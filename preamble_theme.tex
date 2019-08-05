@@ -1,0 +1,456 @@
+\documentclass[12pt,aspectratio=169]{beamer}
+
+% ====================================================
+% ====================================================
+% USEPACKAGES AND IMPORTS
+% ====================================================
+% ====================================================
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+% tables
+\usepackage{tabularx}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{makecell}
+
+% tikz and colors
+\usepackage{tikz}
+\usepackage{xcolor}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\usepackage{tikzsymbols}
+
+\usetikzlibrary{shapes}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{shapes.symbols}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{shadings}
+\usetikzlibrary{positioning}
+\usetikzlibrary{arrows}
+\usetikzlibrary{trees}
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{patterns}
+\usetikzlibrary{intersections}
+
+\usepgfplotslibrary{patchplots}
+\usepgfplotslibrary{fillbetween}
+
+% boxes
+\usepackage[many]{tcolorbox}
+
+% math packages and fonts
+\usepackage{bm}
+\usepackage{ccfonts}
+\usepackage{eulervm}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{nicefrac}
+\usepackage{slashed}
+\usepackage{dsfont}
+\usepackage{array}
+\usepackage{cancel}
+
+% algorithms and listings
+\usepackage[ruled,vlined,linesnumbered]{algorithm2e}
+\usepackage{listings}
+\usepackage{setspace}
+
+\tcbuselibrary{listings}
+\tcbuselibrary{breakable}
+\tcbuselibrary{skins}
+
+% misc
+\usepackage{soul}
+\usepackage{pifont}
+\usepackage{multicol}
+\usepackage{animate}
+\usepackage{hyperref}
+\usepackage{wasysym}
+\usepackage[absolute,overlay]{textpos}
+\usepackage[hang,flushmargin]{footmisc}
+
+% ====================================================
+% ====================================================
+% LAYOUT AND THEME
+% ====================================================
+% ====================================================
+
+\usetheme{Copenhagen}
+
+% color definitions
+\definecolor{myblue1}{RGB}{35,119,189}
+\definecolor{myblue2}{RGB}{95,179,238}
+\definecolor{myblue3}{RGB}{129,168,207}
+\definecolor{myblue4}{RGB}{26,89,142}
+
+\definecolor{myred1}{RGB}{247,12,12}
+
+% set theme colors
+\setbeamercolor*{structure}{fg=myblue1,bg=blue}
+\setbeamercolor*{palette primary}{use=structure,fg=white,bg=structure.fg}
+\setbeamercolor*{palette secondary}{use=structure,fg=white,bg=structure.fg!75!black}
+\setbeamercolor*{palette tertiary}{use=structure,fg=white,bg=structure.fg!50!black}
+\setbeamercolor*{palette quaternary}{fg=black,bg=white}
+
+\setbeamertemplate{itemize item}[circle]
+\setbeamertemplate{itemize subitem}[circle]
+\setbeamertemplate{itemize subsubitem}[circle]
+
+\setbeamertemplate{enumerate item}[circle]
+\setbeamertemplate{enumerate subitem}[circle]
+\setbeamertemplate{enumerate subsubitem}[circle]
+
+\setbeamercolor{itemize item}{fg=myblue1}
+\setbeamercolor{itemize subitem}{fg=myblue1}
+\setbeamercolor{itemize subsubitem}{fg=myblue1}
+
+\setbeamertemplate{section in toc}[circle]
+\setbeamertemplate{subsection in toc}[circle]
+\setbeamerfont{subsection in toc}{size=\scriptsize}
+
+\setbeamercolor{frametitle continuation}{fg=black}
+
+% title graphic -- sap logo and dhbw logo
+\titlegraphic{\includegraphics[scale=0.1]{img/logo_sap}\hspace*{4.75cm}~%
+   	\includegraphics[scale=0.05]{img/logo_dhbw}
+}
+
+\makeatletter
+% frame title
+\defbeamertemplate*{frametitle}{mydefault}[1][left]
+{
+  	\ifbeamercolorempty[bg]{frametitle}{}{\nointerlineskip}%
+  	\nointerlineskip%
+ 	\@tempdima=\textwidth%
+  	\advance\@tempdima by\beamer@leftmargin%
+  	\advance\@tempdima by\beamer@rightmargin%
+  	\begin{tcolorbox}[
+  		enhanced,
+  		outer arc=0pt,
+  		arc=0pt,
+  		boxrule=0pt,
+  		top=0pt,
+  		bottom=0pt,
+  		enlarge left by=-\beamer@leftmargin,
+  		enlarge right by=-\beamer@rightmargin,
+  		width=\paperwidth,
+  		nobeforeafter,
+  		interior style={
+    			left color=myblue2,
+    			right color=white
+    		},
+  		shadow={0mm}{-0.4mm}{0mm}{black!60,opacity=0.6},    
+  		shadow={0mm}{-0.8mm}{0mm}{black!40,opacity=0.4},    
+  	]
+    	\usebeamerfont{frametitle}%
+    	\vbox{}\vskip-1ex%
+    	\if@tempswa\else\csname beamer@fte#1\endcsname\fi%
+    	\insertframetitle\par%
+    	{%
+      		\ifx\insertframesubtitle\@empty%
+      		\else%
+      		{\usebeamerfont{framesubtitle}\usebeamercolor[fg]{black}\insertframesubtitle\strut\par}%
+      		\fi
+    	}%
+    	\vskip-1ex%
+    	\if@tempswa\else\vskip-.3cm\fi
+  	\end{tcolorbox}%
+}
+
+% footline of a frame
+\defbeamertemplate*{footline}{mysplit theme}
+{%
+  	\leavevmode%
+  	\hbox{
+		\begin{beamercolorbox}[
+			wd=.5\paperwidth,ht=2.5ex,dp=1.125ex,leftskip=.3cm plus1fill,rightskip=.3cm
+		]{author in head/foot}%
+    			\usebeamerfont{author in head/foot}\insertshortauthor\ (\insertinstitute), \insertdate
+  		\end{beamercolorbox}%
+  		\begin{beamercolorbox}[
+			wd=.5\paperwidth,ht=2.5ex,dp=1.125ex,leftskip=.3cm,rightskip=.3cm plus1fil
+		]{title in head/foot}%
+    			\usebeamerfont{title in head/foot}\insertshorttitle\hfill
+    			\insertprefix-\insertframenumber/\inserttotalframenumber\hspace*{0.5em}
+  		\end{beamercolorbox}}%
+  	\vskip0pt%
+}
+\makeatother
+
+% ====================================================
+% ====================================================
+% COMMANDS AND GENERAL DEFINITIONS
+% ====================================================
+% ====================================================
+
+% page number prefix
+\newcommand\insertprefix{}  % empty by default
+\newcommand\prefix[1]{\renewcommand\insertprefix{#1}}
+
+
+% listing definitions
+% ====================================================
+\lstdefinestyle{python}{
+	language={Python},
+	otherkeywords={},
+	morekeywords={},
+	deletekeywords={}
+}
+
+% line numbers
+\renewcommand*\thelstnumber{\makebox[3em][r]{\ifnum\value{lstnumber}<10 0\fi\the\value{lstnumber}}}
+
+% python listings environment
+\newtcblisting{listingPython}[1][]{
+	enhanced,
+	listing only,
+	colback=myblue1!10!white,
+	colframe=myblue1,
+	overlay={
+		\begin{tcbclipinterior}
+			\fill[black!25] (frame.south west) rectangle ([xshift=5.1mm]frame.north west);
+		\end{tcbclipinterior}
+	},
+	listing remove caption=false,
+	left=-0.5mm,right=-1mm,
+	listing options={
+		style=tcblatex,
+		style=python,
+		keywordstyle=\bfseries\color{violet},
+		commentstyle=\itshape\color{green!50!black},
+		stringstyle=\color{blue},
+		numbers=left,
+		xleftmargin=7mm,
+		tabsize=4,
+	},
+  	#1
+}
+
+% math definitions
+% ====================================================
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+
+\newcommand*{\vertbar}{\rule[-1ex]{0.5pt}{2.5ex}}
+\newcommand*{\horzbar}{\rule[.5ex]{2.5ex}{0.5pt}}
+\newcommand{\indep}{\rotatebox[origin=c]{90}{$\models$}}
+
+\newcommand\hcancel[2][black]{\setbox0=\hbox{$#2$}%
+	\rlap{\raisebox{.45\ht0}{\textcolor{#1}{\rule{\wd0}{1pt}}}}#2} 
+
+% algorithm definitions
+% ====================================================
+\newcommand\mycommfont[1]{\footnotesize\ttfamily\textcolor{myblue1}{#1}}
+\SetCommentSty{mycommfont}
+
+% global pfgplots settings
+% ====================================================
+\pgfplotsset{
+	% allow filtering of data for pgfplots
+	discard if/.style 2 args={
+        	x filter/.code={
+            		\edef\tempa{\thisrow{#1}}
+            		\edef\tempb{#2}
+            		\ifx\tempa\tempb
+                		\def\pgfmathresult{inf}
+            		\fi
+        	}
+    	},
+    	discard if not/.style 2 args={
+        	x filter/.code={
+            		\edef\tempa{\thisrow{#1}}
+            		\edef\tempb{#2}
+            		\ifx\tempa\tempb
+            		\else
+                		\def\pgfmathresult{inf}
+            		\fi
+        	}
+    	},
+	% custom colormap
+    	colormap={customColormap}{
+ 		rgb255=(35,119,189)
+		rgb255=(190,190,190)
+        	rgb255=(255,255,255)
+    	}
+}
+
+% commands
+% ====================================================
+
+% highlight commands
+% --------------------------------------------------------------------------------------------------------
+% highlight command
+\newcommand{\highlight}[1]{\textcolor{myblue1}{\textbf{#1}}}
+\newcommand{\Highlight}[1]{\textcolor{myred1}{\textbf{#1}}}
+
+% blue color boxes (with frame/without frame/without fill)
+\newtcolorbox{boxBlue}{colback=myblue1!10!white,colframe=myblue4}
+\newtcolorbox{boxBlueNoFrame}{colback=myblue1!10!white,colframe=myblue1!10!white}
+\newtcolorbox{boxBlueNoFill}{colback=white,colframe=myblue4}
+
+% font commands
+% --------------------------------------------------------------------------------------------------------
+\newcommand{\capi}[1]{{\rmfamily\scshape#1}} 					% capitals
+\newcommand{\linkstyle}[1]{\underline{\smash{\texttt{#1}}}} 		% style of hyperlinks
+
+% tikz commands
+% --------------------------------------------------------------------------------------------------------
+% checkmark
+\def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;}
+
+% intersection of lines
+\newcommand\intersect[5]{
+  	\draw[#5] let \p{c} = (intersection of #1 -- #2 and #3 -- #4) in (#1) -- ($(\p{c})!1.75mm!(#1)$) 
+  		to[bend right=90] ($(\p{c})!1.75mm!(#2)$) -- (#2)
+}
+
+% double line circle (in tikzpicture)
+\newcommand{\doublecircle}[2]{
+	\draw[fill=white,draw=myblue1] (#1,#2) circle (2mm);
+	\draw[fill=myblue1,draw=myblue1] (#1,#2) circle (1.5mm);
+}
+
+% circled numbers
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{\node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+% slide modifiers
+% --------------------------------------------------------------------------------------------------------
+% mark slide as optional
+\newcommand{\optional}{
+	\begin{textblock}{100}(0.15,0.30)
+      		\includegraphics[scale=0.2]{img/scream}
+    	\end{textblock}
+}
+
+% mark slide as important
+\newcommand{\important}{
+	\begin{textblock}{100}(0.10,0.15)
+      		\includegraphics[scale=0.1]{img/important}
+    	\end{textblock}
+}
+
+% citation
+% --------------------------------------------------------------------------------------------------------
+% first argument in {book, online, article}
+\newcommand{\literature}[5]{
+	\setbeamertemplate{bibliography item}[#1]
+	\bibitem{#2}
+	\highlight{#3} \\
+	\textcolor{darkgray}{\textit{#4}} \\
+	\textcolor{black}{#5}
+}
+% cite content
+\newcommand{\citeAuthor}[2]{\vfill\scriptsize\textcolor{lightgray}{#1 \cite{#2}}}
+
+% slide architecture
+% --------------------------------------------------------------------------------------------------------
+% divide frame into two parts
+\newcommand{\divideTwo}[4]{
+	\begin{minipage}{#1\textwidth}
+		#2
+	\end{minipage}
+	\hfill
+	\begin{minipage}{#3\textwidth}
+		#4
+	\end{minipage}
+}
+
+% divide frame into two parts (start on top)
+\newcommand{\divideTwoTop}[4]{
+	\begin{minipage}[t]{#1\textwidth}
+		#2
+	\end{minipage}
+	\hfill
+	\begin{minipage}[t]{#3\textwidth}
+		#4
+	\end{minipage}
+}
+
+% special pages
+% --------------------------------------------------------------------------------------------------------
+% title page
+\newcommand{\maketitlepage}{
+	{
+		\usebackgroundtemplate{%
+			\tikz[overlay,remember picture] \node[opacity=0.2, at=(current page.center)] {
+  				\includegraphics[height=\paperheight,width=\paperwidth]{img/processor.jpg}
+			};
+		}
+		\begin{frame}[plain]
+			\maketitle
+		\end{frame}
+	}
+}
+
+% divider page
+\newcommand{\makedivider}[1]{
+	{
+		\usebackgroundtemplate{%
+			\tikz[overlay,remember picture] \node[opacity=0.2, at=(current page.center)] {
+  				\includegraphics[height=\paperheight,width=\paperwidth]{img/processor.jpg}
+			};
+		}
+		\begin{frame}[plain]
+			\vfill
+			\begin{boxBlue}
+				\centering
+				\textbf{Section:} \\
+				\large \highlight{#1}
+			\end{boxBlue}
+			\vfill
+			\centering
+			\includegraphics[scale=0.1]{img/logo_sap.png}
+			\vfill
+		\end{frame}
+	}
+}
+
+% overview page
+\newcommand{\makeoverview}[1]{
+	\begin{frame}{Lecture Overview}{}
+		\begin{tabbing}
+			\hspace*{3.5cm}\= \kill
+			\ifnum #1=1 \highlight{\textbf{Unit I:}} \else \textbf{Unit I:} \fi
+			\> \ifnum #1=1 \highlight{Machine Learning Introduction} \else Machine Learning Introduction \fi \\
+		\end{tabbing}
+	\end{frame}
+}
+
+% thank you page
+\newcommand{\makethanks}{
+	\begin{frame}[plain]
+	
+		\vfill
+		\begin{boxBlue}
+			\centering
+			\Large \highlight{Thank you very much for the attention!}
+		\end{boxBlue}
+		
+		\vfill\footnotesize
+		\begin{tabbing}
+			\hspace*{1.5cm}\= \kill
+			\highlight{Topic:} 	\> \inserttitle \\
+			\highlight{Date:} 		\> \insertdate
+		\end{tabbing}
+		
+		\vfill
+		\highlight{Contact:} \\
+		\insertauthor\ (D062271) \\
+		\insertinstitute \\
+		\href{mailto:daniel.wehner@sap.com}{\linkstyle{daniel.wehner@sap.com}}
+		
+		\vfill\normalsize
+		\begin{center}
+			\large\highlight{Do you have any questions?}
+		\end{center}
+		\vfill
+	\end{frame}
+}

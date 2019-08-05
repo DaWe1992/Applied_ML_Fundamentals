@@ -1,0 +1,31 @@
+\documentclass[11pt]{article}
+
+% ====================================================
+% ====================================================
+% USEPACKAGES AND IMPORTS
+% ====================================================
+% ====================================================
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\usepackage{fancyhdr}
+
+% definitions
+% ====================================================
+\let\titleoriginal\title
+\renewcommand{\title}[1]{
+	\titleoriginal{#1}
+	\newcommand{\thetitle}{#1}
+}
+
+\setlength{\parskip}{\baselineskip}%
+\setlength{\parindent}{0pt}%
+
+% header and footer
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Applied Machine Learning Fundamentals}
+\rhead{\thetitle}
+\cfoot{\thepage}
