@@ -36,7 +36,6 @@
 
 % Section: General Overview
 %______________________________________________________________________
-
 \section{General Overview}
 \makedivider{General Overview}
 
@@ -82,22 +81,193 @@
 \end{frame}
 
 
+% A more abstract Definition
+\begin{frame}{A more abstract Definition}{}
+	\begin{itemize}
+		\item Our task is to learn a mapping from input to output:
+		\begin{equation*}
+			h : \mathcal{I} \mapsto \mathcal{O}
+		\end{equation*}
+		\item Put differently, we want to predict the output from the input:
+		\begin{equation*}
+			y = h(\bm{x}; \bm{\theta}) \qquad\text{also:}\quad y = h_{\bm{\theta}}(\bm{x})
+		\end{equation*}
+		\begin{boxBlueNoFrame}
+			\item $\bm{x} \in \mathcal{I}$ (Input)
+			\item $y \in \mathcal{O}$ (Output)
+			\item $\bm{\theta} \in \bm{\Theta}$ (Parameters: What needs to be `learned')
+		\end{boxBlueNoFrame}
+	\end{itemize}
+\end{frame}
+
+
 % Section: Problem Types in Machine Learning
 %______________________________________________________________________
-
 \section{Problem Types in Machine Learning}
 \makedivider{Problem Types in Machine Learning}
 
-\begin{frame}{}{}
+% Subsection: Type of Training Information
+% --------------------------------------------------------------------------------------------------------
+\subsection{Type of Training Information}
 
+% Type of Training Information
+\begin{frame}{Type of Training Information}{}
+	\begin{itemize}
+		\item \highlight{Supervised learning}
+		\begin{itemize}
+			\item `Teacher' provides \textbf{gold labels}
+			\item E.\,g. neural networks, decision trees, linear regression
+		\end{itemize}
+		\item \highlight{Unsupervised learning}
+		\begin{itemize}
+			\item Labels are \textbf{not} known during training
+			\item E.\,g. clustering, density estimation, association rule mining
+		\end{itemize}
+		\item \highlight{Reinforcement learning}
+		\begin{itemize}
+			\item Environment provides rewards for actions but correct action is unknown
+			\item E.\,g. policy-iteration, Q-learning, SARSA
+		\end{itemize}
+		\item \highlight{Semi-supervised learning} (Instances partly labeled)
+	\end{itemize}
 \end{frame}
 
-\subsection{}
+
+% Type of Training Information (Ctd.)
+\begin{frame}{Type of Training Information (Ctd.)}{}
+	\input{01_intro_ml/01_tikz/type_of_training_information}
+\end{frame}
+
+
+% Supervised Learning
+\begin{frame}{Supervised Learning}{}
+	\divideTwo{0.49}{
+		\begin{itemize}
+			\small
+			\item A single row is called \highlight{example}
+			\item An example without class label is called \highlight{instance}
+			\item \highlight{Predictors:}
+			\begin{itemize}
+				\scriptsize
+				\item Outlook $\in \{sunny, overcast, rainy\}$
+				\item Temperature $\in \{hot, mild, cool\}$
+				\item Humidity $\in \{high, normal\}$
+				\item Wind $\in \{weak, strong\}$
+			\end{itemize}
+			\item \highlight{Label:}
+			\begin{itemize}
+				\scriptsize
+				\item PlayGolf $\in \{yes, no\}$
+				\item Given a new instance we want to predict the label
+			\end{itemize}
+			\item \textbf{Label for the new instance???}
+		\end{itemize}
+	}{0.49}{
+		\vspace*{2mm}
+		\input{01_intro_ml/03_tbl/example_data_set}
+	}
+\end{frame}
+
+
+% Supervised Learning: General Approach
+\begin{frame}{Supervised Learning: General Approach}{}
+	\vspace*{-5mm}
+	\input{01_intro_ml/01_tikz/supervised_learning_general_approach}
+\end{frame}
+
+
+% Unsupervised Learning
+\begin{frame}{Unsupervised Learning}{}
+	\divideTwo{0.49}{
+		\vspace*{5mm}
+		\input{01_intro_ml/01_tikz/unsupervised_learning}
+	}{0.49}{
+		\begin{itemize}
+			\item There are \textbf{no} labels
+			\item Try to find regularities in the data
+			\item Examples for unsupervised learning:
+			\begin{itemize}
+				\item \highlight{Clustering}
+				\item \highlight{Density estimation}
+				\item \highlight{Dimensionality reduction}
+			\end{itemize}
+		\end{itemize}
+	}
+\end{frame}
+
+
+% Subsection: Availability of Training Examples
+% --------------------------------------------------------------------------------------------------------
+\subsection{Availability of Training Examples}
+
+% Availability of Training Examples
+\begin{frame}{Availability of Training Examples}{}
+	\begin{itemize}
+		\item \highlight{Batch Learning}
+		\begin{itemize}
+			\item The learner is provided with a fixed set of training examples
+			\item See weather data set
+			\item E.\,g. neural networks, decision trees
+		\end{itemize}
+		\item \highlight{Incremental/Online Learning}
+		\begin{itemize}
+			\item Constant stream of training examples
+			\item The model is updated as new training examples arrive
+			\item E.\,g. k-nearest-neighbors
+		\end{itemize}
+		\item Active Learning (\textit{not covered})
+	\end{itemize}
+\end{frame}
+
+
+% Subsection: Type of Target Variable
+% --------------------------------------------------------------------------------------------------------
+\subsection{Type of Target Variable}
+
+% Type of Target Variable: Regression
+\begin{frame}{Type of Target Variable: Regression}{}
+	\divideTwo{0.49}{
+		\highlight{Regression}
+		\begin{itemize}
+			\item Learn a mapping into a continuous space
+			\begin{itemize}
+				\item $\mathcal{O} = \mathbb{R}$
+				\item $\mathcal{O} = \mathbb{R}^3$
+			\end{itemize}
+			\item E.\,g. curve fitting, financial analysis, housing prices, ...
+		\end{itemize}
+	}{0.49}{
+		\includegraphics[scale=0.5]{01_intro_ml/02_img/regression_example}
+	}
+\end{frame}
+
+
+% Type of Target Variable: Classification
+\begin{frame}{Type of Target Variable: Classification}{}
+	\divideTwo{0.49}{
+		\includegraphics[scale=0.25]{01_intro_ml/02_img/classification_example}
+	}{0.49}{
+		\highlight{Classification}
+		\begin{itemize}
+			\item Learn a mapping into a discrete space, e.\,g.
+			\begin{itemize}
+				\item $\mathcal{O} = \{0, 1\}$ (binary classification)
+				\item $\mathcal{O} = \{0, 1, 2, 3, ...\}$
+				\item $\mathcal{O} = \{verb, noun, adverb, ...\}$
+			\end{itemize}
+			\item Examples:
+			\begin{itemize}
+				\item Spam / no spam
+				\item Digit recognition
+				\item Part of speech tagging
+			\end{itemize}
+		\end{itemize}
+	}
+\end{frame}
 
 
 % Section: Key Challenges in Machine Learning
 %______________________________________________________________________
-
 \section{Key Challenges in Machine Learning}
 \makedivider{Key Challenges in Machine Learning}
 
@@ -108,7 +278,6 @@
 
 % Section: Lecture Overview
 %______________________________________________________________________
-
 \section{Lecture Overview}
 \makedivider{Lecture Overview}
 
@@ -117,8 +286,10 @@
 
 % Section: Wrap-Up
 %______________________________________________________________________
-
 \section{Wrap-Up}
+
+% Subsection: Summary
+% --------------------------------------------------------------------------------------------------------
 \subsection{Summary}
 
 % Summary
@@ -127,6 +298,17 @@
 \end{frame}
 
 
+% Subsection: Self-Test Questions
+% --------------------------------------------------------------------------------------------------------
+\subsection{Self-Test Questions}
+
+% Self-Test Questions
+\begin{frame}{Self-Test Questions}{}
+
+\end{frame}
+
+% Subsection: Recommended Literature and further Reading
+% --------------------------------------------------------------------------------------------------------
 \subsection{Recommended Literature and further Reading}
 
 % Literature
@@ -161,163 +343,6 @@
 %
 %	\input{04_ml_introduction/03_tbl/notation}
 %\end{frame}
-%
-%
-%\section{ML Introduction}
-%\makedivider{ML Introduction}
-%
-%\subsection{Machine Learning Terminology}
-%
-%% Why Machine Learning?
-%\begin{frame}{Why Machine Learning?}{}
-%	\begin{itemize}
-%		\item Subset of artificial intelligence
-%		\item The term `Machine Learning' was coined by Arthur Samuel in 1959
-%		\item Machine learning explores the study and construction of algorithms that can \highlight{learn} from and
-%			\highlight{make predictions on data}
-%		\item Era of big data $\Rightarrow$ \textbf{no human can deal with the data avalanche}
-%	\end{itemize}
-%
-%	\begin{boxBlue}
-%		\textit{`We are drowning in information and starving for knowledge.' \\
-%		\null\hfill \textbf{-- John Naisbitt}}
-%	\end{boxBlue}
-%\end{frame}
-%
-%
-%\subsection{Dimension: Type of Training Information}
-%
-%% Type of Training Information
-%\begin{frame}{Dimension: Type of Training Information}{}
-%	\begin{itemize}
-%		\item \highlight{Supervised Learning}
-%		\begin{itemize}
-%			\item A `teacher' provides values for the target function (Labeled training examples)
-%			\item \textbf{E.\,g.} Neural networks, decision trees, regression, ...
-%		\end{itemize}
-%		\item \highlight{Unsupervised Learning}
-%		\begin{itemize}
-%			\item The labels are \textbf{not} known
-%			\item \textbf{E.\,g.} Clustering, Apriori, ...
-%		\end{itemize}
-%		\item \highlight{Reinforcement Learning}
-%		\begin{itemize}
-%			\item A `teacher' provides rewards for actions but the correct solution is not known
-%			\item \textbf{E.\,g.} Policy-Iteration, Q-Learning, SARSA
-%		\end{itemize}
-%		\item Semi-Supervised Learning (Examples are partly labeled, \textit{not covered})
-%	\end{itemize}
-%\end{frame}
-%
-%
-%% Dimension: Type of Training Information visualized
-%\begin{frame}{Dimension: Type of Training Information visualized}{}
-%	\input{04_ml_introduction/01_tikz/type_of_training_information}
-%\end{frame}
-%
-%
-%% Example Data Set: Weather Data (supervised)
-%\begin{frame}{Example Data Set: Weather Data (supervised)}{}
-%	\divideTwo{0.49}{
-%		\begin{itemize}
-%			\small
-%			\item A single row is called \highlight{example}
-%			\item An example without class label is called \highlight{instance}
-%			\item \highlight{Predictors:}
-%			\begin{itemize}
-%				\scriptsize
-%				\item Outlook $\in \{sunny, overcast, rainy\}$
-%				\item Temperature $\in \{hot, mild, cool\}$
-%				\item Humidity $\in \{high, normal\}$
-%				\item Wind $\in \{weak, strong\}$
-%			\end{itemize}
-%			\item \highlight{Label:}
-%			\begin{itemize}
-%				\scriptsize
-%				\item PlayGolf $\in \{yes, no\}$
-%				\item Given a new instance we want to predict the label
-%			\end{itemize}
-%			\item \textbf{Label for the new instance???}
-%		\end{itemize}
-%	}{0.49}{
-%		\vspace*{2mm}
-%		\input{04_ml_introduction/03_tbl/example_data_set}
-%	}
-%\end{frame}
-%
-%
-%% Supervised Learning: General Approach
-%\begin{frame}{Supervised Learning: General Approach}{}
-%	\vspace*{-5mm}
-%	\input{04_ml_introduction/01_tikz/supervised_learning}
-%\end{frame}
-%
-%
-%% Unsupervised Learning
-%\begin{frame}{Unsupervised Learning}{}
-%	\divideTwo{0.49}{
-%		\vspace*{5mm}
-%		\input{04_ml_introduction/01_tikz/unsupervised_learning}
-%	}{0.49}{
-%		\begin{itemize}
-%			\item There are \textbf{no} labels
-%			\item Try to find regularities in the data
-%			\item Example algorithms:
-%			\begin{itemize}
-%				\item \highlight{Clustering} (k-Means)
-%				\item \highlight{Expectation-Maximization} (EM-Algorithm)
-%				\item \highlight{Apriori} (Association Rules)
-%			\end{itemize}
-%		\end{itemize}
-%	}
-%\end{frame}
-%
-%
-%\subsection{Dimension: Example Availability}
-%
-%% Example Availability
-%\begin{frame}{Dimension: Example Availability}{}
-%	\begin{itemize}
-%		\item \highlight{Batch Learning}
-%		\begin{itemize}
-%			\item The learner is provided with a fixed set of training examples
-%			\item See weather data set
-%			\item \textbf{E.\,g.} Neural networks, Decision Trees
-%		\end{itemize}
-%		\item \highlight{Incremental/Online Learning}
-%		\begin{itemize}
-%			\item Constant stream of training examples
-%			\item The model is updates as training examples arrive
-%			\item \textbf{E.\,g.} k-Nearest-Neighbors
-%		\end{itemize}
-%		\item Active Learning (\textit{not covered})
-%	\end{itemize}
-%\end{frame}
-%
-%
-%\subsection{Dimension: Type of Target Variable}
-%
-%% Type of Target Variable
-%\begin{frame}{Dimension: Type of Target Variable}{}
-%	\begin{itemize}
-%		\item \highlight{Classification}
-%		\begin{itemize}
-%			\item Examples are classified into one of two or more (discrete) classes
-%			\item Real-valued or discrete input variables
-%			\item A problem with two classes is called binary classification problem
-%			\item Multi-class classification problem: More than two classes
-%			\item Multi-label classification problem: Assignment of multiple labels per example
-%		\end{itemize}
-%		\item \highlight{Regression}
-%		\begin{itemize}
-%			\item Prediction of a quantity (real-valued)
-%			\item Real-valued or discrete input variables
-%			\item Multivariate regression problem: Multiple input variables
-%		\end{itemize}
-%	\end{itemize}
-%\end{frame}
-%
-%
-%\subsection{Example}
+
 
 \end{document}
