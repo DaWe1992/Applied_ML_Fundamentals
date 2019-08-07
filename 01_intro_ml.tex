@@ -82,7 +82,7 @@
 
 
 % A more abstract Definition
-\begin{frame}{A more abstract Definition}{}
+\begin{frame}{A more abstract Definition}{}\important
 	\begin{itemize}
 		\item Our task is to learn a mapping from input to output:
 		\begin{equation*}
@@ -271,17 +271,211 @@
 \section{Key Challenges in Machine Learning}
 \makedivider{Key Challenges in Machine Learning}
 
-\begin{frame}{}{}
+% Subsection: Generalization from Training Data
+% --------------------------------------------------------------------------------------------------------
+\subsection{Generalization from Training Data}
 
+% Generalization from Training Data
+\begin{frame}{Generalization from Training Data}{}\important
+	\begin{itemize}
+		\item Learning doest not mean memorizing the training data
+		\item What if we see input that we \textbf{haven't seen before}?
+		\item Example OCR (\textbf{O}ptical \textbf{C}haracter \textbf{R}ecognition):
+		\begin{figure}
+			\centering
+			\includegraphics[scale=0.4]{01_intro_ml/02_img/mnist_digits}
+		\end{figure}
+		\vspace*{-4mm}
+		\hfill{\scriptsize Hand-written digits from the MNIST data set}
+		\begin{itemize}
+			\item Predict the character given the input image
+			\item \Highlight{People have different hand-writings}
+		\end{itemize}
+	\end{itemize}
 \end{frame}
 
 
-% Section: Lecture Overview
-%______________________________________________________________________
-\section{Lecture Overview}
-\makedivider{Lecture Overview}
+% Generalization from Training Data (Ctd.)
+\begin{frame}{Generalization from Training Data (Ctd.)}{}\important
+	\divideTwo{0.49}{
+		\highlight{What is the problem here?}
+		\begin{itemize}
+			\item Complex decision boundary
+			\item This leads to \Highlight{$\skull$ Overfitting $\skull$}
+			\begin{itemize}
+				\item The model is too expressive...
+				\item ...and adapts to \textbf{idiosyncrasies} of the training data
+			\end{itemize}
+		\end{itemize}
+	}{0.49}{
+		\includegraphics[scale=0.3]{01_intro_ml/02_img/salmon_sea_bass_overfitting}
+	}
+	\vspace*{2mm}
+	\begin{boxBlueNoFrame}
+		\textbf{Solution:} Choose a simpler model (c.\,f. \textbf{Occam's razor})
+	\end{boxBlueNoFrame}
+\end{frame}
 
-\makeoverview{1}
+
+% Generalization from Training Data (Ctd.)
+\begin{frame}{Generalization from Training Data (Ctd.)}{}\important
+	\divideTwo{0.49}{
+		\includegraphics[scale=0.3]{01_intro_ml/02_img/salmon_sea_bass}
+	}{0.49}{
+		\begin{itemize}
+			\item Linear model
+			\item Allow for \textbf{misclassifications} of training examples
+			\item \textbf{Better generalization} to unseen instances
+		\end{itemize}
+	}
+\end{frame}
+
+
+% A Prominent Example of Overfitting
+\begin{frame}{A Prominent Example of Overfitting}{}
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.5]{01_intro_ml/02_img/tanks_overfitting}
+	\end{figure}
+\end{frame}
+
+
+% Subsection: Feature Selection / Feature Engineering
+% --------------------------------------------------------------------------------------------------------
+\subsection{Feature Selection / Feature Engineering}
+
+% Choosing the right Features
+\begin{frame}{Choosing the right Features}{}
+	\highlight{When stuck, move to a different perspective!}
+	\vspace*{-2mm}
+	\input{01_intro_ml/01_tikz/feature_mapping}
+	\vspace*{-2mm}
+	\begin{equation*}
+		\phi(x_1, x_2) \mapsto \left( x_1^2, \sqrt{2} x_1 x_2, x_2^2 \right) = (z_1, z_2, z_3)
+	\end{equation*}
+\end{frame}
+
+
+% Curse of Dimensionality
+\begin{frame}{Choosing the right Features}{}
+	\highlight{But: Beware of the \highlight{curse of dimensionality}!}
+	
+	\begin{figure}
+		\divideTwo{0.59}{
+			\includegraphics[scale=0.2]{01_intro_ml/02_img/curse_of_dimensionality}
+		}{0.39}{
+			\begin{itemize}
+				\item Too many features significantly \textbf{slow down} the ML algorithm
+				\item Need \textbf{exponential} amount of training data
+				\item Dimensionality reduction
+			\end{itemize}
+		}
+	\end{figure}
+	\citeAuthor{Image taken from}{}{p.\,35}
+\end{frame}
+
+
+% Subsection: Performance Measurement
+% --------------------------------------------------------------------------------------------------------
+\subsection{Performance Measurement}
+
+% Performance Measurement
+\begin{frame}{Performance Measurement}{}
+	\begin{itemize}
+		\item How do we measure performance?
+		\begin{itemize}
+			\item 99\,\% correct classification in speech recognition: What does it really mean?
+			\item \textit{We understand the meaning of the sentence?}, \textit{We understand every word?},
+				\textit{For all speakers?}
+		\end{itemize}
+		\item We need more \textbf{concrete numbers}:
+		\begin{itemize}
+			\item \% of correctly classified letters
+			\item Average distance driven (until accident, ...)
+			\item \% of games won
+			\item \% of correctly recognized words, sentences, etc.
+		\end{itemize}
+		\item \Highlight{Training vs. testing performance}
+	\end{itemize}
+\end{frame}
+
+
+% Performance Measurement (Ctd.)
+\begin{frame}{Performance Measurement (Ctd.)}{}
+	\begin{itemize}
+		\item We also need to define the right \highlight{error metric}:
+	\end{itemize}
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.5]{01_intro_ml/02_img/error_metric}
+	\end{figure}
+	\vspace*{-4mm}
+	\begin{itemize}
+		\item Which is better?
+		\item Euclidean distance (L2-norm) might be useless
+	\end{itemize}
+\end{frame}
+
+
+% Subsection: Model Selection
+% --------------------------------------------------------------------------------------------------------
+\subsection{Model Selection}
+
+% Model Selection
+\begin{frame}{Model Selection}{}
+	\begin{itemize}
+		\item What is the \textbf{right model}?
+		\item The learned parameters (here: $\bm{w}$) can mean a lot of different things:
+	\end{itemize}
+	
+	\begin{figure}
+		\divideTwo{0.49}{
+			\footnotesize
+			\begin{itemize}
+				\item May characterize a family of functions
+				\item May be parameters of a probability distribution
+				\item $\bm{w}$ may be a vector, adjacency matrix, graph, ...
+			\end{itemize}
+		}{0.49}{
+			\begin{figure}
+				\centering
+				\includegraphics[scale=0.25]{01_intro_ml/02_img/model_selection}
+			\end{figure}
+		}
+	\end{figure}
+\end{frame}
+
+
+% Subsection: Computation
+% --------------------------------------------------------------------------------------------------------
+\subsection{Computation}
+
+% Computation
+\begin{frame}{Computation}{}
+	Even if the other problems are solved, \Highlight{computation is usually quite hard}:
+	\begin{itemize}
+		\item Learning involves optimization of parameters
+		\item Find / Search for best model parameters
+		\begin{itemize}
+			\item GoogleNet has $\approx$ 6.5 million parameters
+			\item Often GPUs (\textbf{G}raphics \textbf{P}rocessing \textbf{U}nit) are needed
+			\item Google invented TPUs (\textbf{T}ensor \textbf{P}rocessing \textbf{U}nit)
+		\end{itemize}
+		\item Often we have to deal with thousands, millions, ... of training examples
+		\item Given a model, the prediction has to be computed efficiently
+	\end{itemize}
+\end{frame}
+
+
+% Section: Machine Learning Examples
+%______________________________________________________________________
+\section{Machine Learning Examples}
+\makedivider{Machine Learning Examples}
+
+% Machine Learning Examples
+\begin{frame}{Machine Learning Examples}{}
+
+\end{frame}
 
 
 % Section: Wrap-Up
@@ -296,6 +490,13 @@
 \begin{frame}{Summary}{}
 
 \end{frame}
+
+
+% Subsection: Lecture Overview
+% --------------------------------------------------------------------------------------------------------
+\subsection{Lecture Overview}
+
+\makeoverview{1}
 
 
 % Subsection: Self-Test Questions
