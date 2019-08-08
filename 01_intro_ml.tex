@@ -101,6 +101,15 @@
 \end{frame}
 
 
+% General Parardigm
+\begin{frame}{General Paradigm}{}\important
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.25]{01_intro_ml/02_img/general_paradigm}
+	\end{figure}
+\end{frame}
+
+
 % Section: Problem Types in Machine Learning
 %______________________________________________________________________
 \section{Problem Types in Machine Learning}
@@ -128,7 +137,7 @@
 			\item Environment provides rewards for actions but correct action is unknown
 			\item E.\,g. policy-iteration, Q-learning, SARSA
 		\end{itemize}
-		\item \highlight{Semi-supervised learning} (Instances partly labeled)
+		\item \highlight{Semi-supervised learning} (partly labeled data)
 	\end{itemize}
 \end{frame}
 
@@ -320,11 +329,12 @@
 % Generalization from Training Data (Ctd.)
 \begin{frame}{Generalization from Training Data (Ctd.)}{}\important
 	\divideTwo{0.49}{
+		\vspace*{1mm}
 		\includegraphics[scale=0.3]{01_intro_ml/02_img/salmon_sea_bass}
 	}{0.49}{
 		\begin{itemize}
-			\item Linear model
-			\item Allow for \textbf{misclassifications} of training examples
+			\item Linear (less complex) model
+			\item Allow for \textbf{misclassifications} of some training examples
 			\item \textbf{Better generalization} to unseen instances
 		\end{itemize}
 	}
@@ -400,6 +410,28 @@
 \end{frame}
 
 
+% Training vs. Testing Performance
+\begin{frame}{Training vs. Testing Performance}{}
+	\divideTwo{0.49}{
+		\begin{itemize}
+			\item Evaluate on data which was \textbf{not used} for training (\highlight{out-of-sample testing})
+			\item Two-way split: \textit{Train - Test}
+			\item Even better: \textit{Train - Dev - Test}
+			\vspace{2mm}
+			\begin{tabbing}
+				\hspace*{1.5cm}\= \kill
+				\textbf{Train:}	\>	Train model 				\\
+				\textbf{Dev:} 	\>	Tune hyper-parameters 	\\
+				\textbf{Test:} 	\>	Test final model
+			\end{tabbing}
+		\end{itemize}
+	}{0.49}{
+		\centering
+		\includegraphics[scale=0.4]{01_intro_ml/02_img/train_test_split_meme}
+	}
+\end{frame}
+
+
 % Performance Measurement (Ctd.)
 \begin{frame}{Performance Measurement (Ctd.)}{}
 	\begin{itemize}
@@ -467,14 +499,87 @@
 \end{frame}
 
 
-% Section: Machine Learning Examples
+% Section: Machine Learning Applications
 %______________________________________________________________________
-\section{Machine Learning Examples}
-\makedivider{Machine Learning Examples}
+\section{Machine Learning Applications}
+\makedivider{Machine Learning Applications}
 
-% Machine Learning Examples
-\begin{frame}{Machine Learning Examples}{}
+% Subsection: Natural Language Processing
+% --------------------------------------------------------------------------------------------------------
+\subsection{Natural Language Processing}
 
+% Natural Language Processing
+\begin{frame}{Applications in Natural Language Processing}{}
+	\begin{itemize}
+		\item \textbf{E-mail filtering:}
+		\begin{figure}
+			\includegraphics[scale=0.5]{01_intro_ml/02_img/email_filtering}
+		\end{figure}
+		\item \textbf{Speech Recognition:}
+		\begin{figure}
+			\includegraphics[scale=0.5]{01_intro_ml/02_img/speech_recognition}
+		\end{figure}
+	\end{itemize}
+\end{frame}
+
+
+% Subsection: Computer Vision
+% --------------------------------------------------------------------------------------------------------
+\subsection{Computer Vision}
+
+% Applications in Computer Vision
+\begin{frame}{Applications in Computer Vision}{}
+	\divideTwoTop{0.49}{
+		\textbf{Face detection:}
+		\begin{figure}
+			\includegraphics[scale=0.35]{01_intro_ml/02_img/face_detection}
+		\end{figure}
+	}{0.49}{
+		\textbf{Traffic sign detection:}
+		\begin{figure}
+			\includegraphics[scale=0.3]{01_intro_ml/02_img/traffic_sign_detection}
+		\end{figure}
+	}
+\end{frame}
+
+
+% Applications in Computer Vision (Ctd.)
+\begin{frame}{Applications in Computer Vision (Ctd.)}{}
+	\textbf{Optical character recognition:}
+	\begin{figure}
+		\includegraphics[scale=0.3]{01_intro_ml/02_img/digit_recognition}
+	\end{figure}
+	{\footnotesize See \href{https://www.youtube.com/watch?v=yxuRnBEczUU}{\linkstyle{Demonstration LeNet}}}
+\end{frame}
+
+
+% Subsection: Robotics
+% --------------------------------------------------------------------------------------------------------
+\subsection{Robotics}
+
+% Applications in Robotics
+\begin{frame}{Applications in Robotics}{}
+	\divideTwoTop{0.49}{
+		\textbf{Robot control:}
+		\vspace*{0.8mm}
+		\begin{figure}
+			\includegraphics[scale=0.1125]{01_intro_ml/02_img/robot_control}
+		\end{figure}
+	}{0.49}{
+		\textbf{Autonomous driving:}
+		\begin{figure}
+			\includegraphics[scale=0.35]{01_intro_ml/02_img/autonomous_driving}
+		\end{figure}
+	}
+\end{frame}
+
+
+% Why Machine Learning?
+\begin{frame}{Why Machine Learning?}{}
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.4]{01_intro_ml/02_img/why_machine_learning}
+	\end{figure}
 \end{frame}
 
 
