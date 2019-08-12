@@ -195,45 +195,6 @@
 \newcommand\insertprefix{}  % empty by default
 \newcommand\prefix[1]{\renewcommand\insertprefix{#1}}
 
-
-% listing definitions
-% ====================================================
-\lstdefinestyle{python}{
-	language={Python},
-	otherkeywords={},
-	morekeywords={},
-	deletekeywords={}
-}
-
-% line numbers
-\renewcommand*\thelstnumber{\makebox[3em][r]{\ifnum\value{lstnumber}<10 0\fi\the\value{lstnumber}}}
-
-% python listings environment
-\newtcblisting{listingPython}[1][]{
-	enhanced,
-	listing only,
-	colback=myblue1!10!white,
-	colframe=myblue1,
-	overlay={
-		\begin{tcbclipinterior}
-			\fill[black!25] (frame.south west) rectangle ([xshift=5.1mm]frame.north west);
-		\end{tcbclipinterior}
-	},
-	listing remove caption=false,
-	left=-0.5mm,right=-1mm,
-	listing options={
-		style=tcblatex,
-		style=python,
-		keywordstyle=\bfseries\color{violet},
-		commentstyle=\itshape\color{green!50!black},
-		stringstyle=\color{blue},
-		numbers=left,
-		xleftmargin=7mm,
-		tabsize=4,
-	},
-  	#1
-}
-
 % math definitions
 % ====================================================
 \DeclareMathOperator*{\argmax}{arg\,max}
@@ -242,46 +203,6 @@
 
 \newcommand*{\vertbar}{\rule[-1ex]{0.5pt}{2.5ex}}
 \newcommand*{\horzbar}{\rule[.5ex]{2.5ex}{0.5pt}}
-\newcommand{\indep}{\rotatebox[origin=c]{90}{$\models$}}
-
-\newcommand\hcancel[2][black]{\setbox0=\hbox{$#2$}%
-	\rlap{\raisebox{.45\ht0}{\textcolor{#1}{\rule{\wd0}{1pt}}}}#2} 
-
-% algorithm definitions
-% ====================================================
-\newcommand\mycommfont[1]{\footnotesize\ttfamily\textcolor{myblue1}{#1}}
-\SetCommentSty{mycommfont}
-
-% global pfgplots settings
-% ====================================================
-\pgfplotsset{
-	% allow filtering of data for pgfplots
-	discard if/.style 2 args={
-        	x filter/.code={
-            		\edef\tempa{\thisrow{#1}}
-            		\edef\tempb{#2}
-            		\ifx\tempa\tempb
-                		\def\pgfmathresult{inf}
-            		\fi
-        	}
-    	},
-    	discard if not/.style 2 args={
-        	x filter/.code={
-            		\edef\tempa{\thisrow{#1}}
-            		\edef\tempb{#2}
-            		\ifx\tempa\tempb
-            		\else
-                		\def\pgfmathresult{inf}
-            		\fi
-        	}
-    	},
-	% custom colormap
-    	colormap={customColormap}{
- 		rgb255=(35,119,189)
-		rgb255=(190,190,190)
-        	rgb255=(255,255,255)
-    	}
-}
 
 % commands
 % ====================================================
@@ -299,28 +220,18 @@
 
 % font commands
 % --------------------------------------------------------------------------------------------------------
-\newcommand{\capi}[1]{{\rmfamily\scshape#1}} 					% capitals
+%\newcommand{\capi}[1]{{\rmfamily\scshape#1}} 					% capitals
 \newcommand{\linkstyle}[1]{\underline{\smash{\texttt{#1}}}} 		% style of hyperlinks
 
 % tikz commands
 % --------------------------------------------------------------------------------------------------------
-% checkmark
-\def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;}
-
-% intersection of lines
-\newcommand\intersect[5]{
-  	\draw[#5] let \p{c} = (intersection of #1 -- #2 and #3 -- #4) in (#1) -- ($(\p{c})!1.75mm!(#1)$) 
-  		to[bend right=90] ($(\p{c})!1.75mm!(#2)$) -- (#2)
+\newcommand{\bubble}[3]{
+\begin{textblock}{100}(#1, #2)
+      	\begin{tikzpicture}
+		\node[ellipse,draw=myblue1,very thick,fill=lightgray,align=center] at (0,0) {#3};
+	\end{tikzpicture}
+\end{textblock}
 }
-
-% double line circle (in tikzpicture)
-\newcommand{\doublecircle}[2]{
-	\draw[fill=white,draw=myblue1] (#1,#2) circle (2mm);
-	\draw[fill=myblue1,draw=myblue1] (#1,#2) circle (1.5mm);
-}
-
-% circled numbers
-\newcommand*\circled[1]{\tikz[baseline=(char.base)]{\node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
 
 % slide modifiers
 % --------------------------------------------------------------------------------------------------------

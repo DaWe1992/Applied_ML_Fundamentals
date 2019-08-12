@@ -34,10 +34,178 @@
 \end{frame}
 
 
-% Section: General Overview
+% Section: Introduction to Regression
 %______________________________________________________________________
-\section{General Overview}
-\makedivider{General Overview}
+\section{Introduction to Regression}
+\makedivider{Introduction to Regression}
+
+
+% Regression
+\begin{frame}{Regression}{}
+	\vspace*{-6mm}
+	\begin{tabbing}
+		\hspace*{7cm}\= \kill
+		\highlight{Type of target variable}			\> Continuous 		\\[1mm]
+		\highlight{Type of training information} 	\> Supervised 		\\[1mm]
+		\highlight{Example Availability}			\> Batch learning		\\[1mm]
+	\end{tabbing}
+	
+	\vspace*{-7mm}
+	\footnotesize
+	\begin{boxBlue}
+		\textbf{Algorithm sketch:} Given the training data $\mathcal{D}$ the algorithm derives
+		a function of the type
+	
+		\vspace*{-6mm}
+		\begin{equation}
+			h_{\bm{\theta}}(\bm{x}) = \theta_0 + \theta_1 x_1 + \dots + \theta_{m+1} x_{m}
+				\qquad \bm{x} \in \mathbb{R}^{m}, \bm{\theta} \in \mathbb{R}^{m+1}
+		\end{equation}
+
+		from the data. $\bm{\theta}$ is the parameter vector containing the coefficients to be estimated by the regression
+ 		algorithm. Once $\bm{\theta}$ is learned it can be used for prediction. 
+	\end{boxBlue}
+\end{frame}
+
+
+% Example Data Set: Revenues
+\begin{frame}{Example Data Set: Revenues}{}
+	\divideTwo{0.44}{
+		\input{05_regression/01_tikz/data_regression_marketing_expenses}
+	}{0.55}{
+		\begin{itemize}
+			\item Find a linear function:
+			\begin{equation*}
+				h_{\bm{\theta}}(\bm{x}) = \theta_0 + \theta_1 x_1 + \dots + \theta_{m+1} x_{m}
+			\end{equation*}
+			\item Usually: $x_0 = 1$:
+		\end{itemize}
+		\begin{align*}
+			\bm{\widehat{x}} \in \mathbb{R}^{m+1}
+				&= [1\ \bm{x}]^{\intercal} \\
+			h_{\bm{\theta}}(\bm{\widehat{x}}) = \sum_{j=0}^{m+1} \theta_j x_j
+				&= \bm{\theta}^{\intercal} \bm{\widehat{x}}
+		\end{align*}
+	}
+\end{frame}
+
+
+% Error Function for Regression
+\begin{frame}{Error Function for Regression}{}
+	\begin{itemize}
+		\item In order to know how good the function fits we need an error function $\mathcal{J}(\bm{\theta})$:
+		\begin{equation}
+			\mathcal{J}(\bm{\theta}) = \frac{1}{2n} \sum_{i=1}^n (h_{\bm{\theta}}(\bm{\widehat{x}}^{(i)}) - y^{(i)})^2
+		\end{equation}
+		\item We want to minimize $\mathcal{J}(\bm{\theta})$:
+		\begin{equation*}
+			\min_{\bm{\theta}} \frac{1}{2n} \sum_{i=1}^n (h_{\bm{\theta}}(\bm{\widehat{x}}^{(i)}) - y^{(i)})^2
+		\end{equation*}
+		\item This is \highlight{ordinary least squares (OLS)}
+	\end{itemize}
+\end{frame}
+
+
+% Error Function Intuition
+\begin{frame}{Error Function Intuition}{}
+	% tikz image showing least squares
+\end{frame}
+
+
+% Closed-Form Solutions
+\begin{frame}{Closed-Form Solutions}{}
+	\bubble{0.5}{5}{
+		\scriptsize sample mean $\overline x$
+	}
+	\begin{itemize}
+		\item Usual approach (for two unknowns): Calculate $\theta_0$ and $\theta_1$ according to
+		\begin{equation}
+			\theta_0 = \overline{y} - \theta_2 \overline{x} \qquad\qquad
+			\theta_1 = \frac{\sum_{i=1}^n (x^{(i)} - \overline{x}) \cdot
+				(y^{(i)} - \overline{y})}{\sum_{i=1}^n (x^{(i)} - \overline{x})^2}
+		\end{equation}
+		\item \highlight{`Normal equation'} (scales to arbitrary dimensions):
+		\begin{equation}
+			\bm{\theta} = \underbracket{
+				(\bm{\widehat{X}}^{\intercal} \bm{\widehat{X}})^{-1} \bm{\widehat{X}}^{\intercal}
+			}_{\substack{\text{Moore-Penrose} \\ \text{pseudo-inverse}}} \bm{y}
+		\end{equation}
+		$\bm{\widehat{X}}$ is called `design matrix' or `regressor matrix'
+	\end{itemize}
+\end{frame}
+
+
+% Design Matrix / Regressor Matrix
+\begin{frame}{Design Matrix / Regressor Matrix}{}
+	\bubble{12}{4}{
+		\scriptsize In the following \\
+		\scriptsize $\bm{\widehat{X}} \equiv \bm{X}$
+	}
+	\begin{itemize}
+		\item The design matrix $\bm{\widehat{X}} \in \mathbb{R}^{n \times (m + 1)}$ looks as follows:
+		\footnotesize
+		\begin{equation}
+			\bm{\widehat{X}} =
+			\begin{pmatrix}
+  				1 & x_1^{(1)} & x_2^{(1)} & \cdots & x_m^{(1)} \\
+				1 & x_1^{(2)} & x_2^{(2)} & \cdots & x_m^{(2)} \\
+				1 & x_1^{(3)} & x_2^{(3)} & \cdots & x_m^{(3)} \\
+				\vdots & \vdots & \vdots & \ddots & \vdots \\
+				1 & x_1^{(n)} & x_2^{(n)} & \cdots & x_m^{(n)} \\
+ 			\end{pmatrix}
+		\end{equation}
+		\normalsize
+		\item And the $n \times 1$ label vector:
+		\footnotesize
+		\begin{equation*}
+			 \bm{y} =
+			 \begin{pmatrix}
+				y^{(1)}, y^{(2)}, y^{(3)}, \dots, y^{(n)}
+			\end{pmatrix}^{\intercal}
+		\end{equation*}
+	\end{itemize}
+\end{frame}
+
+
+% Derivation of the Normal Equation
+\begin{frame}{Derivation of the Normal Equation}{}\optional
+	\begin{itemize}
+		\item The derivation involves a bit of linear algebra
+		\item Step \ding{182}: Rewrite $\mathcal{J}(\bm{\theta})$ in matrix-vector notation:
+		\begin{align*}
+			\mathcal{J}(\bm{\theta})
+				&= \frac{1}{2}(\bm{X} \bm{\theta} - \bm{y})^{\intercal} (\bm{X} \bm{\theta} - \bm{y}) \\
+				&= ((\bm{X} \bm{\theta})^{\intercal} - \bm{y}^{\intercal}) (\bm{X} \bm{\theta} - \bm{y}) \\
+				&= (\bm{X} \bm{\theta})^{\intercal} \bm{X} \bm{\theta} - (\bm{X} \bm{\theta})^{\intercal} \bm{y}
+					- \bm{y}^{\intercal} (\bm{X} \bm{\theta}) + \bm{y}^{\intercal} \bm{y} \\
+				&= \bm{\theta}^{\intercal} \bm{X}^{\intercal} \bm{X} \bm{\theta}
+					- 2 (\bm{X} \bm{\theta})^{\intercal} \bm{y} + \bm{y}^{\intercal} \bm{y}
+		\end{align*}
+		\item To be continued...
+	\end{itemize}
+\end{frame}
+
+
+% Derivation of the Normal Equation (Ctd.)
+\begin{frame}{Derivation of the Normal Equation (Ctd.)}{}\optional
+	\begin{itemize}
+		\item Step \ding{183}: Calculate the derivative of $\mathcal{J}(\bm{\theta})$ and set it to zero:
+		\begin{align*}
+			\nabla_{\bm{\theta}}\mathcal{J}(\bm{\theta})
+				&= 2 \bm{X}^{\intercal} \bm{X} \bm{\theta} - 2 \bm{X}^{\intercal} \bm{y} \overset{!}{=} \bm{0} \\	
+				&\Leftrightarrow \bm{X}^{\intercal} \bm{X} \bm{\theta} = \bm{X}^{\intercal} \bm{y}
+		\end{align*}
+		\item If $\bm{X}^{\intercal} \bm{X}$ is invertible, we can multiply both sides by
+			$(\bm{X}^{\intercal} \bm{X})^{-1}$:
+		\vspace*{3mm}
+		\begin{boxBlueNoFrame}
+			\highlight{Normal equation:}
+			\begin{equation*}
+				\bm{\theta} = (\bm{X}^{\intercal} \bm{X})^{-1} \bm{X}^{\intercal} \bm{y}
+			\end{equation*}
+		\end{boxBlueNoFrame}
+	\end{itemize}
+\end{frame}
 
 
 % Section: Wrap-Up
