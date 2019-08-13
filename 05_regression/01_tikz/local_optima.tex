@@ -1,0 +1,19 @@
+\begin{figure}
+\centering
+\begin{tikzpicture}
+    
+    \begin{axis}[
+		scale=0.8,
+		xlabel={$\theta$},
+		ylabel={$\mathcal{J}(\theta)$},
+		domain=-2.5:2,
+		x=2cm,
+		y=1cm
+	]
+
+		\addplot[myblue1,ultra thick,smooth] {0.25 * (x^4 + 0.4 * x^3 - 3 * x^2 + x + 2)};
+		\node[align=center,gray] at (axis cs:-1.25,1) {\textbf{Global}\\ \textbf{Optimum}};
+		\node[align=center,gray] at (axis cs:0.75,1.5) {\textbf{Local}\\ \textbf{Optimum}};
+	\end{axis}
+\end{tikzpicture}
+\end{figure}

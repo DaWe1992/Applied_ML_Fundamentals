@@ -39,6 +39,9 @@
 \section{Introduction to Regression}
 \makedivider{Introduction to Regression}
 
+% Subsection: What is Regression?
+% --------------------------------------------------------------------------------------------------------
+\subsection{What is Regression?}
 
 % Regression
 \begin{frame}{Regression}{}
@@ -90,6 +93,10 @@
 \end{frame}
 
 
+% Subsection: Least Squares Error Function
+% --------------------------------------------------------------------------------------------------------
+\subsection{Least Squares Error Function}
+
 % Error Function for Regression
 \begin{frame}{Error Function for Regression}{}
 	\begin{itemize}
@@ -112,9 +119,18 @@
 \end{frame}
 
 
+% Section: Solutions to Regression
+%______________________________________________________________________
+\section{Solutions to Regression}
+\makedivider{Solutions to Regression}
+
+% Subsection: Closed-Form Solutions and Normal Equation
+% --------------------------------------------------------------------------------------------------------
+\subsection{Closed-Form Solutions and Normal Equation}
+
 % Closed-Form Solutions
 \begin{frame}{Closed-Form Solutions}{}
-	\bubble{0.5}{5}{
+	\bubble{0.5}{5.5}{
 		\scriptsize sample mean $\overline x$
 	}
 	\begin{itemize}
@@ -137,7 +153,7 @@
 
 % Design Matrix / Regressor Matrix
 \begin{frame}{Design Matrix / Regressor Matrix}{}
-	\bubble{12}{4}{
+	\bubble{12}{4.5}{
 		\scriptsize In the following \\
 		\scriptsize $\bm{\widehat{X}} \equiv \bm{X}$
 	}
@@ -205,6 +221,202 @@
 			\end{equation*}
 		\end{boxBlueNoFrame}
 	\end{itemize}
+\end{frame}
+
+
+% Problems with Matrix Inversion?
+\begin{frame}{Problems with Matrix Inversion?}{}
+	\begin{itemize}
+		\item What if $(\bm{X}^{\intercal} \bm{X})^{-1}$ does not exist?
+		\item Problems and solutions:
+		\begin{enumerate}
+			\item Linearly dependent (redundant) features or design matrix does not have full rank? 
+				(E.\,g. size in m$^2$ and size in feet$^2$) \\
+				\highlight{$\Rightarrow$ Delete correlated features}
+			\item Too many features ($m > n$)? \\
+				\highlight{$\Rightarrow$ Delete features (e.\,g. using PCA) / add training examples}
+			\item Other numerical instabilities? \\
+				\highlight{$\Rightarrow$ Add a regularization term} (later)
+			\item Computationally too expensive? \\
+				\highlight{$\Rightarrow$ Use gradient descent}
+		\end{enumerate}
+	\end{itemize}
+\end{frame}
+
+
+% Subsection: Gradient Descent
+% --------------------------------------------------------------------------------------------------------
+\subsection{Gradient Descent}
+
+% Gradient Descent
+\begin{frame}{Gradient Descent}{}\important
+	\begin{itemize}
+		\item We want to minimize a smooth function $\mathcal{J} : \mathbb{R}^{m+1} \rightarrow \mathbb{R}$:
+		\begin{equation*}
+			\min_{\bm{\theta} \in \mathbb{R}^{m+1}} \mathcal{J}(\bm{\theta})
+		\end{equation*}
+		\item Update the parameters iteratively:
+		\begin{equation}
+			\bm{\theta}^{(t+1)} \longleftarrow \bm{\theta}^{(t)} -
+				\alpha \nabla_{\bm{\theta}} \mathcal{J}(\bm{\theta}^{(t)})
+		\end{equation}
+		\item where $\alpha > 0$ (\highlight{learning rate}) and $\nabla_{\bm{\theta}} \mathcal{J}(\bm{\theta})$
+			is the gradient of $\mathcal{J}(\bm{\theta})$ w.\,r.\,t. $\bm{\theta}$:
+		\begin{equation*}
+			\nabla_{\bm{\theta}} \mathcal{J}(\bm{\theta}) = 
+			\begin{pmatrix}
+				\frac{\partial \mathcal{J}(\bm{\theta})}{\partial \theta_0},
+				\frac{\partial \mathcal{J}(\bm{\theta})}{\partial \theta_1}, 
+				\dots,
+				\frac{\partial \mathcal{J}(\bm{\theta})}{\partial \theta_{m+1}}
+			\end{pmatrix}^{\intercal}
+		\end{equation*}
+	\end{itemize}
+\end{frame}
+
+
+% Data Input Space vs. Hypothesis Space
+\begin{frame}{Data Input Space vs. Hypothesis Space}{}
+	\divideTwoTop{0.49}{
+		\highlight{Data input space}
+		\input{05_regression/01_tikz/data_input_space}
+	}{0.49}{
+		\highlight{Hypothesis space $\mathcal{H}$}
+		\input{05_regression/01_tikz/hypothesis_space}
+	}
+\end{frame}
+
+
+% Data Input Space vs. Hypothesis Space (Ctd.)
+\begin{frame}{Data Input Space vs. Hypothesis Space (Ctd.)}{}
+	\begin{itemize}
+		\item \textbf{Data input space}
+		\begin{itemize}
+			\item Determined by the $m$ \textbf{attributes} of the data set $x_1, x_2, \dots, x_m$
+			\item Often high-dimensional
+		\end{itemize}
+		\item \textbf{Hypothesis space $\mathcal{H}$}
+		\begin{itemize}
+			\item Determined by the \textbf{number of parameters} of the model
+			\item Each point in the hypothesis space corresponds to a \textbf{specific assignment of model parameters}
+			\item The error function gives information about how good this assignment is
+			\item \highlight{Gradient descent is applied in the hypothesis space $\mathcal{H}$}
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+% Visualization of Gradient Descent in 3 Dimensions
+\begin{frame}{Visualization of Gradient Descent in 3 Dimensions}{}
+	\input{05_regression/01_tikz/hypothesis_space_gradient_descent}
+\end{frame}
+
+
+% Versions of Gradient Descent
+\begin{frame}{Versions of Gradient Descent}{}
+	\begin{itemize}
+		\item Assume some training data $\mathcal{D}$: $\{ \bm{x}^{(i)}, y^{(i)} \}_{i=1}^{n}$
+		\item Squared error for a \textbf{single} example: $\ell(y_{pred}, y_{true}) = (y_{pred} - y_{true})^2$
+		\item Our objective is to minimize the \textbf{total} error:
+		\begin{equation*}
+			\min_{\bm{\theta} \in \mathbb{R}^{m+1}} \mathcal{J}(\bm{\theta}) =
+				\min_{\bm{\theta} \in \mathbb{R}^{m+1}} \sum_{i=1}^n \ell(h_{\bm{\theta}}(\bm{x}^{(i)}), y^{(i)})
+		\end{equation*}
+		\item Three versions of gradient descent:
+		\begin{enumerate}
+			\item Batch gradient descent
+			\item Stochastic gradient descent
+			\item Mini-batch gradient descent
+		\end{enumerate}
+	\end{itemize}
+\end{frame}
+
+
+% Versions of Gradient Descent (Ctd.)
+\begin{frame}{Versions of Gradient Descent (Ctd.)}{}
+	\begin{itemize}
+		\item \highlight{Batch gradient descent}: Compute gradient based on \textbf{\underline{ALL}} data points
+		\begin{equation}
+			\bm{\theta}^{(t+1)} \longleftarrow \bm{\theta}^{(t)} - \alpha
+				\textcolor{myblue1}{\bm{\sum_{i=1}^{n}}} \nabla \ell(h_{\bm{\theta}^{(t)}}(\bm{x}^{(i)}), y^{(i)})
+		\end{equation}
+		
+		\item \highlight{Stochastic gradient descent}: Compute gradient based on a \textbf{\underline{SINGLE}} data point
+			\Highlight{(pick training example randomly and not sequentially!)}
+		\item \texttt{For} $i \in \{1, \dots, n\}$ \texttt{do:}
+		\vspace*{-3mm}
+		\begin{equation}
+			\bm{\theta}^{(t+1)} \longleftarrow \bm{\theta}^{(t)} - \alpha \nabla \ell(h_{\bm{\theta}^{(t)}}(\bm{x}^{(i)}), y^{(i)})
+		\end{equation}
+	\end{itemize}
+\end{frame}
+
+
+% Solving linear Regression using Gradient Descent
+\begin{frame}{Solving linear Regression using Gradient Descent}{}
+	\begin{itemize}
+		\item Randomly initialize $\bm{\theta}$
+		\item To minimize the error, keep changing $\bm{\theta}$ according to:
+		\begin{equation}
+			\bm{\theta}^{(t+1)} \longleftarrow \bm{\theta}^{(t)}
+				- \alpha \nabla_{\bm{\theta}}\mathcal{J}(\bm{\theta}^{(t)})
+		\end{equation}
+		\item We need to calculate $\nabla_{\theta_j}\mathcal{J}(\bm{\theta}^{(t)})$: 
+			{\footnotesize (based on a single example)}
+		{\footnotesize
+		\begin{align*}
+			\nabla_{\theta_j}\mathcal{J}(\bm{\theta}^{(t)})
+				&= \frac{\partial}{\partial \theta_j} \frac{1}{2}(h_{\bm{\theta}}(\bm{x}) - y)^2
+					= 2 \cdot \frac{1}{2} (h_{\bm{\theta}}(\bm{x}) - y) \cdot \frac{\partial}{\partial \theta_j}
+						(h_{\bm{\theta}}(\bm{x}) - y) \\
+				&= (h_{\bm{\theta}}(\bm{x}) - y) \cdot \frac{\partial}{\partial \theta_j}
+					(\theta_0 x_0 + \dots + \theta_{m+1} x_{m+1} - y)
+					= \boxed{(h_{\bm{\theta}}(\bm{x}) - y) x_j}
+		\end{align*}}
+	\end{itemize}
+\end{frame}
+
+
+% Solving the introductory Example
+\begin{frame}{Solving the introductory Example}{}
+	\divideTwo{0.49}{
+		\vspace*{4mm}
+		\input{05_regression/01_tikz/data_regression_marketing_expenses_with_curve}
+	}{0.49}{
+		\begin{itemize}
+			\item $\theta_0 \approx 7.4218$
+			\item $\theta_1 \approx 2.9827$
+			\item $\mathcal{J}(\bm{\theta}) \approx 446.9584$
+			\item $h_{\bm{\theta}}(\bm{x}) = 7.4218 + 2.9827 \cdot x_1$
+			\item $R = h_{\bm{\theta}}(2.7) = \bm{\underline{\underline{15.4750}}}$
+		\end{itemize}
+	}
+\end{frame}
+
+
+% Disadvantage of Gradient Descent
+\begin{frame}{Disadvantage of Gradient Descent}{}
+	\input{05_regression/01_tikz/local_optima}
+\end{frame}
+
+
+% Section: Probabilistic Regression
+%______________________________________________________________________
+\section{Probabilistic Regression}
+\makedivider{Probabilistic Regression}
+
+\begin{frame}{}{}
+
+\end{frame}
+
+
+% Section: Basis Function Regression
+%______________________________________________________________________
+\section{Basis Function Regression}
+\makedivider{Basis Function Regression}
+
+\begin{frame}{}{}
+
 \end{frame}
 
 
