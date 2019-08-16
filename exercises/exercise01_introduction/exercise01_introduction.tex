@@ -23,7 +23,15 @@
 
 \section{Statistics Refresher}
 \begin{enumerate}[label=\alph*)]
+\exercise{Terminology (1 point)}{What is a random variable? What is a probability density function (PDF)? What is a probability mass function (PMF)? What do a PDF and a PMF tell us about a random variable?}{7cm}
+
 \exercise{Expectation and Variance (1 point)}{State the general definition of expectation and variance for the probability density $f : \Omega \rightarrow \mathbb{R}$ of a continuous random variable. What do expectation and variance express?}{7cm}
+
+\end{enumerate}
+
+\section{Optimization}
+\begin{enumerate}[label=\alph*)]
+\exercise{Numerical Optimization - Gradient Descent (5 points)}{Implement a simple gradient descent algorithm for finding a minimum of the Rosenbrock function with $n = 2$ using Python and NumPy: $$f(x) = \sum_{i = 0}^{n - 1} \left[100 (x_{i+1} - x_i^2)^2 + (x_i - 1)^2\right]$$ Submit your code and a plot of the learning curve for the best run of your gradient descent implementation. Which learning rate worked best? (Hint: You need to find the first derivative(s) of $f(x)$ for $n = 2$ and iteratively evaluate them during gradient descent. Automatic differentiation tools are not allowed for this exercise.)}{7cm}
 
 \end{enumerate}
 
