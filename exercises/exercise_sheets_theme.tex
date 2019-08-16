@@ -15,6 +15,7 @@
 \usepackage{fancyhdr}
 \usepackage{enumitem}
 \usepackage{amssymb}
+\usepackage{xparse}
 \usepackage{roboto}
 \renewcommand{\familydefault}{\sfdefault}
 
@@ -29,8 +30,10 @@
 \setlength{\parskip}{\baselineskip}%
 \setlength{\parindent}{0pt}%
 
-\newcommand\exercise[3]{
-	\item #1\vspace{0.2cm}\newline #2 \vspace{#3}
+\newcommand\exercise[4]{
+	\IfNoValueTF{#4}
+    	{\item #1\vspace{0.2cm}\newline #2 \vspace{#3}}
+    	{\item #1\vspace{0.2cm}\newline #2\vspace{0.5cm}\newline Solution:\newline#4 \vspace{#3}}%
 }
 
 % header and footer
