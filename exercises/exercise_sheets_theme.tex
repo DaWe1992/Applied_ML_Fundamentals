@@ -10,9 +10,17 @@
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
 
+\usepackage[
+  left=2.5cm,
+  right=2cm,
+  top=2.5cm,
+  bottom=4cm,
+]{geometry}
+
 \usepackage{tikz}
 \usepackage{eso-pic}
 \usepackage{fancyhdr}
+\usepackage{etoolbox}
 \usepackage{enumitem}
 \usepackage{amssymb}
 \usepackage{xparse}
@@ -30,10 +38,12 @@
 \setlength{\parskip}{\baselineskip}%
 \setlength{\parindent}{0pt}%
 
-\newcommand\exercise[4]{
-	\IfNoValueTF{#4}
-    	{\item #1\vspace{0.2cm}\newline #2 \vspace{#3}}
-    	{\item #1\vspace{0.2cm}\newline #2\vspace{0.5cm}\newline Solution:\newline#4 \vspace{#3}}%
+\newcommand\exercise[4][]{
+	\ifx\hfuzz#1\hfuzz
+  		\item #2\vspace{0.2cm}\newline #3 \vspace{#4}%
+	\else
+  		\item #2\vspace{0.2cm}\newline #3\vspace{0.5cm}\newline Solution:\newline#1 \vspace{#4}%
+	\fi
 }
 
 % header and footer
