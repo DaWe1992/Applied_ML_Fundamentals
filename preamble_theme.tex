@@ -23,21 +23,22 @@
 \usepackage{pgfplotstable}
 \usepackage{tikzsymbols}
 
-\usetikzlibrary{shapes}
-\usetikzlibrary{shapes.geometric}
-\usetikzlibrary{shapes.symbols}
-\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{calc}
+\usetikzlibrary{trees}
+\usetikzlibrary{patterns}
 \usetikzlibrary{shadings}
 \usetikzlibrary{positioning}
-\usetikzlibrary{arrows}
-\usetikzlibrary{trees}
-\usetikzlibrary{calc}
-\usetikzlibrary{arrows.meta}
-\usetikzlibrary{patterns}
 \usetikzlibrary{intersections}
-
 \usepgfplotslibrary{patchplots}
 \usepgfplotslibrary{fillbetween}
+\usetikzlibrary{decorations.pathreplacing}
+
+\usetikzlibrary{arrows}
+\usetikzlibrary{arrows.meta}
+
+\usetikzlibrary{shapes}
+\usetikzlibrary{shapes.symbols}
+\usetikzlibrary{shapes.geometric}
 
 % boxes
 \usepackage[many]{tcolorbox}
@@ -228,7 +229,7 @@
 \newcommand{\bubble}[3]{
 \begin{textblock}{100}(#1, #2)
       	\begin{tikzpicture}
-		\node[ellipse,draw=myblue1,very thick,fill=lightgray,align=center] at (0,0) {#3};
+		\node[rectangle,draw=yellow,very thick,fill=yellow!60,align=center] at (0,0) {#3};
 	\end{tikzpicture}
 \end{textblock}
 }
