@@ -115,7 +115,11 @@
 
 % Error Function Intuition
 \begin{frame}{Error Function Intuition}{}
-	% tikz image showing least squares
+	\bubble{12}{9}{
+		\scriptsize Why the \textbf{square} \\[-2mm]
+		\scriptsize in the error function?
+	}
+	\input{05_regression/01_tikz/error_function_intuition}
 \end{frame}
 
 
@@ -364,15 +368,15 @@
 		\item We need to calculate $\nabla_{\theta_j}\mathcal{J}(\bm{\theta}^{(t)})$: 
 			{\footnotesize (based on a single example)}
 		{\footnotesize
-		\begin{align*}
-			\nabla_{\theta_j}\mathcal{J}(\bm{\theta}^{(t)})
+		\begin{align}
+			\frac{\partial}{\partial \theta_j} \mathcal{J}(\bm{\theta})
 				&= \frac{\partial}{\partial \theta_j} \frac{1}{2}(h_{\bm{\theta}}(\bm{x}) - y)^2
 					= 2 \cdot \frac{1}{2} (h_{\bm{\theta}}(\bm{x}) - y) \cdot \frac{\partial}{\partial \theta_j}
 						(h_{\bm{\theta}}(\bm{x}) - y) \\
 				&= (h_{\bm{\theta}}(\bm{x}) - y) \cdot \frac{\partial}{\partial \theta_j}
 					(\theta_0 x_0 + \dots + \theta_{m+1} x_{m+1} - y)
 					= \boxed{(h_{\bm{\theta}}(\bm{x}) - y) x_j}
-		\end{align*}}
+		\end{align}}
 	\end{itemize}
 \end{frame}
 
@@ -652,9 +656,135 @@
 \end{frame}
 
 
+% Overfitting vs. Underfitting
+\begin{frame}{Overfitting vs. Underfitting}{}
+	\begin{itemize}
+		\item \textbf{Underfitting}
+		\begin{itemize}
+			\item The model is not complex enough to fit the data well $\Rightarrow$ \highlight{High bias}
+			\item Make the model more complex; adding new examples \Highlight{does not help}
+		\end{itemize}
+		\item \textbf{Overfitting}
+		\begin{itemize}
+			\item The model predicts the training data perfectly
+			\item But it \Highlight{fails to generalize} to unseen instances $\Rightarrow$ \highlight{High variance}
+			\item Decrease the degree of freedom or add more training examples
+			\item Also: Try \highlight{regularization}
+		\end{itemize}
+		\item \highlight{Bias-Variance trade-off}
+	\end{itemize}
+\end{frame}
+
+
+% First Solution: Smaller Degree
+\begin{frame}{First Solution: Smaller Degree}{}
+	\bubble{12}{5}{
+		\scriptsize Much better :)
+	}
+	One solution: Use a \highlight{smaller degree} (here: $P = 3$)
+	\vspace{-3mm}
+	\begin{figure}
+		\includegraphics[scale=0.5]{05_regression/02_img/non_linear_data_with_poly_fit_degree_3}
+	\end{figure}
+\end{frame}
+
+
+% Second Solution: Regularization
+\begin{frame}{Second Solution: Regularization}{}
+	\begin{itemize}
+		\item Enrich $\mathcal{J}(\bm{\theta})$ with a \highlight{regularization term}
+		\item This can \textbf{prevent overfitting} and results in a smoother function \\
+			(large values for $\theta_j$ are prevented)
+		\item Two forms of regularization, \highlight{L1} and \highlight{L2}:
+		\begin{equation*}
+			\min_{\bm{\theta}} \mathcal{J}(\bm{\theta}) + \lambda \vert \bm{\theta} \vert
+			\quad \rightarrow \text{(\textbf{L1})}
+			\qquad\qquad
+			\min_{\bm{\theta}} \mathcal{J}(\bm{\theta}) + \lambda \Vert \bm{\theta} \Vert^2
+			\quad \rightarrow \text{(\textbf{L2})}
+		\end{equation*}
+		\vspace*{-3mm}
+		\begin{equation*}
+			\vert \bm{\theta} \vert = \sum_{j=1}^{m+1} \vert \theta_j \vert
+			\qquad\qquad
+			\Vert \bm{\theta} \Vert^2 = \sum_{j=1}^{m+1} \theta_j^2
+		\end{equation*}
+		\item $\lambda \ge 0$ controls the \textbf{degree of regularization}
+	\end{itemize}
+\end{frame}
+
+
+% Regularization visualized
+\begin{frame}{Regularization visualized}{}
+	\bubble{10}{13}{
+		\scriptsize L2 (left), L1 (right)
+	}
+	\divideTwo{0.45}{
+		\footnotesize
+		\begin{itemize}
+			\item Here: $\bm{w} \equiv \bm{\theta}$
+			\item L1-Regularization \\
+				$\Rightarrow$ \highlight{Lasso regression} \\
+				\scriptsize (least abs. shrinkage and select. operator) \footnotesize
+			\item L2-Regularization \\
+				$\Rightarrow$ \highlight{Ridge regression} \\
+				\scriptsize (Tikhonov regularization) \footnotesize
+			\item The combination of both is called \highlight{elastic net}
+		\end{itemize}
+	}{0.54}{
+		\begin{figure}
+			\includegraphics[scale=0.35]{05_regression/02_img/regularization}
+		\end{figure}
+	}
+\end{frame}
+
+
+% Incorporating Regularization
+\begin{frame}{Incorporating Regularization}{}
+	\bubble{10}{4.5}{
+		\scriptsize The regularization also \\[-2mm]
+		\scriptsize helps to overcome numerical issues!
+	}
+	\begin{itemize}
+		\item Normal equation with regularization:
+		\begin{equation}
+			\bm{\theta} = (\bm{X}^{\intercal} \bm{X}\ \textcolor{myblue1}{+\ \lambda \bm{I}})^{-1}
+				\bm{X}^{\intercal} \bm{y}
+		\end{equation}
+		\item Regularized gradient descent update rule:
+		\begin{align*}
+			\bm{\theta}^{(t+1)}
+				&\longleftarrow \bm{\theta}^{(t)}
+					- \alpha \nabla_{\bm{\theta}}\mathcal{J}(\bm{\theta}^{(t)}) \\
+			\frac{\partial}{\partial \theta_j} \mathcal{J}(\bm{\theta})
+				&= (h_{\bm{\theta}}(\bm{x}) - y) x_j\ \textcolor{myblue1}{+\ \lambda \theta_j}
+		\end{align*}
+	\end{itemize}
+\end{frame}
+
+
+% Polynomial Regression with Regularization
+\begin{frame}{Polynomial Regression with Regularization}{}
+	\divideTwo{0.49}{
+		\textbf{At least better}
+		\vspace*{-4mm}
+		\begin{figure}
+			\includegraphics[scale=0.45]{05_regression/02_img/non_linear_data_with_poly_fit_lambda_1000}
+		\end{figure}
+	}{0.49}{
+		\textbf{Way too much regularization}
+		\vspace*{-4mm}
+		\begin{figure}
+			\includegraphics[scale=0.45]{05_regression/02_img/non_linear_data_with_poly_fit_lambda_too_large}
+		\end{figure}
+	}
+\end{frame}
+
+
 % Section: Wrap-Up
 %______________________________________________________________________
 \section{Wrap-Up}
+\makedivider{Wrap-Up}
 
 % Subsection: Summary
 % --------------------------------------------------------------------------------------------------------
