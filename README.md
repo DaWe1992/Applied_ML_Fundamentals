@@ -10,7 +10,7 @@
 	* Statistics
 	* Linear Algebra
 	* Optimization
-3. Bayesian Decision Theory
+3. [Bayesian Decision Theory](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_decision_theory.pdf)
     * Bayes Optimal Classifier
     * Naive Bayes
 4. Probability Density Estimation
@@ -18,7 +18,7 @@
 	* Non-parametric models
 	* (Mixture models)
 5. Supervised Learning
-    * Regression
+    * [Regression](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/05_regression.pdf)
       * Linear Regression
 	  * (Probabilistic Regression, MAP regression)
       * Basis functions: Radial Basis Functiond, Polyonmial
