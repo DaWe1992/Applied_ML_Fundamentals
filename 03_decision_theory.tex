@@ -181,8 +181,8 @@
 % --------------------------------------------------------------------------------------------------------
 \subsection{Bayes' Theorem}
 
-% Bayesian Decision Theory: Bayes' Theorem
-\begin{frame}{Bayesian Decision Theory: Bayes' Theorem}{}
+% Bayes' Theorem
+\begin{frame}{Bayes' Theorem}{}
 	\begin{itemize}
 		\item What we actually want to compute: $P(\mathcal{C}_k \vert \bm{x}) \Rightarrow$
 			\highlight{Posterior probability}
@@ -238,8 +238,8 @@
 % --------------------------------------------------------------------------------------------------------
 \subsection{Bayes' Optimal Classifier}
 
-% Bayesian Decision Theory: Bayes' Optimal Classifier (Ctd.)
-\begin{frame}{Bayesian Decision Theory: Bayes' Optimal Classifier (Ctd.)}{}
+% Error Minimization
+\begin{frame}{Error Minimization}{}
 	\divideTwo{0.45}{
 		\begin{figure}
 			\centering
@@ -247,20 +247,21 @@
 		\end{figure}
 	}{0.49}{
 		\begin{align*}
-			p(error) 	&= p(x \in \mathcal{R}_1, \mathcal{C}_2) + p(x \in \mathcal{R}_2, \mathcal{C}_1) \\
-					&= \overbracket{
-							\int_{\mathcal{R}_1} p(x \vert \mathcal{C}_2) \cdot p(\mathcal{C}_2) \diff x
-						}^{\text{\textcolor{red}{red} + \textcolor{green!80!black}{green} area}}\ + \\
-					&\phantom{=}\ \underbracket{
-							\int_{\mathcal{R}_2} p(x \vert \mathcal{C}_1) \cdot p(\mathcal{C}_1) \diff x
-						}_{\text{\textcolor{blue}{blue} area}}
+			p(error) 
+				&= p(x \in \mathcal{R}_1, \mathcal{C}_2) + p(x \in \mathcal{R}_2, \mathcal{C}_1) \\
+				&= \overbracket{
+						\int_{\mathcal{R}_1} p(x \vert \mathcal{C}_2) \cdot p(\mathcal{C}_2) \diff x
+					}^{\text{\textcolor{red}{red} + \textcolor{green!80!black}{green} area}}\ + \\
+				&\phantom{=}\ \underbracket{
+						\int_{\mathcal{R}_2} p(x \vert \mathcal{C}_1) \cdot p(\mathcal{C}_1) \diff x
+					}_{\text{\textcolor{blue}{blue} area}}
 		\end{align*}
 	}
 \end{frame}
 
 
-% Bayesian Decision Theory: Bayes' Optimal Classifier (Ctd.)
-\begin{frame}{Bayesian Decision Theory: Bayes' Optimal Classifier (Ctd.)}{}
+% Bayes' Optimal Classifier
+\begin{frame}{Bayes' Optimal Classifier}{}
 	\begin{itemize}
 		\item Decision rule:
 		\begin{itemize}
@@ -290,8 +291,8 @@
 % --------------------------------------------------------------------------------------------------------
 \subsection{Assumptions and Algorithm}
 
-% A na\"{i}ve assumption
-\begin{frame}{A na\"{i}ve assumption}{}
+% A na\"{i}ve Assumption
+\begin{frame}{A na\"{i}ve Assumption}{}
 	\bubble{12}{4.25}{
 		\scriptsize Our first classification \\[-2mm]
 		\scriptsize algorithm!
@@ -328,15 +329,16 @@
 		\item \textbf{Given:}
 		\begin{itemize}
 			\item New instance $\bm{x} = \langle x_1, x_2, \dots, x_m \rangle$ to be classified
-			\item Finite set of classes $\mathcal{C} = \{ \mathcal{C}_1, \mathcal{C}_2, \dots, \mathcal{C}_l \}$
+			\item Finite set of $\ell$ classes $\{ \mathcal{C}_1, \mathcal{C}_2, \dots, \mathcal{C}_\ell \}$
 			\item \highlight{Labeled} training data ($\Rightarrow$ supervised learning)
 		\end{itemize}
 		\item \textbf{Wanted:} Most probable class $\mathcal{C}_{MAP}$ (maximum aposteriori) for $\bm{x}$:
 		\begin{align}
 			\mathcal{C}_{MAP}
-				&= \argmax_{\mathcal{C}_k \in \mathcal{C}} \widehat{p}(\mathcal{C}_k \vert \bm{x}) \\
-				&= \argmax_{\mathcal{C}_k \in \mathcal{C}} \widehat{p}(\mathcal{C}_k)
-					\prod_{j=1}^m \widehat{p}(x_j \vert \mathcal{C}_k)
+				&= \argmax_{\mathcal{C}_k \in \{ \mathcal{C}_1, \dots, \mathcal{C}_\ell \}} 
+					\widehat{p}(\mathcal{C}_k \vert \bm{x}) \\
+				&= \argmax_{\mathcal{C}_k \in \{ \mathcal{C}_1, \dots, \mathcal{C}_\ell \}} 
+					\widehat{p}(\mathcal{C}_k) \prod_{j=1}^m \widehat{p}(x_j \vert \mathcal{C}_k)
 		\end{align}
 	\end{itemize}
 \end{frame}
@@ -359,8 +361,8 @@
 \end{frame}
 
 
-% Na\"{i}ve Bayes Classifier: How to estimate the Probabilities?
-\begin{frame}{Na\"{i}ve Bayes Classifier: How to estimate the Probabilities?}{}
+% How to estimate the Probabilities?
+\begin{frame}{How to estimate the Probabilities?}{}
 	\begin{itemize}
 		\item How to estimate the probabilities $\widehat{p}(\mathcal{C}_k)$ and $\widehat{p}(x_j \vert \mathcal{C}_k)$ ?
 		\item \textbf{Solution}: Simply count the occurrences
@@ -368,7 +370,7 @@
 			\widehat{p}(\mathcal{C}_k)
 				&= \frac{\sum_{i=1}^n \mathbb{1}\{ y^{(i)} = \mathcal{C}_k \}}{n} \\[3mm]
 			\widehat{p}(x_j = v \vert \mathcal{C}_k)
-				&= \frac{\sum_{i=1}^n \mathbb{1}\{ x_j^{(i)} = v, y^{(i)} = \mathcal{C}_k \}}
+				&= \frac{\sum_{i=1}^n \mathbb{1}\{ x_j^{(i)} = v \wedge y^{(i)} = \mathcal{C}_k \}}
 					{\sum_{i=1}^n \mathbb{1}\{ y^{(i)} = \mathcal{C}_k \}}
 		\end{align}
 		\item $\mathbb{1}\{ bool \}$ is the \highlight{indicator function} \\[-1mm]
@@ -378,6 +380,124 @@
 	\begin{textblock}{100}(2,8)
 		\includegraphics[scale=0.5]{03_decision_theory/02_img/count_count}
 	\end{textblock}
+\end{frame}
+
+
+% Let's compute some Probabilities
+\begin{frame}{Let's compute some Probabilities}{}
+	\begin{itemize}
+		\item New instance $\bm{x} = \langle sunny, cool, high, strong \rangle$
+		\item What is its class?
+		\item Let's compute some of the probabilities needed:
+	\end{itemize}
+	
+	\begin{align*}
+		\widehat{p}(Golf = yes) 						&= \nicefrac{9}{14} = 0.64 	\\
+		\widehat{p}(Golf = no)						&= \nicefrac{5}{14} = 0.36 	\\
+		\widehat{p}(Outlook = sunny \vert Golf = yes) 	&= \nicefrac{2}{9} = 0.22 	\\
+		\widehat{p}(Outlook = sunny \vert Golf = no) 	&= \nicefrac{3}{5} = 0.60 	\\
+		...
+	\end{align*}
+\end{frame}
+
+
+% Class Prediction
+\begin{frame}{Class Prediction}{}
+	\vspace*{-10mm}
+	\begin{align*}
+		\widehat{p}(yes \vert \bm{x}) &= \overbracket{
+			\widehat{p}(sunny \vert yes)
+		}^{=0.22} \cdot
+		\overbracket{
+			\widehat{p}(cool \vert yes) \cdot \widehat{p}(high \vert yes) \cdot \widehat{p}(strong \vert yes)
+		}^{\text{calculate probabilities accordingly}} \cdot
+		\overbracket{
+			\widehat{p}(yes)
+		}^{=0.64} \\ &= \bm{0.0053}
+		\\[2mm]
+		\widehat{p}(no \vert \bm{x}) &= \underbracket{
+			\widehat{p}(sunny \vert no)
+		}_{=0.60} \cdot
+		\underbracket{
+			\widehat{p}(cool \vert no) \cdot \widehat{p}(high \vert no) \cdot \widehat{p}(strong \vert no)
+		}_{\text{calculate probabilities accordingly}} \cdot
+		\underbracket{
+			\widehat{p}(no)
+		}_{=0.36} \\ &= \bm{0.0206}
+	\end{align*}
+
+	\begin{boxBlueNoFrame}
+		\textbf{Classification:} $\mathcal{C}_{MAP} = no$ (No golf today...)
+	\end{boxBlueNoFrame}
+\end{frame}
+
+
+% Scaling the Output
+\begin{frame}{Scaling the Output}{}
+	\begin{itemize}
+		\item \Highlight{But wait!} \textcolor{red}{These probabilities don't sum up to one!?!?}
+		\begin{itemize}
+			\item This is because we dropped the normalization term $p(\bm{x})$
+			\item \highlight{Scaling} can fix this:
+		\end{itemize}
+		\begin{align*}
+			\widehat{p}(yes \vert \bm{x})_{norm} = \frac{0.0053}{0.0053 + 0.0206} = \bm{0.205} 	\\[3mm]
+			\widehat{p}(no \vert \bm{x})_{norm} = \frac{0.0206}{0.0053 + 0.0206} = \bm{0.795}
+		\end{align*}
+		\item Scaling does \textbf{not} change the prediction
+	\end{itemize}
+\end{frame}
+
+
+% Subsection: Laplace Smoothing
+% --------------------------------------------------------------------------------------------------------
+\subsection{Laplace Smoothing}
+
+% Laplace Smoothing
+\begin{frame}{Laplace Smoothing}{}
+	\begin{itemize}
+		\item \textbf{Problem:} A feature value $v^{\star}$ in the test data not seen during training
+		\item $\widehat{p}(v^{\star} \vert \mathcal{C}_k) = 0$: The whole product becomes zero...
+		\item \textbf{Solution}: \highlight{Laplace smoothing}
+		\begin{align}
+			\widehat{p}(\mathcal{C}_k)
+				&= \frac{\sum_{i=1}^n \mathbb{1}\{ y^{(i)} = \mathcal{C}_k \} + 1} {n + \ell} \\[3mm]
+			\widehat{p}(x_j = v \vert \mathcal{C}_k)
+				&= \frac{\sum_{i=1}^n \mathbb{1}\{ x_j^{(i)} = v \wedge y^{(i)} = \mathcal{C}_k \} + 1}
+					{\sum_{i=1}^n \mathbb{1}\{ y^{(i)} = \mathcal{C}_k \} + \ell}
+		\end{align}
+	\end{itemize}
+\end{frame}
+
+
+% Section: Risk Minimization
+%______________________________________________________________________
+\section{Risk Minimization}
+\makedivider{Risk Minimization}
+
+% Subsection: 
+% --------------------------------------------------------------------------------------------------------
+\subsection{}
+
+% Error != Risk
+\begin{frame}{Error != Risk}{}
+	\begin{itemize}
+		\item So far, we have tried to minimize the misclassification rate
+		\item Nevertheless, there are cases where not every misclassification is equally bad
+		\item Some classical examples:
+		\begin{itemize}
+			\item \textbf{Smoke detector}
+			\begin{itemize}
+				\item If there is a fire, we must make sure to detect it
+				\item If there is not, an occasional false alarm may be acceptable
+			\end{itemize}
+			\item \textbf{Medical diagnosis}
+			\begin{itemize}
+				\item If the patient is sick, we have to detect the disease
+				\item If they are healthy, it can be okay to classify them as sick (order further tests)
+			\end{itemize}
+		\end{itemize}
+	\end{itemize}
 \end{frame}
 
 
