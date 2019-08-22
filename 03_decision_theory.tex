@@ -50,10 +50,12 @@
 			\highlight{rules of probability}
 		\item The data is understood to be a set of \highlight{random samples} from some
 			underlying \highlight{probability distribution}
-		\item The basic assumption about how the data is generated is always there, even if you don' t see
-			a single probability distribution
 		\item This is the reason for the name \highlight{statistical machine learning}
 	\end{itemize}
+	\begin{boxBlueNoFrame}
+		The basic assumption about how the data is generated is always there, even if you don't see
+		a single probability distribution!
+	\end{boxBlueNoFrame}
 \end{frame}
 
 
@@ -156,8 +158,8 @@
 
 % How to get the Prior Probabilities?
 \begin{frame}{How to get the Prior Probabilities?}{}
-	\bubble{11}{5}{
-		\footnotesize Don't count \textcolor{orange}{\textbf{oranges}}!
+	\bubble{11}{5.25}{
+		\footnotesize But don't count apples!
 	}
 	\vspace*{4mm}
 	\begin{figure}
@@ -167,7 +169,7 @@
 	\begin{textblock}{100}(4,4.5)
 		\footnotesize \highlight{Count Count's advice:}
 	\end{textblock}
-	\begin{textblock}{100}(4,6)
+	\begin{textblock}{100}(4,6.25)
 		\textbf{Simply count the} \\
 		\textbf{number of instances} \\
 		\textbf{in each class!}
@@ -208,15 +210,174 @@
 \end{frame}
 
 
+% Calculation of the Posterior Probability
+\begin{frame}{Calculation of the Posterior Probability}{}
+	\divideTwo{0.49}{
+		\footnotesize
+		\begin{itemize}
+			\item By applying Bayes' theorem we can compute the posterior
+			\item Simply plug \ding{182} and \ding{183} into Bayes' theorem
+			\begin{enumerate}
+				\item Class prior probabilities
+				\item Class conditional probabilities
+			\end{enumerate}
+		\end{itemize}
+		\begin{boxBlueNoFrame}
+			We get the final \highlight{decision boundary}
+		\end{boxBlueNoFrame}
+	}{0.45}{
+		\begin{figure}
+			\centering
+			\includegraphics[scale=0.3]{03_decision_theory/02_img/decision_boundary}
+		\end{figure}
+	}
+\end{frame}
+
+
+% Subsection: Bayes' Optimal Classifier
+% --------------------------------------------------------------------------------------------------------
+\subsection{Bayes' Optimal Classifier}
+
+% Bayesian Decision Theory: Bayes' Optimal Classifier (Ctd.)
+\begin{frame}{Bayesian Decision Theory: Bayes' Optimal Classifier (Ctd.)}{}
+	\divideTwo{0.45}{
+		\begin{figure}
+			\centering
+			\includegraphics[scale=0.5]{03_decision_theory/02_img/error_minimization}
+		\end{figure}
+	}{0.49}{
+		\begin{align*}
+			p(error) 	&= p(x \in \mathcal{R}_1, \mathcal{C}_2) + p(x \in \mathcal{R}_2, \mathcal{C}_1) \\
+					&= \overbracket{
+							\int_{\mathcal{R}_1} p(x \vert \mathcal{C}_2) \cdot p(\mathcal{C}_2) \diff x
+						}^{\text{\textcolor{red}{red} + \textcolor{green!80!black}{green} area}}\ + \\
+					&\phantom{=}\ \underbracket{
+							\int_{\mathcal{R}_2} p(x \vert \mathcal{C}_1) \cdot p(\mathcal{C}_1) \diff x
+						}_{\text{\textcolor{blue}{blue} area}}
+		\end{align*}
+	}
+\end{frame}
+
+
+% Bayesian Decision Theory: Bayes' Optimal Classifier (Ctd.)
+\begin{frame}{Bayesian Decision Theory: Bayes' Optimal Classifier (Ctd.)}{}
+	\begin{itemize}
+		\item Decision rule:
+		\begin{itemize}
+			\item Decide $\mathcal{C}_1$ if $p(\mathcal{C}_1 \vert \bm{x}) > p(\mathcal{C}_2 \vert \bm{x})$
+			\item This is equivalent to: \textit{(we don't need the normalization)}
+			\begin{equation}
+				p(\bm{x} \vert \mathcal{C}_1) \cdot p(\mathcal{C}_1) >
+					p(\bm{x} \vert \mathcal{C}_2) \cdot p(\mathcal{C}_2)
+			\end{equation} 
+			\item Which is in turn equivalent to:
+			\begin{equation}
+				\frac{p(\bm{x} \vert \mathcal{C}_1)}{p(\bm{x} \vert \mathcal{C}_2)} >
+					\frac{p(\mathcal{C}_2)}{p(\mathcal{C}_1)}
+			\end{equation}
+		\end{itemize}
+		\item A classifier obeying this rule is called \highlight{Bayes' Optimal Classifier}
+	\end{itemize}
+\end{frame}
+
+
 % Section: Na\"{i}ve Bayes Classifier
 %______________________________________________________________________
 \section{Na\"{i}ve Bayes Classifier}
 \makedivider{Na\"{i}ve Bayes Classifier}
 
+% Subsection: Assumptions and Algorithm
+% --------------------------------------------------------------------------------------------------------
+\subsection{Assumptions and Algorithm}
 
-%
-\begin{frame}{}{}
+% A na\"{i}ve assumption
+\begin{frame}{A na\"{i}ve assumption}{}
+	\bubble{12}{4.25}{
+		\scriptsize Our first classification \\[-2mm]
+		\scriptsize algorithm!
+	}
+	\begin{itemize}
+		\item We want to compute $p(\mathcal{C}_k \vert \bm{x})$. Recall Bayes' theorem:
+		\begin{equation}
+			P(\mathcal{C}_k \vert \bm{x}) = \frac{P(\bm{x} \vert \mathcal{C}_k) \cdot P(\mathcal{C}_k)}{P(\bm{x})}
+		\end{equation}
+		\item Assumptions:
+		\begin{itemize}
+			\item All $x_i \in \bm{x}$ are \highlight{pairwise conditionally independent}
+				($\Rightarrow$ \textbf{na\"{i}ve})
+			\begin{equation}
+				p(\bm{x} \vert \mathcal{C}_k) 
+					= p(x_1 \vert \mathcal{C}_k) \cdot p(x_2 \vert \mathcal{C}_k, x_1) \cdot
+						p(x_3 \vert \mathcal{C}_k, x_1, x_2) \cdot ... 
+					= \prod_{j=1}^m p(x_j \vert \mathcal{C}_k)
+			\end{equation}
+			\item $p(\bm{x})$ is constant w.\,r.\,t. class label
+				$\Rightarrow$ \highlight{It is omitted}
+		\end{itemize}
+	\end{itemize}
+\end{frame}
 
+
+% How to get the most probable Class?
+\begin{frame}{How to get the most probable Class?}{}
+	\bubble{1}{12}{
+		\scriptsize $\widehat{p}$ denotes an \\[-2mm]
+		\scriptsize \textbf{approximated} probability
+	}
+	\begin{itemize}
+		\item \textbf{Given:}
+		\begin{itemize}
+			\item New instance $\bm{x} = \langle x_1, x_2, \dots, x_m \rangle$ to be classified
+			\item Finite set of classes $\mathcal{C} = \{ \mathcal{C}_1, \mathcal{C}_2, \dots, \mathcal{C}_l \}$
+			\item \highlight{Labeled} training data ($\Rightarrow$ supervised learning)
+		\end{itemize}
+		\item \textbf{Wanted:} Most probable class $\mathcal{C}_{MAP}$ (maximum aposteriori) for $\bm{x}$:
+		\begin{align}
+			\mathcal{C}_{MAP}
+				&= \argmax_{\mathcal{C}_k \in \mathcal{C}} \widehat{p}(\mathcal{C}_k \vert \bm{x}) \\
+				&= \argmax_{\mathcal{C}_k \in \mathcal{C}} \widehat{p}(\mathcal{C}_k)
+					\prod_{j=1}^m \widehat{p}(x_j \vert \mathcal{C}_k)
+		\end{align}
+	\end{itemize}
+\end{frame}
+
+
+% How to get the most probable Class? (Ctd.)
+\begin{frame}{How to get the most probable Class? (Ctd.)}{}
+	\vspace*{-2mm}
+	\input{03_decision_theory/01_tikz/naive_bayes_procedure}
+\end{frame}
+
+
+% Subsection: An Example
+% --------------------------------------------------------------------------------------------------------
+\subsection{An Example}
+
+% Example Data Set
+\begin{frame}{Example Data Set}{}
+	\input{03_decision_theory/03_tbl/example_data_set}
+\end{frame}
+
+
+% Na\"{i}ve Bayes Classifier: How to estimate the Probabilities?
+\begin{frame}{Na\"{i}ve Bayes Classifier: How to estimate the Probabilities?}{}
+	\begin{itemize}
+		\item How to estimate the probabilities $\widehat{p}(\mathcal{C}_k)$ and $\widehat{p}(x_j \vert \mathcal{C}_k)$ ?
+		\item \textbf{Solution}: Simply count the occurrences
+		\begin{align}
+			\widehat{p}(\mathcal{C}_k)
+				&= \frac{\sum_{i=1}^n \mathbb{1}\{ y^{(i)} = \mathcal{C}_k \}}{n} \\[3mm]
+			\widehat{p}(x_j = v \vert \mathcal{C}_k)
+				&= \frac{\sum_{i=1}^n \mathbb{1}\{ x_j^{(i)} = v, y^{(i)} = \mathcal{C}_k \}}
+					{\sum_{i=1}^n \mathbb{1}\{ y^{(i)} = \mathcal{C}_k \}}
+		\end{align}
+		\item $\mathbb{1}\{ bool \}$ is the \highlight{indicator function} \\[-1mm]
+			{\scriptsize (returns 1 if $bool$ is true, 0 otherwise.
+			E.\,g.: $\mathbb{1}\{1+1=2\} = 1$, $\mathbb{1}\{3=2\} = 0$)}
+	\end{itemize}
+	\begin{textblock}{100}(2,8)
+		\includegraphics[scale=0.5]{03_decision_theory/02_img/count_count}
+	\end{textblock}
 \end{frame}
 
 
