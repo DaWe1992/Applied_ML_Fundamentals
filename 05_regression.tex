@@ -6,7 +6,7 @@
 % ====================================================
 % ====================================================
 
-\title[Machine Learning Introduction]{*** Applied Machine Learning Fundamentals *** Regression}
+\title[Regression]{*** Applied Machine Learning Fundamentals *** Regression}
 \institute{SAP\,SE}
 \author{Daniel Wehner}
 \date{\today}
@@ -115,7 +115,11 @@
 
 % Error Function Intuition
 \begin{frame}{Error Function Intuition}{}
-	% tikz image showing least squares
+	\bubble{12}{9}{
+		\scriptsize Why the \textbf{square} \\[-2mm]
+		\scriptsize in the error function?
+	}
+	\input{05_regression/01_tikz/error_function_intuition}
 \end{frame}
 
 
@@ -136,7 +140,7 @@
 	\begin{itemize}
 		\item Usual approach (for two unknowns): Calculate $\theta_0$ and $\theta_1$ according to
 		\begin{equation}
-			\theta_0 = \overline{y} - \theta_2 \overline{x} \qquad\qquad
+			\theta_0 = \overline{y} - \theta_1 \overline{x} \qquad\qquad
 			\theta_1 = \frac{\sum_{i=1}^n (x^{(i)} - \overline{x}) \cdot
 				(y^{(i)} - \overline{y})}{\sum_{i=1}^n (x^{(i)} - \overline{x})^2}
 		\end{equation}
@@ -364,15 +368,15 @@
 		\item We need to calculate $\nabla_{\theta_j}\mathcal{J}(\bm{\theta}^{(t)})$: 
 			{\footnotesize (based on a single example)}
 		{\footnotesize
-		\begin{align*}
-			\nabla_{\theta_j}\mathcal{J}(\bm{\theta}^{(t)})
+		\begin{align}
+			\frac{\partial}{\partial \theta_j} \mathcal{J}(\bm{\theta})
 				&= \frac{\partial}{\partial \theta_j} \frac{1}{2}(h_{\bm{\theta}}(\bm{x}) - y)^2
 					= 2 \cdot \frac{1}{2} (h_{\bm{\theta}}(\bm{x}) - y) \cdot \frac{\partial}{\partial \theta_j}
 						(h_{\bm{\theta}}(\bm{x}) - y) \\
 				&= (h_{\bm{\theta}}(\bm{x}) - y) \cdot \frac{\partial}{\partial \theta_j}
 					(\theta_0 x_0 + \dots + \theta_{m+1} x_{m+1} - y)
 					= \boxed{(h_{\bm{\theta}}(\bm{x}) - y) x_j}
-		\end{align*}}
+		\end{align}}
 	\end{itemize}
 \end{frame}
 
@@ -405,6 +409,10 @@
 \section{Probabilistic Regression}
 \makedivider{Probabilistic Regression}
 
+% Subsection: Underlying Assumptions
+% --------------------------------------------------------------------------------------------------------
+\subsection{Underlying Assumptions}
+
 % Probabilistic Regression
 \begin{frame}{Probabilistic Regression}{}
 	\begin{itemize}
@@ -430,6 +438,10 @@
 \end{frame}
 
 
+% Subsection: Gradient Descent
+% --------------------------------------------------------------------------------------------------------
+\subsection{Maximum Likelihood Solution}
+
 % Maximum Likelihood Regression
 \begin{frame}{Maximum Likelihood Regression}{}
 	\begin{itemize}
@@ -447,6 +459,9 @@
 
 % Maximum Likelihood Regression (Ctd.)
 \begin{frame}{Maximum Likelihood Regression (Ctd.)}{}
+	\bubble{1}{10.5}{
+		\scriptsize Remember log-rules?
+	}
 	Simplify using the \textbf{log}-likelihood:
 	\begin{align}
 		\log p(\bm{y} \vert \bm{X}, \bm{\theta}, \beta)
@@ -459,19 +474,317 @@
 \end{frame}
 
 
+% Maximum Likelihood Regression (Ctd.)
+\begin{frame}{Maximum Likelihood Regression (Ctd.)}{}
+	\begin{itemize}
+		\item Compute the gradient w.\,r.\,t. $\bm{\theta}$:
+		\begin{align*}
+			\nabla_{\bm{\theta}} \log p(\bm{y} \vert \bm{X}, \bm{\theta}, \beta) &= \bm{0} \\
+			-\beta \sum_{i=1}^n (y^{(i)} - \bm{\theta}^{\intercal} \bm{x}^{(i)})\bm{x}^{(i)} &= \bm{0} \\
+			\dots \\
+			\bm{\theta}_{ML} &= (\bm{X}^{\intercal}\bm{X})^{-1} \bm{X}^{\intercal} \bm{y}
+		\end{align*}
+		\item \highlight{Same result as in least squares regression}
+	\end{itemize}
+\end{frame}
+
+
+% We have derived the squared Error!
+\begin{frame}{We have derived the squared Error!}{}\important
+	\begin{boxBlue}
+		Minimizing the squared error gives the maximum likelihood solution for the parameters $\bm{\theta}$ assuming
+		Gaussian noise.
+	\end{boxBlue}
+	\begin{itemize}
+		\item The maximum likelihood approach gives rise to the squared error
+		\item But it is much more powerful than regular least squares
+			\highlight{$\Rightarrow$ We can estimate the uncertainty $\beta$}
+	\end{itemize}
+	\begin{equation}
+		\beta_{ML} = \left( \frac{1}{n} \sum_{i=1}^n
+			(y^{(i)} - \bm{\theta}_{ML}^{\intercal} \bm{x}^{(i)})^2 \right)^{-1}
+	\end{equation}
+\end{frame}
+
+
 % Section: Basis Function Regression
 %______________________________________________________________________
 \section{Basis Function Regression}
 \makedivider{Basis Function Regression}
 
-\begin{frame}{}{}
+% Subsection: General Idea
+% --------------------------------------------------------------------------------------------------------
+\subsection{General Idea}
 
+% What if...?
+\begin{frame}{What if...?}{}
+	\bubble{10}{7.5}{
+		\scriptsize This best-fitting function is \\[-2mm]
+		\scriptsize obviously \textbf{not a straight line}! \\
+
+		\scriptsize \highlight{What would you do?}
+	}
+	\begin{itemize}
+		\item So far we have fitted linear functions
+		\item \Highlight{What if the data is not linear...?}
+	\end{itemize}
+	\includegraphics[scale=0.5]{05_regression/02_img/non_linear_data}
+\end{frame}
+
+
+% Basis Functions
+\begin{frame}{Basis Functions}{}
+	\bubble{2}{7.5}{
+		\scriptsize We assume 1-D data
+	}
+	\begin{itemize}
+		\item Remember: \highlight{`When stuck switch to a different perspective'}
+		\item We can add \textbf{higher-order} features using \highlight{basis functions $\varphi$}:
+		\begin{equation}
+			h_{\bm{\theta}}(x) = \sum_{j=0}^P \theta_j\varphi_j(x)
+		\end{equation}
+		\item There exist several types of basis functions:
+		\begin{itemize}
+			\item \highlight{linear:} $\varphi_0(x) = 1$ and $\varphi_1(x) = x$
+			\item \highlight{polynomial} $\Rightarrow$ see below
+			\item \highlight{radial basis functions (RBFs)} $\Rightarrow$ see below
+			\item \highlight{Fourier basis}
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+% New Design Matrix
+\begin{frame}{New Design Matrix}{}
+	Applying the basis functions to $\bm{X}$ we get the new design matrix $\bm{\Phi}$:
+	
+	\footnotesize
+	\begin{equation}
+		\bm{\Phi} =
+		\begin{pmatrix}
+			\varphi_0(x^{(1)}) 	& \varphi_1(x^{(1)}) 	& \varphi_2(x^{(1)}) 	& \hdots & \varphi_P(x^{(1)}) 	\\
+			\varphi_0(x^{(2)}) 	& \varphi_1(x^{(2)}) 	& \varphi_2(x^{(2)}) 	& \hdots & \varphi_P(x^{(2)}) 	\\
+			\vdots 				& \vdots 			& \vdots 			& \ddots & \vdots 				\\
+			\varphi_0(x^{(n)}) 	& \varphi_1(x^{(n)}) 	& \varphi_2(x^{(n)}) 	& \hdots & \varphi_P(x^{(n)}) 
+		\end{pmatrix}
+	\end{equation}
+	
+	\vspace*{2mm}
+	\begin{boxBlue}
+		\footnotesize
+		\highlight{The model is still linear in the parameters, so we can still use the same algorithm as before.}
+		\Highlight{This is still linear regression (!!!)}
+	\end{boxBlue}
+\end{frame}
+
+
+% Subsection: Polynomial Basis Functions
+% --------------------------------------------------------------------------------------------------------
+\subsection{Polynomial Basis Functions}
+
+% Polynomial Basis Functions
+\begin{frame}{Polynomial Basis Functions}{}
+	\bubble{8}{6.5}{
+		\scriptsize For $N$-D data we would also \\[-2mm]
+		\scriptsize include cross-terms!
+	}
+	\begin{itemize}
+		\item A quite frequently used basis function: The \highlight{polynomial basis}
+		\begin{align*}
+			\varphi_0(x) 			&= 1 	\\
+			\varphi_j(x) 			&= x^j	\\
+			h_{\bm{\theta}}(x) 	&= \sum_{j=0}^P \theta_j \varphi_j(x) = \theta_0 + \theta_1 x +
+									\theta_2 x^2 + \dots + \theta_P x^P
+		\end{align*}
+		\item Here, $P$ is the degree of the polynomial
+		\item Here: $\varphi(x) = [1, x, x^2, x^3, \dots, x^P]$
+	\end{itemize}
+\end{frame}
+
+
+% Subsection: Radial Basis Functions
+% --------------------------------------------------------------------------------------------------------
+\subsection{Radial Basis Functions}
+
+% Radial Basis Functions
+\begin{frame}{Basis Functions: Radial Basis Functions}{}
+	\begin{itemize}
+		\item Yet another possible choice of basis function: \highlight{Radial basis functions}
+		\begin{align}
+			\varphi_0(x) 	&= 1 \\
+			\varphi_j(x) 	&= \exp\left\{ - \nicefrac{1}{2} \Vert x - z_j \Vert^2 / 2 \sigma^2 \right\}
+		\end{align}
+		\item $\{z_j\}$ are the centers of the radial basis functions
+		\item $P$ denotes the number of centers / number of radial basis functions
+		\item Often we take each data point as a center, so $P = N$
+	\end{itemize}
+\end{frame}
+
+
+% Radial Basis Functions (Ctd.)
+\begin{frame}{Radial Basis Functions (Ctd.)}{}
+	\vspace{-3mm}
+	\begin{figure}
+		\includegraphics[scale=0.55]{05_regression/02_img/non_linear_data_rbf}
+	\end{figure}
+\end{frame}
+
+
+% Subsection: Regularization Techniques
+% --------------------------------------------------------------------------------------------------------
+\subsection{Regularization Techniques}
+
+% The Danger of too expressive Models...
+\begin{frame}{The Danger of too expressive Models...}{}
+	\divideTwo{0.49}{
+		\footnotesize
+		Polynomial of degree $P = 16$ \\
+		\Highlight{($\skull$ severe overfitting $\skull$)}
+		\vspace{-3mm}
+		\begin{figure}
+			\includegraphics[scale=0.45]{05_regression/02_img/non_linear_data_with_poly_fit}
+		\end{figure}
+	}{0.49}{
+		\footnotesize
+		RBF with $\sigma = 1.00, P = N$ \\
+		(About right)
+		\vspace{-3mm}
+		\begin{figure}
+			\includegraphics[scale=0.45]{05_regression/02_img/non_linear_data_with_rbf_fit}
+		\end{figure}
+	}
+\end{frame}
+
+
+% Overfitting vs. Underfitting
+\begin{frame}{Overfitting vs. Underfitting}{}
+	\begin{itemize}
+		\item \textbf{Underfitting}
+		\begin{itemize}
+			\item The model is not complex enough to fit the data well $\Rightarrow$ \highlight{High bias}
+			\item Make the model more complex; adding new examples \Highlight{does not help}
+		\end{itemize}
+		\item \textbf{Overfitting}
+		\begin{itemize}
+			\item The model predicts the training data perfectly
+			\item But it \Highlight{fails to generalize} to unseen instances $\Rightarrow$ \highlight{High variance}
+			\item Decrease the degree of freedom or add more training examples
+			\item Also: Try \highlight{regularization}
+		\end{itemize}
+		\item \highlight{Bias-Variance trade-off}
+	\end{itemize}
+\end{frame}
+
+
+% First Solution: Smaller Degree
+\begin{frame}{First Solution: Smaller Degree}{}
+	\bubble{12}{5}{
+		\scriptsize Much better :)
+	}
+	One solution: Use a \highlight{smaller degree} (here: $P = 3$)
+	\vspace{-3mm}
+	\begin{figure}
+		\includegraphics[scale=0.5]{05_regression/02_img/non_linear_data_with_poly_fit_degree_3}
+	\end{figure}
+\end{frame}
+
+
+% Second Solution: Regularization
+\begin{frame}{Second Solution: Regularization}{}
+	\begin{itemize}
+		\item Enrich $\mathcal{J}(\bm{\theta})$ with a \highlight{regularization term}
+		\item This can \textbf{prevent overfitting} and results in a smoother function \\
+			(large values for $\theta_j$ are prevented)
+		\item Two forms of regularization, \highlight{L1} and \highlight{L2}:
+		\begin{equation*}
+			\min_{\bm{\theta}} \mathcal{J}(\bm{\theta}) + \lambda \vert \bm{\theta} \vert
+			\quad \rightarrow \text{(\textbf{L1})}
+			\qquad\qquad
+			\min_{\bm{\theta}} \mathcal{J}(\bm{\theta}) + \lambda \Vert \bm{\theta} \Vert^2
+			\quad \rightarrow \text{(\textbf{L2})}
+		\end{equation*}
+		\vspace*{-3mm}
+		\begin{equation*}
+			\vert \bm{\theta} \vert = \sum_{j=1}^{m+1} \vert \theta_j \vert
+			\qquad\qquad
+			\Vert \bm{\theta} \Vert^2 = \sum_{j=1}^{m+1} \theta_j^2
+		\end{equation*}
+		\item $\lambda \ge 0$ controls the \textbf{degree of regularization}
+	\end{itemize}
+\end{frame}
+
+
+% Regularization visualized
+\begin{frame}{Regularization visualized}{}
+	\bubble{10}{13}{
+		\scriptsize L2 (left), L1 (right)
+	}
+	\divideTwo{0.45}{
+		\footnotesize
+		\begin{itemize}
+			\item Here: $\bm{w} \equiv \bm{\theta}$
+			\item L1-Regularization \\
+				$\Rightarrow$ \highlight{Lasso regression} \\
+				\scriptsize (least abs. shrinkage and select. operator) \footnotesize
+			\item L2-Regularization \\
+				$\Rightarrow$ \highlight{Ridge regression} \\
+				\scriptsize (Tikhonov regularization) \footnotesize
+			\item The combination of both is called \highlight{elastic net}
+		\end{itemize}
+	}{0.54}{
+		\begin{figure}
+			\includegraphics[scale=0.35]{05_regression/02_img/regularization}
+		\end{figure}
+	}
+\end{frame}
+
+
+% Incorporating Regularization
+\begin{frame}{Incorporating Regularization}{}
+	\bubble{10}{4.5}{
+		\scriptsize The regularization also \\[-2mm]
+		\scriptsize helps to overcome numerical issues!
+	}
+	\begin{itemize}
+		\item Normal equation with regularization:
+		\begin{equation}
+			\bm{\theta} = (\bm{X}^{\intercal} \bm{X}\ \textcolor{myblue1}{+\ \lambda \bm{I}})^{-1}
+				\bm{X}^{\intercal} \bm{y}
+		\end{equation}
+		\item Regularized gradient descent update rule:
+		\begin{align*}
+			\bm{\theta}^{(t+1)}
+				&\longleftarrow \bm{\theta}^{(t)}
+					- \alpha \nabla_{\bm{\theta}}\mathcal{J}(\bm{\theta}^{(t)}) \\
+			\frac{\partial}{\partial \theta_j} \mathcal{J}(\bm{\theta})
+				&= (h_{\bm{\theta}}(\bm{x}) - y) x_j\ \textcolor{myblue1}{+\ \lambda \theta_j}
+		\end{align*}
+	\end{itemize}
+\end{frame}
+
+
+% Polynomial Regression with Regularization
+\begin{frame}{Polynomial Regression with Regularization}{}
+	\divideTwo{0.49}{
+		\textbf{At least better}
+		\vspace*{-4mm}
+		\begin{figure}
+			\includegraphics[scale=0.45]{05_regression/02_img/non_linear_data_with_poly_fit_lambda_1000}
+		\end{figure}
+	}{0.49}{
+		\textbf{Way too much regularization}
+		\vspace*{-4mm}
+		\begin{figure}
+			\includegraphics[scale=0.45]{05_regression/02_img/non_linear_data_with_poly_fit_lambda_too_large}
+		\end{figure}
+	}
 \end{frame}
 
 
 % Section: Wrap-Up
 %______________________________________________________________________
 \section{Wrap-Up}
+\makedivider{Wrap-Up}
 
 % Subsection: Summary
 % --------------------------------------------------------------------------------------------------------
@@ -505,6 +818,7 @@
 \begin{frame}{Self-Test Questions}{}
 
 \end{frame}
+
 
 % Subsection: Recommended Literature and further Reading
 % --------------------------------------------------------------------------------------------------------

@@ -1,0 +1,554 @@
+\input{preamble_theme}
+
+% ====================================================
+% ====================================================
+% PRESENTATION DATA
+% ====================================================
+% ====================================================
+
+\title[Decision Theory]{*** Applied Machine Learning Fundamentals *** Decision Theory}
+\institute{SAP\,SE}
+\author{Daniel Wehner}
+\date{\today}
+\prefix{DT}
+
+% ====================================================
+% ====================================================
+% BEGIN OF DOCUMENT
+% ====================================================
+% ====================================================
+
+\begin{document}
+
+% Title frame
+%______________________________________________________________________
+\maketitlepage
+
+
+% Agenda
+%______________________________________________________________________
+\begin{frame}{Agenda \today}
+	\begin{multicols}{2}
+		\tableofcontents
+	\end{multicols}
+\end{frame}
+
+
+% Section: Bayesian Decision Theory
+%______________________________________________________________________
+\section{Bayesian Decision Theory}
+\makedivider{Bayesian Decision Theory}
+
+% Subsection: Introduction
+% --------------------------------------------------------------------------------------------------------
+\subsection{Introduction}
+
+% Statistical Methods
+\begin{frame}{Statistical Methods}{}
+	\begin{itemize}
+		\item Statistical methods assume that the process that `generates' the data is governed by the
+			\highlight{rules of probability}
+		\item The data is understood to be a set of \highlight{random samples} from some
+			underlying \highlight{probability distribution}
+		\item This is the reason for the name \highlight{statistical machine learning}
+	\end{itemize}
+	\begin{boxBlueNoFrame}
+		The basic assumption about how the data is generated is always there, even if you don't see
+		a single probability distribution!
+	\end{boxBlueNoFrame}
+\end{frame}
+
+
+% Running Example: Optical Character Recognition (OCR)
+\begin{frame}{Running Example: Optical Character Recognition (OCR)}{}
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.6]{03_decision_theory/02_img/characters}
+	\end{figure}
+	\vspace*{-1mm}
+	\footnotesize
+	\Highlight{Goal: Classify a new letter so that the probability of a wrong classification is minimized}
+\end{frame}
+
+
+% Subsection: Class Conditional Probabilities
+% --------------------------------------------------------------------------------------------------------
+\subsection{Class Conditional Probabilities}
+
+% Class Conditional Probabilities
+\begin{frame}{Class Conditional Probabilities}{}
+	\begin{itemize}
+		\item First concept: \highlight{Class conditional probabilities}
+		\item Probability of $\bm{x}$ given a specific class $\mathcal{C}_k$ is formally written as:
+		\begin{equation}
+			p(\bm{x} \vert \mathcal{C}_k) \in [0, 1]
+		\end{equation}
+		\item $\bm{x} \in \mathbb{R}^m$ is a feature vector, e.\,g. \#\,black pixels, height-width ratio, ...
+		\begin{figure}
+			\centering
+			\includegraphics[scale=0.3]{03_decision_theory/02_img/conditional_probabilities}
+		\end{figure}
+	\end{itemize}
+\end{frame}
+
+
+% Class Conditional Probabilities (Ctd.)
+\begin{frame}{Class Conditional Probabilities (Ctd.)}{}
+	\divideTwo{0.49}{
+		\begin{figure}
+			\centering
+			\includegraphics[scale=0.4]{03_decision_theory/02_img/conditional_probabilities_overlap1}
+		\end{figure}
+	}{0.49}{
+		\begin{figure}
+			\centering
+			\includegraphics[scale=0.4]{03_decision_theory/02_img/conditional_probabilities_overlap2}
+		\end{figure}
+	}
+	\vspace*{3mm}
+	\begin{boxBlueNoFrame}
+		If $\bm{x} = 15$ we would predict class $a$ since $p(15 \vert a) > p(15 \vert b)$. \\
+		If $\bm{x} = 25$ we would output class $b$ since $p(25 \vert b) > p(25 \vert a)$.
+	\end{boxBlueNoFrame}
+\end{frame}
+
+
+% Class Conditional Probabilities (Ctd.)
+\begin{frame}{Class Conditional Probabilities (Ctd.)}{}
+	\bubble{12}{5}{
+		\scriptsize We have a problem!
+	}
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.5]{03_decision_theory/02_img/conditional_probabilities_overlap3}
+	\end{figure}
+	\vspace*{-3mm}
+	\begin{itemize}
+		\item \highlight{Which class should be chosen now?}
+		\item The conditional probabilities are the same... $\skull$
+	\end{itemize}
+\end{frame}
+
+
+% Subsection: Class Priors
+% --------------------------------------------------------------------------------------------------------
+\subsection{Class Priors}
+
+% Class Prior Probabilities
+\begin{frame}{Class Prior Probabilities}{}
+	\bubble{10}{10}{
+		\footnotesize How would you decide now?
+	}
+	\begin{itemize}
+		\item Second concept: \highlight{Class priors}
+		\item The prior probability of a data point belonging to a particular class $\mathcal{C}$
+		\begin{alignat*}{2}
+			\mathcal{C}_1 &\equiv a \qquad p(\mathcal{C}_1) &&= 0.75 \\
+			\mathcal{C}_2 &\equiv b \qquad p(\mathcal{C}_2) &&= 0.25
+		\end{alignat*}
+		\item By definition:
+		\begin{itemize}
+			\item $0 \le p(\mathcal{C}_k) \le 1,\ \forall k$
+			\item The sum of all probabilities equals one: $\sum_{k=1}^{\vert \mathcal{C} \vert} p(\mathcal{C}_k) = 1$
+		\end{itemize}
+		\item \highlight{The class prior is equivalent to a prior belief in the class label}
+	\end{itemize}
+\end{frame}
+
+
+% How to get the Prior Probabilities?
+\begin{frame}{How to get the Prior Probabilities?}{}
+	\bubble{11}{5.25}{
+		\footnotesize But don't count apples!
+	}
+	\vspace*{4mm}
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.6]{03_decision_theory/02_img/count_count_bubble}
+	\end{figure}
+	\begin{textblock}{100}(4,4.5)
+		\footnotesize \highlight{Count Count's advice:}
+	\end{textblock}
+	\begin{textblock}{100}(4,6.25)
+		\textbf{Simply count the} \\
+		\textbf{number of instances} \\
+		\textbf{in each class!}
+	\end{textblock}
+\end{frame}
+
+
+% Subsection: Bayes' Theorem
+% --------------------------------------------------------------------------------------------------------
+\subsection{Bayes' Theorem}
+
+% Bayes' Theorem
+\begin{frame}{Bayes' Theorem}{}\important
+	\begin{itemize}
+		\item What we actually want to compute: $P(\mathcal{C}_k \vert \bm{x}) \Rightarrow$
+			\highlight{Posterior probability}
+		\item We can compute it by applying \highlight{Bayes' theorem}
+		\item This is one of the \Highlight{most important formulas (!!!)}
+	\end{itemize}
+
+	\begin{boxBlue}
+		\begin{equation}
+			\overbracket{p(\mathcal{C}_k \vert \bm{x})}^{\text{\highlight{Class posterior}}}
+				= \frac{
+					\overbracket{p(\bm{x} \vert \mathcal{C}_k)}^{\text{\highlight{Class cond.}}}
+					\cdot
+					\overbracket{p(\mathcal{C}_k)}^{\text{\highlight{Class prior}}}
+				}{
+					\underbracket{p(\bm{x})}_{\text{\highlight{Normalization term}}}
+				}
+				= \frac{
+					p(\bm{x} \vert \mathcal{C}_k) \cdot p(\mathcal{C}_k)
+				}{
+					\sum_{j=1}^{\vert \mathcal{C} \vert} p(\bm{x} \vert \mathcal{C}_j) \cdot p(\mathcal{C}_j)
+				}
+		\end{equation}
+	\end{boxBlue}
+\end{frame}
+
+
+% Calculation of the Posterior Probability
+\begin{frame}{Calculation of the Posterior Probability}{}
+	\divideTwo{0.49}{
+		\footnotesize
+		\begin{itemize}
+			\item By applying Bayes' theorem we can compute the posterior
+			\item Simply plug \ding{182} and \ding{183} into Bayes' theorem
+			\begin{enumerate}
+				\item Class prior probabilities
+				\item Class conditional probabilities
+			\end{enumerate}
+		\end{itemize}
+		\begin{boxBlueNoFrame}
+			We get the final \highlight{decision boundary}
+		\end{boxBlueNoFrame}
+	}{0.45}{
+		\begin{figure}
+			\centering
+			\includegraphics[scale=0.3]{03_decision_theory/02_img/decision_boundary}
+		\end{figure}
+	}
+\end{frame}
+
+
+% Subsection: Bayes' Optimal Classifier
+% --------------------------------------------------------------------------------------------------------
+\subsection{Bayes' Optimal Classifier}
+
+% Error Minimization
+\begin{frame}{Error Minimization}{}
+	\divideTwo{0.45}{
+		\begin{figure}
+			\centering
+			\includegraphics[scale=0.5]{03_decision_theory/02_img/error_minimization}
+		\end{figure}
+	}{0.49}{
+		\begin{align*}
+			p(error) 
+				&= p(x \in \mathcal{R}_1, \mathcal{C}_2) + p(x \in \mathcal{R}_2, \mathcal{C}_1) \\
+				&= \overbracket{
+						\int_{\mathcal{R}_1} p(x \vert \mathcal{C}_2) \cdot p(\mathcal{C}_2) \diff x
+					}^{\text{\textcolor{red}{red} + \textcolor{green!80!black}{green} area}}\ + \\
+				&\phantom{=}\ \underbracket{
+						\int_{\mathcal{R}_2} p(x \vert \mathcal{C}_1) \cdot p(\mathcal{C}_1) \diff x
+					}_{\text{\textcolor{blue}{blue} area}}
+		\end{align*}
+	}
+\end{frame}
+
+
+% Bayes' Optimal Classifier
+\begin{frame}{Bayes' Optimal Classifier}{}\important
+	\begin{itemize}
+		\item Decision rule:
+		\begin{itemize}
+			\item Decide $\mathcal{C}_1$ if $p(\mathcal{C}_1 \vert \bm{x}) > p(\mathcal{C}_2 \vert \bm{x})$
+			\item This is equivalent to: \textit{(we don't need the normalization)}
+			\begin{equation}
+				p(\bm{x} \vert \mathcal{C}_1) \cdot p(\mathcal{C}_1) >
+					p(\bm{x} \vert \mathcal{C}_2) \cdot p(\mathcal{C}_2)
+			\end{equation} 
+			\item Which is in turn equivalent to:
+			\begin{equation}
+				\frac{p(\bm{x} \vert \mathcal{C}_1)}{p(\bm{x} \vert \mathcal{C}_2)} >
+					\frac{p(\mathcal{C}_2)}{p(\mathcal{C}_1)}
+			\end{equation}
+		\end{itemize}
+		\item A classifier obeying this rule is called \highlight{Bayes' Optimal Classifier}
+	\end{itemize}
+\end{frame}
+
+
+% Section: Na\"{i}ve Bayes Classifier
+%______________________________________________________________________
+\section{Na\"{i}ve Bayes Classifier}
+\makedivider{Na\"{i}ve Bayes Classifier}
+
+% Subsection: Assumptions and Algorithm
+% --------------------------------------------------------------------------------------------------------
+\subsection{Assumptions and Algorithm}
+
+% A na\"{i}ve Assumption
+\begin{frame}{A na\"{i}ve Assumption}{}
+	\bubble{12}{4.25}{
+		\scriptsize Our first classification \\[-2mm]
+		\scriptsize algorithm!
+	}
+	\begin{itemize}
+		\item We want to compute $p(\mathcal{C}_k \vert \bm{x})$. Recall Bayes' theorem:
+		\begin{equation}
+			P(\mathcal{C}_k \vert \bm{x}) = \frac{P(\bm{x} \vert \mathcal{C}_k) \cdot P(\mathcal{C}_k)}{P(\bm{x})}
+		\end{equation}
+		\item Assumptions:
+		\begin{itemize}
+			\item All $x_i \in \bm{x}$ are \highlight{pairwise conditionally independent}
+				($\Rightarrow$ \textbf{na\"{i}ve})
+			\begin{equation}
+				p(\bm{x} \vert \mathcal{C}_k) 
+					= p(x_1 \vert \mathcal{C}_k) \cdot p(x_2 \vert \mathcal{C}_k, x_1) \cdot
+						p(x_3 \vert \mathcal{C}_k, x_1, x_2) \cdot ... 
+					= \prod_{j=1}^m p(x_j \vert \mathcal{C}_k)
+			\end{equation}
+			\item $p(\bm{x})$ is constant w.\,r.\,t. class label
+				$\Rightarrow$ \highlight{It is omitted}
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+% How to get the most probable Class?
+\begin{frame}{How to get the most probable Class?}{}\important
+	\bubble{1}{12}{
+		\scriptsize $\widehat{p}$ denotes an \\[-2mm]
+		\scriptsize \textbf{approximated} probability
+	}
+	\begin{itemize}
+		\item \textbf{Given:}
+		\begin{itemize}
+			\item New instance $\bm{x} = \langle x_1, x_2, \dots, x_m \rangle$ to be classified
+			\item Finite set of $\ell$ classes $\{ \mathcal{C}_1, \mathcal{C}_2, \dots, \mathcal{C}_\ell \}$
+			\item \highlight{Labeled} training data ($\Rightarrow$ supervised learning)
+		\end{itemize}
+		\item \textbf{Wanted:} Most probable class $\mathcal{C}_{MAP}$ (maximum aposteriori) for $\bm{x}$:
+		\begin{align}
+			\mathcal{C}_{MAP}
+				&= \argmax_{\mathcal{C}_k \in \{ \mathcal{C}_1, \dots, \mathcal{C}_\ell \}} 
+					\widehat{p}(\mathcal{C}_k \vert \bm{x}) \\
+				&= \argmax_{\mathcal{C}_k \in \{ \mathcal{C}_1, \dots, \mathcal{C}_\ell \}} 
+					\widehat{p}(\mathcal{C}_k) \prod_{j=1}^m \widehat{p}(x_j \vert \mathcal{C}_k)
+		\end{align}
+	\end{itemize}
+\end{frame}
+
+
+% How to get the most probable Class? (Ctd.)
+\begin{frame}{How to get the most probable Class? (Ctd.)}{}
+	\vspace*{-2mm}
+	\input{03_decision_theory/01_tikz/naive_bayes_procedure}
+\end{frame}
+
+
+% Subsection: An Example
+% --------------------------------------------------------------------------------------------------------
+\subsection{An Example}
+
+% Example Data Set
+\begin{frame}{Example Data Set}{}
+	\input{03_decision_theory/03_tbl/example_data_set}
+\end{frame}
+
+
+% How to estimate the Probabilities?
+\begin{frame}{How to estimate the Probabilities?}{}
+	\begin{itemize}
+		\item How to estimate the probabilities $\widehat{p}(\mathcal{C}_k)$ and $\widehat{p}(x_j \vert \mathcal{C}_k)$ ?
+		\item \textbf{Solution}: Simply count the occurrences
+		\begin{align}
+			\widehat{p}(\mathcal{C}_k)
+				&= \frac{\sum_{i=1}^n \mathbb{1}\{ y^{(i)} = \mathcal{C}_k \}}{n} \\[3mm]
+			\widehat{p}(x_j = v \vert \mathcal{C}_k)
+				&= \frac{\sum_{i=1}^n \mathbb{1}\{ x_j^{(i)} = v \wedge y^{(i)} = \mathcal{C}_k \}}
+					{\sum_{i=1}^n \mathbb{1}\{ y^{(i)} = \mathcal{C}_k \}}
+		\end{align}
+		\item $\mathbb{1}\{ bool \}$ is the \highlight{indicator function} \\[-1mm]
+			{\scriptsize (returns 1 if $bool$ is true, 0 otherwise.
+			E.\,g.: $\mathbb{1}\{1+1=2\} = 1$, $\mathbb{1}\{3=2\} = 0$)}
+	\end{itemize}
+	\begin{textblock}{100}(2,8)
+		\includegraphics[scale=0.5]{03_decision_theory/02_img/count_count}
+	\end{textblock}
+\end{frame}
+
+
+% Let's compute some Probabilities
+\begin{frame}{Let's compute some Probabilities}{}
+	\begin{itemize}
+		\item New instance $\bm{x} = \langle sunny, cool, high, strong \rangle$
+		\item What is its class?
+		\item Let's compute some of the probabilities needed:
+	\end{itemize}
+	
+	\begin{align*}
+		\widehat{p}(Golf = yes) 						&= \nicefrac{9}{14} = 0.64 	\\
+		\widehat{p}(Golf = no)						&= \nicefrac{5}{14} = 0.36 	\\
+		\widehat{p}(Outlook = sunny \vert Golf = yes) 	&= \nicefrac{2}{9} = 0.22 	\\
+		\widehat{p}(Outlook = sunny \vert Golf = no) 	&= \nicefrac{3}{5} = 0.60 	\\
+		...
+	\end{align*}
+\end{frame}
+
+
+% Class Prediction
+\begin{frame}{Class Prediction}{}
+	\vspace*{-10mm}
+	\begin{align*}
+		\widehat{p}(yes \vert \bm{x}) &= \overbracket{
+			\widehat{p}(sunny \vert yes)
+		}^{=0.22} \cdot
+		\overbracket{
+			\widehat{p}(cool \vert yes) \cdot \widehat{p}(high \vert yes) \cdot \widehat{p}(strong \vert yes)
+		}^{\text{calculate probabilities accordingly}} \cdot
+		\overbracket{
+			\widehat{p}(yes)
+		}^{=0.64} \\ &= \bm{0.0053}
+		\\[2mm]
+		\widehat{p}(no \vert \bm{x}) &= \underbracket{
+			\widehat{p}(sunny \vert no)
+		}_{=0.60} \cdot
+		\underbracket{
+			\widehat{p}(cool \vert no) \cdot \widehat{p}(high \vert no) \cdot \widehat{p}(strong \vert no)
+		}_{\text{calculate probabilities accordingly}} \cdot
+		\underbracket{
+			\widehat{p}(no)
+		}_{=0.36} \\ &= \bm{0.0206}
+	\end{align*}
+
+	\begin{boxBlueNoFrame}
+		\textbf{Classification:} $\mathcal{C}_{MAP} = no$ (No golf today...)
+	\end{boxBlueNoFrame}
+\end{frame}
+
+
+% Scaling the Output
+\begin{frame}{Scaling the Output}{}
+	\begin{itemize}
+		\item \Highlight{But wait!} \textcolor{red}{These probabilities don't sum up to one!?!?}
+		\begin{itemize}
+			\item This is because we dropped the normalization term $p(\bm{x})$
+			\item \highlight{Scaling} can fix this:
+		\end{itemize}
+		\begin{align*}
+			\widehat{p}(yes \vert \bm{x})_{norm} = \frac{0.0053}{0.0053 + 0.0206} = \bm{0.205} 	\\[3mm]
+			\widehat{p}(no \vert \bm{x})_{norm} = \frac{0.0206}{0.0053 + 0.0206} = \bm{0.795}
+		\end{align*}
+		\item Scaling does \textbf{not} change the prediction
+	\end{itemize}
+\end{frame}
+
+
+% Subsection: Laplace Smoothing
+% --------------------------------------------------------------------------------------------------------
+\subsection{Laplace Smoothing}
+
+% Laplace Smoothing
+\begin{frame}{Laplace Smoothing}{}
+	\begin{itemize}
+		\item \textbf{Problem:} A feature value $v^{\star}$ in the test data not seen during training
+		\item $\widehat{p}(v^{\star} \vert \mathcal{C}_k) = 0$: The whole product becomes zero...
+		\item \textbf{Solution}: \highlight{Laplace smoothing}
+		\begin{align}
+			\widehat{p}(\mathcal{C}_k)
+				&= \frac{\sum_{i=1}^n \mathbb{1}\{ y^{(i)} = \mathcal{C}_k \} + 1} {n + \ell} \\[3mm]
+			\widehat{p}(x_j = v \vert \mathcal{C}_k)
+				&= \frac{\sum_{i=1}^n \mathbb{1}\{ x_j^{(i)} = v \wedge y^{(i)} = \mathcal{C}_k \} + 1}
+					{\sum_{i=1}^n \mathbb{1}\{ y^{(i)} = \mathcal{C}_k \} + \ell}
+		\end{align}
+	\end{itemize}
+\end{frame}
+
+
+% Section: Risk Minimization
+%______________________________________________________________________
+\section{Risk Minimization}
+\makedivider{Risk Minimization}
+
+% Subsection: 
+% --------------------------------------------------------------------------------------------------------
+\subsection{}
+
+% Error != Risk
+\begin{frame}{Error != Risk}{}
+	\begin{itemize}
+		\item So far, we have tried to minimize the misclassification rate
+		\item Nevertheless, there are cases where not every misclassification is equally bad
+		\item Some classical examples:
+		\begin{itemize}
+			\item \textbf{Smoke detector}
+			\begin{itemize}
+				\item If there is a fire, we must make sure to detect it
+				\item If there is not, an occasional false alarm may be acceptable
+			\end{itemize}
+			\item \textbf{Medical diagnosis}
+			\begin{itemize}
+				\item If the patient is sick, we have to detect the disease
+				\item If they are healthy, it can be okay to classify them as sick (order further tests)
+			\end{itemize}
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+% Section: Wrap-Up
+%______________________________________________________________________
+\section{Wrap-Up}
+\makedivider{Wrap-Up}
+
+% Subsection: Summary
+% --------------------------------------------------------------------------------------------------------
+\subsection{Summary}
+
+% Summary
+\begin{frame}{Summary}{}
+
+\end{frame}
+
+
+% Subsection: Lecture Overview
+% --------------------------------------------------------------------------------------------------------
+\subsection{Lecture Overview}
+
+\makeoverview{3}
+
+
+% Subsection: Self-Test Questions
+% --------------------------------------------------------------------------------------------------------
+\subsection{Self-Test Questions}
+
+% Self-Test Questions
+\begin{frame}{Self-Test Questions}{}
+
+\end{frame}
+
+
+% Subsection: Recommended Literature and further Reading
+% --------------------------------------------------------------------------------------------------------
+\subsection{Recommended Literature and further Reading}
+
+% Literature
+%______________________________________________________________________
+\begin{frame}{Recommended Literature and further Reading}{}
+	\footnotesize
+	\begin{thebibliography}{2}
+
+	\end{thebibliography}
+\end{frame}
+
+
+% Thank you
+%______________________________________________________________________
+\makethanks
+
+\end{document}
