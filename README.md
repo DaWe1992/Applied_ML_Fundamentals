@@ -13,7 +13,7 @@
 3. [Bayesian Decision Theory](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_decision_theory.pdf)
     * Bayes Optimal Classifier
     * Naive Bayes
-4. Probability Density Estimation
+4. [Probability Density Estimation](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/04_density_estimation.pdf)
     * Parametric models
 	* Non-parametric models
 	* (Mixture models)
@@ -37,7 +37,7 @@
         * Multi-Layer-Perceptrons and Backpropagation
         * Deep Learning Application: Natural Language Processing (Word Embeddings, Text Classification, Sentiment Analysis)
       * (Support Vector Machines)
-6. Unsupervised Learning 
+6. Unsupervised Learning
     * Clustering
       * k-Means
       * Hierarchical Clustering (divisive, agglomerative)
