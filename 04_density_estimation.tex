@@ -10,7 +10,7 @@
 \institute{SAP\,SE}
 \author{Daniel Wehner}
 \date{\today}
-\prefix{DT}
+\prefix{PDE}
 
 % ====================================================
 % ====================================================
@@ -49,7 +49,7 @@
 		\item We have learned about Bayes' optimal classifiers which classify data based on the probability distribution
 			$p(\bm{x} \vert \mathcal{C}_k) \cdot p(\mathcal{C}_k)$
 		\item Na\"{i}ve Bayes is an instance of PDE for \textbf{discrete data}
-		\item \highlight{How to get these probabilities for the continuous case?}
+		\item \highlight{How to get these probabilities in the continuous case?}
 		\begin{itemize}
 			\item The prior $p({\mathcal{C}_k})$ is still easy to compute
 			\item The estimation of class conditional probabilities $p(\bm{x} \vert \mathcal{C}_k)$ is more complicated
@@ -62,7 +62,10 @@
 
 % Training Data Example
 \begin{frame}{Training Data Example}{}
-	% Image of training data...
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.55]{04_density_estimation/02_img/pde_data_raw}
+	\end{figure}
 \end{frame}
 
 
@@ -73,7 +76,7 @@
 % Overview of the Methods for PDE
 \begin{frame}{Overview of the Methods for PDE}{}
 	\begin{enumerate}
-		\item \highlight{Parametric models} (Maximum likelihood estimation)
+		\item \highlight{Parametric models} (maximum likelihood estimation)
 		\begin{itemize}
 			\item Assume a fixed parametric form (e.\,g. a Gaussian distribution)
 			\item Estimate the parameters such that the model fits the data best
@@ -106,7 +109,15 @@
 	\begin{itemize}
 		\item Given some (continuous) training data $\bm{X} = \{ x^{(i)} \}_{i=1}^n$ \\
 			(where all $x^{(i)}$ belong to the same class):
+		\begin{figure}
+			\centering
+			\includegraphics[scale=0.3]{04_density_estimation/02_img/pde_data_1d}
+		\end{figure}
 		\item Estimate $p(x)$ using a fixed parametric form:
+		\begin{figure}
+			\centering
+			\includegraphics[scale=0.3]{04_density_estimation/02_img/pde_result_1d}
+		\end{figure}
 	\end{itemize}
 \end{frame}
 
@@ -247,7 +258,7 @@
 				= \nabla_{\mu} \sum_{i=1}^n \log \frac{1}{\sqrt{2 \pi \sigma^2}} \exp\left\{ -\frac{(x^{(i)} - \mu)^2}{2 \sigma^2} \right\}
 				= \sum_{i=1}^n \frac{x^{(i)} - \mu}{\sigma^2}
 		\end{equation*}
-		\item Set derivative to zero:
+		\item Set derivative to zero and solve:
 		\begin{equation*}
 			\sum_{i=1}^n x^{(i)} - \mu \overset{!}{=} 0
 				\Leftrightarrow n \cdot \mu = \sum_{i=1}^n x^{(i)}
@@ -259,7 +270,10 @@
 
 % Maximization of the Likelihood
 \begin{frame}{Maximization of the Likelihood}{}
-	% Image: Likelihood Maximization
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.55]{04_density_estimation/02_img/maximum_likelihood}
+	\end{figure}
 \end{frame}
 
 
@@ -295,7 +309,7 @@
 				= \frac{1}{\sqrt{(2 \pi)^D \vert \bm{\Sigma} \vert}}
 					\exp\left\{ -\frac{1}{2} (\bm{x} - \bm{\mu})^{\intercal} \bm{\Sigma}^{-1} (\bm{x} - \bm{\mu}) \right\}
 		\end{equation}
-		\item Luckily, the derivations don't change
+		\item Luckily, the derivations don't change:
 		\begin{equation}
 			\bm{\mu}_{ml} = \frac{1}{n} \sum_{i=1}^n \bm{x}^{(i)}
 			\qquad
@@ -307,7 +321,10 @@
 
 % MLE for the Example Data Set
 \begin{frame}{MLE for the Example Data Set}{}
-
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.55]{04_density_estimation/02_img/pde_boundary}
+	\end{figure}
 \end{frame}
 
 
@@ -332,7 +349,7 @@
 	\end{itemize}
 	
 	\begin{boxBlueNoFrame}
-		We don't want to make any assumptions about the underlying distribution!
+		\highlight{We don't want to make any assumptions about the underlying distribution!}
 	\end{boxBlueNoFrame}
 \end{frame}
 
@@ -364,7 +381,20 @@
 
 % Histograms (Ctd.)
 \begin{frame}{Histograms (Ctd.)}{}
-	% Image: Histograms
+	\begin{minipage}{0.32\framewidth}
+		\begin{center}\highlight{Too narrow}\end{center}
+		\includegraphics[scale=0.3]{04_density_estimation/02_img/histo_small}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.32\framewidth}
+		\begin{center}\highlight{About right}\end{center}
+		\includegraphics[scale=0.3]{04_density_estimation/02_img/histo_medium}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.32\framewidth}
+		\begin{center}\highlight{Too wide}\end{center}
+		\includegraphics[scale=0.3]{04_density_estimation/02_img/histo_large}
+	\end{minipage}
 \end{frame}
 
 
@@ -380,7 +410,7 @@
 			\end{enumerate}
 		\end{itemize}
 	}{0.44}{
-		% Image: Curse of dimensionality
+		\includegraphics[scale=0.3]{04_density_estimation/02_img/curse_of_dimensionality}
 	}
 	
 	\vspace*{4mm}
@@ -412,7 +442,7 @@
 \begin{frame}{Kernel Density Estimation: Parzen Window}{}
 	\begin{itemize}
 		\item $\mathcal{R}$ is a $D$-dimensional \highlight{hyper-cube} of edge length $h$ centered on $\bm{x}$
-		\item Determine if a data point falls in region $\mathcal{R}$:
+		\item Determine if a data point falls into region $\mathcal{R}$:
 		\begin{equation}
 			H(\bm{u}) = \begin{cases} 
 				1\quad \text{if}\ \vert u_d \vert \le \nicefrac{h}{2}, d = 1, 2, \dots, D \\
@@ -439,6 +469,32 @@
 			p(\bm{x}) \approx \frac{k(\bm{x})}{n \cdot v} = \frac{1}{n \cdot h^D} \sum_{i=1}^n H(\bm{x} - \bm{x}^{(i)})
 		\end{equation}
 	\end{itemize}
+\end{frame}
+
+
+% Kernel Density Estimation: Parzen Window (Ctd.)
+\begin{frame}{Kernel Density Estimation: Parzen Window (Ctd.)}
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.55]{04_density_estimation/02_img/kde}
+	\end{figure}
+\end{frame}
+
+
+% k-Nearest Neighbors
+\begin{frame}{k-Nearest Neighbors}
+	\begin{itemize}
+		\item 
+	\end{itemize}
+\end{frame}
+
+
+% k-Nearest Neighbors (Ctd.)
+\begin{frame}{k-Nearest Neighbors (Ctd.)}
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.55]{04_density_estimation/02_img/knn}
+	\end{figure}
 \end{frame}
 
 
