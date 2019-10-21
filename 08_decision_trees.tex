@@ -1,0 +1,278 @@
+\input{preamble_theme}
+
+% ====================================================
+% ====================================================
+% PRESENTATION DATA
+% ====================================================
+% ====================================================
+
+\title[Classification I]{*** Applied Machine Learning Fundamentals *** Decision Trees and Ensembles}
+\institute{SAP\,SE}
+\author{Daniel Wehner}
+\date{\today}
+\prefix{DT}
+
+% ====================================================
+% ====================================================
+% BEGIN OF DOCUMENT
+% ====================================================
+% ====================================================
+
+\begin{document}
+
+% Title frame
+%______________________________________________________________________
+\maketitlepage
+
+
+% Agenda
+%______________________________________________________________________
+\begin{frame}{Agenda \today}
+	\begin{multicols}{2}
+		\tableofcontents
+	\end{multicols}
+\end{frame}
+
+
+% Section: Introduction
+%______________________________________________________________________
+\section{Introduction}
+\makedivider{Introduction}
+
+% What we want...
+\begin{frame}{What we want...}{}
+	\divideTwo{0.49}{
+		\vspace*{4mm}
+		\input{08_decision_trees/03_tbl/example_data_set}
+	}{0.49}{
+		\input{08_decision_trees/01_tikz/tree}
+	}
+\end{frame}
+
+
+% What are Decision Trees?
+\begin{frame}{What are Decision Trees?}{}
+	\begin{itemize}
+		\item Decision trees are induced in a \highlight{supervised} fashion
+		\item Originally invented by \textit{Ross Quinlan} (1986)
+		\item Decision trees are grown \textbf{recursively} $\rightarrow$ \textit{'divide-and-conquer'}
+		\item A decision tree consists of:
+
+		\begin{tabbing}
+			\hspace*{2.5cm}\= \kill
+			\textbf{Nodes}	\>	Each node corresponds to an attribute test 	\\
+			\textbf{Edges}	\>	One edge per possible test outcome			\\
+			\textbf{Leaves}	\>	Class label to predict
+		\end{tabbing}
+	\end{itemize}
+\end{frame}
+
+
+% Classifying new Instances
+\begin{frame}{Classifying new Instances}{}
+	\divideTwo{0.49}{
+		\begin{itemize}
+			\item Suppose we get a new instance:
+			
+			\footnotesize
+			\begin{tabbing}
+				\hspace*{2.5cm}\= \kill
+				\texttt{Outlook}			\>	rainy		\\
+				\texttt{Temperature} 		\>	mild	 	\\
+				\texttt{Humidity}			\>	normal	\\
+				\texttt{Wind}			\>	strong
+			\end{tabbing}
+			\normalsize
+
+			\item \textbf{What is its class?}
+			\item Answer: \textbf{No}
+		\end{itemize}
+	}{0.49}{
+		\input{08_decision_trees/01_tikz/tree}
+	}
+\end{frame}
+
+
+% Another Decision Tree...
+\begin{frame}{Another Decision Tree...}{}
+	\bubble{1}{11}{\footnotesize \textbf{Is this one better?}}
+	\vspace*{-2mm}
+	\input{08_decision_trees/01_tikz/tree_alternative}
+\end{frame}
+
+
+% Inductive Bias of Decision Trees
+\begin{frame}{Inductive Bias of Decision Trees}{}
+	\divideTwo{0.75}{
+		\begin{itemize}
+			\item Complex models tend to \textbf{overfit} the data and do not generalize well
+			\item Small decision trees are preferred
+			\vspace*{4mm}
+			\begin{boxBlueNoFrame}
+				\textbf{Occam's razor}: \\
+				\footnotesize \textbf{`More things should not be used than are necessary.'}
+			\end{boxBlueNoFrame}
+			\vspace*{2mm}
+			\item \highlight{Prefer the simplest hypothesis that fits the data!}
+		\end{itemize}
+	}{0.20}{
+		\begin{figure}
+			\centering
+			\includegraphics[scale=0.25]{08_decision_trees/02_img/william_of_ockham}
+		\end{figure}
+	}
+\end{frame}
+
+
+% The Root of all Evil... Which Attribute to choose?
+\begin{frame}{The Root of all Evil... Which Attribute to choose?}{}
+	\divideTwo{0.49}{
+		\input{08_decision_trees/01_tikz/attribute_split_outlook}
+		\vspace*{0.25mm}	
+	}{0.49}{
+		\input{08_decision_trees/01_tikz/attribute_split_temperature}
+		\vspace*{0.25mm}	
+	}
+
+	\divideTwo{0.49}{
+		\input{08_decision_trees/01_tikz/attribute_split_wind}
+	}{0.49}{
+		\input{08_decision_trees/01_tikz/attribute_split_humidity}
+	}
+\end{frame}
+
+
+% Finding a proper Attribute
+\begin{frame}{Finding a proper Attribute}{}
+	\divideTwo{0.79}{
+		\begin{itemize}
+			\item Simple and small trees are preferred
+			\begin{itemize}
+				\item Data in successor node should be \textbf{as pure as possible}
+				\item I.\,e. nodes containing one class only are preferable
+			\end{itemize}
+			\item \textbf{Question:} How can we express this thought as a mathematical formula?
+			\item \textbf{Answer:}
+			\begin{itemize}
+				\item \highlight{Entropy} (\textit{Claude E. Shannon})
+				\item Originates in the field of \textbf{information theory}
+			\end{itemize}
+		\end{itemize}
+	}{0.19}{
+		\includegraphics[scale=0.3]{08_decision_trees/02_img/claude_shannon}
+	}
+\end{frame}
+
+
+% Measure of Impurity: Entropy
+\begin{frame}{Measure of Impurity: Entropy}{}
+	\begin{itemize}
+		\item Entropy is a measure of chaos in the data (measured in bits)
+		\item \textbf{Example:} Consider two classes $A$ and $B$ ($\mathcal{C} = \{ A, B \}$)
+	
+		\footnotesize
+		\begin{tabbing}
+			\hspace*{5cm}\=\hspace*{1.5cm}\= \kill
+			$E(\{ \bm{A}, \bm{A}, \bm{A}, \bm{A}, \bm{A}, \bm{A}, \bm{A}, \bm{A} \})$
+				\>	$\rightarrow$ 0		\>	$Bits$	\\
+			$E(\{ \bm{A}, \bm{A}, \bm{A}, \bm{A}, \bm{A}, \bm{A}, B, B \})$
+				\>	$\rightarrow$ 0.81 	\>	$Bits$	\\
+			$E(\{ \bm{A}, \bm{A}, \bm{A}, \bm{A}, B, B, B, B \})$
+				\>	$\rightarrow$ 1		\>	$Bit$		\\
+			$E(\{ \bm{A}, \bm{A}, B, B, B, B, B, B \})$
+				\>	$\rightarrow$ 0.81 	\>	$Bits$	\\
+			$E(\{ B, B, B, B, B, B, B, B \})$	
+				\>	$\rightarrow$ 0		\>	$Bits$
+		\end{tabbing}
+		\normalsize
+	\end{itemize}
+	
+	\begin{boxBlueNoFrame}
+		\footnotesize
+		\highlight{If both classes are equally distributed, the entropy function $E$ reaches its maximum.
+		Pure data sets have minimal entropy}.
+	\end{boxBlueNoFrame}
+\end{frame}
+
+
+% Measure of Impurity: Entropy (Ctd.)
+\begin{frame}{Measure of Impurity: Entropy (Ctd.)}{}
+	\input{08_decision_trees/01_tikz/entropy}
+\end{frame}
+
+
+% Measure of Impurity: Entropy (Ctd.)
+\begin{frame}{Measure of Impurity: Entropy (Ctd.)}{}
+	\begin{boxBlueNoFrame}
+		\highlight{Entropy formula:}
+		\begin{equation}
+			E(\mathcal{D}) = -\sum_{c \in \mathcal{C}} p_c \cdot \log_2 p_c
+		\end{equation}
+	\end{boxBlueNoFrame}
+
+	\begin{itemize}
+		\item Where $p_c$ denotes the relative frequency of class $c \in \mathcal{C}$	
+		\item \textbf{Weather data:}
+		\begin{align*}
+			\mathcal{C} &= \{ yes, no \} \qquad \text{i.\,e.} \qquad
+				p_{yes} = \nicefrac{9}{14} \quad \text{and} \quad p_{no} = \nicefrac{5}{14} \\[3mm]
+			E(\mathcal{D})
+				&= -\sum_{c \in \mathcal{C}} p_c \cdot \log_2 (p_c)
+	       		   	= - (\nicefrac{9}{14} \cdot \log_2 (\nicefrac{9}{14}) + \nicefrac{5}{14} \cdot \log_2 (\nicefrac{5}{14}))
+				= \boldsymbol{0.9403}
+		\end{align*}
+	\end{itemize}
+\end{frame}
+
+
+% Section: Wrap-Up
+%______________________________________________________________________
+\section{Wrap-Up}
+\makedivider{Wrap-Up}
+
+% Subsection: Summary
+% --------------------------------------------------------------------------------------------------------
+\subsection{Summary}
+
+% Summary
+\begin{frame}{Summary}{}
+
+\end{frame}
+
+
+% Subsection: Lecture Overview
+% --------------------------------------------------------------------------------------------------------
+\subsection{Lecture Overview}
+
+\makeoverview{3}
+
+
+% Subsection: Self-Test Questions
+% --------------------------------------------------------------------------------------------------------
+\subsection{Self-Test Questions}
+
+% Self-Test Questions
+\begin{frame}{Self-Test Questions}{}
+
+\end{frame}
+
+
+% Subsection: Recommended Literature and further Reading
+% --------------------------------------------------------------------------------------------------------
+\subsection{Recommended Literature and further Reading}
+
+% Literature
+%______________________________________________________________________
+\begin{frame}{Recommended Literature and further Reading}{}
+	\footnotesize
+	\begin{thebibliography}{2}
+
+	\end{thebibliography}
+\end{frame}
+
+
+% Thank you
+%______________________________________________________________________
+\makethanks
+
+\end{document}
