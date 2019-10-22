@@ -1,3 +1,4 @@
+{
 % Set the overall layout of the tree
 \tikzstyle{level 1}=[level distance=2cm,sibling distance=6cm]
 \tikzstyle{level 2}=[level distance=2.5cm,sibling distance=2cm]
@@ -15,117 +16,117 @@
 		sloped
 	]
 		\node[bag]{\highlight{Temp.}}
-    		child{
+    		child {
      	   		node[bag]{\highlight{Outlook}}        
-            			child{
+            		child {
                 			node[end, label=below:{\textbf{\underline{No}}}]{}
                 			edge from parent
                 			node[above]{\textit{sunny}}
-            			}
-            			child{
+            		}
+            		child {
                 			node[end, label=below:{\textbf{\textcolor{red}{\underline{?}}}}]{}
                			edge from parent
                 			node[above]{\textit{rain}}
-            			}
-				child{
+            		}
+			child {
                 			node[end, label=below:{\textbf{\underline{Yes}}}]{}
                			edge from parent
                 			node[above]{\textit{overcast}}
-            			}
-            			edge from parent 
-            			node[above]{\textit{hot}}
+            		}
+            		edge from parent 
+            		node[above]{\textit{hot}}
     		}
-		child{
-        		node[bag]{\highlight{Outlook}}        
-        		child {
-                		node[bag]{\highlight{Humid.}}
-                		child{
-                			node[end, label=below:{\textbf{\underline{No}}}]{}
-                			edge from parent
-                			node[above]{\textit{high}}
-                		}
-				child{
-                			node[end, label=below:{\textbf{\underline{Yes}}}]{}
-                			edge from parent
-                			node[above]{\textit{normal}}
-                		}
-				child[missing]{}
-                		edge from parent
-                		node[above]{\textit{sunny}}
-            		}
-            		child{
-                		node[bag]{\highlight{Humid.}}
-				child[missing]{}
-				child{
-					node[bag]{\highlight{Wind}}
-					child{
-						node[end, label=below:{\textbf{\underline{No}}}]{}
-                				edge from parent
-                				node[above]{\textit{strong}}
-					}
-					child{
-						node[end, label=below:{\textbf{\underline{Yes}}}]{}
-                				edge from parent
-                				node[above]{\textit{weak}}
-					}
-					edge from parent
-                			node[above]{\textit{high}}
-				}
-				child{
-					node[end, label=below:{\textbf{\underline{Yes}}}]{}
-                			edge from parent
-                			node[above]{\textit{normal}}
-				}
-                		edge from parent
-                		node[above]{\textit{rainy}}
-            		}
-			child{
-                		node[end, label=below:{\textbf{\underline{Yes}}}]{}
-                		edge from parent
-                		node[above]{\textit{overcast}}
-            		}
-        		edge from parent         
-            		node[above]{\textit{mild}}
-		}
-    		child{
-        		node[bag]{\highlight{Outlook}}        
-        		child {
-                		node[end, label=below:{\textbf{\underline{Yes}}}]{}
-                		edge from parent
-                		node[above]{\textit{sunny}}
-            		}
-            		child{
-                		node[bag]{\highlight{Humid.}}
-                		child{
-                			node[end, label=below:{\textbf{\textcolor{red}{\underline{?}}}}]{}
-                			edge from parent
-                			node[above]{\textit{high}}
-                		}
-				child{
-                			node[bag]{\highlight{Wind}}
-					child{
+		child {
+        			node[bag]{\highlight{Outlook}}        
+        			child {
+                			node[bag]{\highlight{Humid.}}
+                			child {
                 				node[end, label=below:{\textbf{\underline{No}}}]{}
                 				edge from parent
-                				node[above]{\textit{strong}}
+                				node[above]{\textit{high}}
                 			}
-					child{
+				child {
                 				node[end, label=below:{\textbf{\underline{Yes}}}]{}
                 				edge from parent
-                				node[above]{\textit{weak}}
+                				node[above]{\textit{normal}}
+                			}
+				child[missing]{}
+                			edge from parent
+                			node[above]{\textit{sunny}}
+            		}
+            		child {
+                			node[bag]{\highlight{Humid.}}
+				child[missing]{}
+				child {
+					node[bag]{\highlight{Wind}}
+					child {
+						node[end, label=below:{\textbf{\underline{No}}}]{}
+                					edge from parent
+                					node[above]{\textit{strong}}
+					}
+					child {
+						node[end, label=below:{\textbf{\underline{Yes}}}]{}
+                					edge from parent
+                					node[above]{\textit{weak}}
+					}
+					edge from parent
+                				node[above]{\textit{high}}
+				}
+				child {
+					node[end, label=below:{\textbf{\underline{Yes}}}]{}
+                				edge from parent
+                				node[above]{\textit{normal}}
+				}
+                			edge from parent
+                			node[above]{\textit{rainy}}
+            		}
+			child {
+                			node[end, label=below:{\textbf{\underline{Yes}}}]{}
+                			edge from parent
+                			node[above]{\textit{overcast}}
+            		}
+        			edge from parent         
+            		node[above]{\textit{mild}}
+		}
+    		child {
+        			node[bag]{\highlight{Outlook}}        
+        			child {
+                			node[end, label=below:{\textbf{\underline{Yes}}}]{}
+                			edge from parent
+                			node[above]{\textit{sunny}}
+            		}
+            		child {
+                			node[bag]{\highlight{Humid.}}
+                			child {
+                				node[end, label=below:{\textbf{\textcolor{red}{\underline{?}}}}]{}
+                				edge from parent
+                				node[above]{\textit{high}}
+                			}
+				child {
+                			node[bag]{\highlight{Wind}}
+					child {
+                					node[end, label=below:{\textbf{\underline{No}}}]{}
+                					edge from parent
+                					node[above]{\textit{strong}}
+                				}
+					child {
+                					node[end, label=below:{\textbf{\underline{Yes}}}]{}
+                					edge from parent
+                					node[above]{\textit{weak}}
+                				}
+                				edge from parent
+                				node[above]{\textit{normal}}
                 			}
                 			edge from parent
-                			node[above]{\textit{normal}}
-                		}
-                		edge from parent
-                		node[above]{\textit{rainy}}
+                			node[above]{\textit{rainy}}
             		}
-			child{
-                		node[end, label=below:{\textbf{\underline{Yes}}}]{}
-                		edge from parent
-                		node[above]{\textit{overcast}}
+			child {
+                			node[end, label=below:{\textbf{\underline{Yes}}}]{}
+                			edge from parent
+                			node[above]{\textit{overcast}}
             		}
-        		edge from parent         
+        			edge from parent         
             		node[above]{\textit{cool}}
 		};
 	\end{tikzpicture}
-\end{figure}
+\end{figure}}

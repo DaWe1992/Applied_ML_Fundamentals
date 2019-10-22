@@ -1,3 +1,4 @@
+{
 % Set the overall layout of the tree
 \tikzstyle{level 1}=[level distance=3.5cm, sibling distance=2cm]
 \tikzstyle{level 2}=[level distance=3.5cm, sibling distance=2cm]
@@ -14,20 +15,20 @@
 		sloped
 	]
 		\node[bag]{\highlight{Temp.}}
-		child{
+		child {
 			node[bag,align=center]{Yes Yes\\No No}
 			edge from parent
 			node[above]{\textit{hot}}
 		}
-    		child{
+    		child {
 			node[bag,align=center]{Yes Yes\\Yes Yes\\No No}
 			edge from parent
 			node[above]{\textit{mild}}
 		}
-		child{
+		child {
 			node[bag,align=center]{Yes Yes\\Yes No}
 			edge from parent
 			node[above]{\textit{cool}}
 		};
 	\end{tikzpicture}
-\end{figure}
+\end{figure}}

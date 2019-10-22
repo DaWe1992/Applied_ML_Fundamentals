@@ -5,7 +5,7 @@
     		\begin{axis}[
 			scale=0.7,
 			xlabel={Relative frequency of class $A$ ($p_A$)},
-			ylabel={Entropy $E(\bm{X})$},
+			ylabel={Entropy $E(\mathcal{D})$},
 			grid=both,
     			grid style={line width=.1pt, draw=gray!10},
 			minor tick num=2,
@@ -18,8 +18,8 @@
 			\pgfplotstableread{08_decision_trees/05_data/data_entropy.txt} \datatable
 			\addplot[myblue1,no marks,ultra thick,smooth] table[x=x,y=y] from \datatable;
 
-			\node[fill=myblue1] at (axis cs:0.5,0.45) {\footnotesize $\textcolor{white}{E(\bm{X}) =
-				-\sum_{c \in \mathcal{C}} p_c \cdot \log_2 (p_c)}$};
+			\node[fill=myblue1] at (axis cs:0.5,0.45) {\footnotesize $\textcolor{white}{E(\mathcal{D}) =
+				-\sum_{c \in \mathcal{C}} p_c \cdot \log_2 p_c}$};
 		
 		\end{axis}
 	\end{tikzpicture}

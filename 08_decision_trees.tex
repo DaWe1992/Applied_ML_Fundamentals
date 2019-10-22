@@ -6,7 +6,7 @@
 % ====================================================
 % ====================================================
 
-\title[Classification I]{*** Applied Machine Learning Fundamentals *** Decision Trees and Ensembles}
+\title[Decision Trees and Ensembles]{*** Applied Machine Learning Fundamentals *** Decision Trees and Ensembles}
 \institute{SAP\,SE}
 \author{Daniel Wehner}
 \date{\today}
@@ -105,7 +105,7 @@
 \begin{frame}{Inductive Bias of Decision Trees}{}
 	\divideTwo{0.75}{
 		\begin{itemize}
-			\item Complex models tend to \textbf{overfit} the data and do not generalize well
+			\item Complex models tend to \textbf{overfit} the data and \textbf{do not generalize well}
 			\item Small decision trees are preferred
 			\vspace*{4mm}
 			\begin{boxBlueNoFrame}
@@ -118,7 +118,7 @@
 	}{0.20}{
 		\begin{figure}
 			\centering
-			\includegraphics[scale=0.25]{08_decision_trees/02_img/william_of_ockham}
+			\includegraphics[scale=0.2]{08_decision_trees/02_img/william_of_ockham}
 		\end{figure}
 	}
 \end{frame}
@@ -211,16 +211,495 @@
 	\end{boxBlueNoFrame}
 
 	\begin{itemize}
-		\item Where $p_c$ denotes the relative frequency of class $c \in \mathcal{C}$	
+		\item $p_c$ denotes the relative frequency of class $c \in \mathcal{C}$	
 		\item \textbf{Weather data:}
 		\begin{align*}
 			\mathcal{C} &= \{ yes, no \} \qquad \text{i.\,e.} \qquad
 				p_{yes} = \nicefrac{9}{14} \quad \text{and} \quad p_{no} = \nicefrac{5}{14} \\[3mm]
 			E(\mathcal{D})
-				&= -\sum_{c \in \mathcal{C}} p_c \cdot \log_2 (p_c)
-	       		   	= - (\nicefrac{9}{14} \cdot \log_2 (\nicefrac{9}{14}) + \nicefrac{5}{14} \cdot \log_2 (\nicefrac{5}{14}))
+				&= -\sum_{c \in \mathcal{C}} p_c \cdot \log_2 p_c
+	       		   	= - (\nicefrac{9}{14} \cdot \log_2 \nicefrac{9}{14} + \nicefrac{5}{14} \cdot \log_2 \nicefrac{5}{14})
 				= \boldsymbol{0.9403}
 		\end{align*}
+	\end{itemize}
+\end{frame}
+
+
+% Quality of the Split: Average Entropy
+\begin{frame}{Quality of the Split: Average Entropy}{}
+	\begin{itemize}
+		\item We still don't know which attribute to use for the split
+		\item Calculate the entropy after each potential split
+		\item \highlight{Average Entropy} after splitting by attribute \texttt{A}:
+		\begin{equation}
+			E(\mathcal{D}, \texttt{A})
+				= \sum_{v \in \text{dom}(\texttt{A})}
+					\frac{\vert \mathcal{D}_{\texttt{A}=v} \vert}{\vert \mathcal{D} \vert} \cdot E(\mathcal{D}_{\texttt{A}=v})
+		\end{equation}
+		\item Legend:
+		\footnotesize
+		\begin{tabbing}
+			\hspace*{2.5cm}\= \kill
+			\texttt{A}							\>	Attribute												\\
+			$\text{dom}(\texttt{A})$				\>	Possible values attribute \texttt{A} can take (domain of \texttt{A})	\\
+			$\vert \mathcal{D}_{\texttt{A}=v} \vert$	\>	Number of examples satisfying $\texttt{A} = v$
+		\end{tabbing}
+		\normalsize
+	\end{itemize}
+\end{frame}
+
+
+% Quality of the Split: Average Entropy (Ctd.)
+\begin{frame}{Quality of the Split: Average Entropy (Ctd.)}{}
+	\textbf{Example:} Attribute \texttt{Outlook}
+	\begin{alignat*}{2}
+		E(\mathcal{D}, \texttt{Outlook})
+			&= \sum_{v \in \text{dom}(\texttt{Outlook})}
+				\frac{\vert \mathcal{D}_{\texttt{Outlook} = v} \vert}{\vert \mathcal{D} \vert} \cdot E(\mathcal{D}_{\texttt{Outlook} = v}) 	\\[2mm]
+			&= \nicefrac{5}{14} \cdot 0.9710 + \nicefrac{5}{14} \cdot 0.9710 + \nicefrac{4}{14} \cdot 0
+			&&= \bm{0.6936}																				\\[2mm]
+																										\hline
+																										\\[-3mm]
+		E(\mathcal{D}_{\texttt{Outlook}=sunny})
+			&= -(\nicefrac{2}{5} \cdot \log_2 (\nicefrac{2}{5}) + \nicefrac{3}{5} \cdot \log_2 (\nicefrac{3}{5}))
+			&&= 0.9710																					\\[2mm]
+		E(\mathcal{D}_{\texttt{Outlook}=rainy})
+			&= -(\nicefrac{3}{5} \cdot \log_2 (\nicefrac{3}{5}) + \nicefrac{2}{5} \cdot \log_2 (\nicefrac{2}{5}))
+			&&= 0.9710																					\\[2mm]
+		E(\mathcal{D}_{\texttt{Outlook}=overcast})
+			&= -(\nicefrac{4}{4} \cdot \log_2 (\nicefrac{4}{4}) + \nicefrac{0}{4} \cdot \log_2 (\nicefrac{0}{4}))
+			&&= 0
+	\end{alignat*}
+\end{frame}
+
+
+% Information Gain
+\begin{frame}{Information Gain}{}
+	\begin{itemize}
+		\item We have calculated the entropy before and after the split
+		\item The difference of both is called the \highlight{information gain (IG)}
+		\item Select the attribute with the highest IG
+		\vspace*{2mm}
+		\input{08_decision_trees/03_tbl/ig}
+		\vspace*{2mm}
+		\item Attribute \texttt{Outlook} maximizes IG
+		\item After the split: Remove attribute \texttt{Outlook}
+	\end{itemize}
+\end{frame}
+
+
+% Training Data after the Split by Attribute \texttt{Outlook}
+\begin{frame}{Training Data after the Split by Attribute \texttt{Outlook}}{}
+	\divideTwo{0.49}{
+		\vspace*{5mm}
+		\input{08_decision_trees/03_tbl/training_data_after_split}
+	}{0.49}{
+		\begin{itemize}
+			\item Data set $\mathcal{D}$ after the split
+			\item We obtain three subsets (one per attribute value)
+			\item Attribute \texttt{Outlook} is removed
+		\end{itemize}
+	}
+\end{frame}
+
+
+% How to proceed?
+\begin{frame}{How to proceed?}{}
+	\begin{itemize}
+		\item The algorithm is recursively applied to the resulting subsets
+		\begin{enumerate}
+			\item Calculate entropy (before and after the split)
+			\item Calculate information gain for each attribute 
+			\item Choose the attribute with max. information gain for the split
+			\item In the current branch: Do not consider the attribute any more
+			\item \textbf{Recursion} $\bm{\circlearrowleft}$ (\texttt{Go to 1})
+		\end{enumerate}
+		\item Recursion stops as soon as the subset is pure
+		\item In the example above the subset $\mathcal{D}_{\texttt{Outlook}=overcast}$ is already pure
+		\item This algorithm is referred to as \highlight{ID3 (Iterative Dichotomizer)}
+	\end{itemize}
+\end{frame}
+
+
+% Step by Step: Construction of the Tree
+\begin{frame}{Step by Step: Construction of the Tree}{}
+	\input{08_decision_trees/01_tikz/tree_construction_1_result}
+\end{frame}
+
+
+% Step by Step: Construction of the Tree (Ctd.)
+\begin{frame}{Step by Step: Construction of the Tree (Ctd.)}{}
+	\divideTwo{0.49}{
+		\input{08_decision_trees/01_tikz/tree_construction_2_alternative_1}
+		\vspace*{0.25mm}
+	}{0.49}{
+		\vspace*{1mm}
+		\input{08_decision_trees/01_tikz/tree_construction_2_alternative_2}
+		\vspace*{0.25mm}
+	}
+	
+	\divideTwo{0.49}{
+		\input{08_decision_trees/01_tikz/tree_construction_2_alternative_3}
+	}{0.49}{
+		\begin{itemize}
+			\item $IG(\texttt{Temperature}) = 0.571$
+			\item $IG(\texttt{Humidity}) = \textbf{0.971}$
+			\item $IG(\texttt{Wind}) = 0.020$
+		\end{itemize}
+	}
+\end{frame}
+
+
+% Step by Step: Construction of the Tree (Ctd.)
+\begin{frame}{Step by Step: Construction of the Tree (Ctd.)}{}
+	\input{08_decision_trees/01_tikz/tree_construction_2_result}
+\end{frame}
+
+
+% Step by Step: Construction of the Tree (Ctd.)
+\begin{frame}{Step by Step: Construction of the Tree (Ctd.)}{}
+	\input{08_decision_trees/01_tikz/tree_construction_3_result}
+\end{frame}
+
+
+% Step by Step: Construction of the Tree (Ctd.)
+\begin{frame}{Step by Step: Construction of the Tree (Ctd.)}{}
+	\input{08_decision_trees/01_tikz/tree_broader}
+\end{frame}
+
+
+% ID3 Algorithm
+\begin{frame}[plain]{}{}
+	\begin{algorithm}[H]
+		\setstretch{1.0}
+		\DontPrintSemicolon
+		\footnotesize
+		\KwIn{Training set $\mathcal{D}$, Attribute list $Attr\_List$}
+		Create a node $N$\;
+		\If{all tuples in $\mathcal{D}$ have class $c$}{
+			\Return $N$ as leaf node labeled with class $c$\;
+		}
+		\If{$\vert Attr\_List \vert = 0$}{
+			\Return $N$ as leaf node labeled with majority class in $\mathcal{D}$\;
+		}
+		Find best split attribute $\texttt{A}^*$ and label node $N$ with $\texttt{A}^*$\;
+		$Attr\_List \longleftarrow Attr\_List \backslash \{ \texttt{A}^* \}$\;
+		\ForAll{$v \in \text{dom}(\texttt{A}^*)$}{
+			Let $\mathcal{D}_{\texttt{A}^*=v}$ be the set of tuples in $\mathcal{D}$ that satisfy $\texttt{A}^* = v$\;
+			\If{$\vert \mathcal{D}_{\texttt{A}^*=v} \vert = 0$}{
+				Attach leaf labeled with majority class in $\mathcal{D}$ to node $N$\;
+			}
+			\Else{
+				Attach node returned by $ID3(\mathcal{D}_{\texttt{A}^*=v}, Attr\_List)$\;
+			}
+		}
+		\Return $N$
+ 		\caption{ID3 Algorithm (Iterative Dichotomizer)}
+	\end{algorithm}
+\end{frame}
+
+
+% An Alternative to Information Gain: Gini Index
+\begin{frame}{An Alternative to Information Gain: Gini Index}{}
+	\begin{boxBlueNoFrame}
+		\highlight{Gini index:}
+		\begin{equation}
+			Gini(\mathcal{D})
+				= \sum_{c \in \mathcal{C}} p_c \cdot (1 - p_c)
+				= 1 -  \sum_{c \in \mathcal{C}} p_c^2
+		\end{equation}
+	\end{boxBlueNoFrame}
+	\begin{itemize}
+		\item Used e.\,g. in \highlight{CART (Classification and Regression Trees)}
+		\item \textbf{Gini gain} could be defined analogously to IG \\
+			{\footnotesize \textit{(usually not done)}}
+	\end{itemize}
+\end{frame}
+
+
+% Why not use the Error as a splitting Criterion?
+\begin{frame}{Why not use the Error as a splitting Criterion?}{}
+	\begin{itemize}
+		\item The bias towards pure leaves is \textbf{not strong enough}
+		\item \textbf{Example:}
+	\end{itemize}
+	
+	\divideTwo{0.49}{
+		\vspace*{2mm}
+		\input{08_decision_trees/01_tikz/split_error}
+	}{0.49}{
+		Error without splitting: \\
+		\textbf{20\,\%} \\ \vspace*{-3mm}
+		
+		Error after splitting: \\
+		\textbf{20\,\%} \\ \vspace*{-3mm}
+		
+		\footnotesize
+		\highlight{Both splits don't improve the error. \\
+		But together they give a perfect split!}
+	}
+\end{frame}
+
+
+% Summary: Impurity Measures
+\begin{frame}{Summary: Impurity Measures}{}
+	\input{08_decision_trees/01_tikz/impurity_measures_all}
+\end{frame}
+
+
+% Highly-Branching Attributes
+\begin{frame}{Highly-Branching Attributes}{}
+	\begin{boxBlueNoFrame}
+		\highlight{Attributes with a large number of values are problematic, since the leaves are not
+			`backed' with sufficient data examples.}
+
+		\vspace*{4mm}
+		\textbf{In extreme cases only one example per node (e.\,g. IDs)}
+	\end{boxBlueNoFrame}
+
+	\begin{boxBlueNoFrame}
+		This may lead to:
+		\begin{itemize}
+			\item \textbf{Overfitting} \footnotesize (Selection of attributes which are not optimal for prediction) \normalsize
+			\item \textbf{Fragmentation} \footnotesize (Data is fragmented into (too) many small sets) \normalsize
+		\end{itemize}
+	\end{boxBlueNoFrame}
+\end{frame}
+
+
+% Highly-Branching Attributes (Ctd.)
+\begin{frame}{Highly-Branching Attributes (Ctd.)}{}
+	\vspace*{-2mm}
+	\input{08_decision_trees/01_tikz/highly_branching_attributes}
+	\vspace*{-5mm}
+	\begin{itemize}
+		\item Entropy before was $0.9403$, Entropy after split is $0$
+		\item IG($\mathcal{D}$, \texttt{Day}) = 0.9403
+		\item Attribute \texttt{Day} would be chosen for the split \Highlight{$\Rightarrow$ Bad for prediction $\skull$}
+	\end{itemize}
+\end{frame}
+
+
+% Highly-Branching Attributes (Ctd.)
+\begin{frame}{Highly-Branching Attributes (Ctd.)}{}
+	\begin{itemize}
+		\item Calculate the \highlight{intrinsic information (IntI)}:
+		\begin{equation}
+			IntI(\mathcal{D}, \texttt{A})
+				= -\sum_{v \in \text{dom}(\texttt{A})} \frac{\vert \mathcal{D}_{\texttt{A}=v} \vert}{\vert \mathcal{D} \vert} \cdot
+					\log_2 \frac{\vert \mathcal{D}_{\texttt{A}=v} \vert}{\vert \mathcal{D} \vert}
+		\end{equation}
+		\item Attributes with high $IntI$ are \textbf{less useful} (high fragmentation)
+		\item New splitting heuristic \highlight{Gain ratio (GR)}:
+		\begin{equation}
+			GR(\mathcal{D}, \texttt{A}) = \frac{IG(\mathcal{D}, \texttt{A})}{IntI(\mathcal{D}, \texttt{A})}
+		\end{equation}
+	\end{itemize}
+\end{frame}
+
+
+% Highly-Branching Attributes (Ctd.)
+\begin{frame}{Highly-Branching Attributes (Ctd.)}{}
+	\begin{itemize}
+		\item Intrinsic information for attribute \texttt{Day}:
+		\begin{equation}
+			IntI(\mathcal{D}, \texttt{Day}) = 14 \cdot (-\nicefrac{1}{14} \cdot \log_2 (\nicefrac{1}{14})) = \bm{3.807}
+		\end{equation}
+		\item Gain ratio for attribute \texttt{Day}:
+		\begin{equation}
+			GR(\mathcal{D}, \texttt{Day}) = \frac{0.9403}{3.807} = \bm{0.246}
+		\end{equation}
+	\end{itemize}
+
+	\vspace*{-3mm}
+	\begin{boxBlue}
+		\footnotesize
+		In this case the attribute \texttt{Day} would still be chosen.
+		Be careful what features to include into the training data set! \highlight{(Feature engineering is important!)}
+	\end{boxBlue}
+\end{frame}
+
+
+% Handling numeric Attributes
+\begin{frame}{Handling numeric Attributes}{}
+	\begin{itemize}
+		\item Usually, only \textbf{binary splits} are considered, e.\,g.:
+		\begin{itemize}
+			\item $\texttt{Temperature} < 48$
+			\item $\texttt{CPU} > 24$
+			\item \textbf{Not:} $24 \le \texttt{Temperature} \le 31$
+		\end{itemize}
+		\item To support multiple splits, the attribute is \textbf{not removed} \\
+			{\footnotesize \textit{(the same attribute can be used again for another split)}}
+		\item \Highlight{Problem:} There is an \textbf{infinite number} of possible splits!
+		\item \textbf{Solution:} Discretize range (fixed step size, ...)
+		\item \highlight{Splitting on numeric attributes is computationally demanding!}
+	\end{itemize}
+\end{frame}
+
+
+% Handling numeric Attributes (Ctd.)
+\begin{frame}{Handling numeric Attributes (Ctd.)}{}
+	\begin{itemize}
+		\item Consider the attribute \texttt{Temperature}: \\
+			Use \textbf{numerical values} instead of discrete values like \textit{cool}, \textit{mild}, \textit{hot}:
+	\end{itemize}
+	\vspace*{-3mm}
+	\input{08_decision_trees/01_tikz/numeric_attributes}
+	\divideTwo{0.49}{
+		\begin{itemize}
+			\item $\texttt{Temperature} < 71.5$ \\
+				{\footnotesize yes: 4 | no: 2}
+		\end{itemize}
+	}{0.49}{
+		\begin{itemize}
+			\item $\texttt{Temperature} \ge 71.5$ \\
+				{\footnotesize yes: 5 | no: 3}
+		\end{itemize}
+	}
+	\vspace*{2mm}
+	\begin{equation*}
+			E(\mathcal{D}, \texttt{Temp.})
+				= \nicefrac{6}{14} \cdot E(\texttt{Temp.} < 71.5) + \nicefrac{8}{14} \cdot E(\texttt{Temp.} \ge 71.5)
+				= \bm{0.939}
+		\end{equation*}
+\end{frame}
+
+
+% Handling numeric Attributes (Ctd.)
+\begin{frame}{Handling numeric Attributes (Ctd.)}{}
+	\input{08_decision_trees/03_tbl/numeric_attributes}
+\end{frame}
+
+
+% Regression Trees
+\begin{frame}{Regression Trees}{}
+	\begin{itemize}
+		\item Prediction of continuous variables
+		\item Predict average value of all examples in the leaf
+		\item Split the data such that variance in the leaves is minimized
+		\item \textbf{Termination criterion is important, otherwise single point per leaf!}
+	\end{itemize}
+	\begin{boxBlueNoFrame}
+		\highlight{Standard deviation reduction (SDR):}
+		\begin{equation}
+			SDR(\mathcal{D}, \texttt{A}) = SD(\mathcal{D})
+				- \sum_{v \in dom(\texttt{A})} \frac{\vert \mathcal{D}_{\texttt{A}=v} \vert}{\vert \mathcal{D} \vert}
+				\cdot SD(\mathcal{D}_{\texttt{A}=v})
+		\end{equation}
+	\end{boxBlueNoFrame}
+\end{frame}
+
+
+% Introduction Ensemble Methods
+\begin{frame}{Introduction Ensemble Methods}{}
+	\begin{itemize}
+		\item \textbf{Key Idea}: Don't learn a single classifier but a \textbf{set of classifiers}
+		\item Combine the predictions of the single classifiers to obtain the final prediction
+	\end{itemize}
+		
+	\begin{boxBlue}
+		\footnotesize
+		\highlight{Problem:} How can we induce multiple classifiers from a single data set without getting
+		the same classifier over and over again? \textbf{We want to have diverse classifiers,
+		otherwise the ensemble is useless!}	
+	\end{boxBlue}
+		
+	\begin{itemize}
+		\item Basic techniques:
+		\begin{itemize}
+			\item \highlight{Bagging}
+			\item \highlight{Boosting}
+			\item \highlight{Stacking}
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+% What is the Advantage?
+\begin{frame}{What is the Advantage?}{}
+	\begin{itemize}
+		\item Consider the following:
+		\begin{itemize}
+			\item There are 25 \textbf{independent} base classifiers
+			\item \highlight{Independence assumption:}
+				Probability of misclassification \textbf{does not} depend on other classifiers in the ensemble
+			\item Usually, this assumption does not fully hold in practice
+			\item Each classifier has an error rate of $\epsilon = 0.35$
+		\end{itemize}
+		\item The ensemble makes a wrong prediction \textbf{if the majority is wrong} \\
+			($\Rightarrow$ i.\,e. at least 13)
+		\begin{equation}
+			\epsilon_{ensemble}
+				= \sum_{i=13}^{25} \binom{25}{i} \cdot \epsilon^i \cdot (1 - \epsilon)^{25 - i}
+				\approx \bm{0.06 \ll \epsilon}
+		\end{equation}
+	\end{itemize}
+\end{frame}
+
+
+% Bagging
+\begin{frame}{Bagging: General Approach}{}
+	Bagging $\widehat{=}$ \highlight{B}ootstrap \highlight{Agg}regat\highlight{ing}
+	\vspace*{-2mm}
+	\input{08_decision_trees/01_tikz/bagging}
+\end{frame}
+
+
+% Creating the Bootstrap Samples
+\begin{frame}{Creating the Bootstrap Samples}{}
+	\begin{itemize}
+		\item How to generate multiple data sets which are different?
+		\item \textbf{Solution:} Use sampling with replacement
+		\vspace*{2mm}
+		\input{08_decision_trees/03_tbl/bagging_bootstrap_samples}
+		\vspace*{2mm}
+		\item Some examples may appear \textbf{in more than one set}
+		\item Some examples may appear \textbf{more than once} in one set
+		\item Some examples may \textbf{not appear at all}
+	\end{itemize}
+\end{frame}
+
+
+% Bagging Algorithm
+\begin{frame}[plain]{}{}
+	\begin{algorithm}[H]
+		\setstretch{1.4}
+		\DontPrintSemicolon
+		\footnotesize
+		\KwIn{Training set $\mathcal{D}$, number of base classifiers $n$}
+		\highlight{Training:}\;
+		\ForAll{$i \in \{ 1, 2, \dots, k \}$}{
+			Draw a bootstrap sample $\mathcal{D}_i$ with replacement from $\mathcal{D}$\;
+			Learn a classifier $C_i$ from $\mathcal{D}_i$\;
+			Add classifier $C_i$ to the ensemble\;
+		}
+		\highlight{Prediction:}\;
+		\ForAll{unlabeled instances}{
+			Get predictions from all classifiers $C_i$\;
+		}
+		\Return{Class which receives the majority of votes (combined classifier $C^*$)}
+ 		\caption{Bagging Algorithm}
+	\end{algorithm}
+\end{frame}
+
+
+% Bagging Variations
+\begin{frame}{Bagging Variations}{}
+	\begin{itemize}
+		\item The bootstrap samples had equal size and were drawn with replacement
+		\item Also conceivable:
+		\begin{enumerate}
+			\item \textbf{Varying the size} of the bootstrap samples
+			\item Sampling \textbf{without replacement} $\Rightarrow$ \highlight{Pasting}
+			\item \textbf{Sampling of features}, not instances
+			\begin{itemize}
+				\item Not all features are available in all bootstrap samples
+				\item This is how \highlight{random forests} work
+			\end{itemize}
+			\item Creating \textbf{heterogeneous ensembles} \\
+				(Neural networks, decision trees, support vector machines, ...)
+		\end{enumerate}
 	\end{itemize}
 \end{frame}
 

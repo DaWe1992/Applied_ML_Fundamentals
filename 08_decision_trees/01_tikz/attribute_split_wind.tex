@@ -1,3 +1,4 @@
+{
 % Set the overall layout of the tree
 \tikzstyle{level 1}=[level distance=3.5cm, sibling distance=2cm]
 \tikzstyle{level 2}=[level distance=3.5cm, sibling distance=2cm]
@@ -14,15 +15,15 @@
 		sloped
 	]
 		\node[bag]{\highlight{Wind}}
-		child{
+		child {
 			node[bag,align=center]{Yes Yes\\Yes Yes\\Yes Yes\\No No}
 			edge from parent
 			node[above]{\textit{strong}}
 		}
-		child{
+		child {
 			node[bag,align=center]{Yes Yes\\Yes No\\No No}
 			edge from parent
 			node[above]{\textit{weak}}
 		};
 	\end{tikzpicture}
-\end{figure}
+\end{figure}}

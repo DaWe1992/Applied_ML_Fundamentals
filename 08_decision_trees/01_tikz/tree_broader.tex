@@ -1,7 +1,7 @@
 {
 % Set the overall layout of the tree
-\tikzstyle{level 1}=[level distance=2.5cm, sibling distance=2cm]
-\tikzstyle{level 2}=[level distance=2.5cm, sibling distance=2cm]
+\tikzstyle{level 1}=[level distance=2.5cm, sibling distance=3cm]
+\tikzstyle{level 2}=[level distance=2.5cm, sibling distance=3cm]
 
 % Define styles for bags and leafs
 \tikzstyle{bag}=[rectangle,draw=black,text width=4em,text centered]
@@ -18,9 +18,9 @@
     		child {
         			node[bag]{\highlight{Humid.}}        
         			child {
-            		    	node[end,label=below:{\textbf{\underline{No}}}]{}
-            		    	edge from parent
-            		  	node[above]{\textit{high}}
+            	    		node[end,label=below:{\textbf{\underline{No}}}]{}
+            	    		edge from parent
+            		    	node[above]{\textit{high}}
             		}
             		child {
                 			node[end,label=below:{\textbf{\underline{Yes}}}]{}
@@ -38,12 +38,12 @@
 		child {
         			node[bag]{\highlight{Wind}}        
             		child {
-                			node[end,label=below:{\textbf{\underline{No}}}]{}
+              	  		node[end,label=below:{\textbf{\underline{No}}}]{}
                 			edge from parent
                 			node[above]{\textit{strong}}
             		}
             		child {
-                			node[end,label=below:{\textbf{\underline{Yes}}}]{}
+           	     		node[end,label=below:{\textbf{\underline{Yes}}}]{}
                			edge from parent
                 			node[above]{\textit{weak}}
             		}
