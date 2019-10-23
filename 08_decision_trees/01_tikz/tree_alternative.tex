@@ -11,13 +11,13 @@
 \begin{figure}
 	\centering
 	\begin{tikzpicture}[
-		scale=0.6,
+		scale=0.55,
 		every node/.style={scale=0.5},
 		sloped
 	]
-		\node[bag]{\highlight{Temp.}}
+		\node[bag]{\highlighttt{Temp.}}
     		child {
-     	   		node[bag]{\highlight{Outlook}}        
+     	   		node[bag]{\highlighttt{Outlook}}        
             		child {
                 			node[end, label=below:{\textbf{\underline{No}}}]{}
                 			edge from parent
@@ -37,9 +37,9 @@
             		node[above]{\textit{hot}}
     		}
 		child {
-        			node[bag]{\highlight{Outlook}}        
+        			node[bag]{\highlighttt{Outlook}}        
         			child {
-                			node[bag]{\highlight{Humid.}}
+                			node[bag]{\highlighttt{Humid.}}
                 			child {
                 				node[end, label=below:{\textbf{\underline{No}}}]{}
                 				edge from parent
@@ -55,10 +55,10 @@
                 			node[above]{\textit{sunny}}
             		}
             		child {
-                			node[bag]{\highlight{Humid.}}
+                			node[bag]{\highlighttt{Humid.}}
 				child[missing]{}
 				child {
-					node[bag]{\highlight{Wind}}
+					node[bag]{\highlighttt{Wind}}
 					child {
 						node[end, label=below:{\textbf{\underline{No}}}]{}
                 					edge from parent
@@ -89,21 +89,21 @@
             		node[above]{\textit{mild}}
 		}
     		child {
-        			node[bag]{\highlight{Outlook}}        
+        			node[bag]{\highlighttt{Outlook}}        
         			child {
                 			node[end, label=below:{\textbf{\underline{Yes}}}]{}
                 			edge from parent
                 			node[above]{\textit{sunny}}
             		}
             		child {
-                			node[bag]{\highlight{Humid.}}
+                			node[bag]{\highlighttt{Humid.}}
                 			child {
                 				node[end, label=below:{\textbf{\textcolor{red}{\underline{?}}}}]{}
                 				edge from parent
                 				node[above]{\textit{high}}
                 			}
 				child {
-                			node[bag]{\highlight{Wind}}
+                			node[bag]{\highlighttt{Wind}}
 					child {
                 					node[end, label=below:{\textbf{\underline{No}}}]{}
                 					edge from parent

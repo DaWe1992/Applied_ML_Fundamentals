@@ -1,0 +1,21 @@
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[
+		scale=0.5
+	]
+
+		\begin{axis}[
+			domain=0.02:0.98,
+			minor tick num=5,
+			grid=both,
+    			grid style={line width=.1pt, draw=gray!10},
+    			major grid style={line width=.2pt,draw=gray!50},
+			legend pos=outer north east,
+			xlabel={$\varepsilon$},
+			ylabel={$\alpha_u = (\log(1 - \varepsilon) / \varepsilon)$}
+		]
+    			\addplot[no marks,ultra thick,smooth,myblue1]{ln((1-x)/x)};
+    		\end{axis}
+		
+	\end{tikzpicture}
+\end{figure}

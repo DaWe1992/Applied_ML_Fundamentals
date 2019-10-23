@@ -214,6 +214,7 @@
 % --------------------------------------------------------------------------------------------------------
 % highlight command
 \newcommand{\highlight}[1]{\textcolor{myblue1}{\textbf{#1}}}
+\newcommand{\highlighttt}[1]{\textcolor{myblue1}{\texttt{#1}}}
 \newcommand{\Highlight}[1]{\textcolor{myred1}{\textbf{#1}}}
 
 % blue color boxes (with frame/without frame/without fill)
@@ -223,7 +224,6 @@
 
 % font commands
 % --------------------------------------------------------------------------------------------------------
-%\newcommand{\capi}[1]{{\rmfamily\scshape#1}} 					% capitals
 \newcommand{\linkstyle}[1]{\underline{\smash{\texttt{#1}}}} 		% style of hyperlinks
 
 % tikz commands
@@ -236,13 +236,6 @@
 		\node[rectangle,draw=yellow,very thick,fill=yellow!60,align=center] at (0,0) {#3};
 	\end{tikzpicture}
 \end{textblock}
-}
-
-% speech bubble
-\newcommand{\speech}[2]{
-	\tikz[remember picture,baseline]{
-		\node[anchor=base,inner sep=0,outer sep=0] (#1) {\underline{#1}};\node[overlay,ellipse callout,fill=blue!50] 
-        	at ($(#1.north)+(-.5cm,0.8cm)$) {#2};}
 }
 
 % slide modifiers
@@ -362,7 +355,7 @@
 		\begin{tabbing}
 			\hspace*{1.5cm}\= \kill
 			\highlight{Topic:} 	\> \inserttitle \\
-			\highlight{Date:} 		\> \insertdate
+			\highlight{Date:} 	\> \insertdate
 		\end{tabbing}
 		
 		\vfill
