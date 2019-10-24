@@ -70,6 +70,6 @@ You do not need to buy any books for the lecture. Most resources are available o
 | Machine Learning - A probabilistic perspective | Murphy (2012)				| MIT Press     | [click here](https://doc.lagout.org/science/Artificial%20Intelligence/Machine%20learning/Machine%20Learning_%20A%20Probabilistic%20Perspective%20%5BMurphy%202012-08-24%5D.pdf)																					|
 | Pattern Recognition and Machine Learning 	     | Bishop (2006)   			    | Springer  	| [click here](http://users.isr.ist.utl.pt/~wurmd/Livros/school/Bishop%20-%20Pattern%20Recognition%20And%20Machine%20Learning%20-%20Springer%20%202006.pdf) 																						|
 
-## Bugs and Errors
+## Bugs and Errors ![](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/img/bug.png =50x50)
 Help us improve the lecture. Feel free to file an issue if you spot any errors in the slides, exercises or code.
 Thank you very much. *Please do not open issues for questions concerning the content!*
