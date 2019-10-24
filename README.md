@@ -62,11 +62,13 @@ We will provide starter code and task descriptions for the weekly assignments in
 ## Literature
 You do not need to buy any books for the lecture. Most resources are available online. Please find a list below:
 
-| Title                                    	| Author(s)                                         	| Publisher 	| Link                                                         	|
-|------------------------------------------	|---------------------------------------------------	|-----------	|--------------------------------------------------------------	|
-| Machine Learning                          | Mitchell (1997)                                       | McGraw-Hill   | [click here](http://profsite.um.ac.ir/~monsefi/machine-learning/pdf/Machine-Learning-Tom-Mitchell.pdf)																																										|
-| Pattern Recognition and Machine Learning 	| Bishop (2006)   			                          	| Springer  	| [click here](http://users.isr.ist.utl.pt/~wurmd/Livros/school/Bishop%20-%20Pattern%20Recognition%20And%20Machine%20Learning%20-%20Springer%20%202006.pdf) 																																							|
-| Deep Learning                            	| Goodfellow et al. (2016) 								| MIT Press     | [click here](https://www.deeplearningbook.org/) 		        |
+| Title                                    	     | Author(s)                    | Publisher 	| Link                                                         			|
+|------------------------------------------	     |-----------------------------	|-----------	|--------------------------------------------------------------			|
+| Elements of statistical Learning               | Hastie et al. (2008) 		| Springer      | [click here](https://web.stanford.edu/~hastie/Papers/ESLII.pdf)		|
+| Deep Learning                            	     | Goodfellow et al. (2016)		| MIT Press     | [click here](https://www.deeplearningbook.org/) 		        		|
+| Machine Learning                               | Mitchell (1997)              | McGraw-Hill   | [click here](http://profsite.um.ac.ir/~monsefi/machine-learning/pdf/Machine-Learning-Tom-Mitchell.pdf)																																							|
+| Machine Learning - A probabilistic perspective | Murphy (2012)				| MIT Press     | [click here](https://doc.lagout.org/science/Artificial%20Intelligence/Machine%20learning/Machine%20Learning_%20A%20Probabilistic%20Perspective%20%5BMurphy%202012-08-24%5D.pdf)																					|
+| Pattern Recognition and Machine Learning 	     | Bishop (2006)   			    | Springer  	| [click here](http://users.isr.ist.utl.pt/~wurmd/Livros/school/Bishop%20-%20Pattern%20Recognition%20And%20Machine%20Learning%20-%20Springer%20%202006.pdf) 																						|
 
 ## Bugs and Errors
 Help us improve the lecture. Feel free to file an issue if you spot any errors in the slides, exercises or code.
