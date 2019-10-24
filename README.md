@@ -9,7 +9,7 @@ This lecture is supposed to give a general introduction into state-of-the-art ma
 
 ## Contents
 
-1. [Introduction to ML](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_intro_ml.pdf)
+1. [Introduction to ML](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/pdf/01_intro_ml.pdf)
     * Motivation and applications
     * Terminology
     * Key challenges in ML: Generalization, feature Engineering, curse of Dimensionality, model selection
@@ -17,22 +17,22 @@ This lecture is supposed to give a general introduction into state-of-the-art ma
 	* Statistics
 	* Linear algebra
 	* Optimization
-3. [Bayesian Decision Theory](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_decision_theory.pdf)
+3. [Bayesian Decision Theory](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/pdf/03_decision_theory.pdf)
     * Bayes optimal classifier
     * Naive Bayes
-4. [Probability Density Estimation](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/04_density_estimation.pdf)
+4. [Probability Density Estimation](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/pdf/04_density_estimation.pdf)
     * Parametric models
 	* Non-parametric models
 	* (Mixture models)
 5. Supervised Learning
-    * [Regression](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/05_regression.pdf)
+    * [Regression](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/pdf/05_regression.pdf)
       * Linear regression
 	  * Probabilistic regression
       * Basis functions: Radial Basis functions, polynomial basis functions
     * Classification I
       * k-nearest neighbors
       * Logistic regression
-      * [Decision trees and ensemble methods](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/08_decision_trees.pdf)
+      * [Decision trees and ensemble methods](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/pdf/08_decision_trees.pdf)
 	  	(random forests, boosting, bagging, stacking)
 	* Evaluation
       * Out-of-sample testing and cross validation
@@ -44,7 +44,7 @@ This lecture is supposed to give a general introduction into state-of-the-art ma
         * Perceptrons
         * Multi-layer-perceptrons and back-propagation
         * Deep learning application: Natural language processing (word embeddings, text classification, sentiment analysis)
-      * [Support vector machines](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/11_svm.pdf)
+      * [Support vector machines](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/pdf/11_svm.pdf)
 6. Unsupervised learning
     * Clustering
       * k-Means
