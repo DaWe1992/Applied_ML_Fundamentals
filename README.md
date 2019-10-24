@@ -3,9 +3,9 @@
 ## Contents
 
 1. [Introduction to ML](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_intro_ml.pdf)
-    * Motivation & Applications
+    * Motivation and applications
     * Terminology
-    * Key Challenges: Generalization, Feature Engineering, Curse of Dimensionality, Evaluation
+    * Key challenges in ML: Generalization, feature Engineering, curse of Dimensionality, model selection
 2. Mathematical Foundations
 	* Statistics
 	* Linear algebra
@@ -20,7 +20,7 @@
 5. Supervised Learning
     * [Regression](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/05_regression.pdf)
       * Linear regression
-	  * (Probabilistic Regression, MAP regression)
+	  * Probabilistic regression
       * Basis functions: Radial Basis functions, polynomial basis functions
     * Classification I
       * k-nearest neighbors
@@ -43,7 +43,7 @@
       * k-Means
       * Hierarchical clustering (divisive and agglomerative)
     * Principal component analysis
-7. (Reinforcement learning)
+7. Reinforcement learning
     * Markov decision processes
     * Dynamic programming: Policy iteration, value iteration
     * Q-learning, Q-networks
@@ -53,9 +53,9 @@
 We will provide starter code and task descriptions for the weekly assignments in this repository (folder [exercises](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/exercises)). Solutions will be presented and discussed in the next class. The assignments must be handed in via Moodle, questions can be asked via the Moodle forum.
 
 ## Literature
-You do not need to buy any books and we will provide links to more resources (e.g. relevant papers) in class.
+You do not need to buy any books for the lecture. Most resources are available online. Please find a list below:
 
 | Title                                    	| Author(s)                                         	| Publisher 	| Link                                                         	|
 |------------------------------------------	|---------------------------------------------------	|-----------	|--------------------------------------------------------------	|
-| Pattern Recognition and Machine Learning 	| Bishop (2006)   			                          	| Springer  	| [click](http://users.isr.ist.utl.pt/~wurmd/Livros/school/Bishop%20-%20Pattern%20Recognition%20And%20Machine%20Learning%20-%20Springer%20%202006.pdf) 																									|
-| Deep Learning                            	| Goodfellow et al. (2016) 								|           	| [click](https://www.deeplearningbook.org/).            	|
+| Pattern Recognition and Machine Learning 	| Bishop (2006)   			                          	| Springer  	| [click here](http://users.isr.ist.utl.pt/~wurmd/Livros/school/Bishop%20-%20Pattern%20Recognition%20And%20Machine%20Learning%20-%20Springer%20%202006.pdf) 																																							|
+| Deep Learning                            	| Goodfellow et al. (2016) 								| MIT Press     | [click here](https://www.deeplearningbook.org/) 		        |
