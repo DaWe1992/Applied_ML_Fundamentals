@@ -53,5 +53,9 @@
 We will provide starter code and task descriptions for the weekly assignments in this repository (folder [exercises](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/exercises)). Solutions will be presented and discussed in the next class. The assignments must be handed in via Moodle, questions can be asked via the Moodle forum.
 
 ## Literature
-You do not need to buy any book and we will provide links to more resources (e.g. relevant papers) in class.
-We recommend the book "Pattern Recognition and Machine Learning" by Christopher M. Bishop ([link](https://www.springer.com/gp/book/9780387310732)), which covers most of the topics discussed in class very well. For the refresher on linear algebra/statistics/optimization and for deep learning we recommend the book "Deep Learning" by Ian Goodfellow, Yoshua Bengio and Aaron Courville (free access [here](https://www.deeplearningbook.org/)).
+You do not need to buy any books and we will provide links to more resources (e.g. relevant papers) in class.
+
+| Title                                    	| Author(s)                                         	| Publisher 	| Link                                                         	|
+|------------------------------------------	|---------------------------------------------------	|-----------	|--------------------------------------------------------------	|
+| Pattern Recognition and Machine Learning 	| Christopher M. Bishop                             	| Springer  	| [Click here](https://www.springer.com/gp/book/9780387310732) 	|
+| Deep Learning                            	| Ian Goodfellow, Yoshua Bengio and Aaron Courville 	|           	| [Click here](https://www.deeplearningbook.org/)).            	|
