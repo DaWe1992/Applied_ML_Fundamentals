@@ -62,15 +62,15 @@ We will provide starter code and task descriptions for the weekly assignments in
 ## Literature <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/img/literature.png" width="25px" height="25px">
 You do not need to buy any books for the lecture. Most resources are available online. Please find a list below:
 
-| Title                                    	     | Author(s)                    | Publisher 					| Link                                                         			|
-|------------------------------------------	     |-----------------------------	|-----------					|--------------------------------------------------------------			|
-| Elements of statistical Learning               | Hastie et al. (2008) 		| Springer      				| [click here](https://web.stanford.edu/~hastie/Papers/ESLII.pdf)		|
-| Deep Learning                            	     | Goodfellow et al. (2016)		| MIT Press     				| [click here](https://www.deeplearningbook.org/) 		        		|
-| Machine Learning                               | Mitchell (1997)              | McGraw-Hill   				| [click here](http://profsite.um.ac.ir/~monsefi/machine-learning/pdf/Machine-Learning-Tom-Mitchell.pdf)																																						|
-| Machine Learning - A probabilistic perspective | Murphy (2012)				| MIT Press     				| [click here](https://doc.lagout.org/science/Artificial%20Intelligence/Machine%20learning/Machine%20Learning_%20A%20Probabilistic%20Perspective%20%5BMurphy%202012-08-24%5D.pdf)																				|
-| Mathematics for Machine Learning               | Deisenroth et al. (2019)     | Cambridge University Press	| [click here](https://mml-book.github.io/)
-| Pattern Recognition and Machine Learning 	     | Bishop (2006)   			    | Springer  					| [click here](http://users.isr.ist.utl.pt/~wurmd/Livros/school/Bishop%20-%20Pattern%20Recognition%20And%20Machine%20Learning%20-%20Springer%20%202006.pdf) 																						|
-| Reinforcement Learning - An introduction       | Sutton et al. (2014)         | MIT Press     				| [click here](http://incompleteideas.net/book/bookdraft2017nov5.pdf)   |
+| Title                                    	     | Author(s)                    | Publisher 				| Link                                                         			|
+|------------------------------------------	     |-----------------------------	|-----------				|--------------------------------------------------------------			|
+| Elements of statistical Learning               | Hastie et al. (2008) 		| Springer      			| [click here](https://web.stanford.edu/~hastie/Papers/ESLII.pdf)		|
+| Deep Learning                            	     | Goodfellow et al. (2016)		| MIT Press     			| [click here](https://www.deeplearningbook.org/) 		        		|
+| Machine Learning                               | Mitchell (1997)              | McGraw-Hill   			| [click here](http://profsite.um.ac.ir/~monsefi/machine-learning/pdf/Machine-Learning-Tom-Mitchell.pdf)																																							|
+| Machine Learning - A probabilistic perspective | Murphy (2012)				| MIT Press     			| [click here](https://doc.lagout.org/science/Artificial%20Intelligence/Machine%20learning/Machine%20Learning_%20A%20Probabilistic%20Perspective%20%5BMurphy%202012-08-24%5D.pdf)																			|
+| Mathematics for Machine Learning               | Deisenroth et al. (2019)     | Cambridge Uni. Press		| [click here](https://mml-book.github.io/)								|
+| Pattern Recognition and Machine Learning 	     | Bishop (2006)   			    | Springer  				| [click here](http://users.isr.ist.utl.pt/~wurmd/Livros/school/Bishop%20-%20Pattern%20Recognition%20And%20Machine%20Learning%20-%20Springer%20%202006.pdf) 																									|
+| Reinforcement Learning - An introduction       | Sutton et al. (2014)         | MIT Press     			| [click here](http://incompleteideas.net/book/bookdraft2017nov5.pdf)   |
 
 ## Bugs and Errors <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/img/bug.png" width="25px" height="30px">
 Help us improve the lecture. Feel free to file an issue if you spot any errors in the slides, exercises or code.
