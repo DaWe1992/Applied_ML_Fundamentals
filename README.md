@@ -64,6 +64,7 @@ You do not need to buy any books for the lecture. Most resources are available o
 
 | Title                                    	| Author(s)                                         	| Publisher 	| Link                                                         	|
 |------------------------------------------	|---------------------------------------------------	|-----------	|--------------------------------------------------------------	|
+| Machine Learning                          | Mitchell (1997)                                       | McGraw-Hill   | [click here](http://profsite.um.ac.ir/~monsefi/machine-learning/pdf/Machine-Learning-Tom-Mitchell.pdf)																																										|
 | Pattern Recognition and Machine Learning 	| Bishop (2006)   			                          	| Springer  	| [click here](http://users.isr.ist.utl.pt/~wurmd/Livros/school/Bishop%20-%20Pattern%20Recognition%20And%20Machine%20Learning%20-%20Springer%20%202006.pdf) 																																							|
 | Deep Learning                            	| Goodfellow et al. (2016) 								| MIT Press     | [click here](https://www.deeplearningbook.org/) 		        |
 
