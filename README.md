@@ -1,8 +1,7 @@
 # Applied Machine Learning Fundamentals (DHBW Lecture)
 
 ```
-We are drowning in information and starving for knowledge.’
-– John Naisbitt
+'We are drowning in information and starving for knowledge.' – John Naisbitt
 ```
 
 Machine learning has become an integral part of many modern applications.
