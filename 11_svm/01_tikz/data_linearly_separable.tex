@@ -1,0 +1,22 @@
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[
+		scale=0.8
+	]
+
+		\begin{axis}[
+			xlabel={$x_1$},
+			ylabel={$x_2$}
+		]
+		
+			\addplot[
+				only marks,mark=*,mark size=2.0,fill=myblue1,discard if not={c}{-1}
+			] table{11_svm/05_data/data_linearly_separable.txt};
+
+			\addplot[
+				only marks,mark=*,mark size=2.0,fill=lightgray,discard if not={c}{1}
+			] table{11_svm/05_data/data_linearly_separable.txt};
+    		\end{axis}
+
+	\end{tikzpicture}
+\end{figure}

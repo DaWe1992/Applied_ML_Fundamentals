@@ -1,0 +1,948 @@
+\input{preamble_theme}
+
+% ====================================================
+% ====================================================
+% PRESENTATION DATA
+% ====================================================
+% ====================================================
+
+\title[Support Vector Machines]{*** Applied Machine Learning Fundamentals *** Support Vector Machines}
+\institute{SAP\,SE}
+\author{Daniel Wehner}
+\date{\today}
+\prefix{SVM}
+
+% ====================================================
+% ====================================================
+% BEGIN OF DOCUMENT
+% ====================================================
+% ====================================================
+
+\begin{document}
+
+% Title frame
+%______________________________________________________________________
+\maketitlepage
+
+
+% Agenda
+%______________________________________________________________________
+\begin{frame}{Agenda \today}
+	\begin{multicols}{2}
+		\tableofcontents
+	\end{multicols}
+\end{frame}
+
+
+% Section: Linear SVMs
+%______________________________________________________________________
+\section{Linear SVMs}
+\makedivider{Linear SVMs}
+
+% Subsection: Introduction
+% --------------------------------------------------------------------------------------------------------
+\subsection{Introduction}
+
+% What is a Support Vector Machine (SVM)?
+\begin{frame}{What is a Support Vector Machine (SVM)?}{}
+	\bubble{11}{8.5}{
+		\footnotesize What is the best \\[-1mm]
+		\footnotesize separating hyperplane?
+	}
+	\begin{itemize}
+		\item A support vector machine is a \textbf{binary classifier}
+			{\footnotesize \textit{(Vapnik and Chervonenkis)}}
+		\begin{itemize}
+			\item The classes are denoted by $\{-1; +1\}$
+			\item Techniques for multi-class classification:
+			\begin{itemize}
+				\item \highlight{OVR (One-vs-Rest)}
+				\item \highlight{OVO (One-vs-One)}
+			\end{itemize}
+		\end{itemize}
+		\item An SVM finds the \textbf{best separating hyperplane}
+		\item Why is it called \textit{`machine'}?
+		\begin{itemize}
+			\item It's no physical machine, it's a mathematical construct \\
+				{\footnotesize \textit{(just as a `Turing machine' is no real machine...)}}
+			\item `Machine' refers to `Machine Learning' 
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+% Subsection: Discriminant Functions
+% --------------------------------------------------------------------------------------------------------
+\subsection{Discriminant Functions}
+
+% Discriminant Functions
+\begin{frame}{Discriminant Functions}{}
+	\begin{itemize}
+		\item The simplest discriminant is a linear function of the form:
+		\begin{equation}
+			y(\bm{x})
+				= \bm{w}^{\intercal} \bm{x} + b
+				= \sum_{j=1}^m w_j x_j + b
+				= w_1 x_1 + w_2 x_2 + \dots + w_m x_m + b
+		\end{equation} 
+		\item $\bm{w}$ is called the \textbf{weight vector} and $b$ is the \textbf{bias}
+		\item An input vector $\bm{x}$ is assigned class $\mathcal{C}_1$ if $y(\bm{x}) \ge 0$,
+			class $\mathcal{C}_2$ otherwise
+		\item The \highlight{decision boundary} is defined by the relation: $y(\bm{x}) = 0$
+		\item The boundary is a $(D - 1)$-dimensional hyperplane within the $D$-dimensional input space
+	\end{itemize}
+\end{frame}
+
+
+% Discriminant Functions (Ctd.)
+\begin{frame}{Discriminant Functions (Ctd.)}{}
+	\vspace*{-2mm}
+	\input{11_svm/01_tikz/discriminant_functions}
+\end{frame}
+
+
+% Discriminant Functions (Ctd.)
+\begin{frame}{Discriminant Functions (Ctd.)}{}
+	\begin{itemize}
+		\item Consider two points $\bm{x}_A$ and $\bm{x}_B$ which lie on the decision surface
+		\item Since $y(\bm{x}_A) = y(\bm{x}_B) = 0$, we have $\bm{w}^{\intercal}(\bm{x}_A - \bm{x}_B) = 0$,
+			hence $\bm{w}$ is \textbf{orthogonal} to every vector lying within the decision surface
+		\item $\bm{w}$ determines the orientation of the decision surface
+		\item Similarly, if $\bm{x}$ is a point on the decision surface, then $y(\bm{x}) = 0$ and the normal distance from the
+			origin to the decision surface is given by:
+		\begin{equation}
+			\frac{\bm{w}^{\intercal} \bm{x} + b}{\Vert \bm{w} \Vert} = 0 \Leftrightarrow
+			\frac{\bm{w}^{\intercal} \bm{x}}{\Vert \bm{w} \Vert} = -\frac{b}{\Vert \bm{w} \Vert}
+		\end{equation}
+		\item $b$ controls the offset from the origin
+	\end{itemize}
+\end{frame}
+
+
+% Discriminant Functions (Ctd.)
+\begin{frame}{Discriminant Functions (Ctd.)}{}
+	\begin{itemize}
+		\item $y(\bm{x})$ gives a \textbf{signed measure} of the perp. distance of $\bm{x}$ to the boundary
+		\item Consider an arbitrary point $\bm{x}$ and its orth. projection $\bm{x}_{\perp}$ onto the surface
+		\begin{equation}
+			\bm{x} = \bm{x}_{\perp} + r \frac{\bm{w}}{\Vert \bm{w} \Vert}
+		\end{equation}
+		\item Multiplying both sides by $\bm{w}^{\intercal}$ and adding $b$, and making use of:
+		\begin{equation*}
+			y(\bm{x}) = \bm{w}^{\intercal} \bm{x} + b \qquad \text{and} \qquad
+			y(\bm{x}_{\perp}) = \bm{w}^{\intercal} \bm{x}_{\perp} + b = 0			
+		\end{equation*}
+		\item We get:
+		\begin{equation}
+			r = \frac{y(\bm{x})}{\Vert \bm{w} \Vert}
+		\end{equation}
+	\end{itemize}
+\end{frame}
+
+
+% Subsection: Linear Separability
+% --------------------------------------------------------------------------------------------------------
+\subsection{Linear Separability}
+
+% Linear Separability
+\begin{frame}{Linear Separability}{}
+	\begin{itemize}
+		\item We have $n$ input vectors $\bm{X} = \{ \bm{x}^{(1)}, \bm{x}^{(2)}, \dots, \bm{x}^{(n)} \}$
+		\item With corresponding target values $t^{(1)}, t^{(2)}, \dots, t^{(n)}$ where $t^{(i)} \in \{-1, +1\}$
+		\item New data points are classified according to the sign of $y(\bm{x})$: $sign(y(\bm{x}))$
+	\end{itemize}
+	
+	\begin{boxBlueNoFrame}
+		\footnotesize
+		A data set is \textbf{linearly separable} in feature space, if $\exists (\bm{w}, b)$ such that
+		\begin{align}
+			y(\bm{x}^{(i)}) = \bm{w}^{\intercal} \bm{x}^{(i)} + b &> 0 \qquad
+				\text{$\forall \bm{x}^{(i)}$ with $t^{(i)} = +1$} \\
+			y(\bm{x}^{(i)}) = \bm{w}^{\intercal} \bm{x}^{(i)} + b &< 0 \qquad
+				\text{otherwise ($t^{(i)} = -1$)}
+		\end{align}
+		This can also be written as: $t^{(i)} y(\bm{x}^{(i)}) > 0\ \forall i$ 
+	\end{boxBlueNoFrame}
+\end{frame}
+
+
+% Example Data Set
+\begin{frame}{Example Data Set (linearly separable)}{}
+	\divideTwo{0.49}{
+		\vspace*{4mm}
+		\input{11_svm/01_tikz/data_linearly_separable}
+	}{0.49}{
+		\begin{itemize}
+			\item This data set is \highlight{linearly separable} (you can find a straight line to separate the two classes)
+			\item The possible number of hyperplanes is infinite...
+			\item \textbf{Which hyperplane should be chosen?}
+		\end{itemize}
+	}
+\end{frame}
+
+
+% Subsection: Maximum Margin Classifiers
+% --------------------------------------------------------------------------------------------------------
+\subsection{Maximum Margin Classifiers}
+
+% Maximum Margin Classifiers
+\begin{frame}{Maximum Margin Classifiers}{}\important
+	\divideTwo{0.54}{
+		\begin{itemize}
+			\item An SVM is a so-called \highlight{maximum margin classifier}
+			\item It maximizes the margin $\mathcal{M}$
+			\begin{equation*}
+				\max_{\bm{w}, b} \mathcal{M}
+			\end{equation*}
+			\item The larger $\mathcal{M}$ the less likely are false predictions
+			\item Only the \highlight{support vectors} determine the hyperplane
+		\end{itemize}
+	}{0.44}{
+		\input{11_svm/01_tikz/maximum_margin_classifier}
+	}
+\end{frame}
+
+
+% Maximum Margin Classifiers (Ctd.)
+\begin{frame}{Maximum Margin Classifiers (Ctd.)}{}
+	\begin{itemize}
+		\item Recall the perpendicular distance of a point $\bm{x}$ to the hyperplane:
+		\begin{equation}
+			\frac{\vert y(\bm{x}) \vert}{\Vert \bm{w} \Vert}
+		\end{equation}
+		\item Furthermore, we are only interested in solutions for which all data points are correctly classified, i.\,e. 
+			$t^{(i)} y(\bm{x}^{(i)}) > 0\ \forall i$, thus the distance is given by:
+		\begin{equation}
+			\frac{t^{(i)} y(\bm{x}^{(i)})}{\Vert \bm{w} \Vert} = \frac{t^{(i)} (\bm{w}^{\intercal} \bm{x}^{(i)} + b)}{\Vert \bm{w} \Vert}
+		\end{equation}
+	\end{itemize}
+\end{frame}
+
+
+% Maximum Margin Classifiers (Ctd.)
+\begin{frame}{Maximum Margin Classifiers (Ctd.)}{}
+	\begin{itemize}
+		\item The margin is given by the perp. distance to the closest data point $\bm{x}^{(i)}$
+		\item We wish to optimize the parameters $\bm{w}$ and $b$ to maximize this distance
+		\item We have to solve:
+		\vspace*{-3.5mm}
+		\begin{equation}
+			\bm{w}^*, b^* =
+			\overbracket{
+				\argmax_{\bm{w}, b} \left\{ \frac{1}{\Vert \bm{w} \Vert}
+				\overbracket{
+					\min_i [t^{(i)} (\bm{w}^{\intercal} \bm{x}^{(i)} + b)]
+				}^{\text{`closest data points'}}
+				\right\}
+			}^{\text{`maximize distance to closest data points'}}
+		\end{equation}
+		\vspace*{-3.5mm}
+		\item Note that $1/\Vert \bm{w} \Vert$ does not depend on $i$
+		\item A direct solution of this optimization would be very complex $\Rightarrow$ rewrite!
+	\end{itemize}
+\end{frame}
+
+
+% Maximum Margin Classifiers (Ctd.)
+\begin{frame}{Maximum Margin Classifiers (Ctd.)}{}
+	\begin{itemize}
+		\item We note that rescaling $\bm{w}$ and $b$ by a factor $\kappa$
+			\textbf{does not change the distance} to the decision boundary
+		\item Therefore, for the points that are closest to the surface, we can set:
+		\begin{equation}
+			t^{(i)} (\bm{w}^{\intercal} \bm{x}^{(i)} + b) = 1
+		\end{equation}
+		\item In this case, all data points $\bm{x}^{(i)}$ satisfy the constraint:
+		\begin{equation}
+			t^{(i)} (\bm{w}^{\intercal} \bm{x}^{(i)} + b) \ge 1 \qquad i = 1, 2, \dots, n
+		\end{equation}
+		\item It is sufficient to solve: \highlight{$\argmin_{\bm{w}, b} \frac{1}{2} \Vert \bm{w} \Vert^2$}
+			\footnotesize ($\nicefrac{1}{2}$ for later mathematical convenience) \normalsize
+	\end{itemize}
+\end{frame}
+
+
+% Maximum Margin Classifiers (Ctd.)
+\begin{frame}{Maximum Margin Classifiers (Ctd.)}{}
+	\vspace*{-4mm}
+	\begin{equation}
+		\bm{w}^*, b^* = \argmin_{\bm{w}, b} \frac{1}{2} \Vert \bm{w} \Vert^2
+	\end{equation}
+	\vspace*{4mm}
+	
+	\divideTwo{0.75}{
+		\begin{itemize}
+			\item This is a \textbf{quadratic optimization (QP)} problem
+			\item A global optimum exists due to \textbf{convexity}
+			\item How to solve such problems?
+		\end{itemize}
+		\vspace*{2mm}\centering
+		\highlight{Lagrangian Optimization} \\
+		\footnotesize (named after Joseph-Louis Lagrange)
+	}{0.24}{
+		\vspace*{2mm}
+		\begin{figure}
+			\centering
+			\fbox{\includegraphics[scale=0.3]{11_svm/02_img/lagrange}}
+		\end{figure}
+	}
+\end{frame}
+
+
+% Subsection: Lagrangian Optimization
+% --------------------------------------------------------------------------------------------------------
+\subsection{Lagrangian Optimization}
+
+% Lagrangian Optimization: A simple Example
+\begin{frame}{Lagrangian Optimization: A simple Example}{}
+	\begin{itemize}
+		\item Lagrangian optimization is optimization \textbf{subject to constraints}
+		\item \textbf{Example:}
+		\begin{equation}
+			\overbracket{f(x_1, x_2) = 1 - x_1^2 - x_2^2}^{\text{function to optimize $f(\bm{x})$}}
+			\quad \text{s.\,t.} \quad
+			\overbracket{g(x_1, x_2) = x_1 + x_2 - 1 = 0}^{\text{linear constraint $g(\bm{x}) = 0$}}
+		\end{equation}
+		\item To find a solution we have to formulate the \highlight{Lagrangian equation}: \\
+			{\footnotesize General form: $\mathcal{L}(\bm{x}, \alpha) = f(\bm{x}) + \alpha g(\bm{x})$}
+		\begin{equation}
+			\mathcal{L}(\bm{x}, \alpha) = 1 - x_1^2 - x_2^2 + \alpha(x_1 + x_2 - 1)
+		\end{equation}
+	\end{itemize}
+\end{frame}
+
+
+% Lagrangian Optimization: A simple Example (Ctd.)
+\begin{frame}{Lagrangian Optimization: A simple Example (Ctd.)}{}
+	\begin{equation*}
+		\mathcal{L}(\bm{x}, \alpha) = 1 - x_1^2 - x_2^2 + \alpha(x_1 + x_2 - 1)
+	\end{equation*}
+	
+	We determine the partial derivatives w.\,r.\,t. $x_1$, $x_2$ and $\alpha$ and set them to zero:
+	\begin{alignat}{2}
+		\frac{\partial \mathcal{L}(\bm{x}, \alpha)}{\partial x_1} 	&= -2 x_1 + \alpha	&&\overset{!}{=} 0 	\\[2mm]
+		\frac{\partial \mathcal{L}(\bm{x}, \alpha)}{\partial x_2} 	&= -2 x_2 + \alpha 	&&\overset{!}{=} 0	\\[2mm]
+		\frac{\partial \mathcal{L}(\bm{x}, \alpha)}{\partial \alpha} 	&= x_1 + x_2 - 1 	&&\overset{!}{=} 0
+	\end{alignat}
+\end{frame}
+
+
+% Lagrangian Optimization: A simple Example (Ctd.)
+\begin{frame}{Lagrangian Optimization: A simple Example (Ctd.)}{}
+	\begin{itemize}
+		\item Solving the first two equations for $x_1$ and $x_2$, respectively, we get:
+		\begin{align}
+			x_1 &= \nicefrac{1}{2} \alpha \\
+			x_2 &= \nicefrac{1}{2} \alpha
+		\end{align}
+		\item Substitution into the third equation $x_1 + x_2 - 1 = 0$:
+		\begin{equation}
+			\widetilde{\mathcal{L}}(\alpha) =
+				\nicefrac{1}{2} \alpha + \nicefrac{1}{2} \alpha - 1 = 0 \Leftrightarrow \alpha = 1
+		\end{equation}
+		\item Finally, we get:
+		\begin{equation*}
+			x_1 = \nicefrac{1}{2} \qquad x_2 = \nicefrac{1}{2}
+		\end{equation*}
+	\end{itemize}
+\end{frame}
+
+
+% Lagrangian Optimization: A simple Example (Ctd.)
+\begin{frame}{Lagrangian Optimization: A simple Example (Ctd.)}{}
+	\input{11_svm/01_tikz/lagrange_optimization}
+\end{frame}
+
+
+% SVM Parameter Optimization
+\begin{frame}{SVM Parameter Optimization}{}
+	\begin{boxBlueNoFrame}
+		We have to solve the Lagrangian:
+		\begin{equation}
+			\mathcal{L}(\bm{w}, b, \bm{\alpha}) = \overbracket{
+				\nicefrac{1}{2} \Vert \bm{w} \Vert^2
+			}^{f(\bm{x})} -
+			\sum_{i=1}^n \alpha_i [\overbracket{
+				t^{(i)} \cdot (\bm{w}^{\intercal} \bm{x}^{(i)} + b) - 1
+			}^{g(\bm{x})\, =\, 0}]
+		\end{equation}
+	\end{boxBlueNoFrame}
+	\begin{itemize}
+		\item $\bm{\alpha}$ is a vector of \highlight{Lagrangian multipliers}
+		\item There is \textbf{one constraint per data point!}
+		\item The Lagrangian multipliers will be non-zero for all support vectors
+	\end{itemize}
+\end{frame}
+
+
+% SVM Parameter Optimization (Ctd.)
+\begin{frame}{SVM Parameter Optimization (Ctd.)}{}\important
+	\floattext{8.75}{6.25}{\footnotesize \highlight{linear combination of input!}}
+	We have to compute the partial derivatives w.\,r.\,t. $\bm{w}$ and b and set them to zero:
+		
+	\begin{alignat}{2}
+		\frac{\partial \mathcal{L}}{\partial \bm{w}}
+			&= \bm{w} - \sum_{i=1}^n \alpha_i t^{(i)} \bm{x}^{(i)} \overset{!}{=} 0
+				&&\Rightarrow \boxed{\bm{w} = \sum_{i=1}^n \alpha_i t^{(i)} \bm{x}^{(i)}} \\[5mm]
+		\frac{\partial \mathcal{L}}{\partial b} 
+			&= -\sum_{i=1}^n \alpha_i t^{(i)} \overset{!}{=} 0
+				&&\Rightarrow \boxed{\sum_{i=1}^n \alpha_i t^{(i)} = 0}
+	\end{alignat}
+\end{frame}
+
+
+% SVM Parameter Optimization (Ctd.)
+\begin{frame}{SVM Parameter Optimization (Ctd.)}{}\optional
+	\floattext{4.75}{14}{\footnotesize \highlight{Wolfe dual}}
+	As a next step the partial derivatives are substituted in into $\mathcal{L}$:
+	\footnotesize
+	\begin{align}
+		\nonumber
+		\widetilde{\mathcal{L}}(\bm{\alpha})
+		&=
+			\frac{1}{2} \left( \sum_{i=1}^n \alpha_i t^{(i)} \bm{x}^{(i)} \right)\left( \sum_{j=1}^n \alpha_j t^{(j)} \bm{x}^{(j)} \right) -
+			\left( \sum_{i=1}^n \alpha_i t^{(i)} \bm{x}^{(i)} \right) \left( \sum_{j=1}^n \alpha_j t^{(j)} \bm{x}^{(j)} \right) \\
+		&\phantom{=} - \sum_{i=1}^n \alpha_i t^{(i)} b + \sum_{i=1}^n \alpha_i \\[5mm]
+		&=
+			\boxed{
+				\sum_{i=1}^n \alpha_i - \frac{1}{2} \sum_{i=1}^n \sum_{j=1}^n
+					\alpha_i \alpha_j t^{(i)} t^{(j)} \langle \bm{x}^{(i)}, \bm{x}^{(j)} \rangle
+			} \quad \text{s.\,t.}\ \alpha_i \ge 0\ \forall i\ \text{and}\ \sum_{i=1}^n \alpha_i t^{(i)} = 0
+	\end{align}
+	\normalsize
+\end{frame}
+
+
+% SVM Parameter Optimization (Ctd.)
+\begin{frame}{SVM Parameter Optimization (Ctd.)}{}\optional
+	\begin{itemize}
+		\item Once we know $\bm{\alpha}$, we can determine $b$ by noting that any
+			support vector satisfies $t^{(i)} y(\bm{x}^{(i)}) = 1$: {\scriptsize ($\mathcal{S} \equiv$ indices of support vectors)}
+		\begin{equation}
+			t^{(i)} \left( \sum_{j \in \mathcal{S}} \alpha_j t^{(j)} \langle \bm{x}^{(i)}, \bm{x}^{(j)} \rangle + b \right) = 1
+		\end{equation}
+		\item Average over all support vectors to compute $b$: {\scriptsize ($n_\mathcal{S} \equiv$ number of support vectors)}
+		\begin{equation}
+			b = \frac{1}{n_{\mathcal{S}}} \sum_{i \in \mathcal{S}} \left(
+				t^{(i)} - \sum_{j \in \mathcal{S}} \alpha_j t^{(j)} \langle \bm{x}^{(i)}, \bm{x}^{(j)} \rangle
+			\right)
+		\end{equation}
+	\end{itemize}
+\end{frame}
+
+
+% Updated Decision Rule
+\begin{frame}{Updated Decision Rule}{}
+	\begin{itemize}
+		\item Given our derivations, we can rewrite the SVM decision rule as follows:
+		\begin{equation}
+			y(\bm{x}) = sign\left( \sum_{i \in \mathcal{S}} \alpha_i t^{(i)} \langle \bm{x}^{(i)}, \bm{x} \rangle + b \right)
+		\end{equation}
+		\item $\bm{x}$ is an unknown instance for which the class label is not known
+	\end{itemize}
+
+	\begin{boxBlueNoFrame}
+		\footnotesize
+		\highlight{Since all $\alpha_i$ will be zero for non-support vectors, the decision
+		for a class depends on the support vectors only!} This makes predictions fast, even for large data sets.
+		\textbf{The number of support vectors can also be used as an evaluation criterion.}
+	\end{boxBlueNoFrame}
+\end{frame}
+
+
+% Linear SVM: Example
+\begin{frame}{Linear SVM: Example}{}
+	\vspace*{-2mm}
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.2]{11_svm/02_img/svm_linear}
+	\end{figure}
+\end{frame}
+
+
+% Section: Kernel SVMs
+%______________________________________________________________________
+\section{Kernel SVMs}
+\makedivider{Kernel SVMs}
+
+% Subsection: Non-linear Data
+% --------------------------------------------------------------------------------------------------------
+\subsection{Non-linear Data}
+
+% Non-Linear SVMs
+\begin{frame}{Non-Linear SVMs / Non-Linear Separability}{}
+	\divideTwo{0.49}{
+		\begin{itemize}
+			\item So far we have assumed \textbf{linear separability} of the data
+			\item \textbf{What if the data is not linearly separable?} \\
+				{\footnotesize(which will be the case in practice...)}
+			\item We cannot find a straight line...
+			\item $\overset{Remedy}{\Longrightarrow}$ \highlight{Feature maps}, \highlight{Kernels}
+		\end{itemize}
+	}{0.49}{
+		\begin{figure}
+			\centering
+			\includegraphics[scale=0.18]{11_svm/02_img/data_non_linear}
+		\end{figure}
+	}
+\end{frame}
+
+
+% Subsection: Feature Mapping
+% --------------------------------------------------------------------------------------------------------
+\subsection{Feature Mapping}
+
+% Feature Mapping
+\begin{frame}{Feature Mapping}{}
+	The mapping function $\varphi$ maps from input space $\mathcal{X}$ to feature space $\mathcal{F}$:
+	\input{11_svm/01_tikz/feature_mapping}
+	\vspace*{-2mm}
+	\begin{equation*}
+		\varphi(x_1, x_2) \mapsto \left( x_1^2, \sqrt{2} x_1 x_2, x_2^2 \right) = (z_1, z_2, z_3)
+	\end{equation*}
+\end{frame}
+
+
+% Feature Mapping (Ctd.)
+\begin{frame}{Feature Mapping (Ctd.)}{}
+	\begin{itemize}
+		\item A \highlight{feature map} \textbf{explicitly} transforms the data to a higher dimension where classification becomes easier
+		\item Computing the feature map can -- from a computational point of view -- become very expensive
+		\item And how do you know how many dimensions to add? What transformations should be used?
+		\item \highlight{A more tractable solution is required $\Rightarrow$ Kernels}
+	\end{itemize}
+\end{frame}
+
+
+% Subsection: Kernels
+% --------------------------------------------------------------------------------------------------------
+\subsection{Kernels}
+
+% What is a Kernel?
+\begin{frame}{What is a Kernel?}{}
+	\begin{itemize}
+		\item A kernel can  be considered a \textbf{similarity function}
+		\item Many algorithms have been \textit{`kernelized'}, e.\,g. \textit{Kernel PCA}, \textit{Kernel SVM}
+		\item Think of it as projecting the data in a higher dimensional space to make it linearly separable
+	\end{itemize}
+	
+	\begin{boxBlueNoFrame}
+		\footnotesize
+		A kernel allows the SVM to operate in a \highlight{high-dimensional, implicit feature space} without ever
+		computing the coordinates of the data in that space, but rather by simply computing the \textbf{inner products}
+		between the images of \textbf{all pairs of data} in the feature space. $\Rightarrow$ \highlight{Kernel trick} [Wikipedia]
+	\end{boxBlueNoFrame}
+\end{frame}
+
+
+% What is a Kernel? (Ctd.)
+\begin{frame}{What is a Kernel? (Ctd.)}{}\important
+	\begin{itemize}
+		\item The explicit computation of a feature map $\varphi(\bm{x})$ is avoided...
+		\item ...by replacing the dot product with the kernel $\mathcal{K}$:
+		\begin{equation}
+			\mathcal{K}(\bm{x}, \bm{x'}) \Leftrightarrow \varphi(\bm{x})^{\intercal} \varphi(\bm{x'})
+		\end{equation}
+		\item Instead of mapping features explicitly, we calculate the \highlight{Gram matrix}
+			$\bm{K} \in \mathbb{R}^{N \times N}$, where: 
+		\begin{equation}
+			K_{ij} = \mathcal{K}(\bm{x}^{(i)}, \bm{x}^{(j)})
+		\end{equation}
+	\end{itemize}
+\end{frame}
+
+
+% Well-known Kernels
+\begin{frame}{Well-known Kernels}{}\important
+	\begin{itemize}
+		\item \highlight{Linear kernel}
+		\begin{equation}
+			\mathcal{K}(\bm{x}, \bm{x'}) = \bm{x}^{\intercal} \bm{x'}
+		\end{equation}
+		\item \highlight{Polynomial kernel}
+		\begin{equation}
+			\mathcal{K}(\bm{x}, \bm{x'}) = (\bm{x}^{\intercal}\bm{x'} + c)^p
+		\end{equation}
+		\item \highlight{Radial-Basis-Function (RBF) kernel}
+		\begin{equation}
+			\mathcal{K}(\bm{x}, \bm{x'}) = \exp \left\{ -\frac{\Vert \bm{x} - \bm{x'} \Vert^2}{2 \sigma^2} \right\}
+				= \exp \{ -\gamma \Vert \bm{x} - \bm{x'} \Vert^2 \}
+		\end{equation}
+	\end{itemize}
+\end{frame}
+
+
+% Power of Kernels
+\begin{frame}{Power of Kernels}{}
+	\begin{itemize}
+		\item Suppose $\bm{x}, \bm{x'} \in \mathbb{R}^m$ with $m = 2$
+		\item Polynomial feature mapping ($c = 0$):
+		\vspace*{-1.5mm}
+		\begin{equation}
+			\varphi(\bm{x}) = [x_1 x_1, x_1 x_2, x_2 x_1, x_2 x_2]^{\intercal} \qquad
+			\varphi(\bm{x'}) = [x'_1 x'_1, x'_1 x'_2, x'_2 x'_1, x'_2 x'_2]^{\intercal}
+		\end{equation}
+		\item Using a polynomial kernel:
+		{\scriptsize
+		\begin{equation}
+			\mathcal{K}(\bm{x}, \bm{x'}) 
+				= (\bm{x}^{\intercal} \bm{x'})^2
+				= \left( \sum_{i=1}^m x_i x'_i \right) \left( \sum_{j=1}^m x_j x'_j \right)
+				= \sum_{i=1}^m \sum_{j=1}^m (x_i x_j) (x'_i x'_j) = \varphi(\bm{x})^{\intercal} \varphi(\bm{x'})
+		\end{equation}}
+		\vspace*{-2mm}
+		\begin{boxBlueNoFrame}
+			\footnotesize
+			\highlight{We need $\mathcal{O}(n^2)$ to compute $\varphi(\bm{x})$ and $\varphi(\bm{x'})$ but only $\mathcal{O}(n)$
+			to compute $\mathcal{K}(\bm{x}, \bm{x'})$}
+		\end{boxBlueNoFrame}
+	\end{itemize}
+\end{frame}
+
+
+% Incorporating the Kernel Function
+\begin{frame}{Incorporating the Kernel Function}{}
+	\begin{itemize}
+		\item The kernel function $\mathcal{K}$ replaces each occurrence of $\bm{x}^{\intercal}\bm{x'}$
+		\item \textbf{Example:}
+		\begin{align}
+			\widetilde{\mathcal{L}} 
+					&= \sum_{i=1}^n \alpha_i  - \frac{1}{2} \sum_{i=1}^n \sum_{j=1}^n
+						\alpha_i \alpha_j t^{(i)} t^{(j)} \mathcal{K}(\bm{x}^{(i)}, \bm{x}^{(j)}) \\[4mm]
+			y(\bm{x}) 	&= sign \left( \sum_{i \in \mathcal{S}} \alpha_i t^{(i)} \mathcal{K}(\bm{x}^{(i)}, \bm{x}) + b \right)
+		\end{align}
+	\end{itemize}
+\end{frame}
+
+
+% Polynomial Kernel vs. RBF Kernel
+\begin{frame}{Polynomial Kernel vs. RBF Kernel}{}
+	\divideTwo{0.49}{
+		\begin{figure}
+			\centering
+			\includegraphics[scale=0.2]{11_svm/02_img/poly_kernel}
+			\caption{Polynomial Kernel}
+		\end{figure}
+	}{0.49}{
+		\begin{figure}
+			\centering
+			\includegraphics[scale=0.2]{11_svm/02_img/rbf_kernel}
+			\caption{RBF (Gaussian) Kernel}
+		\end{figure}
+	}
+\end{frame}
+
+
+% Subsection: Mercer's Condition
+% --------------------------------------------------------------------------------------------------------
+\subsection{Mercer's Condition}
+
+% Mercer's Condition
+\begin{frame}{Mercer's Condition}{}
+	\begin{itemize}
+		\item A kernel is valid, if it fulfills \highlight{Mercer's condition}
+		\item This is the case, if for all \textbf{square-integrable functions} $g(\bm{x})$...
+		\begin{equation}
+			\int_{-\infty}^{\infty} \vert g(\bm{x}) \vert^2 \diff x < \infty
+		\end{equation}
+		\item ...it holds:
+		\begin{equation}
+			\int \int g(\bm{x})\mathcal{K}(\bm{x}, \bm{x'})g(\bm{x'}) \diff \bm{x} \diff \bm{x'} \ge 0
+		\end{equation}
+	\end{itemize}
+\end{frame}
+
+
+% Mercer's Condition (Ctd.)
+\begin{frame}{Mercer's Condition (Ctd.)}{}\optional
+	\begin{itemize}
+		\item Suppose $\mathcal{K}$ is a valid kernel and let $\bm{X} = \{\bm{x}^{(1)}, \dots, \bm{x}^{(n)}\}$ be given
+		\item For any vector $\bm{z} \in \mathbb{R}^n$:
+		\vspace*{-1.5mm}
+		\scriptsize
+		\begin{align}
+			\bm{z}^{\intercal} \bm{K} \bm{z}
+				&= 	\sum_i \sum_j z_i K_{ij} z_j
+						= \sum_i \sum_j z_i \varphi(\bm{x}^{(i)})^{\intercal} \varphi(\bm{x}^{(j)}) z_j 			\\
+				&= \sum_i \sum_j z_i \sum_k (\varphi(\bm{x}^{(i)}))_k (\varphi(\bm{x}^{(j)}))_k z_j 
+						= \sum_k \sum_i \sum_j z_i (\varphi(\bm{x}^{(i)}))_k (\varphi(\bm{x}^{(j)}))_k z_j 		\\
+				&= \sum_k \left( \sum_i z_i \varphi(\bm{x}^{(i)})_k \right)^2 \ge 0 \Longrightarrow \bm{K} \ge 0
+		\end{align}
+		\normalsize
+		\item $\bm{K} \ge 0$ means that matrix $\bm{K}$ must be \highlight{positive semi-definite (psd)}
+	\end{itemize}
+\end{frame}
+
+
+% Mercer's Condition (Ctd.)
+\begin{frame}{Mercer's Condition (Ctd.)}{}\important
+	\begin{boxBlue}
+		\highlight{Mercer's Theorem:} \\
+		$\mathcal{K}$ is a valid kernel, iff for any set of $n$ training examples $\bm{X} = \{ \bm{x}^{(1)}, \dots, \bm{x}^{(n)} \}$ kernel matrix
+		$\bm{K} \in \mathbb{R}^{n \times n}$ is \textbf{positive semi-definite}. The kernel is then called \highlight{Mercer kernel}.
+	\end{boxBlue}
+
+	\begin{itemize}
+		\item This entails: $K_{ij} \ge 0\ \forall i, j$
+		\item \textbf{Example}:
+		\begin{itemize}
+			\item $\mathcal{K}(\bm{x}, \bm{x}) = -1 \ne \varphi(\bm{x})^{\intercal} \varphi(\bm{x})$
+			\item $\mathcal{K}$ cannot be a valid kernel
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+% Constructing new Kernels
+\begin{frame}{Constructing new Kernels}{}
+	\begin{itemize}
+		\item It is not always easy to check if Mercer's condition is satisfied, but it is possible to construct
+			\textbf{new kernels out of known ones}
+		\item If $\mathcal{K}_1(\bm{x}, \bm{x'})$ and $\mathcal{K}_2(\bm{x}, \bm{x'})$ are valid kernels, so are:
+	\end{itemize}
+	
+	\begin{boxBlueNoFrame}
+		\begin{itemize}
+			\setlength\itemsep{0em}
+			\item $c \cdot \mathcal{K}_1(\bm{x}, \bm{x'})$
+			\item $\mathcal{K}_1(\bm{x}, \bm{x'}) + \mathcal{K}_2(\bm{x}, \bm{x'})$
+			\item $\mathcal{K}_1(\bm{x}, \bm{x'}) \cdot \mathcal{K}_2(\bm{x}, \bm{x'})$
+			\item $f(\bm{x}) \cdot \mathcal{K}_1(\bm{x}, \bm{x'}) \cdot f(\bm{x'})$
+			\item etc.
+		\end{itemize}
+	\end{boxBlueNoFrame}
+\end{frame}
+
+
+% Section: Soft-Margin SVMs
+%______________________________________________________________________
+\section{Soft-Margin SVMs}
+\makedivider{Soft-Margin SVMs}
+
+% Subsection: Overlapping Data
+% --------------------------------------------------------------------------------------------------------
+\subsection{Overlapping Data}
+
+% Overlapping Distributions
+\begin{frame}{Overlapping Distributions}{}
+	\begin{itemize}
+		\item We assumed linearly separable data \\
+			\hspace*{5mm} $\Rightarrow$ \textbf{SVM gives exact solution}
+		\item \textbf{But:} The classes may overlap \\
+			\hspace*{5mm} $\Rightarrow$ \textbf{Exact separation leads to poor generalization}
+		\item \highlight{Soft-margin SVM:} Allow some data points to be misclassified
+		\item To this end, a penalty is introduced:
+		\begin{itemize}
+			\item Misclassifications are penalized
+			\item This penalty increases linearly with the distance from the decision boundary
+		\end{itemize}
+		\item This is done using \highlight{slack variables}
+	\end{itemize}
+\end{frame}
+
+
+% Overlapping Distributions: Example
+\begin{frame}{Overlapping Distributions: Example}{}
+	\vspace*{-2mm}
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.2]{11_svm/02_img/soft_margin}
+	\end{figure}
+\end{frame}
+
+
+% Subsection: Slack Variables
+% --------------------------------------------------------------------------------------------------------
+\subsection{Slack Variables}
+
+% Slack Variables
+\begin{frame}{Slack Variables}{}
+	\begin{itemize}
+		\item The slack is denoted by $\xi_i$ (where $\xi_i \ge 0; i = 1, \dots, n$), one per data point
+		\item \textbf{Different cases}:
+		
+		\footnotesize
+		\begin{tabbing}
+			\hspace*{2.5cm}\= \kill
+			$\xi_i = 0$ 		\> if $\bm{x}^{(i)}$ is on or inside the correct margin boundary 		\\
+			$0 < \xi_i < 1$ 		\> if $\bm{x}^{(i)}$ lies inside the margin, but on the correct side 	\\
+			$\xi_i = 1$ 		\> if $\bm{x}^{(i)}$ is on the decision boundary 					\\
+			$\xi_i > 1$ 		\> if $\bm{x}^{(i)}$ lies on the wrong side of the decision boundary (misclassification)
+		\end{tabbing}
+		\normalsize
+
+		\item The classification constraints are replaced with:
+		\begin{equation}
+			t^{(i)} y(\bm{x}^{(i)}) \ge 1 - \xi_i \qquad i = 1, \dots, n
+		\end{equation}
+		\item We get a \highlight{soft-margin classifier}
+	\end{itemize}
+\end{frame}
+
+
+% Slack Variables (Ctd.)
+\begin{frame}{Slack Variables (Ctd.)}{}
+	\input{11_svm/01_tikz/slack}
+\end{frame}
+
+
+% Soft SVM Parameter Optimization
+\begin{frame}{Soft SVM Parameter Optimization}{}
+	\begin{itemize}
+		\item We want to maximize the margin, while softly \textbf{penalizing points which lie on the wrong side of the boundary}:
+		\begin{equation}
+			\frac{1}{2} \Vert \bm{w} \Vert^2 + C \sum_{i=1}^n \xi_i
+			\quad \text{s.\,t.} \quad t^{(i)} y(\bm{x}^{(i)}) \ge 1 - \xi_i\ \text{and}\ \xi_i \ge 0\ \forall i
+		\end{equation}
+		\item $C > 0$ controls the \textit{`degree of softness'}, the larger $C$ the more we penalize
+		\item The Lagrangian function:
+		
+		\footnotesize
+		\vspace*{-2mm}
+		\begin{equation}
+			\mathcal{L}(\bm{w}, b, \bm{\alpha}, \bm{\mu})
+				= \frac{1}{2} \Vert \bm{w} \Vert^2 + C \sum_{i=1}^n \xi_i -
+					\sum_{i=1}^n \alpha_i \{ t^{(i)} y(\bm{x}^{(i)}) - 1 + \xi_i \} - \sum_{i=1}^n \mu_i \xi_i
+		\end{equation}
+	\end{itemize}
+\end{frame}
+
+
+% Soft SVM Parameter Optimization (Ctd.)
+\begin{frame}{Soft SVM Parameter Optimization (Ctd.)}{}
+	\begin{itemize}
+		\item It turns out that the dual objective function looks exactly the same:
+		\begin{equation}
+			\widetilde{\mathcal{L}}(\bm{\alpha}) =
+				\sum_{i=1}^n \alpha_i - \frac{1}{2} \sum_{i=1}^n \sum_{j=1}^n
+				\alpha_i \alpha_j t^{(i)} t^{(j)} \langle \bm{x}^{(i)}, \bm{x}^{(j)} \rangle
+		\end{equation}
+		\item But the constraints differ slightly:
+		\footnotesize
+		\begin{align}
+			&1) \quad \sum_{i=1}^n \alpha_i t^{(i)} = 0 \\[2mm]
+			&2) \quad \boxed{0 \le \alpha_i\ \textcolor{red}{\le C} \qquad i = 1, \dots, n} 
+		\end{align}
+		\normalsize
+		\item Constraint 2) is called \highlight{boxed constraint}
+	\end{itemize}
+\end{frame}
+
+
+% Section: Multi-Class Classification
+%______________________________________________________________________
+\section{Multi-Class Classification}
+\makedivider{Multi-Class Classification}
+
+% Subsection: Multiple Classes
+% --------------------------------------------------------------------------------------------------------
+\subsection{Multiple Classes}
+
+% Multi-Class Classification
+\begin{frame}{Multi-Class Classification}{}
+	\begin{itemize}
+		\item An SVM can handle two classes only, namely \textbf{-1} and \textbf{+1}
+		\item \textbf{What if there are more than two classes?}
+		\item Two common techniques:
+		\begin{itemize}
+			\item \highlight{One-vs-Rest (OVR)} 	$\Rightarrow$ One-against-All
+			\item \highlight{One-vs-One (OVO)} 	$\Rightarrow$ Pairwise classification
+		\end{itemize}
+		\item Several classifiers are trained
+		\item During prediction the classifiers \textbf{vote for the correct class}
+		\item Such techniques can be used for all binary classifiers (e.\,g. logistic regression)
+	\end{itemize}
+\end{frame}
+
+
+% Subsection: One-vs-Rest (OVR)
+% --------------------------------------------------------------------------------------------------------
+\subsection{One-vs-Rest (OVR)}
+
+% Multi-Class Classification: One-vs-Rest (OVR)
+\begin{frame}{Multi-Class Classification: One-vs-Rest (OVR)}{}
+	\divideTwo{0.49}{
+		\begin{itemize}
+			\item \textbf{Train one classifier per class} (expert for that class)
+			\item We get $\vert \mathcal{C} \vert$ classifiers
+			\item The $k$-th classifier learns to distinguish the $k$-th class from all the others
+			\item Set the labels of examples from class $k$ to \textbf{+1}, all the others to \textbf{-1}
+		\end{itemize}
+	}{0.49}{
+		\vspace*{2mm}
+		\input{11_svm/01_tikz/ovr}
+	}
+\end{frame}
+
+
+% Subsection: One-vs-One (OVO)
+% --------------------------------------------------------------------------------------------------------
+\subsection{One-vs-One (OVO)}
+
+% Multi-Class Classification: One-vs-One (OVO)
+\begin{frame}{Multi-Class Classification: One-vs-One (OVO)}{}
+	\divideTwo{0.49}{
+		\vspace*{2mm}
+		\input{11_svm/01_tikz/ovo}
+	}{0.49}{
+		\begin{itemize}
+			\item \textbf{Train one classifier for each pair of classes}
+			\item We get $\binom{\mathcal{C}}{2}$ classifiers
+			\item Ignore all other examples that do not belong to either of the two classes
+			\item \textbf{Voting}: Count how often each class wins; the class with highest count is predicted
+		\end{itemize}
+	}
+\end{frame}
+
+
+% Section: Wrap-Up
+%______________________________________________________________________
+\section{Wrap-Up}
+\makedivider{Wrap-Up}
+
+% Subsection: Summary
+% --------------------------------------------------------------------------------------------------------
+\subsection{Summary}
+
+% Summary
+\begin{frame}{Summary}{}
+
+\end{frame}
+
+
+% Subsection: Lecture Overview
+% --------------------------------------------------------------------------------------------------------
+\subsection{Lecture Overview}
+
+\makeoverview{3}
+
+
+% Subsection: Self-Test Questions
+% --------------------------------------------------------------------------------------------------------
+\subsection{Self-Test Questions}
+
+% Self-Test Questions
+\begin{frame}{Self-Test Questions}{}
+
+\end{frame}
+
+
+% Subsection: Recommended Literature and further Reading
+% --------------------------------------------------------------------------------------------------------
+\subsection{Recommended Literature and further Reading}
+
+% Literature
+%______________________________________________________________________
+\begin{frame}{Recommended Literature and further Reading}{}
+	\footnotesize
+	\begin{thebibliography}{2}
+
+	\end{thebibliography}
+\end{frame}
+
+
+% Thank you
+%______________________________________________________________________
+\makethanks
+
+\end{document}

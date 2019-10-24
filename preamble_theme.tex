@@ -238,6 +238,17 @@
 \end{textblock}
 }
 
+\newcommand{\floattext}[3]{
+\begin{textblock}{100}(#1, #2)
+      	#3
+\end{textblock}
+}
+
+\newcommand{\doublecircle}[2]{
+	\draw[fill=white,draw=myblue1] (#1,#2) circle (2mm);
+	\draw[fill=myblue1,draw=myblue1] (#1,#2) circle (1.5mm);
+}
+
 % slide modifiers
 % --------------------------------------------------------------------------------------------------------
 % mark slide as optional
@@ -370,4 +381,29 @@
 		\end{center}
 		\vfill
 	\end{frame}
+}
+
+% global pfgplots settings
+% --------------------------------------------------------------------------------------------------------
+\pgfplotsset{
+	% allow filtering of data for pgfplots
+	discard if/.style 2 args={
+        		x filter/.code={
+            		\edef\tempa{\thisrow{#1}}
+            		\edef\tempb{#2}
+            		\ifx\tempa\tempb
+                		\def\pgfmathresult{inf}
+            		\fi
+        		}
+    	},
+    	discard if not/.style 2 args={
+        		x filter/.code={
+            		\edef\tempa{\thisrow{#1}}
+            		\edef\tempb{#2}
+            		\ifx\tempa\tempb
+            		\else
+                		\def\pgfmathresult{inf}
+            		\fi
+        		}
+    	}
 }

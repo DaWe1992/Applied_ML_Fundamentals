@@ -1,0 +1,32 @@
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[
+		scale=0.8
+	]
+
+		\begin{axis}[
+			xlabel={$x_1$},
+			ylabel={$x_2$}
+		]
+		
+			\addplot[
+				only marks,mark=*,mark size=2.0,fill=red,discard if not={c}{0}
+			] table{11_svm/05_data/data_multi_class.txt};
+
+			\addplot[
+				only marks,mark=*,mark size=2.0,fill=blue,discard if not={c}{1}
+			] table{11_svm/05_data/data_multi_class.txt};
+
+			\addplot[
+				only marks,mark=*,mark size=2.0,fill=white,draw=gray,discard if not={c}{2}
+			] table{11_svm/05_data/data_multi_class.txt};
+
+			\draw[thick,dashed,red] (axis cs: -10,-10) -- (axis cs: 5,7.5);
+			\node[red] at (axis cs: -10,-6) {\textbf{+1}};
+			\node[blue] at (axis cs: -5,-7.5) {\textbf{-1}};
+			\node[gray] at (axis cs: -2.5,7.5) {ignored};
+			
+    		\end{axis}
+		
+	\end{tikzpicture}
+\end{figure}
