@@ -1,5 +1,13 @@
 # Applied Machine Learning Fundamentals (DHBW Lecture)
 
+'''
+We are drowning in information and starving for knowledge.’
+– John Naisbitt
+'''
+
+Machine learning has become an integral part of many modern applications.
+This lecture is supposed to give a general introduction into state-of-the-art machine learning algorithms and their applications.
+
 ## Contents
 
 1. [Introduction to ML](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_intro_ml.pdf)
