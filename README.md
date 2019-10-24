@@ -74,4 +74,4 @@ You do not need to buy any books for the lecture. Most resources are available o
 Help us improve the lecture. Feel free to file an issue if you spot any errors in the slides, exercises or code.
 Thank you very much. *Please do not open issues for questions concerning the content!*
 
-![](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/img/bug.png =50x50)
+![](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/img/bug.png)
