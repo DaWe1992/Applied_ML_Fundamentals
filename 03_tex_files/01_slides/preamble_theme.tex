@@ -307,13 +307,19 @@
 % title page
 \newcommand{\maketitlepage}{
 	{
+		\beamertemplatenavigationsymbolsempty
 		\usebackgroundtemplate{%
 			\tikz[overlay,remember picture] \node[opacity=0.2, at=(current page.center)] {
   				\includegraphics[height=\paperheight,width=\paperwidth]{../03_img/processor.jpg}
 			};
 		}
 		\begin{frame}[plain]
+			\vspace*{0.75cm}
 			\maketitle
+			\vfill
+			\begin{center}
+				\footnotesize Find all slides on \href{https://github.com/DaWe1992/Applied_ML_Fundamentals}{\linkstyle{GitHub}}
+			\end{center}
 		\end{frame}
 	}
 }
@@ -321,6 +327,7 @@
 % divider page
 \newcommand{\makedivider}[1]{
 	{
+		\beamertemplatenavigationsymbolsempty
 		\usebackgroundtemplate{%
 			\tikz[overlay,remember picture] \node[opacity=0.2, at=(current page.center)] {
   				\includegraphics[height=\paperheight,width=\paperwidth]{../03_img/processor.jpg}
@@ -335,7 +342,7 @@
 			\end{boxBlue}
 			\vfill
 			\centering
-			\includegraphics[scale=0.1]{../03_img/logo_sap.png}
+			\includegraphics[scale=0.05]{../03_img/logo_dhbw.png}
 			\vfill
 		\end{frame}
 	}
@@ -354,8 +361,8 @@
 
 % thank you page
 \newcommand{\makethanks}{
+	{\beamertemplatenavigationsymbolsempty
 	\begin{frame}[plain]
-	
 		\vfill
 		\begin{boxBlue}
 			\centering
@@ -380,7 +387,7 @@
 			\large\highlight{Do you have any questions?}
 		\end{center}
 		\vfill
-	\end{frame}
+	\end{frame}}
 }
 
 % global pfgplots settings

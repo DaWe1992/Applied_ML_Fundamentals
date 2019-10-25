@@ -34,6 +34,467 @@
 \end{frame}
 
 
+% Section: Introduction
+%______________________________________________________________________
+\section{Introduction}
+\makedivider{Introduction}
+
+% Subsection: Why Dimensionality Reduction?
+% --------------------------------------------------------------------------------------------------------
+\subsection{Why Dimensionality Reduction?}
+
+% Why Dimensionality Reduction?
+\begin{frame}{Why Dimensionality Reduction?}{}
+	\begin{itemize}
+		\item Most data is high-dimensional
+		\item Dimensionality reduction can be used for:
+		\begin{itemize}
+			\item \textbf{Lossy (!)} data compression
+			\item Feature extraction
+			\item Data visualization
+		\end{itemize}
+	\end{itemize}
+	
+	\begin{boxBlueNoFrame}
+		Dimensionality reduction can help to \textbf{speed up} learning algorithms substantially.
+		Too many (correlated) features usually \textbf{decrease the performance} of the learning algorithm
+		(cf. \highlight{curse of dimensionality}).
+	\end{boxBlueNoFrame}
+\end{frame}
+
+
+% Subsection: Data Compression
+% --------------------------------------------------------------------------------------------------------
+\subsection{Data Compression}
+
+% Use Case I: Data Compression / Feature Extraction
+\begin{frame}{Use Case I: Data Compression / Feature Extraction}{}
+	\divideTwo{0.44}{
+		\begin{itemize}
+			\item The features \textit{inches} and \textit{cm} are closely related
+			\item \textbf{Problems}:
+			\begin{itemize}
+				\item Redundancy
+				\item More memory needed
+				\item Algorithms become slow
+			\end{itemize}
+			\item \textbf{Solution}: Convert $x_1$ and $x_2$ into a new feature $z_1$ \\
+				($\mathbb{R}^2 \rightarrow \mathbb{R}$)
+		\end{itemize}
+	}{0.55}{
+		\input{13_pca/01_tikz/data_compression}
+	}
+\end{frame}
+
+
+% Subsection: Data Visualization
+% --------------------------------------------------------------------------------------------------------
+\subsection{Data Visualization}
+
+% Use Case II: Data Visualization
+\begin{frame}{Use Case II: Data Visualization}
+	\divideTwo{0.49}{
+		\begin{figure}
+			\centering
+			\includegraphics[scale=0.5]{13_pca/02_img/data_viz_3d}
+		\end{figure}
+	}{0.49}{
+		\begin{figure}
+			\centering
+			\includegraphics[scale=0.45]{13_pca/02_img/data_viz_2d}
+		\end{figure}
+	}
+\end{frame}
+
+
+% Subsection: What is PCA?
+% --------------------------------------------------------------------------------------------------------
+\subsection{What is PCA?}
+
+% PCA: Principal Component Analysis
+\begin{frame}{PCA: Principal Component Analysis}{}
+	\begin{itemize}
+		\item PCA is an \textbf{unsupervised} algorithm
+		\item It is known as the \textit{Karhunen-Lo\`{e}ve} transform
+		\item PCA can be defined as the \textbf{orthogonal projection} of the data onto a lower dimensional
+			\textbf{linear space} (\textit{principal subspace})
+		\item Consider a data set of $n$ observations $\bm{X} = \{ \bm{x}^{(1)}, \bm{x}^{(2)}, \dots, \bm{x}^{(n)} \}$
+		\begin{itemize}
+			\item $\bm{x}^{(i)}$ is a real-valued vector in $\mathbb{R}^m$ ($m$-dimensional)
+			\item We want to project the data onto a space having dimensionality $k \ll m$, while \textbf{maximizing
+				the variance of the projected data} ($\mathbb{R}^m \rightarrow \mathbb{R}^k$)
+		\end{itemize}
+		\item \highlight{Remove dimensions which are the least informative of the data}
+	\end{itemize}
+\end{frame}
+
+
+% Orthogonal Projections
+\begin{frame}{Orthogonal Projections}{}
+	\divideTwo{0.66}{
+		\input{13_pca/01_tikz/orthogonal_projections}
+	}{0.33}{
+		\begin{itemize}
+			\item $\bm{x}^{(i)}$ denote the original data points
+			\item $\bm{x}_{\perp}^{(i)}$ is the orthogonal projection of $\bm{x}^{(i)}$ onto vector $\bm{u}_1$ 
+		\end{itemize}
+	}
+\end{frame}
+
+
+% Section: Maximum Variance Formulation
+%______________________________________________________________________
+\section{Maximum Variance Formulation}
+\makedivider{Maximum Variance Formulation}
+
+% Subsection: Example
+% --------------------------------------------------------------------------------------------------------
+\subsection{Example}
+
+% Maximum Variance Formulation
+\begin{frame}{Maximum Variance Formulation}{}
+	\input{13_pca/01_tikz/maximum_variance_projection}
+\end{frame}
+
+
+% Subsection: Formalization of the Problem
+% --------------------------------------------------------------------------------------------------------
+\subsection{Formalization of the Problem}
+
+% Maximum Variance Formulation (Ctd.)
+\begin{frame}{Maximum Variance Formulation (Ctd.)}{}
+	\begin{itemize}
+		\item In the following we assume $k = 1$ {\footnotesize (projection onto a line defined by a unit vector $\bm{u}_1$)}
+		\item Each data point $\bm{x}^{(i)}$ is projected onto a scalar value $\bm{u}_1^{\intercal} \bm{x}^{(i)}$
+		\item The mean of the projected data is $\bm{u}_1^{\intercal} \overline{\bm{x}}$, where $\overline{\bm{x}}$
+			is the sample set mean:
+		\begin{equation}
+			\overline{\bm{x}} = \frac{1}{n} \sum_{i=1}^n \bm{x}^{(i)}
+		\end{equation}
+		\item The variance of the projected data is given by:
+		\begin{equation}
+			\frac{1}{n} \sum_{i=1}^n \left( \bm{u}_1^{\intercal} \bm{x}^{(i)} -
+				\bm{u}_1^{\intercal} \overline{\bm{x}} \right)^2 = \bm{u}_1^{\intercal} \bm{\Sigma} \bm{u}_1
+		\end{equation}
+	\end{itemize}
+\end{frame}
+
+
+% Maximum Variance Formulation (Ctd.)
+\begin{frame}{Maximum Variance Formulation (Ctd.)}{}
+	\begin{itemize}
+		\item $\bm{\Sigma}$ is the covariance matrix defined by:
+		\begin{equation}
+			\bm{\Sigma} = \frac{1}{n} \sum_{i = 1}^n \overbracket{
+				(\bm{x}^{(i)} - \overline{\bm{x}}) (\bm{x}^{(i)} - \overline{\bm{x}})^{\intercal}
+			}^{\text{\textbf{Outer product} $\rightarrow$ \textbf{matrix}}}
+		\end{equation}
+		\item The projected variance $\bm{u}_1^{\intercal}\bm{\Sigma}\bm{u}_1$ is maximized with respect to $\bm{u}_1$
+		\item Constraint: $\Vert \bm{u}_1 \Vert = 1$, otherwise $\bm{u}_1$ grows unboundedly
+		\item We have to solve the following optimization problem:
+		\begin{equation}
+			\max_{\bm{u}_1} \left\{
+				\bm{u}_1^{\intercal} \bm{\Sigma} \bm{u}_1 + \lambda_1 (1 - \bm{u}_1^{\intercal} \bm{u}_1)
+			\right\}
+		\end{equation}
+	\end{itemize}
+\end{frame}
+
+
+% Maximum Variance Formulation (Ctd.)
+\begin{frame}{Maximum Variance Formulation (Ctd.)}{}
+	\begin{itemize}
+		\item $\nabla_{\bm{u}_1} \{ \bm{u}_1^{\intercal} \bm{\Sigma} \bm{u}_1 +
+			\lambda_1 (1 - \bm{u}_1^{\intercal} \bm{u}_1) \} \overset{!}{=} 0
+			\qquad\Longrightarrow \bm{\Sigma} \bm{u}_1 = \lambda_1 \bm{u}_1$
+		\item This is an \textbf{eigenvalue problem}
+		\item The equation tells us that $\bm{u}_1$ must be an eigenvector of $\bm{\Sigma}$
+		\item If we left-multiply by $\bm{u}_1^{\intercal}$ and use $\bm{u}_1^{\intercal} \bm{u}_1 = 1$,
+			we see: $\bm{u}_1^{\intercal} \bm{\Sigma} \bm{u}_1 = \lambda_1$
+	\end{itemize}
+	
+	\begin{boxBlueNoFrame}
+		\highlight{The variance reaches a maximum if we set $\bm{u}_1$ equal to the eigenvector having the largest
+		eigenvalue $\lambda_1$. This eigenvector is the first principal component.}
+	\end{boxBlueNoFrame}
+\end{frame}
+
+
+% Maximum Variance Formulation (Ctd.)
+\begin{frame}{Maximum Variance Formulation (Ctd.)}{}
+	\begin{itemize}
+		\item Additional principal components can be defined in an \textbf{incremental fashion}
+		\item Choose each new component such that it \textbf{maximizes the remaining projected variance} 
+		\item All principal components are \textbf{orthogonal to each other}
+		\item Projection onto $k$ dimensions:
+		\begin{itemize}
+			\item The lower-dimensional space is defined by the $k$ eigenvectors $\bm{u}_1, \bm{u}_2, \dots, \bm{u}_k$ of the
+				covariance matrix $\bm{\Sigma}$
+			\item These correspond to the $k$ largest eigenvalues $\lambda_1, \lambda_2, \dots, \lambda_k$
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+% Section: PCA Algorithm
+%______________________________________________________________________
+\section{PCA Algorithm}
+\makedivider{PCA Algorithm}
+
+% Subsection: The Algorithm
+% --------------------------------------------------------------------------------------------------------
+\subsection{The Algorithm}
+
+% PCA Algorithm
+\begin{frame}[plain]{}{}
+	\begin{algorithm}[H]
+		\setstretch{1.6}
+		\DontPrintSemicolon
+		\footnotesize
+		\KwIn{Input data $\bm{X} = \{ \bm{x}^{(1)}, \bm{x}^{(2)}, \dots, \bm{x}^{(n)} \} \in \mathbb{R}^{n \times m}$, number of dimensions $k$}
+		\KwOut{Projected data $\bm{Z} \in \mathbb{R}^{n \times k}$}
+		$\overline{\bm{x}}
+			\longleftarrow \frac{1}{n} \sum_{i=1}^n \bm{x}^{(i)}$
+			\tcp*[h]{sample set mean}\;
+		$\bm{\Sigma}
+			\longleftarrow \frac{1}{n} \sum_{i = 1}^n (\bm{x}^{(i)} - \overline{\bm{x}}) (\bm{x}^{(i)}
+				- \overline{\bm{x}})^{\intercal}$
+				\tcp*[h]{covariance matrix}\;
+
+		Perform \textbf{s}ingular \textbf{v}alue \textbf{d}ecomposition to find the eigenvectors of matrix $\bm{\Sigma}$:
+		\begin{equation*}
+			[\bm{U}, \bm{S}, \bm{V}] = SVD(\bm{\Sigma})
+		\end{equation*}
+		\vspace*{-6mm}
+
+		Select first $k$ eigenvectors: $\bm{U}_k \longleftarrow \bm{U}_{(:,:k)}$
+			\tcp*[h]{eig.vecs with largest eig.vals.}\;
+		$\bm{Z} \longleftarrow \bm{U}_k^{\intercal} \bm{X}$ 
+		\caption{PCA Algorithm}
+	\end{algorithm}
+\end{frame}
+
+
+% Projection of the Data
+\begin{frame}{Projection of the Data}{}
+	\begin{itemize}
+		\item Matrix $\bm{U}$ is obtained by applying \textbf{singular value decomposition} to $\bm{\Sigma}$
+		\begin{equation}
+			\bm{U} =
+			\begin{bmatrix}
+				\vertbar 		& \vertbar 		& 		& \vertbar 			\\
+				\bm{u}_1 		& \bm{u}_2 	& \dots 	& \bm{u}_m		\\
+				\vertbar 		& \vertbar 		& 		& \vertbar
+			\end{bmatrix} \in \mathbb{R}^{m \times m}
+		\end{equation}
+		\item The projection $\mathbb{R}^m \rightarrow \mathbb{R}^k (k \ll m)$ is performed as follows:
+		\begin{equation}
+			\begin{bmatrix}
+				z_1^{(i)} 	\\
+				\vdots 	\\
+				z_k^{(i)}
+			\end{bmatrix} = 
+			\begin{bmatrix}
+				\vertbar 		& \vertbar 		& 		& \vertbar 			\\
+				\bm{u}_1 		& \bm{u}_2 	& \dots 	& \bm{u}_k		\\
+				\vertbar 		& \vertbar 		& 		& \vertbar
+			\end{bmatrix}^{\intercal}
+			\begin{bmatrix}
+				x_1^{(i)} 	\\
+				\vdots 	\\
+				x_m^{(i)}
+			\end{bmatrix}
+		\end{equation}
+	\end{itemize}
+\end{frame}
+
+
+% Subsection: Example
+% --------------------------------------------------------------------------------------------------------
+\subsection{Example}
+
+% PCA Result
+\begin{frame}{PCA Result}{}
+	\vspace*{-1mm}
+	\divideTwo{0.49}{
+		\begin{figure}
+			\centering
+			\includegraphics[scale=0.35]{13_pca/02_img/pca_example_data_3d}
+		\end{figure}
+	}{0.49}{
+		\begin{figure}
+			\centering
+			\includegraphics[scale=0.35]{13_pca/02_img/pca_example_eigenvectors}
+		\end{figure}
+	}
+\end{frame}
+
+
+% PCA Result (Ctd.)
+\begin{frame}{PCA Result (Ctd.)}{}
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.6]{13_pca/02_img/pca_example_data_2d}
+	\end{figure}
+\end{frame}
+
+
+% Subsection: Data Reconstruction
+% --------------------------------------------------------------------------------------------------------
+\subsection{Data Reconstruction}
+
+% Reconstruction from compressed Representation
+\begin{frame}{Reconstruction from compressed Representation}{}
+	It is possible to compute an approximate reconstruction of the data after having applied PCA ($\mathbb{R}^k \rightarrow \mathbb{R}^m$):
+	\begin{equation}
+		\bm{x}_{\approx}^{(i)} = \bm{U}_k \bm{z}^{(i)}
+	\end{equation}
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.35]{13_pca/02_img/reconstruction}
+	\end{figure}
+\end{frame}
+
+
+% Subsection: Choice of $k$
+% --------------------------------------------------------------------------------------------------------
+\subsection{Choice of $k$}
+
+% Choosing the Number of Components
+\begin{frame}{Choosing the Number of Components}{}
+	\begin{itemize}
+		\item The goal is to preserve as much variance as possible
+		\item Minimize the \textbf{average projection error} given by:
+		\begin{equation}
+			\frac{1}{n} \sum_{i=1}^n \Vert \bm{x}^{(i)} - \bm{x}_{\approx}^{(i)} \Vert^2
+		\end{equation}
+		\item \textbf{Total variation} in the data is computed as follows:
+		\begin{equation}
+			\frac{1}{n} \sum_{i=1}^n \Vert \bm{x}^{(i)} \Vert^2
+		\end{equation}
+	\end{itemize}
+\end{frame}
+
+
+% Choosing the Number of Components (Ctd.)
+\begin{frame}{Choosing the Number of Components (Ctd.)}{}
+	\begin{itemize}
+		\item Typically, $k$ is chosen to be the smallest value such that:
+		\begin{equation}
+			\frac{
+				\overbracket{
+					\nicefrac{1}{n} \sum_{i=1}^n \Vert \bm{x}^{(i)} - \bm{x}_{\approx}^{(i)} \Vert^2
+				}^{\text{average projection error}}
+			}{
+				\underbracket{
+					\nicefrac{1}{n} \sum_{i=1}^n \Vert \bm{x}^{(i)} \Vert^2
+				}_{\text{total variation}}
+			} \le \gamma
+		\end{equation}
+		\item This means that $(1 - \gamma) \cdot 100$\,\% of the variance is retained
+	\end{itemize}
+\end{frame}
+
+
+% You can be more efficient...
+\begin{frame}{You can be more efficient...}{}
+	\begin{itemize}
+		\item The above algorithm is computationally very expensive
+		\item The same result can be computed much more efficient, remember:
+		\begin{equation}
+			[\bm{U}, \bm{S}, \bm{V}] = SVD(\bm{\Sigma})
+		\end{equation}
+		\item We can use the ($m \times m$)-matrix $\bm{S}$ (eigenvalues on the main diagonal):
+		\footnotesize
+		\begin{equation}
+			\bm{S} =
+			\begin{bmatrix}
+				S_{11} 	& 0 		& \hdots 	& 0 			\\
+				0 		& S_{22} 	& \hdots 	& 0 			\\
+				\vdots 	& \vdots 	& \ddots 	& \vdots 		\\
+				0 		& 0 		& \hdots 	& S_{mm}
+			\end{bmatrix}
+		\end{equation}
+	\end{itemize}
+\end{frame}
+
+
+% You can be more efficient... (Ctd.)
+\begin{frame}{You can be more efficient... (Ctd.)}{}
+	\begin{itemize}
+		\item For a given $k$, the fraction of variance retained can be computed as follows:
+		\begin{equation}
+			1 - \frac{\sum_{i=1}^k S_{ii}}{\sum_{i=1}^m S_{ii}} \le 1 - \gamma
+		\end{equation}
+		\item The matrix has to be computed only once and can be reused for all $k$
+	\end{itemize}
+	\begin{boxBlueNoFrame}
+		\highlight{Simplification:}
+		\begin{equation*}
+			\frac{\sum_{i=1}^k S_{ii}}{\sum_{i=1}^m S_{ii}} \ge 1 - \gamma
+		\end{equation*}
+	\end{boxBlueNoFrame}
+\end{frame}
+
+
+% Section: PCA Applications
+%______________________________________________________________________
+\section{PCA Applications}
+\makedivider{PCA Applications}
+
+% Subsection: Eigenfaces
+% --------------------------------------------------------------------------------------------------------
+\subsection{Eigenfaces}
+
+% Application of PCA to Images: Eigenfaces
+\begin{frame}{Application of PCA to Images: Eigenfaces}{}
+	\divideTwo{0.49}{
+		\begin{figure}
+			\centering
+			\includegraphics[scale=0.44]{13_pca/02_img/faces}
+			\caption{100 images of faces}
+		\end{figure}
+	}{0.49}{
+		\begin{figure}
+			\centering
+			\includegraphics[scale=0.44]{13_pca/02_img/eigenfaces}
+			\caption{First 36 principal components}
+		\end{figure}
+	}
+\end{frame}
+
+
+% Application of PCA to Images: Eigenfaces (Ctd.)
+\begin{frame}{Application of PCA to Images: Eigenfaces (Ctd.)}{}
+	\divideTwo{0.49}{
+		\begin{figure}
+			\centering
+			\includegraphics[scale=0.44]{13_pca/02_img/faces}
+			\caption{Original images}
+		\end{figure}
+	}{0.49}{
+		\begin{figure}
+			\centering
+			\includegraphics[scale=0.83]{13_pca/02_img/recovered_faces}
+			\caption{Reconstructed images}
+		\end{figure}
+	}
+\end{frame}
+
+
+% Subsection: Face Morphing
+% --------------------------------------------------------------------------------------------------------
+\subsection{Face Morphing}
+
+% Application of PCA to Images: Face Morphing
+\begin{frame}{Application of PCA to Images: Face Morphing}{}
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.35]{13_pca/02_img/face_morphing}
+	\end{figure}
+\end{frame}
+
+
 % Section: Wrap-Up
 %______________________________________________________________________
 \section{Wrap-Up}
