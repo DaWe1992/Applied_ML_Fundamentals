@@ -49,7 +49,7 @@ This lecture is supposed to give a general introduction into state-of-the-art ma
     * Clustering
       * k-Means
       * Hierarchical clustering (divisive and agglomerative)
-    * Principal component analysis
+    * Principal component analysis ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/13_pca.pdf))
 7. **Reinforcement learning**
     * Markov decision processes
     * Dynamic programming: Policy iteration, value iteration
