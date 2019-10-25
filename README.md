@@ -34,7 +34,6 @@ This lecture is supposed to give a general introduction into state-of-the-art ma
       * k-nearest neighbors
       * Logistic regression
       * Decision trees and ensemble methods ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/08_decision_trees.pdf))
-	  	(random forests, boosting, bagging, stacking)
 	* Evaluation
       * Out-of-sample testing and cross validation
       * Precision, recall, F1, ROC, accuracy
