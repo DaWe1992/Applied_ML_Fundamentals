@@ -34,27 +34,27 @@ This lecture is supposed to give a general introduction into state-of-the-art ma
       * k-nearest neighbors
       * Logistic regression
       * Decision trees and ensemble methods ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/08_decision_trees.pdf))
+	* Evaluation of ML models ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/09_evaluation.pdf))
+  	  	* Out-of-sample testing and cross validation
+  	  	* Precision, recall, F1, ROC, accuracy
+  	  	* Confusion matrices
+  	  	* Model selection: Grid search, random search
 	* Classification II
       * Deep learning
         * Perceptrons
         * Multi-layer-perceptrons and back-propagation
         * Deep learning application: Natural language processing (word embeddings, text classification, sentiment analysis)
       * Support vector machines ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/11_svm.pdf))
-6. **Evaluation** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/09_evaluation.pdf))
-  	* Out-of-sample testing and cross validation
-  	* Precision, recall, F1, ROC, accuracy
-  	* Confusion matrices
-  	* Model selection: Grid search, random search
-7. **Unsupervised learning**
+6. **Unsupervised learning**
     * Clustering
       * k-Means
       * Hierarchical clustering (divisive and agglomerative)
     * Principal component analysis ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/13_pca.pdf))
-8. **Reinforcement learning**
+7. **Reinforcement learning**
     * Markov decision processes
     * Dynamic programming: Policy iteration, value iteration
     * Q-learning, Q-networks
-9. **Lecture summary**
+8. **Lecture summary**
 
 ## Assignments <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/assignments.png" width="25px" height="25px">
 The assignments have to be solved in groups comprising 3 to 4 students. We provide starter code and task descriptions in this repository (folder [exercises](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/02_exercises)). Solutions will be presented and discussed in the next class. Please submit your solutions via Moodle. We will correct your homework and give it back to you. Correct solutions are rewarded with a bonus for the exam or project. **The solutions have to be your own work. If you plagiarize, you will lose all bonus points!**
