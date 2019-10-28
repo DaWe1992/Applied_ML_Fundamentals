@@ -1,0 +1,32 @@
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[
+		scale=0.9
+	]
+
+		\begin{axis}[
+			grid=both,
+    			grid style={line width=.1pt, draw=gray!10},
+			xlabel={\footnotesize{\textbf{False Positive Rate}}},
+			ylabel={\footnotesize{\textbf{True Positive Rate}}},
+			y=4cm,
+    			x=8cm
+		]
+    		
+    			\pgfplotstableread{09_evaluation/05_data/data_roc_example_2.txt} \datatable
+
+			\fill[lightgray,opacity=0.35] (axis cs:0,0) rectangle (axis cs:1,1);
+			\addplot[name path=roc,no marks,myblue1,very thick] table[x=x,y=y] from \datatable;
+			\path[name path=axis] (axis cs:0,0) -- (axis cs:1,0);
+			\draw[dashed] (axis cs:0,0) --node[rotate=27,above]{\footnotesize{random performance}} (axis cs:1,1);
+
+			\addplot[myblue1,opacity=0.3] fill between[of=roc and axis,soft clip={domain=0:1}];
+
+			\node[myblue1,align=center] at (axis cs:0.7,0.25) {\textbf{AUC = 0.9726} \\
+				\footnotesize{\textbf{A}rea \textbf{U}nder \textbf{C}urve}};
+			\node[gray] at (axis cs:0.075,0.95) {\textbf{\tiny{1 - AUC}}};
+			
+    		\end{axis}
+		
+	\end{tikzpicture}
+\end{figure}

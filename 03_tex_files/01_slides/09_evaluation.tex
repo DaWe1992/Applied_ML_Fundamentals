@@ -34,6 +34,681 @@
 \end{frame}
 
 
+% Section: Evaluation Methods and Data Splits
+%______________________________________________________________________
+\section{Evaluation Methods and Data Splits}
+\makedivider{Evaluation Methods and Data Splits}
+
+% Subsection: Introduction
+% --------------------------------------------------------------------------------------------------------
+\subsection{Introduction}
+
+% Evaluation of trained Models
+\begin{frame}{Evaluation of trained Models}{}
+	\begin{enumerate}
+		\item \highlight{Validation through experts}: A domain expert checks plausibility
+		\begin{itemize}
+			\item Subjective, time-intensive, costly
+			\item Often the only option
+		\end{itemize}
+		\item \highlight{Validation on data}: Evaluate performance on a \textbf{separate (!)} test set
+		\begin{itemize}
+			\item Labeled data is scarce, could be better used for training
+			\item Fast and simple, no domain knowledge needed
+		\end{itemize}
+		\item \highlight{On-line validation}: Test model in a fielded application
+		\begin{itemize}
+			\item Bad models may be costly
+			\item Gives the best estimate for the overall utility
+		\end{itemize}
+	\end{enumerate}
+\end{frame}
+
+
+% Out-of-Sample Testing
+\begin{frame}{Out-of-Sample Testing}{}\important
+	\begin{itemize}
+		\item The performance cannot be measured on the training data ($\Rightarrow$ overfitting!)
+		\item Usually, a portion of the available data is reserved for testing
+		\begin{itemize}
+			\item $\nicefrac{2}{3}$ for training, $\nicefrac{1}{3}$ for testing (evaluation)
+			\item The model is trained on the training set and evaluated on the test set
+		\end{itemize}
+		\item \textbf{Problems}:
+		\begin{itemize}
+			\item Waste of data
+			\item Labeling may be expensive
+		\end{itemize}
+		\item \textbf{Solution}: \highlight{Cross-Validation (X-Val)}
+	\end{itemize}
+\end{frame}
+
+
+% Subsection: Cross-Validation / LOO-Validation
+% --------------------------------------------------------------------------------------------------------
+\subsection{Cross-Validation / LOO-Validation}
+
+% Cross-Validation (X-Val)
+\begin{frame}{Cross-Validation (X-Val)}{}\important
+	\begin{itemize}
+		\item Split the data set into $k$ equally sized partitions $P = \{ p_1, p_2, \dots, p_k \}$
+		\item \texttt{For each} partition $p_i$ \texttt{do}: use $p_i$ for testing and $P \backslash \{ p_i \}$ for training
+		\item Average the results; e.\,g. 4-fold X-Val:
+	\end{itemize}
+	
+	\vspace*{-5mm}
+	\input{09_evaluation/01_tikz/cross_validation}
+\end{frame}
+
+
+% Leave-One-Out Cross-Validation (LOO X-Val)
+\begin{frame}{Leave-One-Out Cross-Validation (LOO X-Val)}{}
+	\vspace*{2mm}
+	\divideTwo{0.49}{
+		\begin{itemize}
+			\item $n$-fold X-Val
+			\begin{itemize}
+				\item $n$ is the number of examples
+				\item Use $n - 1$ examples for training, one example for testing
+			\end{itemize}
+		\end{itemize}
+	}{0.49}{
+		\begin{itemize}
+			\item Properties
+			\begin{itemize}
+				\item Makes best use of the data
+				\item Very expensive for large data sets (large $n$)
+			\end{itemize}
+		\end{itemize}
+	}
+	
+	\vspace*{5mm}
+	\begin{boxBlueNoFrame}
+		\highlight{If $k$-fold X-Val is performed, we get $k$ trained models!}
+		
+	\end{boxBlueNoFrame}
+	
+	\begin{itemize}
+		\item \textbf{Which model is used in production?}
+		\item \textbf{Answer:} None. X-Val is only used for error estimation. The final model is trained on the entire data set
+	\end{itemize}
+\end{frame}
+
+
+% Subsection: Data Splits
+% --------------------------------------------------------------------------------------------------------
+\subsection{Data Splits}
+
+% Three Splits: Train, Dev/Validation, Test
+\begin{frame}{Three Splits: Train, Dev/Validation, Test}{}\important
+	\bubble{10.25}{5.5}{
+		\footnotesize \highlight{Stratified splits} have the same \\[-1mm]
+		\footnotesize class dist. as the entire data set
+	}
+	In practice it is common to split the data into three portions:
+	\vspace*{3mm}
+	\begin{boxBlueNoFrame}
+		\begin{enumerate}
+			\item \highlight{Training set} {\footnotesize (used for training as before)}
+			\item \highlight{Dev/Validation set}
+			\begin{itemize}
+				\item Used for hyper-parameter tuning of the model
+				\item Using the test set for that would be cheating
+			\end{itemize}
+			\item \highlight{Test set}
+			\begin{itemize}
+				\item The final model is tested on the test set
+				\item Test set is used to estimate the \textbf{generalization error}
+			\end{itemize}
+		\end{enumerate}
+	\end{boxBlueNoFrame}
+\end{frame}
+
+
+% Section: Evaluation Metrics
+%______________________________________________________________________
+\section{Evaluation Metrics}
+\makedivider{Evaluation Metrics}
+
+% Subsection: Confusion Matrices
+% --------------------------------------------------------------------------------------------------------
+\subsection{Confusion Matrices}
+
+% Types of Errors
+\begin{frame}{Types of Errors}{}
+	\bubble{12}{6}{\footnotesize a.\,k.\,a. $\alpha/\beta$ error}
+	\begin{itemize}
+		\item \highlight{Type I Error}: False negatives
+		\begin{itemize}
+			\item An instance which is labeled $\oplus$ is classified as $\ominus$
+			\item E.\,g. a spam e-mail is not detected
+		\end{itemize}
+		\item \highlight{Type II Error}: False positives
+		\begin{itemize}
+			\item An instance which is labeled $\ominus$ is classified as $\oplus$
+			\item E.\,g. a non-spam (ham) e-mail is classified as spam
+		\end{itemize}
+	\end{itemize}
+	
+	\begin{boxBlueNoFrame}
+		\highlight{Depending on the context the costs of false negatives and false positives can be different!}
+	\end{boxBlueNoFrame}
+\end{frame}
+
+
+% Confusion Matrices (two Classes)
+\begin{frame}{Confusion Matrices (two Classes)}{}\important
+	\vspace*{2mm}
+	\begin{itemize}
+		\item How often is class $\mathcal{C}_i$ confused with class $\mathcal{C}_j$?
+		\item Calculate \highlight{accuracy}:
+	\end{itemize}
+	\input{09_evaluation/03_tbl/confusion_matrix}
+	\vspace*{-5mm}
+	\begin{align*}
+		accuracy 	&= \frac{tp + tn}{tp + tn + fp + fn} \\[3mm]
+		error		&= 1 - accuracy
+	\end{align*}
+\end{frame}
+
+
+% Confusion Matrices (multiple Classes)
+\begin{frame}{Confusion Matrices (multiple Classes)}{}
+	\input{09_evaluation/03_tbl/confusion_matrix_multiple_classes}
+	
+	\vspace*{2mm}
+	\begin{equation*}
+		accuracy = \frac{n_{A,A} + n_{B,B} + n_{C,C} + n_{D,D}}{n}
+	\end{equation*}
+\end{frame}
+
+
+% Subsection: Drawback of Accuracy
+% --------------------------------------------------------------------------------------------------------
+\subsection{Drawback of Accuracy}
+
+% Drawback of Accuracy
+\begin{frame}{Drawback of Accuracy}{}
+	\begin{itemize}
+		\item Real-world data sets are usually \textbf{imbalanced}, i.\,e. some classes appear more frequently than others
+		\item \textbf{Example}:
+		\begin{itemize}
+			\item A data set $\mathcal{D}$ contains two classes $\mathcal{C}_1$ and $\mathcal{C}_2$
+			\item $\mathcal{C}_1$ appears 99\,\% of the time, $\mathcal{C}_2$ 1\,\% of the time
+			\item It is easy to reach 99\,\% accuracy by always predicting the majority class
+			\item \textbf{Is this useful?} \textit{Probably not...}
+		\end{itemize}
+	\end{itemize}
+	
+	\vspace*{-1mm}
+	\begin{boxBlueNoFrame}
+		\textbf{We need some more sophisticated evaluation metrics!}
+	\end{boxBlueNoFrame}
+\end{frame}
+
+
+% Subsection: Precision, Recall and F1-Score
+% --------------------------------------------------------------------------------------------------------
+\subsection{Precision, Recall and F1-Score}
+
+% Precision and Recall
+\begin{frame}{Precision and Recall}{}\important
+	\begin{boxBlueNoFrame}
+		\highlight{Precision}: Ratio of $tp$ to all instances predicted as $\oplus$
+		\begin{equation}
+			Precision\ (P) = \frac{tp}{tp + fp}
+		\end{equation}
+	\end{boxBlueNoFrame}
+
+	\begin{boxBlueNoFrame}
+		\highlight{Recall} (Sensitivity): Ratio of $tp$ to all instances actually labeled as $\oplus$
+		\begin{equation}
+			Recall\ (R) = \frac{tp}{tp + fn}
+		\end{equation}
+	\end{boxBlueNoFrame}
+\end{frame}
+
+
+% Precision-Recall-Trade-Off
+\begin{frame}{Precision-Recall-Trade-Off}{}
+	\vspace*{-4mm}
+	\begin{center}
+		\highlight{There is a trade-off between precision and recall:}
+	\end{center}
+	\vspace*{-3mm}
+	\begin{boxBlueNoFrame}
+		\textbf{It is very easy to get 100\,\% precision:}
+		\begin{itemize}
+			\item Simply classify one instance as $\oplus$ where you are absolutely sure
+			\item But recall is bad... {\footnotesize \textit{(many $\oplus$-instances are not detected)}}
+		\end{itemize}
+		\vspace*{2mm}
+		\hrule
+		\vspace*{2mm}
+		\textbf{It is also quite easy to achieve 100\,\% recall:}
+		\begin{itemize}
+			\item Classify all instances as $\oplus$
+			\item But precision is bad... {\footnotesize \textit{(many $\ominus$-instances are detected)}}
+		\end{itemize}
+	\end{boxBlueNoFrame}
+\end{frame}
+
+
+% Precision-Recall Curves / P-R-Curves
+\begin{frame}{Precision-Recall Curves / P-R-Curves}{}
+	\begin{itemize}
+		\item Visualization of the Precision-Recall-trade-off
+		\item Influence precision and recall by changing thresholds
+		\item \textbf{Example}:
+		\begin{itemize}
+			\item Consider a ranker, e.\,g. a logistic regression classifier
+			\item It outputs probabilities for each class
+			\item The threshold when to predict $\oplus$ can be changed
+			\item This has an influence on precision and recall
+		\end{itemize}
+	\end{itemize}
+	
+	\vspace*{-1mm}
+	\begin{boxBlueNoFrame}
+		\highlight{A P-R-curve plots precision and recall for all possible thresholds.}
+	\end{boxBlueNoFrame}
+\end{frame}
+
+
+% Precision-Recall Curves / P-R-Curves (Ctd.)
+\begin{frame}{Precision-Recall Curves / P-R-Curves (Ctd.)}{}
+	\input{09_evaluation/01_tikz/p_r_curve}
+\end{frame}
+
+
+% Combining Precision and Recall: F1-Score
+\begin{frame}{Combining Precision and Recall: F1-Score}{}\important
+	\bubble{10.5}{6.5}{\footnotesize Why the harmonic mean?}
+	\begin{itemize}
+		\item When to use precision, when recall?
+		\item This depends on the cost of $fp$ and $fn$
+		\begin{itemize}
+			\item If $fp$ are expensive $\Rightarrow$ \textbf{use precision!}
+			\item If $fn$ are expensive $\Rightarrow$ \textbf{use recall!}
+		\end{itemize}
+		\item \highlight{F1-score} \textit{(harmonic mean of precision and recall)}
+		\begin{equation}
+			F_1 = \frac{2 \cdot P \cdot R}{P + R} \qquad\quad
+			F_{\beta} = (1 + \beta^2) \cdot \frac{P \cdot R}{(\beta^2 \cdot P) + R} \quad (\beta \in \mathbb{R}^+)
+		\end{equation}
+		\item Large $\beta$ emphasizes recall
+	\end{itemize}
+\end{frame}
+
+
+% Calculation for multiple Classes (Example Precision)
+\begin{frame}{Calculation for multiple Classes (Example Precision)}{}
+	\begin{itemize}
+		\item Precision must be calculated for each class separately
+		\item For $\vert \mathcal{C} \vert$ classes we get $\vert \mathcal{C} \vert$ results. \textbf{How to combine?}
+		\begin{itemize}
+			\item \highlight{Macro average:} Calculate $P$ for each class and average the result
+			\begin{equation}
+				P_{macro} = \frac{P_A + P_B + P_C + P_D}{\vert \mathcal{C} \vert}
+			\end{equation}
+			\item \highlight{Micro average:} Sum all $tp$ and $fp$ for all classes and calculate $P$
+			\begin{equation}
+				P_{micro} = \frac{tp_A + tp_B + tp_C + tp_D}{(tp_A + tp_B + tp_C + tp_D) + (fp_A + fp_B + fp_C + fp_D)}
+			\end{equation}
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+% Calculation for multiple Classes (Example Precision)
+\begin{frame}{Calculation for multiple Classes (Example Precision)}{}
+	\bubble{2.5}{12}{
+		\footnotesize Cols: Prediction \\[-1mm]
+		\footnotesize Rows: Gold label
+	}
+	\divideTwo{0.39}{
+		\input{09_evaluation/03_tbl/confusion_matrix_multiple_classes_example}
+	}{0.59}{
+		\begin{align*}
+			P_A 			&= \frac{40}{40 + 48} = 0.45 							\\[0.5mm]
+			P_B 			&= 0.61											\\[0.5mm]
+			P_C 			&= 0.56											\\[0.5mm]
+			P_D 			&= 0.30											\\[0.5mm]
+			P_{macro} 	&= \frac{0.45 + 0.61 + 0.56 + 0.30}{4} = 0.48 				\\[0.5mm]
+			P_{micro}		&= \frac{40 + ... + 8}{(40 + ... + 8) + (48 + ... + 19)} = 0.51
+		\end{align*}
+	}
+\end{frame}
+
+
+% Subsection: ROC and AUC
+% --------------------------------------------------------------------------------------------------------
+\subsection{ROC and AUC}
+
+% ROC-Curves
+\begin{frame}{ROC-Curves}{}
+	\begin{itemize}
+		\item ROC = \highlight{R}eceiver \highlight{O}perating \highlight{C}haracteristic
+		\item Borrowed from signal theory {\footnotesize \textit{(hence the name)}}
+		\item Uses $true\ positive\ rate$ (recall) and $false\ positive\ rate = \frac{fp}{fp + tn}$
+	\end{itemize}
+	
+	\begin{boxBlueNoFrame}
+		\highlight{General procedure}:
+		\footnotesize
+		\begin{itemize}\setlength\itemsep{-0.25em}
+			\item Rank test instances by decreasing certainty of class $\bm{\oplus}$
+			\item Start at the origin $(0, 0)$
+			\item If the next instance in the ranking is $\oplus$: move $\nicefrac{1}{\vert \oplus \vert}$ up
+			\item If the next instance in the ranking is $\ominus$: move $\nicefrac{1}{\vert \ominus \vert}$ right
+		\end{itemize}
+	\end{boxBlueNoFrame}
+\end{frame}
+
+
+% Sample ROC-Curve I
+\begin{frame}{Sample ROC-Curve I}{}
+	\divideTwo{0.49}{
+		\vspace*{2mm}
+		\input{09_evaluation/03_tbl/roc_example_1}
+	}{0.49}{
+		\input{09_evaluation/01_tikz/roc_example_1}
+	}
+\end{frame}
+
+
+% Sample ROC-Curve II
+\begin{frame}{Sample ROC-Curve II}{}
+	\vspace*{5mm}
+	\input{09_evaluation/01_tikz/roc_example_2}
+\end{frame}
+
+
+% ROC-Curve Interpretation
+\begin{frame}{ROC-Curve Interpretation}{}
+	\vspace*{-2mm}
+	\begin{itemize}
+		\item AUC can be interpreted as the probability of a positive example always being listed before a negative example
+		\item A high AUC value entails a good class separation:
+
+		\footnotesize
+		\begin{tabbing}
+			\hspace*{2.5cm}\= \kill
+			\textbf{AUC = 1.0}: 		\>	All $\oplus$ listed before all $\ominus$ (desiderata)			\\
+			\textbf{AUC = 0.5}: 		\>	Random ordering									\\
+			\textbf{AUC = 0.0}: 		\>	All $\ominus$ listed before all $\oplus$
+										(not the worst case $\Rightarrow$ Invert classification)
+		\end{tabbing}
+	\end{itemize}
+
+	\begin{boxBlueNoFrame}
+		\footnotesize
+		\textbf{Analogy}: It is like a quiz. But you can answer those questions first where you feel the
+		most certain (ranking). If you answer the first questions wrong, you don't perform well $\Rightarrow$ \textbf{small AUC}.
+	\end{boxBlueNoFrame}
+\end{frame}
+
+
+% Section: Cost-sensitive Evaluation
+%______________________________________________________________________
+\section{Cost-sensitive Evaluation}
+\makedivider{Cost-sensitive Evaluation}
+
+% Subsection: Misclassification Costs
+% --------------------------------------------------------------------------------------------------------
+\subsection{Misclassification Costs}
+
+% Cost-Sensitive Evaluation
+\begin{frame}{Cost-Sensitive Evaluation}{}
+	\begin{itemize}
+		\item Predicting class $\mathcal{C}_i$ instead of the correct class $\mathcal{C}_j$ is associated
+			with a cost-factor $c(\mathcal{C}_i \vert \mathcal{C}_j)$
+		\item Usually, there are only costs for wrong predictions
+	\end{itemize}
+
+	\divideTwoTop{0.49}{
+		\begin{itemize}
+			\item 0/1-Loss:
+			\footnotesize
+			\begin{equation*}
+				c(\mathcal{C}_i \vert \mathcal{C}_j) =
+				\begin{cases}
+					0 \qquad \text{if}\ i = j \\
+					1 \qquad \text{if}\ i \ne j
+				\end{cases}
+			\end{equation*}
+		\end{itemize}
+	}{0.49}{
+		\begin{itemize}
+			\item General case (two class problems):
+		\end{itemize}
+		\input{09_evaluation/03_tbl/cost_matrix}
+	}
+\end{frame}
+
+
+% Cost-Sensitive Evaluation Examples
+\begin{frame}{Cost-Sensitive Evaluation Examples}{}
+	\begin{itemize}
+		\item \textbf{Loan applications}
+		\begin{tabbing}
+			\hspace*{9cm}\= \kill
+			Rejecting applicants who will not pay back 	\> $\rightarrow$ \textbf{no costs}	\\
+			Accepting applicants who will pay back		\> $\rightarrow$ \textbf{gain}		\\
+			Accepting applicants who will not pay back	\> $\rightarrow$ \textbf{big loss}	\\
+			Rejecting applicants who would pay back		\> $\rightarrow$ \textbf{loss}
+		\end{tabbing}
+		\item \textbf{Spam-mail filtering}
+		\item \textbf{Medical diagnosis}
+		\item ...
+	\end{itemize}
+\end{frame}
+
+
+% Subsection: Expected Costs and Cost Ratio
+% --------------------------------------------------------------------------------------------------------
+\subsection{Expected Costs and Cost Ratio}
+
+% Expected Costs / Loss and Cost Ratio
+\begin{frame}{Expected Costs / Loss and Cost Ratio}{}
+	\begin{itemize}
+		\item Expected loss $\mathcal{L}$:
+		\begin{equation}
+			\mathcal{L} = tpr \cdot c(\oplus \vert \oplus) + fpr \cdot c(\oplus \vert \ominus) +
+							fnr \cdot c(\ominus \vert \oplus) + tnr \cdot c(\ominus \vert \ominus)
+		\end{equation}
+		\item If there are no costs for a correct classification:
+		\begin{equation}
+			\mathcal{L} = fpr \cdot c(\oplus \vert \ominus) + fnr \cdot c(\ominus \vert \oplus)
+		\end{equation}
+		\item \highlight{Cost ratio} {\footnotesize \textit{(false positives are $r$ times as expensive as false negatives)}}
+		\begin{equation}
+			r = \frac{c(\oplus \vert \ominus)}{c(\ominus \vert \oplus)} = \frac{c_{fp}}{c_{fn}}
+		\end{equation}
+	\end{itemize}
+\end{frame}
+
+
+% Subsection: Selection of optimal Classifiers
+% --------------------------------------------------------------------------------------------------------
+\subsection{Selection of optimal Classifiers}
+
+% Classifiers in ROC-Space -- Example
+\begin{frame}{Classifiers in ROC-Space -- Example}{}
+	\input{09_evaluation/01_tikz/classifiers_in_roc_0}
+\end{frame}
+
+
+% Classifiers in ROC-Space -- Example (Ctd.)
+\begin{frame}{Classifiers in ROC-Space -- Example (Ctd.)}{}
+	\vspace*{-2mm}
+	\begin{minipage}{0.24\textwidth}
+		\input{09_evaluation/01_tikz/classifiers_in_roc_1}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.24\textwidth}
+		\input{09_evaluation/01_tikz/classifiers_in_roc_2}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.24\textwidth}
+		\input{09_evaluation/01_tikz/classifiers_in_roc_3}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.24\textwidth}
+		\input{09_evaluation/01_tikz/classifiers_in_roc_4}
+	\end{minipage}
+\end{frame}
+
+
+% Classifiers in ROC-Space -- Example (Ctd.)
+\begin{frame}{Classifiers in ROC-Space -- Example (Ctd.)}{}
+	\divideTwo{0.49}{
+		\begin{boxBlueNoFrame}
+			Classifiers on the convex hull minimize costs for some cost ratio.
+			\highlight{Classifiers below the convex hull are always suboptimal.}
+		\end{boxBlueNoFrame}
+	}{0.49}{
+		\input{09_evaluation/01_tikz/classifiers_in_roc_convex_hull}
+	}
+\end{frame}
+
+
+% Classifiers in ROC-Space (Ctd.)
+\begin{frame}{Classifiers in ROC-Space (Ctd.)}{}
+	\begin{itemize}
+		\item It is possible to reach any point on the convex hull
+		\item \textbf{Interpolation of two adjacent classifiers in ROC-space:}
+		\begin{itemize}
+			\item \texttt{Classifier 1}: $tpr_1$ and $fpr_1$
+			\item \texttt{Classifier 2}: $tpr_2$ and $fpr_2$
+			\item If \texttt{classifier 1} is used to predict $q \cdot 100\,\%$ and \texttt{classifier 2} for the rest:
+			\begin{align*}
+				tpr_{inter} &= q \cdot tpr_1 + (1 - q) \cdot tpr_2 \\[3mm]
+				fpr_{inter} &= q \cdot fpr_1 + (1 - q) \cdot fpr_2 \\
+			\end{align*}
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+% Subsection: Calibration of Thresholds
+% --------------------------------------------------------------------------------------------------------
+\subsection{Calibration of Thresholds}
+
+% Calibrating Thresholds
+\begin{frame}{Calibrating Thresholds}{}
+	\divideTwo{0.49}{
+		\vspace*{2mm}
+		\input{09_evaluation/03_tbl/roc_calibrate_thresholds}
+	}{0.49}{
+		\vspace*{-2mm}
+		\input{09_evaluation/01_tikz/roc_calibrate_thresholds}
+	}
+\end{frame}
+
+
+% Section: Miscellaneous
+%______________________________________________________________________
+\section{Miscellaneous}
+\makedivider{Miscellaneous}
+
+% Subsection: Evaluation of Regressors
+% --------------------------------------------------------------------------------------------------------
+\subsection{Evaluation of Regressors}
+
+% Evaluation of Regressors
+\begin{frame}{Evaluation of Regressors}{}
+	\begin{itemize}
+		\item \highlight{Coefficient of determination $R^2$:}
+		\scriptsize
+		\begin{equation}
+			R^2 	= \frac{\sum_{i=1}^n (\widehat{y}_i - \overline{y})^2}{\sum_{i=1}^n (y_i - \overline{y})^2}
+					= \frac{\text{Variance explained by model}}{\text{Total variance}} \qquad R^2 \in [0,1]
+		\end{equation}
+		\normalsize
+		\item \highlight{Root mean square error (RMSE):}
+		\scriptsize
+		\begin{equation}
+			RMSE = \left( \frac{1}{n} \cdot \sum_{i=1}^n \left( \widehat{y}_i - y_i \right)^2 \right)^{\nicefrac{1}{2}}
+		\end{equation}
+		\normalsize
+		\item \highlight{Mean absolute error (MAE):}
+		\scriptsize
+		\begin{equation}
+			MAE = \frac{1}{n} \cdot \sum_{i=1}^n \vert \widehat{y}_i - y_i \vert
+		\end{equation}
+	\end{itemize}
+\end{frame}
+
+
+% Evaluation of Regressors (Ctd.)
+\begin{frame}{Evaluation of Regressors (Ctd.)}{}
+	\divideTwo{0.49}{
+		\vspace*{2mm}
+		\input{09_evaluation/03_tbl/regression_example}
+	}{0.49}{
+		\vspace*{-2mm}
+		\input{09_evaluation/01_tikz/regression_example}
+	}
+\end{frame}
+
+
+% Evaluation of Regressors (Ctd.)
+\begin{frame}{Evaluation of Regressors (Ctd.)}{}
+	\begin{itemize}
+		\item Coefficient of determination:
+		\scriptsize
+		\begin{equation}
+			R^2		= \frac{(1.28 - 2.59)^2 + \dots + (3.55 - 2.59)^2}{(1.10 - 2.59)^2 + \dots + (3.63 - 2.59)^2}
+					= \frac{7.97}{8.89} = \bm{0.90}
+		\end{equation}
+		\normalsize
+		\item Root mean square error:
+		\scriptsize
+		\begin{equation}
+			RMSE = \left( \frac{1}{10} \cdot
+				[(1.28 - 1.10)^2 + \dots + (3.55 - 3.63)^2] \right)^{\nicefrac{1}{2}} = \boldsymbol{0.19}
+		\end{equation}
+		\normalsize
+		\item Mean absolute error:
+		\scriptsize
+		\begin{equation}
+			MAE = \frac{1}{10} \cdot \left( \vert 1.28 - 1.10 \vert + \dots + \vert 3.55 - 3.63 \vert \right) = \bm{0.15}
+		\end{equation}
+	\end{itemize}
+\end{frame}
+
+
+% Subsection: Grid Search and Random Search
+% --------------------------------------------------------------------------------------------------------
+\subsection{Grid Search and Random Search}
+
+% Grid Search
+\begin{frame}{Grid Search}{}
+	\begin{itemize}
+		\item \highlight{Grid search} is applied to find \textbf{optimal parameter settings}
+		\item For the optimization the \textbf{dev} data set is used
+		\item We have to specify the search space / ranges of parameter values
+		\item Grid search will try \textbf{all parameter combinations} to find the best model
+		\begin{itemize}
+			\item Computationally very expensive
+			\item Scikit-learn provides parameters to parallelize the search \\
+				(\texttt{n\_jobs=-1} $\Rightarrow$ use all cores available)
+			\item May not find the optimal setting $\Rightarrow$ \highlight{random search}
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+% Grid Search vs. random Search
+\begin{frame}{Grid Search vs. random Search}{}
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.25]{09_evaluation/02_img/grid_random_search}
+	\end{figure}
+\end{frame}
+
+
 % Section: Wrap-Up
 %______________________________________________________________________
 \section{Wrap-Up}

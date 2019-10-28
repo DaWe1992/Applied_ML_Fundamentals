@@ -1,0 +1,23 @@
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[
+		scale=0.85
+	]
+
+		\draw[step=0.5,lightgray,dashed] (0,0) grid (5,5);
+
+		% axes
+		\draw[->,thick] (0,0) -- (5.1,0) node[below]{$x$};
+		\draw[->,thick] (0,0) -- (0,5.1) node[left]{$y$};
+
+		\foreach \x in {1,2,3,4}{\node at (\x,-0.25) {\footnotesize \x};}
+		\foreach \y in {1,2,3,4}{\node at (-0.25,\y) {\footnotesize \y};}
+
+		\draw[myblue1,thick] (0,1) -- node[above,rotate=30,myblue1] {\footnotesize$\bm{\frac{3}{5} \cdot x + 1}$} (5,4);
+
+		\foreach \x/\y in {4.25/3.63,3.07/2.55,3.67/3.63,0.47/1.1,3.72/3.25,4.16/3.49,4.01/3.3,0.58/1.5,1/1.67,1.5/1.75}{
+			\draw[thick,fill=lightgray] (\x,\y) circle (3pt);
+		}
+		
+	\end{tikzpicture}
+\end{figure}
