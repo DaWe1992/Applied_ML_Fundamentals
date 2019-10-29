@@ -32,7 +32,8 @@ class DataCreator:
         """
         Creates the classification data set.
         
-        :return:            X, y (data features and labels)
+        :param sklearn:         flag indicating if sklearn should be used
+        :return:                X, y (data features and labels)
         """
         X = np.asarray(
             [[3.00, 1.00],

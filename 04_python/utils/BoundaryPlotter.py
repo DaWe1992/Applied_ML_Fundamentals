@@ -25,11 +25,11 @@ class BoundaryPlotter:
     Class BoundaryPlotter.
     Plots the decision boundary.
     """
-    
+
     def __init__(self, X, y):
         """
         Constructor.
-        
+
         :param X:               data features
         :param y:               data labels
         """
@@ -44,32 +44,32 @@ class BoundaryPlotter:
     def __prepare_plot(self, ax):
         """
         Prepares the plot.
-        
+
         :param ax:              pyplot axis object
         """
         ax.set_xlim((self.x_min, self.x_max))
         ax.set_ylim((self.y_min, self.y_max))
-        
+
         # axis labels
         ax.set_xlabel(r"$x_1$")
         ax.set_ylabel(r"$x_2$")
         # draw major grid
         ax.grid(b=True, which="major", color="gray", linestyle="--", zorder=5)
-    
-    
-    def plot_boundary(self, clf):
+
+
+    def plot_boundary(self, clf, step_size=0.0025):
         """
         Plots the decision boundary.
-        
+
         :param clf:             classifier model
         """
         fig, ax = plt.subplots(figsize=(12.00, 7.00))
         self.__prepare_plot(ax)
-        
+
         # create a mesh-grid
         xx, yy = np.meshgrid( \
-            np.arange(self.x_min, self.x_max, 0.0025), \
-            np.arange(self.y_min, self.y_max, 0.0025) \
+            np.arange(self.x_min, self.x_max, step_size),
+            np.arange(self.y_min, self.y_max, step_size)
         )
         # classify each point in the mesh-grid
         Z = clf.predict(np.c_[xx.ravel(), yy.ravel()])
@@ -81,10 +81,9 @@ class BoundaryPlotter:
             alpha=0.40, zorder=0
         )
         ax.contour(xx, yy, Z, levels=[0], cmap="Greys_r", linewidths=2.5)
-        
+
         # draw data scatter plot
         ax.scatter(self.X[:, 0], self.X[:, 1], c=self.y,
            cmap=plt.cm.rainbow, edgecolors="k", zorder=10)
-        
+
         plt.show()
-        

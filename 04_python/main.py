@@ -17,6 +17,7 @@ from utils.BoundaryPlotter import BoundaryPlotter
 
 # classifiers
 # -----------------------------------------------------------------------------
+from clf.kNN import kNN
 from clf.LogisticRegression import LogisticRegression
 
 # evaluation
@@ -35,12 +36,16 @@ if __name__ == "__main__":
     # create data
     X, y = DataCreator().make_classification(sklearn=False)
     
+    # train kNN classifier
+    clf = kNN(n_neighbors=3)
+    clf.fit(X, y)
+    
     # train logistic regression classifier
-    clf = LogisticRegression(X, y)
-    clf.fit(batch_size=X.shape[0])
+#    clf = LogisticRegression()
+#    clf.fit(X, y, batch_size=X.shape[0])
     
     # plot boundary
-    BoundaryPlotter(X, y).plot_boundary(clf)
+    BoundaryPlotter(X, y).plot_boundary(clf, step_size=0.01)
     
     # evaluation
     evaluator = Evaluator()

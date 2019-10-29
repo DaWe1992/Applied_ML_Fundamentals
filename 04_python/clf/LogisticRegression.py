@@ -29,12 +29,21 @@ class LogisticRegression:
     Implementation of a logistic regression classifier.
     """
     
-    def __init__(self, X, y):
+    def fit(self,
+        X, y,
+        alpha=0.001,
+        n_max_iter=10000,
+        batch_size=1,
+        epsilon=1e-15):
         """
-        Constructor.
+        Fits a logistic regression model to the data.
         
         :param X:               data features (training data)
         :param y:               data labels (training data)
+        :param alpha:           learning rate
+        :param n_max_iter:      maximum number of iterations for gradient descent
+        :param batch_size:      size of the batch used in each training iteration
+        :param epsilon:         threshold used for early stopping
         """
         # determine number of training examples
         self.n = X.shape[0]
@@ -48,27 +57,9 @@ class LogisticRegression:
         )
         self.y = y
         
-        # initialize parameters
-        self.theta = [0.00] * (self.m + 1)
-        
-    
-    def fit(self,
-        alpha=0.001,
-        n_max_iter=10000,
-        batch_size=1,
-        epsilon=1e-15):
-        """
-        Fits a logistic regression model to the data.
-        
-        :param alpha:           learning rate
-        :param n_max_iter:      maximum number of iterations for gradient descent
-        :param batch_size:      size of the batch used in each training iteration
-        :param epsilon:         threshold used for early stopping
-        """
         print("Fitting logistic regression...")
-
         # fit the model parameters
-        self.__grad_desc(alpha, n_max_iter, batch_size, epsilon)
+        self.theta = self.__grad_desc(alpha, n_max_iter, batch_size, epsilon)
         print(self.theta)
     
     
@@ -99,9 +90,12 @@ class LogisticRegression:
         :param n_max_iter:      maximum number of iterations for gradient descent
         :param batch_size:      size of the batch used in each training iteration
         :param epsilon:         threshold used for early stopping
+        :return:                theta
         """
         print("Starting gradient descent...")
         
+        # initialize parameters
+        theta = [0.00] * (self.m + 1)
         cost = np.inf; current_cost = np.inf
         
         # initialize a table which is going to contain the gradient descent steps
@@ -112,9 +106,9 @@ class LogisticRegression:
             X_b, y_b = self.__next_batch(n=batch_size)
             cost = current_cost
             # gradient descent step
-            self.theta -= alpha * (self.__sigmoid(X_b @ self.theta) - y_b) @ X_b
+            theta -= alpha * (self.__sigmoid(X_b @ theta) - y_b) @ X_b
             # calculate cost for new theta
-            current_cost = self.__cost(self.theta)
+            current_cost = self.__cost(theta)
             # early stopping
             if np.abs(current_cost - cost) < epsilon:
                 print("Early stopping... difference fell below", epsilon)
@@ -125,14 +119,16 @@ class LogisticRegression:
                 #self.plot(theta, boundary=True)
                 t.add_row([
                     i,
-                    "{0:.10f}".format(self.theta[0]),
-                    "{0:.10f}".format(self.theta[1]),
-                    "{0:.10f}".format(self.theta[2]),
+                    "{0:.10f}".format(theta[0]),
+                    "{0:.10f}".format(theta[1]),
+                    "{0:.10f}".format(theta[2]),
                     "{0:.10f}".format(current_cost)
                 ])
         
         print("Done.")
         print(t)
+        
+        return theta
     
     
     def __next_batch(self, n=1):
