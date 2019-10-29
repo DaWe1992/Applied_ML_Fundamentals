@@ -32,19 +32,20 @@ This lecture is supposed to give a general introduction into state-of-the-art ma
       * Basis functions: Radial basis functions, polynomial basis functions
     * Classification I
       * k-nearest neighbors
-      * Logistic regression
+      * Logistic regression ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/07_logistic_regression.pdf))
       * Decision trees and ensemble methods ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/08_decision_trees.pdf))
-	* Evaluation of ML models ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/09_evaluation.pdf))
-  	  	* Out-of-sample testing and cross validation
-  	  	* Precision, recall, F1, ROC, accuracy
-  	  	* Confusion matrices
-  	  	* Model selection: Grid search, random search
 	* Classification II
       * Deep learning
         * Perceptrons
         * Multi-layer-perceptrons and back-propagation
         * Deep learning application: Natural language processing (word embeddings, text classification, sentiment analysis)
       * Support vector machines ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/11_svm.pdf))
+6. **Evaluation of ML models** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/09_evaluation.pdf))
+	* Out-of-sample testing and cross validation
+	* Confusion matrices
+	* Evaluation metrics: Precision, recall, F1 score, ROC, accuracy
+	* Cost-sensitive evaluation
+	* Model selection: Grid search, random search
 6. **Unsupervised learning**
     * Clustering
       * k-Means

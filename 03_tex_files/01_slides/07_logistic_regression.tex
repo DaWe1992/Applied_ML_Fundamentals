@@ -1,0 +1,562 @@
+\input{preamble_theme}
+
+% ====================================================
+% ====================================================
+% PRESENTATION DATA
+% ====================================================
+% ====================================================
+
+\title[Principal Component Analysis]{*** Applied Machine Learning Fundamentals *** Logistic Regression}
+\institute{SAP\,SE}
+\author{Daniel Wehner}
+\date{\today}
+\prefix{LR}
+
+% ====================================================
+% ====================================================
+% BEGIN OF DOCUMENT
+% ====================================================
+% ====================================================
+
+\begin{document}
+
+% Title frame
+%______________________________________________________________________
+\maketitlepage
+
+
+% Agenda
+%______________________________________________________________________
+\begin{frame}{Agenda \today}
+	\begin{multicols}{2}
+		\tableofcontents
+	\end{multicols}
+\end{frame}
+
+
+% Section: Introduction
+%______________________________________________________________________
+\section{Introduction}
+\makedivider{Introduction}
+
+% Subsection: What is logistic Regression?
+% --------------------------------------------------------------------------------------------------------
+\subsection{What is logistic Regression?}
+
+% What is logistic Regression?
+\begin{frame}{What is logistic Regression?}{}
+	\begin{itemize}
+		\item Learning algorithm for \textbf{classification} {\footnotesize \textit{(despite the name...)}}
+		\item In its standard form it's applicable to \textbf{binary classification problems only}, but you can use techniques like:
+		\begin{itemize}
+			\item \highlight{One-vs-One (OVO)}
+			\item \highlight{One-vs-Rest (OVR)}
+		\end{itemize}
+		\item \textbf{Class labels:}
+		\begin{itemize}
+			\item The `positive class' is usually encoded as \textbf{1} / $\oplus$
+			\item The `negative class' as \textbf{0} / $\ominus$
+		\end{itemize}
+		\item \textbf{Probabilistic interpretation:} The output of the algorithm is between 0 and 1
+			{\footnotesize \textit{(probability of the instance belonging to the positive class)}}
+	\end{itemize}
+\end{frame}
+
+
+% Subsection: Why you should not use linear Regression
+% --------------------------------------------------------------------------------------------------------
+\subsection{Why you should not use linear Regression}
+
+% Why you should not use linear Regression...
+\begin{frame}{Why you should not use linear Regression...}{}\important
+	\input{07_logistic_regression/01_tikz/logreg_motivation}
+\end{frame}
+
+
+% Why you should not use linear Regression... (Ctd.)
+\begin{frame}{Why you should not use linear Regression... (Ctd.)}{}
+	\begin{itemize}
+		\item Linear regression: $h_{\bm{\theta}}(x) = \bm{\theta}^{\intercal} \bm{x}$
+		\item By putting a \textbf{threshold} at 0.5, we can turn linear regression into a classifier
+		\begin{itemize}
+			\item If $h_{\bm{\theta}}(x) \ge 0.5$, predict $y = 1$
+			\item If $h_{\bm{\theta}}(x) < 0.5$, predict $y = 0$
+		\end{itemize}
+		\item Outliers \textbf{affect the decision boundary}
+		\item Furthermore, we only want $0 \le h_{\bm{\theta}}(x) \le 1$
+		\item Linear regression can output $h_{\bm{\theta}}(x) \ll 0$ or $h_{\bm{\theta}}(x) \gg 1$
+		\item \highlight{We need a better strategy!}
+	\end{itemize}
+\end{frame}
+
+
+% Section: Model Architecture
+%______________________________________________________________________
+\section{Model Architecture}
+\makedivider{Model Architecture}
+
+% Subsection: Sigmoid Function
+% --------------------------------------------------------------------------------------------------------
+\subsection{Sigmoid Function}
+
+% Logistic Regression Model
+\begin{frame}{Logistic Regression Model}{}\important
+	\begin{itemize}
+		\item Remember that we want: $0 \le h_{\bm{\theta}}(x) \le 1$
+		\item \textbf{Solution:} \highlight{Logistic/Sigmoid function:}
+		\begin{equation}
+			g(z) = \frac{1}{1 + e^{-z}}
+		\end{equation}
+		\item We plug $\bm{\theta}^{\intercal} \bm{x}$ into the sigmoid function:
+		\begin{equation}
+			h_{\bm{\theta}}(x) = g(\bm{\theta}^{\intercal} \bm{x}) = \frac{1}{1 + e^{-(\bm{\theta}^{\intercal} \bm{x})}}
+		\end{equation}
+	\end{itemize}
+\end{frame}
+
+
+% Logistic/Sigmoid Function
+\begin{frame}{Logistic/Sigmoid Function}{}
+	\divideTwo{0.49}{
+		\vspace*{2mm}
+		\input{07_logistic_regression/01_tikz/sigmoid_function}
+	}{0.49}{
+		\begin{itemize}
+			\item $g(z)$ is symmetric around $z = 0$
+			\item $0 \le g(z) \le 1$ holds true
+		\end{itemize}
+	}
+\end{frame}
+
+
+% Where does the Sigmoid come from?
+\begin{frame}{Where does the Sigmoid come from?}{}\optional
+	{\footnotesize
+	\begin{alignat}{2}
+		p(\mathcal{C}_1 \vert \bm{x})
+			&=	\frac{p(\bm{x} \vert \mathcal{C}_1) p(\mathcal{C}_1)}{p(\bm{x})}
+				= \frac{p(\bm{x} \vert \mathcal{C}_1) p(\mathcal{C}_1)}{\sum_j p(\bm{x}, \mathcal{C}_j)}
+				= \frac{p(\bm{x} \vert \mathcal{C}_1) p(\mathcal{C}_1)}{\sum_j p(\bm{x} \vert \mathcal{C}_j) p(\mathcal{C}_j)}
+			\\[1mm]
+			&= \frac{p(\bm{x} \vert \mathcal{C}_1) p(\mathcal{C}_1)}{
+				p(\bm{x} \vert \mathcal{C}_1) p(\mathcal{C}_1) + p(\bm{x} \vert \mathcal{C}_2) p(\mathcal{C}_2)}
+			\\[1mm]
+			&= \frac{1}{1 + p(\bm{x} \vert \mathcal{C}_2) p(\mathcal{C}_2) / (p(\bm{x} \vert \mathcal{C}_1) p(\mathcal{C}_1))}
+			\\[1mm]
+			&= \frac{1}{1 + \exp\{ -z \}} = g(z) && \longrightarrow \text{\highlight{logistic sigmoid}}
+			\\[1mm]
+		z 	&= \log \frac{p(\bm{x} \vert \mathcal{C}_1) p(\mathcal{C}_1)}{p(\bm{x} \vert \mathcal{C}_2) p(\mathcal{C}_2)}
+			&& \longrightarrow \text{\highlight{log odds}}
+	\end{alignat}}
+\end{frame}
+
+
+% Subsection: Probabilistic Interpretation
+% --------------------------------------------------------------------------------------------------------
+\subsection{Probabilistic Interpretation}
+
+% Interpretation of Hypothesis Output
+\begin{frame}{Interpretation of Hypothesis Output}{}
+	\begin{itemize}
+		\item $h_{\bm{\theta}}(x)$ is interpreted as the probability of instance $x$ belonging to class $y = 1$
+		\item \textbf{Example:}
+		\begin{equation}
+			\bm{x} = \begin{bmatrix} x_0 \\ x_1 \end{bmatrix} = \begin{bmatrix} 1 \\ tumorSize \end{bmatrix}
+		\end{equation}
+		\vspace*{1mm}
+		\item If $h_{\bm{\theta}}(x) = 0.7$, we have to tell the patient that there
+			is a \textbf{70\,\% chance} of the tumor being malignant $\Rightarrow p(y = 1 \vert \bm{x}, \bm{\theta})$
+		\item \textbf{Binary case:} $p(y = 0 \vert \bm{x}, \bm{\theta}) = 1 - p(y = 1 \vert \bm{x}, \bm{\theta})$
+	\end{itemize}
+\end{frame}
+
+
+% Subsection: Model Training
+% --------------------------------------------------------------------------------------------------------
+\subsection{Model Training}
+
+% Training Setup
+\begin{frame}{Training Setup}{}
+	\begin{itemize}
+		\item We have a labeled training set ($\Rightarrow$ \textbf{supervised learning}):
+		\begin{equation}
+			\mathcal{D} = 
+				\left\{ (\bm{x}^{(1)}, y^{(1)}), (\bm{x}^{(2)}, y^{(2)}), \dots, (\bm{x}^{(n)}, y^{(n)}) \right\}
+				= \left\{ (\bm{x}^{(i)}, y^{(i)}) \right\}_{i=1}^n
+		\end{equation}
+		\item Each $\bm{x}$ is a vector of features:
+		\begin{equation}
+			\bm{x} = \begin{bmatrix} x_0 \\ \vdots \\ x_{m} \end{bmatrix} \in \mathbb{R}^{m+1}
+			\quad \text{and} \quad x_0 = 1 \quad \text{and} \quad y \in \{0, 1\}
+		\end{equation}
+		\item \highlight{How to choose the parameters $\bm{\theta}$?}
+	\end{itemize}
+\end{frame}
+
+
+% Logistic Regression Cost Function
+\begin{frame}{Logistic Regression Cost Function}{}
+	\begin{itemize}
+		\item Gradient descent is performed in order to find the parameters $\bm{\theta}$
+		\item To this end, a cost function is needed:
+		\begin{equation}
+			\mathcal{J}(\bm{\theta}) = \frac{1}{n} \sum_{i=1}^n \ell(h_{\bm{\theta}}(\bm{x}^{(i)}), y^{(i)})
+		\end{equation}
+		\item The cost function $\ell(h_{\bm{\theta}}(\bm{x}), y)$ is defined as follows: \\
+		{\footnotesize \textit{(square loss would be \textbf{non-convex...})}}
+		\begin{equation}
+			\ell(h_{\bm{\theta}}(\bm{x}), y) =
+			\begin{cases}
+				-\log(h_{\bm{\theta}}(\bm{x})) 		& \text{if}\ y = 1	\\
+				-\log(1 - h_{\bm{\theta}}(\bm{x}))	& \text{if}\ y = 0
+			\end{cases}
+		\end{equation}
+	\end{itemize}
+\end{frame}
+
+
+% Logistic Regression Cost Function (Ctd.)
+\begin{frame}{Logistic Regression Cost Function (Ctd.)}{}
+	\divideTwo{0.49}{
+		\textbf{\textit{y} = 1:}
+		\input{07_logistic_regression/01_tikz/cost_function_1}
+	}{0.49}{
+		\textbf{\textit{y} = 0:}
+		\input{07_logistic_regression/01_tikz/cost_function_2}
+	}
+\end{frame}
+
+
+% Logistic Regression Cost Function (Ctd.)
+\begin{frame}{Logistic Regression Cost Function (Ctd.)}{}\important
+	\begin{itemize}
+		\item $\ell(h_{\bm{\theta}}(\bm{x}), y)$ can be written in a more compact form:
+		\begin{equation}
+			\ell(h_{\bm{\theta}}(\bm{x}), y) = -y \log(h_{\bm{\theta}}(\bm{x})) -
+				(1 - y) \log(1 - h_{\bm{\theta}}(\bm{x}))
+		\end{equation}
+		\vspace*{-6mm}
+		\begin{itemize}
+			\item If $y = 1$, we get: $-\log(h_{\bm{\theta}}(\bm{x}))$
+			\item If $y = 0$, we get: $-\log(1 - h_{\bm{\theta}}(\bm{x}))$
+		\end{itemize}
+		\item This gives the \highlight{cross entropy} cost function $\mathcal{J}(\bm{\theta})$:
+		\begin{equation}
+			\mathcal{J}(\bm{\theta}) = \frac{1}{n} \sum_{i=1}^n \left[
+				-y^{(i)} \log(h_{\bm{\theta}}(\bm{x}^{(i)})) - (1 - y^{(i)}) \log(1 - h_{\bm{\theta}}(\bm{x}^{(i)}))
+			\right]
+		\end{equation}
+	\end{itemize}
+\end{frame}
+
+
+% Derivation of Cross Entropy
+\begin{frame}{Derivation of Cross Entropy}{}\optional
+	\begin{itemize}
+		\item The likelihood function can be written in the form:
+		\begin{equation}
+			\mathcal{L}(\bm{\theta}) = \prod_{i=1}^n h_{\bm{\theta}}(\bm{x}^{(i)})^{y^{(i)}} \cdot (1 - h_{\bm{\theta}}(\bm{x}^{(i)}))^{1 - y^{(i)}}
+		\end{equation}
+		\item The cost function is then given by the \textbf{negative log-likelihood}:
+		\begin{equation}
+			\mathcal{J}(\bm{\theta}) = -\log \mathcal{L}(\bm{\theta})
+		\end{equation}
+	\end{itemize}
+\end{frame}
+
+
+% Gradient Descent
+\begin{frame}{Gradient Descent}{}
+	\begin{itemize}
+		\item The goal is to minimize $\mathcal{J}(\bm{\theta})$: $\bm{\theta}^*
+			= \argmin_{\bm{\theta}} \mathcal{J}(\bm{\theta})$
+		\item \texttt{Repeat until convergence \{} \\
+			$\qquad \bm{\theta}^{(t+1)} \longleftarrow \bm{\theta}^{(t)} - \alpha \nabla_{\bm{\theta}}
+				\mathcal{J}(\bm{\theta}^{(t)}) \quad$
+			\textcolor{myblue1}{\textit{// simultaneously update all} $\theta_j$} \\
+		\texttt{\}}
+		\item The partial derivative $\nabla_{\bm{\theta}} \mathcal{J}(\bm{\theta})$ is given by:
+		{\footnotesize
+		\begin{equation}
+			\nabla_{\bm{\theta}} \mathcal{J}(\bm{\theta}) = \frac{1}{n} \sum_{i=1}^n \left(
+				h_{\bm{\theta}}(\bm{x}^{(i)}) - y^{(i)}
+			\right) x_j^{(i)}
+		\end{equation}}
+	\end{itemize}
+	\vspace*{-3mm}
+	\begin{boxBlueNoFrame}
+		\highlight{Algorithm looks identical to linear regression, but $h_{\bm{\theta}}(\bm{x})$ is different!}
+	\end{boxBlueNoFrame}
+\end{frame}
+
+
+% Subsection: Decision Boundary
+% --------------------------------------------------------------------------------------------------------
+\subsection{Decision Boundary}
+
+% Decision Boundary
+\begin{frame}{Decision Boundary}{}
+	\divideTwo{0.62}{
+		\begin{itemize}
+			\item \highlight{For classification we have to set a threshold}
+			\item Suppose we predict $y = 1$ if $h_{\bm{\theta}}(x) \ge 0.5$
+			\begin{itemize}
+				\item This means $g(z) \ge 0.5$
+				\item This is equivalent to $z \ge 0$ and $\bm{\theta}^{\intercal} \bm{x} \ge 0$
+			\end{itemize}
+			\item Suppose we predict $y = 0$ if $h_{\bm{\theta}}(x) < 0.5 \Rightarrow \bm{\theta}^{\intercal} \bm{x} < 0$
+		\end{itemize}
+	}{0.37}{
+		\vspace*{2mm}
+		\input{07_logistic_regression/01_tikz/sigmoid_function_decision_boundary}
+	}
+\end{frame}
+
+
+% Decision Boundary (Ctd.)
+\begin{frame}{Decision Boundary (Ctd.)}{}
+	\begin{itemize}
+		\item Suppose we have the following hypothesis:
+		\begin{equation*}
+			h_{\bm{\theta}}(\bm{x}) = g(\theta_0 + \theta_1 x_1 + \theta_2 x_2)
+		\end{equation*}
+		\item Using gradient descent we obtained the following coefficients:
+		\begin{equation*}
+			\theta_0 = -3 \qquad \theta_1 = 1 \qquad \theta_2 = 1
+		\end{equation*}
+		\item Predict $y = 1$ if $-3 + x_1 + x_2 \ge 0$
+	\end{itemize}
+\end{frame}
+
+
+% Decision Boundary (Ctd.)
+\begin{frame}{Decision Boundary (Ctd.)}{}
+	\divideTwo{0.33}{
+		\input{07_logistic_regression/01_tikz/decision_boundary}
+	}{0.66}{
+		\begin{itemize}
+			\item Predict $y = 1$, if $-3 + x_1 + x_2 \ge 0$
+			\item The decision boundary satisfies $-3 + x_1 + x_2 = 0$
+			\item If $x_2 = 0$, then $x_1 = 3$ and vice versa
+			
+			\vspace*{5mm}
+			\begin{boxBlueNoFrame}
+				\footnotesize
+				\highlight{Logistic regression is not a maximum-margin classifier
+				(although the cost function can be adjusted to get that $\Rightarrow$ Hinge loss)}
+			\end{boxBlueNoFrame}
+		\end{itemize}
+	}
+\end{frame}
+
+
+% Example: Decision Boundary
+\begin{frame}{Example: Decision Boundary}{}
+	\divideTwo{0.49}{
+		\begin{figure}
+			\includegraphics[scale=0.45]{07_logistic_regression/02_img/logreg_example_linear}
+		\end{figure}
+	}{0.49}{
+		\begin{figure}
+			\includegraphics[scale=0.45]{07_logistic_regression/02_img/logreg_example_linear_boundary}
+		\end{figure}
+	}
+	
+	\begin{center}
+		\highlight{Where is the sigmoid function?}
+	\end{center}
+\end{frame}
+
+
+% Example: Logistic Function
+\begin{frame}{Example: Logistic Function}{}
+	\vspace*{-7mm}
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.6]{07_logistic_regression/02_img/logreg_example_linear_logistic_function}
+	\end{figure}
+\end{frame}
+
+
+% Section: Non-linear Data
+%______________________________________________________________________
+\section{Non-linear Data}
+\makedivider{Non-linear Data}
+
+% Subsection: Feature Mapping
+% --------------------------------------------------------------------------------------------------------
+\subsection{Feature Mapping}
+
+% Non-Linear Decision Boundaries
+\begin{frame}{Non-Linear Decision Boundaries}{}
+	\begin{itemize}
+		\item \highlight{Feature mapping} can be used to obtain non-linear decision boundaries
+		\item \textbf{Example:}
+		\begin{itemize}
+			\item Imagine a circular data set
+			\item Using the features...
+			\begin{equation*}
+				h_{\bm{\theta}}(\bm{x}) = g(\theta_0 + \theta_1 x_1 + \theta_2 x_2 +
+				\textcolor{myblue1}{\theta_3 x_1^2} + \textcolor{myblue1}{\theta_4 x_2^2})
+			\end{equation*}
+			\item ...the algorithm could e.\,g. choose: $\bm{\theta} =
+				\begin{bmatrix} -1, 0, 0, 1, 1 \end{bmatrix}^{\intercal}$
+			\item So we would get: $x_1^2 + x_2^2 = 1 \Rightarrow$ \textbf{equation of a unit circle}
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+% Example: Non-Linear Decision Boundary
+\begin{frame}{Example: Non-Linear Decision Boundary}{}
+	\divideTwo{0.49}{
+		\begin{figure}
+			\includegraphics[scale=0.29]{07_logistic_regression/02_img/logreg_example_non_linear}
+		\end{figure}
+	}{0.49}{
+		\begin{figure}
+			\includegraphics[scale=0.3]{07_logistic_regression/02_img/logreg_example_non_linear_boundary}
+		\end{figure}
+	}
+\end{frame}
+
+
+% Subsection: Regularization
+% --------------------------------------------------------------------------------------------------------
+\subsection{Regularization}
+
+% Logistic Regression Cost Function (Ctd.)
+\begin{frame}{Logistic Regression Cost Function (Ctd.)}{}
+	\begin{itemize}
+		\item We should apply regularization for non-linear decision boundaries:
+		\footnotesize
+		\begin{equation}
+			\frac{1}{n} \sum_{i=1}^n \left[
+				-y^{(i)} \log(h_{\bm{\theta}}(\bm{x}^{(i)})) - (1 - y^{(i)}) \log(1 - h_{\bm{\theta}}(\bm{x}^{(i)}))
+			\right] + \textcolor{myblue1}{\frac{\lambda}{2m} \sum_{j=1}^m \theta_j^2}
+		\end{equation}
+		\normalsize
+		\item The last term prevents the parameters $\theta_j$ from becoming too large
+		\item $\lambda \ge 0$ controls the degree of regularization
+		\item This leads to smoother decision boundaries
+	\end{itemize}
+\end{frame}
+
+
+% Section: Multi-Class Classification
+%______________________________________________________________________
+\section{Multi-Class Classification}
+\makedivider{Multi-Class Classification}
+
+% Subsection: Multiple Classes
+% --------------------------------------------------------------------------------------------------------
+\subsection{Multiple Classes}
+
+% Multi-Class Classification
+\begin{frame}{Multi-Class Classification}{}
+	\begin{itemize}
+		\item Logistic regression can handle two classes only, namely \textbf{0} and \textbf{1}
+		\item \textbf{What if there are more than two classes?}
+		\item Two common techniques:
+		\begin{itemize}
+			\item \highlight{One-vs-Rest (OVR)} 	$\Rightarrow$ One-against-All
+			\item \highlight{One-vs-One (OVO)} 	$\Rightarrow$ Pairwise classification
+		\end{itemize}
+		\item Several classifiers are trained
+		\item During prediction the classifiers \textbf{vote for the correct class}
+		\item Such techniques can be used for all binary classifiers
+	\end{itemize}
+\end{frame}
+
+
+% Subsection: One-vs-Rest (OVR)
+% --------------------------------------------------------------------------------------------------------
+\subsection{One-vs-Rest (OVR)}
+
+% Multi-Class Classification: One-vs-Rest (OVR)
+\begin{frame}{Multi-Class Classification: One-vs-Rest (OVR)}{}
+	\divideTwo{0.49}{
+		\begin{itemize}
+			\item \textbf{Train one classifier per class} (expert for that class)
+			\item We get $\vert \mathcal{C} \vert$ classifiers
+			\item The $k$-th classifier learns to distinguish the $k$-th class from all the others
+			\item Set the labels of examples from class $k$ to \textbf{1}, all the others to \textbf{0}
+		\end{itemize}
+	}{0.49}{
+		\vspace*{2mm}
+		\input{07_logistic_regression/01_tikz/ovr}
+	}
+\end{frame}
+
+
+% Subsection: One-vs-One (OVO)
+% --------------------------------------------------------------------------------------------------------
+\subsection{One-vs-One (OVO)}
+
+% Multi-Class Classification: One-vs-One (OVO)
+\begin{frame}{Multi-Class Classification: One-vs-One (OVO)}{}
+	\divideTwo{0.49}{
+		\vspace*{2mm}
+		\input{07_logistic_regression/01_tikz/ovo}
+	}{0.49}{
+		\begin{itemize}
+			\item \textbf{Train one classifier for each pair of classes}
+			\item We get $\binom{\mathcal{C}}{2}$ classifiers
+			\item Ignore all other examples that do not belong to either of the two classes
+			\item \textbf{Voting}: Count how often each class wins; the class with highest count is predicted
+		\end{itemize}
+	}
+\end{frame}
+
+
+% Section: Wrap-Up
+%______________________________________________________________________
+\section{Wrap-Up}
+\makedivider{Wrap-Up}
+
+% Subsection: Summary
+% --------------------------------------------------------------------------------------------------------
+\subsection{Summary}
+
+% Summary
+\begin{frame}{Summary}{}
+
+\end{frame}
+
+
+% Subsection: Lecture Overview
+% --------------------------------------------------------------------------------------------------------
+\subsection{Lecture Overview}
+
+\makeoverview{3}
+
+
+% Subsection: Self-Test Questions
+% --------------------------------------------------------------------------------------------------------
+\subsection{Self-Test Questions}
+
+% Self-Test Questions
+\begin{frame}{Self-Test Questions}{}
+
+\end{frame}
+
+
+% Subsection: Recommended Literature and further Reading
+% --------------------------------------------------------------------------------------------------------
+\subsection{Recommended Literature and further Reading}
+
+% Literature
+%______________________________________________________________________
+\begin{frame}{Recommended Literature and further Reading}{}
+	\footnotesize
+	\begin{thebibliography}{2}
+
+	\end{thebibliography}
+\end{frame}
+
+
+% Thank you
+%______________________________________________________________________
+\makethanks
+
+\end{document}

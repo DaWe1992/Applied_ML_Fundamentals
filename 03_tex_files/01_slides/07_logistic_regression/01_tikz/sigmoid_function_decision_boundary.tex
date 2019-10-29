@@ -1,0 +1,23 @@
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[
+		scale=0.6
+	]
+
+		\begin{axis}[
+			domain=-10:10,
+			xlabel={$\bm{\theta}^{\intercal} \bm{x}$},
+			ylabel={$g(\bm{\theta}^{\intercal} \bm{x})$}
+		]
+		
+			\draw[fill=gray,fill opacity=0.40] (axis cs:-12,-0.2) rectangle (axis cs:0,1.2);
+			\draw[fill=lightgray,fill opacity=0.10] (axis cs:0,-0.2) rectangle (axis cs:12,1.2);
+			\addplot[no marks,ultra thick,smooth,myblue1]{1 / (1 + exp(-x))};
+
+			\node at (axis cs:-5,0.5) {\huge $\bm{\ominus}$};
+			\node at (axis cs:5,0.5) {\huge $\bm{\oplus}$};
+			
+    		\end{axis}
+
+	\end{tikzpicture}
+\end{figure}
