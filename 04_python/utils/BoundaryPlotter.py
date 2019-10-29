@@ -67,7 +67,7 @@ class BoundaryPlotter:
         self.__prepare_plot(ax)
 
         # create a mesh-grid
-        xx, yy = np.meshgrid( \
+        xx, yy = np.meshgrid(
             np.arange(self.x_min, self.x_max, step_size),
             np.arange(self.y_min, self.y_max, step_size)
         )
