@@ -6,7 +6,7 @@
 
 Machine learning is a subfield of artificial intelligence (AI) that provides systems the ability to automatically learn and improve from experience **without being explicitly programmed**. Machine learning focuses on the development of computer programs that can access data and use it to learn for themselves. Machine learning has become an integral part of many modern applications.
 
-<img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/data_science.png">
+<img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/data_science.png" width=200px>
 
 This lecture is supposed to give a general introduction into state-of-the-art machine learning algorithms and their applications.
 
