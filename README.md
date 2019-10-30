@@ -35,7 +35,7 @@ This lecture is supposed to give a general introduction into state-of-the-art ma
 	  * Probabilistic regression
       * Basis functions: Radial basis functions, polynomial basis functions
     * Classification I
-      * k-nearest neighbors
+      * k-nearest neighbors ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/06_knn.pdf))
       * Logistic regression ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/07_logistic_regression.pdf))
       * Decision trees and ensemble methods ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/08_decision_trees.pdf))
 	* Classification II
