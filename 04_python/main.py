@@ -10,10 +10,6 @@ Created on Tue Oct 29 17:06:24 2019
 # Imports
 # -----------------------------------------------------------------------------
 
-# numpy
-# -----------------------------------------------------------------------------
-import numpy as np
-
 # data creation and plotting
 # -----------------------------------------------------------------------------
 from utils.DataCreator import DataCreator
@@ -25,18 +21,22 @@ from clf.kNN import kNN
 from clf.SVM import SVM
 from clf.LogisticRegression import LogisticRegression
 
+# regression
+# -----------------------------------------------------------------------------
+from reg.GaussianProcess import GaussianProcess
+
 # evaluation
 # -----------------------------------------------------------------------------
 from utils.Evaluator import Evaluator
 
 
 # -----------------------------------------------------------------------------
-# Main
+# Functions
 # -----------------------------------------------------------------------------
 
-if __name__ == "__main__":
+def classification():
     """
-    Main function.
+    Classification.
     """
     # create data
     X, y = DataCreator().make_classification(sklearn=True)
@@ -62,4 +62,28 @@ if __name__ == "__main__":
     acc = evaluator.accuracy(clf, X, y)
     print("Accuracy: {} %".format(acc))
     evaluator.conf_mat(clf, X, y)
+    
+    
+def regression():
+    """
+    Regression.
+    """
+    # create data
+    X, y = DataCreator().make_regression(sklearn=False)
+    
+    # train Gaussian process regressor
+    gp = GaussianProcess()
+    gp.fit(X, y)
+    gp.plot()
+
+
+# -----------------------------------------------------------------------------
+# Main
+# -----------------------------------------------------------------------------
+
+if __name__ == "__main__":
+    """
+    Main function.
+    """
+    regression()
     

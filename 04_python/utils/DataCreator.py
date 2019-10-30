@@ -30,7 +30,7 @@ class DataCreator:
     
     def make_classification(self, sklearn=False):
         """
-        Creates the classification data set.
+        Creates a classification data set.
         
         :param sklearn:         flag indicating if sklearn should be used
         :return:                X, y (data features and labels)
@@ -71,6 +71,19 @@ class DataCreator:
                 class_sep=0.65,
                 random_state=60
             )
+        
+        return X, y
+    
+    
+    def make_regression(self, sklearn=False):
+        """
+        Creates a regression data set.
+        
+        :param sklearn:         flag indicating if sklearn should be used
+        :return:                X, y (data features and labels)        
+        """
+        X = np.array([-1.50, -0.25, 0.00, 1.00, 5.00, 5.50, 10.50, 11.50])
+        y = np.array([-1.60, 0.50, 0.80, -2.00, 0.00, 1.00, 3.00, 3.00])
         
         return X, y
     
