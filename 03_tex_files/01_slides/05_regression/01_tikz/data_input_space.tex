@@ -6,19 +6,21 @@
 			mark=*,draw=myblue1,fill=lightgray,mark size=3
 		}
 	]
+	
 		\begin{axis}[
 			xlabel=$x$,
 			ylabel=$y$,
 		]
 	
 			\addplot[no marks,myblue1,very thick]{x};
-			\addplot[point] coordinates {(-2,-3)}; 	\addplot[point] coordinates {(0,1.5)};
-			\addplot[point] coordinates {(1,2)}; 	\addplot[point] coordinates {(4,3.7)};
-			\addplot[point] coordinates {(2,2.5)}; 	\addplot[point] coordinates {(3,1.75)};
+			\addplot[point] coordinates {(-2,-3)}; 		\addplot[point] coordinates {(0,1.5)};
+			\addplot[point] coordinates {(1,2)}; 		\addplot[point] coordinates {(4,3.7)};
+			\addplot[point] coordinates {(2,2.5)}; 		\addplot[point] coordinates {(3,1.75)};
 			\addplot[point] coordinates {(-4,-3.5)}; 	\addplot[point] coordinates {(-3,-2.25)};
 			\addplot[point] coordinates {(-1,-1.2)}; 	\addplot[point] coordinates {(-1.5,-1)};
 
 			\node at (axis cs:2,-2) {$y = \theta_0 + \theta_1 x$};
+			
 		\end{axis}
 
 	\end{tikzpicture}

@@ -622,20 +622,20 @@
 		\item \highlight{Coefficient of determination $R^2$:}
 		\scriptsize
 		\begin{equation}
-			R^2 	= \frac{\sum_{i=1}^n (\widehat{y}_i - \overline{y})^2}{\sum_{i=1}^n (y_i - \overline{y})^2}
+			R^2 	= \frac{\sum_{i=1}^n (h_{\bm{\theta}}(\bm{x}^{(i)}) - \overline{y})^2}{\sum_{i=1}^n (y^{(i)} - \overline{y})^2}
 					= \frac{\text{Variance explained by model}}{\text{Total variance}} \qquad R^2 \in [0,1]
 		\end{equation}
 		\normalsize
 		\item \highlight{Root mean square error (RMSE):}
 		\scriptsize
 		\begin{equation}
-			RMSE = \left( \frac{1}{n} \cdot \sum_{i=1}^n \left( \widehat{y}_i - y_i \right)^2 \right)^{\nicefrac{1}{2}}
+			RMSE = \left( \frac{1}{n} \cdot \sum_{i=1}^n \left( h_{\bm{\theta}}(\bm{x}^{(i)}) - y^{(i)} \right)^2 \right)^{\nicefrac{1}{2}}
 		\end{equation}
 		\normalsize
 		\item \highlight{Mean absolute error (MAE):}
 		\scriptsize
 		\begin{equation}
-			MAE = \frac{1}{n} \cdot \sum_{i=1}^n \vert \widehat{y}_i - y_i \vert
+			MAE = \frac{1}{n} \cdot \sum_{i=1}^n \vert h_{\bm{\theta}}(\bm{x}^{(i)}) - y^{(i)} \vert
 		\end{equation}
 	\end{itemize}
 \end{frame}

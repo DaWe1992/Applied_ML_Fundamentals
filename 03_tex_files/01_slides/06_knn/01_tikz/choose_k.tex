@@ -1,0 +1,26 @@
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[
+		scale=1.0
+	]
+
+		\begin{axis}[
+			grid=both,
+    			grid style={line width=0.1pt, draw=lightgray!70},
+			xlabel={$k$},
+			ylabel={Error},
+			y=0.28cm,
+    			x=0.2cm,
+			ymax=20
+		]
+    			\pgfplotstableread{06_knn/05_data/data_choose_k.txt} \datatable
+			\addplot[mark=*,mark size=1.5,myblue1] table[x=x,y=y] from \datatable;
+
+			\node[gray] (A) at (axis cs:10,15) {\textbf{best} $k$: 8 or 9};
+			\draw[->,thick,gray] (A) -- (axis cs:8.5,6.5);
+			\draw[gray,very thick] (axis cs:7,5.7) -- (axis cs:10,5.7);
+			
+    		\end{axis}
+
+	\end{tikzpicture}
+\end{figure}

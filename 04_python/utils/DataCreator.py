@@ -63,12 +63,13 @@ class DataCreator:
         # sklearn data set creation
         if sklearn:
             X, y = make_classification(
-                n_samples=50,
+                n_samples=70,
                 n_features=2,
                 n_redundant=0,
                 n_informative=2,
                 n_clusters_per_class=1,
-                class_sep=1.1
+                class_sep=0.65,
+                random_state=60
             )
         
         return X, y

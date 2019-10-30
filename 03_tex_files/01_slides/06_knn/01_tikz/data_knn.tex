@@ -1,0 +1,25 @@
+\begin{figure}
+	\centering
+	\begin{tikzpicture}
+    
+  		  \begin{axis}[
+			scale=0.8,
+			xlabel={$x_1$},
+			ylabel={$x_2$},
+			axis x line=center,
+  			axis y line=center
+		]
+
+			\pgfplotstableread{06_knn/05_data/data_knn_0.txt} \datatableClassZero
+			\pgfplotstableread{06_knn/05_data/data_knn_1.txt} \datatableClassOne
+		
+			\addplot[only marks,mark=*,mark size=2,draw=gray,fill=white] table[x=x,y=y] from \datatableClassZero;
+			\addplot[only marks,mark=*,mark size=2,draw=myblue1,fill=white] table[x=x,y=y] from \datatableClassOne;
+			\addplot[mark=*,draw=red,fill=red] coordinates {(0.45,0.15)};
+		
+		\end{axis}
+	
+		\node[red] at (2.25,0.5) {\textbf{?}};
+		
+	\end{tikzpicture}
+\end{figure}

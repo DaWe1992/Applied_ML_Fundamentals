@@ -1,0 +1,357 @@
+\input{preamble_theme}
+
+% ====================================================
+% ====================================================
+% PRESENTATION DATA
+% ====================================================
+% ====================================================
+
+\title[$k$-Nearest Neighbors]{*** Applied Machine Learning Fundamentals *** $k$-Nearest Neighbors}
+\institute{SAP\,SE}
+\author{Daniel Wehner}
+\date{\today}
+\prefix{KNN}
+
+% ====================================================
+% ====================================================
+% BEGIN OF DOCUMENT
+% ====================================================
+% ====================================================
+
+\begin{document}
+
+% Title frame
+%______________________________________________________________________
+\maketitlepage
+
+
+% Agenda
+%______________________________________________________________________
+\begin{frame}{Agenda \today}
+	\begin{multicols}{2}
+		\tableofcontents
+	\end{multicols}
+\end{frame}
+
+
+% Section: Introduction
+%______________________________________________________________________
+\section{Introduction}
+\makedivider{Introduction}
+
+% Subsection: Overview of the Algorithm
+% --------------------------------------------------------------------------------------------------------
+\subsection{Overview of the Algorithm}
+
+% Introduction
+\begin{frame}{Introduction}{}
+	\divideTwo{0.49}{
+		\begin{itemize}
+			\item \textbf{Basic idea:} Predict the class label based on nearby known examples
+			\item Instance-based learning, a.\,k.\,a. \highlight{lazy learning}
+		\end{itemize}
+		\vspace*{4mm}
+		\begin{boxBlueNoFrame}
+			\highlight{We do not learn any model, the data speaks for itself!}
+		\end{boxBlueNoFrame}
+	}{0.49}{
+		\input{06_knn/01_tikz/data_knn}
+	}
+\end{frame}
+
+
+% Subsection: Derivation of the Algorithm
+% --------------------------------------------------------------------------------------------------------
+\subsection{Derivation of the Algorithm}
+
+% Derivation of the Algorithm
+\begin{frame}{Derivation of the Algorithm}{}\optional
+	\bubble{11}{6}{
+		\footnotesize Remember non-parametric \\[-1mm]
+		\footnotesize density estimation?
+	}
+	\begin{itemize}
+		\item Unconditional density:
+		\begin{equation*}
+			p(\bm{x}) = \frac{k}{n \cdot v}
+		\end{equation*}
+		\item Class priors:
+		\begin{equation*}
+			p(\mathcal{C}_j) = \frac{n_j}{n}
+		\end{equation*}
+	\end{itemize}
+	
+	\begin{boxBlueNoFrame}
+		\highlight{Combine using Bayes' theorem:}
+		\vspace*{-4mm}
+		\begin{equation}
+			p(\mathcal{C}_j \vert \bm{x}) 
+				= \frac{p(\bm{x} \vert \mathcal{C}_j) \cdot p(\mathcal{C}_j)}{p(\bm{x})}
+				= \frac{\frac{k_j}{n_j \cdot v} \cdot \frac{n_j}{n}}{\frac{k}{n \cdot v}}
+				= \frac{k_j}{k}
+		\end{equation}
+	\end{boxBlueNoFrame}
+\end{frame}
+
+
+% Section: Distance Metrics
+%______________________________________________________________________
+\section{Distance Metrics}
+\makedivider{Distance Metrics}
+
+% Subsection: Properties of Distance Metrics
+% --------------------------------------------------------------------------------------------------------
+\subsection{Properties of Distance Metrics}
+
+% Distance Metrics
+\begin{frame}{Distance Metrics}{}
+	\begin{itemize}
+		\item How to measure the distance between two data points $i$ and $j$? \\
+			$\Rightarrow$ \highlight{distance metrics}
+		\item Let $d$ be a function $d : (u, v) \mapsto \mathbb{R}^{+}$ (including 0)
+		\item Function $d$ has the following properties:
+	\end{itemize}
+	
+	\begin{boxBlueNoFrame}
+		\begin{enumerate}
+			\item $d(u, v) = d(v, u)$ \highlight{(commutativity)}
+			\item $d(u, v) = 0 \Rightarrow u = v$
+			\item $d(u, k) \le d(u, v) + d(v, k)$ \highlight{(triangle inequality)}
+		\end{enumerate}
+	\end{boxBlueNoFrame}
+\end{frame}
+
+
+% Subsection: Minkowski, Manhattan, Euclidean
+% --------------------------------------------------------------------------------------------------------
+\subsection{Minkowski, Manhattan, Euclidean}
+
+% Distance Metrics (Ctd.)
+\begin{frame}{Distance Metrics (Ctd.)}{}
+	\highlight{Minkowski distance:}
+	\begin{equation}
+		d_p(u, v) = \left( \sum_{j=1}^m \vert x_j^{(u)} - x_j^{(v)} \vert \right)^{\nicefrac{1}{p}}
+	\end{equation}
+	
+	\divideTwo{0.49}{
+		\highlight{Manhattan distance:} ($p = 1$)
+		\begin{equation*}
+			d_1(u, v) = \sum_{j=1}^m \vert x_j^{(u)} - x_j^{(v)} \vert
+		\end{equation*}
+	}{0.49}{
+		\highlight{Euclidean distance:} ($p = 2$)
+		\begin{equation*}
+			d_2(u, v) = \sqrt{\sum_{j=1}^m \vert x_j^{(u)} - x_j^{(v)} \vert^2}
+		\end{equation*}
+	}
+\end{frame}
+
+
+% Distance Metrics (Ctd.)
+\begin{frame}{Distance Metrics (Ctd.)}{}
+	\input{06_knn/01_tikz/distance_metrics}
+\end{frame}
+
+
+% Subsection: Cosine Similarity
+% --------------------------------------------------------------------------------------------------------
+\subsection{Cosine Similarity}
+
+% Cosine Similarity
+\begin{frame}{Cosine Similarity}{}
+	\begin{itemize}
+		\item \highlight{Similarity metrics} are an alternative to distance metrics
+		\item \textbf{Example:} \highlight{Cosine similarity}
+		\item The cosine similarity of two vectors $\bm{a}$ and $\bm{b}$ is the cosine of the angle:
+		\begin{equation}
+			\cos \measuredangle (\bm{a}, \bm{b}) = \frac{\bm{a} \cdot \bm{b}}{\Vert \bm{a} \Vert_2 \cdot \Vert \bm{b} \Vert_2}
+				= \frac{\sum_{j=1}^m a_j \cdot b_j}{\sqrt{\sum_{j=1}^m (a_j)^2} \cdot \sqrt{\sum_{j=1}^m (b_j)^2}}
+		\end{equation}
+		\item The dot product is defined as:
+		\begin{equation}
+			\bm{a} \cdot \bm{b} = \Vert \bm{a} \Vert_2 \cdot \Vert \bm{b} \Vert_2 \cdot \cos \measuredangle (\bm{a}, \bm{b})
+		\end{equation}
+	\end{itemize}
+\end{frame}
+
+
+% Cosine Similarity (Ctd.)
+\begin{frame}{Cosine Similarity (Ctd.)}{}
+	\input{06_knn/01_tikz/cosine_similarity}
+\end{frame}
+
+
+% Section: $k$-nearest Neighbors Algorithm
+%______________________________________________________________________
+\section{$k$-nearest Neighbors Algorithm}
+\makedivider{$k$-nearest Neighbors Algorithm}
+
+% Subsection: General Procedure
+% --------------------------------------------------------------------------------------------------------
+\subsection{General Procedure}
+
+% Prediction with $k$-Nearest Neighbors (Ctd.)
+\begin{frame}{Prediction with $k$-Nearest Neighbors (Ctd.)}{}
+	\highlight{$k$-nearest neighbors algorithm:}
+	\begin{enumerate}
+		\item Calculate the \textbf{pairwise distances} between the new data point and all data points in the data set
+		\item Sort the data points by distances \textbf{in ascending order} \\
+			{\footnotesize \textit{(if similarity metrics are used, sort in descending order)}}
+		\item Look at the first $k$ examples and \textbf{count how often each class occurs}
+		\item Predict the class with \textbf{the maximum score}
+	\end{enumerate}
+\end{frame}
+
+
+% Subsection: Calculation of Distances
+% --------------------------------------------------------------------------------------------------------
+\subsection{Calculation of Distances}
+
+% \ding{182} Calculation of Distances
+\begin{frame}{\ding{182} Calculation of Distances}{}
+	\divideTwo{0.49}{
+		\vspace*{3mm}
+		\input{06_knn/03_tbl/knn_distances}
+	}{0.49}{
+		\begin{itemize}
+			\item $\bm{x}^{(u)} = (0.45, 0.15)$
+			\item Calculate the \textbf{Euclidean distance} between $\bm{x}^{(u)}$ and all other data points $\bm{x}^{(v)}$
+		\end{itemize}
+		\vspace*{3mm}
+		\begin{boxBlueNoFrame}
+			\highlight{Prediction is expensive!}
+		\end{boxBlueNoFrame}
+	}
+\end{frame}
+
+
+% Subsection: Prediction of the Class Label
+% --------------------------------------------------------------------------------------------------------
+\subsection{Prediction of the Class Label}
+
+% \ding{183}/\ding{184}/\ding{185} Prediction of the Class Label
+\begin{frame}{\ding{183}/\ding{184}/\ding{185} Prediction of the Class Label}{}
+	\divideTwo{0.49}{
+		\begin{itemize}
+			\item Let $k$ be set to 10
+			\item Step \ding{183}: Sort data set by distances \\
+				{\footnotesize \textit{(cf. table)}}
+			\item Step \ding{184}: Count the classes
+			\begin{itemize}
+				\item \textbf{Class 0:} 3
+				\item \textbf{Class 1:} 7
+			\end{itemize}
+			\item Step \ding{185}: \textbf{Predict class 1!}
+		\end{itemize}
+	}{0.49}{
+		\vspace*{3mm}
+		\input{06_knn/03_tbl/knn_distances_sorted}
+	}
+\end{frame}
+
+
+% Section: Choice of $k$
+%______________________________________________________________________
+\section{Choice of $k$}
+\makedivider{Choice of $k$}
+
+% Subsection: Danger of Overfitting
+% --------------------------------------------------------------------------------------------------------
+\subsection{Danger of Overfitting}
+
+% How to choose $k$
+\begin{frame}{How to choose $k$?}{}
+	\textbf{The choice of $k$ is important:} \\
+	\divideTwo{0.49}{
+		\includegraphics[scale=0.25]{06_knn/02_img/knn_1}
+		\vspace*{-3mm}
+		\begin{center}
+			\hspace*{7mm}
+			$k = 1$ \Highlight{($\skull$ overfitting $\skull$)}
+		\end{center}
+	}{0.49}{
+		\includegraphics[scale=0.25]{06_knn/02_img/knn_30}
+		\vspace*{-3mm}
+		\begin{center}
+			\hspace*{7mm}
+			$k = 30$ (about right)
+		\end{center}
+	}
+\end{frame}
+
+
+% Subsection: Selection Strategies
+% --------------------------------------------------------------------------------------------------------
+\subsection{Selection Strategies}
+
+% How to choose $k$ (Ctd.)
+\begin{frame}{How to choose $k$? (Ctd.)}{}
+	\begin{itemize}
+		\item First of all, it is recommended to use \textbf{odd values} for $k$ \\
+			{\footnotesize \textit{(no tie-breaking necessary)}}
+		\item Compute $k$ depending on the size of the data set $\mathcal{D}$:
+		\begin{equation}
+			k = \sqrt{\frac{n}{2}} \qquad \text{or} \qquad k = \sqrt{n}
+		\end{equation}
+		\item \textbf{Other strategy:} Evaluate different $k$ on a \texttt{dev} set and choose the best one
+	\end{itemize}
+\end{frame}
+
+
+% How to choose $k$ (Ctd.)
+\begin{frame}{How to choose $k$? (Ctd.)}{}
+	\input{06_knn/01_tikz/choose_k}
+\end{frame}
+
+
+% Section: Wrap-Up
+%______________________________________________________________________
+\section{Wrap-Up}
+\makedivider{Wrap-Up}
+
+% Subsection: Summary
+% --------------------------------------------------------------------------------------------------------
+\subsection{Summary}
+
+% Summary
+\begin{frame}{Summary}{}
+
+\end{frame}
+
+
+% Subsection: Lecture Overview
+% --------------------------------------------------------------------------------------------------------
+\subsection{Lecture Overview}
+
+\makeoverview{3}
+
+
+% Subsection: Self-Test Questions
+% --------------------------------------------------------------------------------------------------------
+\subsection{Self-Test Questions}
+
+% Self-Test Questions
+\begin{frame}{Self-Test Questions}{}
+
+\end{frame}
+
+
+% Subsection: Recommended Literature and further Reading
+% --------------------------------------------------------------------------------------------------------
+\subsection{Recommended Literature and further Reading}
+
+% Literature
+%______________________________________________________________________
+\begin{frame}{Recommended Literature and further Reading}{}
+	\footnotesize
+	\begin{thebibliography}{2}
+
+	\end{thebibliography}
+\end{frame}
+
+
+% Thank you
+%______________________________________________________________________
+\makethanks
+
+\end{document}

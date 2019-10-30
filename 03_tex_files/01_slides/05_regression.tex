@@ -48,14 +48,14 @@
 	\vspace*{-6mm}
 	\begin{tabbing}
 		\hspace*{7cm}\= \kill
-		\highlight{Type of target variable}			\> Continuous 		\\[1mm]
+		\highlight{Type of target variable}		\> Continuous 		\\[1mm]
 		\highlight{Type of training information} 	\> Supervised 		\\[1mm]
-		\highlight{Example Availability}			\> Batch learning		\\[1mm]
+		\highlight{Example Availability}			\> Batch learning	\\[1mm]
 	\end{tabbing}
 	
 	\vspace*{-7mm}
 	\footnotesize
-	\begin{boxBlue}
+	\begin{boxBlueNoFrame}
 		\textbf{Algorithm sketch:} Given the training data $\mathcal{D}$ the algorithm derives
 		a function of the type
 	
@@ -67,7 +67,7 @@
 
 		from the data. $\bm{\theta}$ is the parameter vector containing the coefficients to be estimated by the regression
  		algorithm. Once $\bm{\theta}$ is learned it can be used for prediction. 
-	\end{boxBlue}
+	\end{boxBlueNoFrame}
 \end{frame}
 
 
@@ -491,10 +491,10 @@
 
 % We have derived the squared Error!
 \begin{frame}{We have derived the squared Error!}{}\important
-	\begin{boxBlue}
+	\begin{boxBlueNoFrame}
 		Minimizing the squared error gives the maximum likelihood solution for the parameters $\bm{\theta}$ assuming
 		Gaussian noise.
-	\end{boxBlue}
+	\end{boxBlueNoFrame}
 	\begin{itemize}
 		\item The maximum likelihood approach gives rise to the squared error
 		\item But it is much more powerful than regular least squares
@@ -564,17 +564,17 @@
 		\begin{pmatrix}
 			\varphi_0(x^{(1)}) 	& \varphi_1(x^{(1)}) 	& \varphi_2(x^{(1)}) 	& \hdots & \varphi_P(x^{(1)}) 	\\
 			\varphi_0(x^{(2)}) 	& \varphi_1(x^{(2)}) 	& \varphi_2(x^{(2)}) 	& \hdots & \varphi_P(x^{(2)}) 	\\
-			\vdots 				& \vdots 			& \vdots 			& \ddots & \vdots 				\\
+			\vdots 			& \vdots 			& \vdots 			& \ddots & \vdots 			\\
 			\varphi_0(x^{(n)}) 	& \varphi_1(x^{(n)}) 	& \varphi_2(x^{(n)}) 	& \hdots & \varphi_P(x^{(n)}) 
 		\end{pmatrix}
 	\end{equation}
 	
 	\vspace*{2mm}
-	\begin{boxBlue}
+	\begin{boxBlueNoFrame}
 		\footnotesize
 		\highlight{The model is still linear in the parameters, so we can still use the same algorithm as before.}
 		\Highlight{This is still linear regression (!!!)}
-	\end{boxBlue}
+	\end{boxBlueNoFrame}
 \end{frame}
 
 
