@@ -727,7 +727,15 @@
 
 % Summary
 \begin{frame}{Summary}{}
-
+	\begin{itemize}
+		\item \textbf{Out-of-sample testing:} Split data into \texttt{train}, \texttt{dev} and \texttt{test} sets
+		\item Cross-validation makes \textbf{maximum use of the data}
+		\item Confusion matrices reveal \textbf{which classes are frequently confused}
+		\item Precision, recall and F1 are \textbf{more robust w.\,r.\,t. imbalanced data sets}
+		\item ROC curves are used for the evaluation of rankers
+		\item Different classifiers can be optimal assuming a different cost model
+		\item Hyper-parameters are optimized using \textbf{grid search} or \textbf{random search}
+	\end{itemize}
 \end{frame}
 
 
@@ -738,7 +746,13 @@
 % Self-Test Questions
 \begin{frame}{Self-Test Questions}{}\important
 	\begin{enumerate}
-		\item Your model does not perform well, because of its high bias.
+		\item Why should you split the data into \texttt{train}, \texttt{dev} and \texttt{test} sets?
+		\item You perform 10-fold cross validation. How many models do you have to learn? Which one do you use in production?
+		\item What is the problem with accuracy?
+		\item Why do we apply the harmonic mean to compute the F1 score?
+		\item Your model gets an AUC value of 0. What does this mean?
+		\item Random search is usually preferred to optimize hyper-parameters. Why?
+		\item Your model does not perform well due to its high bias.
 			Your boss suggests adding more training data. How would you respond?
 	\end{enumerate}
 \end{frame}
@@ -764,6 +778,18 @@
 	\begin{thebibliography}{2}
 
 	\end{thebibliography}
+\end{frame}
+
+
+% Subsection: Meme of the Day
+% --------------------------------------------------------------------------------------------------------
+\subsection{Meme of the Day}
+
+% Meme of the Day
+\begin{frame}{Meme of the Day}{}
+	\begin{figure}
+		\includegraphics[scale=0.4]{09_evaluation/02_img/meme_of_the_day}
+	\end{figure}
 \end{frame}
 
 

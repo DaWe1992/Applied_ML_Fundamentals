@@ -25,6 +25,11 @@ from clf.LogisticRegression import LogisticRegression
 # -----------------------------------------------------------------------------
 from reg.GaussianProcess import GaussianProcess
 
+# reinforcement learning
+# -----------------------------------------------------------------------------
+from rl.GridWorld import GridWorld
+from rl.ValueIteration import ValueIteration
+
 # evaluation
 # -----------------------------------------------------------------------------
 from utils.Evaluator import Evaluator
@@ -42,8 +47,8 @@ def classification():
     X, y = DataCreator().make_classification(sklearn=True)
     
     # train kNN classifier
-    clf = kNN(n_neighbors=3)
-    clf.fit(X, y)
+#    clf = kNN(n_neighbors=3)
+#    clf.fit(X, y)
     
     # train SVM classifier
 #    clf = SVM(kernel="linear", C=1.0, p=2, s=5.0)
@@ -51,8 +56,8 @@ def classification():
 #    clf.fit(X, y)
     
     # train logistic regression classifier
-#    clf = LogisticRegression()
-#    clf.fit(X, y, batch_size=X.shape[0])
+    clf = LogisticRegression()
+    clf.fit(X, y, batch_size=X.shape[0])
     
     # plot boundary
     BoundaryPlotter(X, y).plot_boundary(clf, step_size=0.005)
@@ -75,6 +80,39 @@ def regression():
     gp = GaussianProcess()
     gp.fit(X, y)
     gp.plot()
+    
+    
+def reinforcement_learning():
+    """
+    Reinforcement learning.
+    """
+    # initialize environment
+    # -------------------------------------------------------------------------
+    # environment description
+    env_description = {
+        "size": {
+            "x": 8,
+            "y": 4
+        },
+        "obs_pos": [[1, 1], [3, 1], [3, 7], [0, 5], [1, 5]],
+        "r": {
+            "r_p": 10,
+            "r_n": -10,
+            "r_o": -1,
+            "r_p_pos": [[3, 3], [0, 7]],
+            "r_n_pos": [[2, 3], [3, 6], [0, 2]]
+        }
+    }
+    
+    env = GridWorld(env_description)
+    
+    # initialize value iteration
+    # and calculate the optimal policy
+    # -------------------------------------------------------------------------
+    val_it = ValueIteration(gamma=0.99, thresh=10e-5, env=env)
+    # get optimal policy
+    pi = val_it.get_pi()
+    env.pretty_print_policy(pi)
 
 
 # -----------------------------------------------------------------------------
@@ -85,5 +123,7 @@ if __name__ == "__main__":
     """
     Main function.
     """
-    regression()
+    classification()
+#    regression()
+#    reinforcement_learning()
     

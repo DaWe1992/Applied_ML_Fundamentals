@@ -69,8 +69,7 @@ class DataCreator:
                 n_redundant=0,
                 n_informative=2,
                 n_clusters_per_class=1,
-                class_sep=0.65,
-                random_state=60
+                class_sep=0.65
             )
         
         return X, y

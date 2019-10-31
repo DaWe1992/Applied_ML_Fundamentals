@@ -1118,7 +1118,7 @@
 		\item Can correct up to $(d - 1) / 2$ single bit-errors
 		\item In this case: Use seven classifiers
 		\input{08_decision_trees/03_tbl/ecoc}
-		\item Predicted code-word: \highlight{1011111} $\Rightarrow$ What is the true class??? \\
+		\item Predicted code-word: \textbf{1011111} $\Rightarrow$ What is the true class??? \\
 			\textit{Probably class \textbf{a}, the second classifier made a mistake...}
 	\end{itemize}
 \end{frame}
@@ -1161,7 +1161,22 @@
 
 % Summary
 \begin{frame}{Summary}{}
-
+	\begin{itemize}
+		\item \textbf{Decision trees:}
+		\begin{itemize}
+			\item The construction of decision trees is guided by an \textbf{impurity measure}, \\
+				e.\,g. entropy or Gini
+			\item Recursively select features which \textbf{maximize the information gain}
+			\item Decision trees can handle \textbf{numeric attributes} and \textbf{continuous output}
+		\end{itemize}
+		\item \textbf{Ensembles:}
+		\begin{itemize}
+			\item \textbf{Bagging:} Sample diverse data sets from underlying data
+			\item \textbf{Boosting:} Focus on instances misclassified by earlier classifiers
+			\item \textbf{Stacking:} Learn a meta-classifier on top of base classifiers
+			\item \textbf{Random forests} combine bagging with randomization
+		\end{itemize}
+	\end{itemize}
 \end{frame}
 
 
@@ -1171,7 +1186,15 @@
 
 % Self-Test Questions
 \begin{frame}{Self-Test Questions}{}\important
-
+	\begin{enumerate}
+		\item What is an inductive bias? What is the inductive bias of decision trees?
+		\item Explain what Occam's razor is.
+		\item What does entropy measure? How do you compute the information gain?
+		\item True or false: \textit{'Pure data sets have maximal entropy.'}
+		\item What is the advantage of ensemble methods?
+		\item What distinguishes bagging from boosting?
+		\item Explain what a random forest does.
+	\end{enumerate}
 \end{frame}
 
 
