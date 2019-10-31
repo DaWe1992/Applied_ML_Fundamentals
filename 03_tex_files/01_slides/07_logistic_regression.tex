@@ -25,6 +25,13 @@
 \maketitlepage
 
 
+% Lecture Overview
+%______________________________________________________________________
+\begin{frame}{Lecture Overview}{}
+	\makeoverview{6}
+\end{frame}
+
+
 % Agenda
 %______________________________________________________________________
 \begin{frame}{Agenda \today}
@@ -82,7 +89,7 @@
 			\item If $h_{\bm{\theta}}(x) \ge 0.5$, predict $y = 1$
 			\item If $h_{\bm{\theta}}(x) < 0.5$, predict $y = 0$
 		\end{itemize}
-		\item Outliers \textbf{affect the decision boundary}
+		\item \textbf{Outliers affect the decision boundary}
 		\item Furthermore, we only want $0 \le h_{\bm{\theta}}(x) \le 1$
 		\item Linear regression can output $h_{\bm{\theta}}(x) \ll 0$ or $h_{\bm{\theta}}(x) \gg 1$
 		\item \highlight{We need a better strategy!}
@@ -520,15 +527,17 @@
 
 % Summary
 \begin{frame}{Summary}{}
-
+	\begin{itemize}
+		\item \Highlight{Logistic regression is used for classification (!!!)}
+		\item It is used for \textbf{binary classification problems} (generalizations exist)
+		\item \textbf{Output:} Probability of instance belonging to positive class
+		\item Apply a \textbf{threshold} to get the classification
+		\item The algorithm minimizes the \textbf{cross entropy cost function}
+		\item There is \textbf{no closed-form solution} (unlike for linear regression)
+		\item \textbf{Basis functions} can be used for non-linear data
+		\item \textbf{Multi-class classification:} One-vs-Rest, One-vs-One
+	\end{itemize}
 \end{frame}
-
-
-% Subsection: Lecture Overview
-% --------------------------------------------------------------------------------------------------------
-\subsection{Lecture Overview}
-
-\makeoverview{3}
 
 
 % Subsection: Self-Test Questions
@@ -536,8 +545,23 @@
 \subsection{Self-Test Questions}
 
 % Self-Test Questions
-\begin{frame}{Self-Test Questions}{}
+\begin{frame}{Self-Test Questions}{}\important
+	\begin{enumerate}
+		\item Why should you not use linear regression for classification?
+		\item State the formula for the logistic function.
+		\item Why do we use cross entropy instead of the squared error?
+		\item Does logistic regression find the best-separating hyper-plane?
+		\item What techniques do you know for multi-class classification problems?
+	\end{enumerate}
+\end{frame}
 
+
+% Subsection: Lecture Outlook
+% --------------------------------------------------------------------------------------------------------
+\subsection{Lecture Outlook}
+
+\begin{frame}{What's next...?}{}
+	\makeoverview{6}
 \end{frame}
 
 
@@ -552,6 +576,18 @@
 	\begin{thebibliography}{2}
 
 	\end{thebibliography}
+\end{frame}
+
+
+% Subsection: Meme of the Day
+% --------------------------------------------------------------------------------------------------------
+\subsection{Meme of the Day}
+
+% Meme of the Day
+\begin{frame}{Meme of the Day}{}
+	\begin{figure}
+		\includegraphics[scale=0.45]{07_logistic_regression/02_img/meme_of_the_day}
+	\end{figure}
 \end{frame}
 
 

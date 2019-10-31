@@ -17,6 +17,7 @@ import numpy as np
 # sklearn
 # -----------------------------------------------------------------------------
 from sklearn.datasets import make_classification
+from sklearn.datasets import make_regression
 
 
 # -----------------------------------------------------------------------------
@@ -84,6 +85,13 @@ class DataCreator:
         """
         X = np.array([-1.50, -0.25, 0.00, 1.00, 5.00, 5.50, 10.50, 11.50])
         y = np.array([-1.60, 0.50, 0.80, -2.00, 0.00, 1.00, 3.00, 3.00])
+        
+        if sklearn:
+            X, y = make_regression(
+                n_samples=5,
+                n_features=1,
+                noise=10.0
+            )
         
         return X, y
     

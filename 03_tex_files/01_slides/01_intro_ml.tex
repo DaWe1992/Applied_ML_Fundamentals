@@ -25,6 +25,13 @@
 \maketitlepage
 
 
+% Lecture Overview
+%______________________________________________________________________
+\begin{frame}{Lecture Overview}{}
+	\makeoverview{1}
+\end{frame}
+
+
 % Agenda
 %______________________________________________________________________
 \begin{frame}{Agenda \today}
@@ -34,10 +41,14 @@
 \end{frame}
 
 
-% Section: General Overview
+% Section: Introduction
 %______________________________________________________________________
-\section{General Overview}
-\makedivider{General Overview}
+\section{Introduction}
+\makedivider{Introduction}
+
+% Subsection: Motivation
+% --------------------------------------------------------------------------------------------------------
+\subsection{Motivation}
 
 % Why Machine Learning?
 \begin{frame}{Why Machine Learning?}{}
@@ -65,6 +76,10 @@
 		\hfill\textbf{-- Hal Varian}, Chief Economist at Google, 2009}
 \end{frame}
 
+
+% Subsection: Definition of Machine Learning
+% --------------------------------------------------------------------------------------------------------
+\subsection{Definition of Machine Learning}
 
 % Definition of Machine Learning
 \begin{frame}{Definition of Machine Learning}{}
@@ -215,7 +230,7 @@
 		\item \highlight{Batch Learning}
 		\begin{itemize}
 			\item The learner is provided with a fixed set of training examples
-			\item See weather data set
+			\item Cf. weather data set
 			\item E.\,g. neural networks, decision trees
 		\end{itemize}
 		\item \highlight{Incremental/Online Learning}
@@ -414,13 +429,15 @@
 \begin{frame}{Training vs. Testing Performance}{}
 	\divideTwo{0.49}{
 		\begin{itemize}
-			\item Evaluate on data which was \textbf{not used} for training (\highlight{out-of-sample testing})
-			\item Two-way split: \texttt{Train - Test}
-			\item Even better: \texttt{Train - Dev - Test}
+			\item Evaluate on data which was \textbf{not used} for training {\footnotesize \highlight{(out-of-sample)}}
+			\item Two-way split: \\
+				\texttt{Train - Test}
+			\item Even better: \\
+				\texttt{Train - Dev - Test}
 			\vspace{2mm}
 			\begin{tabbing}
 				\hspace*{1.5cm}\= \kill
-				\textbf{Train:}	\>	Train model 				\\
+				\textbf{Train:}	\>	Train model 			\\
 				\textbf{Dev:} 	\>	Tune hyper-parameters 	\\
 				\textbf{Test:} 	\>	Test final model
 			\end{tabbing}
@@ -594,15 +611,24 @@
 
 % Summary
 \begin{frame}{Summary}{}
-
+	\begin{itemize}
+		\item Vast amounts of data are prohibitive for manual inspection
+		\item Machine learning algorithms learn \textbf{without being explicitly programmed}
+		\item \textbf{Important distinctions:}
+		\begin{itemize}
+			\item Supervised learning $\Leftrightarrow$ unsupervised learning
+			\item Classification $\Leftrightarrow$ regression
+		\end{itemize}
+		\item \textbf{Challenges:}
+		\begin{enumerate}
+			\item Generalization
+			\item Feature engineering
+			\item Performance measurement
+			\item Model selection
+			\item Computation
+		\end{enumerate}
+	\end{itemize}
 \end{frame}
-
-
-% Subsection: Lecture Overview
-% --------------------------------------------------------------------------------------------------------
-\subsection{Lecture Overview}
-
-\makeoverview{1}
 
 
 % Subsection: Self-Test Questions
@@ -610,8 +636,25 @@
 \subsection{Self-Test Questions}
 
 % Self-Test Questions
-\begin{frame}{Self-Test Questions}{}
+\begin{frame}{Self-Test Questions}{}\important
+	\begin{enumerate}
+		\item What is the difference between supervised and unsupervised learning?
+		\item What is regression?
+		\item What does generalization mean?
+		\item \textit{'The more features the better.'} Is this statement correct or not? Give reasons for your answer.
+		\item Why do we need \texttt{train}, \texttt{dev} and \texttt{test} sets?
+		\item True or false: 100\,\% train accuracy is desirable.
+		\item State some applications of machine learning.
+	\end{enumerate}
+\end{frame}
 
+
+% Subsection: Lecture Outlook
+% --------------------------------------------------------------------------------------------------------
+\subsection{Lecture Outlook}
+
+\begin{frame}{What's next...?}{}
+	\makeoverview{2}
 \end{frame}
 
 
@@ -633,24 +676,5 @@
 % Thank you
 %______________________________________________________________________
 \makethanks
-
-
-%\section{Notation}
-%
-%% Notation
-%\begin{frame}{Notation}
-%	\begin{itemize}
-%		\item Mathematical notation:
-%		\begin{itemize}
-%			\item Scalars: Standard letters, e.\,g. $h$, $t$, ...
-%			\item Vectors: Bold-faced letters, e.\,g. $\bm{x}$, $\bm{\theta}$, ...
-%			\item Matrices: Bold-faced capital letters, e.\,g. $\bm{W}$, $\bm{\Phi}$, ...
-%		\end{itemize}
-%		\item Symbols:
-%	\end{itemize}
-%
-%	\input{04_ml_introduction/03_tbl/notation}
-%\end{frame}
-
 
 \end{document}

@@ -25,6 +25,13 @@
 \maketitlepage
 
 
+% Lecture Overview
+%______________________________________________________________________
+\begin{frame}{Lecture Overview}{}
+	\makeoverview{5}
+\end{frame}
+
+
 % Agenda
 %______________________________________________________________________
 \begin{frame}{Agenda \today}
@@ -34,10 +41,10 @@
 \end{frame}
 
 
-% Section: Introduction to Regression
+% Section: Introduction
 %______________________________________________________________________
-\section{Introduction to Regression}
-\makedivider{Introduction to Regression}
+\section{Introduction}
+\makedivider{Introduction}
 
 % Subsection: What is Regression?
 % --------------------------------------------------------------------------------------------------------
@@ -516,19 +523,23 @@
 % --------------------------------------------------------------------------------------------------------
 \subsection{General Idea}
 
-% What if...?
-\begin{frame}{What if...?}{}
-	\bubble{10}{7.5}{
-		\scriptsize This best-fitting function is \\[-2mm]
+% What if the Data is non-linear?
+\begin{frame}{What if the Data is non-linear?}{}
+	\bubble{2.5}{10.5}{
+		\scriptsize The best-fitting function is \\[-2mm]
 		\scriptsize obviously \textbf{not a straight line}! \\
 
-		\scriptsize \highlight{What would you do?}
+		\scriptsize \textbf{What would you do?}
 	}
-	\begin{itemize}
-		\item So far we have fitted linear functions
-		\item \Highlight{What if the data is not linear...?}
-	\end{itemize}
-	\includegraphics[scale=0.5]{05_regression/02_img/non_linear_data}
+	\divideTwo{0.49}{
+		\vspace*{-15mm}
+		\begin{itemize}
+			\item So far we have fitted straight lines
+			\item \Highlight{What if the data is not linear...?}
+		\end{itemize}
+	}{0.49}{
+		\includegraphics[scale=0.5]{05_regression/02_img/non_linear_data}
+	}
 \end{frame}
 
 
@@ -538,7 +549,7 @@
 		\scriptsize We assume 1-D data
 	}
 	\begin{itemize}
-		\item Remember: \highlight{`When stuck switch to a different perspective'}
+		\item Remember: \textbf{`When stuck switch to a different perspective'}
 		\item We can add \textbf{higher-order} features using \highlight{basis functions $\varphi$}:
 		\begin{equation}
 			h_{\bm{\theta}}(x) = \sum_{j=0}^P \theta_j\varphi_j(x)
@@ -681,6 +692,7 @@
 	\bubble{12}{5}{
 		\scriptsize Much better :)
 	}
+	\vspace*{3mm}
 	One solution: Use a \highlight{smaller degree} (here: $P = 3$)
 	\vspace{-3mm}
 	\begin{figure}
@@ -792,22 +804,20 @@
 
 % Summary
 \begin{frame}{Summary}{}
-
+	\begin{itemize}
+		\item Regression predicts \textbf{continuous target variables}
+		\item The algorithm minimizes the \textbf{(mean) squared error}
+		\item Minimizing the squared error gives the \textbf{maximum likelihood solution}
+		\item \textbf{Two approaches:}
+		\begin{enumerate}
+			\item Normal equation
+			\item (Batch / stochastic / mini-batch) gradient descent
+		\end{enumerate}
+		\item Probabilistic regression allows to \textbf{quantify the uncertainty of the model}
+		\item Use \textbf{basis functions} to fit non-linear regression lines
+		\item \textbf{Regularization} is important
+	\end{itemize}
 \end{frame}
-
-% Meme of the day
-\begin{frame}{Summary}{Meme of the day}
-	\begin{figure}
-		\includegraphics[scale=0.25]{05_regression/02_img/gauss_meme.png}
-	\end{figure}
-\end{frame}
-
-
-% Subsection: Lecture Overview
-% --------------------------------------------------------------------------------------------------------
-\subsection{Lecture Overview}
-
-\makeoverview{3}
 
 
 % Subsection: Self-Test Questions
@@ -815,16 +825,26 @@
 \subsection{Self-Test Questions}
 
 % Self-Test Questions
-\begin{frame}{Self-Test Questions}{}
-	\begin{itemize}
-	\item What is a suitable cost function for regression? Where does this cost function come from and which assumption(s) are there?
-	\item What is regularization? Why should you apply it?
-	\item What is maximum likelihood estimation?
-	\item Which kinds of gradient descent algorithms do you know? Explain their differences.
-	\item Which kinds of basis functions do you know? Why should basis functions be used? How to decide which basis functions to use?
-	\item What is overfitting?
-	\item Your model does not perform well, because of its high bias. Your boss suggests adding more training data. How would you respond?
-	\end{itemize}
+\begin{frame}{Self-Test Questions}{}\important
+	\begin{enumerate}
+		\item What is the goal of regression?
+		\item What can you do if matrix inversion fails for the normal equation?
+		\item What is a suitable cost function for regression? Where does it come from?
+		\item Does gradient descent give the exact solution?
+		\item What is the advantage of probabilistic regression?
+		\item What are basis functions? Why use them? State some examples.
+		\item What is overfitting / underfitting?
+		\item What is regularization? Why should you apply it?
+	\end{enumerate}
+\end{frame}
+
+
+% Subsection: Lecture Outlook
+% --------------------------------------------------------------------------------------------------------
+\subsection{Lecture Outlook}
+
+\begin{frame}{What's next...?}{}
+	\makeoverview{6}
 \end{frame}
 
 
@@ -832,23 +852,43 @@
 % --------------------------------------------------------------------------------------------------------
 \subsection{Recommended Literature and further Reading}
 
-% Recommended further Reading
-\begin{frame}{Recommended Literature and further Reading}{}
-	\begin{itemize}
-	\item "Pattern Recognition and Machine Learning", Christopher M. Bishop - Chapter 3.1 Linear Models for Regression
-	\item Stanford CS229 course notes, Andrew Ng, \url{http://cs229.stanford.edu/summer2019/cs229-notes1.pdf}
-	\item Stanford CS229 course recording, Andrew Ng, \url{https://www.youtube.com/watch?v=5u4G23_OohI}
-	\item "Machine Learning: A Probabilistic Perspective", Kevin P. Murphy, Chapters 1.4.5 Linear Regression and 1.4.7 Overfitting
-	\end{itemize}
-\end{frame}
-
 % Literature
 %______________________________________________________________________
-\begin{frame}{Recommended Literature and further Reading}{}
+\begin{frame}[allowframebreaks]{Recommended Literature and further Reading}{}
 	\footnotesize
 	\begin{thebibliography}{2}
-
+		\literature{book}{Bishop.2006}{[1] Pattern Recognition and Machine Learning}
+			{Christopher Bishop. Springer. 2006.}{$\rightarrow$ \href{
+				http://users.isr.ist.utl.pt/~wurmd/Livros/school/Bishop\%20-\%20Pattern\%20Recognition\%20And\%20Machine\%20Learning\%20-\%20Springer\%20\%202006.pdf
+			}{\linkstyle{Link}}, cf. chapter 3.1 \textit{'Linear Models for Regression'}}
+			
+		\literature{book}{Murphy.2012}{[2] Machine Learning: A Probabilistic Perspective}
+			{Kevin Murphy. MIT Press. 2012.}{$\rightarrow$ \href{
+				https://doc.lagout.org/science/Artificial\%20Intelligence/Machine\%20learning/Machine\%20Learning_\%20A\%20Probabilistic\%20Perspective\%20\%5BMurphy\%202012-08-24\%5D.pdf
+			}{\linkstyle{Link}}, cf. chapters 1.4.5 \textit{'Linear Regression'} and 1.4.7 \textit{'Overfitting'}}	
+			
+		\literature{online}{Ng.2019}{[3] Stanford CS229 course notes}
+			{Andrew Ng. Stanford University. 2019.}{$\rightarrow$ \href{
+				http://cs229.stanford.edu/summer2019/cs229-notes1.pdf
+			}{\linkstyle{Link}}}
+			
+		\literature{online}{Ng.2008}{[4] Stanford CS229 course recording}
+			{Andrew Ng. Stanford University. 2008.}{$\rightarrow$ \href{
+				https://www.youtube.com/watch?v=5u4G23_OohI
+			}{\linkstyle{Link}}}
 	\end{thebibliography}
+\end{frame}
+
+
+% Subsection: Meme of the Day
+% --------------------------------------------------------------------------------------------------------
+\subsection{Meme of the Day}
+
+% Meme of the Day
+\begin{frame}{Meme of the Day}{}
+	\begin{figure}
+		\includegraphics[scale=0.4]{05_regression/02_img/meme_of_the_day}
+	\end{figure}
 \end{frame}
 
 

@@ -25,6 +25,13 @@
 \maketitlepage
 
 
+% Lecture Overview
+%______________________________________________________________________
+\begin{frame}{Lecture Overview}{}
+	\makeoverview{6}
+\end{frame}
+
+
 % Agenda
 %______________________________________________________________________
 \begin{frame}{Agenda \today}
@@ -194,7 +201,7 @@
 \begin{frame}{Prediction with $k$-Nearest Neighbors (Ctd.)}{}
 	\highlight{$k$-nearest neighbors algorithm:}
 	\begin{enumerate}
-		\item Calculate the \textbf{pairwise distances} between the new data point and all data points in the data set
+		\item Calculate the distances between the new data point and \textbf{all data points in the data set}
 		\item Sort the data points by distances \textbf{in ascending order} \\
 			{\footnotesize \textit{(if similarity metrics are used, sort in descending order)}}
 		\item Look at the first $k$ examples and \textbf{count how often each class occurs}
@@ -315,15 +322,22 @@
 
 % Summary
 \begin{frame}{Summary}{}
-
+	\begin{itemize}
+		\item The basic idea is to classify unknown instances \textbf{based on nearby examples}
+		\item The algorithm is an example for \textbf{instance-based learning}
+		\item \textbf{Distance metrics} allow to calculate the distance between data points:
+		\begin{itemize}
+			\item Manhattan distance
+			\item Euclidean distance
+			\item Cosine similarity
+		\end{itemize}
+		\item Choose the value of $k$ wisely:
+		\begin{itemize}
+			\item Too small: \textbf{Overfitting}
+			\item Too large: \textbf{Underfitting}
+		\end{itemize}
+	\end{itemize}
 \end{frame}
-
-
-% Subsection: Lecture Overview
-% --------------------------------------------------------------------------------------------------------
-\subsection{Lecture Overview}
-
-\makeoverview{3}
 
 
 % Subsection: Self-Test Questions
@@ -331,8 +345,26 @@
 \subsection{Self-Test Questions}
 
 % Self-Test Questions
-\begin{frame}{Self-Test Questions}{}
+\begin{frame}{Self-Test Questions}{}\important
+	\begin{enumerate}
+		\item Outline the $k$-nearest neighbors algorithm.
+		\item What is instance-based learning (in contrast to model-based learning)?
+		\item How can you compute distances? What properties do distance metrics have?
+		\item What is the intuition behind the triangle inequality?
+		\item How can you choose $k$?
+		\item Suppose you have a data set comprising $n = 50$ examples. \\
+			If you set $k = n$, what class does the algorithm predict?
+		\item What are advantages and disadvantages of the algorithm?
+	\end{enumerate}
+\end{frame}
 
+
+% Subsection: Lecture Outlook
+% --------------------------------------------------------------------------------------------------------
+\subsection{Lecture Outlook}
+
+\begin{frame}{What's next...?}{}
+	\makeoverview{6}
 \end{frame}
 
 
@@ -347,6 +379,18 @@
 	\begin{thebibliography}{2}
 
 	\end{thebibliography}
+\end{frame}
+
+
+% Subsection: Meme of the Day
+% --------------------------------------------------------------------------------------------------------
+\subsection{Meme of the Day}
+
+% Meme of the Day
+\begin{frame}{Meme of the Day}{}
+	\begin{figure}
+		\includegraphics[scale=0.225]{06_knn/02_img/meme_of_the_day}
+	\end{figure}
 \end{frame}
 
 

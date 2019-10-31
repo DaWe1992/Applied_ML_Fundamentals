@@ -350,13 +350,29 @@
 
 % overview page
 \newcommand{\makeoverview}[1]{
-	\begin{frame}{Lecture Overview}{}
-		\begin{tabbing}
-			\hspace*{3.5cm}\= \kill
-			\ifnum #1=1 \highlight{\textbf{Unit I:}} \else \textbf{Unit I:} \fi
-			\> \ifnum #1=1 \highlight{Machine Learning Introduction} \else Machine Learning Introduction \fi \\
-		\end{tabbing}
-	\end{frame}
+	\begin{tabbing}
+		\hspace*{3.5cm}\= \kill
+		\ifnum #1=1 \highlight{\textbf{Unit I}} \else \textbf{Unit I} \fi
+		\> \ifnum #1=1 \highlight{Machine Learning Introduction} \else Machine Learning Introduction \fi \\
+		\ifnum #1=2 \highlight{\textbf{Unit II}} \else \textbf{Unit II} \fi
+		\> \ifnum #1=2 \highlight{Mathematical Foundations} \else Mathematical Foundations \fi \\
+		\ifnum #1=3 \highlight{\textbf{Unit III}} \else \textbf{Unit III} \fi
+		\> \ifnum #1=3 \highlight{Bayesian Decision Theory} \else Bayesian Decision Theory \fi \\
+		\ifnum #1=4 \highlight{\textbf{Unit IV}} \else \textbf{Unit IV} \fi
+		\> \ifnum #1=4 \highlight{Probability Density Estimation} \else Probability Density Estimation \fi \\
+		\ifnum #1=5 \highlight{\textbf{Unit V}} \else \textbf{Unit V} \fi
+		\> \ifnum #1=5 \highlight{Regression} \else Regression \fi \\
+		\ifnum #1=6 \highlight{\textbf{Unit VI}} \else \textbf{Unit VI} \fi
+		\> \ifnum #1=6 \highlight{Classification I} \else Classification I \fi \\
+		\ifnum #1=7 \highlight{\textbf{Unit VII}} \else \textbf{Unit VII} \fi
+		\> \ifnum #1=7 \highlight{Evaluation} \else Evaluation \fi \\
+		\ifnum #1=8 \highlight{\textbf{Unit VIII}} \else \textbf{Unit VIII} \fi
+		\> \ifnum #1=8 \highlight{Classification II} \else Classification II \fi \\
+		\ifnum #1=9 \highlight{\textbf{Unit IX}} \else \textbf{Unit IX} \fi
+		\> \ifnum #1=9 \highlight{Clustering} \else Clustering \fi \\
+		\ifnum #1=10 \highlight{\textbf{Unit X}} \else \textbf{Unit X} \fi
+		\> \ifnum #1=10 \highlight{Dimensionality Reduction} \else Dimensionality Reduction \fi \\
+	\end{tabbing}
 }
 
 % thank you page
@@ -378,7 +394,7 @@
 		
 		\vfill
 		\highlight{Contact:} \\
-		\insertauthor\ (D062271) \\
+		\insertauthor \\
 		\insertinstitute \\
 		\href{mailto:daniel.wehner@sap.com}{\linkstyle{daniel.wehner@sap.com}}
 		
