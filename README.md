@@ -18,7 +18,7 @@ This lecture is supposed to give a general introduction into state-of-the-art ma
     * Motivation and applications
     * Terminology
     * Key challenges in ML: Generalization, feature engineering, model selection, ...
-2. **Mathematical foundations**
+2. **Mathematical foundations** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/02_math.pdf))
 	* Statistics
 	* Linear algebra
 	* Optimization

@@ -1,0 +1,23 @@
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[
+		scale=0.8,
+		axis/.style={
+			->,ultra thick
+		}
+	]
+	
+		% draw grid
+		\draw[lightgray] (0,0) grid (5,5);
+		
+		\draw[very thick,myblue1,-stealth] (0,0) -- (3,1) node[right=3mm,fill=myblue1!30] {$\bm{x}^{(1)}$};
+		\draw[very thick,gray,-stealth] (0,0) -- (2,4) node[right=3mm,fill=lightgray!50] {$\bm{x}^{(2)}$};
+	
+		% draw axes
+		\draw[axis] (0,0) -- (0,5) node[above]{$x_2$}; \draw[axis] (0,0) -- (5,0) node[right]{$x_1$};
+		% axis labels
+		\foreach \x in {0,1,...,5} \node at (\x,-0.5){\footnotesize{\x}};
+		\foreach \y in {0,1,...,5} \node at (-0.5,\y){\footnotesize{\y}};
+
+	\end{tikzpicture}
+\end{figure}
