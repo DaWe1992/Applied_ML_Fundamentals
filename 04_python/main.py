@@ -10,6 +10,10 @@ Created on Tue Oct 29 17:06:24 2019
 # Imports
 # -----------------------------------------------------------------------------
 
+# numpy
+# -----------------------------------------------------------------------------
+import numpy as np
+
 # data creation and plotting
 # -----------------------------------------------------------------------------
 from utils.DataCreator import DataCreator
@@ -47,17 +51,17 @@ def classification():
     X, y = DataCreator().make_classification(sklearn=True)
     
     # train kNN classifier
-#    clf = kNN(n_neighbors=3)
+#    clf = kNN(n_neighbors=1)
 #    clf.fit(X, y)
     
     # train SVM classifier
-#    clf = SVM(kernel="linear", C=1.0, p=2, s=5.0)
-#    y[np.where(y == 0)] = -1
-#    clf.fit(X, y)
+    clf = SVM(kernel="linear", C=1.0, p=2, s=5.0)
+    y[np.where(y == 0)] = -1
+    clf.fit(X, y)
     
     # train logistic regression classifier
-    clf = LogisticRegression()
-    clf.fit(X, y, batch_size=X.shape[0])
+#    clf = LogisticRegression()
+#    clf.fit(X, y, batch_size=X.shape[0])
     
     # plot boundary
     BoundaryPlotter(X, y).plot_boundary(clf, step_size=0.005)
