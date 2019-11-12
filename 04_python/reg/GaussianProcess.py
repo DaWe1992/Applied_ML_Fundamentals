@@ -12,7 +12,7 @@ Created on Wed Oct 30 18:33:53 2019
 
 # numpy and plotting
 # -----------------------------------------------------------------------------
-import autograd.numpy as np
+import numpy as np
 import matplotlib.pyplot as plt 
 
 # scipy

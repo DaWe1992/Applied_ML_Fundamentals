@@ -1,4 +1,5 @@
-.DS_Store
-.aux
-.log
+*DS_Store
+*.aux
+*.log
 exercise_solutions/
+*__pycache__
