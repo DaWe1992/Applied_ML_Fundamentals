@@ -1,4 +1,10 @@
+% rubber: clean 02_math.aux
+% rubber: clean 02_math.fls
+% rubber: clean 02_math.out
+% rubber: clean 02_math.log
 \input{preamble_theme}
+\usepackage{hyperref}
+\usepackage{movie15}
 
 % ====================================================
 % ====================================================
@@ -92,8 +98,159 @@
 \makedivider{Optimization}
 
 % 
-\begin{frame}{}{}
+\begin{frame}{Motivation}{Every machine learning problem is an optimization problem!}
+\begin{itemize}
+\item In every machine learning problem, you will have:
+\begin{itemize}
+\item an objective function you want to optimize
+\item data you want to learn from
+\item parameters which need to be learned
+\item assumptions on your problem, your data and how the world works
+\end{itemize}
+\item Thus, we would like to have general solutions to the problem of learning
+\item Machine learning provides suitable objective functions for optimization based on the data, different models embody different objective functions and assumptions
+\end{itemize}
+\end{frame}
 
+\begin{frame}{Constrained Optimization}{How to formalize an optimization problem}
+	\begin{align*}
+		\underset{\theta}{\text{min }} J(\theta, D) &= \dots &\leftarrow\text{cost function / objective}\\
+		\text{s.\,t. } f(\theta, D) &= 0 &\leftarrow\text{equality constraints}\\
+		g(\theta, D) &\ge 0 &\leftarrow\text{inequality constraints}\\
+	\end{align*}
+	What should an ideal optimization problem, i.\,e. the cost function and constraints look like?
+\end{frame}
+
+\begin{frame}{Constrained Optimization}{How to formalize an optimization problem}
+	\begin{align*}
+		\underset{\theta}{\text{min }} J(\theta, D) &= \dots &\leftarrow\text{convex function}\\
+		\text{s.\,t. } f(\theta, D) &= 0 &\leftarrow\text{linear function}\\
+		g(\theta, D) &\ge 0 &\leftarrow\text{convex set}\\
+	\end{align*}
+\end{frame}
+
+\begin{frame}{Cost Functions}{Which cost functions are there? Ideally, the cost function is convex}
+	\divideTwo{0.49}{\centering \href{https://upload.wikimedia.org/wikipedia/commons/a/a3/Gradient_descent.gif}{non-convex}}{0.49}{\hspace{1cm}convex}\\
+	\vspace{0.4cm}
+	\includegraphics[width=0.9\textwidth]{02_math/02_img/costfunctions.png}
+\end{frame}
+
+\begin{frame}{Convexity}{Convex Sets}
+	\begin{itemize}
+		\item A set $C \subseteq \mathbb{R}^n$ is convex if for each $x, y \in C$ and any $\alpha \in [0,1]$, $\alpha x + (1 - \alpha)y \in C$. Examples are $\mathbb{R}^n$ and norm balls.\\
+	\end{itemize}
+	\begin{figure}
+		\center
+		\includegraphics[width=0.6\textwidth]{02_math/02_img/convexsets.png}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Convexity}{Convex Functions}
+	\begin{itemize}
+		\item A function $f : \mathbb{R}^n \rightarrow \mathbb{R}$ is convex if for $x, y \in dom(f)$ and any $\alpha \in [0,1]$, $f(\alpha x + (1 - \alpha)y) \le \alpha f(x) + (1 - \alpha)f(y)$. Examples are linear functions $f(x) = w^Tx + b$ and quadratic functions $f(x) = x^TAx + b^Tx + c$.\\
+	\end{itemize}
+	\begin{figure}
+		\center
+		\includegraphics[width=0.6\textwidth]{02_math/02_img/convexfunction.png}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Convexity}{Why are convex cost functions so nice?}
+	\begin{itemize}
+		\item Local solutions are global optima
+		\item Efficient implementations of optimizers are available
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Convexity}{How to recognize a convex function? Convexity conditions}
+	\begin{itemize}
+		\item First-order convexity condition:\\ Suppose $f : \mathbb{R}^n \rightarrow \mathbb{R}$ is differentiable. The function $f$ is convex iff $f(y) \ge f(x) + \nabla f(x)^T(y - x) \hspace{0.2cm}\forall x, y \in dom(f)$.
+		\item Second-order convexity condition:\\ Suppose $f : \mathbb{R}^n \rightarrow \mathbb{R}$ is twice differentiable. The function $f$ is convex iff $\nabla^2 f(x) \ge 0 \vspace{0.2cm}\forall x \in dom(f)$.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Constrained Optimization}{How to solve an optimization problem with constraints}
+	\begin{align*}
+		\text{min } f(x,y) &= 2\cdot y + x\\
+		\text{s.\,t. } 0 = g(x,y) &= y^2 +xy -1\\
+	\end{align*}
+	\begin{itemize}
+		\item Convert the problem to an unconstrained one\\
+		\item Introduce Lagrange multipliers
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Constrained Optimization}{Lagrange multipliers}
+	\divideTwo{0.49}{
+		\begin{align*}
+			\text{min } f(x,y) &= 2\cdot y + x\\
+			\text{s.\,t. } 0 = g(x,y) &= y^2 +xy -1\\
+		\end{align*}
+	}{0.49}{
+		\begin{align*}
+			L(x,y,\lambda) &= f(x,y) + \lambda g(x,y)\\
+			\frac{\partial L}{\partial x} &= 1 + \lambda y\\
+			\frac{\partial L}{\partial y} &= 2 + 2\lambda y + \lambda x\\
+			\frac{\partial L}{\partial \lambda} &= y^2 + xy - 1\\
+		\end{align*}
+	}
+\end{frame}
+
+\begin{frame}{Constrained Optimization}{Lagrange multipliers}
+	\divideTwo{0.49}{
+		\begin{align*}
+			\text{I.    }0 &= 1 + \lambda y\\
+			\text{II.   }0 &= 2 + 2\lambda y + \lambda x\\
+			\text{III.  }0 &= y^2 + xy - 1\\
+		\end{align*}
+	}{0.49}{
+		\begin{align*}
+			\text{I.  }\lambda &= -\frac{1}{y}\\
+			\text{I.} \rightarrow \text{II.  }x &= 0\\
+			\text{III. }y &= \pm 1
+		\end{align*}
+	}
+\end{frame}
+
+\begin{frame}{Numerical Optimization}{What to do if we cannot solve it analytically?}
+	\begin{itemize}
+		\item Different numerical optimization algorithms exist for optimizing a function numerically on a computer if we can't solve it analytically
+		\item Many approaches incrementally update an estimate $\theta_{new} := \theta_{old} + \alpha \delta\theta$ of the optimal parameters, so that after each update $J(\theta_{new}) < J(\theta_{old})$
+		\item The challenge is to find the right step size $\alpha$ and direction $\delta\theta$
+		\item Different algorithms differ in the number of required iterations, the computational cost per iteration, the convergence guarantees, the robustness with noisy cost functions and their memory usage
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Numerical Optimization}{Optimization algorithms}
+	\begin{itemize}
+		\item There are various approaches to numerical optimization
+		\item Gradient-based methods require differentiable functions and not too many iterations, but only guarantee to find a local optimum, examples are:
+		\begin{itemize}
+			\item Gradient Descent (with constant, variable or line-search-optimized step size)
+			\item (L-)BFGS
+			\item Conjugate Gradient Descent
+		\end{itemize}
+		\item Non-gradient based methods may find a global optimum, but require a large number of steps, examples are:
+		\begin{itemize}
+			\item Genetic Algorithms
+			\item Non-Linear Simplex
+			\item Nelder-Mead
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Numerical Optimization}{There are many other things you have to consider}
+Initialization also matters...
+\includegraphics[width=0.75\textwidth]{02_math/02_img/gradientascent.png}
+\end{frame}
+
+\begin{frame}{Want to learn more about optimization?}{Every machine learning problem is an optimization problem!}
+\begin{itemize}
+\item Deep Learning book chapters 4.3, 4.4 and 8 (\href{https://www.deeplearningbook.org/contents/numerical.html}{Link chapters 4.3, 4.4}, \href{https://www.deeplearningbook.org/contents/optimization.html}{Link chapter 8}) are highly recommended
+\item Boyd \& Vandenberghe, Convex Optimization (\href{http://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf}{Link})
+\item Stanford convex optimization course (\href{https://web.stanford.edu/class/ee364a/lectures.html}{Link})
+\item MOOC on constrained optimization (\href{https://www.khanacademy.org/math/multivariable-calculus/applications-of-multivariable-derivatives/lagrange-multipliers-and-constrained-optimization/v/constrained-optimization-introduction}{Link})
+\end{itemize}
 \end{frame}
 
 
