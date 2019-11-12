@@ -65,9 +65,9 @@
 \begin{frame}{What is a Vector?}{}
 	\divideTwo{0.49}{
 		\begin{align*}
-			\bm{a} 		&= \left[\begin{array}{C{1em}} $a_1$ \\ $a_2$ \end{array}\right] 	\\[4mm]
-			\bm{x}^{(1)} 	&= \left[\begin{array}{C{1em}} $3$ \\ $1$ \end{array}\right] 	\\[4mm]
-			\bm{x}^{(2)} 	&= \left[\begin{array}{C{1em}} $2$ \\ $4$ \end{array}\right]
+			\bm{x} 	&= \left[\begin{array}{C{1em}} $x_1$ \\ $x_2$ \end{array}\right] 	\\[4mm]
+			\bm{v} 	&= \left[\begin{array}{C{1em}} $3$ \\ $1$ \end{array}\right] 		\\[4mm]
+			\bm{w} 	&= \left[\begin{array}{C{1em}} $2$ \\ $4$ \end{array}\right]
 		\end{align*}
 	}{0.49}{
 		\input{02_math/01_tikz/vector}
@@ -79,43 +79,432 @@
 \begin{frame}{Multiplication by a Scalar}{}
 	\divideTwo{0.49}{
 		\begin{align*}
-			c \bm{a}
-				&= c \left[\begin{array}{C{1em}} $a_1$ \\ $a_2$ \end{array}\right]
-					= \left[\begin{array}{C{1em}} $c a_1$ \\ $c a_2$ \end{array}\right]	\\[4mm]
-			2 \bm{x}^{(1)} 
+			c \bm{x}
+				&= c \left[\begin{array}{C{1em}} $x_1$ \\ $x_2$ \end{array}\right]
+					= \left[\begin{array}{C{1em}} $c x_1$ \\ $c x_2$ \end{array}\right]	\\[4mm]
+			2 \bm{v} 
 				&= 2 \left[\begin{array}{C{1em}} $3$ \\ $1$ \end{array}\right]
 					= \left[\begin{array}{C{1em}} $6$ \\ $2$ \end{array}\right]
 		\end{align*}
 	}{0.49}{
-
+		\input{02_math/01_tikz/vector_mult_scalar}
 	}
 \end{frame}
 
 
 % Addition of Vectors
 \begin{frame}{Addition of Vectors}{}
-	\divideTwo{0.49}{
+	\divideTwo{0.59}{
 		\begin{align*}
-			\bm{a} + \bm{b} = \left[\begin{array}{C{1em}} $a_1$ \\ $a_2$ \end{array}\right] + \left[\begin{array}{C{1em}} $b_1$ \\ $b_2$ \end{array}\right]
-				&= \left[\begin{array}{C{3em}} $a_1 + b_1$ \\ $a_2 + b_2$ \end{array}\right] \\[4mm]
-			\bm{x}^{(1)} + \bm{x}^{(2)} = \left[\begin{array}{C{1em}} $3$ \\ $1$ \end{array}\right] + \left[\begin{array}{C{1em}} $2$ \\ $4$ \end{array}\right]
+			\bm{x} + \bm{y} = \left[\begin{array}{C{1em}} $x_1$ \\ $x_2$ \end{array}\right] +
+					\left[\begin{array}{C{1em}} $y_1$ \\ $y_2$ \end{array}\right]
+				&= \left[\begin{array}{C{3em}} $x_1 + y_1$ \\ $x_2 + y_2$ \end{array}\right] \\[4mm]
+			\bm{v} + \bm{w} = \left[\begin{array}{C{1em}} $3$ \\ $1$ \end{array}\right] +
+					\left[\begin{array}{C{1em}} $2$ \\ $4$ \end{array}\right]
 				&= \left[\begin{array}{C{1em}} $5$ \\ $5$ \end{array}\right]
 		\end{align*}
-	}{}{
-
+	}{0.39}{
+		\input{02_math/01_tikz/vector_addition}
 	}
 \end{frame}
 
 
 % Linear Combination of Vectors
 \begin{frame}{Linear Combination of Vectors}{}
-	\divideTwo{0.49}{
-		\begin{align*}
-			\bm{u} = c_1 \bm{v}^{(1)} + c_2 \bm{v}^{(2)} + \dots + c_n \bm{v}^{(n)}
-		\end{align*}
-	}{0.49}{
+	\begin{align*}
+		\bm{u} = c_1 \bm{v}^{(1)} + c_2 \bm{v}^{(2)} + \dots + c_n \bm{v}^{(n)}
+	\end{align*}
+\end{frame}
 
+
+% Vector Transpose and inner and outer Product
+\begin{frame}{Vector Transpose and inner and outer Product}{}
+	\begin{itemize}
+		\item Vector transpose:
+		\begin{equation*}
+			\bm{v} = \left[\begin{array}{C{1em}} $3$ \\ $1$ \end{array}\right] \qquad\qquad
+			\bm{v}^{\intercal} = \left[\begin{array}{C{1em} C{1em}} $3$ & $1$ \end{array}\right]
+		\end{equation*}
+		\item Inner product / dot product / scalar product:
+		\begin{align*}
+			\bm{v} \cdot \bm{w}
+				&\equiv \bm{v}^{\intercal} \bm{w} \equiv \langle \bm{v}, \bm{w} \rangle \\[1mm]
+				&= \left[\begin{array}{C{1em} C{1em}} $3$ & $1$ \end{array}\right]
+					\left[\begin{array}{C{1em}} $2$ \\ $4$ \end{array}\right]
+					= (3 \cdot 2) + (1 \cdot 4) = 10
+		\end{align*}
+	\end{itemize}
+\end{frame}
+
+
+% Vector Transpose and inner and outer Product (Ctd.)
+\begin{frame}{Vector Transpose and inner and outer Product (Ctd.)}{}
+	\begin{itemize}
+		\item Outer product:
+		\begin{equation*}
+			\bm{v}\bm{w}^{\intercal}
+				= 	\left[\begin{array}{C{1em}} $3$ \\ $1$ \end{array}\right]
+						\left[\begin{array}{C{1em} C{1em}} $2$ & $4$ \end{array}\right]
+				= 	\left[\begin{array}{C{1em} C{1em}} $6$ & $12$ \\ $2$ & $4$ \end{array}\right]
+		\end{equation*}
+	\end{itemize}
+
+	\begin{boxBlueNoFrame}
+		\highlight{The inner product yields a scalar value, the results of an outer product is a matrix!}
+	\end{boxBlueNoFrame}
+\end{frame}
+
+
+% Length of a Vector
+\begin{frame}{Length of a Vector}{}
+	\begin{itemize}
+		\item Length of a vector (Frobenius norm):
+		\begin{align}
+			\Vert \bm{x} \Vert
+				&= \sqrt{\bm{x}^{\intercal} \bm{x}}		\\[1mm]
+			\Vert c \bm{x} \Vert
+				&= \vert c \vert \cdot \Vert \bm{x} \Vert	\\[1mm]
+			\Vert \bm{x} + \bm{y} \Vert
+				&\le \Vert \bm{x} \Vert + \Vert \bm{y} \Vert
+		\end{align}
+		\item Example:
+		\begin{equation*}
+			\Vert \bm{v} \Vert = \sqrt{3^2 + 1^2} = 10
+		\end{equation*}
+	\end{itemize}
+\end{frame}
+
+
+% Angle between Vectors
+\begin{frame}{Angle between Vectors}{}
+	\begin{itemize}
+		\item The angle between two vectors is given by:
+		\begin{align}
+			\cos \measuredangle (\bm{x}, \bm{y}) &= \frac{\bm{x} \cdot \bm{y}}{\Vert \bm{x} \Vert \cdot \Vert \bm{y} \Vert}
+				= \frac{\sum_{j=1}^m x_j \cdot y_j}{\sqrt{\sum_{j=1}^m (x_j)^2} \cdot \sqrt{\sum_{j=1}^m (y_j)^2}} \\[3mm]
+			\nonumber
+			\cos \measuredangle (\bm{v}, \bm{w}) &= \frac{\bm{v} \cdot \bm{w}}{\Vert \bm{v} \Vert \cdot \Vert \bm{w} \Vert}
+				= \frac{10}{\sqrt{10} \cdot \sqrt{20}} \approx 0.71
+		\end{align}
+		\vspace*{1mm}
+		\item Inner product: $\bm{x} \cdot \bm{y}
+			= \Vert \bm{x} \Vert \cdot \Vert \bm{y} \Vert \cdot \cos \measuredangle (\bm{x}, \bm{y})$
+	\end{itemize}
+\end{frame}
+
+
+% Projection of Vectors
+\begin{frame}{Projection of Vectors}{}
+	\floattext{12}{5}{
+		\input{02_math/01_tikz/vector_projection}
 	}
+	\begin{itemize}
+		\item How is the projection of $\bm{x}$ onto $\bm{y}$ defined?
+		\item Formally, we have:
+		\begin{align}
+			\nonumber
+			p 	&= \Vert \bm{v} \Vert \cos \measuredangle (\bm{v}, \bm{w}) 								\\[1mm]
+			\nonumber
+				&= \Vert \bm{v} \Vert \frac{\bm{v} \cdot \bm{w}}{\Vert \bm{v} \Vert \cdot \Vert \bm{w} \Vert} 	\\[1mm]
+				&= \frac{\bm{v} \cdot \bm{w}}{\Vert \bm{w} \Vert}
+		\end{align}
+		\item Note that $p$ is \textbf{not a vector!}
+	\end{itemize}
+\end{frame}
+
+
+% Subsection: Matrices
+% --------------------------------------------------------------------------------------------------------
+\subsection{Matrices}
+
+% What is a Matrix?
+\begin{frame}{What is a Matrix?}{}
+	\vspace*{-3mm}
+	\divideTwo{0.49}{
+		General case ($\mathbb{R}^{n \times m}$):
+		\begin{equation*}
+			\bm{X}
+				= 	\left[\begin{array}{C{1.5em} C{1.5em} C{1.5em} C{1.5em}}
+						$X_{11}$ 	& 	$X_{12}$ 	& 	$\hdots$ & 	$X_{1m}$ 	\\
+						$X_{21}$ 	& 	$X_{22}$ 	& 	$\hdots$ &	$X_{2m}$ 	\\
+						$\vdots$  	& 	$\vdots$		& 	$\ddots$ & 	$\vdots$		\\
+						$X_{n1}$ 	& 	$X_{n2}$ 	& 	$\hdots$ & 	$X_{nm}$
+					\end{array}\right]
+		\end{equation*}
+	}{0.49}{
+		\begin{alignat*}{2}
+			\bm{M}
+				&=	\left[\begin{array}{C{1em} C{1em} C{1em}}
+						$3$ & $4$ & $5$ \\
+						$1$ & $0$ & $1$
+					\end{array}\right]
+			\qquad &\mathbb{R}^{2 \times 3}
+			\\[3mm]
+			\bm{N}
+				&=	\left[\begin{array}{C{1em} C{1em} C{1em}}
+						$3$ & $0$ & $0$ \\
+						$0$ & $7$ & $0$ \\
+						$0$ & $0$ & $1$
+					\end{array}\right]
+			\qquad &\mathbb{R}^{3 \times 3}
+			\\[3mm]
+			\bm{P}
+				&=	\left[\begin{array}{C{1em} C{1em}}
+						$10$ & $1$ \\
+						$11$ & $2$
+					\end{array}\right]
+			\qquad &\mathbb{R}^{2 \times 2}
+		\end{alignat*}
+	}
+\end{frame}
+
+
+% Matrix Transpose and Addition
+\begin{frame}{Matrix Transpose and Addition}{}
+	\begin{itemize}
+		\item Transpose of a matrix:
+		\begin{equation}
+			\bm{M}^{\intercal}
+				=	\left[\begin{array}{C{1em} C{1em} C{1em}}
+						$3$ & $4$ & $5$ \\
+						$1$ & $0$ & $1$
+					\end{array}\right]^{\intercal}
+				=	\left[\begin{array}{C{1em} C{1em}}
+						$3$ & $1$ \\
+						$4$ & $0$ \\
+						$5$ & $1$
+					\end{array}\right]
+		\end{equation}
+		\item Addition of matrices:
+		\begin{equation}
+			\bm{X} + \bm{Y}
+				=	\left[\begin{array}{C{1.5em} C{1.5em}}
+						$X_{11}$ & $X_{12}$ \\
+						$X_{21}$ & $X_{22}$
+					\end{array}\right] +
+					\left[\begin{array}{C{1.5em} C{1.5em}}
+						$Y_{11}$ & $Y_{12}$ \\
+						$Y_{21}$ & $Y_{22}$
+					\end{array}\right]
+				=	\left[\begin{array}{C{4em} C{4em}}
+						$X_{11} + Y_{11}$ & $X_{12} + Y_{12}$ \\
+						$X_{21} + Y_{21}$ & $X_{22} + Y_{22}$
+					\end{array}\right]
+		\end{equation}
+	\end{itemize}
+\end{frame}
+
+
+% Matrix Multiplication
+\begin{frame}{Matrix Multiplication}{}
+	\begin{itemize}
+		\item Multiplication by scalars:
+		\begin{equation}
+			c \bm{X}
+				=	c \left[\begin{array}{C{1.5em} C{1.5em} C{1.5em}}
+						$X_{11}$ & $X_{12}$ & $X_{13}$ \\
+						$X_{21}$ & $X_{22}$ & $X_{23}$
+					\end{array}\right]
+				= 	\left[\begin{array}{C{3em} C{3em} C{3em}}
+						$c \cdot X_{11}$ & $c \cdot X_{12}$ & $c \cdot X_{13}$ \\
+						$c \cdot X_{21}$ & $c \cdot X_{22}$ & $c \cdot X_{23}$
+					\end{array}\right]
+		\end{equation}
+		\item Matrix-vector multiplication:
+		\begin{equation}
+			\bm{z} = \bm{X}\bm{y}
+				= 	\left[\begin{array}{C{1em} C{1em}}
+						$X_{11}$ & $X_{12}$ \\
+						$X_{21}$ & $X_{22}$
+					\end{array}\right]
+					\left[\begin{array}{C{1em}} $y_1$ \\ $y_2$ \end{array}\right]
+				=	\left[\begin{array}{C{6em}}
+						$X_{11} \cdot y_1 + X_{12} \cdot y_2$ \\
+						$X_{21} \cdot y_1 + X_{22} \cdot y_2$
+					\end{array}\right]
+		\end{equation}
+	\end{itemize}
+\end{frame}
+
+
+% Matrix Multiplication (Ctd.)
+\begin{frame}{Matrix Multiplication (Ctd.)}{}
+	\begin{itemize}
+		\item Matrix-matrix multiplication:
+		\begin{align}
+			\nonumber
+			\bm{Z}
+				&= \bm{X}\bm{Y} \\
+			\nonumber
+				&= 	\left[\begin{array}{C{1.5em} C{1.5em} C{1.5em}}
+						$X_{11}$ & $X_{12}$ & $X_{13}$ \\
+						$X_{21}$ & $X_{22}$ & $X_{23}$
+					\end{array}\right]
+					\left[\begin{array}{C{1.5em} C{1.5em}}
+						$Y_{11}$ & $Y_{12}$ \\
+						$Y_{21}$ & $Y_{22}$ \\
+						$Y_{31}$ & $Y_{32}$
+					\end{array}\right] \\
+				&= 	\left[\begin{array}{C{12em} C{12em}}
+						$X_{11}Y_{11} + X_{12}Y_{21} + X_{13}Y_{31}$ & $X_{11}Y_{12} + X_{12}Y_{22} + X_{13}Y_{32}$ \\
+						$X_{21}Y_{11} + X_{22}Y_{21} + X_{23}Y_{31}$ & $X_{21}Y_{12} + X_{22}Y_{22} + X_{23}Y_{32}$ \\
+					\end{array}\right]
+		\end{align}
+	\end{itemize}
+\end{frame}
+
+
+% Matrix Inversion
+\begin{frame}{Matrix Inversion}{}
+	\begin{itemize}
+		\item Matrix inversion is defined for \textbf{square matrices} $\bm{X} \in \mathbb{R}^{n \times n}$
+		\item A matrix $\bm{X}$ multiplied by its inverse $\bm{X}^{-1}$ gives the \highlight{identity matrix}:
+		\begin{align}
+			\bm{X}^{-1} \bm{X}
+				&= \bm{X} \bm{X}^{-1} = \bm{I} \\
+			\bm{I}
+				&= \left[\begin{array}{C{1em} C{1em} C{1em} C{1em}}
+					$1$ 		& 	$0$ 		& 	$\hdots$ & 	$0$ 		\\
+					$0$ 		& 	$1$ 		& 	$\hdots$ & 	$0$ 		\\
+					$\vdots$ & 	$\vdots$	& 	$\ddots$ & 	$\vdots$	\\
+					$0$ 		& 	$0$ 		& 	$\hdots$ & 	$1$
+				\end{array}\right]
+		\end{align}
+		\item If $\bm{X}^{-1}$ exists, we say that $\bm{X}$ is \highlight{non-singular}
+	\end{itemize}
+\end{frame}
+
+
+% Matrix Inversion (Ctd.)
+\begin{frame}{Matrix Inversion (Ctd.)}{}
+	\begin{itemize}
+		\item It holds that ($\bm{C}$ is the \highlight{cofactor matrix}):
+		\begin{equation}
+			\bm{X}^{-1} = \frac{1}{\text{det}(\bm{X})} \bm{C}^{\intercal}
+		\end{equation}
+		\item A condition for invertability is that \textbf{the determinant has to be different than zero}
+		\item \textbf{Example:}
+		\begin{equation*}
+			\bm{X}
+				=	\left[\begin{array}{C{1em} C{1em}}
+						$1$ & $0$ \\
+						$0$ & $0$
+					\end{array}\right]
+			\qquad\qquad
+			\text{det}(\bm{X}) = 0
+			\qquad\qquad
+			\bm{X}^{-1} =\ ?
+		\end{equation*}
+	\end{itemize}
+\end{frame}
+
+
+% Matrix Inversion Example
+\begin{frame}{Matrix Inversion Example}{}
+	\begin{equation*}
+		\bm{X}
+			=	\left[\begin{array}{C{2em} C{2em}}
+					$1$ 	& $\nicefrac{1}{2}$ \\
+					$-1$	& $1$
+				\end{array}\right]
+		\qquad
+		\bm{X}^{-1}
+			=	\left[\begin{array}{C{2em} C{2em}}
+					$\nicefrac{2}{3}$ 	& 	$-\nicefrac{1}{3}$ \\
+					$\nicefrac{2}{3}$	& 	$\nicefrac{2}{3}$
+				\end{array}\right]
+	\end{equation*}
+
+	Please verify!
+	\begin{equation*}
+		\bm{X} \bm{X}^{-1} = \bm{I}
+			= 	\left[\begin{array}{C{1em} C{1em}}
+					$1$ & $0$ \\
+					$0$ & $1$
+				\end{array}\right]
+			= \bm{X}^{-1} \bm{X}
+	\end{equation*}
+
+	\begin{boxBlueNoFrame}
+		\highlight{Use for example the Gauss-Jordan algorithm to find the inverse!}
+	\end{boxBlueNoFrame}
+\end{frame}
+
+
+% Matrix Pseudoinverse
+\begin{frame}{Matrix Pseudoinverse}{}
+	\begin{itemize}
+		\item \textbf{Question:} How can we invert a matrix $\bm{X} \in \mathbb{R}^{n \times m}$ which is not squared?
+		\item \textbf{Left pseudoinverse} $\bm{X}^{\#} \bm{X}$:
+		\begin{equation}
+			\bm{X}^{\#} \bm{X}
+				= \textcolor{myblue1}{\underbracket{
+					(\bm{X}^{\intercal} \bm{X})^{-1} \bm{X}^{\intercal}
+				}_{\text{left-multiplied}}} \bm{X} = \bm{I}_m
+		\end{equation}
+		\item \textbf{Right pseudoinverse} $\bm{X} \bm{X}^{\#}$:
+		\begin{equation}
+			\bm{X} \bm{X}^{\#}
+				= \bm{X} \textcolor{myblue1}{\underbracket{
+					\bm{X}^{\intercal} (\bm{X} \bm{X}^{\intercal})^{-1}
+				}_{\text{right-multiplied}}} = \bm{I}_n
+		\end{equation}
+	\end{itemize}
+\end{frame}
+
+
+% Subsection: Eigenvectors and Eigenvalues
+% --------------------------------------------------------------------------------------------------------
+\subsection{Eigenvectors and Eigenvalues}
+
+% Eigenvectors and Eigenvalues
+\begin{frame}{Eigenvectors and Eigenvalues}{}
+	\begin{itemize}
+		\item Some vectors $\bm{v}$ only change their length when multiplied by a matrix $\bm{X}$
+	\end{itemize}
+\end{frame}
+
+
+% Subsection: Miscellaneous
+% --------------------------------------------------------------------------------------------------------
+\subsection{Miscellaneous}
+
+% Symmetric Matrices
+\begin{frame}{Symmetric Matrices}{}
+	\begin{itemize}
+		\item A squared $n \times n$ matrix $\bm{X}$ is \highlight{symmetric}, iff
+		\begin{align}
+			\forall i, j: \qquad X_{ij}
+				&= X_{ji} \\
+			\bm{X}
+				&= \bm{X}^{\intercal}
+		\end{align}
+		\item Some properties:
+		\begin{itemize}
+			\item The inverse $\bm{X}^{-1}$ is also symmetric
+			\item \highlight{Eigen-decomposition:} $\bm{X}$ can be decomposed into $\bm{X} = \bm{Q} \bm{D} \bm{Q}^{\intercal}$,
+				where the columns of $\bm{Q}$ are the eigenvectors of $\bm{X}$, and $\bm{D}$ is a diagonal matrix whose
+				entries are the corresponding eigenvalues
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+% Positive (semi-)definite Matrices
+\begin{frame}{Positive (semi-)definite Matrices}{}
+	\begin{itemize}
+		\item A \textbf{squared symmetric} matrix $\bm{X}^{n \times n}$ is \highlight{positive definite},
+			iff for any vector $\bm{y} \in \mathbb{R}^n$:
+		\begin{equation}
+			\bm{y}^{\intercal} \bm{X} \bm{y} > 0
+		\end{equation}
+		\item Or \highlight{positive semi-definite}, iff $\bm{y}^{\intercal} \bm{X} \bm{y} \ge 0$
+	\end{itemize}
+	
+	\vspace*{3mm}
+	\begin{boxBlueNoFrame}
+		Such matrices are important in machine learning. For instance, the covariance matrix is always positive semi-definite.
+	\end{boxBlueNoFrame}
 \end{frame}
 
 

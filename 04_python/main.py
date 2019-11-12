@@ -55,7 +55,7 @@ def classification():
 #    clf.fit(X, y)
     
     # train SVM classifier
-    clf = SVM(kernel="linear", C=1.0, p=2, s=5.0)
+    clf = SVM(kernel="polynomial", C=1.0, p=2, s=5.0)
     y[np.where(y == 0)] = -1
     clf.fit(X, y)
     
