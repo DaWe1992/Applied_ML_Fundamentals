@@ -80,7 +80,8 @@ class BoundaryPlotter:
             cmap=plt.cm.rainbow,
             alpha=0.40, zorder=0
         )
-        ax.contour(xx, yy, Z, levels=[0], cmap="Greys_r", linewidths=2.5)
+        if np.unique(self.y).shape[0] == 2:
+            ax.contour(xx, yy, Z, levels=[0], cmap="Greys_r", linewidths=2.5)
 
         # draw data scatter plot
         ax.scatter(self.X[:, 0], self.X[:, 1], c=self.y,

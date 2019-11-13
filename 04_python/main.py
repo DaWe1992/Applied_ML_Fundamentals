@@ -48,16 +48,16 @@ def classification():
     Classification.
     """
     # create data
-    X, y = DataCreator().make_classification(sklearn=True)
+    X, y = DataCreator().make_classification(sklearn=True, n_classes=2)
     
     # train kNN classifier
-#    clf = kNN(n_neighbors=1)
-#    clf.fit(X, y)
+    clf = kNN(n_neighbors=3)
+    clf.fit(X, y)
     
     # train SVM classifier
-    clf = SVM(kernel="polynomial", C=1.0, p=2, s=5.0)
-    y[np.where(y == 0)] = -1
-    clf.fit(X, y)
+#    clf = SVM(kernel="polynomial", C=1.0, p=2, s=5.0)
+#    y[np.where(y == 0)] = -1
+#    clf.fit(X, y)
     
     # train logistic regression classifier
 #    clf = LogisticRegression()
@@ -127,7 +127,7 @@ if __name__ == "__main__":
     """
     Main function.
     """
-    classification()
+#    classification()
 #    regression()
-#    reinforcement_learning()
+    reinforcement_learning()
     

@@ -209,7 +209,7 @@
 		\item Formally, we have:
 		\begin{align}
 			\nonumber
-			p 	&= \Vert \bm{v} \Vert \cos \measuredangle (\bm{v}, \bm{w}) 								\\[1mm]
+			p 	&= \Vert \bm{v} \Vert \cos \measuredangle (\bm{v}, \bm{w}) 							\\[1mm]
 			\nonumber
 				&= \Vert \bm{v} \Vert \frac{\bm{v} \cdot \bm{w}}{\Vert \bm{v} \Vert \cdot \Vert \bm{w} \Vert} 	\\[1mm]
 				&= \frac{\bm{v} \cdot \bm{w}}{\Vert \bm{w} \Vert}
@@ -519,9 +519,142 @@
 \section{Statistics}
 \makedivider{Statistics}
 
-% 
-\begin{frame}{}{}
 
+% Subsection: Random Variables and Common Distributions
+% --------------------------------------------------------------------------------------------------------
+\subsection{Random Variables and Common Distributions}
+
+% Random Variables
+\begin{frame}{Random Variables}{}
+	\begin{itemize}
+		\item What is a \highlight{random variable}? \pause
+		\begin{itemize}
+			\item It's a random number determined by chance (according to a distribution)
+			\item Random variables in machine learning: input data, output data, noise
+		\end{itemize}
+		\item What is a \highlight{probability distribution}? \pause
+		\begin{itemize}
+			\item Describes the probability that a random variable is equal to a certain value
+			\item It can be given by the physics of an experiment (e.\,g. throwing dice)
+			\item \highlight{Discrete} vs. \highlight{continuous} distributions
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+% Uniform Distribution
+\begin{frame}{Uniform Distribution}{}
+	\input{02_math/01_tikz/uniform_distribution}
+	
+	\begin{center}
+		Every outcome is equally probable within a bounded region $\mathcal{R}$
+		\begin{equation}
+			p(x) = \nicefrac{1}{\mathcal{R}}
+		\end{equation}
+	\end{center}
+\end{frame}
+
+
+% Discrete Distributions
+\begin{frame}{Discrete Distributions}{}
+	\begin{boxBlueNoFrame}
+		The random variables take on \textbf{discrete values}
+	\end{boxBlueNoFrame}
+
+	\textbf{Examples:}
+	\begin{itemize}
+		\item When throwing a die, the possible values are given by a countably finite set:
+		\begin{equation*}
+			x_i \in \{ 1, 2, 3, 4, 5, 6 \}
+		\end{equation*}
+		\item The number of sand grains at the beach (countably infinite set):
+		\begin{equation*}
+			x_i \in \mathbb{N}
+		\end{equation*}
+	\end{itemize}
+\end{frame}
+
+
+% Discrete Distributions (Ctd.)
+\begin{frame}{Discrete Distributions (Ctd.)}{}
+	\begin{itemize}
+		\item All probabilities sum up to 1:
+		\begin{equation*}
+			\sum_i p(x_i) = 1
+		\end{equation*}
+		\item Discrete distributions are particularly important in classification
+		\item A discrete distribution is described by a \highlight{probability mass function} \\
+			(also called frequency function)
+	\end{itemize}
+\end{frame}
+
+
+% Bernoulli Distribution
+\begin{frame}{Bernoulli Distribution}{}
+	\begin{itemize}
+		\item A \highlight{Bernoulli random variable} only takes on two values (e.\,g. 0 and 1):
+		\begin{align}
+			x
+				&\in \{ 0, 1 \} 				\\
+			p(x = 1 \vert \mu)
+				&= \mu 					\\
+			\text{Bern}(x \vert \mu)
+				&= \mu^x (1 - \mu)^{1 - x} 	\\
+			\mathbb{E}\{ x \}
+				&= \mu 					\\
+			\text{var}\{ x \}
+				&= \mu (1 - \mu)
+		\end{align}
+		\item The only parameter is $\mu$, i.\,e. the distribution is completely defined by this parameter
+	\end{itemize}
+\end{frame}
+
+
+% Binomial Distribution
+\begin{frame}{Binomial Distribution}{}
+	\begin{itemize}
+		\item \highlight{Binomial variables} are a sequence of $n$ repeated Bernoulli variables
+		\item \textbf{Example:} What is the probability of getting $m \in \mathbb{N}$ heads in $N$ trials?
+		\begin{align}
+			\text{Bin}(m \vert N, \mu)
+				&= \binom{N}{m} \mu^m (1 - \mu)^{N - m}		\\[2mm]
+			\mathbb{E}\{ m \}
+				&= N \mu 								\\[2mm]
+			\text{var}\{ m \}
+				&= N \mu (1 - \mu)
+		\end{align}
+	\end{itemize}
+\end{frame}
+
+
+% Binomial Distribution (Ctd.)
+\begin{frame}{Binomial Distribution (Ctd.)}{}
+	\input{02_math/01_tikz/binomial_distribution}
+\end{frame}
+
+
+% Continuous Distributions
+\begin{frame}{Continuous Distributions}{}
+	\begin{boxBlueNoFrame}
+		The random variables take on \textbf{continuous values}
+	\end{boxBlueNoFrame}
+
+	\begin{itemize}
+		\item Continuous distributions are discrete distributions where the number of discrete values goes to infinity
+		\item It's described by a \highlight{probability density function} which integrates to 1:
+		\begin{equation*}
+			\int_{-\infty}^{+\infty} p(x) \diff x = 1
+		\end{equation*}
+	\end{itemize}
+\end{frame}
+
+
+% Multivariate Gaussian
+\begin{frame}{Multivariate Gaussian}{}
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.35]{02_math/02_img/multivariate_gaussian}
+	\end{figure}
 \end{frame}
 
 
@@ -532,17 +665,18 @@
 
 % 
 \begin{frame}{Motivation}{Every machine learning problem is an optimization problem!}
-\begin{itemize}
-\item In every machine learning problem, you will have:
-\begin{itemize}
-\item an objective function you want to optimize
-\item data you want to learn from
-\item parameters which need to be learned
-\item assumptions on your problem, your data and how the world works
-\end{itemize}
-\item Thus, we would like to have general solutions to the problem of learning
-\item Machine learning provides suitable objective functions for optimization based on the data, different models embody different objective functions and assumptions
-\end{itemize}
+	\begin{itemize}
+		\item In every machine learning problem, you will have:
+		\begin{itemize}
+			\item an objective function you want to optimize
+			\item data you want to learn from
+			\item parameters which need to be learned
+			\item assumptions on your problem, your data and how the world works
+		\end{itemize}
+		\item Thus, we would like to have general solutions to the problem of learning
+		\item Machine learning provides suitable objective functions for optimization based on the data,
+			different models embody different objective functions and assumptions
+	\end{itemize}
 \end{frame}
 
 \begin{frame}{Constrained Optimization}{How to formalize an optimization problem}
