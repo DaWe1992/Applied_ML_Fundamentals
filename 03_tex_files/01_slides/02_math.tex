@@ -134,9 +134,11 @@
 
 % Linear Combination of Vectors
 \begin{frame}{Linear Combination of Vectors}{}
+	\vspace*{-4mm}
 	\begin{align}
 		\bm{u} = c_1 \bm{v}^{(1)} + c_2 \bm{v}^{(2)} + \dots + c_n \bm{v}^{(n)}
 	\end{align}
+	\input{02_math/01_tikz/linear_combination}
 \end{frame}
 
 
@@ -486,6 +488,40 @@
 \begin{frame}{Eigenvectors and Eigenvalues}{}\important
 	\begin{itemize}
 		\item Some vectors $\bm{v}$ only change their length when multiplied by a matrix $\bm{X}$
+		\item \textbf{Example:}
+		\begin{equation*}
+			\left[\begin{array}{C{1em} C{1em}}
+				$4$ & $-1$ \\
+				$2$ & $1$
+			\end{array}\right]
+			\left[\begin{array}{C{1em}} $1$ \\ $2$ \end{array}\right] = 2 \left[\begin{array}{C{1em}} $1$ \\ $2$ \end{array}\right]
+		\end{equation*}
+		\item These vectors are called \highlight{eigenvectors}, the scaling factors are known as \highlight{eigenvalues}
+		\item More general:
+		\begin{equation}
+			\bm{W} \bm{v} = \lambda \bm{v}
+		\end{equation}
+	\end{itemize}
+\end{frame}
+
+
+% Eigenvectors form a Basis
+\begin{frame}{Eigenvectors form a Basis}{}
+	\begin{itemize}
+		\item Let us assume that there are $n$ eigenvectors with corresponding eigenvalues:
+		\begin{align*}
+			&\bm{v}_1, \bm{v_2}, \dots, \bm{v}_n \\
+			&\lambda_1, \lambda_2, \dots, \lambda_n
+		\end{align*}
+		\item \textbf{Theorem:}
+		\begin{itemize}
+			\item For an $n \times n$ matrix with eigenvectors $\bm{v}_1, \bm{v}_2, \dots, \bm{v}_n$, if they correspond to
+				\textbf{distinct} eigenvalues $\lambda_1, \lambda_2, \dots, \lambda_n$, then the set $\{ \bm{v}_1, \bm{v}_2, \dots, \bm{v}_n \}$ is linearly independent
+			\item Hence, any vector can be expressed as a linear combination of eigenvectors:
+			\begin{equation*}
+				\bm{v} = c_1 \bm{v}_1 + c_2 \bm{v}_2 + \dots + c_n \bm{v}_n
+			\end{equation*}
+		\end{itemize}
 	\end{itemize}
 \end{frame}
 
