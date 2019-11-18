@@ -1,0 +1,57 @@
+\input{preamble_theme}
+\usepackage{hyperref}
+
+% title
+\title{Exercise 3 - Regression}
+
+% ====================================================
+% ====================================================
+% BEGIN OF DOCUMENT
+% ====================================================
+% ====================================================
+\begin{document}
+\AddToShipoutPicture*{\BackgroundPic}
+
+\maketitle
+\medskip
+\newpage
+
+% Bayesian Decision Theory
+%______________________________________________________________________
+\section{Linear Regression}
+
+\begin{enumerate}[label=\alph*)]
+
+% Task 1
+\exercise{Ordinary Least Squares (5 points)}{Implement an ordinary least squares regression model using numpy/pandas to predict the value of a house in Boston using the Boston Housing Dataset in the folder \textit{data} (file \textit{bostonhousingdataset.csv}). The target variable is in the last column, it is called \textit{medv} (median value of owner-occupied homes in \$1000s). You can find an explanation of each attribute in the dataset on Kaggle (\href{https://www.kaggle.com/c/boston-housing}{link}). Evaluate and report the mean squared error (MSE) of your model on the dataset.}{5cm}
+
+% Solution:
+
+
+% Task 2
+\exercise{Basis Function Features (3 points)}{Compute polynomial or radial basis function features from the source data. Optimize the basis functions for the task of predicting the value of a house (i.\,e. tune the degree of the polynomials or means and scale of the radial basis functions). Which basis functions worked best?}{7cm}
+
+% Solution:
+
+
+\pagebreak
+
+% Task 3
+\exercise{Regularization (2 points)}{Explain in your own words what \textit{regularization} is, why it is beneficial and which kinds of regularization you could apply to a linear regression model. Explain what \textit{ridge regression} is.}{7cm}
+
+% Solution:
+
+% Task 5
+\exercise{Bonus Question 1 (1 point)}{Which are the three most important features for the house value prediction according to your linear regression model? Why?}{3cm}
+
+% Solution:
+
+% Task 6
+\exercise{Bonus Question 2 (1 point)}{Plot the residuals for your regression model (y-axis) and the predicted values (x-axis). What can the residuals tell you about the performance of your model?}{2cm}
+
+% Solution:
+
+
+\end{enumerate}
+
+\end{document}
