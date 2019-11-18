@@ -1,10 +1,5 @@
-% rubber: clean 02_math.aux
-% rubber: clean 02_math.fls
-% rubber: clean 02_math.out
-% rubber: clean 02_math.log
 \input{preamble_theme}
 \usepackage{hyperref}
-\usepackage{movie15}
 
 % ====================================================
 % ====================================================
@@ -54,22 +49,29 @@
 
 % Introduction
 \begin{frame}{Introduction}{}
-	\center\vspace{-0.3cm} Math is a significant portion of data science!\\
-	\divideTwo{0.49}{
+	\begin{boxBlueNoFrame}
+		\highlight{Math is a significant portion of data science / machine learning!}
+	\end{boxBlueNoFrame}
+	\divideTwo{0.39}{
 		\begin{figure}
 			\centering
-			\includegraphics[width=0.7\textwidth]{02_math/02_img/data_science.png}
+			\includegraphics[scale=0.125]{02_math/02_img/data_science.png}
 		\end{figure}
-	}{0.49}{
+	}{0.59}{
 		\vspace{0.5cm}
-		You will need it to understand:\newline\vspace{-0.6cm}
-		\begin{itemize}\setlength\itemsep{0.05em}\small
-			\item Assumptions about probability distributions,
-			\item optimization for learning / empirical risk minimization,
-			\item using linear algebra, calculus and statistics to make learning and inference more efficient
-			\item and much more!
+		You will need it to understand:
+		\begin{itemize}
+			\item \textbf{Statistical} machine learning
+			\item How optimization for learning / empirical risk minimization works,
+			\item How linear algebra, calculus and statistics are used to make learning and inference more efficient
 		\end{itemize}
 	}
+\end{frame}
+
+
+% Math is important!
+\begin{frame}{Math is important!}{}
+	\input{02_math/01_tikz/pie_chart_math}
 \end{frame}
 
 
@@ -132,14 +134,14 @@
 
 % Linear Combination of Vectors
 \begin{frame}{Linear Combination of Vectors}{}
-	\begin{align*}
+	\begin{align}
 		\bm{u} = c_1 \bm{v}^{(1)} + c_2 \bm{v}^{(2)} + \dots + c_n \bm{v}^{(n)}
-	\end{align*}
+	\end{align}
 \end{frame}
 
 
-% Vector Transpose and inner and outer Product
-\begin{frame}{Vector Transpose and inner and outer Product}{}
+% Vector Transpose, inner and outer Product
+\begin{frame}{Vector Transpose, inner and outer Product}{}\important
 	\begin{itemize}
 		\item Vector transpose:
 		\begin{equation*}
@@ -147,19 +149,21 @@
 			\bm{v}^{\intercal} = \left[\begin{array}{C{1em} C{1em}} $3$ & $1$ \end{array}\right]
 		\end{equation*}
 		\item Inner product / dot product / scalar product:
-		\begin{align*}
+		\begin{align}
 			\bm{v} \cdot \bm{w}
-				&\equiv \bm{v}^{\intercal} \bm{w} \equiv \langle \bm{v}, \bm{w} \rangle \\[1mm]
+				&\equiv \bm{v}^{\intercal} \bm{w} \equiv \langle \bm{v}, \bm{w} \rangle
+					= \sum_{j=1}^m v_j w_j \\[1mm]
+				\nonumber
 				&= \left[\begin{array}{C{1em} C{1em}} $3$ & $1$ \end{array}\right]
 					\left[\begin{array}{C{1em}} $2$ \\ $4$ \end{array}\right]
 					= (3 \cdot 2) + (1 \cdot 4) = 10
-		\end{align*}
+		\end{align}
 	\end{itemize}
 \end{frame}
 
 
 % Vector Transpose and inner and outer Product (Ctd.)
-\begin{frame}{Vector Transpose and inner and outer Product (Ctd.)}{}
+\begin{frame}{Vector Transpose and inner and outer Product (Ctd.)}{}\important
 	\begin{itemize}
 		\item Outer product:
 		\begin{equation*}
@@ -281,7 +285,7 @@
 
 
 % Matrix Transpose and Addition
-\begin{frame}{Matrix Transpose and Addition}{}
+\begin{frame}{Matrix Transpose and Addition}{}\important
 	\begin{itemize}
 		\item Transpose of a matrix:
 		\begin{equation}
@@ -317,7 +321,7 @@
 
 
 % Matrix Multiplication
-\begin{frame}{Matrix Multiplication}{}
+\begin{frame}{Matrix Multiplication}{}\important
 	\begin{itemize}
 		\item Multiplication by scalars:
 		\begin{equation}
@@ -349,7 +353,7 @@
 
 
 % Matrix Multiplication (Ctd.)
-\begin{frame}{Matrix Multiplication (Ctd.)}{}
+\begin{frame}{Matrix Multiplication (Ctd.)}{}\important
 	\begin{itemize}
 		\item Matrix-matrix multiplication:
 		\begin{align}
@@ -376,7 +380,7 @@
 
 
 % Matrix Inversion
-\begin{frame}{Matrix Inversion}{}
+\begin{frame}{Matrix Inversion}{}\important
 	\begin{itemize}
 		\item Matrix inversion is defined for \textbf{square matrices} $\bm{X} \in \mathbb{R}^{n \times n}$
 		\item A matrix $\bm{X}$ multiplied by its inverse $\bm{X}^{-1}$ gives the \highlight{identity matrix}:
@@ -479,7 +483,7 @@
 \subsection{Eigenvectors and Eigenvalues}
 
 % Eigenvectors and Eigenvalues
-\begin{frame}{Eigenvectors and Eigenvalues}{}
+\begin{frame}{Eigenvectors and Eigenvalues}{}\important
 	\begin{itemize}
 		\item Some vectors $\bm{v}$ only change their length when multiplied by a matrix $\bm{X}$
 	\end{itemize}
@@ -629,14 +633,14 @@
 \begin{frame}{Binomial Distribution}{}
 	\begin{itemize}
 		\item \highlight{Binomial variables} are a sequence of $n$ repeated Bernoulli variables
-		\item \textbf{Example:} What is the probability of getting $m \in \mathbb{N}$ heads in $N$ trials?
+		\item \textbf{Example:} What is the probability of getting $m \in \mathbb{N}$ heads in $n$ trials?
 		\begin{align}
-			\text{Bin}(m \vert N, \mu)
-				&= \binom{N}{m} \mu^m (1 - \mu)^{N - m}		\\[2mm]
+			\text{Bin}(m \vert n, \mu)
+				&= \binom{n}{m} \mu^m (1 - \mu)^{n - m}		\\[2mm]
 			\mathbb{E}\{ m \}
-				&= N \mu 								\\[2mm]
+				&= n \mu 								\\[2mm]
 			\text{var}\{ m \}
-				&= N \mu (1 - \mu)
+				&= n \mu (1 - \mu)
 		\end{align}
 	\end{itemize}
 \end{frame}
@@ -676,11 +680,11 @@
 
 
 % Central Limit Theorem
-\begin{frame}{Central Limit Theorem}{}
+\begin{frame}{Central Limit Theorem}{}\important
 	\begin{boxBlue}
 		\highlight{Central Limit Theorem:}
 
-		The distribution of the sum of $N$ i.\,i.\,d. (independent and identically distributed) random variables becomes increasingly Gaussian as $N$ increases.
+		The distribution of the sum of $n$ i.\,i.\,d. (independent and identically distributed) random variables becomes increasingly Gaussian as $n$ increases.
 	\end{boxBlue}
 
 	\begin{itemize}
@@ -692,8 +696,8 @@
 
 
 % Multivariate Gaussian Distribution
-\begin{frame}{Multivariate Gaussian Distribution}{}
-	\vspace*{-4mm}
+\begin{frame}{Multivariate Gaussian Distribution}{}\important
+	\vspace*{-2mm}
 	\begin{equation}
 		p_D(\bm{x})
 			= \mathcal{N}(\bm{x} \vert \bm{\mu}, \bm{\Sigma})
@@ -746,7 +750,7 @@
 				&= p(x_1 \vert x_2, \dots, x_n) p(x_2, \dots, x_n) \\
 				&= p(x_1 \vert x_2, \dots, x_n) p(x_2 \vert x_3, \dots, x_n) \dots p(x_{n-1} \vert x_n) p(x_n) 
 		\end{align}
-		\item \highlight{Bayes rule:}
+		\item \highlight{Bayes' rule:}
 		\begin{equation}
 			p(y \vert x) = \frac{p(x \vert y) p(y)}{p(x)}
 		\end{equation}
@@ -767,7 +771,7 @@
 	\end{alignat}
 	\textbf{Approximate expectation:}
 	\begin{equation}
-		\mathbb{E}\{ f \} = \int_x p(x) f(x) \diff x \approx \frac{1}{N} \sum_{i=1}^N f(x_i)
+		\mathbb{E}\{ f \} = \int_x p(x) f(x) \diff x \approx \frac{1}{n} \sum_{i=1}^n f(x_i)
 	\end{equation}
 \end{frame}
 
@@ -791,166 +795,382 @@
 \end{frame}
 
 
+% Variance and Covariance
+\begin{frame}{Variance and Covariance}{}
+	\begin{itemize}
+		\item Covariances give a measure of correlation: {\footnotesize (how much variables change together)}
+		\item Scalars:
+		\begin{align}
+			\nonumber
+			\text{cov}\{ x, y \}
+				&= \mathbb{E}_{x, y} \{ (x - \mathbb{E}_x\{ x \}) (y - \mathbb{E}_y\{ y \}) \} \\
+				&= \mathbb{E}_{x, y}\{ xy \} - \mathbb{E}_x\{ x \} \mathbb{E}_y\{ y \}
+		\end{align}
+		\item Vector notation:
+		\begin{equation}
+			\text{cov}\{ \bm{x}, \bm{y} \} = \mathbb{E}_{\bm{x}, \bm{y}}\{ (\bm{x} - \mathbb{E}_{\bm{x}}\{ \bm{x} \})
+				(\bm{y} - \mathbb{E}_{\bm{y}}\{ \bm{y} \})^{\intercal} \}
+		\end{equation}
+	\end{itemize}
+\end{frame}
+
+
+% Subsection: Kullback-Leibler Divergence
+% --------------------------------------------------------------------------------------------------------
+\subsection{Kullback-Leibler Divergence}
+
+% Kullback-Leibler Divergence
+\begin{frame}{Kullback-Leibler Divergence}{}
+	\begin{itemize}
+		\item The \highlight{Kullback-Leibler (KL) divergence} is a similarity measure between two distributions $p$ and $q$:
+		\begin{equation}
+			\text{KL}(p \Vert q) = \sum_{x} p(x) \cdot \log \frac{p(x)}{q(x)}
+		\end{equation}
+		\item Some properties:
+		\begin{itemize}
+			\item It is not a distance metric: $\text{KL}(p \Vert q) \ne \text{KL}(q \Vert p)$
+			\item It is non-negative: $\text{KL}(p \Vert q) \ge 0$
+			\item If $\forall x: p(x) = q(x) \Rightarrow \text{KL}(p \Vert q) = 0$
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
 % Section: Optimization
 %______________________________________________________________________
 \section{Optimization}
 \makedivider{Optimization}
 
-% 
-\begin{frame}{Motivation}{Every machine learning problem is an optimization problem!}
+% Subsection: Introduction
+% --------------------------------------------------------------------------------------------------------
+\subsection{Introduction}
+
+% Motivation
+\begin{frame}{Motivation}{}
 	\begin{itemize}
 		\item In every machine learning problem, you will have:
-		\begin{itemize}
-			\item an objective function you want to optimize
-			\item data you want to learn from
-			\item parameters which need to be learned
-			\item assumptions on your problem, your data and how the world works
-		\end{itemize}
-		\item Thus, we would like to have general solutions to the problem of learning
-		\item Machine learning provides suitable objective functions for optimization based on the data,
-			different models embody different objective functions and assumptions
+		\begin{enumerate}
+			\item An \textbf{objective function} you want to optimize
+			\item \textbf{Data} you want to learn from
+			\item \textbf{Parameters} which need to be learned
+			\item Assumptions about the problem and the data
+		\end{enumerate}
+		\item We would like to have general solutions to the problem of learning
+		\item Different algorithms embody different objective functions and assumptions
 	\end{itemize}
+
+	\begin{boxBlueNoFrame}
+		\highlight{Every machine learning problem is an optimization problem!}
+	\end{boxBlueNoFrame}
 \end{frame}
 
-\begin{frame}{Constrained Optimization}{How to formalize an optimization problem}
-	\begin{align*}
-		\underset{\theta}{\text{min }} J(\theta, D) &= \dots &\leftarrow\text{cost function / objective}\\
-		\text{s.\,t. } f(\theta, D) &= 0 &\leftarrow\text{equality constraints}\\
-		g(\theta, D) &\ge 0 &\leftarrow\text{inequality constraints}\\
-	\end{align*}
-	What should an ideal optimization problem, i.\,e. the cost function and constraints look like?
+
+% Unconstrained Optimization
+\begin{frame}{Unconstrained Optimization}{}
+	\vfill
+	\begin{center}
+		\large\textbf{You know how to do that, don't you?}
+	\end{center}
+	\vfill
 \end{frame}
 
-\begin{frame}{Constrained Optimization}{How to formalize an optimization problem}
-	\begin{align*}
-		\underset{\theta}{\text{min }} J(\theta, D) &= \dots &\leftarrow\text{convex function}\\
-		\text{s.\,t. } f(\theta, D) &= 0 &\leftarrow\text{linear function}\\
-		g(\theta, D) &\ge 0 &\leftarrow\text{convex set}\\
-	\end{align*}
+
+% Subsection: Cost Functions and Convexity
+% --------------------------------------------------------------------------------------------------------
+\subsection{Cost Functions and Convexity}
+
+% Constrained Optimization
+\begin{frame}{Constrained Optimization}{}
+	\vspace*{-3mm}
+	\textbf{Formalization:}
+	\begin{alignat*}{2}
+		\min_{\bm{\theta}} \mathcal{J}(\theta)
+			&= \dots 
+			&&\qquad\qquad\longleftarrow\text{cost function / objective}			\\
+		\text{s.\,t. } f(\theta)
+			&= 0
+			&&\qquad\qquad\longleftarrow\text{equality constraints}				\\
+		g(\theta)
+			&\ge 0
+			&&\qquad\qquad\longleftarrow\text{inequality constraints}
+	\end{alignat*}
+
+	\begin{boxBlueNoFrame}
+		What should an ideal optimization problem, i.\,e. the cost function and constraints look like?
+	\end{boxBlueNoFrame}
 \end{frame}
 
-\begin{frame}{Cost Functions}{Which cost functions are there? Ideally, the cost function is convex}
-	\divideTwo{0.49}{\centering \href{https://upload.wikimedia.org/wikipedia/commons/a/a3/Gradient_descent.gif}{non-convex}}{0.49}{\hspace{1cm}convex}\\
-	\vspace{0.4cm}
-	\includegraphics[width=0.9\textwidth]{02_math/02_img/costfunctions.png}
+
+% Constrained Optimization
+\begin{frame}{Constrained Optimization (Ctd.)}{}
+	\begin{alignat*}{2}
+		\min_{\bm{\theta}} \mathcal{J}(\theta)
+			&= \dots 
+			&&\qquad\qquad\longleftarrow\text{convex function}			\\
+		\text{s.\,t. } f(\theta)
+			&= 0
+			&&\qquad\qquad\longleftarrow\text{linear function}			\\
+		g(\theta)
+			&\ge 0
+			&&\qquad\qquad\longleftarrow\text{convex set}
+	\end{alignat*}
 \end{frame}
 
-\begin{frame}{Convexity}{Convex Sets}
-	\begin{itemize}
-		\item A set $C \subseteq \mathbb{R}^n$ is convex if for each $x, y \in C$ and any $\alpha \in [0,1]$, $\alpha x + (1 - \alpha)y \in C$. Examples are $\mathbb{R}^n$ and norm balls.\\
-	\end{itemize}
+
+% Cost Functions
+\begin{frame}{Cost Functions}{}
+	\floattext{3.25}{4.5}{non-convex}
+	\floattext{10}{4.5}{convex}
+	\vspace*{4mm}
 	\begin{figure}
-		\center
-		\includegraphics[width=0.6\textwidth]{02_math/02_img/convexsets.png}
+		\centering
+		\includegraphics[width=0.9\textwidth]{02_math/02_img/cost_functions}
 	\end{figure}
 \end{frame}
 
-\begin{frame}{Convexity}{Convex Functions}
+
+% Convexity -- Convex Sets
+\begin{frame}{Convexity -- Convex Sets}{}
+	\floattext{8.75}{12}{$\bm{x}$}
+	\floattext{11}{11}{$\bm{y}$}
+	\floattext{2.5}{11.5}{\textbf{convex}}
+	\floattext{12}{11.5}{\textbf{non-convex}}
 	\begin{itemize}
-		\item A function $f : \mathbb{R}^n \rightarrow \mathbb{R}$ is convex if for $x, y \in dom(f)$ and any $\alpha \in [0,1]$, $f(\alpha x + (1 - \alpha)y) \le \alpha f(x) + (1 - \alpha)f(y)$. Examples are linear functions $f(x) = w^Tx + b$ and quadratic functions $f(x) = x^TAx + b^Tx + c$.\\
+		\item A set $C \subseteq \mathbb{R}^n$ is convex, if $\forall \bm{x}, \bm{y} \in C$ and $\forall \alpha \in [0,1]$
+		\begin{equation}	
+			\alpha \bm{x} + (1 - \alpha) \bm{y} \in C
+		\end{equation}
+		\item This is the equation line segment between $\bm{x}$ and $\bm{y}$
 	\end{itemize}
+	
+	\vspace*{-3mm}
 	\begin{figure}
 		\center
-		\includegraphics[width=0.6\textwidth]{02_math/02_img/convexfunction.png}
+		\includegraphics[scale=0.4]{02_math/02_img/convex_sets}
 	\end{figure}
 \end{frame}
 
-\begin{frame}{Convexity}{Why are convex cost functions so nice?}
+
+% Convexity -- Convex Functions
+\begin{frame}{Convexity -- Convex Functions}{}
 	\begin{itemize}
+		\item A function $f : \mathbb{R}^n \mapsto \mathbb{R}$ is convex, if $\forall \bm{x}, \bm{y} \in \text{dom}(f)$ and $\forall \alpha \in [0,1]$
+		\begin{equation}
+			f(\alpha \bm{x} + (1 - \alpha) \bm{y}) \le \alpha f(\bm{x}) + (1 - \alpha) f(\bm{y})
+		\end{equation}
+		\item Examples are linear functions $f(\bm{x}) = \bm{a}^{\intercal} \bm{x} + b$
+			and quadratic functions $f(\bm{x}) = \bm{x}^{\intercal} \bm{A} \bm{x} + \bm{b}^{\intercal} \bm{x} + c$
+	\end{itemize}
+
+	\vspace*{-3mm}
+	\begin{figure}
+		\center
+		\includegraphics[scale=0.2]{02_math/02_img/convex_function}
+	\end{figure}
+\end{frame}
+
+
+% Convexity (Ctd.)
+\begin{frame}{Convexity (Ctd.)}{}
+	\begin{itemize}
+		\item \highlight{Why are convex cost functions so appealing?}
 		\item Local solutions are global optima
 		\item Efficient implementations of optimizers are available
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Convexity}{How to recognize a convex function? Convexity conditions}
+
+% Subsection: Constrained Optimization and Lagrange Multipliers
+% --------------------------------------------------------------------------------------------------------
+\subsection{Constrained Optimization and Lagrange Multipliers}
+
+% Constrained Optimization
+\begin{frame}{Constrained Optimization}{}\important
 	\begin{itemize}
-		\item First-order convexity condition:\\ Suppose $f : \mathbb{R}^n \rightarrow \mathbb{R}$ is differentiable. The function $f$ is convex iff $f(y) \ge f(x) + \nabla f(x)^T(y - x) \hspace{0.2cm}\forall x, y \in dom(f)$.
-		\item Second-order convexity condition:\\ Suppose $f : \mathbb{R}^n \rightarrow \mathbb{R}$ is twice differentiable. The function $f$ is convex iff $\nabla^2 f(x) \ge 0 \vspace{0.2cm}\forall x \in dom(f)$.
+		\item \textbf{How to solve this optimization problem?}
+		\begin{align*}
+			\min_{x, y} \mathcal{J}(x,y)
+				&= 2y + x 		\\
+			\intertext{subject to (s.\,t.):}
+			f(x, y)
+				&= y^2 +xy -1 = 0
+		\end{align*}
+		\item Convert the problem to an unconstrained one
+		\item This is done using \highlight{Lagrange multipliers} $\alpha$
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Constrained Optimization}{How to solve an optimization problem with constraints}
-	\begin{align*}
-		\text{min } f(x,y) &= 2\cdot y + x\\
-		\text{s.\,t. } 0 = g(x,y) &= y^2 +xy -1\\
-	\end{align*}
-	\begin{itemize}
-		\item Convert the problem to an unconstrained one\\
-		\item Introduce Lagrange multipliers
-	\end{itemize}
-\end{frame}
 
-\begin{frame}{Constrained Optimization}{Lagrange multipliers}
+% The Concept of Lagrange Multipliers
+\begin{frame}{The Concept of Lagrange Multipliers}{}\important
+	\begin{boxBlueNoFrame}
+		\textbf{General Lagrange function:} $\mathcal{L}(x, y, \lambda) = \mathcal{J}(x,y) + \lambda f(x,y)$
+	\end{boxBlueNoFrame}
+
+	\vspace*{3mm}
 	\divideTwo{0.49}{
 		\begin{align*}
-			\text{min } f(x,y) &= 2\cdot y + x\\
-			\text{s.\,t. } 0 = g(x,y) &= y^2 +xy -1\\
+			\min_{x, y} \mathcal{J}(x,y)
+				&= 2y + x 		\\
+			\intertext{s.\,t.:}
+			f(x, y)
+				&= y^2 +xy -1 = 0
 		\end{align*}
 	}{0.49}{
-		\begin{align*}
-			L(x,y,\lambda) &= f(x,y) + \lambda g(x,y)\\
-			\frac{\partial L}{\partial x} &= 1 + \lambda y\\
-			\frac{\partial L}{\partial y} &= 2 + 2\lambda y + \lambda x\\
-			\frac{\partial L}{\partial \lambda} &= y^2 + xy - 1\\
-		\end{align*}
+		Step \ding{182}: Differentiate w.\,r.\,t. $x$, $y$ and $\lambda$:
+		\begin{alignat*}{2}
+			\text{I.}\quad
+				&\nabla_x \mathcal{L}
+				&&= 1 + \lambda y				\\[2mm]
+			\text{II.}\quad
+				&\nabla_y \mathcal{L}
+				&&= 2 + 2\lambda y + \lambda x 		\\[2mm]
+			\text{III.} \quad
+				&\nabla_{\lambda} \mathcal{L}
+				&&= y^2 + xy - 1
+		\end{alignat*}
 	}
 \end{frame}
 
-\begin{frame}{Constrained Optimization}{Lagrange multipliers}
+
+% The Concept of Lagrange Multipliers (Ctd.)
+\begin{frame}{The Concept of Lagrange Multipliers (Ctd.)}{}\important
 	\divideTwo{0.49}{
-		\begin{align*}
-			\text{I.    }0 &= 1 + \lambda y\\
-			\text{II.   }0 &= 2 + 2\lambda y + \lambda x\\
-			\text{III.  }0 &= y^2 + xy - 1\\
-		\end{align*}
+		Step \ding{183}: Set equations to zero:
+		\begin{alignat*}{2}
+			\text{I.}	&\quad 1 + \lambda y 				&&\overset{!}{=} 0 	\\[2mm]
+			\text{II.}	&\quad 2 + 2\lambda y + \lambda x 	&&\overset{!}{=} 0 	\\[2mm]
+			\text{III.}	&\quad y^2 + xy - 1				&&\overset{!}{=} 0
+		\end{alignat*}
 	}{0.49}{
-		\begin{align*}
-			\text{I.  }\lambda &= -\frac{1}{y}\\
-			\text{I.} \rightarrow \text{II.  }x &= 0\\
-			\text{III. }y &= \pm 1
-		\end{align*}
+		Step \ding{184}: Substitute:
+		\begin{alignat*}{2}
+			\text{I.}					&\quad \lambda 		&&= -\frac{1}{y} 	\\[2mm]
+			\text{I.} \rightarrow \text{II.}  	&\quad x			&&= 0			\\[2mm]
+			\text{II.} \rightarrow \text{III.}	&\quad y 			&&= \pm 1
+		\end{alignat*}
 	}
 \end{frame}
 
-\begin{frame}{Numerical Optimization}{What to do if we cannot solve it analytically?}
+
+% Subsection: Numerical Optimization
+% --------------------------------------------------------------------------------------------------------
+\subsection{Numerical Optimization}
+
+% Numerical Optimization
+\begin{frame}{Numerical Optimization}{}\important
 	\begin{itemize}
 		\item Different numerical optimization algorithms exist for optimizing a function numerically on a computer if we can't solve it analytically
-		\item Many approaches incrementally update an estimate $\theta_{new} := \theta_{old} + \alpha \delta\theta$ of the optimal parameters, so that after each update $J(\theta_{new}) < J(\theta_{old})$
-		\item The challenge is to find the right step size $\alpha$ and direction $\delta\theta$
-		\item Different algorithms differ in the number of required iterations, the computational cost per iteration, the convergence guarantees, the robustness with noisy cost functions and their memory usage
+		\item \highlight{Gradient descent:} Incrementally update an estimate of the parameters:
+		\begin{equation}
+			\bm{\theta}_{new} \longleftarrow \bm{\theta}_{old} + \alpha \delta \bm{\theta}
+		\end{equation}
+		\item After each update: $\mathcal{J}(\bm{\theta}_{new}) < \mathcal{J}(\bm{\theta}_{old})$
+		\item The algorithms differ in the number of iterations required, the computational cost, the convergence guarantees,
+			the robustness with noisy cost functions and their memory usage
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Numerical Optimization}{Optimization algorithms}
+% Numerical Optimization Algorithms
+\begin{frame}{Numerical Optimization Algorithms}{}
 	\begin{itemize}
-		\item There are various approaches to numerical optimization
-		\item Gradient-based methods require differentiable functions and not too many iterations, but only guarantee to find a local optimum, examples are:
+		\item \textbf{Gradient-based methods:}
 		\begin{itemize}
-			\item Gradient Descent (with constant, variable or line-search-optimized step size)
-			\item (L-)BFGS
-			\item Conjugate Gradient Descent
+			\item \highlight{Gradient descent} (with constant, variable step size $\alpha$)
+			\item \highlight{(L-)BFGS} (Broyden-Fletcher-Goldfarb-Shanno)
+			\item \highlight{Conjugate gradient descent}
 		\end{itemize}
-		\item Non-gradient based methods may find a global optimum, but require a large number of steps, examples are:
+		\item \textbf{Non-gradient based methods:}
 		\begin{itemize}
-			\item Genetic Algorithms
-			\item Non-Linear Simplex
-			\item Nelder-Mead
+			\item \highlight{Genetic algorithms}
+			\item \highlight{Non-Linear simplex}
+			\item \highlight{Nelder-Mead}
 		\end{itemize}
+	\end{itemize}
+	
+	\begin{boxBlueNoFrame}
+		\highlight{Numerical techniques may not find the global optimum!}
+	\end{boxBlueNoFrame}
+\end{frame}
+
+
+% Gradient Descent
+\begin{frame}{Gradient Descent}{}
+	\begin{itemize}
+		\item Most basic algorithm (and most commonly used)
+		\item Go into the direction of the \textbf{steepest descent}
+		\item The gradient points in the direction of the maximum ($\rightarrow$ subtract gradient)
+		\begin{equation}
+			\bm{\theta}^{(new)} \longleftarrow \bm{\theta}^{(old)} -
+				\alpha \nabla_{\bm{\theta}} \mathcal{J}(\bm{\theta}^{(old)})
+		\end{equation}
+		\item The parameter updates tend to 'zig-zag' down the valley (see next slide)
+		\item Gradient descent is a \highlight{1st-order method}
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Numerical Optimization}{There are many other things you have to consider}
-Initialization also matters...
-\includegraphics[width=0.75\textwidth]{02_math/02_img/gradientascent.png}
+
+% Gradient Descent (Ctd.)
+\begin{frame}{Gradient Descent (Ctd.)}{}
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.45]{02_math/02_img/gradient_descent}
+	\end{figure}
 \end{frame}
 
-\begin{frame}{Want to learn more about optimization?}{Every machine learning problem is an optimization problem!}
-\begin{itemize}
-\item Deep Learning book chapters 4.3, 4.4 and 8 (\href{https://www.deeplearningbook.org/contents/numerical.html}{Link chapters 4.3, 4.4}, \href{https://www.deeplearningbook.org/contents/optimization.html}{Link chapter 8}) are highly recommended
-\item Boyd \& Vandenberghe, Convex Optimization (\href{http://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf}{Link})
-\item Stanford convex optimization course (\href{https://web.stanford.edu/class/ee364a/lectures.html}{Link})
-\item MOOC on constrained optimization (\href{https://www.khanacademy.org/math/multivariable-calculus/applications-of-multivariable-derivatives/lagrange-multipliers-and-constrained-optimization/v/constrained-optimization-introduction}{Link})
-\end{itemize}
+
+% Initialization
+\begin{frame}{Initialization}{}
+	Initialization also matters...
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.75\textwidth]{02_math/02_img/gradientascent}
+	\end{figure}
+\end{frame}
+
+
+% Newton's Method
+\begin{frame}{Newton's Method}{}\optional
+	\floattext{7.75}{7.5}{\footnotesize\highlight{Taylor series expansion}}
+	\begin{itemize}
+		\item We want to solve: {\footnotesize ($\bm{H}$ is the \highlight{Hessian}, $\bm{g}$ the \highlight{Jacobian})}
+		\begin{equation}
+			\delta \bm{\theta} = \argmin_{\delta \bm{\theta}}
+				\left[ c + \bm{g}^{\intercal} \delta \bm{\theta} + \frac{1}{2} \delta \bm{\theta}^{\intercal} \bm{H} \delta \bm{\theta} \right]
+		\end{equation}
+		\item We have to differentiate and set to zero:
+		\begin{equation}
+			\nabla_{\delta \bm{\theta}} \left[ c + \bm{g}^{\intercal} \delta \bm{\theta} +
+				\frac{1}{2} \delta \bm{\theta}^{\intercal} \bm{H} \delta \bm{\theta} \right]
+				= \bm{g} + \bm{H} \delta \bm{\theta} \overset{!}{=} \bm{0}
+		\end{equation}
+		\item Which yields the solution:
+		\begin{equation}
+			\delta \bm{\theta} = -\bm{H}^{-1} \bm{g}
+		\end{equation}
+	\end{itemize}
+\end{frame}
+
+
+% Newton's Method (Ctd.)
+\begin{frame}{Newton's Method (Ctd.)}{}\optional
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.4]{02_math/02_img/newton}
+	\end{figure}
+\end{frame}
+
+
+% Want to learn more about Optimization?
+\begin{frame}{Want to learn more about Optimization?}{}
+	\begin{itemize}
+		\item Deep Learning book chapters 4.3, 4.4 and 8 \\
+			(\href{https://www.deeplearningbook.org/contents/numerical.html}{Link chapters 4.3, 4.4},
+			\href{https://www.deeplearningbook.org/contents/optimization.html}{Link chapter 8}) are highly recommended
+		\item Boyd \& Vandenberghe, Convex Optimization (\href{http://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf}{Link})
+		\item Stanford convex optimization course (\href{https://web.stanford.edu/class/ee364a/lectures.html}{Link})
+		\item MOOC on constrained optimization (\href{https://www.khanacademy.org/math/multivariable-calculus/applications-of-multivariable-derivatives/lagrange-multipliers-and-constrained-optimization/v/constrained-optimization-introduction}{Link})
+	\end{itemize}
 \end{frame}
 
 
