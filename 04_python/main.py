@@ -16,27 +16,27 @@ import numpy as np
 
 # data creation and plotting
 # -----------------------------------------------------------------------------
-from utils.DataCreator import DataCreator
-from utils.BoundaryPlotter import BoundaryPlotter
+from utils.data_creator import DataCreator
+from utils.boundary_plotter import BoundaryPlotter
 
 # classifiers
 # -----------------------------------------------------------------------------
-from clf.kNN import kNN
-from clf.SVM import SVM
-from clf.LogisticRegression import LogisticRegression
+from clf.knn import kNN
+from clf.svm import SVM
+from clf.logistic_regression import LogisticRegression, LogRegOneVsOne
 
 # regression
 # -----------------------------------------------------------------------------
-from reg.GaussianProcess import GaussianProcess
+from reg.gaussian_process import GaussianProcess
 
 # reinforcement learning
 # -----------------------------------------------------------------------------
-from rl.GridWorld import GridWorld
-from rl.ValueIteration import ValueIteration
+from rl.grid_world import GridWorld
+from rl.value_iteration import ValueIteration
 
 # evaluation
 # -----------------------------------------------------------------------------
-from utils.Evaluator import Evaluator
+from utils.evaluator import Evaluator
 
 
 # -----------------------------------------------------------------------------
@@ -48,11 +48,11 @@ def classification():
     Classification.
     """
     # create data
-    X, y = DataCreator().make_classification(sklearn=True, n_classes=2)
+    X, y = DataCreator().make_classification(sklearn=True, n_classes=3)
     
     # train kNN classifier
-    clf = kNN(n_neighbors=3)
-    clf.fit(X, y)
+#    clf = kNN(n_neighbors=3)
+#    clf.fit(X, y)
     
     # train SVM classifier
 #    clf = SVM(kernel="polynomial", C=1.0, p=2, s=5.0)
@@ -62,6 +62,10 @@ def classification():
     # train logistic regression classifier
 #    clf = LogisticRegression()
 #    clf.fit(X, y, batch_size=X.shape[0])
+    
+    # train one-vs-one logistic regression classifier
+    clf = LogRegOneVsOne()
+    clf.fit(X, y)
     
     # plot boundary
     BoundaryPlotter(X, y).plot_boundary(clf, step_size=0.005)
@@ -127,7 +131,7 @@ if __name__ == "__main__":
     """
     Main function.
     """
-#    classification()
+    classification()
 #    regression()
-    reinforcement_learning()
+#    reinforcement_learning()
     
