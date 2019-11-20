@@ -1,5 +1,4 @@
 \input{preamble_theme}
-\usepackage{hyperref}
 
 % ====================================================
 % ====================================================
@@ -9,8 +8,8 @@
 
 \title[Mathematical Foundations]{*** Applied Machine Learning Fundamentals *** Mathematical Foundations}
 \institute{SAP\,SE}
-\author{Daniel Wehner}
-\date{\today}
+\author{M.\,Sc. Daniel Wehner}
+\date{Winter term 2019/2020}
 \prefix{MATH}
 
 % ====================================================
@@ -35,7 +34,7 @@
 
 % Agenda
 %______________________________________________________________________
-\begin{frame}{Agenda \today}
+\begin{frame}{Agenda for this Unit}
 	\begin{multicols}{2}
 		\tableofcontents
 	\end{multicols}
@@ -464,14 +463,14 @@
 		\item \textbf{Question:} How can we invert a matrix $\bm{X} \in \mathbb{R}^{n \times m}$ which is not squared?
 		\item \textbf{Left pseudoinverse} $\bm{X}^{\#} \bm{X}$:
 		\begin{equation}
-			\bm{X}^{\#} \bm{X}
+			\textcolor{myblue1}{\bm{X}^{\#}} \bm{X}
 				= \textcolor{myblue1}{\underbracket{
 					(\bm{X}^{\intercal} \bm{X})^{-1} \bm{X}^{\intercal}
 				}_{\text{left-multiplied}}} \bm{X} = \bm{I}_m
 		\end{equation}
 		\item \textbf{Right pseudoinverse} $\bm{X} \bm{X}^{\#}$:
 		\begin{equation}
-			\bm{X} \bm{X}^{\#}
+			\bm{X} \textcolor{myblue1}{\bm{X}^{\#}}
 				= \bm{X} \textcolor{myblue1}{\underbracket{
 					\bm{X}^{\intercal} (\bm{X} \bm{X}^{\intercal})^{-1}
 				}_{\text{right-multiplied}}} = \bm{I}_n
@@ -1197,19 +1196,6 @@
 \end{frame}
 
 
-% Want to learn more about Optimization?
-\begin{frame}{Want to learn more about Optimization?}{}
-	\begin{itemize}
-		\item Deep Learning book chapters 4.3, 4.4 and 8 \\
-			(\href{https://www.deeplearningbook.org/contents/numerical.html}{Link chapters 4.3, 4.4},
-			\href{https://www.deeplearningbook.org/contents/optimization.html}{Link chapter 8}) are highly recommended
-		\item Boyd \& Vandenberghe, Convex Optimization (\href{http://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf}{Link})
-		\item Stanford convex optimization course (\href{https://web.stanford.edu/class/ee364a/lectures.html}{Link})
-		\item MOOC on constrained optimization (\href{https://www.khanacademy.org/math/multivariable-calculus/applications-of-multivariable-derivatives/lagrange-multipliers-and-constrained-optimization/v/constrained-optimization-introduction}{Link})
-	\end{itemize}
-\end{frame}
-
-
 % Section: Wrap-Up
 %______________________________________________________________________
 \section{Wrap-Up}
@@ -1220,9 +1206,37 @@
 \subsection{Summary}
 
 % Summary
-\begin{frame}{Summary}{}
+\begin{frame}[allowframebreaks]{Summary}{}
 	\begin{itemize}
-		\item
+		\item \highlight{Machine learning is math!}
+		\item \textbf{Linear algebra:}
+		\begin{itemize}
+			\item You should know what vectors are and what you can do with them \\
+				(addition, multiplication, transpose, ...)
+			\item The same applies to matrices
+			\item Matrix inversion and pseudoinverse
+			\item Eigenvectors and eigenvalues are important, \textbf{eigenvectors form a basis}
+		\end{itemize}
+		\framebreak
+		\item \textbf{Statistics:}
+		\begin{itemize}
+			\item Random variables are numbers \textbf{determined by chance}
+			\item Probability distributions describe a \textbf{probability mass} or \textbf{density}
+			\item Discrete distributions: Bernoulli, Binomial, Poisson (not covered)
+			\item Continuous distributions: Gaussian, Student-t (not covered)
+			\item Gaussians are important in machine learning and have appealing properties
+			\item Terms: Joint-, marginal- and conditional distribution, chain rule, probabilistic independence, Bayes' rule
+			\item You should know what expectation and variance is
+		\end{itemize}
+		\framebreak
+		\item \textbf{Optimization:}
+		\begin{itemize}
+			\item \highlight{Every machine learning problem is an optimization problem!}
+			\item Good cost functions are \textbf{convex}
+			\item Unconstrained and constrained optimization (Lagrange multipliers)
+			\item Closed-form solutions are not always possible $\rightarrow$ \textbf{numerical optimization}
+			\item The most prominent numerical technique is called \textbf{gradient descent}
+		\end{itemize}
 	\end{itemize}
 \end{frame}
 
@@ -1234,7 +1248,15 @@
 % Self-Test Questions
 \begin{frame}{Self-Test Questions}{}\important
 	\begin{enumerate}
-		\item 
+		\item What is a vector and what is a matrix?
+		\item What is the result of an inner product / outer product?
+		\item How can you invert matrices? Is this always possible?
+		\item What is an eigenvalue problem? Where do they play a role?
+		\item What are random variables and probability distributions?
+		\item Why is the Gaussian distribution so important?
+		\item What is Bayes' rule? Explain its components!
+		\item What is convexity? Why should cost functions by convex?
+		\item What can you do if there is no analytical solution to optimization problems?
 	\end{enumerate}
 \end{frame}
 
@@ -1254,11 +1276,42 @@
 
 % Literature
 %______________________________________________________________________
-\begin{frame}{Recommended Literature and further Reading}{}
+\begin{frame}[allowframebreaks]{Recommended Literature and further Reading}{}
 	\footnotesize
 	\begin{thebibliography}{2}
+		\literature{book}{Deisenroth.2019}{[1] Mathematics for Machine Learning}
+			{Deisenroth et al. Cambridge University Press. 2019.}{$\rightarrow$ \href{
+				https://mml-book.github.io/
+			}{\linkstyle{Link}}}
+
+		\literature{book}{Goodfellow.2016}{[2] Deep Learning}
+			{Ian Goodfellow et al. MIT Press. 2016.}{$\rightarrow$ \href{
+				http://www.deeplearningbook.org/
+			}{\linkstyle{Link}}, cf. chapters 4.3, 4.4, 8}
+
+		\literature{book}{Boyd.2004}{[3] Convex Optimization}
+			{Stephen Boyd et al. Cambridge University Press. 2004.}{$\rightarrow$ \href{
+				http://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf
+			}{\linkstyle{Link}}}
+
+		\literature{online}{Boyd.2019}{[4] Lecture slides 'Convex Optimization'}
+			{Stephen Boyd. Stanford University. 2019.}{$\rightarrow$ \href{
+				https://web.stanford.edu/class/ee364a/lectures.html
+			}{\linkstyle{Link}}}
 
 	\end{thebibliography}
+\end{frame}
+
+
+% Subsection: Meme of the Day
+% --------------------------------------------------------------------------------------------------------
+\subsection{Meme of the Day}
+
+% Meme of the Day
+\begin{frame}{Meme of the Day}{}
+	\begin{figure}
+		\includegraphics[scale=0.2]{02_math/02_img/meme_of_the_day}
+	\end{figure}
 \end{frame}
 
 
