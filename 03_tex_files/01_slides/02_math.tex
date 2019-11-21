@@ -61,7 +61,7 @@
 		You will need it to understand:
 		\begin{itemize}
 			\item \textbf{Statistical} machine learning
-			\item How optimization for learning / empirical risk minimization works,
+			\item How optimization for learning / empirical risk minimization works
 			\item How linear algebra, calculus and statistics are used to make learning and inference more efficient
 		\end{itemize}
 	}
@@ -225,7 +225,7 @@
 		\input{02_math/01_tikz/vector_projection}
 	}
 	\begin{itemize}
-		\item How is the projection of $\bm{x}$ onto $\bm{y}$ defined?
+		\item How is the projection of $\bm{w}$ onto $\bm{v}$ defined?
 		\item Formally, we have:
 		\begin{align}
 			\nonumber
@@ -408,7 +408,7 @@
 		\begin{equation}
 			\bm{X}^{-1} = \frac{1}{\text{det}(\bm{X})} \bm{C}^{\intercal}
 		\end{equation}
-		\item A condition for invertability is that \textbf{the determinant has to be different than zero}
+		\item A condition for invertability is that \textbf{the determinant has to be different from zero}
 		\item \textbf{Example:}
 		\begin{equation*}
 			\bm{X}
@@ -509,16 +509,17 @@
 	\begin{itemize}
 		\item Let us assume that there are $n$ eigenvectors with corresponding eigenvalues:
 		\begin{align*}
-			&\bm{v}_1, \bm{v_2}, \dots, \bm{v}_n \\
+			&\bm{v}^{(1)}, \bm{v}^{(2)}, \dots, \bm{v}^{(n)} \\
 			&\lambda_1, \lambda_2, \dots, \lambda_n
 		\end{align*}
 		\item \textbf{Theorem:}
 		\begin{itemize}
-			\item For an $n \times n$ matrix with eigenvectors $\bm{v}_1, \bm{v}_2, \dots, \bm{v}_n$, if they correspond to
-				\textbf{distinct} eigenvalues $\lambda_1, \lambda_2, \dots, \lambda_n$, then the set $\{ \bm{v}_1, \bm{v}_2, \dots, \bm{v}_n \}$ is linearly independent
+			\item For an $n \times n$ matrix with eigenvectors $\bm{v}^{(1)}, \bm{v}^{(2)}, \dots, \bm{v}^{(n)}$,
+				if they correspond to \textbf{distinct} eigenvalues $\lambda_1, \lambda_2, \dots, \lambda_n$,
+				then the set $\{ \bm{v}^{(1)}, \bm{v}^{(2)}, \dots, \bm{v}^{(n)} \}$ is linearly independent
 			\item Hence, any vector can be expressed as a linear combination of eigenvectors:
 			\begin{equation*}
-				\bm{v} = c_1 \bm{v}_1 + c_2 \bm{v}_2 + \dots + c_n \bm{v}_n
+				\bm{v} = c_1 \bm{v}^{(1)} + c_2 \bm{v}^{(2)} + \dots + c_n \bm{v}^{(n)}
 			\end{equation*}
 		\end{itemize}
 	\end{itemize}
@@ -735,15 +736,15 @@
 	\vspace*{-2mm}
 	\begin{equation}
 		p_D(\bm{x})
-			= \mathcal{N}(\bm{x} \vert \bm{\mu}, \bm{\Sigma})
+			= \mathcal{N}_D(\bm{x} \vert \bm{\mu}, \bm{\Sigma})
 			= \frac{1}{\sqrt{(2 \pi)^D \vert \bm{\Sigma} \vert}}
 				\exp\left\{ -\frac{1}{2} (\bm{x} - \bm{\mu})^{\intercal} \bm{\Sigma}^{-1} (\bm{x} - \bm{\mu}) \right\}
 	\end{equation}
 	\divideTwo{0.49}{
 		\includegraphics[scale=0.3]{02_math/02_img/multivariate_gaussian}
 	}{0.49}{
-		\textbf{For clarification:} $\bm{x}$ and $\bm{\mu}$ are vectors while $\bm{\Sigma}$ is a matrix.
-		The probability given by $\mathcal{N}(\bm{x} \vert \bm{\mu}, \bm{\Sigma}) \in [0; 1]$ is still a scalar value!
+		\textbf{For clarification:} $\bm{x}$ and $\bm{\mu}$ are vectors, while $\bm{\Sigma}$ is a matrix.
+		The probability given by $\mathcal{N}_D(\bm{x} \vert \bm{\mu}, \bm{\Sigma}) \in [0; 1]$ is still a scalar value!
 	}
 \end{frame}
 
@@ -1255,8 +1256,8 @@
 		\item What are random variables and probability distributions?
 		\item Why is the Gaussian distribution so important?
 		\item What is Bayes' rule? Explain its components!
-		\item What is convexity? Why should cost functions by convex?
-		\item What can you do if there is no analytical solution to optimization problems?
+		\item What is convexity? Why should cost functions be convex?
+		\item What can you do if no analytical solution to optimization problems exists?
 	\end{enumerate}
 \end{frame}
 

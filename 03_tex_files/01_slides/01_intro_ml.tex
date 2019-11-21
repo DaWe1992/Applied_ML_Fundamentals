@@ -173,16 +173,16 @@
 			\item \highlight{Predictors:}
 			\begin{itemize}
 				\scriptsize
-				\item Outlook $\in \{sunny, overcast, rainy\}$
-				\item Temperature $\in \{hot, mild, cool\}$
-				\item Humidity $\in \{high, normal\}$
-				\item Wind $\in \{weak, strong\}$
+				\item \texttt{Outlook} $\in \{sunny, overcast, rainy\}$
+				\item \texttt{Temperature} $\in \{hot, mild, cool\}$
+				\item \texttt{Humidity} $\in \{high, normal\}$
+				\item \texttt{Wind} $\in \{weak, strong\}$
 			\end{itemize}
 			\item \highlight{Label:}
 			\begin{itemize}
 				\scriptsize
-				\item PlayGolf $\in \{yes, no\}$
-				\item Given a new instance we want to predict the label
+				\item \texttt{PlayGolf} $\in \{yes, no\}$
+				\item Given a new instance, we want to predict its label
 			\end{itemize}
 			\item \textbf{Label for the new instance???}
 		\end{itemize}
@@ -233,7 +233,7 @@
 			\item Cf. weather data set
 			\item E.\,g. neural networks, decision trees
 		\end{itemize}
-		\item \highlight{Incremental/Online Learning}
+		\item \highlight{Incremental / Online Learning}
 		\begin{itemize}
 			\item Constant stream of training examples
 			\item The model is updated as new training examples arrive
@@ -336,7 +336,7 @@
 	}
 	\vspace*{2mm}
 	\begin{boxBlueNoFrame}
-		\textbf{Solution:} Choose a simpler model (c.\,f. \textbf{Occam's razor})
+		\textbf{Solution:} Choose a simpler model (cf. \textbf{Occam's razor})
 	\end{boxBlueNoFrame}
 \end{frame}
 
@@ -396,7 +396,7 @@
 			\end{itemize}
 		}
 	\end{figure}
-	\citeAuthor{Image taken from}{}{p.\,35}
+	\citeAuthor{Image taken from}{Bishop.2006}{p.\,35}
 \end{frame}
 
 
@@ -668,7 +668,14 @@
 	\footnotesize
 	\begin{thebibliography}{2}
 		\literature{book}{Mitchell.1997}{[1] Machine Learning}
-			{Tom Mitchell. McGraw-Hill Science. 1997.}{$\rightarrow$ See chapter 1 (Introduction)}
+			{Tom Mitchell. McGraw-Hill Science. 1997.}{$\rightarrow$ \href{
+				https://www.cs.ubbcluj.ro/~gabis/ml/ml-books/McGrawHill\%20-\%20Machine\%20Learning\%20-Tom\%20Mitchell.pdf
+			}{\linkstyle{Link}}, cf. chapter 1 \textit{'Introduction'}}
+
+		\literature{book}{Bishop.2006}{[2] Pattern Recognition and Machine Learning}
+			{Christopher Bishop. Springer. 2006.}{$\rightarrow$ \href{
+				http://users.isr.ist.utl.pt/~wurmd/Livros/school/Bishop\%20-\%20Pattern\%20Recognition\%20And\%20Machine\%20Learning\%20-\%20Springer\%20\%202006.pdf
+			}{\linkstyle{Link}}, cf. chapter 1 \textit{'Introduction'}}
 	\end{thebibliography}
 \end{frame}
 
