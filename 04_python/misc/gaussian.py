@@ -29,7 +29,7 @@ def plot_multivariate_normal(mu, cov):
     :param mu:      mean vector
     :param cov:     covariance matrix
     """ 
-    plt.figure()
+    plt.figure(figsize=(20, 10))
     
     # create mesh grid and multivariate normal
     x = np.linspace(-10, 10, 1000)
