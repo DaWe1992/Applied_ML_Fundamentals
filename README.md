@@ -68,7 +68,8 @@ The assignments have to be solved in groups comprising 3 to 4 students.
 Task descriptions, starter code and data sets can be found in the folder [exercises](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/02_exercises).
 Solutions will be presented and discussed in the following class, however, sample solutions will not be uploaded. You are however free to share correct solutions with your colleagues.
 Please submit your solutions via Moodle and in printed form. Please do not submit hand-written solutions,
-rather use proper type-setting software like LaTeX or other comparable programs. 
+rather use proper type-setting software like LaTeX or other comparable programs.
+
 Your homework will be correctd and given back to you. Correct solutions are rewarded with a bonus for the exam (max. 10 percent, if all solutions submitted are correct).
 **Please note:** You have to pass the exam **without the bonus points!** (i.e. it is not possible to turn 5.0 into 4.0)
 **As usual, the solutions have to be your own work. If you plagiarize, you will lose all bonus points!**
