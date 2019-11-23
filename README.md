@@ -4,7 +4,9 @@
 'We are drowning in information and starving for knowledge.' – John Naisbitt
 ```
 
-Machine learning is a subfield of artificial intelligence (AI) that provides systems the ability to automatically learn and improve from experience **without being explicitly programmed**. Machine learning focuses on the development of computer programs that can access data and use it to learn for themselves. Machine learning has become an integral part of many modern applications.
+Machine learning is a subfield of artificial intelligence (AI) that provides systems the ability to automatically learn and improve from experience
+**without being explicitly programmed**. Machine learning focuses on the development of computer programs that can access data and use it to learn for themselves.
+Machine learning has become an integral part of many modern applications.
 
 <p align="center">
 	<img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/data_science.png" width=400px>
@@ -62,13 +64,28 @@ This lecture is supposed to give a general introduction into state-of-the-art ma
 8. **Lecture summary**
 
 ## Assignments <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/assignments.png" width="25px" height="25px">
-The assignments have to be solved in groups comprising 3 to 4 students. We provide starter code and task descriptions in this repository (folder [exercises](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/02_exercises)). Solutions will be presented and discussed in the next class. Please submit your solutions via Moodle. We will correct your homework and give it back to you. Correct solutions are rewarded with a bonus for the exam or project. **The solutions have to be your own work. If you plagiarize, you will lose all bonus points!**
+The assignments have to be solved in groups comprising 3 to 4 students.
+Task descriptions, starter code and data sets can be found in the folder [exercises](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/02_exercises).
+Solutions will be presented and discussed in the following class, however, sample solutions will not be uploaded. You are however free to share correct solutions with your colleagues.
+Please submit your solutions via Moodle and in printed form. Please do not submit hand-written solutions,
+rather use proper type-setting software like LaTeX or other comparable programs. 
+Your homework will be correctd and given back to you. Correct solutions are rewarded with a bonus for the exam (max. 10 percent, if all solutions submitted are correct).
+**Please note:** You have to pass the exam **without the bonus points!** (i.e. it is not possible to turn 5.0 into 4.0)
+**As usual, the solutions have to be your own work. If you plagiarize, you will lose all bonus points!**
 
 ## Exam <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/exam.png" width="30px" height="25px">
-The exam will take 60 minutes. You are allowed to bring a calculator to the exam. We do not ask you for any derivations, rather we want to test whether you understand the general concepts. Make sure that you can answer the self-test questions we provide for each topic. Some of the slides give you hints. A slide marked with <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/scream.png" width="25px" height="25px"> provides in-depth information which you do not have to know by heart (think of it as additional material for the sake of completeness). On the other hand, very important content is indicated by the symbol <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/important.png" width="25px" height="25px"> Make sure you understand it!
+The exam will take 60 minutes. You are allowed to bring a calculator to the exam.
+You will not be asked for any derivations, rather we want to test whether you understand the general concepts.
+Make sure you can answer the self-test questions provided for each topic. Some of the slides give you important hints:
+A slide marked with <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/scream.png" width="25px" height="25px">
+provides in-depth information which you do not have to know by heart (think of it as additional material for the sake of completeness).
+On the other hand, very important content is indicated by the symbol <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/important.png" width="25px" height="25px">
+Make sure you understand it!
 
 ## Python code <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/python.png" width="30px" height="30px">
-You can find additional implementations for some of the algorithms - which are not part of the assignments ;) - in the folder [python](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/04_python). Play around with the hyper-parameters and try different data sets in order to get a better feeling for how the algorithms work.
+You can find additional implementations for some of the algorithms (which are not part of the assignments) in the folder
+[python](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/04_python).
+Play around with the hyper-parameters of the algorithms and try different data sets in order to get a better feeling for how the algorithms work.
 
 ## Literature <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/literature.png" width="25px" height="25px">
 You do not need to buy any books for the lecture. Most resources are available online. Please find a list below:
@@ -84,5 +101,5 @@ You do not need to buy any books for the lecture. Most resources are available o
 | Reinforcement Learning - An introduction       | Sutton et al. (2014)         | MIT Press     			| [click here](http://incompleteideas.net/book/bookdraft2017nov5.pdf)   																													|
 
 ## Bugs and Errors <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/bug.png" width="25px" height="30px">
-Help us improve the lecture. Feel free to file an issue if you spot any errors in the slides, exercises or code.
-Thank you very much. **Please do not open issues for questions concerning the content!**
+Help us improve the lecture. Feel free to file an issue, if you spot any errors in the slides, exercises or code.
+Thank you very much. **Please do not open issues for questions concerning the content!** Either use the Moodle forum or send us an e-mail.

@@ -6,11 +6,11 @@
 % ====================================================
 % ====================================================
 
-\title[Decision Theory]{*** Applied Machine Learning Fundamentals *** Decision Theory}
+\title[Decision Theory]{*** Applied Machine Learning Fundamentals *** Bayesian Decision Theory}
 \institute{SAP\,SE}
-\author{Daniel Wehner}
-\date{\today}
-\prefix{DT}
+\author{M.\,Sc. Daniel Wehner}
+\date{Winter term 2019/2020}
+\prefix{BDT}
 
 % ====================================================
 % ====================================================
@@ -34,7 +34,7 @@
 
 % Agenda
 %______________________________________________________________________
-\begin{frame}{Agenda \today}
+\begin{frame}{Agenda for this Unit}
 	\begin{multicols}{2}
 		\tableofcontents
 	\end{multicols}
@@ -241,9 +241,9 @@
 \end{frame}
 
 
-% Subsection: Bayes' Optimal Classifier
+% Subsection: Bayes' optimal Classifier
 % --------------------------------------------------------------------------------------------------------
-\subsection{Bayes' Optimal Classifier}
+\subsection{Bayes' optimal Classifier}
 
 % Error Minimization
 \begin{frame}{Error Minimization}{}
@@ -267,8 +267,8 @@
 \end{frame}
 
 
-% Bayes' Optimal Classifier
-\begin{frame}{Bayes' Optimal Classifier}{}\important
+% Bayes' optimal Classifier
+\begin{frame}{Bayes' optimal Classifier}{}\important
 	\begin{itemize}
 		\item Decision rule:
 		\begin{itemize}
@@ -284,7 +284,7 @@
 					\frac{p(\mathcal{C}_2)}{p(\mathcal{C}_1)}
 			\end{equation}
 		\end{itemize}
-		\item A classifier obeying this rule is called \highlight{Bayes' Optimal Classifier}
+		\item A classifier obeying this rule is called \highlight{Bayes' optimal Classifier}
 	\end{itemize}
 \end{frame}
 
@@ -336,15 +336,15 @@
 		\item \textbf{Given:}
 		\begin{itemize}
 			\item New instance $\bm{x} = \langle x_1, x_2, \dots, x_m \rangle$ to be classified
-			\item Finite set of $\ell$ classes $\{ \mathcal{C}_1, \mathcal{C}_2, \dots, \mathcal{C}_\ell \}$
+			\item Finite set of $\kappa$ classes $\{ \mathcal{C}_1, \mathcal{C}_2, \dots, \mathcal{C}_{\kappa} \}$
 			\item \highlight{Labeled} training data ($\Rightarrow$ supervised learning)
 		\end{itemize}
 		\item \textbf{Wanted:} Most probable class $\mathcal{C}_{MAP}$ (maximum aposteriori) for $\bm{x}$:
 		\begin{align}
 			\mathcal{C}_{MAP}
-				&= \argmax_{\mathcal{C}_k \in \{ \mathcal{C}_1, \dots, \mathcal{C}_\ell \}} 
+				&= \argmax_{\mathcal{C}_k \in \{ \mathcal{C}_1, \dots, \mathcal{C}_{\kappa} \}} 
 					\widehat{p}(\mathcal{C}_k \vert \bm{x}) \\
-				&= \argmax_{\mathcal{C}_k \in \{ \mathcal{C}_1, \dots, \mathcal{C}_\ell \}} 
+				&= \argmax_{\mathcal{C}_k \in \{ \mathcal{C}_1, \dots, \mathcal{C}_{\kappa} \}} 
 					\widehat{p}(\mathcal{C}_k) \prod_{j=1}^m \widehat{p}(x_j \vert \mathcal{C}_k)
 		\end{align}
 	\end{itemize}
@@ -434,7 +434,7 @@
 	\end{align*}
 
 	\begin{boxBlueNoFrame}
-		\textbf{Classification:} $\mathcal{C}_{MAP} = no$ (No golf today...)
+		\textbf{Classification:} $\mathcal{C}_{MAP} = no$ (no golf today...)
 	\end{boxBlueNoFrame}
 \end{frame}
 
@@ -468,10 +468,10 @@
 		\item \textbf{Solution}: \highlight{Laplace smoothing}
 		\begin{align}
 			\widehat{p}(\mathcal{C}_k)
-				&= \frac{\sum_{i=1}^n \mathbb{1}\{ y^{(i)} = \mathcal{C}_k \} + 1} {n + \ell} \\[3mm]
+				&= \frac{\sum_{i=1}^n \mathbb{1}\{ y^{(i)} = \mathcal{C}_k \} + 1} {n + \kappa} \\[3mm]
 			\widehat{p}(x_j = v \vert \mathcal{C}_k)
 				&= \frac{\sum_{i=1}^n \mathbb{1}\{ x_j^{(i)} = v \wedge y^{(i)} = \mathcal{C}_k \} + 1}
-					{\sum_{i=1}^n \mathbb{1}\{ y^{(i)} = \mathcal{C}_k \} + \ell}
+					{\sum_{i=1}^n \mathbb{1}\{ y^{(i)} = \mathcal{C}_k \} + \kappa}
 		\end{align}
 	\end{itemize}
 \end{frame}
@@ -482,12 +482,12 @@
 \section{Risk Minimization}
 \makedivider{Risk Minimization}
 
-% Subsection: 
+% Subsection: Error $\ne$ Risk
 % --------------------------------------------------------------------------------------------------------
-\subsection{}
+\subsection{Error $\ne$ Risk}
 
-% Error != Risk
-\begin{frame}{Error != Risk}{}
+% Error $\ne$ Risk
+\begin{frame}{Error $\ne$ Risk}{}
 	\begin{itemize}
 		\item So far, we have tried to minimize the misclassification rate
 		\item Nevertheless, there are cases where not every misclassification is equally bad
@@ -504,7 +504,132 @@
 				\item If they are healthy, it can be okay to classify them as sick (order further tests)
 			\end{itemize}
 		\end{itemize}
+		\item \highlight{Minimizing the error is not necessarily equal to minimizing the risk}
 	\end{itemize}
+\end{frame}
+
+
+% Subsection: Loss Functions for Risk Minimization
+% --------------------------------------------------------------------------------------------------------
+\subsection{Loss Functions for Risk Minimization}
+
+% Loss Functions
+\begin{frame}{Loss Functions}{}
+	\begin{itemize}
+		\item \textbf{Key idea:} We have to construct a loss function which expresses what we want:
+		\begin{align*}
+			&\text{loss(decision = healthy | patient = sick)} \gg \\
+			&\text{loss(decision = sick | patient = healthy)}
+		\end{align*}
+		\item We have possible decisions $\alpha_i$...
+		\item ...and a loss function $\ell(\alpha_i \vert C_k)$
+		\item Expected loss (risk) of making a decision $\alpha_i$:
+		\begin{equation}
+			R(\alpha_i \vert \bm{x}) = \sum_k \ell(\alpha_i \vert C_k) p(C_k \vert \bm{x})
+		\end{equation}
+	\end{itemize}
+\end{frame}
+
+
+% Risk Minimization
+\begin{frame}{Risk Minimization}{}
+	\begin{itemize}
+		\item Consider two classes: $\mathcal{C}_1$ and $\mathcal{C}_2$
+		\item Therefore, we have two possible decisions: $\alpha_1$ (for $\mathcal{C}_1$) and $\alpha_2$ (for $\mathcal{C}_2$)
+		\item Loss function: $\ell(\alpha_i \vert C_k) = \ell_{ik}$
+		\item Risk of both decisions:
+		\begin{align*}
+			R(\alpha_1 \vert \bm{x}) &= \ell_{11} p(\mathcal{C}_1 \vert \bm{x}) + \ell_{12} p(\mathcal{C}_2 \vert \bm{x}) \\
+			R(\alpha_2 \vert \bm{x}) &= \ell_{21} p(\mathcal{C}_1 \vert \bm{x}) + \ell_{22} p(\mathcal{C}_2 \vert \bm{x})
+		\end{align*}
+		\item \textbf{Goal:} \highlight{Create a decision rule so that the overall risk is minimized}
+		\item Decide $\alpha_1$, iff $R(\alpha_2 \vert \bm{x}) > R(\alpha_1 \vert \bm{x})$
+	\end{itemize}
+\end{frame}
+
+
+ % Risk Minimization (Ctd.)
+\begin{frame}{Risk Minimization (Ctd.)}{}
+	\divideTwo{0.69}{
+		\vspace*{-2mm}
+		\begin{align*}
+			R(\alpha_2 \vert \bm{x})
+				&> R(\alpha_1 \vert \bm{x}) \\
+			\ell_{21} p(\mathcal{C}_1 \vert \bm{x}) + \ell_{22} p(\mathcal{C}_2 \vert \bm{x})
+				&> \ell_{11} p(\mathcal{C}_1 \vert \bm{x}) + \ell_{12} p(\mathcal{C}_2 \vert \bm{x}) \\
+			(\ell_{21} - \ell_{11}) p(\mathcal{C}_1 \vert \bm{x})
+				&> (\ell_{12} - \ell_{22}) p(\mathcal{C}_2 \vert \bm{x})
+		\end{align*}
+		\begin{align*}
+			\frac{\ell_{21} - \ell_{11}}{\ell_{12} - \ell_{22}}
+				&> \frac{p(\mathcal{C}_2 \vert \bm{x})}{p(\mathcal{C}_1 \vert \bm{x})}
+					= \frac{p(\bm{x} \vert \mathcal{C}_2) p(\mathcal{C}_2)}{p(\bm{x} \vert \mathcal{C}_1) p (\mathcal{C}_1)} \\
+			\frac{p(\bm{x} \vert \mathcal{C}_1)}{p(\bm{x} \vert \mathcal{C}_2)}
+				&> \frac{\ell_{12} - \ell_{22}}{\ell_{21} - \ell_{11}} \frac{p(\mathcal{C}_2)}{p(\mathcal{C}_1)}
+		\end{align*}
+	}{0.29}{
+		It is reasonable to assume that \textbf{the loss of a correct decision is smaller than
+		that of a wrong decision}:
+		\begin{equation*}
+			\ell_{ik} > \ell_{ii} \quad \forall k \ne i
+		\end{equation*}
+	}
+\end{frame}
+
+
+% Risk Minimization 0-1 Loss
+\begin{frame}{Risk Minimization 0-1 Loss}{}
+	\begin{boxBlueNoFrame}
+		\begin{equation*}
+			\frac{p(\bm{x} \vert \mathcal{C}_1)}{p(\bm{x} \vert \mathcal{C}_2)}
+				> \frac{\ell_{12} - \ell_{22}}{\ell_{21} - \ell_{11}} \frac{p(\mathcal{C}_2)}{p(\mathcal{C}_1)}
+		\end{equation*}
+	\end{boxBlueNoFrame}
+
+	\begin{itemize}
+		\item \highlight{0-1 loss:} Decide $\alpha_1$ if:
+		\begin{equation}
+			\frac{p(\bm{x} \vert \mathcal{C}_1)}{p(\bm{x} \vert \mathcal{C}_2)}
+				> \frac{p(\mathcal{C}_2)}{p(\mathcal{C}_1)} \qquad \text{with} \qquad
+			\ell(\alpha_i \vert \mathcal{C}_k) =
+			\begin{cases}
+				0\ i = k \\
+				1\ i \ne k
+			\end{cases}
+		\end{equation}
+		\item \highlight{0-1 loss leads to the same decision rule which minimizes the misclassification rate}
+	\end{itemize}
+\end{frame}
+
+
+% Subsection: Handling of continuous Data
+% --------------------------------------------------------------------------------------------------------
+\subsection{Handling of continuous Data}
+
+% Are we done?
+\begin{frame}{Are we done?}{}
+	\begin{itemize}
+		\item \textbf{Question:} Are we done with classification?
+		\begin{itemize}
+			\item We have decision rules for simple and general loss functions
+			\item They are even \textbf{Bayes' optimal}
+			\item We can deal with two or more classes
+			\item We can deal with high dimensional feature vectors
+			\item We can incorporate prior knowledge on the class distribution
+		\end{itemize}
+		\item We have seen how to get the probabilities for the discrete case \\
+			(cf. na\"{i}ve Bayes classifier)
+		\item \Highlight{But: What about continuous data?}
+	\end{itemize}
+\end{frame}
+
+
+% Continuous Data
+\begin{frame}{Continuous Data}{}
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.4]{03_decision_theory/02_img/continuous_data}
+	\end{figure}
 \end{frame}
 
 
@@ -519,7 +644,15 @@
 
 % Summary
 \begin{frame}{Summary}{}
-
+	\begin{itemize}
+		\item Statistical methods assume that the process that `generates' the data is 
+			\textbf{governed by the rules of probability}
+		\item We need class \textbf{conditional probabilities} and \textbf{class priors}
+		\item Use \textbf{Bayes' theorem} to get the \textbf{class posteriors}
+		\item \textbf{Bayes' optimal classifier:} Decide for the most probable class
+		\item Na\"{i}ve Bayes assumes all \textbf{features to be pairwise conditionally independent}
+		\item \textbf{Error minimization is not equal to risk minimization}
+	\end{itemize}
 \end{frame}
 
 
@@ -529,7 +662,14 @@
 
 % Self-Test Questions
 \begin{frame}{Self-Test Questions}{}\important
-
+	\begin{enumerate}
+		\item What are class conditional probabilities?
+		\item What does \textit{Bayes optimal} mean?
+		\item How can we incorporate prior knowledge about the class distribution into the classification?
+		\item What is the na\"{i}ve assumption which na\"{i}ve Bayes makes? When is this a problem?
+		\item Explain what maximum aposteriori is!
+		\item What is misclassification and risk? Are they the same?
+	\end{enumerate}
 \end{frame}
 
 
@@ -553,6 +693,18 @@
 	\begin{thebibliography}{2}
 
 	\end{thebibliography}
+\end{frame}
+
+
+% Subsection: Meme of the Day
+% --------------------------------------------------------------------------------------------------------
+\subsection{Meme of the Day}
+
+% Meme of the Day
+\begin{frame}{Meme of the Day}{}
+	\begin{figure}
+		\includegraphics[scale=0.35]{03_decision_theory/02_img/meme_of_the_day}
+	\end{figure}
 \end{frame}
 
 
