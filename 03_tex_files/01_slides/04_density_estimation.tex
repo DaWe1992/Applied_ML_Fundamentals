@@ -8,7 +8,7 @@
 
 \title[Probability Density Estimation]{*** Applied Machine Learning Fundamentals *** Probability Density Estimation (PDE)}
 \institute{SAP\,SE}
-\author{Daniel Wehner}
+\author{Clemens Biehl, Daniel Wehner}
 \date{\today}
 \prefix{PDE}
 
@@ -242,11 +242,11 @@
 \begin{frame}{Maximum Likelihood of a Gaussian}{}
 	\begin{itemize}
 		\item $\bm{\theta} = \{ \mu, \sigma^2 \}$
-		\begin{align*}
+		\begin{align}
 			\mathcal{L}\mathcal{L}(\{ \mu, \sigma^2 \})
 				&= \sum_{i=1}^n \log \mathcal{N}(x^{(i)} \vert \mu, \sigma^2) \\
 				&= \sum_{i=1}^n \log \frac{1}{\sqrt{2 \pi \sigma^2}} \exp\left\{ -\frac{(x^{(i)} - \mu)^2}{2 \sigma^2} \right\}
-		\end{align*}
+		\end{align}
 		\item Find $\mu_{ml}$ and $\sigma_{ml}^2$ which maximize the log-likelihood:
 		\begin{equation*}
 			\mu_{ml}, \sigma_{ml}^2 = \argmax_{\mu, \sigma^2} \mathcal{L}\mathcal{L}(\bm{\theta})
@@ -491,7 +491,9 @@
 % k-Nearest Neighbors
 \begin{frame}{k-Nearest Neighbors}
 	\begin{itemize}
-		\item 
+		\item Increase the size of a sphere until $k$ data points fall into this sphere, keep the number $K$ of data points fixed
+		\begin{equation}p(\bm{x}) \approx \frac{k}{n \cdot v(\bm{x})}\end{equation}
+		\item We will also look at k-Nearest Neighbors as a classification model later\newline $\rightarrow$ you can use a majority vote among the $k$ closest training data points to classify a new data point $\bm{x}$
 	\end{itemize}
 \end{frame}
 
@@ -512,11 +514,219 @@
 
 % Subsection: 
 % --------------------------------------------------------------------------------------------------------
-\subsection{}
+\subsection{General Idea}
 
-% 
-\begin{frame}{}{}
+% General Idea / Motivation
+\begin{frame}{Why do we need mixture models?}{}
+	\begin{itemize}
+		\item Parametric models have low memory footprint, are quick at runtime and often have nice analytic properties
+		\item Non-parametric models make fewer assumptions about the data, but are slower and have a high memory footprint
+		\item We can combine different models in a mixture model!
+		\begin{equation}
+			p(\bm{x}) = \sum_{j=1}^M p(\bm{x}|j) p(j)
+		\end{equation}
+	\end{itemize}
+\end{frame}
 
+% General Idea / Motivation
+\begin{frame}{Why do we need mixture models?}{}
+	\begin{itemize}
+		\item A single parametric model might not be able to capture the structure of the dataset at hand
+		\item Mixture distributions (e.\,g. a linear combination of Gaussians) can approximate almost any continuous density to arbitrary accuracy (given a sufficient number of Gaussians is used)
+	\end{itemize}
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.30]{04_density_estimation/02_img/mixturemodels_oldfaithful.png}
+	\end{figure}
+\end{frame}
+
+\subsection{Mixture of Gaussians}
+% Definition of Mixture of Gaussians
+\begin{frame}{Mixture of Gaussians Definition}{}
+	\begin{itemize}
+		\item Sum up the $M$ individual Gaussian distributions
+		\begin{align}
+			p(x) &= \sum_{j=1}^M p(x|z_j)\\
+			p(x_i|z_j) &= \mathcal{N}(x|\mu_j, \sigma_j) = \frac{1}{\sqrt{2\pi}\sigma_j} \exp\left(-\frac{(x - \mu_j)^2}{2\sigma_j^2}\right)
+		\end{align}
+		\begin{figure}
+			\centering
+			\includegraphics[scale=0.20]{04_density_estimation/02_img/gaussianmixturedistribution}
+		\end{figure}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Mixture of Gaussians Definition}{}
+	\begin{itemize}
+		\item Sum up the $M$ individual Gaussian distributions
+		\begin{align}
+			p(x) &= \sum_{j=1}^M p(x|z_j)\\
+			p(x_i|z_j) &= \mathcal{N}(x|\mu_j, \sigma_j) = \frac{1}{\sqrt{2\pi}\sigma_j} \exp\left(-\frac{(x - \mu_j)^2}{2\sigma_j^2}\right)
+		\end{align}
+		\item $z_j$ for $j \in \{1, \dots, M\}$ are the \textit{mixing coefficients}
+		\item $z_j \sim \text{Multinomial}(\bm{\phi})$, where $\phi_j \ge 0$ and $\sum_{j=1}^M \phi_j = 1$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Mixture of Gaussians Definition}{}
+	\begin{itemize}
+		\item Sum up the $M$ individual Gaussian distributions
+		\begin{align}
+			p(x) &= \sum_{j=1}^M p(x|z_j)\\
+			p(x_i|z_j) &= \mathcal{N}(x|\mu_j, \sigma_j) = \frac{1}{\sqrt{2\pi}\sigma_j} \exp\left(-\frac{(x - \mu_j)^2}{2\sigma_j^2}\right)
+		\end{align}
+		\item The overall mixture density $p(x)$ integrates to $1$
+		\item The parameters: $\theta = \{\mu_1, \sigma_1, \pi_1, \dots, \mu_M, \sigma_M, \pi_M\}$
+		\begin{boxBlueNoFrame}
+			\highlight{Which function do we need to maximize to estimate the parameters?}
+		\end{boxBlueNoFrame}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Maximum Likelihood Estimation for MoG}{}
+	\begin{itemize}
+		\item We have defined our Gaussian mixture model: $p(x) = \sum_{j=1}^M p(x|z_j)$
+		\item Maximize the log-likelihood to estimate the parameters $\bm{\theta}$:
+		\begin{align}
+			\mathcal{L} &= \log L(\theta) = \sum_{i=1}^N \log p(x_i|\theta)\\
+			\frac{\partial \mathcal{L}}{\partial \mu_j} &= 0\\
+			\mu_j &= \frac{\sum_{i=1}^N p(z_j|x_i) x_i}{\sum_{i=1}^N p(z_j|x_i)}\hspace{0.5cm} \Leftarrow \text{Do you see the issue?}
+		\end{align}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Maximum Likelihood Estimation for MoG}{}
+	\begin{itemize}
+		\item Maximize the log-likelihood to estimate the parameters $\bm{\theta}$:
+		\begin{align}
+			\mathcal{L} &= \log L(\theta) = \sum_{i=1}^N \log p(x_i|\theta)\\
+			\frac{\partial \mathcal{L}}{\partial \mu_j} &= 0\\
+			\mu_j &= \frac{\sum_{i=1}^N p(z_j|x_i) x_i}{\sum_{i=1}^N p(z_j|x_i)}\hspace{0.5cm} \Leftarrow \text{Do you see the issue?}
+		\end{align}
+		\item There is circular dependency, $\mu_j$ depends on $z_j$ $\Rightarrow$ there is no analytical solution!
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Maximum Likelihood Estimation for MoG}{}
+	\begin{itemize}
+		\item There is circular dependency, $\mu_j$ depends on $z_j$ $\Rightarrow$ there is no analytical solution!
+		\item How about using gradient descent?
+		\begin{itemize}
+			\item Complex gradient (circular dependency, non-linearity)
+			\item Optimization of each Gaussian mixture component depends on all of the other mixture components!
+		\end{itemize}
+		\item We have to take a different approach: \textit{Expectation Maximization}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Expectation Maximization}{}
+	\begin{itemize}
+		\item We have observed data (without labels) $x_i$ and unobserved / hidden / latent variables $z_j$
+		\item If we knew which Gaussian has generated which data point $x_i$, then we could do a maximum likelihood estimation for each mixture component $j$
+		\item If we knew the Gaussians already, i.\,e. their means and (co)variances, then we could assign each data point $x_i$ to mixture component $\eta$ if $p(z_\eta = 1|x_i) > p(z_j = 2|x_i) \quad \forall j$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Expectation Maximization}{}
+	\begin{itemize}
+		\item This is a chicken-and-egg problem:
+		\begin{itemize}
+			\item We don't know which mixture component generated which $x_i$\\
+			\item We don't know the distributions
+		\end{itemize}
+		\item How can we estimate the parameters of the distribution and the mixture coefficients $z_j$?
+	\end{itemize}
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.25]{04_density_estimation/02_img/gaussianmixturedistribution}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Expectation Maximization}{}
+	\begin{itemize}
+		\item How can we estimate the parameters of the distribution and the mixture coefficients $z_j$?
+		\item Idea:
+		\begin{itemize}
+			\item Assign a \textit{mixture label} to each data point $x_i$, cluster the data points and assign them to the mixture components
+			\item The mixture coefficients $z_j$ are \textit{soft assignments} of data points to mixture components
+			\item Iterate between updating the estimate of the mixture coefficients $z_j$ and the distribution parameters $\mu_j, \sigma_j$
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Expectation Maximization}{}
+EM for Gaussian Mixture Models:
+	\begin{enumerate}
+		\item Initialize $\mu_j, \sigma_j, z_j$ and evaluate the initial log-likelihood
+		\item \textbf{E step:} Compute the posterior distribution (\textit{responsibilities} $\gamma_{ij}$) for each mixture coefficient $z_j$ and all data points $x_i$ using the current parameter values
+		\begin{equation}
+			\gamma_{ij} = p(z_j|x_i) = \frac{z_j \mathcal{N}(x_i|\mu_j, \sigma_j)}{\sum_{m=1}^M (x_i|\mu_m, \sigma_\eta)}
+		\end{equation}
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}{Expectation Maximization}{}
+EM for Gaussian Mixture Models:
+	\begin{enumerate}
+		\setcounter{enumi}{2}
+		\item \textbf{M step:} Compute the new parameters using weighted estimates\\
+		\begin{gather}
+			N_j = \sum_{i=1}^N \gamma_{ij} \qquad z_{j}^{\text{new}} = \frac{N_j}{N}\\
+			\mu_j^{\text{new}} = \frac{1}{N_j} \sum_{i=1}^N \gamma_{ij} x_i \qquad (\sigma_j^{\text{new}})^2 = \frac{1}{N_j} \sum_{i=1}^N \gamma_{ij} (x_i - \mu_j^{\text{new}})^2
+		\end{gather}
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}{Expectation Maximization}{}
+EM for Gaussian Mixture Models:
+	\begin{enumerate}
+		\setcounter{enumi}{3}
+		\item Iterate \textbf{E Step} and \textbf{M Step} until convergence, i.\,e. evaluate the log-likelihood after each run and check if the parameters converge:
+		\begin{equation}
+			\mathcal{L} = \sum_{i=1}^N \log p(x_i|\bm{\theta}) = \sum_{i=1}^N \log\left(\sum_{j=1}^M z_j \mathcal{N}(x_i|\mu_j, \sigma_j)\right)
+		\end{equation}
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}{Expectation Maximization}{}
+	\begin{itemize}
+		\item We can use EM for performing maximum likelihood estimation even when the data is incomplete (missing features)
+		\item The incomplete log-likelihood $\mathcal{L}$ is maximized locally
+		\item The log-likelihood is guaranteed to improve or stay the same in every EM iteration
+		\item There are great visualizations of EM for Gaussian mixture models:
+		\begin{itemize}
+			\item \href{https://www.youtube.com/watch?v=l1W3BvjJnmY}{\linkstyle{EM density estimation animation}}
+			\item \href{https://youtu.be/eXdGCO-2n90?t=2}{\linkstyle{2-dimensional EM animation}}
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Expectation Maximization}{}
+	Let's look at some iterations of expectation maximization on a simple dataset:
+	\begin{figure}
+		\includegraphics[scale=0.45]{04_density_estimation/02_img/em}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Expectation Maximization}{}
+	\begin{itemize}
+		\item How do we initialize the parameters for EM?
+		\begin{itemize}
+			\item EM depends on a good initialization of the parameters, a poor initialization can lead to getting stuck in bad local optima
+			\item We can use \textit{k-means} to get an initial clustering
+		\end{itemize}
+		\item How many mixture components do we need?
+		\begin{itemize}
+			\item There are different criteria, we can for instance maximize the \textit{Bayesian Information Criterion} with respect to $K$:
+			\begin{equation}
+				\log p(X|\theta_{ML}) - \frac{1}{2} K \log N
+			\end{equation}
+			\begin{itemize}
+				\item $K$: Number of parameters
+				\item $N$: Number of data points
+			\end{itemize}
+		\end{itemize}
+	\end{itemize}
 \end{frame}
 
 
@@ -532,7 +742,14 @@
 
 % Summary
 \begin{frame}{Summary}{}
-
+	\begin{itemize}
+		\item We can use parametric, non-parametric and mixture models for density estimation
+		\item This allows us to estimate the probabilities needed for e.\,g. a Na\"ive Bayes model to work with continuous features
+		\item Parametric models assume a certain form of the density, governed by parameters like mean and variance for a Gaussian
+		\item Maximum likelihood estimation allows us to determine the parameters based on our dataset
+		\item Non-parametric models directly use the (training) data points themselves
+		\item We can use expectation maximization to optimize the parameters of mixture models
+	\end{itemize}
 \end{frame}
 
 
@@ -542,7 +759,13 @@
 
 % Self-Test Questions
 \begin{frame}{Self-Test Questions}{}\important
-
+	\begin{itemize}
+		\item What is maximum likelihood estimation? How can you get the maximum likelihood estimate for a Gaussian distribution?
+		\item What does \textit{non-parametric} mean in \textit{non-parametric models}?
+		\item What is different between kernel density estimation and k-nearest neighbors?
+		\item Why can't we use a simple maximum likelihood estimate for a mixture model as with a single Gaussian distribution?
+		\item What happens in the E and M steps in expectation maximization?
+	\end{itemize}
 \end{frame}
 
 
@@ -564,8 +787,23 @@
 \begin{frame}{Recommended Literature and further Reading}{}
 	\footnotesize
 	\begin{thebibliography}{2}
-
+		\literature{book}{Bishop (2006)}{[1] Pattern Recognition and Machine Learning - Chapter 2.5 \textit{Non-Parametric Methods}}
+			{Bishop. 2006.}{$\rightarrow$ \href{http://users.isr.ist.utl.pt/~wurmd/Livros/school/Bishop\%20-\%20Pattern\%20Recognition\%20And\%20Machine\%20Learning\%20-\%20Springer\%20\%202006.pdf}{\linkstyle{Link}}}
+		\literature{book}{Bishop (2006)}{[1] Pattern Recognition and Machine Learning - Chapter 9.2 \textit{Mixtures of Gaussians}}
+			{Bishop. 2006.}{$\rightarrow$ \href{http://users.isr.ist.utl.pt/~wurmd/Livros/school/Bishop\%20-\%20Pattern\%20Recognition\%20And\%20Machine\%20Learning\%20-\%20Springer\%20\%202006.pdf}{\linkstyle{Link}}}
 	\end{thebibliography}
+\end{frame}
+
+
+% Subsection: Meme of the Day
+% --------------------------------------------------------------------------------------------------------
+\subsection{Meme of the Day}
+
+% Meme of the Day
+\begin{frame}{Meme of the Day}{}
+	\begin{figure}
+		\includegraphics[scale=0.90]{04_density_estimation/02_img/gaussianseverywhere}
+	\end{figure}
 \end{frame}
 
 
