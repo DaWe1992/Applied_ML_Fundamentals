@@ -547,7 +547,7 @@
 		\item Sum up the $M$ individual Gaussian distributions
 		\begin{align}
 			p(x) &= \sum_{j=1}^M p(x|z_j)\\
-			p(x_i|z_j) &= \mathcal{N}(x|\mu_j, \sigma_j) = \frac{1}{\sqrt{2\pi}\sigma_j} \exp\left(-\frac{(x - \mu_j)^2}{2\sigma_j^2}\right)
+			p(x|z_j) &= \mathcal{N}(x|\mu_j, \sigma_j) = \frac{1}{\sqrt{2\pi}\sigma_j} \exp\left(-\frac{(x - \mu_j)^2}{2\sigma_j^2}\right)
 		\end{align}
 		\begin{figure}
 			\centering
@@ -561,7 +561,7 @@
 		\item Sum up the $M$ individual Gaussian distributions
 		\begin{align}
 			p(x) &= \sum_{j=1}^M p(x|z_j)\\
-			p(x_i|z_j) &= \mathcal{N}(x|\mu_j, \sigma_j) = \frac{1}{\sqrt{2\pi}\sigma_j} \exp\left(-\frac{(x - \mu_j)^2}{2\sigma_j^2}\right)
+			p(x|z_j) &= \mathcal{N}(x|\mu_j, \sigma_j) = \frac{1}{\sqrt{2\pi}\sigma_j} \exp\left(-\frac{(x - \mu_j)^2}{2\sigma_j^2}\right)
 		\end{align}
 		\item $z_j$ for $j \in \{1, \dots, M\}$ are the \textit{mixing coefficients}
 		\item $z_j \sim \text{Multinomial}(\bm{\phi})$, where $\phi_j \ge 0$ and $\sum_{j=1}^M \phi_j = 1$
@@ -573,7 +573,7 @@
 		\item Sum up the $M$ individual Gaussian distributions
 		\begin{align}
 			p(x) &= \sum_{j=1}^M p(x|z_j)\\
-			p(x_i|z_j) &= \mathcal{N}(x|\mu_j, \sigma_j) = \frac{1}{\sqrt{2\pi}\sigma_j} \exp\left(-\frac{(x - \mu_j)^2}{2\sigma_j^2}\right)
+			p(x|z_j) &= \mathcal{N}(x|\mu_j, \sigma_j) = \frac{1}{\sqrt{2\pi}\sigma_j} \exp\left(-\frac{(x - \mu_j)^2}{2\sigma_j^2}\right)
 		\end{align}
 		\item The overall mixture density $p(x)$ integrates to $1$
 		\item The parameters: $\theta = \{\mu_1, \sigma_1, \pi_1, \dots, \mu_M, \sigma_M, \pi_M\}$
@@ -619,6 +619,7 @@
 	\end{itemize}
 \end{frame}
 
+\subsection{Expectation Maximization for MoG}
 \begin{frame}{Expectation Maximization}{}
 	\begin{itemize}
 		\item We have observed data (without labels) $x_i$ and unobserved / hidden / latent variables $z_j$
@@ -660,7 +661,7 @@ EM for Gaussian Mixture Models:
 		\item Initialize $\mu_j, \sigma_j, z_j$ and evaluate the initial log-likelihood
 		\item \textbf{E step:} Compute the posterior distribution (\textit{responsibilities} $\gamma_{ij}$) for each mixture coefficient $z_j$ and all data points $x_i$ using the current parameter values
 		\begin{equation}
-			\gamma_{ij} = p(z_j|x_i) = \frac{z_j \mathcal{N}(x_i|\mu_j, \sigma_j)}{\sum_{m=1}^M (x_i|\mu_m, \sigma_\eta)}
+			\gamma_{ij} = p(z_j|x_i) = \frac{z_j \mathcal{N}(x_i|\mu_j, \sigma_j)}{\sum_{m=1}^M z_m \mathcal{N}(x_i|\mu_m, \sigma_m)}
 		\end{equation}
 	\end{enumerate}
 \end{frame}
