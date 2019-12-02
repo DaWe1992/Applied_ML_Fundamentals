@@ -17,6 +17,7 @@ import numpy as np
 # sklearn
 # -----------------------------------------------------------------------------
 from sklearn.datasets import make_classification
+from sklearn.datasets import make_circles
 from sklearn.datasets import make_regression
 
 
@@ -57,8 +58,11 @@ class DataCreator:
                 n_informative=2,
                 n_clusters_per_class=1,
                 n_classes=n_classes,
-                class_sep=0.75
+                class_sep=5.75,
+                random_state=42
             )
+            
+            X, y = make_circles(n_samples=400, factor=0.3, noise=0.2)
         
         return X, y
     

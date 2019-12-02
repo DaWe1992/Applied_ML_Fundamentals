@@ -23,6 +23,7 @@ from utils.boundary_plotter import BoundaryPlotter
 # -----------------------------------------------------------------------------
 from clf.knn import kNN
 from clf.svm import SVM
+from clf.lda import LDA
 from clf.logistic_regression import LogisticRegression, LogRegOneVsOne
 
 # regression
@@ -48,7 +49,7 @@ def classification():
     Classification.
     """
     # create data
-    X, y = DataCreator().make_classification(sklearn=True, n_classes=3)
+    X, y = DataCreator().make_classification(sklearn=True, n_classes=2)
     
     # train kNN classifier
 #    clf = kNN(n_neighbors=3)
@@ -60,12 +61,17 @@ def classification():
 #    clf.fit(X, y)
     
     # train logistic regression classifier
-#    clf = LogisticRegression()
+#    clf = LogisticRegression(poly=False)
 #    clf.fit(X, y, batch_size=X.shape[0])
     
     # train one-vs-one logistic regression classifier
-    clf = LogRegOneVsOne()
+    clf = LogRegOneVsOne(poly=True)
     clf.fit(X, y)
+    
+    # train Fisher's linear discriminant
+#    clf = LDA(n_dims=1)
+#    y[np.where(y == 0)] = -1
+#    clf.fit(X, y)
     
     # plot boundary
     BoundaryPlotter(X, y).plot_boundary(clf, step_size=0.005)

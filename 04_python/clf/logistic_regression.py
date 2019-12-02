@@ -35,6 +35,15 @@ class LogisticRegression:
     Implementation of a logistic regression classifier.
     """
     
+    def __init__(self, poly=False):
+        """
+        Constructor.
+        
+        :param poly:            usage of polynomial features
+        """
+        self.poly = poly
+    
+    
     def fit(self,
         X, y,
         alpha=0.001,
@@ -51,7 +60,10 @@ class LogisticRegression:
         :param batch_size:      size of the batch used in each training iteration
         :param epsilon:         threshold used for early stopping
         """
-        # determine number of training examples
+        # polynomial features
+        if self.poly:
+            X = self.__poly_features(X)
+            
         self.n = X.shape[0]
         # determine number of attributes
         self.m = X.shape[1]
@@ -78,6 +90,9 @@ class LogisticRegression:
                                 should be returned
         :return:                labels for test data instances
         """
+        if self.poly:
+            X = self.__poly_features(X)
+        
         # add a leading 1 column (x_0 = 1)
         X = np.concatenate(
             (np.ones((X.shape[0], 1)), X.reshape(-1, self.m)),
@@ -176,6 +191,20 @@ class LogisticRegression:
             -self.y * np.log(pred)
             - (1 - self.y) * np.log(1 - pred)
         )
+        
+        
+    def __poly_features(self, X):
+        """
+        
+        """
+        X1 = X[:, 0]
+        X2 = X[:, 1]
+        
+        return np.asarray([
+            X1, X2,                                 # degree 1
+            X1*X1, X1*X2, X2*X2,                    # degree 2
+            X1**3, 3*X1*X1*X2, 3*X1*X2*X2, X2**3    # degree 3
+        ]).T
 
 
 # -----------------------------------------------------------------------------
@@ -188,12 +217,15 @@ class LogRegOneVsOne:
     Implements multi-class classification for binary classifiers.
     """
     
-    def __init__(self):
+    def __init__(self, poly=False):
         """
         Constructor.
+        
+        :param poly:            usage of polynomial features
         """
         self.clfs = []
         self.class_map = []
+        self.poly = poly
         
         
     def fit(self, X, y):
@@ -220,7 +252,7 @@ class LogRegOneVsOne:
 #                  .format(comb[0], comb[1])), "green")
             
             # learn classifier
-            clf = LogisticRegression()
+            clf = LogisticRegression(poly=self.poly)
             clf.fit(X, y, batch_size=X.shape[0])
             self.clfs.append(clf)
             self.class_map.append((comb[0], comb[1]))

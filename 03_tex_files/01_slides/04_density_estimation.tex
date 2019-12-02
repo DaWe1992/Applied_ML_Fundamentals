@@ -8,8 +8,8 @@
 
 \title[Probability Density Estimation]{*** Applied Machine Learning Fundamentals *** Probability Density Estimation (PDE)}
 \institute{SAP\,SE}
-\author{Clemens Biehl, Daniel Wehner}
-\date{\today}
+\author{M.\,Sc. Daniel Wehner}
+\date{Winter term 2019/2020}
 \prefix{PDE}
 
 % ====================================================
@@ -34,7 +34,7 @@
 
 % Agenda
 %______________________________________________________________________
-\begin{frame}{Agenda \today}
+\begin{frame}{Agenda for this Unit}
 	\begin{multicols}{2}
 		\tableofcontents
 	\end{multicols}
@@ -516,185 +516,187 @@
 % --------------------------------------------------------------------------------------------------------
 \subsection{General Idea}
 
-% General Idea / Motivation
-\begin{frame}{Why do we need mixture models?}{}
+% Why do we need Mixture Models?
+\begin{frame}{Why do we need Mixture Models?}{}
 	\begin{itemize}
 		\item Parametric models have low memory footprint, are quick at runtime and often have nice analytic properties
 		\item Non-parametric models make fewer assumptions about the data, but are slower and have a high memory footprint
-		\item We can combine different models in a mixture model!
+		\item \textbf{We can combine different models in a mixture model!}
 		\begin{equation}
 			p(\bm{x}) = \sum_{j=1}^M p(\bm{x}|j) p(j)
 		\end{equation}
 	\end{itemize}
 \end{frame}
 
-% General Idea / Motivation
-\begin{frame}{Why do we need mixture models?}{}
+% Why do we need Mixture Models? (Ctd.)
+\begin{frame}{Why do we need Mixture Models? (Ctd.)}{}
 	\begin{itemize}
-		\item A single parametric model might not be able to capture the structure of the dataset at hand
-		\item Mixture distributions (e.\,g. a linear combination of Gaussians) can approximate almost any continuous density to arbitrary accuracy (given a sufficient number of Gaussians is used)
-	\end{itemize}
-	\begin{figure}
-		\centering
-		\includegraphics[scale=0.30]{04_density_estimation/02_img/mixturemodels_oldfaithful.png}
-	\end{figure}
-\end{frame}
-
-\subsection{Mixture of Gaussians}
-% Definition of Mixture of Gaussians
-\begin{frame}{Mixture of Gaussians Definition}{}
-	\begin{itemize}
-		\item Sum up the $M$ individual Gaussian distributions
-		\begin{align}
-			p(x) &= \sum_{j=1}^M p(x|z_j)\\
-			p(x|z_j) &= \mathcal{N}(x|\mu_j, \sigma_j) = \frac{1}{\sqrt{2\pi}\sigma_j} \exp\left(-\frac{(x - \mu_j)^2}{2\sigma_j^2}\right)
-		\end{align}
+		\item A single parametric model might fail to capture the structure of the data set \\
+			\textbf{Solution:} Use more components
 		\begin{figure}
 			\centering
-			\includegraphics[scale=0.20]{04_density_estimation/02_img/gaussianmixturedistribution}
+			\includegraphics[scale=0.3]{04_density_estimation/02_img/mixture_models.png}
 		\end{figure}
+		\item Mixture distributions (e.\,g. combination of Gaussians) can approximate almost any continuous density to arbitrary accuracy (given a sufficient number of Gaussians is used)
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Mixture of Gaussians Definition}{}
+
+% Subsection: 
+% --------------------------------------------------------------------------------------------------------
+\subsection{Mixture of Gaussians (MoG)}
+
+% Mixture of Gaussians (MoG)
+\begin{frame}{Mixture of Gaussians (MoG)}{}
+	\vspace*{-6mm}
+	{\footnotesize
+	\begin{align}
+		p(x) 
+			&= \sum_{j=1}^M p(x \vert j) p(j) \qquad\text{\footnotesize \textit{probability of data given comp. $j$ $\times$ probability of comp. $j$}} \\
+		p(x|j)
+			&= \mathcal{N}(x \vert \mu_j, \sigma_j) = \frac{1}{\sqrt{2 \pi\sigma_j^2}} \exp \left\{ -\frac{(x - \mu_j)^2}{2\sigma_j^2} \right\} \\
+		p(j) 
+			&= \pi_j \qquad\text{with}\qquad 0 \le \pi_j \le 1 \qquad\text{and}\qquad \sum_{j=1}^M \pi_j = 1
+	\end{align}
+	
+	\vspace*{-3mm}
+	\textbf{Remarks:}
 	\begin{itemize}
-		\item Sum up the $M$ individual Gaussian distributions
-		\begin{align}
-			p(x) &= \sum_{j=1}^M p(x|z_j)\\
-			p(x|z_j) &= \mathcal{N}(x|\mu_j, \sigma_j) = \frac{1}{\sqrt{2\pi}\sigma_j} \exp\left(-\frac{(x - \mu_j)^2}{2\sigma_j^2}\right)
-		\end{align}
-		\item $z_j$ for $j \in \{1, \dots, M\}$ are the \textit{mixing coefficients}
-		\item $z_j \sim \text{Multinomial}(\bm{\phi})$, where $\phi_j \ge 0$ and $\sum_{j=1}^M \phi_j = 1$
-	\end{itemize}
+		\item The mixture density integrates to 1: $\int p(x) \diff x = 1$
+		\item The mixture parameters are: $\bm{\theta} = \{ \mu_1, \sigma_1, \pi_1, \dots, \mu_M, \sigma_M, \pi_M \}$
+	\end{itemize}}
 \end{frame}
 
-\begin{frame}{Mixture of Gaussians Definition}{}
-	\begin{itemize}
-		\item Sum up the $M$ individual Gaussian distributions
-		\begin{align}
-			p(x) &= \sum_{j=1}^M p(x|z_j)\\
-			p(x|z_j) &= \mathcal{N}(x|\mu_j, \sigma_j) = \frac{1}{\sqrt{2\pi}\sigma_j} \exp\left(-\frac{(x - \mu_j)^2}{2\sigma_j^2}\right)
-		\end{align}
-		\item The overall mixture density $p(x)$ integrates to $1$
-		\item The parameters: $\theta = \{\mu_1, \sigma_1, \pi_1, \dots, \mu_M, \sigma_M, \pi_M\}$
-		\begin{boxBlueNoFrame}
-			\highlight{Which function do we need to maximize to estimate the parameters?}
-		\end{boxBlueNoFrame}
-	\end{itemize}
-\end{frame}
 
-\begin{frame}{Maximum Likelihood Estimation for MoG}{}
-	\begin{itemize}
-		\item We have defined our Gaussian mixture model: $p(x) = \sum_{j=1}^M p(x|z_j)$
-		\item Maximize the log-likelihood to estimate the parameters $\bm{\theta}$:
-		\begin{align}
-			\mathcal{L} &= \log L(\theta) = \sum_{i=1}^N \log p(x_i|\theta)\\
-			\frac{\partial \mathcal{L}}{\partial \mu_j} &= 0\\
-			\mu_j &= \frac{\sum_{i=1}^N p(z_j|x_i) x_i}{\sum_{i=1}^N p(z_j|x_i)}\hspace{0.5cm} \Leftarrow \text{Do you see the issue?}
-		\end{align}
-	\end{itemize}
-\end{frame}
-
-\begin{frame}{Maximum Likelihood Estimation for MoG}{}
-	\begin{itemize}
-		\item Maximize the log-likelihood to estimate the parameters $\bm{\theta}$:
-		\begin{align}
-			\mathcal{L} &= \log L(\theta) = \sum_{i=1}^N \log p(x_i|\theta)\\
-			\frac{\partial \mathcal{L}}{\partial \mu_j} &= 0\\
-			\mu_j &= \frac{\sum_{i=1}^N p(z_j|x_i) x_i}{\sum_{i=1}^N p(z_j|x_i)}\hspace{0.5cm} \Leftarrow \text{Do you see the issue?}
-		\end{align}
-		\item There is circular dependency, $\mu_j$ depends on $z_j$ $\Rightarrow$ there is no analytical solution!
-	\end{itemize}
-\end{frame}
-
-\begin{frame}{Maximum Likelihood Estimation for MoG}{}
-	\begin{itemize}
-		\item There is circular dependency, $\mu_j$ depends on $z_j$ $\Rightarrow$ there is no analytical solution!
-		\item How about using gradient descent?
-		\begin{itemize}
-			\item Complex gradient (circular dependency, non-linearity)
-			\item Optimization of each Gaussian mixture component depends on all of the other mixture components!
-		\end{itemize}
-		\item We have to take a different approach: \textit{Expectation Maximization}
-	\end{itemize}
-\end{frame}
-
-\subsection{Expectation Maximization for MoG}
-\begin{frame}{Expectation Maximization}{}
-	\begin{itemize}
-		\item We have observed data (without labels) $x_i$ and unobserved / hidden / latent variables $z_j$
-		\item If we knew which Gaussian has generated which data point $x_i$, then we could do a maximum likelihood estimation for each mixture component $j$
-		\item If we knew the Gaussians already, i.\,e. their means and (co)variances, then we could assign each data point $x_i$ to mixture component $\eta$ if $p(z_\eta = 1|x_i) > p(z_j = 2|x_i) \quad \forall j$
-	\end{itemize}
-\end{frame}
-
-\begin{frame}{Expectation Maximization}{}
-	\begin{itemize}
-		\item This is a chicken-and-egg problem:
-		\begin{itemize}
-			\item We don't know which mixture component generated which $x_i$\\
-			\item We don't know the distributions
-		\end{itemize}
-		\item How can we estimate the parameters of the distribution and the mixture coefficients $z_j$?
-	\end{itemize}
+% Mixture of Gaussians (Ctd.)
+\begin{frame}{Mixture of Gaussians (Ctd.)}{}
 	\begin{figure}
 		\centering
-		\includegraphics[scale=0.25]{04_density_estimation/02_img/gaussianmixturedistribution}
+		\includegraphics[scale=0.4]{04_density_estimation/02_img/gaussian_mixture}
+	\end{figure}
+	\footnotesize The mixture of Gaussians \textcolor{red}{(red)} is obtained by summing over individual Gaussians \textcolor{blue}{(blue)}
+\end{frame}
+
+
+% Maximum Likelihood Estimation for MoG
+\begin{frame}{Maximum Likelihood Estimation for MoG}{}
+	\begin{itemize}
+		\item We have defined our Gaussian mixture model: $p(x) = \sum_{j=1}^M p(x \vert j) p(j)$
+		\item Maximize the \textbf{log-likelihood} to estimate the parameters $\bm{\theta}$:
+		\begin{align}
+			\mathcal{L}\mathcal{L}
+				&= \log \mathcal{L}(\bm{\theta}) = \sum_{i=1}^n \log p(x^{(i)} \vert \bm{\theta}) \\[3mm]
+			\nabla_{\mu_j} \mathcal{L}\mathcal{L} &\overset{!}{=} 0
+			\qquad
+			\mu_j = \frac{\sum_{i=1}^n p(j \vert x^{(i)}) x^{(i)}}{\sum_{i=1}^n p(j \vert x^{(i)})}
+		\end{align}
+		\item Do you see the issue? \Highlight{$\Rightarrow$ Circular dependency, no analytical solution!}
+	\end{itemize}
+\end{frame}
+
+
+% Subsection: 
+% --------------------------------------------------------------------------------------------------------
+\subsection{Expectation Maximization for MoG}
+
+% Expectation Maximization (EM)
+\begin{frame}{Expectation Maximization (EM)}{}
+	\textbf{Different strategy:} We have observed data (without labels) $x^{(i)}$ and unobserved / hidden / latent variables $j \vert x$
+
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.3]{04_density_estimation/02_img/em_1}
 	\end{figure}
 \end{frame}
 
-\begin{frame}{Expectation Maximization}{}
+
+% Expectation Maximization (Ctd.)
+\begin{frame}{Expectation Maximization (Ctd.)}{}
 	\begin{itemize}
-		\item How can we estimate the parameters of the distribution and the mixture coefficients $z_j$?
-		\item Idea:
-		\begin{itemize}
-			\item Assign a \textit{mixture label} to each data point $x_i$, cluster the data points and assign them to the mixture components
-			\item The mixture coefficients $z_j$ are \textit{soft assignments} of data points to mixture components
-			\item Iterate between updating the estimate of the mixture coefficients $z_j$ and the distribution parameters $\mu_j, \sigma_j$
-		\end{itemize}
+		\item \textbf{Suppose we knew the observed and the unobserved data set:} \\
+			We could compute the maximum likelihood solution of all components
+		\item \textbf{Suppose we knew the distributions:} \\
+			We could infer the labels for the unobserved data
+		\begin{figure}
+			\centering
+			\includegraphics[scale=0.3]{04_density_estimation/02_img/em_2}
+		\end{figure}
+		\item \Highlight{We have neither! $\Rightarrow$ Chicken-Egg-Problem!}
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Expectation Maximization}{}
-EM for Gaussian Mixture Models:
-	\begin{enumerate}
-		\item Initialize $\mu_j, \sigma_j, z_j$ and evaluate the initial log-likelihood
-		\item \textbf{E step:} Compute the posterior distribution (\textit{responsibilities} $\gamma_{ij}$) for each mixture coefficient $z_j$ and all data points $x_i$ using the current parameter values
-		\begin{equation}
-			\gamma_{ij} = p(z_j|x_i) = \frac{z_j \mathcal{N}(x_i|\mu_j, \sigma_j)}{\sum_{m=1}^M z_m \mathcal{N}(x_i|\mu_m, \sigma_m)}
-		\end{equation}
-	\end{enumerate}
-\end{frame}
 
-\begin{frame}{Expectation Maximization}{}
-EM for Gaussian Mixture Models:
-	\begin{enumerate}
-		\setcounter{enumi}{2}
-		\item \textbf{M step:} Compute the new parameters using weighted estimates\\
-		\begin{gather}
-			N_j = \sum_{i=1}^N \gamma_{ij} \qquad z_{j}^{\text{new}} = \frac{N_j}{N}\\
-			\mu_j^{\text{new}} = \frac{1}{N_j} \sum_{i=1}^N \gamma_{ij} x_i \qquad (\sigma_j^{\text{new}})^2 = \frac{1}{N_j} \sum_{i=1}^N \gamma_{ij} (x_i - \mu_j^{\text{new}})^2
-		\end{gather}
-	\end{enumerate}
-\end{frame}
-
-\begin{frame}{Expectation Maximization}{}
-EM for Gaussian Mixture Models:
-	\begin{enumerate}
-		\setcounter{enumi}{3}
-		\item Iterate \textbf{E Step} and \textbf{M Step} until convergence, i.\,e. evaluate the log-likelihood after each run and check if the parameters converge:
-		\begin{equation}
-			\mathcal{L} = \sum_{i=1}^N \log p(x_i|\bm{\theta}) = \sum_{i=1}^N \log\left(\sum_{j=1}^M z_j \mathcal{N}(x_i|\mu_j, \sigma_j)\right)
-		\end{equation}
-	\end{enumerate}
-\end{frame}
-
-\begin{frame}{Expectation Maximization}{}
+% Expectation Maximization: General Procedure
+\begin{frame}{Expectation Maximization: General Procedure}{}
 	\begin{itemize}
-		\item We can use EM for performing maximum likelihood estimation even when the data is incomplete (missing features)
-		\item The incomplete log-likelihood $\mathcal{L}$ is maximized locally
-		\item The log-likelihood is guaranteed to improve or stay the same in every EM iteration
-		\item There are great visualizations of EM for Gaussian mixture models:
+		\item So, how can we estimate the mixture parameters?
+		\item \highlight{EM algorithm:}
+		\begin{enumerate}
+			\item Start with an initial guess for the parameters
+			\item \textbf{E-step:} Assign each data point $x^{(i)}$ to a component and compute $p(j \vert x^{(i)})$:
+			\begin{itemize}
+				\item \textit{Hard assignment:} Each data point is assigned to exactly one component  
+				\item \textit{Soft assignment:} Use soft probabilities instead
+			\end{itemize}
+			\item \textbf{M-step:} Update the parameters based on the assignments
+			\item If not converged: Go to \ding{183}
+		\end{enumerate}
+	\end{itemize}
+\end{frame}
+
+
+% Expectation Maximization: General Procedure (Ctd.)
+\begin{frame}{Expectation Maximization: General Procedure (Ctd.)}{}
+	\begin{figure}
+		\includegraphics[scale=0.45]{04_density_estimation/02_img/em}
+	\end{figure}
+\end{frame}
+
+
+% Expectation Maximization for MoG
+\begin{frame}{Expectation Maximization for MoG}{}
+	\textbf{EM for Gaussian Mixture Models:}
+	\begin{itemize}
+		\item Initialize $\mu_j, \sigma_j, \pi_j$ and evaluate the initial log-likelihood
+		\item While stop-condition is not met
+		\begin{itemize}
+			\item \textbf{E-step:} Compute the posterior distribution (a.\,k.\,a. responsibility $\alpha$) for each mixture component and all data points
+			\begin{equation}
+				\alpha_{ij} = p(j \vert x^{(i)}) = \frac{\pi_j \mathcal{N}(x^{(i)} \vert \mu_j, \sigma_j)}{\sum_{k=1}^M \pi_k \mathcal{N}(x^{(i)} \vert \mu_k, \sigma_k)}
+			\end{equation}
+			\item \textbf{M-step:} Compute new parameters using the responsibilities (cf. next slide)
+		\end{itemize}
+		\item Iterate until converged
+	\end{itemize}
+\end{frame}
+
+
+% M-Step in Detail
+\begin{frame}{M-Step in Detail}{}
+	\begin{itemize}
+		\item Update means:
+		\begin{equation}
+			\mu_j^{(new)} = \frac{1}{n_j} \sum_{i=1}^n \alpha_{ij} x^{(i)} \qquad\text{with}\qquad n_j = \sum_{i=^1}^n \alpha_{ij}
+		\end{equation}
+		\item Update variance:
+		\begin{equation}
+			(\sigma_j^{(new)})^2 = \frac{1}{n_j} \sum_{i=1}^n \alpha_{ij} (x^{(i)} - \mu_j^{(new)})^2
+		\end{equation}
+		\item Update $\pi_j$:
+		\begin{equation}
+			\pi_j^{(new)} = \frac{n_j}{n}
+		\end{equation}
+	\end{itemize}
+\end{frame}
+
+
+% Expectation Maximization: General Remarks
+\begin{frame}{Expectation Maximization: General Remarks}{}
+	\begin{itemize}
+		\item \highlight{EM is a general framework and not limited to mixture models}
+		\item We can use EM for performing maximum likelihood estimation, even when the data is incomplete (missing features)
+		\item The log-likelihood is guaranteed to improve or stay the same in every EM iteration \highlight{$\Rightarrow$ Convergence guarantee!}
+		\item Visualizations of EM for Gaussian mixture models:
 		\begin{itemize}
 			\item \href{https://www.youtube.com/watch?v=l1W3BvjJnmY}{\linkstyle{EM density estimation animation}}
 			\item \href{https://youtu.be/eXdGCO-2n90?t=2}{\linkstyle{2-dimensional EM animation}}
@@ -702,26 +704,22 @@ EM for Gaussian Mixture Models:
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Expectation Maximization}{}
-	Let's look at some iterations of expectation maximization on a simple dataset:
-	\begin{figure}
-		\includegraphics[scale=0.45]{04_density_estimation/02_img/em}
-	\end{figure}
-\end{frame}
 
-\begin{frame}{Expectation Maximization}{}
+% Expectation Maximization: Some Recommendations
+\begin{frame}{Expectation Maximization: Some Recommendations}{}
 	\begin{itemize}
-		\item How do we initialize the parameters for EM?
+		\item \textbf{How do we initialize the parameters for EM?}
 		\begin{itemize}
-			\item EM depends on a good initialization of the parameters, a poor initialization can lead to getting stuck in bad local optima
+			\item EM depends on a good initialization of the parameters, a poor initialization can lead to bad local optima
 			\item We can use \textit{k-means} to get an initial clustering
 		\end{itemize}
-		\item How many mixture components do we need?
+		\item \textbf{How many mixture components do we need?}
 		\begin{itemize}
-			\item There are different criteria, we can for instance maximize the \textit{Bayesian Information Criterion} with respect to $K$:
+			\item Use $M$ which maximizes the \highlight{Bayesian information criterion (BIC)}:
 			\begin{equation}
 				\log p(X|\theta_{ML}) - \frac{1}{2} K \log N
 			\end{equation}
+			\vspace*{-2mm}
 			\begin{itemize}
 				\item $K$: Number of parameters
 				\item $N$: Number of data points
