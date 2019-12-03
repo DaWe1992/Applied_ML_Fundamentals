@@ -26,6 +26,10 @@ from clf.svm import SVM
 from clf.lda import LDA
 from clf.logistic_regression import LogisticRegression, LogRegOneVsOne
 
+# unsupervised learning
+# -----------------------------------------------------------------------------
+from unsupervised.em import EM
+
 # regression
 # -----------------------------------------------------------------------------
 from reg.gaussian_process import GaussianProcess
@@ -49,7 +53,7 @@ def classification():
     Classification.
     """
     # create data
-    X, y = DataCreator().make_classification(sklearn=True, n_classes=2)
+    X, y = DataCreator().make_classification(sklearn=True, n_classes=3)
     
     # train kNN classifier
 #    clf = kNN(n_neighbors=3)
@@ -65,22 +69,26 @@ def classification():
 #    clf.fit(X, y, batch_size=X.shape[0])
     
     # train one-vs-one logistic regression classifier
-    clf = LogRegOneVsOne(poly=True)
-    clf.fit(X, y)
+#    clf = LogRegOneVsOne(poly=True)
+#    clf.fit(X, y)
     
     # train Fisher's linear discriminant
 #    clf = LDA(n_dims=1)
 #    y[np.where(y == 0)] = -1
 #    clf.fit(X, y)
     
+    # Expectation Maximization
+    em = EM()
+    em.fit(X, n_comp=3, n_iter=30)
+    
     # plot boundary
-    BoundaryPlotter(X, y).plot_boundary(clf, step_size=0.005)
+#    BoundaryPlotter(X, y).plot_boundary(clf, step_size=0.005)
     
     # evaluation
-    evaluator = Evaluator()
-    acc = evaluator.accuracy(clf, X, y)
-    print("Accuracy: {} %".format(acc))
-    evaluator.conf_mat(clf, X, y)
+#    evaluator = Evaluator()
+#    acc = evaluator.accuracy(clf, X, y)
+#    print("Accuracy: {} %".format(acc))
+#    evaluator.conf_mat(clf, X, y)
     
     
 def regression():

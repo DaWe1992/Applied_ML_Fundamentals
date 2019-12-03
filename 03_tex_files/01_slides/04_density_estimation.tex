@@ -181,11 +181,11 @@
 		\item How to compute $\mathcal{L}(\bm{\theta})$?
 		\item The data is assumed to be \highlight{i.\,i.\,d.} (independent and identically distributed):
 		\begin{itemize}
-			\item Two random variables $x_1$ and $x_2$ are independent if
+			\item Two random variables $x_1$ and $x_2$ are independent, if
 			\begin{equation}
 				P(x_1 \le \alpha, x_2 \le \beta) = P(x_1 \le \alpha) \cdot P(x_2 \le \beta) \qquad \forall \alpha, \beta \in \mathbb{R}
 			\end{equation}
-			\item Two random variables $x_1$ and $x_2$ are identically distributed if
+			\item Two random variables $x_1$ and $x_2$ are identically distributed, if
 			\begin{equation}
 				P(x_1 \le \alpha) = P(x_2 \le \alpha) \qquad \forall \alpha \in \mathbb{R}
 			\end{equation}
@@ -285,7 +285,7 @@
 
 
 % We can classify!
-\begin{frame}{We can classify!}{}
+\begin{frame}{We can classify!}{}\important
 	\bubble{11}{4.5}{
 		\footnotesize Looks familiar?
 	}
@@ -307,7 +307,7 @@
 
 
 % Multivariate Case
-\begin{frame}{Multivariate Case}{}
+\begin{frame}{Multivariate Case}{}\important
 	\begin{itemize}
 		\item The solution above is for 1-D data, what if we have more dimensions?
 		\item \highlight{Multivariate Gaussian distribution}:
@@ -340,12 +340,12 @@
 \section{Non-parametric Models}
 \makedivider{Non-parametric Models}
 
-% Subsection: 
+% Subsection: Motivation
 % --------------------------------------------------------------------------------------------------------
-\subsection{}
+\subsection{Motivation}
 
 % Disadvantages of parametric Models
-\begin{frame}{Disadvantages of parametric Models}{}
+\begin{frame}{Disadvantages of parametric Models}{}\important
 	\begin{itemize}
 		\item Until now we used a fixed parametric form (e.\,g. a Gaussian) which is governed by a small amount of parameters
 		\item \Highlight{This assumption may be wrong:}
@@ -355,11 +355,16 @@
 		\end{itemize}
 	\end{itemize}
 	
+	\vspace*{2mm}
 	\begin{boxBlueNoFrame}
 		\highlight{We don't want to make any assumptions about the underlying distribution!}
 	\end{boxBlueNoFrame}
 \end{frame}
 
+
+% Subsection: Non-parametric Approaches
+% --------------------------------------------------------------------------------------------------------
+\subsection{Non-parametric Approaches}
 
 % Non-parametric Approaches
 \begin{frame}{Non-parametric Approaches}{}
@@ -371,6 +376,10 @@
 \end{frame}
 
 
+% Subsection: Histograms
+% --------------------------------------------------------------------------------------------------------
+\subsection{Histograms}
+
 % Histograms
 \begin{frame}{Histograms}{}
 	\begin{itemize}
@@ -381,7 +390,7 @@
 			p(\bm{x}) \approx \frac{k_j}{n \cdot v_j}\qquad \text{for $\bm{x}$ in bin $j$}
 		\end{equation}
 		\item The sum of all probabilities equals 1: $\sum_{j=1}^m \frac{k_j}{n \cdot v_j} = 1$
-		\item $v_j$ is a \textbf{hyper-parameter} (usually, all bins have equal size) 
+		\item $v_j$ is a \textbf{hyper-parameter} (usually all bins have equal size) 
 	\end{itemize}
 \end{frame}
 
@@ -427,6 +436,10 @@
 \end{frame}
 
 
+% Subsection: Kernel Density Estimation
+% --------------------------------------------------------------------------------------------------------
+\subsection{Kernel Density Estimation}
+
 % An alternative Approach
 \begin{frame}{An alternative Approach}{}
 	\begin{itemize}
@@ -446,7 +459,7 @@
 
 
 % Kernel Density Estimation: Parzen Window
-\begin{frame}{Kernel Density Estimation: Parzen Window}{}
+\begin{frame}{Kernel Density Estimation: Parzen Window}{}\important
 	\begin{itemize}
 		\item $\mathcal{R}$ is a $D$-dimensional \highlight{hyper-cube} of edge length $h$ centered on $\bm{x}$
 		\item Determine if a data point falls into region $\mathcal{R}$:
@@ -465,7 +478,7 @@
 
 
 % Kernel Density Estimation: Parzen Window (Ctd.)
-\begin{frame}{Kernel Density Estimation: Parzen Window (Ctd.)}{}
+\begin{frame}{Kernel Density Estimation: Parzen Window (Ctd.)}{}\important
 	\begin{itemize}
 		\item The volume $v$ is simple to compute:
 		\begin{equation}
@@ -475,12 +488,29 @@
 		\begin{equation}
 			p(\bm{x}) \approx \frac{k(\bm{x})}{n \cdot v} = \frac{1}{n \cdot h^D} \sum_{i=1}^n H(\bm{x} - \bm{x}^{(i)})
 		\end{equation}
+		\item \Highlight{Problem:} \textcolor{red}{There are still discontinuities}
 	\end{itemize}
 \end{frame}
 
 
-% Kernel Density Estimation: Parzen Window (Ctd.)
-\begin{frame}{Kernel Density Estimation: Parzen Window (Ctd.)}
+% Kernel Density Estimation: Gaussian Kernel
+\begin{frame}{Kernel Density Estimation: Gaussian Kernel}{}\optional
+	\begin{align}
+		H(\bm{u})
+			&= \frac{1}{\left( \sqrt{2 \pi \sigma^2} \right)^D} \exp\left\{ -\frac{\Vert \bm{u} \Vert^2}{2 h^2} \right\} \\[1mm]
+		v
+			&= \int H(\bm{u}) \diff \bm{u} = 1 \\[1mm]
+		k(\bm{x})
+			&= \sum_{i=1}^n H(\bm{x} - \bm{x}^{(i)}) \\[1mm]
+		p(\bm{x})
+			&\approx \frac{k(\bm{x})}{n \cdot v} =
+				\frac{1}{n \cdot \left( \sqrt{2 \pi h^2} \right)^D} \sum_{i=1}^n \exp\left\{ -\frac{\Vert \bm{x} - \bm{x}^{(i)} \Vert^2}{2 h^2} \right\}
+	\end{align}
+\end{frame}
+
+
+% Kernel Density Estimation: Gaussian Kernel (Ctd.)
+\begin{frame}{Kernel Density Estimation: Gaussian Kernel (Ctd.)}
 	\begin{figure}
 		\centering
 		\includegraphics[scale=0.55]{04_density_estimation/02_img/kde}
@@ -488,12 +518,20 @@
 \end{frame}
 
 
+% Subsection: $k$-Nearest Neighbors
+% --------------------------------------------------------------------------------------------------------
+\subsection{$k$-Nearest Neighbors}
+
 % k-Nearest Neighbors
-\begin{frame}{k-Nearest Neighbors}
+\begin{frame}{$k$-Nearest Neighbors}
+	\textbf{Different strategy:}
 	\begin{itemize}
-		\item Increase the size of a sphere until $k$ data points fall into this sphere, keep the number $K$ of data points fixed
-		\begin{equation}p(\bm{x}) \approx \frac{k}{n \cdot v(\bm{x})}\end{equation}
-		\item We will also look at k-Nearest Neighbors as a classification model later\newline $\rightarrow$ you can use a majority vote among the $k$ closest training data points to classify a new data point $\bm{x}$
+		\item Fix $k$ and increase the volume, until $k$ data points fall into region $\mathcal{R}$
+		\begin{equation}
+			p(\bm{x}) \approx \frac{k}{n \cdot v(\bm{x})}
+		\end{equation}
+		\item \Highlight{Usually, kernel density estimation gives better results!}
+		\item We will also look at k-Nearest Neighbors as a classification method later!
 	\end{itemize}
 \end{frame}
 
@@ -512,7 +550,7 @@
 \section{Mixture Models}
 \makedivider{Mixture Models}
 
-% Subsection: 
+% Subsection: General Idea
 % --------------------------------------------------------------------------------------------------------
 \subsection{General Idea}
 
@@ -542,13 +580,13 @@
 \end{frame}
 
 
-% Subsection: 
+% Subsection: Mixture of Gaussians (MoG)
 % --------------------------------------------------------------------------------------------------------
 \subsection{Mixture of Gaussians (MoG)}
 
 % Mixture of Gaussians (MoG)
-\begin{frame}{Mixture of Gaussians (MoG)}{}
-	\vspace*{-6mm}
+\begin{frame}{Mixture of Gaussians (MoG)}{}\important
+	\vspace*{-3mm}
 	{\footnotesize
 	\begin{align}
 		p(x) 
@@ -595,7 +633,7 @@
 \end{frame}
 
 
-% Subsection: 
+% Subsection: Expectation Maximization for MoG
 % --------------------------------------------------------------------------------------------------------
 \subsection{Expectation Maximization for MoG}
 
@@ -654,7 +692,8 @@
 
 
 % Expectation Maximization for MoG
-\begin{frame}{Expectation Maximization for MoG}{}
+\begin{frame}{Expectation Maximization for MoG}{}\important
+	\vspace*{2mm}
 	\textbf{EM for Gaussian Mixture Models:}
 	\begin{itemize}
 		\item Initialize $\mu_j, \sigma_j, \pi_j$ and evaluate the initial log-likelihood
@@ -672,20 +711,17 @@
 
 
 % M-Step in Detail
-\begin{frame}{M-Step in Detail}{}
+\begin{frame}{M-Step in Detail}{}\important
 	\begin{itemize}
 		\item Update means:
 		\begin{equation}
-			\mu_j^{(new)} = \frac{1}{n_j} \sum_{i=1}^n \alpha_{ij} x^{(i)} \qquad\text{with}\qquad n_j = \sum_{i=^1}^n \alpha_{ij}
+			\mu_j^{(new)} = \frac{1}{n_j} \sum_{i=1}^n \alpha_{ij} x^{(i)} \qquad\text{with}\qquad n_j = \sum_{i=1}^n \alpha_{ij}
 		\end{equation}
 		\item Update variance:
 		\begin{equation}
 			(\sigma_j^{(new)})^2 = \frac{1}{n_j} \sum_{i=1}^n \alpha_{ij} (x^{(i)} - \mu_j^{(new)})^2
 		\end{equation}
-		\item Update $\pi_j$:
-		\begin{equation}
-			\pi_j^{(new)} = \frac{n_j}{n}
-		\end{equation}
+		\item Update $\pi_j$: $\pi_j^{(new)} = \frac{n_j}{n}$
 	\end{itemize}
 \end{frame}
 
@@ -705,6 +741,10 @@
 \end{frame}
 
 
+% Subsection: Recommendations
+% --------------------------------------------------------------------------------------------------------
+\subsection{Recommendations}
+
 % Expectation Maximization: Some Recommendations
 \begin{frame}{Expectation Maximization: Some Recommendations}{}
 	\begin{itemize}
@@ -719,7 +759,7 @@
 			\begin{equation}
 				\log p(X|\theta_{ML}) - \frac{1}{2} K \log N
 			\end{equation}
-			\vspace*{-2mm}
+			\vspace*{-4mm}
 			\begin{itemize}
 				\item $K$: Number of parameters
 				\item $N$: Number of data points
@@ -742,12 +782,12 @@
 % Summary
 \begin{frame}{Summary}{}
 	\begin{itemize}
-		\item We can use parametric, non-parametric and mixture models for density estimation
-		\item This allows us to estimate the probabilities needed for e.\,g. a Na\"ive Bayes model to work with continuous features
-		\item Parametric models assume a certain form of the density, governed by parameters like mean and variance for a Gaussian
-		\item Maximum likelihood estimation allows us to determine the parameters based on our dataset
-		\item Non-parametric models directly use the (training) data points themselves
-		\item We can use expectation maximization to optimize the parameters of mixture models
+		\item We can use \textbf{parametric}, \textbf{non-parametric} and \textbf{mixture models} to estimate the density
+		\item This allows us to estimate the probabilities needed by e.\,g. a na\"ive Bayes model to work with \textbf{continuous features}
+		\item Parametric models assume a certain \textbf{parametric form}, e.\,g. a Gaussian
+		\item \textbf{MLE} allows us to determine the parameters based on our dataset
+		\item Non-parametric models directly \textbf{use the data points themselves}
+		\item Use the \textbf{EM algorithm} to optimize the parameters of mixture models
 	\end{itemize}
 \end{frame}
 
@@ -758,13 +798,13 @@
 
 % Self-Test Questions
 \begin{frame}{Self-Test Questions}{}\important
-	\begin{itemize}
+	\begin{enumerate}
 		\item What is maximum likelihood estimation? How can you get the maximum likelihood estimate for a Gaussian distribution?
-		\item What does \textit{non-parametric} mean in \textit{non-parametric models}?
-		\item What is different between kernel density estimation and k-nearest neighbors?
-		\item Why can't we use a simple maximum likelihood estimate for a mixture model as with a single Gaussian distribution?
-		\item What happens in the E and M steps in expectation maximization?
-	\end{itemize}
+		\item What does the term \textit{`non-parametric'} mean? How many parameters does such a model have?
+		\item What distinguishes kernel density estimation and $k$-nearest neighbors?
+		\item Why can't we use a simple maximum likelihood estimate for mixture models?
+		\item What happens in the E and M steps in the EM algorithm?
+	\end{enumerate}
 \end{frame}
 
 
@@ -786,12 +826,10 @@
 \begin{frame}{Recommended Literature and further Reading}{}
 	\footnotesize
 	\begin{thebibliography}{2}
-		\literature{book}{Bishop (2006)}{[1] Pattern Recognition and Machine Learning - Chapter 1.2.4 \textit{The Gaussian Distribution}}
-			{Bishop. 2006.}{$\rightarrow$ \href{http://users.isr.ist.utl.pt/~wurmd/Livros/school/Bishop\%20-\%20Pattern\%20Recognition\%20And\%20Machine\%20Learning\%20-\%20Springer\%20\%202006.pdf}{\linkstyle{Link}}}
-		\literature{book}{Bishop (2006)}{[1] Pattern Recognition and Machine Learning - Chapter 2.5 \textit{Non-Parametric Methods}}
-			{Bishop. 2006.}{$\rightarrow$ \href{http://users.isr.ist.utl.pt/~wurmd/Livros/school/Bishop\%20-\%20Pattern\%20Recognition\%20And\%20Machine\%20Learning\%20-\%20Springer\%20\%202006.pdf}{\linkstyle{Link}}}
-		\literature{book}{Bishop (2006)}{[1] Pattern Recognition and Machine Learning - Chapter 9.2 \textit{Mixtures of Gaussians}}
-			{Bishop. 2006.}{$\rightarrow$ \href{http://users.isr.ist.utl.pt/~wurmd/Livros/school/Bishop\%20-\%20Pattern\%20Recognition\%20And\%20Machine\%20Learning\%20-\%20Springer\%20\%202006.pdf}{\linkstyle{Link}}}
+		\literature{book}{Bishop.2006}{[1] Pattern Recognition and Machine Learning}
+			{Christopher Bishop. Springer. 2006.}{$\rightarrow$ \href{
+				http://users.isr.ist.utl.pt/~wurmd/Livros/school/Bishop\%20-\%20Pattern\%20Recognition\%20And\%20Machine\%20Learning\%20-\%20Springer\%20\%202006.pdf
+			}{\linkstyle{Link}}, cf. chapters 1.2.4, 2.5, 9.2}
 	\end{thebibliography}
 \end{frame}
 
