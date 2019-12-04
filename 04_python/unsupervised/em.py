@@ -35,6 +35,10 @@ class EM():
     def fit(self, X, n_comp=4, n_iter=30):
         """
         Execute em (expectation-maximization) algorithm
+        
+        :param X:       data
+        :param n_comp:  number of Gaussian components
+        :param n_iter:  number of iterations
         """
         self.X = X
         self.n = X.shape[0]
@@ -44,14 +48,14 @@ class EM():
         self.n_iter = n_iter
         
         # init covariance matrices
-        cov = np.array([np.identity(self.m) for _ in range(n_comp)])
+        self.cov = np.array([np.identity(self.m) for _ in range(n_comp)])
         # init means
-        mu = np.random.uniform( \
-           np.min(self.X), np.max(self.X), \
+        self.mu = np.random.uniform( \
+           np.min(self.X) + 1, np.max(self.X) - 1, \
            size=(n_comp, self.m) \
         )
         # init priors
-        pi = np.random.uniform(size=(self.n_comp,))
+        self.pi = np.random.uniform(size=(self.n_comp,))
                 
         # perform em iterations
         for i in range(n_iter):
@@ -60,74 +64,85 @@ class EM():
             # -----------------------------------------------------------------
             # compute responsibilities
             # (how likely is a data point to belong to a specific gaussian)
-            alpha = self.__e(mu=mu, cov=cov, pi=pi)
+            alpha = self.__e()
             # -----------------------------------------------------------------
             # MAXIMIZATION STEP
             # -----------------------------------------------------------------
             # update means, covariances, priors
-            mu, cov, pi = self.__m(alpha=alpha)
+            self.__m(alpha=alpha)
             
             # plot at given steps
             if i + 1 in [1, 2, 3, 4, 5, 7, 10, 15, 20, 25, 30]:
                 plt.figure(i)
-                self.visualize(mu, cov, i)
+                self.__visualize(i)
                 
-            print("Finished iteration {}".format(i))
+            print("Finished iteration {}".format(i + 1))
+            
+            
+    def predict(self, X):
+        """
+        Predicts the label of new instances.
+        
+        :param X:       unseen data
+        :return:        labels
+        """
+        return np.argmax(
+            self.__compute_responsibilities(X), axis=0)
     
 
-    def __e(self, mu, cov, pi):
+    def __e(self):
         """
         Performs expectation step.
         
-        :param mu:      means of the mixture components
-        :param cov:     covariance matrices of the mixture components
-        :param pi:      priors of the mixture components
         :return:        array of responsibilities
         """
+        return self.__compute_responsibilities(self.X)
         
+    
+    def __compute_responsibilities(self, X):
+        """
+        Computes the responsibilities for each Gaussian component.
+        
+        :param X:       data
+        :return:        array of responsibilities
+        """
         # compute responsibilities
-        alpha = np.empty((self.n_comp, self.n))
+        alpha = np.empty((self.n_comp, X.shape[0]))
         for j in range(self.n_comp):
-            alpha[j] = pi[j] * self.__multivariate_gaussian(self.X, mu[j], cov[j])
+            alpha[j] = self.pi[j] * self.__multivariate_gaussian(
+                X, self.mu[j], self.cov[j])
     
         # sum over all responsibilities
         denominator = np.sum(alpha, axis=0)
         
         return alpha / denominator
-    
+        
     
     def __m(self, alpha):
         """
         Performs maximization step.
         
         :param alpha:   array of responsibilities
-        :return:        updated parameters (mu, cov, pi)
         """
         # sum over all data points per model
         n_j = np.sum(alpha, axis=1)
-    
-        mu = np.zeros((self.n_comp, self.m))
-        cov = np.zeros((self.n_comp, self.m, self.m))
-        
         # update parameters of all gaussian components
         for j in range(self.n_comp):
             # update means
             for i, x in enumerate(self.X):
-                mu[j] += (alpha[j, i] * x)
-            mu[j] /= n_j[j]
+                self.mu[j] += (alpha[j, i] * x)
+            self.mu[j] /= n_j[j]
     
             # update covariance
             for i, x in enumerate(self.X):
-                diff = x - mu[j]
-                cov[j] += alpha[j, i] * np.outer(diff, diff.T)
+                diff = x - self.mu[j]
+                self.cov[j] += alpha[j, i] * np.outer(diff, diff.T)
     
-            cov[j] /= n_j[j]
+            self.cov[j] /= n_j[j]
     
         # update pi
-        pi = n_j / self.n
-    
-        return mu, cov, pi
-
+        self.pi = n_j / self.n
+        
 
     def __multivariate_gaussian(self, X, mu, covar):
         """
@@ -150,18 +165,17 @@ class EM():
         return out
 
 
-    def visualize(self, mu, covar, iter):
+    def __visualize(self, iter):
         """
         Visualizes the em process.
         
-        :param mu:      means
-        :param covar:   covariances
         :param iter:    iteration counter
         """
         steps = 100
     
         x1 = self.X[:,0]
         x2 = self.X[:,1]
+        labels = self.predict(self.X)
     
         x1_min = np.min(x1); x1_max = np.max(x1)
         x2_min = np.min(x2); x2_max = np.max(x2)
@@ -171,16 +185,20 @@ class EM():
     
         Y, X = np.meshgrid(x2_lin, x1_lin)
         Z = np.empty((steps, steps))
-    
+        
+        # plot 2d gaussians
         for j in range(self.n_comp):
             for i in range(steps):
-                # construct vector with same x1 and all possible x2 to cover the plot space
                 points = np.append(X[i], Y[i]).reshape(2, steps).T
-                Z[i] = self.__multivariate_gaussian(points, mu[j], covar[j])
-            plt.contour(X, Y, Z, 5)
+                Z[i] = self.__multivariate_gaussian(points, self.mu[j], self.cov[j])
+            plt.contour(X, Y, Z, 5, zorder=15)
     
         # plot the samples
-        plt.plot(x1, x2, "co", zorder=1)
+        plt.scatter(x1, x2, zorder=10, cmap=plt.cm.rainbow,
+            edgecolors="k", c=labels)
+        # grid lines
+        plt.grid(b=True, which="major", color="gray", linestyle="--", zorder=5)
+        # labels and title
         plt.xlabel(r"$x_1$")
         plt.ylabel(r"$x_2$")
         plt.title("Mixtures after {} steps".format(iter + 1))
