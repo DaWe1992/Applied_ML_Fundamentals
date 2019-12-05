@@ -67,7 +67,7 @@ This lecture is supposed to give a general introduction into state-of-the-art ma
 The assignments have to be solved in groups comprising 3 to 4 students.
 Task descriptions, starter code and data sets can be found in the folder [exercises](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/02_exercises).
 Solutions will be presented and discussed in the following class, sample solutions will not be uploaded. You are however free to share correct solutions with your colleagues after they have been graded.
-Please submit your solutions via Moodle and in printed form. Please do not submit hand-written solutions,
+Please submit your solutions via Moodle and in printed form (only one group member). Please do not submit hand-written solutions,
 rather use proper type-setting software like LaTeX or other comparable programs. Also make sure to specify the names of all group members.
 
 Your homework will be corrected and given back to you. Correct solutions are rewarded with a bonus for the exam (max. 10 percent, if all solutions submitted are correct).

@@ -267,7 +267,7 @@
 		\end{equation*}
 		\item Set derivative to zero and solve:
 		\begin{equation*}
-			\sum_{i=1}^n x^{(i)} - \mu \overset{!}{=} 0
+			\sum_{i=1}^n (x^{(i)} - \mu) \overset{!}{=} 0
 				\Leftrightarrow n \cdot \mu = \sum_{i=1}^n x^{(i)}
 				\Leftrightarrow \mu = \frac{1}{n} \sum_{i=1}^n x^{(i)}
  		\end{equation*}
@@ -309,7 +309,7 @@
 % Multivariate Case
 \begin{frame}{Multivariate Case}{}\important
 	\begin{itemize}
-		\item The solution above is for 1-D data, what if we have more dimensions?
+		\item The solution above is for 1-D data; what if we have more dimensions?
 		\item \highlight{Multivariate Gaussian distribution}:
 		\begin{equation}
 			\mathcal{N}_D(\bm{x} \vert \bm{\mu}, \bm{\Sigma})
@@ -497,7 +497,7 @@
 \begin{frame}{Kernel Density Estimation: Gaussian Kernel}{}\optional
 	\begin{align}
 		H(\bm{u})
-			&= \frac{1}{\left( \sqrt{2 \pi \sigma^2} \right)^D} \exp\left\{ -\frac{\Vert \bm{u} \Vert^2}{2 h^2} \right\} \\[1mm]
+			&= \frac{1}{\left( \sqrt{2 \pi h^2} \right)^D} \exp\left\{ -\frac{\Vert \bm{u} \Vert^2}{2 h^2} \right\} \\[1mm]
 		v
 			&= \int H(\bm{u}) \diff \bm{u} = 1 \\[1mm]
 		k(\bm{x})
@@ -531,7 +531,7 @@
 			p(\bm{x}) \approx \frac{k}{n \cdot v(\bm{x})}
 		\end{equation}
 		\item \Highlight{Usually, kernel density estimation gives better results!}
-		\item We will also look at k-Nearest Neighbors as a classification method later!
+		\item We will also look at $k$-nearest neighbors as a classification method later!
 	\end{itemize}
 \end{frame}
 
@@ -612,6 +612,7 @@
 		\centering
 		\includegraphics[scale=0.4]{04_density_estimation/02_img/gaussian_mixture}
 	\end{figure}
+	\vspace*{-2mm}
 	\footnotesize The mixture of Gaussians \textcolor{red}{(red)} is obtained by summing over individual Gaussians \textcolor{blue}{(blue)}
 \end{frame}
 
@@ -696,10 +697,10 @@
 	\vspace*{2mm}
 	\textbf{EM for Gaussian Mixture Models:}
 	\begin{itemize}
-		\item Initialize $\mu_j, \sigma_j, \pi_j$ and evaluate the initial log-likelihood
-		\item While stop-condition is not met
+		\item Initialize $\mu_j, \sigma_j, \pi_j$
+		\item While stop-condition is not met:
 		\begin{itemize}
-			\item \textbf{E-step:} Compute the posterior distribution (a.\,k.\,a. responsibility $\alpha$) for each mixture component and all data points
+			\item \textbf{E-step:} Compute the posterior distribution (a.\,k.\,a. responsibility $\alpha$) for each mixture component and all data points:
 			\begin{equation}
 				\alpha_{ij} = p(j \vert x^{(i)}) = \frac{\pi_j \mathcal{N}(x^{(i)} \vert \mu_j, \sigma_j)}{\sum_{k=1}^M \pi_k \mathcal{N}(x^{(i)} \vert \mu_k, \sigma_k)}
 			\end{equation}
@@ -757,12 +758,12 @@
 		\begin{itemize}
 			\item Use $M$ which maximizes the \highlight{Bayesian information criterion (BIC)}:
 			\begin{equation}
-				\log p(X|\theta_{ML}) - \frac{1}{2} K \log N
+				\log p(\bm{X} \vert \bm{\theta}_{ML}) - \frac{1}{2} K \log n
 			\end{equation}
 			\vspace*{-4mm}
 			\begin{itemize}
 				\item $K$: Number of parameters
-				\item $N$: Number of data points
+				\item $n$: Number of data points
 			\end{itemize}
 		\end{itemize}
 	\end{itemize}

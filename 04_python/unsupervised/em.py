@@ -73,7 +73,7 @@ class EM():
             
             # plot at given steps
             if i + 1 in [1, 2, 3, 4, 5, 7, 10, 15, 20, 25, 30]:
-                plt.figure(i)
+                plt.figure(i, figsize=(10, 7))
                 self.__visualize(i)
                 
             print("Finished iteration {}".format(i + 1))
@@ -191,10 +191,10 @@ class EM():
             for i in range(steps):
                 points = np.append(X[i], Y[i]).reshape(2, steps).T
                 Z[i] = self.__multivariate_gaussian(points, self.mu[j], self.cov[j])
-            plt.contour(X, Y, Z, 5, zorder=15)
+            plt.contour(X, Y, Z, 10, zorder=15, cmap="Greys")
     
         # plot the samples
-        plt.scatter(x1, x2, zorder=10, cmap=plt.cm.rainbow,
+        plt.scatter(x1, x2, zorder=10, cmap="rainbow",
             edgecolors="k", c=labels)
         # grid lines
         plt.grid(b=True, which="major", color="gray", linestyle="--", zorder=5)

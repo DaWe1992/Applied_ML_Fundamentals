@@ -79,7 +79,7 @@ class DataCreator:
         
         if sklearn:
             X, y = make_regression(
-                n_samples=5,
+                n_samples=20,
                 n_features=1,
                 noise=10.0
             )

@@ -77,7 +77,7 @@ class BoundaryPlotter:
         # create filled contour plot
         ax.contourf(
             xx, yy, Z,
-            cmap=plt.cm.rainbow,
+            cmap="rainbow",
             alpha=0.40, zorder=0,
             vmin=-1, vmax=np.unique(self.y).shape[0]
         )
@@ -86,7 +86,7 @@ class BoundaryPlotter:
             ax.contour(xx, yy, Z, levels=[0], cmap="Greys_r", linewidths=2.5)
         
         ax.scatter(self.X[:, 0], self.X[:, 1], c=self.y,
-            cmap=plt.cm.rainbow, edgecolors="k", zorder=10,
+            cmap="rainbow", edgecolors="k", zorder=10,
             vmin=-1, vmax=np.unique(self.y).shape[0]
         )
         

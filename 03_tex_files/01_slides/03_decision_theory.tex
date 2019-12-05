@@ -114,8 +114,8 @@
 	}
 	\vspace*{3mm}
 	\begin{boxBlueNoFrame}
-		If $\bm{x} = 15$ we would predict class $a$ since $p(15 \vert a) > p(15 \vert b)$. \\
-		If $\bm{x} = 25$ we would output class $b$ since $p(25 \vert b) > p(25 \vert a)$.
+		If $\bm{x} = 15$ we would predict class $a$, since $p(15 \vert a) > p(15 \vert b)$. \\
+		If $\bm{x} = 25$ we would output class $b$, since $p(25 \vert b) > p(25 \vert a)$.
 	\end{boxBlueNoFrame}
 \end{frame}
 
@@ -148,7 +148,7 @@
 	}
 	\begin{itemize}
 		\item Second concept: \highlight{Class priors}
-		\item The prior probability of a data point belonging to a particular class $\mathcal{C}$
+		\item The prior probability of a data point belonging to a particular class $\mathcal{C}_k$
 		\begin{alignat*}{2}
 			\mathcal{C}_1 &\equiv a \qquad p(\mathcal{C}_1) &&= 0.75 \\
 			\mathcal{C}_2 &\equiv b \qquad p(\mathcal{C}_2) &&= 0.25
@@ -165,9 +165,6 @@
 
 % How to get the Prior Probabilities?
 \begin{frame}{How to get the Prior Probabilities?}{}
-	\bubble{11}{5.25}{
-		\footnotesize But don't count apples!
-	}
 	\vspace*{4mm}
 	\begin{figure}
 		\centering
@@ -272,7 +269,7 @@
 	\begin{itemize}
 		\item Decision rule:
 		\begin{itemize}
-			\item Decide $\mathcal{C}_1$ if $p(\mathcal{C}_1 \vert \bm{x}) > p(\mathcal{C}_2 \vert \bm{x})$
+			\item Decide $\mathcal{C}_1$, if $p(\mathcal{C}_1 \vert \bm{x}) > p(\mathcal{C}_2 \vert \bm{x})$
 			\item This is equivalent to: \textit{(we don't need the normalization)}
 			\begin{equation}
 				p(\bm{x} \vert \mathcal{C}_1) \cdot p(\mathcal{C}_1) >
@@ -381,7 +378,7 @@
 					{\sum_{i=1}^n \mathbb{1}\{ y^{(i)} = \mathcal{C}_k \}}
 		\end{align}
 		\item $\mathbb{1}\{ bool \}$ is the \highlight{indicator function} \\[-1mm]
-			{\scriptsize (returns 1 if $bool$ is true, 0 otherwise.
+			{\scriptsize (returns 1, if $bool$ is true, 0 otherwise.
 			E.\,g.: $\mathbb{1}\{1+1=2\} = 1$, $\mathbb{1}\{3=2\} = 0$)}
 	\end{itemize}
 	\begin{textblock}{100}(2,8)
@@ -587,7 +584,7 @@
 	\end{boxBlueNoFrame}
 
 	\begin{itemize}
-		\item \highlight{0-1 loss:} Decide $\alpha_1$ if:
+		\item \highlight{0-1 loss:} Decide $\alpha_1$, if:
 		\begin{equation}
 			\frac{p(\bm{x} \vert \mathcal{C}_1)}{p(\bm{x} \vert \mathcal{C}_2)}
 				> \frac{p(\mathcal{C}_2)}{p(\mathcal{C}_1)} \qquad \text{with} \qquad
@@ -615,7 +612,7 @@
 			\item They are even \textbf{Bayes' optimal}
 			\item We can deal with two or more classes
 			\item We can deal with high dimensional feature vectors
-			\item We can incorporate prior knowledge on the class distribution
+			\item We can incorporate prior knowledge about the class distribution
 		\end{itemize}
 		\item We have seen how to get the probabilities for the discrete case \\
 			(cf. na\"{i}ve Bayes classifier)
