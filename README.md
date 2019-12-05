@@ -29,8 +29,8 @@ This lecture is supposed to give a general introduction into state-of-the-art ma
     * Naive Bayes
 4. **Probability density estimation** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/04_density_estimation.pdf))
     * Parametric models
-	* Non-parametric models
-	* (Mixture models)
+    * Non-parametric models
+    * Gaussian mixture models and Expectation Maximization
 5. **Supervised learning**
     * Regression ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/05_regression.pdf))
       * Linear regression
