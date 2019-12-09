@@ -63,7 +63,7 @@
 	\vspace*{-7mm}
 	\footnotesize
 	\begin{boxBlueNoFrame}
-		\textbf{Algorithm sketch:} Given the training data $\mathcal{D}$ the algorithm derives
+		\textbf{Algorithm sketch:} Given the training data $\mathcal{D}$, the algorithm derives
 		a function of the type
 	
 		\vspace*{-6mm}
@@ -73,7 +73,7 @@
 		\end{equation}
 
 		from the data. $\bm{\theta}$ is the parameter vector containing the coefficients to be estimated by the regression
- 		algorithm. Once $\bm{\theta}$ is learned it can be used for prediction. 
+ 		algorithm. Once $\bm{\theta}$ is learned, it can be used for prediction. 
 	\end{boxBlueNoFrame}
 \end{frame}
 
@@ -439,6 +439,9 @@
 
 % Probabilistic Regression (Ctd.)
 \begin{frame}{Probabilistic Regression (Ctd.)}{}
+	\bubble{2}{6}{
+		\scriptsize $\bm{w} \equiv \bm{\theta}$
+	}
 	\begin{figure}
 		\includegraphics[scale=0.35]{05_regression/02_img/probabilistic_regression}
 	\end{figure}
@@ -508,8 +511,8 @@
 			\highlight{$\Rightarrow$ We can estimate the uncertainty $\beta$}
 	\end{itemize}
 	\begin{equation}
-		\beta_{ML} = \left( \frac{1}{n} \sum_{i=1}^n
-			(y^{(i)} - \bm{\theta}_{ML}^{\intercal} \bm{x}^{(i)})^2 \right)^{-1}
+		\beta_{ml} = \left( \frac{1}{n} \sum_{i=1}^n
+			(y^{(i)} - \bm{\theta}_{ml}^{\intercal} \bm{x}^{(i)})^2 \right)^{-1}
 	\end{equation}
 \end{frame}
 

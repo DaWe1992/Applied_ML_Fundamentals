@@ -519,10 +519,10 @@
 			&\text{loss(decision = sick | patient = healthy)}
 		\end{align*}
 		\item We have possible decisions $\alpha_i$...
-		\item ...and a loss function $\ell(\alpha_i \vert C_k)$
+		\item ...and a loss function $\ell(\alpha_i \vert \mathcal{C}_k)$
 		\item Expected loss (risk) of making a decision $\alpha_i$:
 		\begin{equation}
-			R(\alpha_i \vert \bm{x}) = \sum_k \ell(\alpha_i \vert C_k) p(C_k \vert \bm{x})
+			R(\alpha_i \vert \bm{x}) = \sum_k \ell(\alpha_i \vert \mathcal{C}_k) p(\mathcal{C}_k \vert \bm{x})
 		\end{equation}
 	\end{itemize}
 \end{frame}
@@ -533,7 +533,7 @@
 	\begin{itemize}
 		\item Consider two classes: $\mathcal{C}_1$ and $\mathcal{C}_2$
 		\item Therefore, we have two possible decisions: $\alpha_1$ (for $\mathcal{C}_1$) and $\alpha_2$ (for $\mathcal{C}_2$)
-		\item Loss function: $\ell(\alpha_i \vert C_k) = \ell_{ik}$
+		\item Loss function: $\ell(\alpha_i \vert \mathcal{C}_k) = \ell_{ik}$
 		\item Risk of both decisions:
 		\begin{align*}
 			R(\alpha_1 \vert \bm{x}) &= \ell_{11} p(\mathcal{C}_1 \vert \bm{x}) + \ell_{12} p(\mathcal{C}_2 \vert \bm{x}) \\
