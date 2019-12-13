@@ -62,7 +62,7 @@ class DataCreator:
                 random_state=42
             )
             
-#            X, y = make_circles(n_samples=400, factor=0.3, noise=0.2)
+            X, y = make_circles(n_samples=400, factor=0.3, noise=0.2)
         
         return X, y
     

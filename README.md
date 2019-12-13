@@ -41,7 +41,7 @@ This lecture is supposed to give a general introduction into state-of-the-art ma
       * Logistic regression ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/07_logistic_regression.pdf))
       * Decision trees and ensemble methods ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/08_decision_trees.pdf))
 	* Classification II
-      * Deep learning
+      * Deep learning ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/10_deep_learning.pdf))
         * Perceptrons
         * Multi-layer-perceptrons and back-propagation
         * Deep learning application: NLP (word embeddings, text classification, sentiment analysis)
@@ -53,7 +53,7 @@ This lecture is supposed to give a general introduction into state-of-the-art ma
 	* Cost-sensitive evaluation
 	* Model selection: Grid search, random search
 6. **Unsupervised learning**
-    * Clustering
+    * Clustering ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/12_clustering.pdf))
       * k-Means
       * Hierarchical clustering (divisive and agglomerative)
     * Principal component analysis ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/13_pca.pdf))

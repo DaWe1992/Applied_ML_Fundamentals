@@ -201,12 +201,12 @@
 		\item Step \ding{182}: Rewrite $\mathcal{J}(\bm{\theta})$ in matrix-vector notation:
 		\begin{align*}
 			\mathcal{J}(\bm{\theta})
-				&= \frac{1}{2}(\bm{X} \bm{\theta} - \bm{y})^{\intercal} (\bm{X} \bm{\theta} - \bm{y}) \\
-				&= ((\bm{X} \bm{\theta})^{\intercal} - \bm{y}^{\intercal}) (\bm{X} \bm{\theta} - \bm{y}) \\
-				&= (\bm{X} \bm{\theta})^{\intercal} \bm{X} \bm{\theta} - (\bm{X} \bm{\theta})^{\intercal} \bm{y}
-					- \bm{y}^{\intercal} (\bm{X} \bm{\theta}) + \bm{y}^{\intercal} \bm{y} \\
-				&= \bm{\theta}^{\intercal} \bm{X}^{\intercal} \bm{X} \bm{\theta}
-					- 2 (\bm{X} \bm{\theta})^{\intercal} \bm{y} + \bm{y}^{\intercal} \bm{y}
+				&= \nicefrac{1}{2}(\bm{X} \bm{\theta} - \bm{y})^{\intercal} (\bm{X} \bm{\theta} - \bm{y}) \\
+				&= \nicefrac{1}{2}((\bm{X} \bm{\theta})^{\intercal} - \bm{y}^{\intercal}) (\bm{X} \bm{\theta} - \bm{y}) \\
+				&= \nicefrac{1}{2}((\bm{X} \bm{\theta})^{\intercal} \bm{X} \bm{\theta} - (\bm{X} \bm{\theta})^{\intercal} \bm{y}
+					- \bm{y}^{\intercal} (\bm{X} \bm{\theta}) + \bm{y}^{\intercal} \bm{y}) \\
+				&= \nicefrac{1}{2}(\bm{\theta}^{\intercal} \bm{X}^{\intercal} \bm{X} \bm{\theta}
+					- 2 (\bm{X} \bm{\theta})^{\intercal} \bm{y} + \bm{y}^{\intercal} \bm{y})
 		\end{align*}
 		\item To be continued...
 	\end{itemize}
@@ -219,7 +219,7 @@
 		\item Step \ding{183}: Calculate the derivative of $\mathcal{J}(\bm{\theta})$ and set it to zero:
 		\begin{align*}
 			\nabla_{\bm{\theta}}\mathcal{J}(\bm{\theta})
-				&= 2 \bm{X}^{\intercal} \bm{X} \bm{\theta} - 2 \bm{X}^{\intercal} \bm{y} \overset{!}{=} \bm{0} \\	
+				&= \nicefrac{1}{2}(2 \bm{X}^{\intercal} \bm{X} \bm{\theta} - 2 \bm{X}^{\intercal} \bm{y}) \overset{!}{=} \bm{0} \\	
 				&\Leftrightarrow \bm{X}^{\intercal} \bm{X} \bm{\theta} = \bm{X}^{\intercal} \bm{y}
 		\end{align*}
 		\item If $\bm{X}^{\intercal} \bm{X}$ is invertible, we can multiply both sides by
@@ -616,7 +616,7 @@
 			\varphi_0(x) 			&= 1 	\\
 			\varphi_j(x) 			&= x^j	\\
 			h_{\bm{\theta}}(x) 	&= \sum_{j=0}^p \theta_j \varphi_j(x) = \theta_0 + \theta_1 x +
-									\theta_2 x^2 + \dots + \theta_P x^p
+									\theta_2 x^2 + \dots + \theta_p x^p
 		\end{align*}
 		\item Here, $p$ is the degree of the polynomial
 		\item Here: $\varphi(x) = [1, x, x^2, x^3, \dots, x^p]$

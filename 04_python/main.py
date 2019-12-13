@@ -69,8 +69,8 @@ def classification():
 #    clf.fit(X, y, batch_size=X.shape[0])
     
     # train one-vs-one logistic regression classifier
-#    clf = LogRegOneVsOne(poly=True)
-#    clf.fit(X, y)
+    clf = LogRegOneVsOne(poly=True)
+    clf.fit(X, y)
     
     # train Fisher's linear discriminant
 #    clf = LDA(n_dims=1)
@@ -78,11 +78,11 @@ def classification():
 #    clf.fit(X, y)
     
     # Expectation Maximization
-    em = EM()
-    em.fit(X, n_comp=3, n_iter=30)
+#    em = EM()
+#    em.fit(X, n_comp=3, n_iter=30)
     
     # plot boundary
-#    BoundaryPlotter(X, y).plot_boundary(clf, step_size=0.005)
+    BoundaryPlotter(X, y).plot_boundary(clf, step_size=0.005)
     
     # evaluation
 #    evaluator = Evaluator()
@@ -145,7 +145,7 @@ if __name__ == "__main__":
     """
     Main function.
     """
-    classification()
-#    regression()
+#    classification()
+    regression()
 #    reinforcement_learning()
     
