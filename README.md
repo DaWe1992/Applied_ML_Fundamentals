@@ -53,7 +53,7 @@ This lecture is supposed to give a general introduction into state-of-the-art ma
 	* Cost-sensitive evaluation
 	* Model selection: Grid search, random search
 6. **Unsupervised learning**
-    * Clustering ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/12_clustering.pdf))
+    * Clustering ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/12_clustering.pdf))
       * k-Means
       * Hierarchical clustering (divisive and agglomerative)
     * Principal component analysis ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/13_pca.pdf))
