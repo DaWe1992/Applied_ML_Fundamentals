@@ -8,8 +8,8 @@
 
 \title[Principal Component Analysis]{*** Applied Machine Learning Fundamentals *** Logistic Regression}
 \institute{SAP\,SE}
-\author{Daniel Wehner}
-\date{\today}
+\author{M.\,Sc. Daniel Wehner}
+\date{Winter term 2019/2020}
 \prefix{LR}
 
 % ====================================================
@@ -34,7 +34,7 @@
 
 % Agenda
 %______________________________________________________________________
-\begin{frame}{Agenda \today}
+\begin{frame}{Agenda for this Unit}
 	\begin{multicols}{2}
 		\tableofcontents
 	\end{multicols}
@@ -61,7 +61,7 @@
 		\end{itemize}
 		\item \textbf{Class labels:}
 		\begin{itemize}
-			\item The `positive class' is usually encoded as \textbf{1} / $\oplus$
+			\item The `positive class' is encoded as \textbf{1} / $\oplus$
 			\item The `negative class' as \textbf{0} / $\ominus$
 		\end{itemize}
 		\item \textbf{Probabilistic interpretation:} The output of the algorithm is between 0 and 1
@@ -83,15 +83,15 @@
 % Why you should not use linear Regression... (Ctd.)
 \begin{frame}{Why you should not use linear Regression... (Ctd.)}{}
 	\begin{itemize}
-		\item Linear regression: $h_{\bm{\theta}}(x) = \bm{\theta}^{\intercal} \bm{x}$
+		\item Linear regression: $h_{\bm{\theta}}(\bm{x}) = \bm{\theta}^{\intercal} \bm{x}$
 		\item By putting a \textbf{threshold} at 0.5, we can turn linear regression into a classifier
 		\begin{itemize}
-			\item If $h_{\bm{\theta}}(x) \ge 0.5$, predict $y = 1$
-			\item If $h_{\bm{\theta}}(x) < 0.5$, predict $y = 0$
+			\item If $h_{\bm{\theta}}(\bm{x}) \ge 0.5$, predict $y = 1$
+			\item If $h_{\bm{\theta}}(\bm{x}) < 0.5$, predict $y = 0$
 		\end{itemize}
 		\item \textbf{Outliers affect the decision boundary}
-		\item Furthermore, we only want $0 \le h_{\bm{\theta}}(x) \le 1$
-		\item Linear regression can output $h_{\bm{\theta}}(x) \ll 0$ or $h_{\bm{\theta}}(x) \gg 1$
+		\item Furthermore, we only want $0 \le h_{\bm{\theta}}(\bm{x}) \le 1$
+		\item Linear regression can output $h_{\bm{\theta}}(\bm{x}) \ll 0$ or $h_{\bm{\theta}}(\bm{x}) \gg 1$
 		\item \highlight{We need a better strategy!}
 	\end{itemize}
 \end{frame}
@@ -109,14 +109,14 @@
 % Logistic Regression Model
 \begin{frame}{Logistic Regression Model}{}\important
 	\begin{itemize}
-		\item Remember that we want: $0 \le h_{\bm{\theta}}(x) \le 1$
-		\item \textbf{Solution:} \highlight{Logistic/Sigmoid function:}
+		\item Remember that we want: $0 \le h_{\bm{\theta}}(\bm{x}) \le 1$
+		\item \textbf{Solution:} \highlight{Logistic / Sigmoid function:}
 		\begin{equation}
 			g(z) = \frac{1}{1 + e^{-z}}
 		\end{equation}
-		\item We plug $\bm{\theta}^{\intercal} \bm{x}$ into the sigmoid function:
+		\item We plug $\bm{\theta}^{\intercal} \bm{\bm{x}}$ into the sigmoid function:
 		\begin{equation}
-			h_{\bm{\theta}}(x) = g(\bm{\theta}^{\intercal} \bm{x}) = \frac{1}{1 + e^{-(\bm{\theta}^{\intercal} \bm{x})}}
+			h_{\bm{\theta}}(\bm{x}) = g(\bm{\theta}^{\intercal} \bm{\bm{x}}) = \frac{1}{1 + e^{-(\bm{\theta}^{\intercal} \bm{x})}}
 		\end{equation}
 	\end{itemize}
 \end{frame}
@@ -165,13 +165,13 @@
 % Interpretation of Hypothesis Output
 \begin{frame}{Interpretation of Hypothesis Output}{}
 	\begin{itemize}
-		\item $h_{\bm{\theta}}(x)$ is interpreted as the probability of instance $x$ belonging to class $y = 1$
+		\item $h_{\bm{\theta}}(\bm{x})$ is interpreted as the probability of instance $\bm{x}$ belonging to class $y = 1$
 		\item \textbf{Example:}
 		\begin{equation}
 			\bm{x} = \begin{bmatrix} x_0 \\ x_1 \end{bmatrix} = \begin{bmatrix} 1 \\ tumorSize \end{bmatrix}
 		\end{equation}
 		\vspace*{1mm}
-		\item If $h_{\bm{\theta}}(x) = 0.7$, we have to tell the patient that there
+		\item If $h_{\bm{\theta}}(\bm{x}) = 0.7$, we have to tell the patient that there
 			is a \textbf{70\,\% chance} of the tumor being malignant $\Rightarrow p(y = 1 \vert \bm{x}, \bm{\theta})$
 		\item \textbf{Binary case:} $p(y = 0 \vert \bm{x}, \bm{\theta}) = 1 - p(y = 1 \vert \bm{x}, \bm{\theta})$
 	\end{itemize}
@@ -282,7 +282,7 @@
 				\mathcal{J}(\bm{\theta}^{(t)}) \quad$
 			\textcolor{myblue1}{\textit{// simultaneously update all} $\theta_j$} \\
 		\texttt{\}}
-		\item The partial derivative $\nabla_{\bm{\theta}} \mathcal{J}(\bm{\theta})$ is given by:
+		\item The gradient $\nabla_{\bm{\theta}} \mathcal{J}(\bm{\theta})$ is given by:
 		{\footnotesize
 		\begin{equation}
 			\nabla_{\bm{\theta}} \mathcal{J}(\bm{\theta}) = \frac{1}{n} \sum_{i=1}^n \left(
@@ -306,12 +306,12 @@
 	\divideTwo{0.62}{
 		\begin{itemize}
 			\item \highlight{For classification we have to set a threshold}
-			\item Suppose we predict $y = 1$ if $h_{\bm{\theta}}(x) \ge 0.5$
+			\item Suppose we predict $y = 1$, if $h_{\bm{\theta}}(\bm{x}) \ge 0.5$
 			\begin{itemize}
 				\item This means $g(z) \ge 0.5$
 				\item This is equivalent to $z \ge 0$ and $\bm{\theta}^{\intercal} \bm{x} \ge 0$
 			\end{itemize}
-			\item Suppose we predict $y = 0$ if $h_{\bm{\theta}}(x) < 0.5 \Rightarrow \bm{\theta}^{\intercal} \bm{x} < 0$
+			\item Suppose we predict $y = 0$, if $h_{\bm{\theta}}(\bm{x}) < 0.5 \Rightarrow \bm{\theta}^{\intercal} \bm{x} < 0$
 		\end{itemize}
 	}{0.37}{
 		\vspace*{2mm}
@@ -331,7 +331,7 @@
 		\begin{equation*}
 			\theta_0 = -3 \qquad \theta_1 = 1 \qquad \theta_2 = 1
 		\end{equation*}
-		\item Predict $y = 1$ if $-3 + x_1 + x_2 \ge 0$
+		\item Predict $y = 1$, if $-3 + x_1 + x_2 \ge 0$
 	\end{itemize}
 \end{frame}
 
@@ -416,15 +416,10 @@
 
 % Example: Non-Linear Decision Boundary
 \begin{frame}{Example: Non-Linear Decision Boundary}{}
-	\divideTwo{0.49}{
-		\begin{figure}
-			\includegraphics[scale=0.29]{07_logistic_regression/02_img/logreg_example_non_linear}
-		\end{figure}
-	}{0.49}{
-		\begin{figure}
-			\includegraphics[scale=0.3]{07_logistic_regression/02_img/logreg_example_non_linear_boundary}
-		\end{figure}
-	}
+	\vspace*{-2mm}
+	\begin{figure}
+		\includegraphics[scale=0.325]{07_logistic_regression/02_img/logreg_example_non_linear_boundary}
+	\end{figure}
 \end{frame}
 
 
@@ -508,9 +503,9 @@
 	}{0.49}{
 		\begin{itemize}
 			\item \textbf{Train one classifier for each pair of classes}
-			\item We get $\binom{\mathcal{C}}{2}$ classifiers
+			\item We get $\binom{\vert \mathcal{C} \vert}{2}$ classifiers
 			\item Ignore all other examples that do not belong to either of the two classes
-			\item \textbf{Voting}: Count how often each class wins; the class with highest count is predicted
+			\item \textbf{Voting}: Count how often each class wins; the class with the highest score is predicted
 		\end{itemize}
 	}
 \end{frame}
@@ -574,7 +569,15 @@
 \begin{frame}{Recommended Literature and further Reading}{}
 	\footnotesize
 	\begin{thebibliography}{2}
+		\literature{book}{Bishop.2006}{[2] Pattern Recognition and Machine Learning}
+			{Christopher Bishop. Springer. 2006.}{$\rightarrow$ \href{
+				http://users.isr.ist.utl.pt/~wurmd/Livros/school/Bishop\%20-\%20Pattern\%20Recognition\%20And\%20Machine\%20Learning\%20-\%20Springer\%20\%202006.pdf
+			}{\linkstyle{Link}}, cf. chapter 4.3.2}
 
+		\literature{book}{Murphy.2012}{[2] Machine Learning: A Probabilistic Perspective}
+			{Kevin Murphy. MIT Press. 2012.}{$\rightarrow$ \href{
+				https://doc.lagout.org/science/Artificial\%20Intelligence/Machine\%20learning/Machine\%20Learning_\%20A\%20Probabilistic\%20Perspective\%20\%5BMurphy\%202012-08-24\%5D.pdf
+			}{\linkstyle{Link}}, cf. chapter 8}
 	\end{thebibliography}
 \end{frame}
 

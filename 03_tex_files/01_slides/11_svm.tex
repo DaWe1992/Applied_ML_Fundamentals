@@ -894,9 +894,9 @@
 	}{0.49}{
 		\begin{itemize}
 			\item \textbf{Train one classifier for each pair of classes}
-			\item We get $\binom{\mathcal{C}}{2}$ classifiers
+			\item We get $\binom{\vert \mathcal{C} \vert}{2}$ classifiers
 			\item Ignore all other examples that do not belong to either of the two classes
-			\item \textbf{Voting}: Count how often each class wins; the class with highest count is predicted
+			\item \textbf{Voting}: Count how often each class wins; the class with the highest score is predicted
 		\end{itemize}
 	}
 \end{frame}

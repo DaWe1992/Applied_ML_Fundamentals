@@ -8,8 +8,8 @@
 
 \title[$k$-Nearest Neighbors]{*** Applied Machine Learning Fundamentals *** $k$-Nearest Neighbors}
 \institute{SAP\,SE}
-\author{Daniel Wehner}
-\date{\today}
+\author{M.\,Sc. Daniel Wehner}
+\date{Winter term 2019/2020}
 \prefix{KNN}
 
 % ====================================================
@@ -34,7 +34,7 @@
 
 % Agenda
 %______________________________________________________________________
-\begin{frame}{Agenda \today}
+\begin{frame}{Agenda for this Unit}
 	\begin{multicols}{2}
 		\tableofcontents
 	\end{multicols}
@@ -242,7 +242,7 @@
 		\begin{itemize}
 			\item Let $k$ be set to 10
 			\item Step \ding{183}: Sort data set by distances \\
-				{\footnotesize \textit{(cf. table)}}
+				{\footnotesize \textit{(cf. table right)}}
 			\item Step \ding{184}: Count the classes
 			\begin{itemize}
 				\item \textbf{Class 0:} 3
@@ -271,14 +271,14 @@
 	\textbf{The choice of $k$ is important:} \\
 	\divideTwo{0.49}{
 		\includegraphics[scale=0.25]{06_knn/02_img/knn_1}
-		\vspace*{-3mm}
+		\vspace*{-10mm}
 		\begin{center}
 			\hspace*{7mm}
 			$k = 1$ \Highlight{($\skull$ overfitting $\skull$)}
 		\end{center}
 	}{0.49}{
 		\includegraphics[scale=0.25]{06_knn/02_img/knn_30}
-		\vspace*{-3mm}
+		\vspace*{-10mm}
 		\begin{center}
 			\hspace*{7mm}
 			$k = 30$ (about right)
@@ -377,7 +377,10 @@
 \begin{frame}{Recommended Literature and further Reading}{}
 	\footnotesize
 	\begin{thebibliography}{2}
-
+		\literature{book}{Mitchell.1997}{[1] Machine Learning}
+			{Tom Mitchell. McGraw-Hill Science. 1997.}{$\rightarrow$ \href{
+				https://www.cs.ubbcluj.ro/~gabis/ml/ml-books/McGrawHill\%20-\%20Machine\%20Learning\%20-Tom\%20Mitchell.pdf
+			}{\linkstyle{Link}}, cf. chapter 8.2}
 	\end{thebibliography}
 \end{frame}
 

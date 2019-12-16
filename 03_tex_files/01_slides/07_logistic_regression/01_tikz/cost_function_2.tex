@@ -5,9 +5,12 @@
 	]
 
 		\begin{axis}[
+			grid=both,
+    			grid style={line width=0.1pt, draw=lightgray!70},
 			domain=0:1,
 			xlabel={$h_{\bm{\theta}}(\bm{x})$},
-			ylabel={$cost\ \ell$}
+			ylabel={$cost\ \ell$},
+			ymax=6
 		]
     			\addplot[no marks,ultra thick,smooth,myblue1,samples=500]{-ln(1 - x)};
     		\end{axis}

@@ -195,7 +195,10 @@ class LogisticRegression:
         
     def __poly_features(self, X):
         """
+        Computes polynomial features.
         
+        :param X:               data points
+        :return:                polynomial features
         """
         X1 = X[:, 0]
         X2 = X[:, 1]

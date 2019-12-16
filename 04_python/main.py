@@ -145,7 +145,7 @@ if __name__ == "__main__":
     """
     Main function.
     """
-#    classification()
-    regression()
+    classification()
+#    regression()
 #    reinforcement_learning()
     
