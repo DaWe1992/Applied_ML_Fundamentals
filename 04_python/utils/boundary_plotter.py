@@ -90,5 +90,5 @@ class BoundaryPlotter:
             vmin=-1, vmax=np.unique(self.y).shape[0]
         )
         
-        plt.savefig("boundary.pdf")
+#        plt.savefig("boundary.pdf")
         plt.show()
