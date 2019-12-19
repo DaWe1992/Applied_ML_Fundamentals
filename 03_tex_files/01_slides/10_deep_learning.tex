@@ -502,6 +502,52 @@
 \end{frame}
 
 
+% Section: Multi-Layer-Perceptrons (MLPs)
+%______________________________________________________________________
+\section{Multi-Layer-Perceptrons (MLPs)}
+\makedivider{Multi-Layer-Perceptrons (MLPs)}
+
+% Subsection: Backpropagation
+% --------------------------------------------------------------------------------------------------------
+\subsection{Backpropagation}
+
+% Backpropagation
+\begin{frame}{Backpropagation}{}
+	\begin{itemize}
+		\item To calculate the error, we first have to perform a forward pass:
+		\begin{equation*}
+			h_k(\bm{x}^{(i)}) = g^{(2)}\left( \sum_{l=0}^h \Theta_{kl}^{(2)} g^{(1)}\left( \sum_{j=0}^d \Theta_{lj}^{(1)} x_{j}^{(i)} \right) \right)
+		\end{equation*}
+		\item The loss function is given by:
+		\begin{equation*}
+			\mathcal{J}^{(i)}(\bm{\Theta}) = \frac{1}{n} \sum_{i=1}^n \sum_{k=1}^{\vert \mathcal{C} \vert}
+				\ell(h_k(\bm{x}^{(i)}; \bm{\Theta}), y_k^{(i)})
+		\end{equation*}
+	\end{itemize}
+\end{frame}
+
+
+% Backpropagation (Ctd.)
+\begin{frame}{Backpropagation (Ctd.)}{}
+	\begin{itemize}
+		\item Compute the gradient w.\,r.\,t. $h_k$:
+		\begin{equation*}
+			\nabla_{h_k} \mathcal{J}^{(i)}(\bm{\Theta}) = \ell'(h_k(\bm{x}^{(i)}; \bm{\Theta}), y_k^{(i)}) \equiv \delta_k^{(i)}
+		\end{equation*}
+		\item Now we can compute the weight gradients:
+		\footnotesize
+		\begin{align*}
+			\nabla_{\Theta_{kl}^{(2)}} \mathcal{J}^{(i)}(\bm{\Theta})
+				&= \frac{\partial \mathcal{J}^{(i)}(\bm{\Theta})}{\partial h_k(\bm{x}^{(i)}; \bm{\Theta})}
+					\frac{\partial h_k(\bm{x}^{(i)}; \bm{\Theta})}{\partial \Theta_{kl}^{(2)}} \\
+				&= \ell'(h_k(\bm{x}^{(i)}; \bm{\Theta}), y_k^{(i)}) \cdot g'^{(2)} \left( \sum_{t=0}^h \Theta_{kt}^{(2)} z_t(\bm{x}^{(i)}) \right)
+					\cdot z_l(\bm{x}^{(i)}) \\
+				&= \delta_k^{(i)} \cdot g'^{(2)} \left( \sum_{t=0}^h \Theta_{kt}^{(2)} z_t(\bm{x}^{(i)}) \right) \cdot z_l(\bm{x}^{(i)})
+		\end{align*}
+	\end{itemize}
+\end{frame}
+
+
 
 % Section: Wrap-Up
 %______________________________________________________________________
