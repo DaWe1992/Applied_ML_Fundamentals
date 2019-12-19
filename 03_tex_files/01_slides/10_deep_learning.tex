@@ -512,38 +512,100 @@
 \subsection{Backpropagation}
 
 % Backpropagation
-\begin{frame}{Backpropagation}{}
+\begin{frame}{Backpropagation}{}\important
 	\begin{itemize}
-		\item To calculate the error, we first have to perform a forward pass:
+		\item In order to update the weights, we first have to perform a \highlight{forward pass}:
+		\begin{align*}
+			h_k(\bm{x}^{(i)}; \bm{\Theta})
+				&= g^{(2)}\left( \sum_{l=0}^h \Theta_{kl}^{(2)} g^{(1)}\left( \sum_{j=0}^m \Theta_{lj}^{(1)} x_{j}^{(i)} \right) \right) \\
+			z_l
+				&=  g^{(1)}\left( \sum_{j=0}^m \Theta_{lj}^{(1)} x_{j}^{(i)} \right) \qquad\text{activation}
+		\end{align*}
+		\item $g(\cdot) \equiv$ activation function, e.\,g. sigmoid
+		\item $\bm{\Theta}$ are the network parameters (to be learned)
+	\end{itemize}
+\end{frame}
+
+
+% Backpropagation (Ctd.)
+\begin{frame}[plain]{}{}
+	\bubble{0.5}{0.5}{
+		\tiny This is a fully connected \\[-2mm]
+		\tiny neural network
+	}
+	\input{10_deep_learning/01_tikz/mlp_backprop}
+\end{frame}
+
+
+% Backpropagation (Ctd.)
+\begin{frame}{Backpropagation (Ctd.)}{}\important
+	\begin{itemize}
+		\item Compute the network loss
+		\item The loss function is given by: {\footnotesize(assume square loss: $\ell = (h_k(\bm{x}^{(i)}; \bm{\Theta}) - y_k^{(i)})^2$)}
 		\begin{equation*}
-			h_k(\bm{x}^{(i)}) = g^{(2)}\left( \sum_{l=0}^h \Theta_{kl}^{(2)} g^{(1)}\left( \sum_{j=0}^d \Theta_{lj}^{(1)} x_{j}^{(i)} \right) \right)
-		\end{equation*}
-		\item The loss function is given by:
-		\begin{equation*}
-			\mathcal{J}^{(i)}(\bm{\Theta}) = \frac{1}{n} \sum_{i=1}^n \sum_{k=1}^{\vert \mathcal{C} \vert}
+			\mathcal{J}^{(i)}(\bm{\Theta}) = \frac{1}{n} \sum_{i=1}^n \sum_{k=1}^\kappa
 				\ell(h_k(\bm{x}^{(i)}; \bm{\Theta}), y_k^{(i)})
+		\end{equation*}
+		\item Compute the error gradient w.\,r.\,t. $h_k(\bm{x}^{(i)}; \bm{\Theta})$:
+		\begin{equation*}
+			 \frac{\partial \mathcal{J}^{(i)}(\bm{\Theta})}{\partial h_k(\bm{x}^{(i)}; \bm{\Theta})}
+			 	= \ell'(h_k(\bm{x}^{(i)}; \bm{\Theta}), y_k^{(i)}) \equiv \delta_k^{(i)}
 		\end{equation*}
 	\end{itemize}
 \end{frame}
 
 
 % Backpropagation (Ctd.)
-\begin{frame}{Backpropagation (Ctd.)}{}
+\begin{frame}{Backpropagation (Ctd.)}{}\important
 	\begin{itemize}
-		\item Compute the gradient w.\,r.\,t. $h_k$:
-		\begin{equation*}
-			\nabla_{h_k} \mathcal{J}^{(i)}(\bm{\Theta}) = \ell'(h_k(\bm{x}^{(i)}; \bm{\Theta}), y_k^{(i)}) \equiv \delta_k^{(i)}
-		\end{equation*}
-		\item Now we can compute the weight gradients:
-		\footnotesize
+		\item Compute the weight gradient for the output layer:
 		\begin{align*}
-			\nabla_{\Theta_{kl}^{(2)}} \mathcal{J}^{(i)}(\bm{\Theta})
+			\frac{\partial \mathcal{J}^{(i)}(\bm{\Theta})}{\partial \Theta_{kl}^{(2)}}
 				&= \frac{\partial \mathcal{J}^{(i)}(\bm{\Theta})}{\partial h_k(\bm{x}^{(i)}; \bm{\Theta})}
 					\frac{\partial h_k(\bm{x}^{(i)}; \bm{\Theta})}{\partial \Theta_{kl}^{(2)}} \\
 				&= \ell'(h_k(\bm{x}^{(i)}; \bm{\Theta}), y_k^{(i)}) \cdot g'^{(2)} \left( \sum_{t=0}^h \Theta_{kt}^{(2)} z_t(\bm{x}^{(i)}) \right)
 					\cdot z_l(\bm{x}^{(i)}) \\
 				&= \delta_k^{(i)} \cdot g'^{(2)} \left( \sum_{t=0}^h \Theta_{kt}^{(2)} z_t(\bm{x}^{(i)}) \right) \cdot z_l(\bm{x}^{(i)})
 		\end{align*}
+	\end{itemize}
+\end{frame}
+
+
+% Backpropagation (Ctd.)
+\begin{frame}{Backpropagation (Ctd.)}{}\important
+	\begin{itemize}
+		\item Compute the error gradient for the hidden layer:
+		\begin{align*}
+			\frac{\partial \mathcal{J}^{(i)}(\bm{\Theta})}{\partial z_l}
+				&= \sum_{k=1}^\kappa \frac{\partial \mathcal{J}^{(i)}(\bm{\Theta})}{\partial h_k(\bm{x}^{(i)}; \bm{\Theta})}
+					\frac{\partial h_k(\bm{x}^{(i)}; \bm{\Theta})}{\partial z_l} \\
+				&= \sum_{k=1}^\kappa \ell'(h_k(\bm{x}^{(i)}; \bm{\Theta}), y^{(i)})
+					\cdot g'^{(2)}\left( \sum_{t=0}^h \Theta_{kt}^{(2)} z_t(\bm{x}^{(i)}) \right) \cdot \Theta_{kl}^{(2)} \\
+				&= \sum_{k=1}^\kappa \delta_k^{(i)} \cdot g'^{(2)} \left( \sum_{t=0}^h \Theta_{kt}^{(2)} z_t(\bm{x}^{(i)}) \right)
+					\cdot \Theta_{kl}^{(2)} \equiv \widehat{\delta}_l^{(i)}
+		\end{align*}
+	\end{itemize}
+\end{frame}
+
+
+% Backpropagation (Ctd.)
+\begin{frame}{Backpropagation (Ctd.)}{}\important
+	\begin{itemize}
+		\item Compute the weight gradient for the hidden layer:
+		\begin{align*}
+			\frac{\partial \mathcal{J}^{(i)}(\bm{\Theta})}{\partial \Theta_{lj}^{(1)}}
+				&= \frac{\partial \mathcal{J}^{(i)}(\bm{\Theta})}{\partial z_l} \cdot g'^{(1)} \left( \sum_{t=0}^m \Theta_{jt}^{(1)} x_j^{(i)} \right) \cdot x_j^{(i)} \\
+				&= \widehat{\delta}_l^{(i)} \cdot g'^{(1)} \left( \sum_{t=0}^m \Theta_{jt}^{(1)} x_j^{(i)} \right) \cdot x_j^{(i)}
+		\end{align*}
+		\item The weight derivatives are now used in the gradient descent update rule
+	\end{itemize}
+\end{frame}
+
+
+% Backpropagation Example
+\begin{frame}{Backpropagation Example}{}
+	\begin{itemize}
+		\item
 	\end{itemize}
 \end{frame}
 
