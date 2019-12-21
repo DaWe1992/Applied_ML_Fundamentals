@@ -561,7 +561,7 @@
 		\item Compute the weight gradient for the output layer:
 		\begin{align*}
 			\frac{\partial \mathcal{J}^{(i)}(\bm{\Theta})}{\partial \Theta_{kl}^{(2)}}
-				&= \frac{\partial \mathcal{J}^{(i)}(\bm{\Theta})}{\partial h_k(\bm{x}^{(i)}; \bm{\Theta})}
+				&= \frac{\partial \mathcal{J}(\bm{\Theta})}{\partial h_k(\bm{x}^{(i)}; \bm{\Theta})}
 					\frac{\partial h_k(\bm{x}^{(i)}; \bm{\Theta})}{\partial \Theta_{kl}^{(2)}} \\
 				&= \ell'(h_k(\bm{x}^{(i)}; \bm{\Theta}), y_k^{(i)}) \cdot g'^{(2)} \left( \sum_{t=0}^h \Theta_{kt}^{(2)} z_t(\bm{x}^{(i)}) \right)
 					\cdot z_l(\bm{x}^{(i)}) \\
@@ -607,6 +607,25 @@
 	\begin{itemize}
 		\item
 	\end{itemize}
+\end{frame}
+
+
+% Section: Further Network Architectures
+%______________________________________________________________________
+\section{Further Network Architectures}
+\makedivider{Further Network Architectures}
+
+% Subsection: Convolutional Neural Networks
+% --------------------------------------------------------------------------------------------------------
+\subsection{Convolutional Neural Networks}
+
+% Convolution Animation
+\begin{frame}{Convolution Animation}{}
+	\begin{figure}
+		\centering
+		\animategraphics[autoplay,loop,height=5.5cm]{2.5}
+			{10_deep_learning/02_img/convolution_animation/}{0}{45}
+	\end{figure}
 \end{frame}
 
 
