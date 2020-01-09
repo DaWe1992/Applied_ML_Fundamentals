@@ -59,10 +59,9 @@
 		\item Lots of different architectures exist:
 		\begin{itemize}
 			\item \highlight{Multi-Layer perceptrons (MLPs)}
-			\item \highlight{Radial Basis Function Networks (RBFNs)}
 			\item \highlight{Convolutional neural networks (CNNs, ConvNets)}
 			\item \highlight{Recurrent neural networks (LSTMs, GRUs, etc.)}
-			\item \highlight{Residual networks (ResNets)}
+			\item ...and many more...
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -103,7 +102,7 @@
 			\textbf{Setback I} (mid 1960s -- late 1970s) \\
 
 			\textit{M.\,Minsky} and \textit{S.\,Papert} (1969): \\
-			Serious problems with perceptron algorithm.
+			Serious problems with perceptron algorithm:
 			It cannot learn the \textbf{XOR problem}.
 		\end{boxBlueNoFrame}
 	}
@@ -133,7 +132,7 @@
 		\end{boxBlueNoFrame}
 	}{0.49}{
 		\begin{boxBlue}
-			\textbf{`Deep Learning'} (since mid 2000) \\
+			\textbf{`Deep Learning'} (since mid 2000) \\ \vspace*{1mm}
 
 			More data, faster computers, better optimization techniques...
 
@@ -156,7 +155,7 @@
 		\item All neurons are connected and form a complex \textbf{network}
 		\item \textbf{Transmitter chemicals} within the fluid of the brain influence the
 			\textbf{electrical potential} inside the body of the neurons
-		\item If the \textbf{membrane potential} reaches some threshold the neurons \textbf{fires}
+		\item If the \textbf{membrane potential} reaches some threshold, the neurons \textbf{fires} \\
 			$\Rightarrow$ A pulse of fixed length is sent down the \textbf{axon}
 		\item The axon connects the neuron with other neurons (via \textbf{synapses})
 		\item Probably there are 100 trillion \textcolor{red}{\textbf{(!!!)}} synapses in the human brain
@@ -176,33 +175,30 @@
 
 % How can we know this?
 \begin{frame}{How can we know this?}{}
-	\divideTwo{0.39}{
+	\divideTwo{0.29}{
 		\begin{figure}
 			\centering
-			\includegraphics[scale=0.3]{10_deep_learning/02_img/cajal_golgi_stain}
+			\includegraphics[scale=0.15]{10_deep_learning/02_img/cajal_golgi_stain}
 		\end{figure}
-	}{0.59}{
+	}{0.69}{
+		\footnotesize
 		\begin{itemize}
 			\item \textit{Santiago Ramón y Cajal} made neurons visible by applying \textbf{Golgi's method}
-			\item Golgi's method uses the Golgi stain to colorize the neurons
-			\item Cajal establishes the \textbf{neuron doctrine} and won the Nobel price in 1906 for his work
+			\item Golgi's method uses the \textbf{Golgi stain} to colorize the neurons
 		\end{itemize}
-	}
-\end{frame}
-
-
-% How can we know this? (Ctd.)
-\begin{frame}{How can we know this? (Ctd.)}{}
-	\divideTwo{0.49}{
+	} \\
+	\vspace*{3mm}
+	\divideTwo{0.59}{
+		\footnotesize
 		\begin{itemize}
-			\item End of the 1940s \textit{A. Hodgkin} and \textit{A. Huxley} started investigating the electrical properties of
-				neurons on the squid's\footnote[frame]{lat.: \textit{Loligo pealeii}} axon
-			\item The right-hand-side image was the first \highlight{action potential} that was plotted
+			\item End of the 1940s, \textit{Hodgkin} and \textit{Huxley} started investigating the electrical properties of
+				neurons on the squid's axon
+			\item The right-hand-side image was the first \textbf{action potential} ever plotted
 		\end{itemize}
-	}{0.49}{
+	}{0.39}{
 		\begin{figure}
 			\centering
-			\includegraphics[scale=0.5]{10_deep_learning/02_img/spike_potential_squid}
+			\includegraphics[scale=0.3]{10_deep_learning/02_img/spike_potential_squid}
 		\end{figure}
 	}
 \end{frame}
@@ -214,7 +210,7 @@
 	\vspace*{-2mm}
 	\begin{itemize}
 		\item \textbf{Idea:} Mechanism of learning is \highlight{association}
-		\item \highlight{Hebbian learning:} If the firing of one neuron repeatedly assists in firing another neuron
+		\item \highlight{Hebbian learning:} If the firing of one neuron repeatedly assists in firing another neuron,
 			the synaptic connection will be strengthened
 	\end{itemize}
 	
@@ -269,10 +265,10 @@
 	\begin{itemize}
 		\item CS is a light (L), a noise (N), or a combination of both (LN)
 		\item US is a mild shock that is paired with the CS in the training phase (+)
-		\item In all conditions, after training fear response is tested when only L is presented without shock (-)
+		\item Fear response is tested after training when only L is presented without shock (-)
 		\item Group B shows conditioning; Group A does not: \textbf{N blocks L}
 		\item This is hard to explain with Hebbian learning
-		\item \textbf{Idea:} Learning only happens if there is a \highlight{prediction error}
+		\item \textbf{Idea:} Learning only happens, if there is a \highlight{prediction error}
 	\end{itemize}
 \end{frame}
 
@@ -286,11 +282,11 @@
 \end{frame}
 
 
-% Artificial Neurons [McCulloch and Pitts 1943]
-\begin{frame}{Artificial Neurons [McCulloch and Pitts 1943]}{}
+% Artificial Neurons [\textit{McCulloch} and \textit{Pitts}, 1943]
+\begin{frame}{Artificial Neurons [\textit{McCulloch} and \textit{Pitts}, 1943]}{}
 	\begin{itemize}
-		\item 1943 \textit{W. S. McCulloch} and \textit{W. H. Pitts} designed the first `artificial neuron'
-		\item These neurons can represent logical functions (e.\,g. b -- \texttt{OR}, c -- \texttt{AND})
+		\item In 1943, \textit{McCulloch} and \textit{Pitts} designed the first `artificial neuron'
+		\item These neurons can represent logical functions (e.\,g. b: \texttt{OR}, c: \texttt{AND})
 	\end{itemize}
 	
 	\begin{figure}
@@ -300,118 +296,20 @@
 \end{frame}
 
 
-% Subsection: Biological Motivation
+% Section: Perceptrons
+%______________________________________________________________________
+\section{Perceptrons}
+\makedivider{Perceptrons}
+
+% Subsection: The original Perceptron Algorithm
 % --------------------------------------------------------------------------------------------------------
-\subsection{Perceptron Learning Algorithm}
+\subsection{The original Perceptron Algorithm}
 
-% Perceptron [Rosenblatt 1957]
-\begin{frame}{Perceptron [Rosenblatt 1957]}{}
-	\input{10_deep_learning/01_tikz/perceptron}
-\end{frame}
-
-
-% Perceptron (Ctd.)
-\begin{frame}{Perceptron (Ctd.)}{}
+% Perceptron [\textit{Rosenblatt}, 1957]
+\begin{frame}{Perceptron [\textit{Rosenblatt}, 1957]}{}
 	\begin{itemize}
-		\item The neuron receives an input-vector $\bm{x}$
-		\begin{equation*}
-			\bm{x} = (x_1, x_2, \dots, x_m)^{\intercal}
-		\end{equation*}
-		\item Each input signal is weighted by a factor\footnote[frame]{weight of synaptic strength} $\theta_j$
-		\begin{equation*}
-			\bm{\theta} = (\theta_1, \theta_2, \dots, \theta_m)^{\intercal}
-		\end{equation*}
-		\item We compute the \highlight{pre-activation} and the \highlight{activation}:
-		\begin{equation}
-			p = \bm{\theta}^{\intercal} \bm{x} + b = \sum_{j=1}^m \theta_j x_j + b \qquad\qquad
-			a = \sigma(p)
-		\end{equation}
+		\item 
 	\end{itemize}
-\end{frame}
-
-
-% Perceptron (Ctd.)
-\begin{frame}{Perceptron (Ctd.)}{}
-	\begin{itemize}
-		\item The simplest activation function is to use a threshold $\rho$:\footnote[frame]{Not used, since not differentiable;
-			alternatives later}
-		\begin{equation*}
-			\sigma(p) =
-			\begin{cases}
-				0 &	\text{for}\ p \le \rho \\
-				1 & \text{for}\ p > \rho
-			\end{cases}
-		\end{equation*}
-		\item Quick example: $\bm{x} = (1, 0, 0.5)^{\intercal}; \bm{\theta} = (1, -0.5, -1)^{\intercal}; \rho = 0$
-		\begin{align*}
-			p &= \sum_{j=1}^3 \theta_j x_j = 1 \cdot 1 + (-0.5) \cdot 0 + (-1) \cdot 0.5 = 0.5 \\
-			a &= \sigma_{\rho=0}(0.5) = 1
-		\end{align*}
-	\end{itemize}
-\end{frame}
-
-
-% Perceptron Learning
-\begin{frame}{Perceptron Learning}{}
-	\begin{itemize}
-		\item Learning means choosing the correct weights $\bm{\theta}^*$ from a set of possible hypotheses $\mathcal{H}$
-		(\highlight{hypothesis space}):
-		\begin{equation*}
-			\mathcal{H} = \{ \bm{\theta} \vert \bm{\theta} \in \mathbb{R}^m \}
-		\end{equation*}
-		\item How to learn the weights from a data set $\mathcal{D}$?
-		\item \textbf{Algorithm outline:}
-		\begin{enumerate}
-			\item Pick a training example $\bm{x} \in \mathcal{D}$
-			\item Calculate the activation $a$ for that training example
-			\item Update the weights $\theta$ based on the error
-		\end{enumerate}
-	\end{itemize}
-\end{frame}
-
-
-% Perceptron Learning (Ctd.)
-\begin{frame}{Perceptron Learning (Ctd.)}{}
-	\begin{itemize}
-		\item Let the error be denoted by $\delta$
-		\item How can we compute the error? We need a loss function $\mathcal{J}(\bm{\theta})$:
-		\begin{equation}
-			\mathcal{J}(\bm{\theta}) = \frac{1}{2} \sum_{i=1}^N (h_{\bm{\theta}}(\bm{x}^{(i)}) - y^{(i)})^2
-		\end{equation}
-		\item Again, we use \highlight{gradient descent}: Compute gradient and go into the negative direction:
-		\begin{equation}
-			\bm{\theta}^{(t+1)} \longleftarrow \bm{\theta}^{(t)} - \alpha \nabla_{\bm{\theta}} \mathcal{J}(\bm{\theta})
-		\end{equation}
-	\end{itemize}
-	\textcolor{gray}{$\Rightarrow$ cf. slides `Regression'}
-\end{frame}
-
-
-% Perceptron Learning Algorithm
-\begin{frame}[plain]{}{}
-	\begin{algorithm}[H]
-		\setstretch{1.1}
-		\DontPrintSemicolon
-		\footnotesize
-		\KwIn{Training data $\mathcal{D}$, convergence threshold $\bm{\varepsilon}$}
-		
-		\tcp*[h]{initialization}\;
-		set all weights $\bm{\theta}^{(0)}$ to small random numbers\;
-		\For{$t \in \{0, 1, \dots, \infty\}$}{
-			pick a sample $\langle \bm{x}, y \rangle \in \mathcal{D}$ randomly\;
-			\tcp*[h]{predict the class label}\;
-			compute the activation $a = \sigma(\bm{\theta}^{\intercal} \bm{x})$\;
-			\tcp*[h]{stochastic gradient descent: update based on prediction error}\;
-			$\bm{\theta}^{(t+1)} \longleftarrow
-				\bm{\theta}^{(t)} - \alpha \nabla_{\bm{\theta}} \mathcal{J}(\bm{\theta})$\;
-			\If{$\Vert \bm{\theta}^{(t+1)} - \bm{\theta}^{(t)} \Vert \le \bm{\varepsilon}$}{
-				\tcp*[h]{convergence}\;
-				\textbf{break}\;
-			}
-		}
-		\Return{$\bm{\theta}$}
- 		\caption{Perceptron Learning Algorithm}
-	\end{algorithm}
 \end{frame}
 
 
@@ -426,15 +324,101 @@
 \end{frame}
 
 
+% Subsection: Perceptron Learning Algorithm
+% --------------------------------------------------------------------------------------------------------
+\subsection{Perceptron Learning Algorithm}
+
+% The Architecture of a Neuron
+\begin{frame}{The Architecture of a Neuron}{}
+	\input{10_deep_learning/01_tikz/perceptron}
+\end{frame}
+
+
+% Perceptron (Ctd.)
+\begin{frame}{Perceptron (Ctd.)}{}
+	\begin{itemize}
+		\item The neuron receives an input vector $\bm{x}$:
+		\begin{equation*}
+			\bm{x} = (1, x_1, x_2, \dots, x_m)^{\intercal}
+		\end{equation*}
+		\item Each input signal is weighted by a factor $\theta_j$: {\footnotesize\textit{(weight of synaptic strength)}}
+		\begin{equation*}
+			\bm{\theta} = (\theta_0, \theta_1, \theta_2, \dots, \theta_m)^{\intercal}
+		\end{equation*}
+		\item We compute the \highlight{pre-activation} and the \highlight{activation}:
+		\begin{equation}
+			a = \bm{\theta}^{\intercal} \bm{x} = \sum_{j=0}^m \theta_j x_j \qquad\qquad
+			z = \sigma(a)
+		\end{equation}
+	\end{itemize}
+\end{frame}
+
+
+% Perceptron (Ctd.)
+\begin{frame}{Perceptron (Ctd.)}{}
+	\begin{itemize}
+		\item The simplest activation function is to use a threshol\footnote[frame]{Not used, since not differentiable;
+			alternatives later}d $\rho$:
+		\begin{equation*}
+			\sigma_{\rho}(a) =
+			\begin{cases}
+				0 &	\text{for}\ a \le \rho \\
+				1 & \text{for}\ a > \rho
+			\end{cases}
+		\end{equation*}
+		\item Quick example: $\bm{x} = (1, 0, 0.5)^{\intercal} \qquad \bm{\theta} = (1, -0.5, -1)^{\intercal} \qquad \rho = 0$
+		\begin{align*}
+			a &= \bm{\theta}^{\intercal}\bm{x} = 1 \cdot 1 + (-0.5) \cdot 0 + (-1) \cdot 0.5 = 0.5 \\
+			z &= \sigma_{\rho=0}(0.5) = 1
+		\end{align*}
+	\end{itemize}
+\end{frame}
+
+
+% Perceptron Learning
+\begin{frame}{Perceptron Learning}{}
+	\begin{itemize}
+		\item Learning means choosing the correct weights $\bm{\theta}^*$ from a set of possible hypotheses $\mathcal{H}$
+		(\highlight{hypothesis space}):
+		\begin{equation*}
+			\mathcal{H} = \{ \bm{\theta} \vert \bm{\theta} \in \mathbb{R}^{m + 1} \}
+		\end{equation*}
+		\item How to learn the weights from a data set $\mathcal{D}$?
+		\item \textbf{Algorithm outline:}
+		\begin{enumerate}
+			\item Pick a training example $\bm{x} \in \mathcal{D}$
+			\item Calculate the activation $z$ for that training example
+			\item Update the weights $\bm{\theta}$ based on the error
+		\end{enumerate}
+	\end{itemize}
+\end{frame}
+
+
+% Perceptron Learning (Ctd.)
+\begin{frame}{Perceptron Learning (Ctd.)}{}
+	\begin{itemize}
+		\item How can we compute the error? $\Rightarrow$ We need a loss function $\mathcal{J}(\bm{\theta})$:
+		\begin{equation}
+			\mathcal{J}(\bm{\theta}) = \frac{1}{2} \sum_{i=1}^n (h_{\bm{\theta}}(\bm{x}^{(i)}) - y^{(i)})^2
+		\end{equation}
+		\item Again, we use \highlight{gradient descent}: Compute gradient and go into the negative direction of the gradient:
+		\begin{equation}
+			\bm{\theta}^{(t+1)} \longleftarrow \bm{\theta}^{(t)} - \alpha \nabla_{\bm{\theta}} \mathcal{J}(\bm{\theta})
+		\end{equation}
+	\end{itemize}
+	\textcolor{gray}{$\Rightarrow$ cf. slides `Regression'}
+\end{frame}
+
+
 % Generalization to multiple Classes
 \begin{frame}{Generalization to multiple Classes}{}
 	\divideTwo{0.59}{
 		\footnotesize
 		\begin{itemize}
 			\item A single neuron can only distinguish two classes
-			\item If there are more than two classes: Simply use more perceptrons\footnote[frame] {This construct is still
+			\item If there are more than two classes: Simply use more neurons\footnote[frame] {This construct is still
 				referred to as a perceptron.}
-			\item Use \highlight{one-hot encoding} for the classes and \highlight{soft-max} as activation function (later)
+			\item Use \highlight{one-hot encoding} for the classes and \highlight{softmax} as activation function (later)
 			\item Example for three classes:
 			\begin{tabbing}
 				\hspace*{1cm}\=\kill
@@ -451,54 +435,23 @@
 
 % What about non-linear Data Sets?
 \begin{frame}{What about non-linear Data Sets?}{}
-	\begin{itemize}
-		\item If the data is not linearly separable then the perceptron cannot learn it
-		\item Remember Marvin Minsky's/Seymour Papert's book \textit{`Perceptrons'}
-		\item What can we do?
-		\begin{enumerate}
-			\item Add feature mapping $\Rightarrow$ \highlight{Radial basis function (RBF) networks}
-			\item Add hidden layers $\Rightarrow$ \highlight{Multi-layer perceptrons (MLP)}
-		\end{enumerate}
-	\end{itemize}
-\end{frame}
-
-
-% Subsection: Radial Basis Function (RBFN) Networks
-% --------------------------------------------------------------------------------------------------------
-\subsection{Radial Basis Function (RBFN) Networks}
-
-% Radial Basis Function (RBF) Networks
-\begin{frame}{Radial Basis Function (RBF) Networks}{}
-	\input{10_deep_learning/01_tikz/rbfn}
-\end{frame}
-
-
-% Inside an RBF Neuron
-\begin{frame}{Inside an RBF Neuron}{}
-	\begin{itemize}
-		\item Each RBF neuron computes the distance of the input $\bm{x}$ to an \highlight{internal prototype} vector:
-		\begin{equation}
-			\varphi_j(\bm{x}) = \exp\left\{ -\frac{\Vert \bm{x} - \bm{z_j} \Vert^2}{2\sigma^2} \right\}
-		\end{equation}
-		\item These distances are then fed into the perceptron
-		\item \textbf{How to get the prototypes?}
+	\divideTwo{0.39}{
 		\begin{itemize}
-			\item We can use clustering, e.\,g. \highlight{k-Means}, to get the locations $\bm{\mu}$ \\
-				{\footnotesize (this avoids useless prototypes in areas without data points)}
-			\item Choose $\sigma$ neither too small nor too big
-		\end{itemize}
-		\item There are no weights $\bm{\theta}$ to tune for that neuron
+			\item Perceptrons cannot learn non-linear boundaries
+			\item Remember \textit{Minsky} and \textit{Papert}
+			\item What can we do?
+			\begin{enumerate}
+				\item Add feature mapping {\scriptsize(cf. right)}
+				\item Add hidden layers \\
+					{\scriptsize\highlight{(Multi-Layer Perceptrons)}}
+			\end{enumerate}
 	\end{itemize}
-\end{frame}
-
-
-% Example: Radial Basis Function (RBF) Networks
-\begin{frame}[plain]{}{}
-	\vspace*{-7mm}
-	\begin{figure}
-		\centering
-		\includegraphics[scale=0.55]{10_deep_learning/02_img/rbfn}
-	\end{figure}
+	}{0.59}{
+		\begin{figure}
+			\centering
+			\includegraphics[scale=0.35]{10_deep_learning/02_img/rbfn}
+		\end{figure}
+	}
 \end{frame}
 
 
@@ -543,7 +496,7 @@
 		\item Compute the network loss
 		\item The loss function is given by: {\footnotesize(assume square loss: $\ell = (h_k(\bm{x}^{(i)}; \bm{\Theta}) - y_k^{(i)})^2$)}
 		\begin{equation*}
-			\mathcal{J}^{(i)}(\bm{\Theta}) = \frac{1}{n} \sum_{i=1}^n \sum_{k=1}^\kappa
+			\mathcal{J}(\bm{\Theta}) = \frac{1}{n} \sum_{i=1}^n \sum_{k=1}^\kappa
 				\ell(h_k(\bm{x}^{(i)}; \bm{\Theta}), y_k^{(i)})
 		\end{equation*}
 		\item Compute the error gradient w.\,r.\,t. $h_k(\bm{x}^{(i)}; \bm{\Theta})$:
@@ -604,9 +557,7 @@
 
 % Backpropagation Example
 \begin{frame}{Backpropagation Example}{}
-	\begin{itemize}
-		\item
-	\end{itemize}
+	\input{10_deep_learning/01_tikz/mlp_backprop_example}
 \end{frame}
 
 
