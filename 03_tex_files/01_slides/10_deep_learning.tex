@@ -8,7 +8,7 @@
 
 \title[Deep Learning]{*** Applied Machine Learning Fundamentals *** Neural Networks / Deep Learning}
 \institute{SAP\,SE}
-\author{M.\,Sc. Daniel Wehner}
+\author{M. Sc. Daniel Wehner}
 \date{Winter term 2019/2020}
 \prefix{DL}
 
@@ -507,6 +507,74 @@
 \section{Multi-Layer-Perceptrons (MLPs)}
 \makedivider{Multi-Layer-Perceptrons (MLPs)}
 
+
+% Subsection: MLP
+% --------------------------------------------------------------------------------------------------------
+\subsection{Overview}
+
+\begin{frame}{Overview: Multi-Layer Perceptron Representation}{}
+	\begin{itemize}
+		\item A Multi-Layer Perceptron (MLP) can approximate any continuous function arbitrarily well (universal function approximator), given enough hidden units
+		\item Hidden layers of the network can learn useful feature representations
+	\end{itemize}
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.45]{10_deep_learning/02_img/mlp}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Overview: Multi-Layer Perceptron Representation}{}
+	\begin{itemize}
+		\item An MLP with $L$ hidden layers is a function:
+		\begin{itemize}
+			\item $f: \mathcal{R}^n \rightarrow \mathcal{R}^m$
+			\item with parameter matrices $\bm{\Theta}^{(1)}$, $\bm{\Theta}^{(2)}$, \dots, $\bm{\Theta}^{(L)}$
+			\item and non-linearities $g^{(1)}$, $g^{(2)}$, \dots, $g^{(L)}$
+			\item where:
+			\begin{align*}
+				z^{(1)} &= \bm{\Theta^{(1)}} \bm{x}\\
+				z^{(2)} &= \bm{\Theta^{(2)}} g^{(1)}(\bm{z^{(1)}})\\
+				\text{\dots}\\
+				z^{(L)} &= \bm{\Theta^{(L-1)}} g^{(L-1)}(\bm{z^{(L-1)}})\\
+				\bm{h} = g^{(L)}(\bm{z^{(L)}})
+			\end{align*}
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Overview: Multi-Layer Perceptron Inference}{}
+	\begin{itemize}
+		\item The forward pass (prediction) of an MLP can be computed as follows:
+		$$h_k(\bm{x}^{(i)}; \bm{\Theta}) = g^{(2)}\left( \sum_{l=0}^h \Theta_{kl}^{(2)} g^{(1)}\left( \sum_{j=0}^m \Theta_{lj}^{(1)} x_{j}^{(i)} \right) \right)$$
+		\item This provides us with an output value for each class $k$, we could predict the class with the highest value $y = \underset{k}{\text{argmax}\,\bm{h}}$
+		\item How can we obtain the optimal weights $\bm{\Theta}$?
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Overview: Multi-Layer Perceptron Learning}{}
+	\begin{itemize}
+		\item We can optimize the parameters using gradient descent and a cost function
+		\item The goal is to minimize the cost, e.\,g. $\mathcal{J}(\bm{\Theta}) = \frac{1}{2n} \sum_{i=1}^n (h_{\bm{\Theta}}(\bm{\widehat{x}}^{(i)}) - y^{(i)})^2$
+		\item \texttt{Repeat until convergence \{} \\
+			$\qquad \bm{\Theta}^{(t+1)} \longleftarrow \bm{\Theta}^{(t)} - \alpha \nabla_{\bm{\Theta}}
+				\mathcal{J}(\bm{\Theta}^{(t)}) \quad$
+			\textcolor{myblue1}{\textit{// simultaneously update all} $\theta_j$} \\
+		\texttt{\}}
+		\item How do we get the gradient $\nabla_{\bm{\Theta}} \mathcal{J}(\bm{\Theta})$ with respect to all weights $\bm{\Theta^{(\text{layer})}_{lj}}$?
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Overview: Multi-Layer Perceptron Learning}{}
+	\begin{itemize}
+		\item We start by randomly initializing the network weights
+		\item Do not set an initial value of 0 for all weights, as this will lead to problems in backpropagation (the gradients will all be the same), but initialize to small random numbers, e.\,g. by sampling from $\mathcal{N}(0, 0.1)$
+		\item We then perform a forward pass through the network, i.\,e. make predictions on our training set
+		\item Using the predictions, we compute a scalar loss value $J(\bm{\Theta})$
+		\item We calculate the gradients of the loss with respect to each network parameter and update all network parameters using gradient descent
+	\end{itemize}
+\end{frame}
+
+
 % Subsection: Backpropagation
 % --------------------------------------------------------------------------------------------------------
 \subsection{Backpropagation}
@@ -521,7 +589,7 @@
 			z_l
 				&=  g^{(1)}\left( \sum_{j=0}^m \Theta_{lj}^{(1)} x_{j}^{(i)} \right) \qquad\text{activation}
 		\end{align*}
-		\item $g(\cdot) \equiv$ activation function, e.\,g. sigmoid
+		\item $g(\cdot) \equiv$ activation function, e.\,g. sigmoid, tanh, ReLU
 		\item $\bm{\Theta}$ are the network parameters (to be learned)
 	\end{itemize}
 \end{frame}
@@ -603,12 +671,85 @@
 
 
 % Backpropagation Example
-\begin{frame}{Backpropagation Example}{}
+%\begin{frame}{Backpropagation Example}{}
+%	\begin{itemize}
+%		\item
+%	\end{itemize}
+%\end{frame}
+
+\begin{frame}{Remarks}{}
 	\begin{itemize}
-		\item
+		\item As a sanity check, we can perform numeric gradient checking: Based on the fact that $f'(x) \approx \frac{1}{v} \cdot (f(x + v) - f(x))$, we can evaluate the loss function for slightly different weights and compare the difference to the gradient we computed using backprop
+		\item There are a lot of hyperparameters for backprop and gradient descent (number of hidden layers, hidden layer dimensionality, activation functions, learning rate, batch size, number of training epochs, regularization, etc.) - you need to empirically find the best ones for your problem
+		\item Play with some hyperparameters here: \url{https://playground.tensorflow.org}
 	\end{itemize}
 \end{frame}
 
+\subsection{Activation Functions}
+\begin{frame}{Sigmoid Function}{}
+	\begin{itemize}
+		\item $\sigma(x) = \frac{1}{1 + e^{-x}}$
+		\item $\sigma'(x) = \sigma(x) (1 - \sigma(x))$
+		\item Value range 0 to 1
+		\item Problem: Gradient can become very small (vanishing gradient), in contrast to large gradients it's not clear how to clip the gradient on the lower end
+		\item Problem: Output is not zero-centered (sigmoid output is always positive, gradients will be all positive or all negative which makes optimization harder)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Sigmoid Function}{}
+	\begin{itemize}
+		\item \textit{Convergence is usually faster if the average of each input variable over the training set is close to zero. To see this, consider the extreme case where all the inputs are positive. Weights to a particular node in the first weight layer are updated by an amount proportional to $\delta$x where $\delta$ is the (scalar) error at that node and x is the input vector (see equations (5) and (10)). When all of the components of an input vector are positive, all of the updates of weights that feed into a node will have the same sign (i.e. sign($\delta$)). As a result, these weights can only all decrease or all increase together for a given input pattern. Thus, if a weight vector must change direction it can only do so by zigzagging which is inefficient and thus very slow.} - Yann LeCun et al., Efficient BackProp, 1998 (\url{http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf})
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{tanh}{}
+	\begin{itemize}
+		\item $\tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}$
+		\item $\tanh'(x) = 1 - \tanh(x)^2$
+		\item Value range -1 to 1
+		\item Zero-centered
+		\item Still suffers from the vanishing gradient problem
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Rectified Linear Unit (ReLU)}{}
+	\begin{itemize}
+		\item $ReLU(x) = max(0,x)$
+		\item $ReLU'(x) = \begin{Bmatrix}
+0 & x<0 \\
+1 & x>0 \\
+\end{Bmatrix}$
+	\end{itemize}
+	\begin{figure}
+		\centering
+		\begin{tikzpicture}[scale=0.6]
+		\begin{axis}[domain=-3:5]
+		\addplot+[mark=none,red,domain=-3:0] {0};
+		\addplot+[mark=none,red,domain=0:5] {x};
+		\end{axis}
+		\end{tikzpicture}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Rectified Linear Unit (ReLU)}{}\important
+	\begin{itemize}
+		\item ReLU not lead to vanishing gradients
+		\item ReLU is very efficient to compute
+		\item Use ReLU as the hidden layer activation function!
+		\item But: Pay attention to the initialization of your parameters to avoid \textit{"dying ReLUs"} (parameter settings where single neurons will always output 0)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Softmax}{}
+	\begin{itemize}
+		\item $softmax_i(x) = \frac{e^{x_i}}{\sum_{j=1}^K e^{x_j}}$
+		\item $\frac{\partial s_i}{\partial a_j} = \begin{Bmatrix}
+s_i (1 - s_j) & i = j \\
+-s_i \cdot s_j & i \ne j \\
+\end{Bmatrix}$
+		\item Used to squash the last layer's activations into a probability distribution
+	\end{itemize}
+\end{frame}
 
 % Section: Further Network Architectures
 %______________________________________________________________________
@@ -619,6 +760,72 @@
 % --------------------------------------------------------------------------------------------------------
 \subsection{Convolutional Neural Networks}
 
+\begin{frame}{Convolutional Neural Networks}{Motivation}
+	\begin{itemize}
+		\item A large fully-connected MLP network can have a lot of parameters $\rightarrow$ it might be too complex / overfit or be computationally inefficient for some tasks
+		\item For some problems the input position may not matter in every case (e.\,g. when classifying emails as spam or not spam, we don't care if the word \textit{the} is at input position 3 or 5)
+		\item The MLP always needs a fixed-size input vector - but we might have variable-size input data (e.\,g. images in different resolutions, text sequences of different lengths, etc.)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Convolutional Neural Networks}{Idea}
+	\begin{itemize}
+		\item \textit{"A convolutional neural network is designed to identify indicative local predictors in a large structure, and combine them to produce a fixed size vector representation of the structure, capturing these local aspects that are most informative for the prediction task at hand."} - Yoav Goldberg
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Convolutional Neural Networks}{Representation}
+	\begin{itemize}
+		\item A CNN usually consists of multiple convolutional layers
+		\item A convolutional layer consists of a convolution (a.k.a. filter), a non-linear activation function and a pooling operation
+		\item Pooling extracts the most important features independent of their input position
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Convolutional Neural Networks}{Representation}
+	\begin{itemize}
+		\item The convolution operation: $$(f \star g)[i] = \sum_{w=-W}^W f[i-w] g[w]$$\vspace{-0.3cm}
+		\begin{itemize}
+			\item $\star$ is the convolution operator,
+			\item $f$ is the input to the convolutional layer,
+			\item $i$ is the current position in the input,
+			\item $W$ is the filter size / window size,
+			\item $g$ is the filter (a.k.a. \textit{kernel})
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Convolutional Neural Networks}{Representation}
+	\begin{itemize}
+		\item The convolution operation: $(f \star g)[i] = \sum_{n=-N}^N f[i-n] g[n]$
+		\item We stride a filter across the input data (e.\,g. image pixels) with a certain stride size and multiply the input with the filter weights at each local position
+	\end{itemize}
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.90]{10_deep_learning/02_img/flatconvolution}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Convolutional Neural Networks}{Representation}
+	\begin{itemize}
+		\item The outputs of the convolutions are passed through non-linear activation functions
+		\item Pooling is applied to extract only the most important activations:
+		\begin{itemize}
+			\item If $c_1, c_2, \dots, c_N \in \mathcal{R}$ are the outputs of the convolution, a \textit{max pooling} operation will output: $\underset{i}{\text{max}}\, c_i$
+		\end{itemize}
+		\item There are no parameters / weights involved in the pooling
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Convolutional Neural Networks}{Remarks}
+	\begin{itemize}
+		\item Usually many (hundreds or thousands) filters are applied simultaneously
+		\item We need to choose the number and size of filters, the stride (step-size) with which to slide them over the input, the activation functions, the pooling (max, $k$-max, mean)
+		\item Multiple convolutional layers can be applied subsequently to extract useful structures from the data (e.\,g. detecting edges, substructures)
+		\item Sparse connectivity and parameter-sharing make CNNs very efficient, computation can be parallelized
+	\end{itemize}
+\end{frame}
+
 % Convolution Animation
 \begin{frame}{Convolution Animation}{}
 	\begin{figure}
@@ -628,6 +835,66 @@
 	\end{figure}
 \end{frame}
 
+% Subsection: Recurrent Neural Networks
+% --------------------------------------------------------------------------------------------------------
+\subsection{Recurrent Neural Networks}
+
+% RNN Overview
+\begin{frame}{Recurrent Neural Networks}{Overview}
+	\begin{itemize}
+		\item Recurrent Neural Networks (RNNs) can be used to process sequences\newline (e.\,g. for sequence labelling tasks like named entity recognition, for sequence transduction tasks like machine translation, for sequence classification, etc.)
+		\item They are similar to feed-forward networks, but have a recurrent loop in the computational graph
+	\end{itemize}
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.25]{10_deep_learning/02_img/rnn}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Recurrent Neural Networks}{Representation}
+	\begin{align*}
+		\bm{h}_t &= \sigma_h(\bm{U} \bm{x} + \bm{V} \bm{h}_{t - 1} + \bm{b}_h)\\
+		\bm{o_t} &= \sigma_o(\bm{W} \bm{h_t} + \bm{b}_o)
+	\end{align*}
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.25]{10_deep_learning/02_img/rnn}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Recurrent Neural Networks}{Extensions}
+	\begin{itemize}
+		\item Bi-directionality: Run the RNN from left-to-right and right-to-left and concatenate the hidden states $\overset{\rightarrow}{h_t}$ and $\overset{\leftarrow}{h_t}$ for both directions
+		\item Gating: Gated Recurrent Units (GRUs) and Long-Short Term Memory (LSTM) Networks add additional parameters to RNNs to better control what is stored in the hidden state $h$ and to prevent vanishingly small gradients for long sequences
+		\item Skip-connections through time
+		\item Attention (re-expressing inputs and outputs in terms of a weighted combination with the other inputs)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Recurrent Neural Networks}{Extensions}
+	\begin{itemize}
+		\item Long-Short Term Memory Network (Hochreiter, Schmidhuber, 1997):
+		\begin{itemize}
+			\item Input gate $\bm{i}_t = \sigma(\bm{W_i} \bm{x}_t + \bm{U}_i \bm{h}_{t-1})$
+			\item Forget gate $\bm{f}_t =\sigma(\bm{W_f} \bm{x}_t + \bm{U}_f \bm{h}_{t-1})$
+			\item Output gate $\bm{o}_t =\sigma(\bm{W_o} \bm{x}_t + \bm{U}_o \bm{h}_{t-1})$
+			\item New memory cell $\overset{\sim}{\bm{c}_t} = \tanh(\bm{W}_c \bm{x}_t + \bm{U}_c \bm{h}_{t-1})$
+			\item Final memory cell $\bm{c}_t = \bm{f}_t \odot \bm{c}_{t-1} + \bm{i}_t \odot \overset{\sim}{\bm{c}_t}$
+			\item Final hidden state $\bm{h}_t = \bm{o}_t \odot \tanh(\bm{c}_t)$
+		\end{itemize}
+		\item $\sigma$ denotes the sigmoid activation function on this slide, $\odot$ is element-wise mutliplication (a.k.a. Hadamard product)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Recurrent Neural Networks}{Extensions}
+	\begin{itemize}
+		\item Long-Short Term Memory Network (Hochreiter, Schmidhuber, 1997):
+	\end{itemize}
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.50]{10_deep_learning/02_img/lstm}
+	\end{figure}
+\end{frame}
 
 
 % Section: Wrap-Up
@@ -642,7 +909,11 @@
 % Summary
 \begin{frame}{Summary}{}
 	\begin{itemize}
-		\item 
+		\item Neural Networks are powerful models for pattern recognition
+		\item The Perceptron can classify all training examples correctly iff the training data is linearly separable
+		\item Multi-Layer Perceptrons are universal function approximators
+		\item Backpropagation is a recursive procedure based on the chain rule of calculus to obtain the gradients for neural network learning
+		\item Different neural network architectures like CNNs and RNNs exist for solving different kinds of problems
 	\end{itemize}
 \end{frame}
 
@@ -654,7 +925,12 @@
 % Self-Test Questions
 \begin{frame}{Self-Test Questions}{}\important
 	\begin{enumerate}
-		\item
+		\item What is the relation between neural networks and logistic regression?
+		\item What is a perceptron? Which problems can it solve and which not?
+		\item Why do we often use multiple layers used instead of a simple Perceptron?
+		\item How does backpropagation work? How does a neural network learn?
+		\item What are advantages and disadvantages of using neural networks?
+		\item What are CNNs and RNNs? For which tasks are they suitable?
 	\end{enumerate}
 \end{frame}
 
@@ -677,7 +953,7 @@
 \begin{frame}{Recommended Literature and further Reading}{}
 	\footnotesize
 	\begin{thebibliography}{2}
-		\literature{book}{Goodfellow.2016}{[2] Deep Learning}
+		\literature{book}{Goodfellow.2016}{[1] Deep Learning}
 			{Ian Goodfellow et al. MIT Press. 2016.}{$\rightarrow$ \href{
 				http://www.deeplearningbook.org/
 			}{\linkstyle{Link}}, cf. chapters 6 \textit{Deep Feedforward Networks}, especially chapter 6.5}
@@ -686,6 +962,11 @@
 			{Christopher Bishop. Springer. 2006.}{$\rightarrow$ \href{
 				http://users.isr.ist.utl.pt/~wurmd/Livros/school/Bishop\%20-\%20Pattern\%20Recognition\%20And\%20Machine\%20Learning\%20-\%20Springer\%20\%202006.pdf
 			}{\linkstyle{Link}}, cf. chapter 5 \textit{Neural Networks}, especially chapter 5.3}
+
+		\literature{online}{Saunderson.2017}{[3] Backpropagation calculus}
+			{Grant Saunderson. YouTube. 2017.}{$\rightarrow$ \href{
+				https://www.youtube.com/watch?v=tIeHLnjs5U8
+			}{\linkstyle{Link}}}
 
 	\end{thebibliography}
 \end{frame}
