@@ -8,7 +8,7 @@
 
 \title[Deep Learning]{*** Applied Machine Learning Fundamentals *** Neural Networks / Deep Learning}
 \institute{SAP\,SE}
-\author{M. Sc. Daniel Wehner}
+\author{Clemens Biehl, Daniel Wehner}
 \date{Winter term 2019/2020}
 \prefix{DL}
 
@@ -733,7 +733,7 @@
 
 \begin{frame}{Rectified Linear Unit (ReLU)}{}\important
 	\begin{itemize}
-		\item ReLU not lead to vanishing gradients
+		\item ReLU does not lead to vanishing gradients
 		\item ReLU is very efficient to compute
 		\item Use ReLU as the hidden layer activation function!
 		\item But: Pay attention to the initialization of your parameters to avoid \textit{"dying ReLUs"} (parameter settings where single neurons will always output 0)
@@ -966,6 +966,17 @@ s_i (1 - s_j) & i = j \\
 		\literature{online}{Saunderson.2017}{[3] Backpropagation calculus}
 			{Grant Saunderson. YouTube. 2017.}{$\rightarrow$ \href{
 				https://www.youtube.com/watch?v=tIeHLnjs5U8
+			}{\linkstyle{Link}}}
+
+	\end{thebibliography}
+\end{frame}
+
+\begin{frame}{Recommended Literature and further Reading}{}
+	\footnotesize
+	\begin{thebibliography}{2}
+		\literature{online}{Ng.2019}{[4] Simple Backpropagation in NumPy}
+			{Andrew Ng et al. Stanford CS229. 2019.}{$\rightarrow$ \href{
+				http://cs229.stanford.edu/notes/backprop.py
 			}{\linkstyle{Link}}}
 
 	\end{thebibliography}
