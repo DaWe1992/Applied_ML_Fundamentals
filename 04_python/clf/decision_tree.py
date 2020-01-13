@@ -37,7 +37,7 @@ X, y = load_iris(return_X_y=True)
 print(X)
 print(y)
 
-clf = tree.DecisionTreeClassifier()
+clf = tree.DecisionTreeClassifier(max_depth=3)
 clf.fit(X, y)
 
 fig = plt.figure(figsize=(20, 12))
