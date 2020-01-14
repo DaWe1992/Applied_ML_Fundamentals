@@ -598,7 +598,11 @@
 
 % Backpropagation Example
 \begin{frame}{Backpropagation Example}{}
-	\input{10_deep_learning/01_tikz/mlp_backprop_example}
+	\vfill
+	\begin{center}
+		\Huge \highlight{See blackboard!}
+	\end{center}
+	\vfill
 \end{frame}
 
 
@@ -702,8 +706,8 @@
 			\centering
 			\begin{tikzpicture}[scale=0.6]
 				\begin{axis}[domain=-3:5]
-					\addplot+[mark=none,red,domain=-3:0] {0};
-					\addplot+[mark=none,red,domain=0:5] {x};
+					\addplot+[mark=none,red,domain=-3:0,ultra thick] {0};
+					\addplot+[mark=none,red,domain=0:5,ultra thick] {x};
 				\end{axis}
 			\end{tikzpicture}
 		\end{figure}
@@ -727,92 +731,89 @@
 \begin{frame}{Softmax Activation}{}
 	\begin{boxBlueNoFrame}
 		\begin{equation*}
-			softmax_i(\bm{x}) = \frac{\exp\{ x_i\}}{\sum_{k=1}^{\kappa} \exp\{x_k\}}
+			softmax_k(\bm{x}) = \frac{\exp\{ x_k\}}{\sum_{j=1}^{\kappa} \exp\{x_j\}}
 		\end{equation*}
 	\end{boxBlueNoFrame}
 	\begin{itemize}
-		\item Softmax is a \textbf{global activation function} (i.\,e. it depends on the preactivations from the other units in the layer)
-		\item It is used to squash the last layer's activations into a probability distribution, such that the activations sum to 1
+		\item Softmax is a \textbf{global activation function} (i.\,e. it depends on the preactivations of the other units in the layer)
+		\item It is used to squash the last layer's activations into a probability distribution, \textbf{such that the activations sum to 1}
 	\end{itemize}
 \end{frame}
 
-% Section: Further Network Architectures
+
+% Section: Further Network Architectures and Word Embeddings
 %______________________________________________________________________
-\section{Further Network Architectures}
-\makedivider{Further Network Architectures}
+\section[Further Network Architectures and Word Embeddings]{Further Arch. / Word Emb.}
+\makedivider{Further Network Architectures and Word Embeddings}
 
 % Subsection: Convolutional Neural Networks
 % --------------------------------------------------------------------------------------------------------
 \subsection{Convolutional Neural Networks}
 
-\begin{frame}{Convolutional Neural Networks}{Motivation}
+% Convolutional Neural Networks (CNNs)
+\begin{frame}{Convolutional Neural Networks (CNNs)}{}
 	\begin{itemize}
-		\item A large fully-connected MLP network can have a lot of parameters $\rightarrow$ it might be too complex / overfit or be computationally inefficient for some tasks
-		\item For some problems the input position may not matter in every case (e.\,g. when classifying emails as spam or not spam, we don't care if the word \textit{the} is at input position 3 or 5)
-		\item The MLP always needs a fixed-size input vector - but we might have variable-size input data (e.\,g. images in different resolutions, text sequences of different lengths, etc.)
+		\item A fully-connected MLP network has a lot of parameters, i.\,e. it might be \textbf{too complex} or \textbf{computationally inefficient} for some tasks
+		\item The input position does not matter in all cases (e.\,g. word positions when classifying emails)
+		\item An MLP always needs a fixed-size input vector, but \textbf{we might have variable-size input data}
+			(e.\,g. images in different resolutions, text sequences of different lengths, etc.)
+		\item \highlight{Solution:} Use \highlight{convolution}!
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Convolutional Neural Networks}{Idea}
+
+% CNN: General Idea
+\begin{frame}{CNN: General Idea}{}
+	\begin{boxBlueNoFrame}
+		\footnotesize
+		\textit{`A convolutional neural network is designed to identify indicative local predictors in a large structure, and combine them to produce a fixed size vector
+		representation of the structure, capturing these local aspects that are most informative for the prediction task at hand.'} - \textbf{Yoav Goldberg}
+	\end{boxBlueNoFrame}
 	\begin{itemize}
-		\item \textit{"A convolutional neural network is designed to identify indicative local predictors in a large structure, and combine them to produce a fixed size vector representation of the structure, capturing these local aspects that are most informative for the prediction task at hand."} - Yoav Goldberg
+		\item A CNN consists of multiple convolutional layers
+		\item A convolutional layer consists of a filter and a non-linear activation function
+		\item \highlight{Pooling} extracts the most important features \textbf{independent of their input position}
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Convolutional Neural Networks}{Representation}
+
+% Convolution
+\begin{frame}{Convolution}{}\important
+	\begin{boxBlueNoFrame}
+		\begin{equation*}
+			(x \star g)[i] = \sum_{j=-w}^w x[i - j] \cdot g[j]
+		\end{equation*}
+	\end{boxBlueNoFrame}
+		
 	\begin{itemize}
-		\item A CNN usually consists of multiple convolutional layers
-		\item A convolutional layer consists of a convolution (a.k.a. filter), a non-linear activation function and a pooling operation
-		\item Pooling extracts the most important features independent of their input position
+		\item $\star$ is the convolution operator
+		\item $x$ is the input to the convolutional layer
+		\item $i$ is the current position in the input
+		\item $j$ is the filter size / window size
+		\item $g$ is the convolution filter (kernel)
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Convolutional Neural Networks}{Representation}
-	\begin{itemize}
-		\item The convolution operation: $$(f \star g)[i] = \sum_{w=-W}^W f[i-w] g[w]$$\vspace{-0.3cm}
-		\begin{itemize}
-			\item $\star$ is the convolution operator,
-			\item $f$ is the input to the convolutional layer,
-			\item $i$ is the current position in the input,
-			\item $W$ is the filter size / window size,
-			\item $g$ is the filter (a.k.a. \textit{kernel})
-		\end{itemize}
-	\end{itemize}
-\end{frame}
 
-\begin{frame}{Convolutional Neural Networks}{Representation}
+% Convolution (Ctd.)
+\begin{frame}{Convolution (Ctd.)}{}\important
 	\begin{itemize}
-		\item The convolution operation: $(f \star g)[i] = \sum_{n=-N}^N f[i-n] g[n]$
-		\item We stride a filter across the input data (e.\,g. image pixels) with a certain stride size and multiply the input with the filter weights at each local position
+		\item The convolution operation
+		\begin{equation*}
+			(x \star g)[i] = \sum_{j=-w}^w x[i - j] \cdot g[j]
+		\end{equation*}
+		\item We shift a filter across the input data (e.\,g. image pixels) with a certain stride and multiply the input with the filter weights at each position
 	\end{itemize}
+	
 	\begin{figure}
 		\centering
-		\includegraphics[scale=0.90]{10_deep_learning/02_img/flatconvolution}
+		\includegraphics[scale=0.80]{10_deep_learning/02_img/flatconvolution}
 	\end{figure}
 \end{frame}
 
-\begin{frame}{Convolutional Neural Networks}{Representation}
-	\begin{itemize}
-		\item The outputs of the convolutions are passed through non-linear activation functions
-		\item Pooling is applied to extract only the most important activations:
-		\begin{itemize}
-			\item If $c_1, c_2, \dots, c_N \in \mathcal{R}$ are the outputs of the convolution, a \textit{max pooling} operation will output: $\underset{i}{\text{max}}\, c_i$
-		\end{itemize}
-		\item There are no parameters / weights involved in the pooling
-	\end{itemize}
-\end{frame}
-
-\begin{frame}{Convolutional Neural Networks}{Remarks}
-	\begin{itemize}
-		\item Usually many (hundreds or thousands) filters are applied simultaneously
-		\item We need to choose the number and size of filters, the stride (step-size) with which to slide them over the input, the activation functions, the pooling (max, $k$-max, mean)
-		\item Multiple convolutional layers can be applied subsequently to extract useful structures from the data (e.\,g. detecting edges, substructures)
-		\item Sparse connectivity and parameter-sharing make CNNs very efficient, computation can be parallelized
-	\end{itemize}
-\end{frame}
 
 % Convolution Animation
-\begin{frame}{Convolution Animation}{}
+\begin{frame}{Convolution Animation}{}\important
 	\begin{figure}
 		\centering
 		\animategraphics[autoplay,loop,height=5.5cm]{2.5}
@@ -820,64 +821,352 @@
 	\end{figure}
 \end{frame}
 
+
+% Pooling
+\begin{frame}{Pooling}{}
+	\begin{itemize}
+		\item The outputs of the convolutions are passed through non-linear activation functions (e.\,g. ReLU, tanh, ...)
+		\item Pooling is applied to extract only the most important activations:
+		\begin{itemize}
+			\item \highlight{max-pooling} (extracts the maximum activation)
+			\item \highlight{mean-pooling} (extracts the mean activation)
+			\item etc.
+		\end{itemize}
+		\item \textbf{There are no parameters involved in the pooling operation}
+		\item In image processing, pooling is necessary to reduce the dimensionality
+	\end{itemize}
+\end{frame}
+
+
 % Subsection: Recurrent Neural Networks
 % --------------------------------------------------------------------------------------------------------
 \subsection{Recurrent Neural Networks}
 
-% RNN Overview
-\begin{frame}{Recurrent Neural Networks}{Overview}
+% Recurrent Neural Networks
+\begin{frame}{Recurrent Neural Networks (RNNs)}{}
 	\begin{itemize}
-		\item Recurrent Neural Networks (RNNs) can be used to process sequences\newline (e.\,g. for sequence labelling tasks like named entity recognition, for sequence transduction tasks like machine translation, for sequence classification, etc.)
-		\item They are similar to feed-forward networks, but have a recurrent loop in the computational graph
-	\end{itemize}
-	\begin{figure}
-		\centering
-		\includegraphics[scale=0.25]{10_deep_learning/02_img/rnn}
-	\end{figure}
-\end{frame}
-
-\begin{frame}{Recurrent Neural Networks}{Representation}
-	\begin{align*}
-		\bm{h}_t &= \sigma_h(\bm{U} \bm{x} + \bm{V} \bm{h}_{t - 1} + \bm{b}_h)\\
-		\bm{o_t} &= \sigma_o(\bm{W} \bm{h_t} + \bm{b}_o)
-	\end{align*}
-	\begin{figure}
-		\centering
-		\includegraphics[scale=0.25]{10_deep_learning/02_img/rnn}
-	\end{figure}
-\end{frame}
-
-\begin{frame}{Recurrent Neural Networks}{Extensions}
-	\begin{itemize}
-		\item Bi-directionality: Run the RNN from left-to-right and right-to-left and concatenate the hidden states $\overset{\rightarrow}{h_t}$ and $\overset{\leftarrow}{h_t}$ for both directions
-		\item Gating: Gated Recurrent Units (GRUs) and Long-Short Term Memory (LSTM) Networks add additional parameters to RNNs to better control what is stored in the hidden state $h$ and to prevent vanishingly small gradients for long sequences
-		\item Skip-connections through time
-		\item Attention (re-expressing inputs and outputs in terms of a weighted combination with the other inputs)
-	\end{itemize}
-\end{frame}
-
-\begin{frame}{Recurrent Neural Networks}{Extensions}
-	\begin{itemize}
-		\item Long-Short Term Memory Network (Hochreiter, Schmidhuber, 1997):
+		\item \highlight{Recurrent Neural Networks (RNNs)} can be used to process sequences
 		\begin{itemize}
-			\item Input gate $\bm{i}_t = \sigma(\bm{W_i} \bm{x}_t + \bm{U}_i \bm{h}_{t-1})$
-			\item Forget gate $\bm{f}_t =\sigma(\bm{W_f} \bm{x}_t + \bm{U}_f \bm{h}_{t-1})$
-			\item Output gate $\bm{o}_t =\sigma(\bm{W_o} \bm{x}_t + \bm{U}_o \bm{h}_{t-1})$
-			\item New memory cell $\overset{\sim}{\bm{c}_t} = \tanh(\bm{W}_c \bm{x}_t + \bm{U}_c \bm{h}_{t-1})$
-			\item Final memory cell $\bm{c}_t = \bm{f}_t \odot \bm{c}_{t-1} + \bm{i}_t \odot \overset{\sim}{\bm{c}_t}$
-			\item Final hidden state $\bm{h}_t = \bm{o}_t \odot \tanh(\bm{c}_t)$
+			\item Sequence labeling (e.\,g. POS-tagging)
+			\item Sequence transduction (e.\,g. machine translation)
+			\item Sequence classification
 		\end{itemize}
-		\item $\sigma$ denotes the sigmoid activation function on this slide, $\odot$ is element-wise mutliplication (a.k.a. Hadamard product)
+		\item They are similar to feed-forward networks, but have a \textbf{recurrent loop in the computational graph}
+		\item By unfolding the network, it can be trained exactly like a feed-forward MLP using backpropagation
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Recurrent Neural Networks}{Extensions}
-	\begin{itemize}
-		\item Long-Short Term Memory Network (Hochreiter, Schmidhuber, 1997):
-	\end{itemize}
+
+% RNN Architecture
+\begin{frame}{RNN Architecture}{}
+	\begin{align*}
+		\bm{h}_t &= \sigma_h(\bm{U} \bm{x} + \bm{V} \bm{h}_{t - 1} + \bm{b}_h) \\
+		\bm{o}_t &= \sigma_o(\bm{W} \bm{h}_t + \bm{b}_o)
+	\end{align*}
+
+	\vspace*{-2mm}
 	\begin{figure}
 		\centering
-		\includegraphics[scale=0.50]{10_deep_learning/02_img/lstm}
+		\includegraphics[scale=0.35]{10_deep_learning/02_img/rnn}
+	\end{figure}
+\end{frame}
+
+
+% RNN Extensions
+\begin{frame}{RNN Extensions}{}\optional
+	\begin{itemize}
+		\item \textbf{Bi-directionality:} \\
+			Run one RNN from left to right and another one from right to left and concatenate the hidden states
+			$\overset{\rightarrow}{\bm{h}_t}$ and $\overset{\leftarrow}{\bm{h}_t}$
+		\item \textbf{Gating:} \\
+			\highlight{Gated Recurrent Units (GRUs)} and \highlight{Long-Short Term Memory (LSTM)} networks modify the recurrent unit
+			to better control what is stored in the hidden state $h$ and to prevent a vanishing gradient
+		\item \textbf{Skip-connections} through time
+	\end{itemize}
+\end{frame}
+
+
+% Inside an LSTM
+\begin{frame}{Inside an LSTM [Hochreiter/Schmidhuber, 1997]}{}\optional
+	\divideTwo{0.49}{
+		\vspace*{3mm}
+		\input{10_deep_learning/01_tikz/lstm_cell}
+	}{0.49}{
+		\vspace*{-5mm}
+		\footnotesize
+		\begin{align*}
+			\shortintertext{\highlight{Forget gate}}
+			\bm{f}_t 				&= \sigma(\bm{\Theta}_f \cdot [\bm{h}_{t-1}, \bm{x}_t] + b_f) 			\\
+			\shortintertext{\highlight{Input gate}}
+			\bm{i}_t 				&= \sigma(\bm{\Theta}_i \cdot [\bm{h}_{t-1}, \bm{x}_t] + b_i) 			\\
+			\widetilde{\bm{C}}_t 		&= \text{tanh}(\bm{\Theta}_C \cdot [\bm{h}_{t-1}, \bm{x}_t] + b_C) 		\\
+			\bm{C}_t 				&= \bm{f}_t \odot \bm{C}_{t-1} + \bm{i}_t \odot \widetilde{\bm{C}}_t 		\\
+			\shortintertext{\highlight{Output gate}}
+			\bm{o}_t 				&= \sigma(\bm{\Theta}_o \cdot [\bm{h}_{t-1}, \bm{x}_t] + b_o) 			\\
+			\bm{h}_t 				&= \bm{o}_t \odot \text{tanh}(\bm{C}_t)
+		\end{align*}
+	}
+\end{frame}
+
+
+% Subsection: Word Embeddings
+% --------------------------------------------------------------------------------------------------------
+\subsection{Word Embeddings}
+
+% Why Vector representations of natural Language?
+\begin{frame}{Why Vector representations of natural Language?}{}
+	\begin{itemize}
+		\item \textbf{Why?}
+		\begin{itemize}
+			\item Most machine learning algorithms (e.\,g. neural nets) cannot handle text input
+			\item Therefore, a numeric representation has to be devised
+		\end{itemize}
+		\item{\textbf{How? -- First ideas:}}
+		\begin{itemize}
+			\item Strawman idea: Represent each word $w \in \mathcal{V}$ as a one-hot vector
+			\item E.\,g. $\mathcal{V} = \{$this, great, be$\}$:
+			\begin{equation*}	
+				\bm{v}_{\text{this}} = [1,0,0]^{\intercal} \qquad
+				\bm{v}_{\text{great}} = [0,1,0]^{\intercal} \qquad
+				\bm{v}_{\text{be}} = [0,0,1]^{\intercal}
+			\end{equation*}
+			\item \textcolor{red}{\textbf{Problems:}} $\bm{v}_{w_i} \in \textcolor{red}{\mathbb{R}^{\vert \mathcal{V} \vert}}$
+			 	and semantics are not modeled
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+% Distributional Hypothesis [Harris, 1954] and [Firth, 1957]
+\begin{frame}{Distributional Hypothesis [Harris, 1954] and [Firth, 1957]}{}
+	\begin{itemize}
+		\item Other approaches are based onto the \highlight{distributional hypothesis}:
+		\begin{itemize}
+			\item{} [Harris, 1954]: Words are similar if they occur in similar contexts:
+			\vspace*{2mm}
+			\begin{center}
+				\textit{`The fact that, for example, not every adjective occurs with every noun can be used as a measure
+				of meaning  difference. (...) In other words, difference in meaning correlates with difference in distribution.'}
+			\end{center}
+			\vspace*{2mm}
+			\item{} [Firth, 1957]:
+			\vspace*{2mm}
+			\begin{center}
+				\textit{`You shall know a word by the company it keeps.'}
+			\end{center}
+			\vspace*{2mm}
+		\end{itemize}
+		\item It is possible to represent words by its context! Such models are called \highlight{count models}
+			[Baroni et al., 2014]
+	\end{itemize}
+\end{frame}
+
+
+% Distributional Hypothesis (Ctd.)
+\begin{frame}{Distributional Hypothesis (Ctd.)}{}
+	\begin{itemize}
+		\item Famous example by [McDonald and Ramscar, 2001]:
+		\vspace*{2mm}
+		\begin{center}
+			\textit{He filled the \textbf{wampimuk}, passed it around and we all drank some.} \\
+			$\Rightarrow$ jar, cup, glass, ...
+		\end{center}
+		\vspace*{2mm}
+		\pause
+		\begin{center}
+			\textit{We found a little hairy \textbf{wampimuk} sleeping behind the tree.} \\
+			$\Rightarrow$ cat, bear, raccoon, ...
+		\end{center}
+		\vspace*{2mm}
+		\item \highlight{Based on the context the invented word \underline{`wampimuk'} is associated with a different meaning}
+	\end{itemize}
+\end{frame}
+
+
+% Count Models
+\begin{frame}{Count Models}{}
+	\begin{itemize}
+		\item Set a window size $m$ and count \# of times a word occurs in that window
+		\item We get a $\vert \mathcal{V} \vert \times \vert \mathcal{V} \vert$ count matrix $\bm{M}$
+		\item Similar approach: \highlight{Latent semantic analysis} [Deerwester et al., 1990]
+	\end{itemize}
+	\divideTwo{0.39}{
+		\vspace*{-3mm}
+		Example by R. Socher:
+		\begin{itemize}
+			\item I like deep learning .
+			\item I like NLP .
+			\item I enjoy flying .
+		\end{itemize}
+	}{0.59}{
+		\vspace*{4mm}
+		\input{10_deep_learning/03_tbl/count_matrix}
+	}
+\end{frame}
+
+
+% Count Models (Ctd.)
+\begin{frame}{Count Models (Ctd.)}{}
+	\begin{itemize}
+		\item Each column (or row) can be used as a word vector
+		\item \textbf{Observations:}
+		\begin{enumerate}
+			\item Due to the counts the word vector now captures the context/semantics better
+			\item The vector is still huge! (size of the vocabulary)
+		\end{enumerate}
+		\item \highlight{Singular value decomposition (SVD)} is performed in order to reduce the dimensionality of the
+			matrix $\bm{M}$:
+		\begin{equation*}
+			\bm{M} = \bm{U} \bm{\Sigma} \bm{V}^{\intercal}
+		\end{equation*}
+		\item We can now use matrix $\bm{U}$ as a reduced version
+	\end{itemize}
+\end{frame}
+
+
+% word2vec Introduction
+\begin{frame}{word2vec [Mikolov et al., 2013] Introduction}{}
+	\begin{itemize}
+		\item Why not learning compact word representations in the first place?
+		\item T. Mikolov et al. proposed \highlight{word2vec}
+		\item \textbf{Unsupervised learning} using an \textbf{auxiliary task}
+		\item The auxiliary task is inspired by the concept of \highlight{language models}, \\ e.\,g. [Bengio et al., 2003]
+		\begin{itemize}
+			\item A language model predicts the next word given the previous words
+			\item E.\,g.: \textit{A dog is a man's best} $\rule{2cm}{0.15mm}$ .
+		\end{itemize} 
+	\end{itemize}
+\end{frame}
+
+
+% CBOW vs. Skip-Gram
+\begin{frame}{CBOW vs. Skip-Gram}{}
+	\textbf{Mikolov et al. propose two architectures:} \vspace*{2mm}
+	\begin{itemize}
+		\item \highlight{CBOW (Continuous bag-of-words):} \\
+			Predict the middle word given the context, e.\,g.:
+		\vspace*{2mm}
+		\begin{center}
+			same procedure $\rule{2cm}{0.15mm}$ every year
+		\end{center}
+		\vspace*{2mm}
+		\item \highlight{Skip-Gram:} \\
+			Predict the context words given the middle word, e.\,g.:
+		\vspace*{2mm}
+		\begin{center}
+			$\rule{2cm}{0.15mm}$ $\rule{2cm}{0.15mm}$ as $\rule{2cm}{0.15mm}$ $\rule{2cm}{0.15mm}$
+		\end{center}
+	\end{itemize}
+\end{frame}
+
+
+% CBOW vs. Skip-Gram (Ctd.)
+\begin{frame}{CBOW vs. Skip-Gram (Ctd.)}{}
+	\divideTwo{0.49}{
+		\input{10_deep_learning/01_tikz/cbow}
+	}{0.49}{
+		\input{10_deep_learning/01_tikz/skipgram}
+	}
+\end{frame}
+
+
+% Skip-Gram in more Detail
+\begin{frame}{Skip-Gram in more Detail}{}
+	\divideTwo{0.49}{
+		\input{10_deep_learning/01_tikz/skipgram_detail}
+	}{0.49}{
+		\begin{itemize}
+			\item The input/labels are \textbf{one-hot vectors} (also for CBOW)
+			\item $\bm{E} \in \mathbb{R}^{d \times \vert \mathcal{V} \vert}$ is a \textbf{shared embedding matrix}
+			\item \textbf{Identity activation} in the projection layer
+			\item $\bm{w} \bm{E} = \bm{v} \in \mathbb{R}^{d \times 1}$ is the embedding of word $\bm{w}$
+				(since $\bm{w}$ is one-hot)
+		\end{itemize}
+	}
+\end{frame}
+
+
+% Skip-Gram in more Detail (Ctd.)
+\begin{frame}[plain]{}{}
+	\input{10_deep_learning/01_tikz/skipgram_more_detail}
+\end{frame}
+
+
+% Skip-Gram Training Objective
+\begin{frame}{Skip-Gram Training Objective}{}
+	\begin{itemize}
+		\item Skip-Gram optimizes the \highlight{negative log-likelihood}:
+		\begin{equation*}
+			\footnotesize
+			\mathcal{J}(\bm{\theta}) = -\frac{1}{T} \sum_{t=1}^T \sum_{\substack{-m \le j \le m\\ j \ne 0}}
+				\log p(w_{t+j} \vert w_t; \bm{\theta})
+		\end{equation*}
+		\item The probability is given by the soft-max:
+		\begin{equation*}
+			\footnotesize
+			p(o \vert c) = \frac{\exp\{ \bm{u}_o^{\intercal} \bm{v}_c \}}{
+				\sum_{w=1}^{\vert \mathcal{V} \vert} \exp\{ \bm{u}_w^{\intercal} \bm{v}_c \}}
+		\end{equation*}
+		\item $t$ is the index into the corpus, $o$ and $c$ are indices into the vocabulary
+	\end{itemize}
+\end{frame}
+
+
+% Evaluation of Word Embeddings
+\begin{frame}{Evaluation of Word Embeddings}{}
+	\begin{itemize}
+		\item As Mikolov et al. found out, the embeddings do not only capture \textbf{syntactic regularities}...
+		\item ...but also \textbf{semantic aspects} of the words
+		\item \textbf{How did the authors get this insight?}
+		\item[$\bm{\Rightarrow}$] Definition of a set of 9 syntactic and 5 semantic questions/tasks, e.\,g.:
+		\begin{itemize}
+			\item Adjective to adverb (e.\,g. \texttt{bad} $\Leftrightarrow$ \texttt{badly})
+			\item Comparative (e.\,g. \texttt{great} $\Leftrightarrow$ \texttt{greater})
+			\item Nation adjective (e.\,g. \texttt{France} $\Leftrightarrow$ \texttt{French})
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+% Evaluation of Word Embeddings (Ctd.)
+\begin{frame}{Evaluation of Word Embeddings (Ctd.)}{}
+	\begin{itemize}
+		\item An instance of a \underline{syntactic} question (Comparative):
+		\vspace*{2mm}
+		\begin{center}
+			\textit{What is the word that is similar to \textbf{small} in the same sense as \\
+			\textbf{biggest} is similar to \textbf{big}?}
+		\end{center}
+		\vspace*{2mm}
+		\item One very famous \underline{semantic} example (Man-Woman):
+		\vspace*{2mm}
+		\begin{center}
+			\textit{\textbf{Man} relates to \textbf{king} like \textbf{woman} does to...?}
+		\end{center}
+	\end{itemize}
+\end{frame}
+
+
+% Evaluation of Word Embeddings (Ctd.)
+\begin{frame}{Evaluation of Word Embeddings (Ctd.)}{}
+	\begin{itemize}
+		\item Such questions can be answered by performing basic algebraic operations:
+		\begin{equation*}
+			\bm{v}_{biggest} - \bm{v}_{big} + \bm{v}_{small} \approx \bm{v}_{smallest}
+		\end{equation*}
+		\begin{equation*}
+			\bm{v}_{king} - \bm{v}_{man} + \bm{v}_{woman} \approx \bm{v}_{queen}
+		\end{equation*}
+		\item A visual example:
+		\input{10_deep_learning/01_tikz/vector_operation}
+	\end{itemize}
+\end{frame}
+
+
+% Result of Country Capital Task
+\begin{frame}{Result of Country Capital Task}{}
+	\begin{figure}
+		\includegraphics[scale=0.3]{10_deep_learning/02_img/country_capital}
 	\end{figure}
 \end{frame}
 
@@ -895,9 +1184,9 @@
 \begin{frame}{Summary}{}
 	\begin{itemize}
 		\item Neural Networks are powerful models for pattern recognition
-		\item The Perceptron can classify all training examples correctly iff the training data is linearly separable
-		\item Multi-Layer Perceptrons are universal function approximators
-		\item Backpropagation is a recursive procedure based on the chain rule of calculus to obtain the gradients for neural network learning
+		\item The perceptron can classify all training examples correctly, \textbf{iff the training data is linearly separable}
+		\item \textbf{MLPs are universal function approximators}
+		\item Backpropagation is a recursive procedure based on the \textbf{chain rule of calculus} to obtain the gradients for neural network learning
 		\item Different neural network architectures like CNNs and RNNs exist for solving different kinds of problems
 	\end{itemize}
 \end{frame}
@@ -912,10 +1201,11 @@
 	\begin{enumerate}
 		\item What is the relation between neural networks and logistic regression?
 		\item What is a perceptron? Which problems can it solve and which not?
-		\item Why do we often use multiple layers used instead of a simple Perceptron?
+		\item Why do we often use multiple layers instead of a simple perceptron?
 		\item How does backpropagation work? How does a neural network learn?
 		\item What are advantages and disadvantages of using neural networks?
 		\item What are CNNs and RNNs? For which tasks are they suitable?
+		\item How can words be represented in vectorial form?
 	\end{enumerate}
 \end{frame}
 

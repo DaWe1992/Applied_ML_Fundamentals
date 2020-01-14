@@ -1,0 +1,46 @@
+\begin{figure}
+	\centering
+		\begin{tikzpicture}[
+			scale=0.5,
+			every node/.style={scale=0.5},
+			layer/.style={thick,rectangle,draw=black,fill=yellow,minimum height=6mm,minimum width=10mm},
+			op/.style={thick,ellipse,draw=black,fill=red!30,minimum width=14mm},
+			arr/.style={-stealth,thick},
+			edg/.style={thick}
+		]
+
+			% cell boundaries
+			\draw[very thick,rounded corners,fill=lightgray] (-5,-3) rectangle (6,3);
+			
+			% input
+			\node[circle,thick,draw=black,fill=myblue2] (X) at (-4.5,-5) {$\bm{x_t}$};
+			% output
+			\node[circle,thick,draw=black,fill=myblue2] (H) at (5.5,5) {$\bm{h_t}$};
+			
+			% layers
+			\node[layer] (F) at (-4,-1) {$\bm{\sigma}$};
+			\node[layer] (I) at (-2,-1) {$\bm{\sigma}$};
+			\node[layer] (tanh1) at (0,-1) {$\bm{tanh}$};
+			\node[layer] (O) at (2,-1) {$\bm{\sigma}$};
+			
+			% operations
+			\node[op] (OpCmF) at (-4,2) {$\bm{\odot}$};
+			\node[op] (OpCpI) at (0,2) {$\bm{\oplus}$};
+			\node[op] (OpImTanh) at (0,0) {$\bm{\odot}$};
+			\node[op] (OpOmTanh) at (4,0) {$\bm{\odot}$};
+			\node[op] (OpTanh) at (4,1.25) {\footnotesize $\bm{tanh}$};
+			
+			% connections
+			\draw[arr] (-5,2) -- (OpCmF) -- (OpCpI) -- (7,2);
+			\draw[edg] (X) -- (-4.5,-2);
+			\draw[arr] (-5,-2) -- ++(7,0) -- (O) -- ++(0,1) -- (OpOmTanh);
+			\draw[arr] (-4,-2) -- (F) -- (OpCmF);
+			\draw[arr] (-2,-2) -- (I) -- ++(0,1) -- (OpImTanh);
+			\draw[arr] (0,-2) -- (tanh1) -- (OpImTanh) -- (OpCpI);
+			\draw[arr] (4,2) -- (OpTanh) -- (OpOmTanh) -- ++(0,-2) -- ++(3,0);
+			\intersect{5.5,-2}{H}{-5,2}{7,2}{arr};
+			\node at (1,-4) {\large Image taken from
+				\href{http://colah.github.io/posts/2015-08-Understanding-LSTMs/}{\linkstyle{colah's blog}} (adapted)};
+
+		\end{tikzpicture}
+\end{figure}
