@@ -43,6 +43,8 @@
 \usetikzlibrary{shapes.symbols}
 \usetikzlibrary{shapes.geometric}
 
+\usetikzlibrary{intersections}
+
 % boxes
 \usepackage[many]{tcolorbox}
 
@@ -252,6 +254,13 @@
 	\draw[fill=white,draw=myblue1] (#1,#2) circle (2mm);
 	\draw[fill=myblue1,draw=myblue1] (#1,#2) circle (1.5mm);
 }
+
+% intersection of lines
+\newcommand{\intersect}[5]{
+	\draw[#5] let \p{c} = (intersection of #1 -- #2 and #3 -- #4) in (#1) -- ($(\p{c})!1.75mm!(#1)$) 
+  		to[bend right=90] ($(\p{c})!1.75mm!(#2)$) -- (#2)
+}
+
 
 % slide modifiers
 % --------------------------------------------------------------------------------------------------------

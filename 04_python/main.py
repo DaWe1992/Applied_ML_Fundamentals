@@ -25,6 +25,7 @@ from clf.knn import kNN
 from clf.svm import SVM
 from clf.lda import LDA
 from clf.logistic_regression import LogisticRegression, LogRegOneVsOne
+from clf.neural_network import NeuralNetwork
 
 # unsupervised learning
 # -----------------------------------------------------------------------------
@@ -69,8 +70,12 @@ def classification():
 #    clf.fit(X, y, batch_size=X.shape[0])
     
     # train one-vs-one logistic regression classifier
-    clf = LogRegOneVsOne(poly=True)
-    clf.fit(X, y)
+#    clf = LogRegOneVsOne(poly=True)
+#    clf.fit(X, y)
+    
+    # train a neural network
+#    clf = NeuralNetwork(layers=[10, 5])
+#    clf.fit(X, y)
     
     # train Fisher's linear discriminant
 #    clf = LDA(n_dims=1)

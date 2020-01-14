@@ -8,7 +8,7 @@
 
 \title[Deep Learning]{*** Applied Machine Learning Fundamentals *** Neural Networks / Deep Learning}
 \institute{SAP\,SE}
-\author{Clemens Biehl, Daniel Wehner}
+\author{M.\,Sc. Daniel Wehner}
 \date{Winter term 2019/2020}
 \prefix{DL}
 
@@ -59,10 +59,9 @@
 		\item Lots of different architectures exist:
 		\begin{itemize}
 			\item \highlight{Multi-Layer perceptrons (MLPs)}
-			\item \highlight{Radial Basis Function Networks (RBFNs)}
 			\item \highlight{Convolutional neural networks (CNNs, ConvNets)}
 			\item \highlight{Recurrent neural networks (LSTMs, GRUs, etc.)}
-			\item \highlight{Residual networks (ResNets)}
+			\item ...and many more...
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -103,7 +102,7 @@
 			\textbf{Setback I} (mid 1960s -- late 1970s) \\
 
 			\textit{M.\,Minsky} and \textit{S.\,Papert} (1969): \\
-			Serious problems with perceptron algorithm.
+			Serious problems with perceptron algorithm:
 			It cannot learn the \textbf{XOR problem}.
 		\end{boxBlueNoFrame}
 	}
@@ -133,7 +132,7 @@
 		\end{boxBlueNoFrame}
 	}{0.49}{
 		\begin{boxBlue}
-			\textbf{`Deep Learning'} (since mid 2000) \\
+			\textbf{`Deep Learning'} (since mid 2000) \\ \vspace*{1mm}
 
 			More data, faster computers, better optimization techniques...
 
@@ -156,7 +155,7 @@
 		\item All neurons are connected and form a complex \textbf{network}
 		\item \textbf{Transmitter chemicals} within the fluid of the brain influence the
 			\textbf{electrical potential} inside the body of the neurons
-		\item If the \textbf{membrane potential} reaches some threshold the neurons \textbf{fires}
+		\item If the \textbf{membrane potential} reaches some threshold, the neurons \textbf{fires} \\
 			$\Rightarrow$ A pulse of fixed length is sent down the \textbf{axon}
 		\item The axon connects the neuron with other neurons (via \textbf{synapses})
 		\item Probably there are 100 trillion \textcolor{red}{\textbf{(!!!)}} synapses in the human brain
@@ -176,33 +175,30 @@
 
 % How can we know this?
 \begin{frame}{How can we know this?}{}
-	\divideTwo{0.39}{
+	\divideTwo{0.29}{
 		\begin{figure}
 			\centering
-			\includegraphics[scale=0.3]{10_deep_learning/02_img/cajal_golgi_stain}
+			\includegraphics[scale=0.15]{10_deep_learning/02_img/cajal_golgi_stain}
 		\end{figure}
-	}{0.59}{
+	}{0.69}{
+		\footnotesize
 		\begin{itemize}
 			\item \textit{Santiago Ramón y Cajal} made neurons visible by applying \textbf{Golgi's method}
-			\item Golgi's method uses the Golgi stain to colorize the neurons
-			\item Cajal establishes the \textbf{neuron doctrine} and won the Nobel price in 1906 for his work
+			\item Golgi's method uses the \textbf{Golgi stain} to colorize the neurons
 		\end{itemize}
-	}
-\end{frame}
-
-
-% How can we know this? (Ctd.)
-\begin{frame}{How can we know this? (Ctd.)}{}
-	\divideTwo{0.49}{
+	} \\
+	\vspace*{3mm}
+	\divideTwo{0.59}{
+		\footnotesize
 		\begin{itemize}
-			\item End of the 1940s \textit{A. Hodgkin} and \textit{A. Huxley} started investigating the electrical properties of
-				neurons on the squid's\footnote[frame]{lat.: \textit{Loligo pealeii}} axon
-			\item The right-hand-side image was the first \highlight{action potential} that was plotted
+			\item End of the 1940s, \textit{Hodgkin} and \textit{Huxley} started investigating the electrical properties of
+				neurons on the squid's axon
+			\item The right-hand-side image was the first \textbf{action potential} ever plotted
 		\end{itemize}
-	}{0.49}{
+	}{0.39}{
 		\begin{figure}
 			\centering
-			\includegraphics[scale=0.5]{10_deep_learning/02_img/spike_potential_squid}
+			\includegraphics[scale=0.3]{10_deep_learning/02_img/spike_potential_squid}
 		\end{figure}
 	}
 \end{frame}
@@ -214,7 +210,7 @@
 	\vspace*{-2mm}
 	\begin{itemize}
 		\item \textbf{Idea:} Mechanism of learning is \highlight{association}
-		\item \highlight{Hebbian learning:} If the firing of one neuron repeatedly assists in firing another neuron
+		\item \highlight{Hebbian learning:} If the firing of one neuron repeatedly assists in firing another neuron,
 			the synaptic connection will be strengthened
 	\end{itemize}
 	
@@ -269,10 +265,10 @@
 	\begin{itemize}
 		\item CS is a light (L), a noise (N), or a combination of both (LN)
 		\item US is a mild shock that is paired with the CS in the training phase (+)
-		\item In all conditions, after training fear response is tested when only L is presented without shock (-)
+		\item Fear response is tested after training when only L is presented without shock (-)
 		\item Group B shows conditioning; Group A does not: \textbf{N blocks L}
 		\item This is hard to explain with Hebbian learning
-		\item \textbf{Idea:} Learning only happens if there is a \highlight{prediction error}
+		\item \textbf{Idea:} Learning only happens, if there is a \highlight{prediction error}
 	\end{itemize}
 \end{frame}
 
@@ -286,11 +282,11 @@
 \end{frame}
 
 
-% Artificial Neurons [McCulloch and Pitts 1943]
-\begin{frame}{Artificial Neurons [McCulloch and Pitts 1943]}{}
+% Artificial Neurons [\textit{McCulloch} and \textit{Pitts}, 1943]
+\begin{frame}{Artificial Neurons [\textit{McCulloch} and \textit{Pitts}, 1943]}{}
 	\begin{itemize}
-		\item 1943 \textit{W. S. McCulloch} and \textit{W. H. Pitts} designed the first `artificial neuron'
-		\item These neurons can represent logical functions (e.\,g. b -- \texttt{OR}, c -- \texttt{AND})
+		\item In 1943, \textit{McCulloch} and \textit{Pitts} designed the first `artificial neuron'
+		\item These neurons can represent logical functions (e.\,g. b: \texttt{OR}, c: \texttt{AND})
 	\end{itemize}
 	
 	\begin{figure}
@@ -300,118 +296,20 @@
 \end{frame}
 
 
-% Subsection: Biological Motivation
+% Section: Perceptrons
+%______________________________________________________________________
+\section{Perceptrons}
+\makedivider{Perceptrons}
+
+% Subsection: The original Perceptron Algorithm
 % --------------------------------------------------------------------------------------------------------
-\subsection{Perceptron Learning Algorithm}
+\subsection{The original Perceptron Algorithm}
 
-% Perceptron [Rosenblatt 1957]
-\begin{frame}{Perceptron [Rosenblatt 1957]}{}
-	\input{10_deep_learning/01_tikz/perceptron}
-\end{frame}
-
-
-% Perceptron (Ctd.)
-\begin{frame}{Perceptron (Ctd.)}{}
+% Perceptron [\textit{Rosenblatt}, 1957]
+\begin{frame}{Perceptron [\textit{Rosenblatt}, 1957]}{}
 	\begin{itemize}
-		\item The neuron receives an input-vector $\bm{x}$
-		\begin{equation*}
-			\bm{x} = (x_1, x_2, \dots, x_m)^{\intercal}
-		\end{equation*}
-		\item Each input signal is weighted by a factor\footnote[frame]{weight of synaptic strength} $\theta_j$
-		\begin{equation*}
-			\bm{\theta} = (\theta_1, \theta_2, \dots, \theta_m)^{\intercal}
-		\end{equation*}
-		\item We compute the \highlight{pre-activation} and the \highlight{activation}:
-		\begin{equation}
-			p = \bm{\theta}^{\intercal} \bm{x} + b = \sum_{j=1}^m \theta_j x_j + b \qquad\qquad
-			a = \sigma(p)
-		\end{equation}
+		\item 
 	\end{itemize}
-\end{frame}
-
-
-% Perceptron (Ctd.)
-\begin{frame}{Perceptron (Ctd.)}{}
-	\begin{itemize}
-		\item The simplest activation function is to use a threshold $\rho$:\footnote[frame]{Not used, since not differentiable;
-			alternatives later}
-		\begin{equation*}
-			\sigma(p) =
-			\begin{cases}
-				0 &	\text{for}\ p \le \rho \\
-				1 & \text{for}\ p > \rho
-			\end{cases}
-		\end{equation*}
-		\item Quick example: $\bm{x} = (1, 0, 0.5)^{\intercal}; \bm{\theta} = (1, -0.5, -1)^{\intercal}; \rho = 0$
-		\begin{align*}
-			p &= \sum_{j=1}^3 \theta_j x_j = 1 \cdot 1 + (-0.5) \cdot 0 + (-1) \cdot 0.5 = 0.5 \\
-			a &= \sigma_{\rho=0}(0.5) = 1
-		\end{align*}
-	\end{itemize}
-\end{frame}
-
-
-% Perceptron Learning
-\begin{frame}{Perceptron Learning}{}
-	\begin{itemize}
-		\item Learning means choosing the correct weights $\bm{\theta}^*$ from a set of possible hypotheses $\mathcal{H}$
-		(\highlight{hypothesis space}):
-		\begin{equation*}
-			\mathcal{H} = \{ \bm{\theta} \vert \bm{\theta} \in \mathbb{R}^m \}
-		\end{equation*}
-		\item How to learn the weights from a data set $\mathcal{D}$?
-		\item \textbf{Algorithm outline:}
-		\begin{enumerate}
-			\item Pick a training example $\bm{x} \in \mathcal{D}$
-			\item Calculate the activation $a$ for that training example
-			\item Update the weights $\theta$ based on the error
-		\end{enumerate}
-	\end{itemize}
-\end{frame}
-
-
-% Perceptron Learning (Ctd.)
-\begin{frame}{Perceptron Learning (Ctd.)}{}
-	\begin{itemize}
-		\item Let the error be denoted by $\delta$
-		\item How can we compute the error? We need a loss function $\mathcal{J}(\bm{\theta})$:
-		\begin{equation}
-			\mathcal{J}(\bm{\theta}) = \frac{1}{2} \sum_{i=1}^N (h_{\bm{\theta}}(\bm{x}^{(i)}) - y^{(i)})^2
-		\end{equation}
-		\item Again, we use \highlight{gradient descent}: Compute gradient and go into the negative direction:
-		\begin{equation}
-			\bm{\theta}^{(t+1)} \longleftarrow \bm{\theta}^{(t)} - \alpha \nabla_{\bm{\theta}} \mathcal{J}(\bm{\theta})
-		\end{equation}
-	\end{itemize}
-	\textcolor{gray}{$\Rightarrow$ cf. slides `Regression'}
-\end{frame}
-
-
-% Perceptron Learning Algorithm
-\begin{frame}[plain]{}{}
-	\begin{algorithm}[H]
-		\setstretch{1.1}
-		\DontPrintSemicolon
-		\footnotesize
-		\KwIn{Training data $\mathcal{D}$, convergence threshold $\bm{\varepsilon}$}
-		
-		\tcp*[h]{initialization}\;
-		set all weights $\bm{\theta}^{(0)}$ to small random numbers\;
-		\For{$t \in \{0, 1, \dots, \infty\}$}{
-			pick a sample $\langle \bm{x}, y \rangle \in \mathcal{D}$ randomly\;
-			\tcp*[h]{predict the class label}\;
-			compute the activation $a = \sigma(\bm{\theta}^{\intercal} \bm{x})$\;
-			\tcp*[h]{stochastic gradient descent: update based on prediction error}\;
-			$\bm{\theta}^{(t+1)} \longleftarrow
-				\bm{\theta}^{(t)} - \alpha \nabla_{\bm{\theta}} \mathcal{J}(\bm{\theta})$\;
-			\If{$\Vert \bm{\theta}^{(t+1)} - \bm{\theta}^{(t)} \Vert \le \bm{\varepsilon}$}{
-				\tcp*[h]{convergence}\;
-				\textbf{break}\;
-			}
-		}
-		\Return{$\bm{\theta}$}
- 		\caption{Perceptron Learning Algorithm}
-	\end{algorithm}
 \end{frame}
 
 
@@ -426,15 +324,101 @@
 \end{frame}
 
 
+% Subsection: Perceptron Learning Algorithm
+% --------------------------------------------------------------------------------------------------------
+\subsection{Perceptron Learning Algorithm}
+
+% The Architecture of a Neuron
+\begin{frame}{The Architecture of a Neuron}{}
+	\input{10_deep_learning/01_tikz/perceptron}
+\end{frame}
+
+
+% Perceptron (Ctd.)
+\begin{frame}{Perceptron (Ctd.)}{}
+	\begin{itemize}
+		\item The neuron receives an input vector $\bm{x}$:
+		\begin{equation*}
+			\bm{x} = (1, x_1, x_2, \dots, x_m)^{\intercal}
+		\end{equation*}
+		\item Each input signal is weighted by a factor $\theta_j$: {\footnotesize\textit{(weight of synaptic strength)}}
+		\begin{equation*}
+			\bm{\theta} = (\theta_0, \theta_1, \theta_2, \dots, \theta_m)^{\intercal}
+		\end{equation*}
+		\item We compute the \highlight{pre-activation} and the \highlight{activation}:
+		\begin{equation}
+			a = \bm{\theta}^{\intercal} \bm{x} = \sum_{j=0}^m \theta_j x_j \qquad\qquad
+			z = \sigma(a)
+		\end{equation}
+	\end{itemize}
+\end{frame}
+
+
+% Perceptron (Ctd.)
+\begin{frame}{Perceptron (Ctd.)}{}
+	\begin{itemize}
+		\item The simplest activation function is to use a threshol\footnote[frame]{Not used, since not differentiable;
+			alternatives later}d $\rho$:
+		\begin{equation*}
+			\sigma_{\rho}(a) =
+			\begin{cases}
+				0 &	\text{for}\ a \le \rho \\
+				1 & \text{for}\ a > \rho
+			\end{cases}
+		\end{equation*}
+		\item Quick example: $\bm{x} = (1, 0, 0.5)^{\intercal} \qquad \bm{\theta} = (1, -0.5, -1)^{\intercal} \qquad \rho = 0$
+		\begin{align*}
+			a &= \bm{\theta}^{\intercal}\bm{x} = 1 \cdot 1 + (-0.5) \cdot 0 + (-1) \cdot 0.5 = 0.5 \\
+			z &= \sigma_{\rho=0}(0.5) = 1
+		\end{align*}
+	\end{itemize}
+\end{frame}
+
+
+% Perceptron Learning
+\begin{frame}{Perceptron Learning}{}
+	\begin{itemize}
+		\item Learning means choosing the correct weights $\bm{\theta}^*$ from a set of possible hypotheses $\mathcal{H}$
+		(\highlight{hypothesis space}):
+		\begin{equation*}
+			\mathcal{H} = \{ \bm{\theta} \vert \bm{\theta} \in \mathbb{R}^{m + 1} \}
+		\end{equation*}
+		\item How to learn the weights from a data set $\mathcal{D}$?
+		\item \textbf{Algorithm outline:}
+		\begin{enumerate}
+			\item Pick a training example $\bm{x} \in \mathcal{D}$
+			\item Calculate the activation $z$ for that training example
+			\item Update the weights $\bm{\theta}$ based on the error
+		\end{enumerate}
+	\end{itemize}
+\end{frame}
+
+
+% Perceptron Learning (Ctd.)
+\begin{frame}{Perceptron Learning (Ctd.)}{}
+	\begin{itemize}
+		\item How can we compute the error? $\Rightarrow$ We need a loss function $\mathcal{J}(\bm{\theta})$:
+		\begin{equation}
+			\mathcal{J}(\bm{\theta}) = \frac{1}{2} \sum_{i=1}^n (h_{\bm{\theta}}(\bm{x}^{(i)}) - y^{(i)})^2
+		\end{equation}
+		\item Again, we use \highlight{gradient descent}: Compute gradient and go into the negative direction of the gradient:
+		\begin{equation}
+			\bm{\theta}^{(t+1)} \longleftarrow \bm{\theta}^{(t)} - \alpha \nabla_{\bm{\theta}} \mathcal{J}(\bm{\theta})
+		\end{equation}
+	\end{itemize}
+	\textcolor{gray}{$\Rightarrow$ cf. slides `Regression'}
+\end{frame}
+
+
 % Generalization to multiple Classes
 \begin{frame}{Generalization to multiple Classes}{}
 	\divideTwo{0.59}{
 		\footnotesize
 		\begin{itemize}
 			\item A single neuron can only distinguish two classes
-			\item If there are more than two classes: Simply use more perceptrons\footnote[frame] {This construct is still
+			\item If there are more than two classes: Simply use more neurons\footnote[frame] {This construct is still
 				referred to as a perceptron.}
-			\item Use \highlight{one-hot encoding} for the classes and \highlight{soft-max} as activation function (later)
+			\item Use \highlight{one-hot encoding} for the classes and \highlight{softmax} as activation function (later)
 			\item Example for three classes:
 			\begin{tabbing}
 				\hspace*{1cm}\=\kill
@@ -451,54 +435,23 @@
 
 % What about non-linear Data Sets?
 \begin{frame}{What about non-linear Data Sets?}{}
-	\begin{itemize}
-		\item If the data is not linearly separable then the perceptron cannot learn it
-		\item Remember Marvin Minsky's/Seymour Papert's book \textit{`Perceptrons'}
-		\item What can we do?
-		\begin{enumerate}
-			\item Add feature mapping $\Rightarrow$ \highlight{Radial basis function (RBF) networks}
-			\item Add hidden layers $\Rightarrow$ \highlight{Multi-layer perceptrons (MLP)}
-		\end{enumerate}
-	\end{itemize}
-\end{frame}
-
-
-% Subsection: Radial Basis Function (RBFN) Networks
-% --------------------------------------------------------------------------------------------------------
-\subsection{Radial Basis Function (RBFN) Networks}
-
-% Radial Basis Function (RBF) Networks
-\begin{frame}{Radial Basis Function (RBF) Networks}{}
-	\input{10_deep_learning/01_tikz/rbfn}
-\end{frame}
-
-
-% Inside an RBF Neuron
-\begin{frame}{Inside an RBF Neuron}{}
-	\begin{itemize}
-		\item Each RBF neuron computes the distance of the input $\bm{x}$ to an \highlight{internal prototype} vector:
-		\begin{equation}
-			\varphi_j(\bm{x}) = \exp\left\{ -\frac{\Vert \bm{x} - \bm{z_j} \Vert^2}{2\sigma^2} \right\}
-		\end{equation}
-		\item These distances are then fed into the perceptron
-		\item \textbf{How to get the prototypes?}
+	\divideTwo{0.39}{
 		\begin{itemize}
-			\item We can use clustering, e.\,g. \highlight{k-Means}, to get the locations $\bm{\mu}$ \\
-				{\footnotesize (this avoids useless prototypes in areas without data points)}
-			\item Choose $\sigma$ neither too small nor too big
-		\end{itemize}
-		\item There are no weights $\bm{\theta}$ to tune for that neuron
+			\item Perceptrons cannot learn non-linear boundaries
+			\item Remember \textit{Minsky} and \textit{Papert}
+			\item What can we do?
+			\begin{enumerate}
+				\item Add feature mapping {\scriptsize(cf. right)}
+				\item Add hidden layers \\
+					{\scriptsize\highlight{(Multi-Layer Perceptrons)}}
+			\end{enumerate}
 	\end{itemize}
-\end{frame}
-
-
-% Example: Radial Basis Function (RBF) Networks
-\begin{frame}[plain]{}{}
-	\vspace*{-7mm}
-	\begin{figure}
-		\centering
-		\includegraphics[scale=0.55]{10_deep_learning/02_img/rbfn}
-	\end{figure}
+	}{0.59}{
+		\begin{figure}
+			\centering
+			\includegraphics[scale=0.35]{10_deep_learning/02_img/rbfn}
+		\end{figure}
+	}
 \end{frame}
 
 
@@ -512,66 +465,39 @@
 % --------------------------------------------------------------------------------------------------------
 \subsection{Overview}
 
-\begin{frame}{Overview: Multi-Layer Perceptron Representation}{}
+% Multi-Layer Perceptrons
+\begin{frame}{Multi-Layer Perceptrons}{}
 	\begin{itemize}
-		\item A Multi-Layer Perceptron (MLP) can approximate any continuous function arbitrarily well (universal function approximator), given enough hidden units
-		\item Hidden layers of the network can learn useful feature representations
+		\item In theory, a \highlight{Multi-Layer Perceptron (MLP)} can approximate any continuous function arbitrarily well
+		\item An MLP with $\lambda$ hidden layers is a function $h: \mathbb{R}^m \rightarrow \mathbb{R}^{\kappa}$,
+			parameterized by network parameters $\bm{\Theta}^{(1)}$, $\bm{\Theta}^{(2)}$, \dots, $\bm{\Theta}^{(\lambda)}$
+		\item In each layer, a non-linearity is applied: $g^{(1)}$, $g^{(2)}$, \dots, $g^{(\lambda)}$
 	\end{itemize}
-	\begin{figure}
-		\centering
-		\includegraphics[scale=0.45]{10_deep_learning/02_img/mlp}
-	\end{figure}
+	\divideTwo{0.49}{
+		\begin{align*}
+			z^{(1)} &= \bm{\Theta}^{(1)} \bm{x}								\\
+			\dots 													\\
+			z^{(\lambda)} &= \bm{\Theta}^{(\lambda)} g^{(\lambda - 1)}(\bm{z}^{(\lambda - 1)})
+		\end{align*}
+	}{0.49}{
+		\begin{align*}
+			\bm{h} &= g^{(\lambda)}(\bm{z^{(\lambda)}}) 						\\
+			y_{pred} &= \argmax_k \bm{h}
+		\end{align*}
+	}
 \end{frame}
 
-\begin{frame}{Overview: Multi-Layer Perceptron Representation}{}
-	\begin{itemize}
-		\item An MLP with $L$ hidden layers is a function:
-		\begin{itemize}
-			\item $f: \mathcal{R}^n \rightarrow \mathcal{R}^m$
-			\item with parameter matrices $\bm{\Theta}^{(1)}$, $\bm{\Theta}^{(2)}$, \dots, $\bm{\Theta}^{(L)}$
-			\item and non-linearities $g^{(1)}$, $g^{(2)}$, \dots, $g^{(L)}$
-			\item where:
-			\begin{align*}
-				z^{(1)} &= \bm{\Theta^{(1)}} \bm{x}\\
-				z^{(2)} &= \bm{\Theta^{(2)}} g^{(1)}(\bm{z^{(1)}})\\
-				\text{\dots}\\
-				z^{(L)} &= \bm{\Theta^{(L-1)}} g^{(L-1)}(\bm{z^{(L-1)}})\\
-				\bm{h} = g^{(L)}(\bm{z^{(L)}})
-			\end{align*}
-		\end{itemize}
-	\end{itemize}
-\end{frame}
 
-\begin{frame}{Overview: Multi-Layer Perceptron Inference}{}
-	\begin{itemize}
-		\item The forward pass (prediction) of an MLP can be computed as follows:
-		$$h_k(\bm{x}^{(i)}; \bm{\Theta}) = g^{(2)}\left( \sum_{l=0}^h \Theta_{kl}^{(2)} g^{(1)}\left( \sum_{j=0}^m \Theta_{lj}^{(1)} x_{j}^{(i)} \right) \right)$$
-		\item This provides us with an output value for each class $k$, we could predict the class with the highest value $y = \underset{k}{\text{argmax}\,\bm{h}}$
-		\item How can we obtain the optimal weights $\bm{\Theta}$?
-	\end{itemize}
-\end{frame}
-
-\begin{frame}{Overview: Multi-Layer Perceptron Learning}{}
-	\begin{itemize}
-		\item We can optimize the parameters using gradient descent and a cost function
-		\item The goal is to minimize the cost, e.\,g. $\mathcal{J}(\bm{\Theta}) = \frac{1}{2n} \sum_{i=1}^n (h_{\bm{\Theta}}(\bm{\widehat{x}}^{(i)}) - y^{(i)})^2$
-		\item \texttt{Repeat until convergence \{} \\
-			$\qquad \bm{\Theta}^{(t+1)} \longleftarrow \bm{\Theta}^{(t)} - \alpha \nabla_{\bm{\Theta}}
-				\mathcal{J}(\bm{\Theta}^{(t)}) \quad$
-			\textcolor{myblue1}{\textit{// simultaneously update all} $\theta_j$} \\
-		\texttt{\}}
-		\item How do we get the gradient $\nabla_{\bm{\Theta}} \mathcal{J}(\bm{\Theta})$ with respect to all weights $\bm{\Theta^{(\text{layer})}_{lj}}$?
-	\end{itemize}
-\end{frame}
-
-\begin{frame}{Overview: Multi-Layer Perceptron Learning}{}
-	\begin{itemize}
-		\item We start by randomly initializing the network weights
-		\item Do not set an initial value of 0 for all weights, as this will lead to problems in backpropagation (the gradients will all be the same), but initialize to small random numbers, e.\,g. by sampling from $\mathcal{N}(0, 0.1)$
-		\item We then perform a forward pass through the network, i.\,e. make predictions on our training set
-		\item Using the predictions, we compute a scalar loss value $J(\bm{\Theta})$
-		\item We calculate the gradients of the loss with respect to each network parameter and update all network parameters using gradient descent
-	\end{itemize}
+% MLP Learning
+\begin{frame}{MLP Learning}{}
+	\begin{enumerate}
+		\item Start by randomly initializing the network weights
+		\item \Highlight{Do not set an initial value of 0 for all weights! (Why?)} \\
+			$\Rightarrow$ Initialize to small random numbers
+		\item Perform a forward pass through the network, i.\,e. make predictions
+		\item Using the predictions, compute a scalar loss value $\mathcal{J}(\bm{\Theta})$
+		\item Calculate the gradients of the loss w.\,r.\,t. each network parameter and update all parameters (gradient descent)
+	\end{enumerate}
 \end{frame}
 
 
@@ -611,7 +537,7 @@
 		\item Compute the network loss
 		\item The loss function is given by: {\footnotesize(assume square loss: $\ell = (h_k(\bm{x}^{(i)}; \bm{\Theta}) - y_k^{(i)})^2$)}
 		\begin{equation*}
-			\mathcal{J}^{(i)}(\bm{\Theta}) = \frac{1}{n} \sum_{i=1}^n \sum_{k=1}^\kappa
+			\mathcal{J}(\bm{\Theta}) = \frac{1}{n} \sum_{i=1}^n \sum_{k=1}^\kappa
 				\ell(h_k(\bm{x}^{(i)}; \bm{\Theta}), y_k^{(i)})
 		\end{equation*}
 		\item Compute the error gradient w.\,r.\,t. $h_k(\bm{x}^{(i)}; \bm{\Theta})$:
@@ -671,163 +597,223 @@
 
 
 % Backpropagation Example
-%\begin{frame}{Backpropagation Example}{}
-%	\begin{itemize}
-%		\item
-%	\end{itemize}
-%\end{frame}
+\begin{frame}{Backpropagation Example}{}
+	\vfill
+	\begin{center}
+		\Huge \highlight{See blackboard!}
+	\end{center}
+	\vfill
+\end{frame}
 
-\begin{frame}{Remarks}{}
+
+% Some Remarks
+\begin{frame}{Some Remarks}{}
 	\begin{itemize}
-		\item As a sanity check, we can perform numeric gradient checking: Based on the fact that $f'(x) \approx \frac{1}{v} \cdot (f(x + v) - f(x))$, we can evaluate the loss function for slightly different weights and compare the difference to the gradient we computed using backprop
-		\item There are a lot of hyperparameters for backprop and gradient descent (number of hidden layers, hidden layer dimensionality, activation functions, learning rate, batch size, number of training epochs, regularization, etc.) - you need to empirically find the best ones for your problem
-		\item Play with some hyperparameters here: \url{https://playground.tensorflow.org}
+		\item \textbf{Check your gradients:}
+		\begin{equation*}
+			\nabla h(x) \overset{!}{\approx} \frac{1}{\varepsilon} \cdot (h(x + \varepsilon) - h(x))
+		\end{equation*}
+		\item \textbf{Hyper-parameter optimization is necessary:}
+	\end{itemize}
+	\divideTwo{0.49}{
+		\footnotesize
+		\begin{itemize}\setlength\itemsep{-0.5em}
+			\item \# hidden layers
+			\item \# hidden units
+			\item activation functions
+			\item learning rate
+		\end{itemize}
+	}{0.49}{
+		\footnotesize
+		\begin{itemize}\setlength\itemsep{-0.5em}
+			\item batch size
+			\item \# training epochs
+			\item regularization
+			\item ...	
+		\end{itemize}
+	}
+	\begin{itemize}
+		\item Have a look at: \url{https://playground.tensorflow.org}
 	\end{itemize}
 \end{frame}
 
+
+% Subsection: Backpropagation
+% --------------------------------------------------------------------------------------------------------
 \subsection{Activation Functions}
+
+% Sigmoid Function
 \begin{frame}{Sigmoid Function}{}
+	\begin{boxBlueNoFrame}
+		\begin{equation*}
+			\sigma(x) = \frac{1}{1 + e^{-x}} \qquad\qquad
+			\sigma'(x) = \sigma(x) (1 - \sigma(x))
+		\end{equation*}
+	\end{boxBlueNoFrame}
+
 	\begin{itemize}
-		\item $\sigma(x) = \frac{1}{1 + e^{-x}}$
-		\item $\sigma'(x) = \sigma(x) (1 - \sigma(x))$
-		\item Value range 0 to 1
-		\item Problem: Gradient can become very small (vanishing gradient), in contrast to large gradients it's not clear how to clip the gradient on the lower end
-		\item Problem: Output is not zero-centered (sigmoid output is always positive, gradients will be all positive or all negative which makes optimization harder)
+		\item Value range: 0 to 1
+		\item \Highlight{Problem 1:} Gradient can become very small \textbf{(vanishing gradient problem)}
+		\item \Highlight{Problem 2:} Output is not zero-centered (makes optimization harder)
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Sigmoid Function}{}
-	\begin{itemize}
-		\item \textit{Convergence is usually faster if the average of each input variable over the training set is close to zero. To see this, consider the extreme case where all the inputs are positive. Weights to a particular node in the first weight layer are updated by an amount proportional to $\delta$x where $\delta$ is the (scalar) error at that node and x is the input vector (see equations (5) and (10)). When all of the components of an input vector are positive, all of the updates of weights that feed into a node will have the same sign (i.e. sign($\delta$)). As a result, these weights can only all decrease or all increase together for a given input pattern. Thus, if a weight vector must change direction it can only do so by zigzagging which is inefficient and thus very slow.} - Yann LeCun et al., Efficient BackProp, 1998 (\url{http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf})
-	\end{itemize}
+
+% Sigmoid Function (Ctd.)
+\begin{frame}{Sigmoid Function (Ctd.)}{}
+	\begin{boxBlueNoFrame}
+		\footnotesize
+		\textit{`Convergence is usually faster if the average of each input variable over the training set is close to zero.
+		To see this, consider the extreme case where all the inputs are positive. Weights to a particular node in the first weight layer are updated by an amount
+		proportional to $\delta$x where $\delta$ is the (scalar) error at that node and x is the input vector. When all of the components of an input vector are
+		positive, all of the updates of weights that feed into a node will have the same sign (i.\,e. sign($\delta$)). As a result, these weights can only all decrease
+		or all increase together for a given input pattern. Thus, if a weight vector must change direction it can only do so by zigzagging which is inefficient and thus
+		very slow.'} - \textbf{Yann LeCun et al., Efficient BackProp, 1998} (\url{http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf})
+	\end{boxBlueNoFrame}
 \end{frame}
 
-\begin{frame}{tanh}{}
+
+% Tangent Hyperbolic (tanh)
+\begin{frame}{Tangent Hyperbolic (tanh)}{}
+	\begin{boxBlueNoFrame}
+		\begin{equation*}
+			\tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}} \qquad\qquad
+			\tanh'(x) = 1 - \tanh(x)^2
+		\end{equation*}
+	\end{boxBlueNoFrame}
+	
 	\begin{itemize}
-		\item $\tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}$
-		\item $\tanh'(x) = 1 - \tanh(x)^2$
-		\item Value range -1 to 1
+		\item Value range: -1 to 1
 		\item Zero-centered
-		\item Still suffers from the vanishing gradient problem
+		\item \Highlight{Still suffers from the vanishing gradient problem}
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Rectified Linear Unit (ReLU)}{}
-	\begin{itemize}
-		\item $ReLU(x) = max(0,x)$
-		\item $ReLU'(x) = \begin{Bmatrix}
-0 & x<0 \\
-1 & x>0 \\
-\end{Bmatrix}$
-	\end{itemize}
-	\begin{figure}
-		\centering
-		\begin{tikzpicture}[scale=0.6]
-		\begin{axis}[domain=-3:5]
-		\addplot+[mark=none,red,domain=-3:0] {0};
-		\addplot+[mark=none,red,domain=0:5] {x};
-		\end{axis}
-		\end{tikzpicture}
-	\end{figure}
-\end{frame}
 
+% Rectified Linear Unit (ReLU)
 \begin{frame}{Rectified Linear Unit (ReLU)}{}\important
+	\divideTwo{0.49}{
+		\begin{itemize}
+			\item $ReLU(x) = max(0,x)$
+			\item $ReLU'(x) = 
+			\begin{cases}
+				0 & \text{if}\ x \le 0 \\
+				1 & \text{otherwise}
+			\end{cases}$
+		\end{itemize}
+	}{0.49}{
+		\begin{figure}
+			\centering
+			\begin{tikzpicture}[scale=0.6]
+				\begin{axis}[domain=-3:5]
+					\addplot+[mark=none,red,domain=-3:0,ultra thick] {0};
+					\addplot+[mark=none,red,domain=0:5,ultra thick] {x};
+				\end{axis}
+			\end{tikzpicture}
+		\end{figure}
+	}
+\end{frame}
+
+
+% ReLU (Ctd.)
+\begin{frame}{ReLU (Ctd.)}{}\important
 	\begin{itemize}
 		\item ReLU does not lead to vanishing gradients
 		\item ReLU is very efficient to compute
 		\item Use ReLU as the hidden layer activation function!
-		\item But: Pay attention to the initialization of your parameters to avoid \textit{"dying ReLUs"} (parameter settings where single neurons will always output 0)
+		\item But: Pay attention to the initialization of your parameters to avoid \textit{`dying ReLUs'} (parameter settings where single neurons will always output 0)
+		\item \highlight{Use batch-normalization!}
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Softmax}{}
+
+% Softmax Activation
+\begin{frame}{Softmax Activation}{}
+	\begin{boxBlueNoFrame}
+		\begin{equation*}
+			softmax_k(\bm{x}) = \frac{\exp\{ x_k\}}{\sum_{j=1}^{\kappa} \exp\{x_j\}}
+		\end{equation*}
+	\end{boxBlueNoFrame}
 	\begin{itemize}
-		\item $softmax_i(x) = \frac{e^{x_i}}{\sum_{j=1}^K e^{x_j}}$
-		\item $\frac{\partial s_i}{\partial a_j} = \begin{Bmatrix}
-s_i (1 - s_j) & i = j \\
--s_i \cdot s_j & i \ne j \\
-\end{Bmatrix}$
-		\item Used to squash the last layer's activations into a probability distribution
+		\item Softmax is a \textbf{global activation function} (i.\,e. it depends on the preactivations of the other units in the layer)
+		\item It is used to squash the last layer's activations into a probability distribution, \textbf{such that the activations sum to 1}
 	\end{itemize}
 \end{frame}
 
-% Section: Further Network Architectures
+
+% Section: Further Network Architectures and Word Embeddings
 %______________________________________________________________________
-\section{Further Network Architectures}
-\makedivider{Further Network Architectures}
+\section[Further Network Architectures and Word Embeddings]{Further Arch. / Word Emb.}
+\makedivider{Further Network Architectures and Word Embeddings}
 
 % Subsection: Convolutional Neural Networks
 % --------------------------------------------------------------------------------------------------------
 \subsection{Convolutional Neural Networks}
 
-\begin{frame}{Convolutional Neural Networks}{Motivation}
+% Convolutional Neural Networks (CNNs)
+\begin{frame}{Convolutional Neural Networks (CNNs)}{}
 	\begin{itemize}
-		\item A large fully-connected MLP network can have a lot of parameters $\rightarrow$ it might be too complex / overfit or be computationally inefficient for some tasks
-		\item For some problems the input position may not matter in every case (e.\,g. when classifying emails as spam or not spam, we don't care if the word \textit{the} is at input position 3 or 5)
-		\item The MLP always needs a fixed-size input vector - but we might have variable-size input data (e.\,g. images in different resolutions, text sequences of different lengths, etc.)
+		\item A fully-connected MLP network has a lot of parameters, i.\,e. it might be \textbf{too complex} or \textbf{computationally inefficient} for some tasks
+		\item The input position does not matter in all cases (e.\,g. word positions when classifying emails)
+		\item An MLP always needs a fixed-size input vector, but \textbf{we might have variable-size input data}
+			(e.\,g. images in different resolutions, text sequences of different lengths, etc.)
+		\item \highlight{Solution:} Use \highlight{convolution}!
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Convolutional Neural Networks}{Idea}
+
+% CNN: General Idea
+\begin{frame}{CNN: General Idea}{}
+	\begin{boxBlueNoFrame}
+		\footnotesize
+		\textit{`A convolutional neural network is designed to identify indicative local predictors in a large structure, and combine them to produce a fixed size vector
+		representation of the structure, capturing these local aspects that are most informative for the prediction task at hand.'} - \textbf{Yoav Goldberg}
+	\end{boxBlueNoFrame}
 	\begin{itemize}
-		\item \textit{"A convolutional neural network is designed to identify indicative local predictors in a large structure, and combine them to produce a fixed size vector representation of the structure, capturing these local aspects that are most informative for the prediction task at hand."} - Yoav Goldberg
+		\item A CNN consists of multiple convolutional layers
+		\item A convolutional layer consists of a filter and a non-linear activation function
+		\item \highlight{Pooling} extracts the most important features \textbf{independent of their input position}
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Convolutional Neural Networks}{Representation}
+
+% Convolution
+\begin{frame}{Convolution}{}\important
+	\begin{boxBlueNoFrame}
+		\begin{equation*}
+			(x \star g)[i] = \sum_{j=-w}^w x[i - j] \cdot g[j]
+		\end{equation*}
+	\end{boxBlueNoFrame}
+		
 	\begin{itemize}
-		\item A CNN usually consists of multiple convolutional layers
-		\item A convolutional layer consists of a convolution (a.k.a. filter), a non-linear activation function and a pooling operation
-		\item Pooling extracts the most important features independent of their input position
+		\item $\star$ is the convolution operator
+		\item $x$ is the input to the convolutional layer
+		\item $i$ is the current position in the input
+		\item $j$ is the filter size / window size
+		\item $g$ is the convolution filter (kernel)
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Convolutional Neural Networks}{Representation}
-	\begin{itemize}
-		\item The convolution operation: $$(f \star g)[i] = \sum_{w=-W}^W f[i-w] g[w]$$\vspace{-0.3cm}
-		\begin{itemize}
-			\item $\star$ is the convolution operator,
-			\item $f$ is the input to the convolutional layer,
-			\item $i$ is the current position in the input,
-			\item $W$ is the filter size / window size,
-			\item $g$ is the filter (a.k.a. \textit{kernel})
-		\end{itemize}
-	\end{itemize}
-\end{frame}
 
-\begin{frame}{Convolutional Neural Networks}{Representation}
+% Convolution (Ctd.)
+\begin{frame}{Convolution (Ctd.)}{}\important
 	\begin{itemize}
-		\item The convolution operation: $(f \star g)[i] = \sum_{n=-N}^N f[i-n] g[n]$
-		\item We stride a filter across the input data (e.\,g. image pixels) with a certain stride size and multiply the input with the filter weights at each local position
+		\item The convolution operation
+		\begin{equation*}
+			(x \star g)[i] = \sum_{j=-w}^w x[i - j] \cdot g[j]
+		\end{equation*}
+		\item We shift a filter across the input data (e.\,g. image pixels) with a certain stride and multiply the input with the filter weights at each position
 	\end{itemize}
+	
 	\begin{figure}
 		\centering
-		\includegraphics[scale=0.90]{10_deep_learning/02_img/flatconvolution}
+		\includegraphics[scale=0.80]{10_deep_learning/02_img/flatconvolution}
 	\end{figure}
 \end{frame}
 
-\begin{frame}{Convolutional Neural Networks}{Representation}
-	\begin{itemize}
-		\item The outputs of the convolutions are passed through non-linear activation functions
-		\item Pooling is applied to extract only the most important activations:
-		\begin{itemize}
-			\item If $c_1, c_2, \dots, c_N \in \mathcal{R}$ are the outputs of the convolution, a \textit{max pooling} operation will output: $\underset{i}{\text{max}}\, c_i$
-		\end{itemize}
-		\item There are no parameters / weights involved in the pooling
-	\end{itemize}
-\end{frame}
-
-\begin{frame}{Convolutional Neural Networks}{Remarks}
-	\begin{itemize}
-		\item Usually many (hundreds or thousands) filters are applied simultaneously
-		\item We need to choose the number and size of filters, the stride (step-size) with which to slide them over the input, the activation functions, the pooling (max, $k$-max, mean)
-		\item Multiple convolutional layers can be applied subsequently to extract useful structures from the data (e.\,g. detecting edges, substructures)
-		\item Sparse connectivity and parameter-sharing make CNNs very efficient, computation can be parallelized
-	\end{itemize}
-\end{frame}
 
 % Convolution Animation
-\begin{frame}{Convolution Animation}{}
+\begin{frame}{Convolution Animation}{}\important
 	\begin{figure}
 		\centering
 		\animategraphics[autoplay,loop,height=5.5cm]{2.5}
@@ -835,64 +821,352 @@ s_i (1 - s_j) & i = j \\
 	\end{figure}
 \end{frame}
 
+
+% Pooling
+\begin{frame}{Pooling}{}
+	\begin{itemize}
+		\item The outputs of the convolutions are passed through non-linear activation functions (e.\,g. ReLU, tanh, ...)
+		\item Pooling is applied to extract only the most important activations:
+		\begin{itemize}
+			\item \highlight{max-pooling} (extracts the maximum activation)
+			\item \highlight{mean-pooling} (extracts the mean activation)
+			\item etc.
+		\end{itemize}
+		\item \textbf{There are no parameters involved in the pooling operation}
+		\item In image processing, pooling is necessary to reduce the dimensionality
+	\end{itemize}
+\end{frame}
+
+
 % Subsection: Recurrent Neural Networks
 % --------------------------------------------------------------------------------------------------------
 \subsection{Recurrent Neural Networks}
 
-% RNN Overview
-\begin{frame}{Recurrent Neural Networks}{Overview}
+% Recurrent Neural Networks
+\begin{frame}{Recurrent Neural Networks (RNNs)}{}
 	\begin{itemize}
-		\item Recurrent Neural Networks (RNNs) can be used to process sequences\newline (e.\,g. for sequence labelling tasks like named entity recognition, for sequence transduction tasks like machine translation, for sequence classification, etc.)
-		\item They are similar to feed-forward networks, but have a recurrent loop in the computational graph
-	\end{itemize}
-	\begin{figure}
-		\centering
-		\includegraphics[scale=0.25]{10_deep_learning/02_img/rnn}
-	\end{figure}
-\end{frame}
-
-\begin{frame}{Recurrent Neural Networks}{Representation}
-	\begin{align*}
-		\bm{h}_t &= \sigma_h(\bm{U} \bm{x} + \bm{V} \bm{h}_{t - 1} + \bm{b}_h)\\
-		\bm{o_t} &= \sigma_o(\bm{W} \bm{h_t} + \bm{b}_o)
-	\end{align*}
-	\begin{figure}
-		\centering
-		\includegraphics[scale=0.25]{10_deep_learning/02_img/rnn}
-	\end{figure}
-\end{frame}
-
-\begin{frame}{Recurrent Neural Networks}{Extensions}
-	\begin{itemize}
-		\item Bi-directionality: Run the RNN from left-to-right and right-to-left and concatenate the hidden states $\overset{\rightarrow}{h_t}$ and $\overset{\leftarrow}{h_t}$ for both directions
-		\item Gating: Gated Recurrent Units (GRUs) and Long-Short Term Memory (LSTM) Networks add additional parameters to RNNs to better control what is stored in the hidden state $h$ and to prevent vanishingly small gradients for long sequences
-		\item Skip-connections through time
-		\item Attention (re-expressing inputs and outputs in terms of a weighted combination with the other inputs)
-	\end{itemize}
-\end{frame}
-
-\begin{frame}{Recurrent Neural Networks}{Extensions}
-	\begin{itemize}
-		\item Long-Short Term Memory Network (Hochreiter, Schmidhuber, 1997):
+		\item \highlight{Recurrent Neural Networks (RNNs)} can be used to process sequences
 		\begin{itemize}
-			\item Input gate $\bm{i}_t = \sigma(\bm{W_i} \bm{x}_t + \bm{U}_i \bm{h}_{t-1})$
-			\item Forget gate $\bm{f}_t =\sigma(\bm{W_f} \bm{x}_t + \bm{U}_f \bm{h}_{t-1})$
-			\item Output gate $\bm{o}_t =\sigma(\bm{W_o} \bm{x}_t + \bm{U}_o \bm{h}_{t-1})$
-			\item New memory cell $\overset{\sim}{\bm{c}_t} = \tanh(\bm{W}_c \bm{x}_t + \bm{U}_c \bm{h}_{t-1})$
-			\item Final memory cell $\bm{c}_t = \bm{f}_t \odot \bm{c}_{t-1} + \bm{i}_t \odot \overset{\sim}{\bm{c}_t}$
-			\item Final hidden state $\bm{h}_t = \bm{o}_t \odot \tanh(\bm{c}_t)$
+			\item Sequence labeling (e.\,g. POS-tagging)
+			\item Sequence transduction (e.\,g. machine translation)
+			\item Sequence classification
 		\end{itemize}
-		\item $\sigma$ denotes the sigmoid activation function on this slide, $\odot$ is element-wise mutliplication (a.k.a. Hadamard product)
+		\item They are similar to feed-forward networks, but have a \textbf{recurrent loop in the computational graph}
+		\item By unfolding the network, it can be trained exactly like a feed-forward MLP using backpropagation
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Recurrent Neural Networks}{Extensions}
-	\begin{itemize}
-		\item Long-Short Term Memory Network (Hochreiter, Schmidhuber, 1997):
-	\end{itemize}
+
+% RNN Architecture
+\begin{frame}{RNN Architecture}{}
+	\begin{align*}
+		\bm{h}_t &= \sigma_h(\bm{U} \bm{x} + \bm{V} \bm{h}_{t - 1} + \bm{b}_h) \\
+		\bm{o}_t &= \sigma_o(\bm{W} \bm{h}_t + \bm{b}_o)
+	\end{align*}
+
+	\vspace*{-2mm}
 	\begin{figure}
 		\centering
-		\includegraphics[scale=0.50]{10_deep_learning/02_img/lstm}
+		\includegraphics[scale=0.35]{10_deep_learning/02_img/rnn}
+	\end{figure}
+\end{frame}
+
+
+% RNN Extensions
+\begin{frame}{RNN Extensions}{}\optional
+	\begin{itemize}
+		\item \textbf{Bi-directionality:} \\
+			Run one RNN from left to right and another one from right to left and concatenate the hidden states
+			$\overset{\rightarrow}{\bm{h}_t}$ and $\overset{\leftarrow}{\bm{h}_t}$
+		\item \textbf{Gating:} \\
+			\highlight{Gated Recurrent Units (GRUs)} and \highlight{Long-Short Term Memory (LSTM)} networks modify the recurrent unit
+			to better control what is stored in the hidden state $h$ and to prevent a vanishing gradient
+		\item \textbf{Skip-connections} through time
+	\end{itemize}
+\end{frame}
+
+
+% Inside an LSTM
+\begin{frame}{Inside an LSTM [Hochreiter/Schmidhuber, 1997]}{}\optional
+	\divideTwo{0.49}{
+		\vspace*{3mm}
+		\input{10_deep_learning/01_tikz/lstm_cell}
+	}{0.49}{
+		\vspace*{-5mm}
+		\footnotesize
+		\begin{align*}
+			\shortintertext{\highlight{Forget gate}}
+			\bm{f}_t 				&= \sigma(\bm{\Theta}_f \cdot [\bm{h}_{t-1}, \bm{x}_t] + b_f) 			\\
+			\shortintertext{\highlight{Input gate}}
+			\bm{i}_t 				&= \sigma(\bm{\Theta}_i \cdot [\bm{h}_{t-1}, \bm{x}_t] + b_i) 			\\
+			\widetilde{\bm{C}}_t 		&= \text{tanh}(\bm{\Theta}_C \cdot [\bm{h}_{t-1}, \bm{x}_t] + b_C) 		\\
+			\bm{C}_t 				&= \bm{f}_t \odot \bm{C}_{t-1} + \bm{i}_t \odot \widetilde{\bm{C}}_t 		\\
+			\shortintertext{\highlight{Output gate}}
+			\bm{o}_t 				&= \sigma(\bm{\Theta}_o \cdot [\bm{h}_{t-1}, \bm{x}_t] + b_o) 			\\
+			\bm{h}_t 				&= \bm{o}_t \odot \text{tanh}(\bm{C}_t)
+		\end{align*}
+	}
+\end{frame}
+
+
+% Subsection: Word Embeddings
+% --------------------------------------------------------------------------------------------------------
+\subsection{Word Embeddings}
+
+% Why Vector representations of natural Language?
+\begin{frame}{Why Vector representations of natural Language?}{}
+	\begin{itemize}
+		\item \textbf{Why?}
+		\begin{itemize}
+			\item Most machine learning algorithms (e.\,g. neural nets) cannot handle text input
+			\item Therefore, a numeric representation has to be devised
+		\end{itemize}
+		\item{\textbf{How? -- First ideas:}}
+		\begin{itemize}
+			\item Strawman idea: Represent each word $w \in \mathcal{V}$ as a one-hot vector
+			\item E.\,g. $\mathcal{V} = \{$this, great, be$\}$:
+			\begin{equation*}	
+				\bm{v}_{\text{this}} = [1,0,0]^{\intercal} \qquad
+				\bm{v}_{\text{great}} = [0,1,0]^{\intercal} \qquad
+				\bm{v}_{\text{be}} = [0,0,1]^{\intercal}
+			\end{equation*}
+			\item \textcolor{red}{\textbf{Problems:}} $\bm{v}_{w_i} \in \textcolor{red}{\mathbb{R}^{\vert \mathcal{V} \vert}}$
+			 	and semantics are not modeled
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+% Distributional Hypothesis [Harris, 1954] and [Firth, 1957]
+\begin{frame}{Distributional Hypothesis [Harris, 1954] and [Firth, 1957]}{}
+	\begin{itemize}
+		\item Other approaches are based onto the \highlight{distributional hypothesis}:
+		\begin{itemize}
+			\item{} [Harris, 1954]: Words are similar if they occur in similar contexts:
+			\vspace*{2mm}
+			\begin{center}
+				\textit{`The fact that, for example, not every adjective occurs with every noun can be used as a measure
+				of meaning  difference. (...) In other words, difference in meaning correlates with difference in distribution.'}
+			\end{center}
+			\vspace*{2mm}
+			\item{} [Firth, 1957]:
+			\vspace*{2mm}
+			\begin{center}
+				\textit{`You shall know a word by the company it keeps.'}
+			\end{center}
+			\vspace*{2mm}
+		\end{itemize}
+		\item It is possible to represent words by its context! Such models are called \highlight{count models}
+			[Baroni et al., 2014]
+	\end{itemize}
+\end{frame}
+
+
+% Distributional Hypothesis (Ctd.)
+\begin{frame}{Distributional Hypothesis (Ctd.)}{}
+	\begin{itemize}
+		\item Famous example by [McDonald and Ramscar, 2001]:
+		\vspace*{2mm}
+		\begin{center}
+			\textit{He filled the \textbf{wampimuk}, passed it around and we all drank some.} \\
+			$\Rightarrow$ jar, cup, glass, ...
+		\end{center}
+		\vspace*{2mm}
+		\pause
+		\begin{center}
+			\textit{We found a little hairy \textbf{wampimuk} sleeping behind the tree.} \\
+			$\Rightarrow$ cat, bear, raccoon, ...
+		\end{center}
+		\vspace*{2mm}
+		\item \highlight{Based on the context the invented word \underline{`wampimuk'} is associated with a different meaning}
+	\end{itemize}
+\end{frame}
+
+
+% Count Models
+\begin{frame}{Count Models}{}
+	\begin{itemize}
+		\item Set a window size $m$ and count \# of times a word occurs in that window
+		\item We get a $\vert \mathcal{V} \vert \times \vert \mathcal{V} \vert$ count matrix $\bm{M}$
+		\item Similar approach: \highlight{Latent semantic analysis} [Deerwester et al., 1990]
+	\end{itemize}
+	\divideTwo{0.39}{
+		\vspace*{-3mm}
+		Example by R. Socher:
+		\begin{itemize}
+			\item I like deep learning .
+			\item I like NLP .
+			\item I enjoy flying .
+		\end{itemize}
+	}{0.59}{
+		\vspace*{4mm}
+		\input{10_deep_learning/03_tbl/count_matrix}
+	}
+\end{frame}
+
+
+% Count Models (Ctd.)
+\begin{frame}{Count Models (Ctd.)}{}
+	\begin{itemize}
+		\item Each column (or row) can be used as a word vector
+		\item \textbf{Observations:}
+		\begin{enumerate}
+			\item Due to the counts the word vector now captures the context/semantics better
+			\item The vector is still huge! (size of the vocabulary)
+		\end{enumerate}
+		\item \highlight{Singular value decomposition (SVD)} is performed in order to reduce the dimensionality of the
+			matrix $\bm{M}$:
+		\begin{equation*}
+			\bm{M} = \bm{U} \bm{\Sigma} \bm{V}^{\intercal}
+		\end{equation*}
+		\item We can now use matrix $\bm{U}$ as a reduced version
+	\end{itemize}
+\end{frame}
+
+
+% word2vec Introduction
+\begin{frame}{word2vec [Mikolov et al., 2013] Introduction}{}
+	\begin{itemize}
+		\item Why not learning compact word representations in the first place?
+		\item T. Mikolov et al. proposed \highlight{word2vec}
+		\item \textbf{Unsupervised learning} using an \textbf{auxiliary task}
+		\item The auxiliary task is inspired by the concept of \highlight{language models}, \\ e.\,g. [Bengio et al., 2003]
+		\begin{itemize}
+			\item A language model predicts the next word given the previous words
+			\item E.\,g.: \textit{A dog is a man's best} $\rule{2cm}{0.15mm}$ .
+		\end{itemize} 
+	\end{itemize}
+\end{frame}
+
+
+% CBOW vs. Skip-Gram
+\begin{frame}{CBOW vs. Skip-Gram}{}
+	\textbf{Mikolov et al. propose two architectures:} \vspace*{2mm}
+	\begin{itemize}
+		\item \highlight{CBOW (Continuous bag-of-words):} \\
+			Predict the middle word given the context, e.\,g.:
+		\vspace*{2mm}
+		\begin{center}
+			same procedure $\rule{2cm}{0.15mm}$ every year
+		\end{center}
+		\vspace*{2mm}
+		\item \highlight{Skip-Gram:} \\
+			Predict the context words given the middle word, e.\,g.:
+		\vspace*{2mm}
+		\begin{center}
+			$\rule{2cm}{0.15mm}$ $\rule{2cm}{0.15mm}$ as $\rule{2cm}{0.15mm}$ $\rule{2cm}{0.15mm}$
+		\end{center}
+	\end{itemize}
+\end{frame}
+
+
+% CBOW vs. Skip-Gram (Ctd.)
+\begin{frame}{CBOW vs. Skip-Gram (Ctd.)}{}
+	\divideTwo{0.49}{
+		\input{10_deep_learning/01_tikz/cbow}
+	}{0.49}{
+		\input{10_deep_learning/01_tikz/skipgram}
+	}
+\end{frame}
+
+
+% Skip-Gram in more Detail
+\begin{frame}{Skip-Gram in more Detail}{}
+	\divideTwo{0.49}{
+		\input{10_deep_learning/01_tikz/skipgram_detail}
+	}{0.49}{
+		\begin{itemize}
+			\item The input/labels are \textbf{one-hot vectors} (also for CBOW)
+			\item $\bm{E} \in \mathbb{R}^{d \times \vert \mathcal{V} \vert}$ is a \textbf{shared embedding matrix}
+			\item \textbf{Identity activation} in the projection layer
+			\item $\bm{w} \bm{E} = \bm{v} \in \mathbb{R}^{d \times 1}$ is the embedding of word $\bm{w}$
+				(since $\bm{w}$ is one-hot)
+		\end{itemize}
+	}
+\end{frame}
+
+
+% Skip-Gram in more Detail (Ctd.)
+\begin{frame}[plain]{}{}
+	\input{10_deep_learning/01_tikz/skipgram_more_detail}
+\end{frame}
+
+
+% Skip-Gram Training Objective
+\begin{frame}{Skip-Gram Training Objective}{}
+	\begin{itemize}
+		\item Skip-Gram optimizes the \highlight{negative log-likelihood}:
+		\begin{equation*}
+			\footnotesize
+			\mathcal{J}(\bm{\theta}) = -\frac{1}{T} \sum_{t=1}^T \sum_{\substack{-m \le j \le m\\ j \ne 0}}
+				\log p(w_{t+j} \vert w_t; \bm{\theta})
+		\end{equation*}
+		\item The probability is given by the soft-max:
+		\begin{equation*}
+			\footnotesize
+			p(o \vert c) = \frac{\exp\{ \bm{u}_o^{\intercal} \bm{v}_c \}}{
+				\sum_{w=1}^{\vert \mathcal{V} \vert} \exp\{ \bm{u}_w^{\intercal} \bm{v}_c \}}
+		\end{equation*}
+		\item $t$ is the index into the corpus, $o$ and $c$ are indices into the vocabulary
+	\end{itemize}
+\end{frame}
+
+
+% Evaluation of Word Embeddings
+\begin{frame}{Evaluation of Word Embeddings}{}
+	\begin{itemize}
+		\item As Mikolov et al. found out, the embeddings do not only capture \textbf{syntactic regularities}...
+		\item ...but also \textbf{semantic aspects} of the words
+		\item \textbf{How did the authors get this insight?}
+		\item[$\bm{\Rightarrow}$] Definition of a set of 9 syntactic and 5 semantic questions/tasks, e.\,g.:
+		\begin{itemize}
+			\item Adjective to adverb (e.\,g. \texttt{bad} $\Leftrightarrow$ \texttt{badly})
+			\item Comparative (e.\,g. \texttt{great} $\Leftrightarrow$ \texttt{greater})
+			\item Nation adjective (e.\,g. \texttt{France} $\Leftrightarrow$ \texttt{French})
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+% Evaluation of Word Embeddings (Ctd.)
+\begin{frame}{Evaluation of Word Embeddings (Ctd.)}{}
+	\begin{itemize}
+		\item An instance of a \underline{syntactic} question (Comparative):
+		\vspace*{2mm}
+		\begin{center}
+			\textit{What is the word that is similar to \textbf{small} in the same sense as \\
+			\textbf{biggest} is similar to \textbf{big}?}
+		\end{center}
+		\vspace*{2mm}
+		\item One very famous \underline{semantic} example (Man-Woman):
+		\vspace*{2mm}
+		\begin{center}
+			\textit{\textbf{Man} relates to \textbf{king} like \textbf{woman} does to...?}
+		\end{center}
+	\end{itemize}
+\end{frame}
+
+
+% Evaluation of Word Embeddings (Ctd.)
+\begin{frame}{Evaluation of Word Embeddings (Ctd.)}{}
+	\begin{itemize}
+		\item Such questions can be answered by performing basic algebraic operations:
+		\begin{equation*}
+			\bm{v}_{biggest} - \bm{v}_{big} + \bm{v}_{small} \approx \bm{v}_{smallest}
+		\end{equation*}
+		\begin{equation*}
+			\bm{v}_{king} - \bm{v}_{man} + \bm{v}_{woman} \approx \bm{v}_{queen}
+		\end{equation*}
+		\item A visual example:
+		\input{10_deep_learning/01_tikz/vector_operation}
+	\end{itemize}
+\end{frame}
+
+
+% Result of Country Capital Task
+\begin{frame}{Result of Country Capital Task}{}
+	\begin{figure}
+		\includegraphics[scale=0.3]{10_deep_learning/02_img/country_capital}
 	\end{figure}
 \end{frame}
 
@@ -910,9 +1184,9 @@ s_i (1 - s_j) & i = j \\
 \begin{frame}{Summary}{}
 	\begin{itemize}
 		\item Neural Networks are powerful models for pattern recognition
-		\item The Perceptron can classify all training examples correctly iff the training data is linearly separable
-		\item Multi-Layer Perceptrons are universal function approximators
-		\item Backpropagation is a recursive procedure based on the chain rule of calculus to obtain the gradients for neural network learning
+		\item The perceptron can classify all training examples correctly, \textbf{iff the training data is linearly separable}
+		\item \textbf{MLPs are universal function approximators}
+		\item Backpropagation is a recursive procedure based on the \textbf{chain rule of calculus} to obtain the gradients for neural network learning
 		\item Different neural network architectures like CNNs and RNNs exist for solving different kinds of problems
 	\end{itemize}
 \end{frame}
@@ -927,10 +1201,11 @@ s_i (1 - s_j) & i = j \\
 	\begin{enumerate}
 		\item What is the relation between neural networks and logistic regression?
 		\item What is a perceptron? Which problems can it solve and which not?
-		\item Why do we often use multiple layers used instead of a simple Perceptron?
+		\item Why do we often use multiple layers instead of a simple perceptron?
 		\item How does backpropagation work? How does a neural network learn?
 		\item What are advantages and disadvantages of using neural networks?
 		\item What are CNNs and RNNs? For which tasks are they suitable?
+		\item How can words be represented in vectorial form?
 	\end{enumerate}
 \end{frame}
 

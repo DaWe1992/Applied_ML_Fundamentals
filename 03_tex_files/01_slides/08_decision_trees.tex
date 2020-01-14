@@ -452,7 +452,7 @@
 
 
 % Why not use the Error as a splitting Criterion?
-\begin{frame}{Why not use the Error as a splitting Criterion?}{}
+\begin{frame}{Why not use the Error as a splitting Criterion?}{}\optional
 	\begin{itemize}
 		\item The bias towards pure leaves is \textbf{not strong enough}
 		\item \textbf{Example:}
@@ -553,7 +553,7 @@
 	\begin{boxBlueNoFrame}
 		\footnotesize
 		In this case the attribute \texttt{Day} would still be chosen.
-		Be careful what features to include into the training data set! \highlight{(Feature engineering is important!)}
+		Be careful what features to include into the training data set! \highlight{(feature engineering is important!)}
 	\end{boxBlueNoFrame}
 \end{frame}
 
@@ -619,7 +619,7 @@
 \subsection{Regression Trees}
 
 % Regression Trees
-\begin{frame}{Regression Trees}{}
+\begin{frame}{Regression Trees}{}\optional
 	\begin{itemize}
 		\item Prediction of continuous variables
 		\item Predict average value of all examples in the leaf
@@ -638,6 +638,17 @@
 \end{frame}
 
 
+% Iris Demo
+{\setbeamertemplate{navigation symbols}{}
+\begin{frame}[plain]{}{}
+	\begin{tikzpicture}[remember picture,overlay]
+            	\node[at=(current page.center)] {
+                	\includegraphics[width=\paperwidth,height=\paperheight]{08_decision_trees/02_img/iris}
+          	};
+        \end{tikzpicture}
+\end{frame}}
+
+
 % Section: Ensemble Methods
 %______________________________________________________________________
 \section{Ensemble Methods}
@@ -650,7 +661,7 @@
 % Introduction Ensemble Methods
 \begin{frame}{Introduction Ensemble Methods}{}
 	\begin{itemize}
-		\item \textbf{Key Idea}: Don't learn a single classifier but a \textbf{set of classifiers}
+		\item \textbf{Key Idea}: Don't learn a single classifier, but a \textbf{set of classifiers}
 		\item Combine the predictions of the single classifiers to obtain the final prediction
 	\end{itemize}
 		
@@ -760,7 +771,7 @@
 				\item This is how \highlight{random forests} work
 			\end{itemize}
 			\item Creating \textbf{heterogeneous ensembles} \\
-				(Neural networks, decision trees, support vector machines, ...)
+				(neural networks, decision trees, support vector machines, ...)
 		\end{enumerate}
 	\end{itemize}
 \end{frame}
@@ -783,7 +794,7 @@
 		\item Some algorithms already do that: E.\,g. neural networks (random initialization of weights)
 		\item Especially greedy algorithms can be randomized:
 		\begin{itemize}
-			\item Pick from the options \textbf{randomly} instead of picking the best one
+			\item Pick from the options \textbf{randomly}, instead of picking the best one
 			\item E.\,g. decision trees: Do not choose attribute with highest information gain
 		\end{itemize}
 	\end{itemize}
@@ -861,7 +872,7 @@
 	\end{itemize}
 
 	\begin{boxBlueNoFrame}
-		\highlight{The large number of classifiers compensates for suboptimal splits}
+		\highlight{The large number of classifiers compensates for suboptimal splits.}
 	\end{boxBlueNoFrame}
 \end{frame}
 
@@ -884,7 +895,7 @@
 				\item Assign a weight to each classifier (depending on their error)
 			\end{itemize}
 			\item \textbf{How to}:
-				\footnotesize \textit{(Unlike bagging, boosting \textbf{cannot} be parallelized!)} \normalsize
+				\footnotesize \textit{(unlike bagging, boosting \textbf{cannot} be parallelized!)} \normalsize
 			\begin{enumerate}
 				\item Initialize example weights with $\nicefrac{1}{n}$
 				\item Train a model using the example weights, calculate error and model weight
@@ -931,12 +942,14 @@
 	\vspace*{2mm}
 	\divideTwo{0.49}{
 		\begin{center}
+			\footnotesize
 			\hspace*{7mm}\textbf{Model weights} $\alpha_u$
 		\end{center}
 		\vspace*{-7mm}
 		\input{08_decision_trees/01_tikz/model_weights}
 	}{0.49}{
 		\begin{center}
+			\footnotesize
 			\hspace*{7mm}\textbf{Example weights} $w_i$
 		\end{center}
 		\vspace*{-7mm}
@@ -1088,7 +1101,7 @@
 \subsection{Error-correcting Output Codes}
 
 % Multi-Class-Problems
-\begin{frame}{Multi-Class-Problems}{}
+\begin{frame}{Multi-Class-Problems}{}\optional
 	\begin{itemize}
 		\item Usually, a \textbf{class binarization} technique is needed
 		\item One-vs-Rest (one classifier for each class)
@@ -1112,7 +1125,7 @@
 
 
 % Error-Correcting Output Codes (ECOCs)
-\begin{frame}{Error-Correcting Output Codes (ECOCs)}{}
+\begin{frame}{Error-Correcting Output Codes (ECOCs)}{}\optional
 	\begin{itemize}
 		\item Use code words that have a high pairwise \highlight{Hamming distance} $d$
 		\item Can correct up to $(d - 1) / 2$ single bit-errors
@@ -1125,7 +1138,7 @@
 
 
 % ECOCs: How to encode the classes?
-\begin{frame}{ECOCs: How to encode the classes?}{}
+\begin{frame}{ECOCs: How to encode the classes?}{}\optional
 	\divideTwo{0.15}{
 		\vspace*{5mm}
 		\fbox{\includegraphics[scale=0.60]{08_decision_trees/02_img/binary}}
@@ -1213,25 +1226,19 @@
 
 % Literature
 %______________________________________________________________________
-\begin{frame}{Recommended Literature and further Reading}{}
+\begin{frame}[allowframebreaks]{Recommended Literature and further Reading}{}
 	\footnotesize
 	\begin{thebibliography}{2}
-		\literature{book}{Hastie et al. 2008}{[2] The Elements of Statistical Learning}
+		\literature{book}{Hastie et al. 2008}{[1] The Elements of Statistical Learning}
 			{Hastie et al. Springer. 2008.}{$\rightarrow$ \href{
 				https://web.stanford.edu/~hastie/Papers/ESLII.pdf
 			}{\linkstyle{Link}}, cf. chapters 8.7, 8.8, 9.2, 10.1}\\
 		\literature{book}{Tom M. Mitchell 1997}{[2] Machine Learning}
 			{Tom M. Mitchell. McGraw-Hill. 1997.}{$\rightarrow$ \href{
-				https://www.cs.ubbcluj.ro/~gabis/ml/ml-books/McGrawHill%20-%20Machine%20Learning%20-Tom%20Mitchell.pdf
+				https://www.cs.ubbcluj.ro/~gabis/ml/ml-books/McGrawHill\%20-\%20Machine\%20Learning\%20-Tom\%20Mitchell.pdf
 			}{\linkstyle{Link}}, cf. chapter 3}\\
-		\literature{online}{Dave Sotelo, Online Blog}{Using Bagging and Boosting to Improve Classification Tree Accuracy}{Dave Sotelo, Online Blog}{$\rightarrow$ \href{https://towardsdatascience.com/using-bagging-and-boosting-to-improve-classification-tree-accuracy-6d3bb6c95e5b}{\linkstyle{Link}}}
-	\end{thebibliography}
-\end{frame}
-
-\begin{frame}{Recommended Literature and further Reading (Ctd.)}{}
-	\footnotesize
-	\begin{thebibliography}{2}
-		\literature{book}{Bishop.2006}{[2] Pattern Recognition and Machine Learning}
+		\literature{online}{Dave Sotelo, Online Blog}{[3] Using Bagging and Boosting to Improve Classification Tree Accuracy}{Dave Sotelo, Online Blog}{$\rightarrow$ \href{https://towardsdatascience.com/using-bagging-and-boosting-to-improve-classification-tree-accuracy-6d3bb6c95e5b}{\linkstyle{Link}}}
+		\literature{book}{Bishop.2006}{[4] Pattern Recognition and Machine Learning}
 			{Christopher Bishop. Springer. 2006.}{$\rightarrow$ \href{
 				http://users.isr.ist.utl.pt/~wurmd/Livros/school/Bishop\%20-\%20Pattern\%20Recognition\%20And\%20Machine\%20Learning\%20-\%20Springer\%20\%202006.pdf
 			}{\linkstyle{Link}}, cf. chapter 14.3}
