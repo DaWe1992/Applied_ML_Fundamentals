@@ -305,11 +305,43 @@
 % --------------------------------------------------------------------------------------------------------
 \subsection{The original Perceptron Algorithm}
 
-% Perceptron [\textit{Rosenblatt}, 1957]
-\begin{frame}{Perceptron [\textit{Rosenblatt}, 1957]}{}
-	\begin{itemize}
-		\item 
-	\end{itemize}
+% Original Perceptron Algorithm [\textit{Rosenblatt}, 1957]
+\begin{frame}{Original Perceptron Algorithm [\textit{Rosenblatt}, 1957]}{}
+	\begin{enumerate}
+		\item Initialize the weight vector $\bm{\theta}$ and a bias $b$
+		\item $\forall (\bm{x}_i \in \bm{X}, y_i \in \{ -1, +1 \})_{i=1}^n$ (until convergence):
+		\begin{itemize}
+			\item[\textbf{2a)}] If $\bm{x}_i$ is correctly classified, do nothing
+			\item[\textbf{2b)}] Else if $y_i = +1$, update the paramters with:
+			\begin{equation*}
+				\bm{w} \longleftarrow \bm{w} + \bm{x}_i \qquad\qquad b \longleftarrow b + 1
+			\end{equation*}
+			\item[\textbf{2c)}] Else if $y_i = -1$, update the paramters with:
+			\begin{equation*}
+				\bm{w} \longleftarrow \bm{w} - \bm{x}_i \qquad\qquad b \longleftarrow b - 1
+			\end{equation*}
+		\end{itemize}
+	\end{enumerate}
+\end{frame}
+
+
+% Original Perceptron Algorithm (Ctd.)
+\begin{frame}{Original Perceptron Algorithm (Ctd.)}{}
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.35]{10_deep_learning/02_img/perceptron_1}
+	\end{figure}
+	\citeAuthor{cf.}{Bishop.2006}{p. 195}
+\end{frame}
+
+
+% Original Perceptron Algorithm (Ctd.)
+\begin{frame}{Original Perceptron Algorithm (Ctd.)}{}
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.35]{10_deep_learning/02_img/perceptron_2}
+	\end{figure}
+	\citeAuthor{cf.}{Bishop.2006}{p. 195}
 \end{frame}
 
 
@@ -324,9 +356,9 @@
 \end{frame}
 
 
-% Subsection: Perceptron Learning Algorithm
+% Subsection: `New' Perceptron Learning Algorithm
 % --------------------------------------------------------------------------------------------------------
-\subsection{Perceptron Learning Algorithm}
+\subsection{`New' Perceptron Learning Algorithm}
 
 % The Architecture of a Neuron
 \begin{frame}{The Architecture of a Neuron}{}
@@ -334,8 +366,8 @@
 \end{frame}
 
 
-% Perceptron (Ctd.)
-\begin{frame}{Perceptron (Ctd.)}{}
+% Perceptron
+\begin{frame}{Perceptron}{}
 	\begin{itemize}
 		\item The neuron receives an input vector $\bm{x}$:
 		\begin{equation*}
@@ -357,8 +389,8 @@
 % Perceptron (Ctd.)
 \begin{frame}{Perceptron (Ctd.)}{}
 	\begin{itemize}
-		\item The simplest activation function is to use a threshol\footnote[frame]{Not used, since not differentiable;
-			alternatives later}d $\rho$:
+		\item The simplest activation function is to use a threshold\footnote[frame]{Not used, since not differentiable;
+			alternatives later} $\rho$:
 		\begin{equation*}
 			\sigma_{\rho}(a) =
 			\begin{cases}
@@ -1024,8 +1056,8 @@
 \end{frame}
 
 
-% word2vec Introduction
-\begin{frame}{word2vec [Mikolov et al., 2013] Introduction}{}
+% word2vec
+\begin{frame}{word2vec [Mikolov et al., 2013]}{}
 	\begin{itemize}
 		\item Why not learning compact word representations in the first place?
 		\item T. Mikolov et al. proposed \highlight{word2vec}

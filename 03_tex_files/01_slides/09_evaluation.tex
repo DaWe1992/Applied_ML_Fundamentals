@@ -625,6 +625,7 @@
 
 % Evaluation of Regressors
 \begin{frame}{Evaluation of Regressors}{}
+	\vspace*{2mm}
 	\begin{itemize}
 		\item \highlight{Coefficient of determination $R^2$:}
 		\scriptsize
@@ -716,6 +717,32 @@
 \end{frame}
 
 
+% Subsection: Bias and Variance
+% --------------------------------------------------------------------------------------------------------
+\subsection{Bias and Variance}
+
+
+% Bias and Variance
+\begin{frame}{Bias and Variance}{}
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.55]{09_evaluation/02_img/bias_variance}
+	\end{figure}
+\end{frame}
+
+
+% Underfitting and Overfitting
+\begin{frame}[plain]{}{}
+	\bubble{1}{5}{
+		\footnotesize Use early stopping!
+	}
+	\begin{figure}
+		\centering
+		\includegraphics[scale=1.3]{09_evaluation/02_img/under_overfitting}
+	\end{figure}
+\end{frame}
+
+
 % Section: Wrap-Up
 %______________________________________________________________________
 \section{Wrap-Up}
@@ -735,6 +762,7 @@
 		\item ROC curves are used for the evaluation of rankers
 		\item Different classifiers can be optimal assuming a different cost model
 		\item Hyper-parameters are optimized using \textbf{grid search} or \textbf{random search}
+		\item Keep the \textbf{bias-variance trade-off} in mind!
 	\end{itemize}
 \end{frame}
 
@@ -776,7 +804,10 @@
 \begin{frame}{Recommended Literature and further Reading}{}
 	\footnotesize
 	\begin{thebibliography}{2}
-
+		\literature{book}{Mitchell.1997}{[1] Machine Learning}
+			{Tom Mitchell. McGraw-Hill Science. 1997.}{$\rightarrow$ \href{
+				https://www.cs.ubbcluj.ro/~gabis/ml/ml-books/McGrawHill\%20-\%20Machine\%20Learning\%20-Tom\%20Mitchell.pdf
+			}{\linkstyle{Link}}, cf. chapter 5}
 	\end{thebibliography}
 \end{frame}
 
