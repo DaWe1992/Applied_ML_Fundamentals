@@ -1,0 +1,134 @@
+\input{preamble_theme}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+
+% title
+\title{Exercise 4 - Classification}
+
+% ====================================================
+% ====================================================
+% BEGIN OF DOCUMENT
+% ====================================================
+% ====================================================
+\begin{document}
+\AddToShipoutPicture*{\BackgroundPic}
+
+\maketitle
+\medskip
+\newpage
+ 
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\lstdefinestyle{pystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+ 
+\lstset{style=pystyle}
+
+% Decision Trees
+%______________________________________________________________________
+\section{Decision Trees}
+
+\begin{enumerate}[label=\alph*)]
+
+% Task 1
+\exercise{ID3 Decision Tree Construction (3 points)}{You are given the following labeled dataset with the goal to construct a model for predicting when to choose which sport. Construct a decision tree using pen and paper with the information gain / entropy based splitting criterion. Constructing the first two levels of the tree is sufficient (i.\,e. performing the first split and one more split per attribute value of the first splitting attribute). Draw the tree and indicate each splitting attribute. Show your calculations.
+\begin{center}
+    \begin{tabular}{| c  c  c  c | c |}
+    \hline
+    Outlook & Temperature & Humidity & Wind & Which sport? \\ \hline
+    sunny & cold & high & weak & soccer \\
+    cloudy & cold & low & strong & soccer \\
+    sunny & warm & low & weak & soccer \\ \hline
+    rainy & cold & high & weak & squash \\
+    sunny & cold & high & weak & squash \\  
+    rainy & warm & high & strong & squash \\
+    cloudy & cold & high & weak & squash \\
+    rainy & warm & high & weak & squash \\ \hline
+    cloudy & warm & high & weak & tennis \\ 
+    cloudy & cold & low & strong & tennis \\
+    sunny & cold & low & strong & tennis \\
+    cloudy & cold & high & weak & tennis \\
+    \hline
+    \end{tabular}
+\end{center}
+}{5cm}
+
+% Solution:
+
+
+\end{enumerate}
+\pagebreak
+
+% Neural Networks
+%______________________________________________________________________
+\section{Neural Networks}
+
+\begin{enumerate}[label=\alph*)]
+
+% Task 1
+\exercise{Hyperparameter exploration (2 points)}{Try varying the hyperparameters of a multi-layer perceptron on the TensorFlow Playground webpage (\url{https://playground.tensorflow.org}) using the \textit{Circle} classification dataset (see figure below). Try different numbers of hidden layers and different numbers of neurons per layer. Does it work better to a) use more neurons near the input layer, b) more neurons towards the last hidden layer or c) use the same number of neurons in each hidden layer? Provide a justification for why a), b) or c) might work better.\newline Can a perceptron (without hidden layers) separate the circular dataset? Why or why not?
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.6]{01_img/TensorFlow_playground_settings}
+\label{figtfp}
+\caption{Mandatory settings on TensorFlow Playground for this exercise}
+\end{figure}
+}{5cm}
+
+% Solution:
+
+\pagebreak
+% Task 2
+\exercise{Multi-Layer Perceptron for Sentiment Analysis (5 points)}{Implement a multi-layer perceptron for classifying the movie reviews in the folder \textit{data/moviereviews} as positive or negative using PyTorch (\url{https://pytorch.org/}). You can find the movie review texts in the file \textit{reviews.txt}. The labels can be found in the file \textit{labels.txt}, each line $i$ contains the label for the movie review in line $i$ of \textit{reviews.txt}. You have to map each of the movie review texts to a fixed-size embedding vector, which you can use as input to your multi-layer perceptron. You can do so using the flair library\footnote{https://github.com/flairNLP/flair}. Install it using \textit{pip install flair}. You can use it to encode text as follows (there are multiple ways - pooling of pre-trained word vectors, recurrent neural nets, etc.):}{0.5cm}
+\begin{lstlisting}[language=Python, breaklines=true, caption=Embedding documents using flair]
+from flair.embeddings import WordEmbeddings, DocumentRNNEmbeddings, FlairEmbeddings, DocumentPoolEmbeddings, Sentence
+
+# instantiate pre-trained word embeddings
+word_embeddings = WordEmbeddings("glove")
+
+# document pool embeddings - you can try to exchange this with DocumentRNNEmbeddings!
+document_embeddings = DocumentPoolEmbeddings([embeddings], fine_tune_mode='none')
+
+# create an example sentence object
+sentence = Sentence("Colorless green ideas sleep furiously.")
+
+# embed the sentence with the document embeddings (needed for each movie review)
+document_embeddings.embed(sentence)
+
+# check out the embedded sentence - it's a torch.Tensor object :-)
+print(sentence.get_embedding())
+\end{lstlisting}
+Perform a 3-fold cross validation and report precision and recall. Report your hyperparameter configuration (learning rate, batch size, network structure, etc.).\\\\
+
+% Solution:
+
+
+% Bonus question
+\pagebreak
+\exercise{Bonus Question: Word Embeddings (1 point)}{Read the paper "Deep contextualized word representations" (Peters et al.)\footnote{\url{https://arxiv.org/pdf/1802.05365.pdf}} and answer the following questions. What is the most important difference between word2vec or GloVe word embeddings and the ELMo model proposed in the paper? Why does this difference have a large effect on the quality of the word embeddings?}{5cm}
+
+% Solution:
+
+
+\end{enumerate}
+
+\end{document}
