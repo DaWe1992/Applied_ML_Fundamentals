@@ -50,27 +50,30 @@
 \begin{enumerate}[label=\alph*)]
 
 % Task 1
-\exercise{ID3 Decision Tree Construction (3 points)}{You are working at a bank which needs to assess when to give credits and when not. You are given the following labeled dataset with the goal to construct a model for predicting whether to give a credit or not. Construct a decision tree using pen and paper with the information gain / entropy based splitting criterion. Draw the tree and indicate each splitting attribute. Show your calculations.
+\exercise{ID3 Decision Tree Construction (3 points)}{You are given the following labeled dataset with the goal to construct a model for predicting when to choose which sport. Construct a decision tree using pen and paper with the information gain / entropy based splitting criterion. Constructing the first two levels of the tree is sufficient (i.\,e. performing the first split and one more split per attribute value of the first splitting attribute). Draw the tree and indicate each splitting attribute. Show your calculations.
 \begin{center}
     \begin{tabular}{| c  c  c  c | c |}
     \hline
-    Age & Educational Degree & Married & Income Level & Give Credit? \\ \hline
-    old & secondary & no & high & yes \\
-    old & college & no & high & yes \\
-    old & college & no & high & yes \\
-    young & secondary & no & high & yes \\    
-    old & secondary & yes & medium & yes \\
-    young & college & yes & low & yes \\
-    young & college & no & high & yes \\
-    old & secondary & no & medium & yes \\ \hline
-    young & primary & yes & medium & no \\
-    young & secondary & yes & medium & no \\
-    old & primary & yes & low & no \\
-    young & college & no & medium & no \\ 
+    Outlook & Temperature & Humidity & Wind & Which sport? \\ \hline
+    sunny & cold & high & weak & soccer \\
+    cloudy & cold & low & strong & soccer \\
+    sunny & warm & low & weak & soccer \\ \hline
+    rainy & cold & high & weak & squash \\
+    sunny & cold & high & weak & squash \\  
+    rainy & warm & high & strong & squash \\
+    cloudy & cold & high & weak & squash \\
+    rainy & warm & high & weak & squash \\ \hline
+    cloudy & warm & high & weak & tennis \\ 
+    cloudy & cold & low & strong & tennis \\
+    sunny & cold & low & strong & tennis \\
+    cloudy & cold & high & weak & tennis \\
     \hline
     \end{tabular}
 \end{center}
 }{5cm}
+
+% Solution:
+
 
 \end{enumerate}
 \pagebreak
@@ -114,10 +117,16 @@ document_embeddings.embed(sentence)
 # check out the embedded sentence - it's a torch.Tensor object :-)
 print(sentence.get_embedding())
 \end{lstlisting}
-Perform a 3-fold cross validation and report precision and recall. Report your hyperparameter configuration (learning rate, batch size, network structure, etc.).
+Perform a 3-fold cross validation and report precision and recall. Report your hyperparameter configuration (learning rate, batch size, network structure, etc.).\\\\
 
 % Solution:
 
+
+% Bonus question
+\pagebreak
+\exercise{Bonus Question: Word Embeddings (1 point)}{Read the paper "Deep contextualized word representations" (Peters et al.)\footnote{\url{https://arxiv.org/pdf/1802.05365.pdf}} and answer the following questions. What is the most important difference between word2vec or GloVe word embeddings and the ELMo model proposed in the paper? Why does this difference have a large effect on the quality of the word embeddings?}{5cm}
+
+% Solution:
 
 
 \end{enumerate}
