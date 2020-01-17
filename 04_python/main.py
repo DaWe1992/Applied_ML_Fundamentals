@@ -25,7 +25,7 @@ from clf.knn import kNN
 from clf.svm import SVM
 from clf.lda import LDA
 from clf.logistic_regression import LogisticRegression, LogRegOneVsOne
-from clf.neural_network import NeuralNetwork
+from clf.mlp_torch import MLP
 
 # unsupervised learning
 # -----------------------------------------------------------------------------
@@ -54,7 +54,7 @@ def classification():
     Classification.
     """
     # create data
-    X, y = DataCreator().make_classification(sklearn=True, n_classes=3)
+    X, y = DataCreator().make_classification(sklearn=True, n_classes=2)
     
     # train kNN classifier
 #    clf = kNN(n_neighbors=3)
@@ -77,6 +77,10 @@ def classification():
 #    clf = NeuralNetwork(layers=[10, 5])
 #    clf.fit(X, y)
     
+    # train tensorflow mlp
+    clf = MLP()
+    clf.fit(X, y)
+    
     # train Fisher's linear discriminant
 #    clf = LDA(n_dims=1)
 #    y[np.where(y == 0)] = -1
@@ -90,10 +94,10 @@ def classification():
     BoundaryPlotter(X, y).plot_boundary(clf, step_size=0.005)
     
     # evaluation
-#    evaluator = Evaluator()
-#    acc = evaluator.accuracy(clf, X, y)
-#    print("Accuracy: {} %".format(acc))
-#    evaluator.conf_mat(clf, X, y)
+    evaluator = Evaluator()
+    acc = evaluator.accuracy(clf, X, y)
+    print("Accuracy: {} %".format(acc))
+    evaluator.conf_mat(clf, X, y)
     
     
 def regression():
