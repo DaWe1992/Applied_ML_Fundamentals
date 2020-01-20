@@ -80,7 +80,7 @@ class MLP(torch.nn.Module):
         
         # loss and optimizer
         criterion = torch.nn.BCELoss()
-        optimizer = torch.optim.SGD(self.parameters(), lr = 0.01)
+        optimizer = torch.optim.SGD(self.parameters(), lr=0.01)
 
         # perform training
         # ---------------------------------------------------------------------

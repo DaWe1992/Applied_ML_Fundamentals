@@ -46,6 +46,123 @@
 \section{Introduction}
 \makedivider{Introduction}
 
+% $k$-Means: Introduction
+\begin{frame}{$k$-Means: Introduction}{}
+	\begin{itemize}
+		\item $k$-Means is a \highlight{clustering} algorithm and as such \textbf{unsupervised}
+		\item A clustering algorithm tries to \textbf{find structure} in the data
+		\item $k$ defines the number of clusters to be found
+		\item Once the clusters are found, they first have to be interpreted...
+		\item ...and can then be used for prediction purposes
+	\end{itemize}
+	
+	\begin{boxBlue}
+		\footnotesize
+		A cluster must be \highlight{internally homogeneous}, but simultaneously \highlight{externally heterogeneous}.
+		(Elements of one cluster have to be very similar, but must differ significantly from elements in other clusters.)
+	\end{boxBlue}
+\end{frame}
+
+
+% $k$-Means: Example Use Cases
+\begin{frame}{$k$-Means: Example Use Cases}{}
+	\begin{itemize}
+		\item \textbf{Behavioral segmentation}
+		\begin{itemize}
+			\item Customer segmentation (e.\,g. \highlight{sinus milieus})
+			\item Creating profiles based on activity monitoring
+		\end{itemize}
+		\item \textbf{Sorting sensor measurements}
+		\begin{itemize}
+			\item Image grouping
+			\item Detection of activity types in motion sensors
+		\end{itemize}
+		\item \textbf{Inventory categorization}
+		\begin{itemize}
+			\item Grouping inventory by sales activity
+			\item Grouping inventory by manufacturing metrics
+		\end{itemize}
+		\item Many, many more, ...
+	\end{itemize}
+\end{frame}
+
+
+\subsection{Procedure}
+% $k$-Means: Procedure
+\begin{frame}{$k$-Means: Procedure}{}
+	\begin{itemize}
+		\item \highlight{Vector quantization}
+		\begin{itemize}
+			\item Represent data points by a single vector (here: called \highlight{centroid}) which is close to them
+			\item This is useful for \highlight{compression}!
+		\end{itemize}
+		\item \textbf{How to}: Create $k$ partitions ($\widehat{=}$ clusters) of the data set $\mathcal{D}$, such that
+			the sum of squared deviations from the cluster centroids is \textbf{minimal}:
+		\begin{equation}
+			\min_{\bm{\mu}_j} \sum_{j=1}^k \sum_{\bm{x}^{(i)} \in \mathcal{D}_j} \Vert \bm{x}^{(i)} - \bm{\mu}_j \Vert^2
+		\end{equation}
+		\item With $\mathcal{D}_j \equiv j^{th}$ cluster, $\mu_j \equiv$ centroid of $j^{th}$ cluster
+	\end{itemize}
+\end{frame}
+
+
+% Result: Voronoi Diagram
+\begin{frame}{Result: Voronoi Diagram}{}
+	\divideTwo{0.49}{
+		\begin{itemize}
+			\item The dots represent cluster centroids
+			\item The lines visualize the \textbf{cluster boundaries}
+			\item For a new point we can easily determine to which cluster it has to be assigned
+		\end{itemize}
+	}{0.49}{
+		\begin{figure}
+			\includegraphics[scale=0.2]{12_clustering/02_img/voronoi}
+		\end{figure}
+	}
+\end{frame}
+
+
+% $k$-Means Algorithm 
+\begin{frame}{$k$-Means Algorithm}{}
+	\begin{itemize}
+		\item Input: $\mathcal{D} = \{ \bm{x}^{(1)}, \bm{x}^{(2)}, \dots, \bm{x}^{(n)} \} \in \mathbb{R}^{n \times m}$,
+			Number of clusters $k$	
+		\item Algorithm:
+		\begin{enumerate}
+			\item $t \longleftarrow 1$
+			\item Randomly choose $k$ means $\bm{\mu}_1^{\langle 1 \rangle}, \bm{\mu}_2^{\langle 1 \rangle}, \dots, \bm{\mu}_k^{\langle 1 \rangle}$ 
+			\item While not converged:
+			\begin{itemize}
+				\item[\textbf{3a}] Assign each $\bm{x}^{(i)} \in \mathcal{D}$ to the closest cluster:
+				{\footnotesize
+				\begin{equation*}
+					\mathcal{D}_j^{\langle t \rangle}
+						= \left\{
+							\bm{x}^{(i)} : \Vert \bm{x}^{(i)} - \bm{\mu}_j^{\langle t \rangle} \Vert^2 \le
+							\Vert \bm{x}^{(i)} - \bm{\mu}_{j^*}^{\langle t \rangle} \Vert^2;\
+							\forall j^* = 1, 2, \dots, k; \bm{x}^{(i)} \in \mathcal{D}
+						\right\}
+				\end{equation*}}
+				\item[\textbf{3b}] Update cluster centroids $\bm{\mu}_j$:
+				{\footnotesize
+				\begin{equation*}
+					\bm{\mu}_{j}^{\langle t+1 \rangle} =
+						\frac{1}{\vert \mathcal{D}_i^{\langle t \rangle} \vert} \sum_{\bm{x}^{(i)} \in \mathcal{D}_j^{\langle t \rangle}} \bm{x}^{(i)}
+				\end{equation*}}
+				\item[\textbf{3c}] $t \longleftarrow t + 1$
+			\end{itemize}
+		\end{enumerate}
+	\end{itemize}
+\end{frame}
+
+
+% Image Compression
+\begin{frame}{Image Compression}{}
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.3]{12_clustering/02_img/image_compression}
+	\end{figure}
+\end{frame}
 
 
 % Section: Wrap-Up
