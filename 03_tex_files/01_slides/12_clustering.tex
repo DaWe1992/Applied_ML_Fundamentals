@@ -46,16 +46,20 @@
 \section{Introduction}
 \makedivider{Introduction}
 
-% $k$-Means: Introduction
-\begin{frame}{$k$-Means: Introduction}{}
+% Subsection: What is Clustering?
+% --------------------------------------------------------------------------------------------------------
+\subsection{What is Clustering?}
+
+% Clustering Introduction
+\begin{frame}{Clustering Introduction}{}
 	\begin{itemize}
-		\item $k$-Means is a \highlight{clustering} algorithm and as such \textbf{unsupervised}
+		\item \highlight{Clustering} belongs to the category of \textbf{unsupervised learning}
 		\item A clustering algorithm tries to \textbf{find structure} in the data
-		\item $k$ defines the number of clusters to be found
 		\item Once the clusters are found, they first have to be interpreted...
 		\item ...and can then be used for prediction purposes
 	\end{itemize}
 	
+	\vspace*{3mm}
 	\begin{boxBlue}
 		\footnotesize
 		A cluster must be \highlight{internally homogeneous}, but simultaneously \highlight{externally heterogeneous}.
@@ -64,8 +68,8 @@
 \end{frame}
 
 
-% $k$-Means: Example Use Cases
-\begin{frame}{$k$-Means: Example Use Cases}{}
+% Example Use Cases for Clustering
+\begin{frame}{Example Use Cases for Clustering}{}
 	\begin{itemize}
 		\item \textbf{Behavioral segmentation}
 		\begin{itemize}
@@ -87,14 +91,44 @@
 \end{frame}
 
 
-\subsection{Procedure}
+% Subsection: Clustering Strategies Overview
+% --------------------------------------------------------------------------------------------------------
+\subsection{Clustering Strategies Overview}
+
+% Clustering Strategies
+\begin{frame}{Clustering Strategies}{}
+	\begin{enumerate}
+		\item EM-based clustering, e.\,g.: $k$-Means
+		\item Hierarchical clustering, e.\,g.:
+		\begin{itemize}
+			\item Agglomerative clustering
+			\item Divisive clustering
+		\end{itemize}
+		\item Affinity-based clustering, e.\,g.:
+		\begin{itemize}
+			\item Spectral clustering
+			\item DBSCAN
+		\end{itemize}
+	\end{enumerate}
+\end{frame}
+
+
+% Section: $k$-Means
+%______________________________________________________________________
+\section{$k$-Means}
+\makedivider{$k$-Means}
+
+% Subsection: Introduction
+% --------------------------------------------------------------------------------------------------------
+\subsection{Introduction}
+
 % $k$-Means: Procedure
 \begin{frame}{$k$-Means: Procedure}{}
 	\begin{itemize}
-		\item \highlight{Vector quantization}
+		\item The algorithm is an instance of \highlight{vector quantization}
 		\begin{itemize}
-			\item Represent data points by a single vector (here: called \highlight{centroid}) which is close to them
-			\item This is useful for \highlight{compression}!
+			\item It represent data points by a single vector (here: \highlight{centroid}) which is close to them
+			\item This is useful for \textbf{compression}!
 		\end{itemize}
 		\item \textbf{How to}: Create $k$ partitions ($\widehat{=}$ clusters) of the data set $\mathcal{D}$, such that
 			the sum of squared deviations from the cluster centroids is \textbf{minimal}:
@@ -121,6 +155,10 @@
 	}
 \end{frame}
 
+
+% Subsection: $k$-Means Algorithm
+% --------------------------------------------------------------------------------------------------------
+\subsection{$k$-Means Algorithm}
 
 % $k$-Means Algorithm 
 \begin{frame}{$k$-Means Algorithm}{}
@@ -156,12 +194,198 @@
 \end{frame}
 
 
+% Subsection: Use Case: Image Compression
+% --------------------------------------------------------------------------------------------------------
+\subsection{Use Case: Image Compression}
+
 % Image Compression
 \begin{frame}{Image Compression}{}
 	\begin{figure}
 		\centering
 		\includegraphics[scale=0.3]{12_clustering/02_img/image_compression}
 	\end{figure}
+\end{frame}
+
+
+% Subsection: Problems and Issues
+% --------------------------------------------------------------------------------------------------------
+\subsection{Problems and Issues}
+
+% $k$-Means Issues
+\begin{frame}{$k$-Means Issues}{}
+	\begin{itemize}
+		\item The algorithm assumes all clusters are \textbf{sperical} \\
+			($\ne$ \highlight{affinity-based clustering})
+		\item Does not have a notion of \textbf{outliers} (unlike \textit{DBSCAN})
+		\item What is the correct value for $k$? $\Rightarrow$ \highlight{Elbow-method:}
+		\begin{itemize}
+			\item Measure sum of squred distances from data points to cluster centers (inertia)
+			\item Record results for different values for $k$ and plot them
+			\item Search for the `elbow point'
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+% Elbow Method
+\begin{frame}{Elbow Method}{}
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.6]{12_clustering/02_img/elbow}
+	\end{figure}
+\end{frame}
+
+
+% Section: Hierarchical Clustering
+%______________________________________________________________________
+\section{Hierarchical Clustering}
+\makedivider{Hierarchical Clustering}
+
+% Subsection: Agglomerative Clustering Algorithm
+% --------------------------------------------------------------------------------------------------------
+\subsection{Agglomerative Clustering Algorithm}
+
+% Agglomerative Clustering
+\begin{frame}{Agglomerative Clustering}{}
+	\begin{enumerate}
+		\item Start with one cluster for each instance: $C = \{ \{ \bm{x}^{(i)}\} : \bm{x}^{(i)} \in \bm{X} \}$
+		\item Compute distance $d(C_i, C_j)$ between all pairs of clusters $C_i$, $C_j$
+		\item Join clusters $C_i$ and $C_j$ with minimum distance into a new cluster $C_p$:
+		\begin{align*}
+			C_p
+				&= \{ C_i, C_j \} \\
+			C
+				&= (C \backslash \{ C_i, C_j \}) \cup \{ C_p \}
+		\end{align*}
+		\item Compute distances between $C_p$ and all other clusters in $C$
+		\item If $\vert C \vert > 1$, goto 3
+	\end{enumerate}
+\end{frame}
+
+
+% Subsection: Agglomerative Clustering: Example
+% --------------------------------------------------------------------------------------------------------
+\subsection{Agglomerative Clustering: Example}
+
+% Agglomerative Clustering: Example
+\begin{frame}{Agglomerative Clustering: Example}{}
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.4]{12_clustering/02_img/aggl_clust_1}
+	\end{figure}
+\end{frame}
+
+
+% Agglomerative Clustering: Example (Ctd.)
+\begin{frame}{Agglomerative Clustering: Example (Ctd.)}{}
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.4]{12_clustering/02_img/aggl_clust_2}
+	\end{figure}
+\end{frame}
+
+
+% Agglomerative Clustering: Example (Ctd.)
+\begin{frame}{Agglomerative Clustering: Example (Ctd.)}{}
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.4]{12_clustering/02_img/aggl_clust_3}
+	\end{figure}
+\end{frame}
+
+
+% Agglomerative Clustering: Example (Ctd.)
+\begin{frame}{Agglomerative Clustering: Example (Ctd.)}{}
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.4]{12_clustering/02_img/aggl_clust_4}
+	\end{figure}
+\end{frame}
+
+
+% Agglomerative Clustering: Example (Ctd.)
+\begin{frame}{Agglomerative Clustering: Example (Ctd.)}{}
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.4]{12_clustering/02_img/aggl_clust_5}
+	\end{figure}
+\end{frame}
+
+
+% Agglomerative Clustering: Example (Ctd.)
+\begin{frame}{Agglomerative Clustering: Example (Ctd.)}{}
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.4]{12_clustering/02_img/aggl_clust_6}
+	\end{figure}
+\end{frame}
+
+
+% Subsection: Distance Metrics between Clusters
+% --------------------------------------------------------------------------------------------------------
+\subsection{Distance Metrics between Clusters}
+
+% Single Linkage
+\begin{frame}{Single Linkage}{}
+	\begin{itemize}
+		\item Computing distances between clusters $C_1$ and $C_2$
+		\item \highlight{Single linkage}:
+		\begin{equation*}
+			d(C_1, C_2) = \min\{ d(\bm{x}^{(i)}, \bm{x}^{(j)}) : \bm{x}^{(i)} \in C_1, \bm{x}^{(j)} \in C_2 \}
+		\end{equation*}
+	\end{itemize}
+
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.4]{12_clustering/02_img/single_linkage}
+	\end{figure}
+\end{frame}
+
+
+% Complete Linkage
+\begin{frame}{Complete Linkage}{}
+	\begin{itemize}
+		\item Computing distances between clusters $C_1$ and $C_2$
+		\item \highlight{Complete linkage}:
+		\begin{equation*}
+			d(C_1, C_2) = \max\{ d(\bm{x}^{(i)}, \bm{x}^{(j)}) : \bm{x}^{(i)} \in C_1, \bm{x}^{(j)} \in C_2 \}
+		\end{equation*}
+	\end{itemize}
+
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.4]{12_clustering/02_img/complete_linkage}
+	\end{figure}
+\end{frame}
+
+
+% Average Linkage
+%\begin{frame}{Average Linkage}{}
+%	\begin{itemize}
+%		\item Computing distances between clusters $C_1$ and $C_2$
+%		\item \highlight{Average linkage}:
+%		\begin{equation*}
+%			d(C_1, C_2) = \sum \{ d(\bm{x}^{(i)}, \bm{x}^{(j)}) : \bm{x}^{(i)} \in C_1, \bm{x}^{(j)} \in C_2 \} / (\vert C_1 \vert \cdot \vert C_2 \vert)
+%		\end{equation*}
+%	\end{itemize}
+%
+%	\begin{figure}
+%		\centering
+%		\includegraphics[scale=0.4]{12_clustering/02_img/average_linkage}
+%	\end{figure}
+%\end{frame}
+
+
+% Section: Spectral Clustering
+%______________________________________________________________________
+\section{Spectral Clustering}
+\makedivider{Spectral Clustering}
+
+% Spectral Clustering
+\begin{frame}{Spectral Clustering}{}
+	\begin{itemize}
+		\item
+	\end{itemize}
 \end{frame}
 
 
@@ -214,6 +438,18 @@
 	\begin{thebibliography}{2}
 	
 	\end{thebibliography}
+\end{frame}
+
+
+% Subsection: Meme of the Day
+% --------------------------------------------------------------------------------------------------------
+\subsection{Meme of the Day}
+
+% Meme of the Day
+\begin{frame}{Meme of the Day}{}
+	\begin{figure}
+		\includegraphics[scale=0.5]{12_clustering/02_img/meme_of_the_day}
+	\end{figure}
 \end{frame}
 
 
