@@ -60,11 +60,11 @@
 	\end{itemize}
 	
 	\vspace*{3mm}
-	\begin{boxBlue}
+	\begin{boxBlueNoFrame}
 		\footnotesize
 		A cluster must be \highlight{internally homogeneous}, but simultaneously \highlight{externally heterogeneous}.
 		(Elements of one cluster have to be very similar, but must differ significantly from elements in other clusters.)
-	\end{boxBlue}
+	\end{boxBlueNoFrame}
 \end{frame}
 
 
@@ -98,13 +98,13 @@
 % Clustering Strategies
 \begin{frame}{Clustering Strategies}{}
 	\begin{enumerate}
-		\item EM-based clustering, e.\,g.: $k$-Means
-		\item Hierarchical clustering, e.\,g.:
+		\item \highlight{EM-based clustering}, e.\,g.: $k$-Means
+		\item \highlight{Hierarchical clustering}, e.\,g.:
 		\begin{itemize}
 			\item Agglomerative clustering
 			\item Divisive clustering
 		\end{itemize}
-		\item Affinity-based clustering, e.\,g.:
+		\item \highlight{Affinity-based clustering}, e.\,g.:
 		\begin{itemize}
 			\item Spectral clustering
 			\item DBSCAN
@@ -123,7 +123,7 @@
 \subsection{Introduction}
 
 % $k$-Means: Procedure
-\begin{frame}{$k$-Means: Procedure}{}
+\begin{frame}{$k$-Means: Procedure}{}\important
 	\begin{itemize}
 		\item The algorithm is an instance of \highlight{vector quantization}
 		\begin{itemize}
@@ -141,7 +141,7 @@
 
 
 % Result: Voronoi Diagram
-\begin{frame}{Result: Voronoi Diagram}{}
+\begin{frame}{Result: Voronoi Diagram}{}\important
 	\divideTwo{0.49}{
 		\begin{itemize}
 			\item The dots represent cluster centroids
@@ -161,7 +161,8 @@
 \subsection{$k$-Means Algorithm}
 
 % $k$-Means Algorithm 
-\begin{frame}{$k$-Means Algorithm}{}
+\begin{frame}{$k$-Means Algorithm}{}\important
+	\vspace*{2mm}
 	\begin{itemize}
 		\item Input: $\mathcal{D} = \{ \bm{x}^{(1)}, \bm{x}^{(2)}, \dots, \bm{x}^{(n)} \} \in \mathbb{R}^{n \times m}$,
 			Number of clusters $k$	
@@ -186,8 +187,8 @@
 				\begin{equation*}
 					\bm{\mu}_{j}^{\langle t+1 \rangle} =
 						\frac{1}{\vert \mathcal{D}_i^{\langle t \rangle} \vert} \sum_{\bm{x}^{(i)} \in \mathcal{D}_j^{\langle t \rangle}} \bm{x}^{(i)}
+					\qquad\text{then update $t$:}\quad t \longleftarrow t + 1
 				\end{equation*}}
-				\item[\textbf{3c}] $t \longleftarrow t + 1$
 			\end{itemize}
 		\end{enumerate}
 	\end{itemize}
@@ -214,12 +215,12 @@
 % $k$-Means Issues
 \begin{frame}{$k$-Means Issues}{}
 	\begin{itemize}
-		\item The algorithm assumes all clusters are \textbf{sperical} \\
+		\item The algorithm assumes all clusters are \textbf{spherical} \\
 			($\ne$ \highlight{affinity-based clustering})
-		\item Does not have a notion of \textbf{outliers} (unlike \textit{DBSCAN})
+		\item Does not have a notion of \textbf{outliers} (unlike DBSCAN)
 		\item What is the correct value for $k$? $\Rightarrow$ \highlight{Elbow-method:}
 		\begin{itemize}
-			\item Measure sum of squred distances from data points to cluster centers (inertia)
+			\item Measure sum of squared distances from data points to cluster centers (inertia)
 			\item Record results for different values for $k$ and plot them
 			\item Search for the `elbow point'
 		\end{itemize}
@@ -245,8 +246,8 @@
 % --------------------------------------------------------------------------------------------------------
 \subsection{Agglomerative Clustering Algorithm}
 
-% Agglomerative Clustering
-\begin{frame}{Agglomerative Clustering}{}
+% Agglomerative Clustering Algorithm
+\begin{frame}{Agglomerative Clustering Algorithm}{}\important
 	\begin{enumerate}
 		\item Start with one cluster for each instance: $C = \{ \{ \bm{x}^{(i)}\} : \bm{x}^{(i)} \in \bm{X} \}$
 		\item Compute distance $d(C_i, C_j)$ between all pairs of clusters $C_i$, $C_j$
@@ -314,6 +315,10 @@
 
 % Agglomerative Clustering: Example (Ctd.)
 \begin{frame}{Agglomerative Clustering: Example (Ctd.)}{}
+	\bubble{13}{5}{
+		\footnotesize This is a \\[-2mm]
+		\footnotesize \highlight{dendrogram}
+	}
 	\begin{figure}
 		\centering
 		\includegraphics[scale=0.4]{12_clustering/02_img/aggl_clust_6}
@@ -359,32 +364,156 @@
 \end{frame}
 
 
-% Average Linkage
-%\begin{frame}{Average Linkage}{}
-%	\begin{itemize}
-%		\item Computing distances between clusters $C_1$ and $C_2$
-%		\item \highlight{Average linkage}:
-%		\begin{equation*}
-%			d(C_1, C_2) = \sum \{ d(\bm{x}^{(i)}, \bm{x}^{(j)}) : \bm{x}^{(i)} \in C_1, \bm{x}^{(j)} \in C_2 \} / (\vert C_1 \vert \cdot \vert C_2 \vert)
-%		\end{equation*}
-%	\end{itemize}
-%
-%	\begin{figure}
-%		\centering
-%		\includegraphics[scale=0.4]{12_clustering/02_img/average_linkage}
-%	\end{figure}
-%\end{frame}
-
-
 % Section: Spectral Clustering
 %______________________________________________________________________
 \section{Spectral Clustering}
 \makedivider{Spectral Clustering}
 
+% Subsection: Motivation
+% --------------------------------------------------------------------------------------------------------
+\subsection{Motivation}
+
 % Spectral Clustering
 \begin{frame}{Spectral Clustering}{}
 	\begin{itemize}
-		\item
+		\item Remember the disadvantage of $k$-Means? (spherical clusters)
+		\item How can we cluster data without this assumption?
+		\item[$\bm{\Rightarrow}$] \highlight{Affinity-based clustering}
+		
+		\vspace*{3mm}
+		\begin{boxBlueNoFrame}
+			\textbf{Affinity-based clustering} assumes \textbf{no shape} of the resulting clusters.
+			It is based on the \textbf{connectedness of the data points}.
+		\end{boxBlueNoFrame}
+
+		\item Spectral clustering is affinity-based
+		\item Whenever you hear \textit{`spectral'}: It has something to do with eigen-vectors
+	\end{itemize}
+\end{frame}
+
+
+% Example Data Set
+\begin{frame}{Example Data Set}{}
+	\bubble{1}{5}{
+		\footnotesize What would be \\[-2mm]
+		\footnotesize the result of $k$-Means?}
+	\input{12_clustering/01_tikz/unsupervised_learning}
+\end{frame}
+
+
+% Subsection: A Bit of Graph Theory
+% --------------------------------------------------------------------------------------------------------
+\subsection{A Bit of Graph Theory}
+
+% A short Introduction to Graphs
+\begin{frame}{A short Introduction to Graphs}{}
+	\begin{itemize}
+		\item A graph $\mathcal{G}$ is a tuple $\mathcal{G} = (\mathcal{V}, \mathcal{E})$
+		\item $\mathcal{V} = \{ v_1, v_2, \dots, v_n \}$ is the set of $n$ vertices (nodes)
+		\item $\mathcal{E} \in \mathcal{V} \times \mathcal{V}$ the set of edges (connections between nodes)
+		\item \highlight{Adjacency matrix} $\bm{A}$
+		\begin{itemize}
+			\item $A_{ij} = 1$, iff $(v_i, v_j) \in \mathcal{E}$ ($v_i$ is a neighbor of $v_j$)
+			\item $\bm{A}$ is symmetric for undirected graphs, i.\,e. $A_{ij} = A_{ji}$
+		\end{itemize}
+		\item The \highlight{degree matrix} $\bm{D} = diag(d_1, d_2, \dots, d_n)$ is a matrix of node degrees
+		\begin{equation*}
+			d_i = \sum_{j=1}^n A_{ij}
+		\end{equation*}
+	\end{itemize}
+\end{frame}
+
+
+% A short Introduction to Graphs (Ctd.)
+\begin{frame}{A short Introduction to Graphs (Ctd.)}{}
+	\begin{itemize}
+		\item For graph analysis it is often useful to compute the \highlight{graph Laplacian} matrix:
+		\begin{equation*}
+			\bm{L} = \bm{D} - \bm{A}
+		\end{equation*}
+		\item Example:
+		\begin{figure}
+			\centering
+			\includegraphics[scale=0.08]{12_clustering/02_img/graph}
+		\end{figure}
+	\end{itemize}
+\end{frame}
+
+
+% Example: Computation of $\bm{A}$, $\bm{D}$ and $\bm{L}$
+\begin{frame}{Example: Computation of $\bm{A}$, $\bm{D}$ and $\bm{L}$}{}
+	\scriptsize
+	\begin{equation*}
+		\bm{A} = \begin{bmatrix}
+			0 & 1 & 0 & 0 & 1 & 0 \\
+			1 & 0 & 1 & 0 & 1 & 0 \\
+			0 & 1 & 0 & 1 & 0 & 0 \\
+			0 & 0 & 1 & 0 & 1 & 1 \\
+			1 & 1 & 0 & 1 & 0 & 0 \\
+			0 & 0 & 0 & 1 & 0 & 0 \\
+		\end{bmatrix}\qquad
+		\bm{D} = \begin{bmatrix}
+			2 & 0 & 0 & 0 & 0 & 0 \\
+			0 & 3 & 0 & 0 & 0 & 0 \\
+			0 & 0 & 2 & 0 & 0 & 0 \\
+			0 & 0 & 0 & 3 & 0 & 0 \\
+			0 & 0 & 0 & 0 & 3 & 0 \\
+			0 & 0 & 0 & 0 & 0 & 1 \\
+		\end{bmatrix}\qquad
+		\bm{L} = \begin{bmatrix}
+			 \phantom{-}2 	& -1 			& \phantom{-}0 	& \phantom{-}0 	& -1 			& \phantom{-}0 	\\
+			-1 			& \phantom{-}3 	& -1 			& \phantom{-}0 	& -1 			& \phantom{-}0 	\\
+			 \phantom{-}0 	& -1 			& \phantom{-}2 	& -1 			& \phantom{-}0 	& \phantom{-}0 	\\
+			 \phantom{-}0 	& \phantom{-}0 	& -1 			& \phantom{-}3 	& -1 			& -1 			\\
+			-1 			& -1 			& \phantom{-}0 	& -1 			& \phantom{-}3 	& \phantom{-}0 	\\
+			 \phantom{-}0 	& \phantom{-}0 	& \phantom{-}0 	& -1 			& \phantom{-}0 	& \phantom{-}1 	\\
+		\end{bmatrix}
+	\end{equation*}
+\end{frame}
+
+
+% Subsection: Spectral Clustering Algorithm
+% --------------------------------------------------------------------------------------------------------
+\subsection{Spectral Clustering Algorithm}
+
+% How to get the Graph?
+\begin{frame}{How to get the Graph?}{}\important
+	\begin{itemize}
+		\item There are at least two possibilities
+		\begin{enumerate}
+			\item \highlight{$\varepsilon$-neighborhood graph}
+			\begin{itemize}
+				\item Connect all instances whose pairwise distances are smaller than $\varepsilon$
+				\item \Highlight{Problem:} How to choose $\varepsilon$?
+			\end{itemize}
+			\item \highlight{$k$-nearest neighbor graph}
+			\begin{itemize}
+				\item Connect instance $\bm{x}^{(i)}$ with instance $\bm{x}^{(j)}$, if $\bm{x}^{(j)}$ is among the $k$ nearest neighbors of $\bm{x}^{(i)}$
+				\item Attention: This definition leads to a directed graph \textbf{(Why?)} \\
+					$\Rightarrow$ Can be ignored
+				\item \Highlight{Problem:} How to choose $k$?
+			\end{itemize}
+		\end{enumerate}
+		\item Both approaches are used in practice
+	\end{itemize}
+\end{frame}
+
+
+% Spectral Clustering Algorithm
+\begin{frame}{Spectral Clustering Algorithm}{}\important
+	\begin{itemize}
+		\item Input: $\mathcal{D} = \{ \bm{x}^{(1)}, \bm{x}^{(2)}, \dots, \bm{x}^{(n)} \} \in \mathbb{R}^{n \times m}$,
+			Number of clusters $k$
+		\item Algorithm:
+		\begin{enumerate}
+			\item Construct a similarity graph (adjacency matrix $\bm{A}$ and degree matrix $\bm{D}$)
+			\item Compute the graph Laplacian matrix $\bm{L} = \bm{D} - \bm{A}$
+			\item Perform \textbf{eigen-decomposition} on $\bm{L}$ (to obtain the eigen-vectors $\bm{Q}$)
+			\begin{equation*}
+				\bm{L} = \bm{Q}\bm{\Lambda}\bm{Q}^{-1}
+			\end{equation*}
+			\item Apply $k$-Means to the rows of matrix $\bm{Q}$ to obtain the clusters $\{ C_1, C_2, \dots, C_k \}$
+		\end{enumerate} 
 	\end{itemize}
 \end{frame}
 
@@ -401,7 +530,15 @@
 % Summary
 \begin{frame}{Summary}{}
 	\begin{itemize}
-		\item 
+		\item Clustering belongs to the category of \textbf{unsupervised learning}
+		\item With clustering we try to find \textbf{structure in the data}
+		\item Different algorithms make \textbf{different assumptions} about the resulting clusters
+		\item \textbf{Clustering Strategies:}
+		\begin{itemize}
+			\item EM-based clustering (e.\,g. $k$-Means)
+			\item Affinity-based clustering (e.\,g. spectral clustering, DBSCAN)
+			\item Hierarchical clustering
+		\end{itemize}
 	\end{itemize}
 \end{frame}
 
@@ -413,7 +550,13 @@
 % Self-Test Questions
 \begin{frame}{Self-Test Questions}{}\important
 	\begin{enumerate}
-		\item
+		\item What is clustering?
+		\item What is the definition of a cluster. Which properties should it have?
+		\item Describe the general procedure of $k$-Means. What are disadvantages?
+		\item What is a dendrogram?
+		\item How do we obtain the graphs for spectral clustering
+		\item What is affinity-based clustering. How does it differ from $k$-Means?
+		\item How to calculate the graph Laplacian matrix?
 	\end{enumerate}
 \end{frame}
 
@@ -436,7 +579,14 @@
 \begin{frame}{Recommended Literature and further Reading}{}
 	\footnotesize
 	\begin{thebibliography}{2}
-	
+		\literature{book}{Bishop.2006}{[1] Pattern Recognition and Machine Learning}
+			{Christopher Bishop. Springer. 2006.}{$\rightarrow$ \href{
+				http://users.isr.ist.utl.pt/~wurmd/Livros/school/Bishop\%20-\%20Pattern\%20Recognition\%20And\%20Machine\%20Learning\%20-\%20Springer\%20\%202006.pdf
+			}{\linkstyle{Link}}, cf. chapter 9}
+		\literature{book}{Murphy.2012}{[2] Machine Learning: A Probabilistic Perspective}
+			{Kevin Murphy. MIT Press. 2012.}{$\rightarrow$ \href{
+				https://doc.lagout.org/science/Artificial\%20Intelligence/Machine\%20learning/Machine\%20Learning_\%20A\%20Probabilistic\%20Perspective\%20\%5BMurphy\%202012-08-24\%5D.pdf
+			}{\linkstyle{Link}}, cf. chapter 25}	
 	\end{thebibliography}
 \end{frame}
 

@@ -1,0 +1,21 @@
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[
+		scale=0.7
+	]
+
+		\begin{axis}[
+			xlabel={$x_1$},
+			ylabel={$x_2$},
+			ticks=none,
+			x=2cm,
+			y=3cm
+		]
+	
+			\addplot[
+				only marks,mark=*,mark size=2.5,fill=myblue1
+			] table{01_intro_ml/05_data/data_moons.txt};
+    		\end{axis}
+
+	\end{tikzpicture}
+\end{figure}
