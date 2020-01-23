@@ -19,6 +19,7 @@ import numpy as np
 from sklearn.datasets import make_classification
 from sklearn.datasets import make_circles
 from sklearn.datasets import make_regression
+from sklearn.datasets import make_swiss_roll
 
 
 # -----------------------------------------------------------------------------
@@ -30,27 +31,31 @@ class DataCreator:
     Class Data Creator.
     """
     
-    def make_classification(self, sklearn=False, n_classes=2):
+    def make_classification(self, name="circles", n_classes=2):
         """
         Creates a binary classification data set.
         
-        :param sklearn:         flag indicating if sklearn should be used
+        :param name:            name of the data set to be generated
+                                    - custom
+                                    - linear (linearly separable, sklearn)
+                                    - circles (sklearn)
+                                    - swiss (swiss roll, sklearn)
+        :param n_classes:       number of classes (only needed for name="linear")
         :return:                X, y (data features and labels)
         """
-        X = np.asarray(
-            [[3.00, 1.00], [3.20, 2.20], [3.15, 4.80],
-             [3.35, 1.20], [3.05, 3.50], [3.55, 2.85],
-             [1.50, 2.25], [2.88, 2.18], [1.95, 4.00],
-             [3.01, 2.95], [2.85, 3.01], [5.85, 2.20],
-             [4.19, 4.00], [5.15, 3.50], [5.07, 2.89],
-             [4.87, 3.54], [4.44, 3.78], [4.48, 3.94], [5.51, 3.80]]
-        )
-        y = np.asarray(
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1]
-        )
-        
-        # sklearn data set creation
-        if sklearn:
+        if name == "custom":
+            X = np.asarray(
+                [[3.00, 1.00], [3.20, 2.20], [3.15, 4.80],
+                 [3.35, 1.20], [3.05, 3.50], [3.55, 2.85],
+                 [1.50, 2.25], [2.88, 2.18], [1.95, 4.00],
+                 [3.01, 2.95], [2.85, 3.01], [5.85, 2.20],
+                 [4.19, 4.00], [5.15, 3.50], [5.07, 2.89],
+                 [4.87, 3.54], [4.44, 3.78], [4.48, 3.94], [5.51, 3.80]]
+            )
+            y = np.asarray(
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1]
+            )
+        elif name == "linear":
             X, y = make_classification(
                 n_samples=200,
                 n_features=2,
@@ -58,11 +63,13 @@ class DataCreator:
                 n_informative=2,
                 n_clusters_per_class=1,
                 n_classes=n_classes,
-                class_sep=1.75,
+                class_sep=5.00,
                 random_state=42
             )
-            
+        elif name == "circles":
             X, y = make_circles(n_samples=400, factor=0.3, noise=0.2)
+        else:
+            X, y = make_swiss_roll(2000, 0.00)
         
         return X, y
     

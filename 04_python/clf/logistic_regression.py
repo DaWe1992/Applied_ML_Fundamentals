@@ -159,7 +159,7 @@ class LogisticRegression:
         :param n:               size of the batch
         :return:                batch of size n
         """
-        idx = np.arange(0 , self.n)
+        idx = np.arange(0 , n)
         np.random.shuffle(idx)
         idx = idx[:n]
         X_shuffle = [self.X[i] for i in idx]

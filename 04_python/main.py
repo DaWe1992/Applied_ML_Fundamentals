@@ -30,6 +30,7 @@ from clf.mlp_torch import MLP
 # unsupervised learning
 # -----------------------------------------------------------------------------
 from unsupervised.em import EM
+from unsupervised.pca import PCA
 
 # regression
 # -----------------------------------------------------------------------------
@@ -54,7 +55,7 @@ def classification():
     Classification.
     """
     # create data
-    X, y = DataCreator().make_classification(sklearn=True, n_classes=2)
+    X, y = DataCreator().make_classification(name="circles", n_classes=2)
     
     # train kNN classifier
 #    clf = kNN(n_neighbors=3)
@@ -71,10 +72,6 @@ def classification():
     
     # train one-vs-one logistic regression classifier
 #    clf = LogRegOneVsOne(poly=True)
-#    clf.fit(X, y)
-    
-    # train a neural network
-#    clf = NeuralNetwork(layers=[10, 5])
 #    clf.fit(X, y)
     
     # train tensorflow mlp
@@ -94,10 +91,10 @@ def classification():
     BoundaryPlotter(X, y).plot_boundary(clf, step_size=0.005)
     
     # evaluation
-    evaluator = Evaluator()
-    acc = evaluator.accuracy(clf, X, y)
-    print("Accuracy: {} %".format(acc))
-    evaluator.conf_mat(clf, X, y)
+#    evaluator = Evaluator()
+#    acc = evaluator.accuracy(clf, X, y)
+#    print("Accuracy: {} %".format(acc))
+#    evaluator.conf_mat(clf, X, y)
     
     
 def regression():
@@ -111,6 +108,36 @@ def regression():
     gp = GaussianProcess()
     gp.fit(X, y)
     gp.plot()
+
+
+def unsupervised_learning():
+    """
+    Unsupervised learning.
+    """
+    from matplotlib import pyplot as plt
+    from mpl_toolkits.mplot3d import proj3d
+  
+    X, y = DataCreator().make_classification(name="swiss", n_classes=2)
+    
+    # plot 3d data
+    fig = plt.figure(figsize=(8, 8))
+    ax = fig.add_subplot(111, projection="3d")
+    ax.view_init(20, -80)
+    ax.scatter(
+        X[:, 0], X[:, 1], X[:, 2], c=y, marker="o", alpha=0.5)
+    
+    plt.show()
+    
+    # transform data into 2d space
+    pca = PCA()
+    X_hat = pca.fit_transform(X, n_components=2)
+    
+    # plot 2d data
+    fig, ax = plt.subplots(figsize=(8, 8))
+    ax.scatter(
+        X_hat[:, 0], X_hat[:, 1], c=y, marker="o", alpha=0.5)
+    
+    plt.show()
     
     
 def reinforcement_learning():
@@ -156,5 +183,6 @@ if __name__ == "__main__":
     """
     classification()
 #    regression()
+#    unsupervised_learning()
 #    reinforcement_learning()
     
