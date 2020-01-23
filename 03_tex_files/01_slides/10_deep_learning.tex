@@ -620,8 +620,8 @@
 		\item Compute the weight gradient for the hidden layer:
 		\begin{align*}
 			\frac{\partial \mathcal{J}^{(i)}(\bm{\Theta})}{\partial \Theta_{lj}^{(1)}}
-				&= \frac{\partial \mathcal{J}^{(i)}(\bm{\Theta})}{\partial z_l} \cdot g'^{(1)} \left( \sum_{t=0}^m \Theta_{jt}^{(1)} x_j^{(i)} \right) \cdot x_j^{(i)} \\
-				&= \widehat{\delta}_l^{(i)} \cdot g'^{(1)} \left( \sum_{t=0}^m \Theta_{jt}^{(1)} x_j^{(i)} \right) \cdot x_j^{(i)}
+				&= \frac{\partial \mathcal{J}^{(i)}(\bm{\Theta})}{\partial z_l} \cdot g'^{(1)} \left( \sum_{t=0}^m \Theta_{lt}^{(1)} x_t^{(i)} \right) \cdot x_j^{(i)} \\
+				&= \widehat{\delta}_l^{(i)} \cdot g'^{(1)} \left( \sum_{t=0}^m \Theta_{lt}^{(1)} x_t^{(i)} \right) \cdot x_j^{(i)}
 		\end{align*}
 		\item The weight derivatives are now used in the gradient descent update rule
 	\end{itemize}
