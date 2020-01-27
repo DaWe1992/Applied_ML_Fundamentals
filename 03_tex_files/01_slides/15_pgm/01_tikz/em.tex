@@ -1,0 +1,15 @@
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[
+		scale=0.6
+	]
+
+		\node[draw=orange,orange] (E) at (-5,0) {\textbf{E-Step}};
+		\node[draw=purple,purple] (M) at (5,0) {\textbf{M-Step}};
+		\node at (0,0) {\footnotesize iterate until convergence};
+		
+		\draw[-stealth,thick] (E) .. controls (0,2) .. (M);
+		\draw[-stealth,thick] (M) .. controls (0,-2) .. (E);
+
+	\end{tikzpicture}
+\end{figure}

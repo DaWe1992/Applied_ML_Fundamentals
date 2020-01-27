@@ -8,8 +8,8 @@
 
 \title[Support Vector Machines]{*** Applied Machine Learning Fundamentals *** Support Vector Machines}
 \institute{SAP\,SE}
-\author{Daniel Wehner}
-\date{\today}
+\author{M.\,Sc. Daniel Wehner}
+\date{Winter term 2019/2020}
 \prefix{SVM}
 
 % ====================================================
@@ -34,7 +34,7 @@
 
 % Agenda
 %______________________________________________________________________
-\begin{frame}{Agenda \today}
+\begin{frame}{Agenda for this Unit}
 	\begin{multicols}{2}
 		\tableofcontents
 	\end{multicols}
@@ -52,13 +52,13 @@
 
 % What is a Support Vector Machine (SVM)?
 \begin{frame}{What is a Support Vector Machine (SVM)?}{}
-	\bubble{11}{8.5}{
+	\bubble{11}{9}{
 		\footnotesize What is the best \\[-1mm]
 		\footnotesize separating hyperplane?
 	}
 	\begin{itemize}
 		\item A support vector machine is a \textbf{binary classifier}
-			{\footnotesize \textit{(Vapnik and Chervonenkis)}}
+			{\footnotesize [Vapnik and Chervonenkis]}
 		\begin{itemize}
 			\item The classes are denoted by $\{-1; +1\}$
 			\item Techniques for multi-class classification:
@@ -71,7 +71,6 @@
 		\item Why is it called \textit{`machine'}?
 		\begin{itemize}
 			\item It's no physical machine, it's a mathematical construct \\
-				{\footnotesize \textit{(just as a `Turing machine' is no real machine...)}}
 			\item `Machine' refers to `Machine Learning' 
 		\end{itemize}
 	\end{itemize}
@@ -87,15 +86,15 @@
 	\begin{itemize}
 		\item The simplest discriminant is a linear function of the form:
 		\begin{equation}
-			y(\bm{x})
+			\widehat{h}(\bm{x})
 				= \bm{w}^{\intercal} \bm{x} + b
 				= \sum_{j=1}^m w_j x_j + b
 				= w_1 x_1 + w_2 x_2 + \dots + w_m x_m + b
 		\end{equation} 
-		\item $\bm{w}$ is called the \textbf{weight vector} and $b$ is the \textbf{bias}
-		\item An input vector $\bm{x}$ is assigned class $\mathcal{C}_1$ if $y(\bm{x}) \ge 0$,
+		\item $\bm{\theta} = \{ \bm{w}, b \}$: $\bm{w}$ is called the \textbf{weight vector} and $b$ is the \textbf{bias}
+		\item An input vector $\bm{x}$ is assigned class $\mathcal{C}_1$ if $\widehat{h}(\bm{x}) \ge 0$,
 			class $\mathcal{C}_2$ otherwise
-		\item The \highlight{decision boundary} is defined by the relation: $y(\bm{x}) = 0$
+		\item The \highlight{decision boundary} is defined by the relation: $\widehat{h}(\bm{x}) = 0$
 		\item The boundary is a $(D - 1)$-dimensional hyperplane within the $D$-dimensional input space
 	\end{itemize}
 \end{frame}
@@ -112,13 +111,14 @@
 \begin{frame}{Discriminant Functions (Ctd.)}{}
 	\begin{itemize}
 		\item Consider two points $\bm{x}_A$ and $\bm{x}_B$ which lie on the decision surface
-		\item Since $y(\bm{x}_A) = y(\bm{x}_B) = 0$, we have $\bm{w}^{\intercal}(\bm{x}_A - \bm{x}_B) = 0$,
+		\item Since $\widehat{h}(\bm{x}_A) = \widehat{h}(\bm{x}_B) = 0$, we have $\bm{w}^{\intercal}(\bm{x}_A - \bm{x}_B) = 0$,
 			hence $\bm{w}$ is \textbf{orthogonal} to every vector lying within the decision surface
 		\item $\bm{w}$ determines the orientation of the decision surface
-		\item Similarly, if $\bm{x}$ is a point on the decision surface, then $y(\bm{x}) = 0$ and the normal distance from the
+		\item Similarly, if $\bm{x}$ is a point on the decision surface, then $\widehat{h}(\bm{x}) = 0$ and the normal distance from the
 			origin to the decision surface is given by:
 		\begin{equation}
-			\frac{\bm{w}^{\intercal} \bm{x} + b}{\Vert \bm{w} \Vert} = 0 \Leftrightarrow
+			\frac{\bm{w}^{\intercal} \bm{x} + b}{\Vert \bm{w} \Vert} = 0
+			\Leftrightarrow
 			\frac{\bm{w}^{\intercal} \bm{x}}{\Vert \bm{w} \Vert} = -\frac{b}{\Vert \bm{w} \Vert}
 		\end{equation}
 		\item $b$ controls the offset from the origin
@@ -129,19 +129,21 @@
 % Discriminant Functions (Ctd.)
 \begin{frame}{Discriminant Functions (Ctd.)}{}
 	\begin{itemize}
-		\item $y(\bm{x})$ gives a \textbf{signed measure} of the perp. distance of $\bm{x}$ to the boundary
+		\item $\widehat{h}(\bm{x})$ gives a \textbf{signed measure} of the perp. distance of $\bm{x}$ to the boundary
 		\item Consider an arbitrary point $\bm{x}$ and its orth. projection $\bm{x}_{\perp}$ onto the surface
 		\begin{equation}
 			\bm{x} = \bm{x}_{\perp} + r \frac{\bm{w}}{\Vert \bm{w} \Vert}
 		\end{equation}
 		\item Multiplying both sides by $\bm{w}^{\intercal}$ and adding $b$, and making use of:
 		\begin{equation*}
-			y(\bm{x}) = \bm{w}^{\intercal} \bm{x} + b \qquad \text{and} \qquad
-			y(\bm{x}_{\perp}) = \bm{w}^{\intercal} \bm{x}_{\perp} + b = 0			
+			\widehat{h}(\bm{x})
+				= \bm{w}^{\intercal} \bm{x} + b \qquad \text{and} \qquad
+			\widehat{h}(\bm{x}_{\perp})
+				= \bm{w}^{\intercal} \bm{x}_{\perp} + b = 0			
 		\end{equation*}
 		\item We get:
 		\begin{equation}
-			r = \frac{y(\bm{x})}{\Vert \bm{w} \Vert}
+			r = \frac{h(\bm{x})}{\Vert \bm{w} \Vert}
 		\end{equation}
 	\end{itemize}
 \end{frame}
@@ -155,20 +157,20 @@
 \begin{frame}{Linear Separability}{}
 	\begin{itemize}
 		\item We have $n$ input vectors $\bm{X} = \{ \bm{x}^{(1)}, \bm{x}^{(2)}, \dots, \bm{x}^{(n)} \}$
-		\item With corresponding target values $t^{(1)}, t^{(2)}, \dots, t^{(n)}$ where $t^{(i)} \in \{-1, +1\}$
-		\item New data points are classified according to the sign of $y(\bm{x})$: $sign(y(\bm{x}))$
+		\item With corresponding target values $y^{(1)}, y^{(2)}, \dots, y^{(n)}$ where $y^{(i)} \in \{-1, +1\}$
+		\item New data points are classified according to the sign of $\widehat{h}(\bm{x})$: $sign(\widehat{h}(\bm{x}))$
 	\end{itemize}
 	
 	\begin{boxBlueNoFrame}
 		\footnotesize
 		A data set is \textbf{linearly separable} in feature space, if $\exists (\bm{w}, b)$ such that
 		\begin{align}
-			y(\bm{x}^{(i)}) = \bm{w}^{\intercal} \bm{x}^{(i)} + b &> 0 \qquad
-				\text{$\forall \bm{x}^{(i)}$ with $t^{(i)} = +1$} \\
-			y(\bm{x}^{(i)}) = \bm{w}^{\intercal} \bm{x}^{(i)} + b &< 0 \qquad
-				\text{otherwise ($t^{(i)} = -1$)}
+			\widehat{h}(\bm{x}^{(i)}) = \bm{w}^{\intercal} \bm{x}^{(i)} + b &> 0 \qquad
+				\text{$\forall \bm{x}^{(i)}$ with $y^{(i)} = +1$} \\
+			\widehat{h}(\bm{x}^{(i)}) = \bm{w}^{\intercal} \bm{x}^{(i)} + b &< 0 \qquad
+				\text{otherwise ($y^{(i)} = -1$)}
 		\end{align}
-		This can also be written as: $t^{(i)} y(\bm{x}^{(i)}) > 0\ \forall i$ 
+		This can also be written as: $y^{(i)} \widehat{h}(\bm{x}^{(i)}) > 0\ \forall i$ 
 	\end{boxBlueNoFrame}
 \end{frame}
 
@@ -176,9 +178,10 @@
 % Example Data Set
 \begin{frame}{Example Data Set (linearly separable)}{}
 	\divideTwo{0.49}{
-		\vspace*{4mm}
+		\vspace*{6mm}
 		\input{11_svm/01_tikz/data_linearly_separable}
 	}{0.49}{
+		\vspace*{-2mm}
 		\begin{itemize}
 			\item This data set is \highlight{linearly separable} (you can find a straight line to separate the two classes)
 			\item The possible number of hyperplanes is infinite...
@@ -215,12 +218,12 @@
 	\begin{itemize}
 		\item Recall the perpendicular distance of a point $\bm{x}$ to the hyperplane:
 		\begin{equation}
-			\frac{\vert y(\bm{x}) \vert}{\Vert \bm{w} \Vert}
+			\frac{\vert \widehat{h}(\bm{x}) \vert}{\Vert \bm{w} \Vert}
 		\end{equation}
 		\item Furthermore, we are only interested in solutions for which all data points are correctly classified, i.\,e. 
-			$t^{(i)} y(\bm{x}^{(i)}) > 0\ \forall i$, thus the distance is given by:
+			$y^{(i)} \widehat{h}(\bm{x}^{(i)}) > 0\ \forall i$, thus the distance is given by:
 		\begin{equation}
-			\frac{t^{(i)} y(\bm{x}^{(i)})}{\Vert \bm{w} \Vert} = \frac{t^{(i)} (\bm{w}^{\intercal} \bm{x}^{(i)} + b)}{\Vert \bm{w} \Vert}
+			\frac{y^{(i)} \widehat{h}(\bm{x}^{(i)})}{\Vert \bm{w} \Vert} = \frac{y^{(i)} (\bm{w}^{\intercal} \bm{x}^{(i)} + b)}{\Vert \bm{w} \Vert}
 		\end{equation}
 	\end{itemize}
 \end{frame}
@@ -238,7 +241,7 @@
 			\overbracket{
 				\argmax_{\bm{w}, b} \left\{ \frac{1}{\Vert \bm{w} \Vert}
 				\overbracket{
-					\min_i [t^{(i)} (\bm{w}^{\intercal} \bm{x}^{(i)} + b)]
+					\min_i \{y^{(i)} (\bm{w}^{\intercal} \bm{x}^{(i)} + b)\}
 				}^{\text{`closest data points'}}
 				\right\}
 			}^{\text{`maximize distance to closest data points'}}
@@ -253,15 +256,15 @@
 % Maximum Margin Classifiers (Ctd.)
 \begin{frame}{Maximum Margin Classifiers (Ctd.)}{}
 	\begin{itemize}
-		\item We note that rescaling $\bm{w}$ and $b$ by a factor $\kappa$
+		\item We note that rescaling $\bm{w}$ and $b$ by a factor $\zeta$
 			\textbf{does not change the distance} to the decision boundary
 		\item Therefore, for the points that are closest to the surface, we can set:
 		\begin{equation}
-			t^{(i)} (\bm{w}^{\intercal} \bm{x}^{(i)} + b) = 1
+			y^{(i)} (\bm{w}^{\intercal} \bm{x}^{(i)} + b) = 1
 		\end{equation}
 		\item In this case, all data points $\bm{x}^{(i)}$ satisfy the constraint:
 		\begin{equation}
-			t^{(i)} (\bm{w}^{\intercal} \bm{x}^{(i)} + b) \ge 1 \qquad i = 1, 2, \dots, n
+			y^{(i)} (\bm{w}^{\intercal} \bm{x}^{(i)} + b) \ge 1 \qquad i = 1, 2, \dots, n
 		\end{equation}
 		\item It is sufficient to solve: \highlight{$\argmin_{\bm{w}, b} \frac{1}{2} \Vert \bm{w} \Vert^2$}
 			\footnotesize ($\nicefrac{1}{2}$ for later mathematical convenience) \normalsize
@@ -284,7 +287,7 @@
 			\item How to solve such problems?
 		\end{itemize}
 		\vspace*{2mm}\centering
-		\highlight{Lagrangian Optimization} \\
+		\highlight{Lagrangian optimization} \\
 		\footnotesize (named after Joseph-Louis Lagrange)
 	}{0.24}{
 		\vspace*{2mm}
@@ -370,7 +373,7 @@
 				\nicefrac{1}{2} \Vert \bm{w} \Vert^2
 			}^{f(\bm{x})} -
 			\sum_{i=1}^n \alpha_i [\overbracket{
-				t^{(i)} \cdot (\bm{w}^{\intercal} \bm{x}^{(i)} + b) - 1
+				y^{(i)} \cdot (\bm{w}^{\intercal} \bm{x}^{(i)} + b) - 1
 			}^{g(\bm{x})\, =\, 0}]
 		\end{equation}
 	\end{boxBlueNoFrame}
@@ -389,11 +392,11 @@
 		
 	\begin{alignat}{2}
 		\frac{\partial \mathcal{L}}{\partial \bm{w}}
-			&= \bm{w} - \sum_{i=1}^n \alpha_i t^{(i)} \bm{x}^{(i)} \overset{!}{=} 0
-				&&\Rightarrow \boxed{\bm{w} = \sum_{i=1}^n \alpha_i t^{(i)} \bm{x}^{(i)}} \\[5mm]
+			&= \bm{w} - \sum_{i=1}^n \alpha_i y^{(i)} \bm{x}^{(i)} \overset{!}{=} 0
+				&&\Rightarrow \boxed{\bm{w} = \sum_{i=1}^n \alpha_i y^{(i)} \bm{x}^{(i)}} \\[5mm]
 		\frac{\partial \mathcal{L}}{\partial b} 
-			&= -\sum_{i=1}^n \alpha_i t^{(i)} \overset{!}{=} 0
-				&&\Rightarrow \boxed{\sum_{i=1}^n \alpha_i t^{(i)} = 0}
+			&= -\sum_{i=1}^n \alpha_i y^{(i)} \overset{!}{=} 0
+				&&\Rightarrow \boxed{\sum_{i=1}^n \alpha_i y^{(i)} = 0}
 	\end{alignat}
 \end{frame}
 
@@ -407,14 +410,14 @@
 		\nonumber
 		\widetilde{\mathcal{L}}(\bm{\alpha})
 		&=
-			\frac{1}{2} \left( \sum_{i=1}^n \alpha_i t^{(i)} \bm{x}^{(i)} \right)\left( \sum_{j=1}^n \alpha_j t^{(j)} \bm{x}^{(j)} \right) -
-			\left( \sum_{i=1}^n \alpha_i t^{(i)} \bm{x}^{(i)} \right) \left( \sum_{j=1}^n \alpha_j t^{(j)} \bm{x}^{(j)} \right) \\
-		&\phantom{=} - \sum_{i=1}^n \alpha_i t^{(i)} b + \sum_{i=1}^n \alpha_i \\[5mm]
+			\frac{1}{2} \left( \sum_{i=1}^n \alpha_i y^{(i)} \bm{x}^{(i)} \right)\left( \sum_{j=1}^n \alpha_j y^{(j)} \bm{x}^{(j)} \right) -
+			\left( \sum_{i=1}^n \alpha_i y^{(i)} \bm{x}^{(i)} \right) \left( \sum_{j=1}^n \alpha_j y^{(j)} \bm{x}^{(j)} \right) \\
+		&\phantom{=} - \sum_{i=1}^n \alpha_i y^{(i)} b + \sum_{i=1}^n \alpha_i \\[5mm]
 		&=
 			\boxed{
 				\sum_{i=1}^n \alpha_i - \frac{1}{2} \sum_{i=1}^n \sum_{j=1}^n
-					\alpha_i \alpha_j t^{(i)} t^{(j)} \langle \bm{x}^{(i)}, \bm{x}^{(j)} \rangle
-			} \quad \text{s.\,t.}\ \alpha_i \ge 0\ \forall i\ \text{and}\ \sum_{i=1}^n \alpha_i t^{(i)} = 0
+					\alpha_i \alpha_j y^{(i)} y^{(j)} \langle \bm{x}^{(i)}, \bm{x}^{(j)} \rangle
+			} \quad \text{s.\,t.}\ \alpha_i \ge 0\ \forall i\ \text{and}\ \sum_{i=1}^n \alpha_i y^{(i)} = 0
 	\end{align}
 	\normalsize
 \end{frame}
@@ -424,14 +427,14 @@
 \begin{frame}{SVM Parameter Optimization (Ctd.)}{}\optional
 	\begin{itemize}
 		\item Once we know $\bm{\alpha}$, we can determine $b$ by noting that any
-			support vector satisfies $t^{(i)} y(\bm{x}^{(i)}) = 1$: {\scriptsize ($\mathcal{S} \equiv$ indices of support vectors)}
+			support vector satisfies $y^{(i)} \widehat{h}(\bm{x}^{(i)}) = 1$: {\scriptsize ($\mathcal{S} \equiv$ indices of support vectors)}
 		\begin{equation}
-			t^{(i)} \left( \sum_{j \in \mathcal{S}} \alpha_j t^{(j)} \langle \bm{x}^{(i)}, \bm{x}^{(j)} \rangle + b \right) = 1
+			y^{(i)} \left( \sum_{j \in \mathcal{S}} \alpha_j y^{(j)} \langle \bm{x}^{(i)}, \bm{x}^{(j)} \rangle + b \right) = 1
 		\end{equation}
 		\item Average over all support vectors to compute $b$: {\scriptsize ($n_\mathcal{S} \equiv$ number of support vectors)}
 		\begin{equation}
 			b = \frac{1}{n_{\mathcal{S}}} \sum_{i \in \mathcal{S}} \left(
-				t^{(i)} - \sum_{j \in \mathcal{S}} \alpha_j t^{(j)} \langle \bm{x}^{(i)}, \bm{x}^{(j)} \rangle
+				y^{(i)} - \sum_{j \in \mathcal{S}} \alpha_j y^{(j)} \langle \bm{x}^{(i)}, \bm{x}^{(j)} \rangle
 			\right)
 		\end{equation}
 	\end{itemize}
@@ -443,7 +446,7 @@
 	\begin{itemize}
 		\item Given our derivations, we can rewrite the SVM decision rule as follows:
 		\begin{equation}
-			y(\bm{x}) = sign\left( \sum_{i \in \mathcal{S}} \alpha_i t^{(i)} \langle \bm{x}^{(i)}, \bm{x} \rangle + b \right)
+			h(\bm{x}) = sign\left( \sum_{i \in \mathcal{S}} \alpha_i y^{(i)} \langle \bm{x}^{(i)}, \bm{x} \rangle + b \right)
 		\end{equation}
 		\item $\bm{x}$ is an unknown instance for which the class label is not known
 	\end{itemize}
@@ -502,7 +505,10 @@
 % Feature Mapping
 \begin{frame}{Feature Mapping}{}
 	The mapping function $\varphi$ maps from input space $\mathcal{X}$ to feature space $\mathcal{F}$:
-	\input{11_svm/01_tikz/feature_mapping}
+	\begin{figure}
+		\centering
+		\input{11_svm/01_tikz/feature_mapping}
+	\end{figure}
 	\vspace*{-2mm}
 	\begin{equation*}
 		\varphi(x_1, x_2) \mapsto \left( x_1^2, \sqrt{2} x_1 x_2, x_2^2 \right) = (z_1, z_2, z_3)
@@ -551,7 +557,7 @@
 			\mathcal{K}(\bm{x}, \bm{x'}) \Leftrightarrow \varphi(\bm{x})^{\intercal} \varphi(\bm{x'})
 		\end{equation}
 		\item Instead of mapping features explicitly, we calculate the \highlight{Gram matrix}
-			$\bm{K} \in \mathbb{R}^{N \times N}$, where: 
+			$\bm{K} \in \mathbb{R}^{n \times n}$, where: 
 		\begin{equation}
 			K_{ij} = \mathcal{K}(\bm{x}^{(i)}, \bm{x}^{(j)})
 		\end{equation}
@@ -597,10 +603,10 @@
 				= \left( \sum_{i=1}^m x_i x'_i \right) \left( \sum_{j=1}^m x_j x'_j \right)
 				= \sum_{i=1}^m \sum_{j=1}^m (x_i x_j) (x'_i x'_j) = \varphi(\bm{x})^{\intercal} \varphi(\bm{x'})
 		\end{equation}}
-		\vspace*{-2mm}
+		\vspace*{-4mm}
 		\begin{boxBlueNoFrame}
 			\footnotesize
-			\highlight{We need $\mathcal{O}(n^2)$ to compute $\varphi(\bm{x})$ and $\varphi(\bm{x'})$ but only $\mathcal{O}(n)$
+			\highlight{We need $\mathcal{O}(n^2)$ to compute $\varphi(\bm{x})$ and $\varphi(\bm{x'})$, but $\mathcal{O}(n)$
 			to compute $\mathcal{K}(\bm{x}, \bm{x'})$}
 		\end{boxBlueNoFrame}
 	\end{itemize}
@@ -615,8 +621,8 @@
 		\begin{align}
 			\widetilde{\mathcal{L}} 
 					&= \sum_{i=1}^n \alpha_i  - \frac{1}{2} \sum_{i=1}^n \sum_{j=1}^n
-						\alpha_i \alpha_j t^{(i)} t^{(j)} \mathcal{K}(\bm{x}^{(i)}, \bm{x}^{(j)}) \\[4mm]
-			y(\bm{x}) 	&= sign \left( \sum_{i \in \mathcal{S}} \alpha_i t^{(i)} \mathcal{K}(\bm{x}^{(i)}, \bm{x}) + b \right)
+						\alpha_i \alpha_j y^{(i)} y^{(j)} \mathcal{K}(\bm{x}^{(i)}, \bm{x}^{(j)}) \\[4mm]
+			h(\bm{x}) 	&= sign\left( \sum_{i \in \mathcal{S}} \alpha_i y^{(i)} \mathcal{K}(\bm{x}^{(i)}, \bm{x}) + b \right)
 		\end{align}
 	\end{itemize}
 \end{frame}
@@ -650,7 +656,7 @@
 		\item A kernel is valid, if it fulfills \highlight{Mercer's condition}
 		\item This is the case, if for all \textbf{square-integrable functions} $g(\bm{x})$...
 		\begin{equation}
-			\int_{-\infty}^{\infty} \vert g(\bm{x}) \vert^2 \diff x < \infty
+			\int_{-\infty}^{\infty} \vert g(\bm{x}) \vert^2 \diff \bm{x} < \infty
 		\end{equation}
 		\item ...it holds:
 		\begin{equation}
@@ -772,7 +778,7 @@
 		\begin{tabbing}
 			\hspace*{2.5cm}\= \kill
 			$\xi_i = 0$ 		\> if $\bm{x}^{(i)}$ is on or inside the correct margin boundary 		\\
-			$0 < \xi_i < 1$ 		\> if $\bm{x}^{(i)}$ lies inside the margin, but on the correct side 	\\
+			$0 < \xi_i < 1$ 		\> if $\bm{x}^{(i)}$ lies inside the margin, but on the correct side 		\\
 			$\xi_i = 1$ 		\> if $\bm{x}^{(i)}$ is on the decision boundary 					\\
 			$\xi_i > 1$ 		\> if $\bm{x}^{(i)}$ lies on the wrong side of the decision boundary (misclassification)
 		\end{tabbing}
@@ -780,7 +786,7 @@
 
 		\item The classification constraints are replaced with:
 		\begin{equation}
-			t^{(i)} y(\bm{x}^{(i)}) \ge 1 - \xi_i \qquad i = 1, \dots, n
+			y^{(i)} \widehat{h}(\bm{x}^{(i)}) \ge 1 - \xi_i \qquad i = 1, \dots, n
 		\end{equation}
 		\item We get a \highlight{soft-margin classifier}
 	\end{itemize}
@@ -799,7 +805,7 @@
 		\item We want to maximize the margin, while softly \textbf{penalizing points which lie on the wrong side of the boundary}:
 		\begin{equation}
 			\frac{1}{2} \Vert \bm{w} \Vert^2 + C \sum_{i=1}^n \xi_i
-			\quad \text{s.\,t.} \quad t^{(i)} y(\bm{x}^{(i)}) \ge 1 - \xi_i\ \text{and}\ \xi_i \ge 0\ \forall i
+			\quad \text{s.\,t.} \quad y^{(i)} \widehat{h}(\bm{x}^{(i)}) \ge 1 - \xi_i\ \text{and}\ \xi_i \ge 0\ \forall i
 		\end{equation}
 		\item $C > 0$ controls the \textit{`degree of softness'}, the larger $C$ the more we penalize
 		\item The Lagrangian function:
@@ -809,7 +815,7 @@
 		\begin{equation}
 			\mathcal{L}(\bm{w}, b, \bm{\alpha}, \bm{\mu})
 				= \frac{1}{2} \Vert \bm{w} \Vert^2 + C \sum_{i=1}^n \xi_i -
-					\sum_{i=1}^n \alpha_i \{ t^{(i)} y(\bm{x}^{(i)}) - 1 + \xi_i \} - \sum_{i=1}^n \mu_i \xi_i
+					\sum_{i=1}^n \alpha_i \{ y^{(i)} \widehat{h}(\bm{x}^{(i)}) - 1 + \xi_i \} - \sum_{i=1}^n \mu_i \xi_i
 		\end{equation}
 	\end{itemize}
 \end{frame}
@@ -822,12 +828,12 @@
 		\begin{equation}
 			\widetilde{\mathcal{L}}(\bm{\alpha}) =
 				\sum_{i=1}^n \alpha_i - \frac{1}{2} \sum_{i=1}^n \sum_{j=1}^n
-				\alpha_i \alpha_j t^{(i)} t^{(j)} \langle \bm{x}^{(i)}, \bm{x}^{(j)} \rangle
+				\alpha_i \alpha_j y^{(i)} y^{(j)} \langle \bm{x}^{(i)}, \bm{x}^{(j)} \rangle
 		\end{equation}
 		\item But the constraints differ slightly:
 		\footnotesize
 		\begin{align}
-			&1) \quad \sum_{i=1}^n \alpha_i t^{(i)} = 0 \\[2mm]
+			&1) \quad \sum_{i=1}^n \alpha_i y^{(i)} = 0 \\[2mm]
 			&2) \quad \boxed{0 \le \alpha_i\ \textcolor{red}{\le C} \qquad i = 1, \dots, n} 
 		\end{align}
 		\normalsize
@@ -913,7 +919,15 @@
 
 % Summary
 \begin{frame}{Summary}{}
-
+	\begin{itemize}
+		\item SVMs  assume the data to be \textbf{linearly separable}
+		\item \textbf{Generalization guarantee:} SVMs are \textbf{maximum margin} classifiers
+		\item The set of \textbf{support vectors} defines the decision boundary
+		\item We have to solve a quadratic optimization problem to obtain the support vectors which are needed for prediction
+		\item \Highlight{Important concept:} Kernels (cf. Mercer's condition)
+		\item Slack variables allow for \textbf{soft-margin classification}
+		\item Apply multi-class classification techniques like OVR / OVO if you have more than two classes
+	\end{itemize}
 \end{frame}
 
 
@@ -923,7 +937,14 @@
 
 % Self-Test Questions
 \begin{frame}{Self-Test Questions}{}\important
-
+	\begin{enumerate}
+		\item What is a maximum-margin classifier?
+		\item Which data points are needed for prediction? How do we get them?
+		\item What is a kernel? Can every function serve as a kernel?
+		\item What prerequisite allows for the usage of kernels?
+		\item Name famous kernels and write down the equation to compute them!
+		\item What is slack? What can we do with it?
+	\end{enumerate}
 \end{frame}
 
 
@@ -942,11 +963,31 @@
 
 % Literature
 %______________________________________________________________________
-\begin{frame}{Recommended Literature and further Reading}{}
+\begin{frame}[allowframebreaks]{Recommended Literature and further Reading}{}
 	\footnotesize
 	\begin{thebibliography}{2}
-
+		\literature{book}{Bishop.2006}{[1] Pattern Recognition and Machine Learning}
+			{Christopher Bishop. Springer. 2006.}{$\rightarrow$ \href{
+				http://users.isr.ist.utl.pt/~wurmd/Livros/school/Bishop\%20-\%20Pattern\%20Recognition\%20And\%20Machine\%20Learning\%20-\%20Springer\%20\%202006.pdf
+			}{\linkstyle{Link}}, cf. chapter 7}
+			
+		\literature{book}{Murphy.2012}{[2] Machine Learning: A Probabilistic Perspective}
+			{Kevin Murphy. MIT Press. 2012.}{$\rightarrow$ \href{
+				https://doc.lagout.org/science/Artificial\%20Intelligence/Machine\%20learning/Machine\%20Learning_\%20A\%20Probabilistic\%20Perspective\%20\%5BMurphy\%202012-08-24\%5D.pdf
+			}{\linkstyle{Link}}, cf. chapter 14.5}
 	\end{thebibliography}
+\end{frame}
+
+
+% Subsection: Meme of the Day
+% --------------------------------------------------------------------------------------------------------
+\subsection{Meme of the Day}
+
+% Meme of the Day
+\begin{frame}{Meme of the Day}{}
+	\begin{figure}
+		\includegraphics[scale=0.8]{11_svm/02_img/meme_of_the_day}
+	\end{figure}
 \end{frame}
 
 

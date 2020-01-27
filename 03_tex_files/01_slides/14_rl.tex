@@ -1,0 +1,1194 @@
+\input{preamble_theme}
+
+% ====================================================
+% ====================================================
+% PRESENTATION DATA
+% ====================================================
+% ====================================================
+
+\title[Reinforcement Learning]{*** Applied Machine Learning Fundamentals *** Reinforcement Learning}
+\institute{SAP\,SE}
+\author{M.\,Sc. Daniel Wehner}
+\date{Winter term 2019/2020}
+\prefix{RL}
+
+% ====================================================
+% ====================================================
+% BEGIN OF DOCUMENT
+% ====================================================
+% ====================================================
+
+\begin{document}
+
+% Title frame
+%______________________________________________________________________
+\maketitlepage
+
+
+% Lecture Overview
+%______________________________________________________________________
+\begin{frame}{Lecture Overview}{}
+	\begin{center}
+		\Huge\highlight{Out of scope for this lecture!}
+	\end{center}
+\end{frame}
+
+
+% Agenda
+%______________________________________________________________________
+\begin{frame}{Agenda \today}
+	\begin{multicols}{2}
+		\tableofcontents
+	\end{multicols}
+\end{frame}
+
+
+% Section: Introduction
+%______________________________________________________________________
+\section{Introduction}
+\makedivider{Introduction}
+
+% Subsection: What is Reinforcement Learning?
+% --------------------------------------------------------------------------------------------------------
+\subsection{What is Reinforcement Learning?}
+
+% What is Reinforcement Learning?
+\begin{frame}{What is Reinforcement Learning?}{}
+	\begin{itemize}
+		\item Agent $\Leftrightarrow$ (Unknown) Environment
+		\item \textbf{Goal}
+		\begin{itemize}
+			\item Learn optimal decisions based on feedback provided by the environment
+			\item Environment rewards agent for actions but \highlight{does not (!)} reveal the correct solution
+				(reward can be positive or negative)
+		\end{itemize}
+		\item \textbf{Applications}
+		\begin{itemize}
+			\item Games, e.\,g.:
+			\begin{itemize}
+				\item Tic-Tac-Toe: MENACE [\textit{Michie}, 1963]
+				\item Backgammon: TD-Gammon [\textit{Tesauro}, 1995]
+			\end{itemize}
+			\item Other: E.\,g. 
+				\href{https://www.youtube.com/watch?v=W_gxLKSsSIE}{\linkstyle{robot control}}
+				\scriptsize (btw.: $robot_{en}$ derived from $robota_{cz}$ -- labor service)
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+% Dimensions of Learning: Type of Training Information
+\begin{frame}{Dimensions of Learning: Type of Training Information}{}
+	\input{14_rl/01_tikz/type_of_training_information}
+\end{frame}
+
+
+% Differences to other Approaches
+\begin{frame}{Difference to other Approaches}{}
+	\begin{enumerate}
+		\item \textbf{Delayed rewards}
+		\begin{itemize}
+			\item Sequence of actions $\Rightarrow$ Problem of \highlight{temporal credit assignment}
+			\item Which actions were good? Which were bad?
+		\end{itemize}
+		\item \textbf{Exploitation vs. exploration}
+		\begin{itemize}
+			\item Should the agent perform actions which are known to be good?
+			\item Or should it try out new (possibly even better) actions?
+		\end{itemize}
+		\item \textbf{Partially observable states} (not everything my be observable)
+		\item \textbf{Life-long learning} 
+		\begin{itemize}
+			\item Environment may not be static, it could change!
+			\item Agents need to adapt to these changes...
+		\end{itemize}
+	\end{enumerate}
+\end{frame}
+
+
+% Credit Assignment Problem
+\begin{frame}{Credit Assignment Problem}{}
+	\begin{itemize}
+		\item \textbf{Fundamental problem in reinforcement learning}
+		\begin{itemize}
+			\item Especially in games: Reward at the end of the match (\textbf{have I won or lost?})
+			\item Central Question: \textbf{Which moves contributed to winning / losing?}
+			\item This problem is referred to as the \highlight{credit assignment problem}
+		\end{itemize}
+		\item \textbf{Solution}
+		\begin{itemize}
+			\item \textbf{All moves} of the sequence are rewarded / punished
+			\item The problem is basically ignored in this case
+			\item After many games the algorithm converges:
+			\begin{itemize}
+				\item Bad moves will be reinforced less positively
+				\item Good moves will be positively reinforced more often
+			\end{itemize}
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+% Subsection: MENACE (Matchbox Educable Noughts and Crosses Engine)
+% --------------------------------------------------------------------------------------------------------
+\subsection{MENACE (Matchbox Educable Noughts and Crosses Engine)}
+
+% MENACE: Learning to play Tic-Tac-Toe
+\begin{frame}{MENACE: Learning to play `Tic-Tac-Toe'}{}
+	\divideTwo{0.49}{
+		\begin{itemize}
+			\item Introduced by [\textit{Mitchie}, 1963]
+			\item Learns to play `Tic-Tac-Toe'
+			\item MENACE stands for:
+			\begin{itemize}
+				\item[] \highlight{M}atchbox
+				\item[] \highlight{E}ducable
+				\item[] \highlight{N}oughts
+				\item[] \highlight{A}nd
+				\item[] \highlight{C}rosses
+				\item[] \highlight{E}ngine
+			\end{itemize}
+		\end{itemize}
+	}{0.49}{
+		\vspace*{2mm}
+		\input{14_rl/01_tikz/tic_tac_toe}
+	}
+\end{frame}
+
+
+% MENACE: Setup
+\begin{frame}{MENACE: Setup}{}
+	\begin{itemize}
+		\item Learns to play `Tic-Tac-Toe' (reinforcement learning by hand)
+		\item \textbf{`Hardware'}
+		\begin{itemize}
+			\item 287 matchboxes (1 per playing position)
+			\item Marbles in nine different colors (one color per field)
+			\item Initially, each matchbox contains the same amount of marbles of each color
+		\end{itemize}
+		\item \textbf{Algorithm}
+		\begin{itemize}
+			\item Choose matchbox corresponding to current playing position
+			\item Pick a marble randomly from the matchbox
+			\item Put marker (\textcolor{blue}{$\bm{\times}$} or \textcolor{red}{$\bm{\bigcirc}$})
+				on the field that corresponds to the color
+		\end{itemize}
+		\item \highlight{How can good moves be positively reinforced?}
+	\end{itemize}
+\end{frame}
+
+
+% MENACE: Visualized
+\begin{frame}{MENACE: Visualized}{}
+	\input{14_rl/01_tikz/tic_tac_toe_1}
+\end{frame}
+
+
+% Reinforcement Learning in MENACE
+\begin{frame}{Reinforcement Learning in MENACE}{}
+	\begin{itemize}
+		\item \textbf{Initialization:} All moves are equally likely $\Rightarrow$ Each matchbox contains the same amount
+			of marbles of each color
+		\item \textbf{Learning algorithm}
+		\begin{itemize}
+			\item Game \highlight{lost}: Marble is removed (negative reinforcement)
+			\item Game \highlight{won}: Marble of corresponding color is added (positive reinforcement)
+			\item \highlight{Remis}: Marbles are put back into the matchbox (no change)
+		\end{itemize}
+	\end{itemize}
+	
+	\begin{boxBlueNoFrame}
+		$\bm{\Uparrow}$ Probability of successful moves is \highlight{increased} \\
+		$\bm{\Downarrow}$ Probability of bad moves is \highlight{decreased}
+	\end{boxBlueNoFrame}
+\end{frame}
+
+
+% Subsection: Reinforcement Learning Formalization
+% --------------------------------------------------------------------------------------------------------
+\subsection{Reinforcement Learning Formalization}
+
+% Reinforcement Learning: Formalization
+\begin{frame}{Reinforcement Learning: Formalization}{}
+	\begin{itemize}
+		\item Definitions
+		\begin{itemize}
+			\item $s \in \mathcal{S}$: state space (discrete or continuous)
+			\item $a \in \mathcal{A}$: action space (discrete or continuous)
+			\item $s_0 \in \mathcal{S}_0 \subseteq \mathcal{S}$: initial states
+			\item $\delta : \mathcal{S} \times \mathcal{A} \rightarrow \mathcal{S}$: state transition function
+				(deterministic or stochastic)
+			\item $r : \mathcal{S} \times \mathcal{A} \rightarrow \mathbb{R}$: reward function
+		\end{itemize}
+		\item \highlight{Markov property} / \highlight{Markov Decision Process (MDP)}
+		\begin{itemize}
+			\item Rewards and state transitions depend on previous state only...
+			\item ...and not how you got into this state (earlier states and actions don't matter)
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+% Reinforcement Learning: Formalization (Ctd.)
+\begin{frame}{Reinforcement Learning: Formalization (Ctd.)}{}
+	\begin{itemize}
+		\item The agent repeatedly chooses an action according to a \highlight{policy $\pi$}
+		\begin{equation}
+			\pi(s) = a
+		\end{equation}
+		\item This leads the agent into a new state $s'$
+		\begin{equation}
+			s' = \delta(s, \pi(s))
+		\end{equation}
+		\item The agent receives feedback (reinforcement) in some states
+		\begin{itemize}
+			\item Not necessarily in all states
+			\item E.\,g. in a game there is usually no reward until the end (game is won or lost)
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+% Reinforcement Learning: Formalization (Ctd.)
+\begin{frame}{Reinforcement Learning: Formalization (Ctd.)}{}
+	\input{14_rl/01_tikz/agent_environment}
+\end{frame}
+
+
+% MENACE Formalization
+\begin{frame}{MENACE Formalization}{}
+	\begin{tabbing}
+		\hspace*{4cm}\= \kill
+		\highlight{States} 				\> Matchboxes (discrete) \\[1mm]
+		\highlight{Actions} 				\> Possible moves (discrete) \\[1mm]
+		\highlight{Policy }				\> Prefer actions with higher number of marbles (stochastic) \\[1mm]
+		\highlight{Reward} 				\> Game won / game lost \\[1mm]
+		\highlight{Transition function}		\> Choose next matchbox according to rules (deterministic)
+	\end{tabbing}
+		
+	\begin{boxBlueNoFrame}
+		\textbf{Task:} Find a policy $\pi$ that maximizes the sum of future rewards ($\widehat{=}\ \pi^*$).
+	\end{boxBlueNoFrame}
+\end{frame}
+
+
+% Learning Task
+\begin{frame}{Learning Task}{}
+	\begin{itemize}
+		\item \textbf{Goal:} Maximize the \highlight{cumulative reward} for the \highlight{trajectory $\tau$}
+			which a policy $\pi$ generates
+		\begin{itemize}
+			\item \textbf{Deterministic:} $\tau$ is always the same
+			\item \textbf{Stochastic:} $\tau$ can differ (random elements included)
+		\end{itemize}
+		\item Cumulative reward:
+		\begin{equation}
+			R(\pi) = R(\tau^{\pi}) = \sum_{t=0}^{\infty} \gamma^t r(s_t, a_t)
+		\end{equation}
+		\item \highlight{Discount factor $\gamma$}: Immediate rewards are weighted higher,
+			rewards further in the future are discounted (exponentially)
+	\end{itemize}
+\end{frame}
+
+
+% Learning Task (Ctd.)
+\begin{frame}{Learning Task (Ctd.)}{}
+	\begin{itemize}
+		\item Rewards $t$ time steps in the future are discounted exponentially by a factor of $\gamma^t$
+		\item Value of $\gamma$:
+		\begin{itemize}
+			\item $0 \le \gamma \le 1$
+			\item $\bm{\gamma = 0}$: Only immediate rewards are taken into account
+			\item $\bm{\gamma = 1}$: Future rewards are given same emphasis as immediate rewards
+		\end{itemize}
+		\item Usually, $\gamma$ is set to a value close to 1 (0.99, 0.98, 0.95, ...)
+		\item Immediate rewards are usually preferred
+	\end{itemize}
+\end{frame}
+
+
+% How to compute $R(\tau^{\pi})$?
+\begin{frame}{How to compute $R(\tau^{\pi})$?}{}
+	\vspace*{-8mm}
+	\begin{align*}
+		R(\tau^{\pi}) 	&= \sum_{t=0}^{\infty} \gamma^t r(s_t, a_t) \\
+						&= r(s_0, a_0) + \gamma r(s_1, a_1) + \gamma^2 r(s_2, a_2) + \dots \\
+						&= r(s_0, \pi(s_0)) + \sum_{t=1}^{\infty} \gamma^t r(\delta(s_{t-1}, \pi(s_{t-1})), \pi(s_t)) \\
+						&= V^{\pi}(s_0)
+	\end{align*}
+
+	\vspace*{-2mm}
+	\begin{itemize}
+		\item $V$ is called the `value' of the first state
+		\item \highlight{Value function}: Reward when starting in state $s_0$ and following policy $\pi$
+	\end{itemize}
+\end{frame}
+
+
+% Optimal Policies and Value Functions
+\begin{frame}{Optimal Policies and Value Functions}{}
+	\begin{itemize}
+		\item The optimal policy is denoted by $\pi^*$
+		\item The optimal policy has the highest expected value for all states:
+		\begin{align*}
+			\pi^*(s) &= \argmax_{\pi} V^{\pi}(s) \quad \forall s \\
+					&= \argmax_{a \in \mathcal{A}} r(s, a) + \gamma V^{\pi^*}(\delta(s, a)) \quad \forall s
+		\end{align*}
+		\item Always select the action that maximizes the value function for the next step,
+			when following $\pi^*$ afterwards
+		\item \textbf{Problem:} \textbf{Recursive definition of $\pi^*$} requires \highlight{perfect knowledge}
+	\end{itemize}
+\end{frame}
+
+
+% An illustrative Example [given perfect Knowledge]
+\begin{frame}{An illustrative Example (given perfect Knowledge)}{}
+	\divideTwo{0.60}{
+		\begin{itemize}
+			\item Each square represents a state
+			\item Each arrow represents a possible action
+			\item Small numbers refer to the reward $r(s, a)$ obtained by taking the action
+			\item In this case: Reward is always set to 0 except when entering the goal state $\bm{\mathcal{G}}$
+			\item $\bm{\mathcal{G}}$ is an absorbing state (impossible to get out again)
+			\item $\gamma = 0.9$
+		\end{itemize}
+	}{0.39}{
+		\vspace*{2mm}
+		\input{14_rl/01_tikz/basic_example}
+	}
+\end{frame}
+
+
+% An illustrative Example (given perfect Knowledge) (Ctd.)
+\begin{frame}{An illustrative Example [given perfect Knowledge] (Ctd.)}{}
+	In this case we can derive the optimal policy $\pi^*$ directly,
+		e.\,g. $s_0 \rightarrow s_3 \rightarrow s_4 \rightarrow \mathcal{G}$
+	\divideTwo{0.60}{
+		\begin{alignat*}{2}
+			V^{\pi^*}(s_0) &= 0 + \gamma 0 + \gamma^2 100 + \gamma^3 0 + \dots 	&&= \bm{81}
+			\\[2mm]
+			V^{\pi^*}(s_1) &= 0 + \gamma 100 + \gamma^2 0 + \gamma^3 0 + \dots 	&&= \bm{90}
+			\\[2mm]
+			V^{\pi^*}(s_2) &= 100 + \gamma 0 + \gamma^2 0 + \gamma^3 0 + \dots	&&= \bm{100}
+			\\[2mm]
+			V^{\pi^*}(s_3) &= 0 + \gamma 100 + \gamma^2 0 + \gamma^3 0 + \dots 	&&= \bm{90}
+			\\[2mm]
+			V^{\pi^*}(s_4) &= 100 + \gamma 0 + \gamma^2 0 + \gamma^3 0 + \dots	&&= \bm{100}
+		\end{alignat*}
+	}{0.39}{
+		\vspace*{2mm}
+		\input{14_rl/01_tikz/basic_example_v_values}
+	}
+\end{frame}
+
+
+% Section: Algorithms
+%______________________________________________________________________
+\section{Algorithms}
+\makedivider{Algorithms}
+
+% Subsection: How to learn the optimal Policy?
+% --------------------------------------------------------------------------------------------------------
+\subsection{How to learn the optimal Policy?}
+
+% How to learn the optimal Policy?
+\begin{frame}{How to learn the optimal Policy?}{}
+	\begin{itemize}
+		\item W/o perfect knowledge it's difficult to learn the optimal policy directly, since training data of the
+			form $\langle s, a \rangle$ is not available (\textbf{$\ne$ supervised learning})
+		\item The only information at the agent's disposal is the sequence of observed immediate rewards: 
+		\begin{equation*}
+			r_0 \longrightarrow r_1 \longrightarrow r_2 \longrightarrow r_3 \longrightarrow r_4 \longrightarrow \dots
+		\end{equation*}
+		\item What evaluation function should be learned?
+		\begin{itemize}
+			\item One obvious choice is $V^{\pi^*}$
+			\item The agent should prefer state $s_1$ over $s_2$ if $V^{\pi^*}(s_1) > V^{\pi^*}(s_2)$
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+% How to learn the optimal Policy? (Ctd.)
+\begin{frame}{How to learn the optimal Policy? (Ctd.)}{}
+	\begin{itemize}
+		\item The optimal action in state $s$ is action $a$ that maximizes the sum of the immediate reward $r(s, a)$,
+			plus the value of $V^{\pi^*}$ of the immediate successor, discounted by $\gamma$:
+		\begin{equation}
+			\pi^*(s) = \argmax_{a \in \mathcal{A}} r(s, a) + \gamma V^{\pi^*}(\delta(s, a))
+		\end{equation}
+		\item \textbf{Problem:}
+		\begin{itemize}
+			\item In order to calculate $V^{\pi^*}$ the agent needs to know $\delta(s, a)$ and $r(s, a)$
+			\item They may not be known... $\Rightarrow$ Learning $V^{\pi*}$ is of no use,
+				since the equation cannot be evaluated
+		\end{itemize}
+		\item $\overset{Remedy}{\Longrightarrow}$ Policy Iteration, Q-Learning, SARSA, ...
+	\end{itemize}
+\end{frame}
+
+
+% Subsection: Policy Iteration
+% --------------------------------------------------------------------------------------------------------
+\subsection{Policy Iteration}
+
+% Policy Iteration
+\begin{frame}{Policy Iteration}{}
+	\begin{itemize}
+		\item Initialize a policy randomly and find its value function and iterate
+		\begin{itemize}
+			\item \highlight{Policy evaluation}: Find the value function of the current policy
+			\item \highlight{Policy improvement}: Find a better policy based on the current one
+		\end{itemize}
+		\item \textbf{Policy improvement theorem}
+		\begin{boxBlue}
+			\footnotesize
+			If it is true that selecting the first action in each state according to a policy $\pi'$ and continuing
+			with policy $\pi$ is better than always following $\pi$, then $\pi'$ is a better policy than $\pi$. $\Rightarrow
+			\pi^0(s) \longrightarrow V^{\pi^0}(s) \longrightarrow \pi^1(s) \longrightarrow V^{\pi^1}(s)
+			\longrightarrow \dots \longrightarrow \pi^*(s)$
+		\end{boxBlue}
+		\item Select the action that maximizes the value function of the current policy:
+		$\pi'(s) = \argmax_{a \in \mathcal{A}} r(s, a) + \gamma V^{\pi}(\delta(s, a))$
+	\end{itemize}
+\end{frame}
+
+
+% Subsection: $Q$-Learning
+% --------------------------------------------------------------------------------------------------------
+\subsection{$Q$-Learning}
+
+% Q-Learning
+\begin{frame}{$Q$-Learning}{}
+	\begin{itemize}
+		\item We define a new function $Q(s, a)$
+		\item Its value is the maximum discounted cumulative reward that can be achieved starting from state  $s$
+			and applying action $a$ as the first action
+		\begin{equation}
+			Q(s, a) = r(s, a) + \gamma V^{\pi^*}(\delta(s, a)) \qquad \text{\textit{looks familiar?}}
+		\end{equation}
+		\item Formula for $\pi^*$ can be rewritten in terms of $Q(s, a)$:
+		\begin{equation}
+			\pi^*(s) = \argmax_{a \in \mathcal{A}} Q(s, a)
+		\end{equation}
+		\item \highlight{This rewrite is important:} Learning the $Q$-function the agent can select optimal actions
+			without any knowledge of $r$ and $\delta$
+	\end{itemize}
+\end{frame}
+
+
+% Q-Learning (Ctd.)
+\begin{frame}{$Q$-Learning (Ctd.)}{}
+	\begin{itemize}
+		\item By always choosing the action with the maximum $Q$-value...
+		\begin{equation*}
+			\argmax_{a \in \mathcal{A}} Q(s, a)
+		\end{equation*}
+		\item ...we maximize the expected cumulative reward
+		\item What may seem surprising: Local optimal choices lead to a global optimal solution
+	\end{itemize}
+
+	\begin{boxBlueNoFrame}
+		Learning the $Q$-function corresponds to learning the optimal policy $\pi^*$
+	\end{boxBlueNoFrame}
+\end{frame}
+
+
+% Algorithm for $Q$-Learning
+\begin{frame}{Algorithm for $Q$-Learning}{}
+	\begin{itemize}
+		\item \textbf{How can $Q$ be learned?}
+		\begin{itemize}
+			\item We learn the $Q$-function by iterative approximation
+			\item Note the close relationship of $Q$ and $V^{\pi^*}$:
+			\begin{equation}
+				V^{\pi^*}(s) = \max_{a' \in \mathcal{A}} Q(s, a')
+			\end{equation}
+			\item Therefore, $Q(s, a)$ can be expressed in terms of itself \highlight{(Bellman equation)}:
+		\end{itemize}
+	\end{itemize}
+	
+	\begin{boxBlueNoFrame}
+		\begin{equation}
+			Q(s, a) = r(s, a) + \gamma \max_{a' \in \mathcal{A}} Q(\delta(s, a), a')
+		\end{equation}
+	\end{boxBlueNoFrame}
+\end{frame}
+
+
+% Algorithm for $Q$-Learning (Ctd.)
+\begin{frame}{Algorithm for $Q$-Learning (Ctd.)}{}
+	\divideTwo{0.60}{
+		\begin{itemize}
+			\item $\widehat{Q}$ denotes the agent's current estimate of the true $Q$ value (which is unknown)
+			\item The $Q$-function is represented by a table
+			\begin{itemize}
+				\item One entry per state-action pair
+				\item The entry for pair $\langle s, a \rangle$ stores $\widehat{Q}(s, a)$
+				\item Initially, table is filled with random numbers or zeroes
+			\end{itemize}
+			\item \textbf{Problem}: The table may become large if there are many states and actions
+		\end{itemize}
+	}{0.39}{
+		\vspace*{2mm}
+		\input{14_rl/03_tbl/q_table}
+	}	
+\end{frame}
+
+
+% Algorithm for $Q$-Learning (Ctd.)
+\begin{frame}{Algorithm for $Q$-Learning (Ctd.)}{}
+	\begin{itemize}
+		\item The agent repeatedly observes the current state $s$, chooses some action $a$, executes it and
+			observes $r$ as well as the new state $s'$
+		\item Update the table entry for $\widehat{Q}(s, a)$ according to the Bellman equation
+		\item The agent doesn't have to know $\delta(s, a)$ and $r(s, a)$
+		\item Instead, it executes some actions and observes what happens
+		\item In the limit $\widehat{Q}$ will converge towards the actual $Q$-function \textbf{iff}...
+		\begin{itemize}
+			\item ...the system can be modeled as a deterministic MDP...
+			\item ...\textbf{and} the reward function is bounded...
+			\item ...\textbf{and} each state-action pair is visited infinitely often
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+% Algorithm for $Q$-Learning (Ctd.)
+\begin{frame}{Algorithm for $Q$-Learning (Ctd.)}{}
+	\begin{algorithm}[H]
+		\footnotesize
+		\DontPrintSemicolon
+ 		\ForEach(\tcp*[h]{initialize table entries with zeroes}){$\langle s, a \rangle$}{
+ 			$\widehat{Q}(s, a) \longleftarrow 0$ \tcp*[h]{Alternative: Initialize with random numbers}\;
+ 		}
+		\While(\tcp*[h]{endless loop}){true}{
+  			Observe current state $s$\;
+  			Select an action $a$ and execute it\;
+  			Receive the immediate reward $r$\;
+  			Observe the new state $s'$\;
+  			Update the table entry for $\widehat{Q}(s, a)$:
+  				$\widehat{Q}(s, a) \longleftarrow r + \gamma \max_{a' \in \mathcal{A}} \widehat{Q}(s', a')$\;
+  			$s \longleftarrow s'$\;
+ 		}
+ 		\caption{Learning the $Q$-function}
+	\end{algorithm}
+\end{frame}
+
+
+% Q-Learning: An illustrative Example
+\begin{frame}{Q-Learning: An illustrative Example}{}
+	\input{14_rl/01_tikz/q_learning_example}
+	\vspace*{-2mm}
+	\begin{align*}
+		\widehat{Q}(s_3, a_{right}) 	&\longleftarrow r + \gamma \max_{a' \in \mathcal{A}} \widehat{Q}(s_4, a') \\
+								&\longleftarrow 0 + 0.9 \max_{a' \in \mathcal{A}}\{66,81,100\} \\
+								&\longleftarrow 90
+	\end{align*}
+\end{frame}
+
+
+% Q-Learning: An illustrative Example (Ctd.)
+\begin{frame}{Q-Learning: An illustrative Example (Ctd.)}{}
+	\begin{itemize}
+		\item Each time the agent makes a move, the $Q$-value estimates are \textbf{propagated backwards}
+			from the new state $s'$ to the old state $s$
+		\item The immediate reward is used to \textbf{augment} the propagated values of $\widehat{Q}$
+		\item Since there is an absorbing goal state $\bm{\mathcal{G}}$, there will be a series of episodes
+		\item \textbf{One episode}:
+		\begin{enumerate}
+			\item Initialize the agent at a random state
+			\item The episode ends as soon as the goal state $\bm{\mathcal{G}}$ is reached
+			\item Repeat until convergence (\texttt{goto 1})
+		\end{enumerate}
+	\end{itemize}
+\end{frame}
+
+
+% Q-Learning: An illustrative Example (Ctd.)
+\begin{frame}{Q-Learning: An illustrative Example (Ctd.)}{}
+	\input{14_rl/01_tikz/q_learning_example_complete}
+\end{frame}
+
+
+% Subsection: SARSA: State-Action-Reward-State-Action
+% --------------------------------------------------------------------------------------------------------
+\subsection{SARSA: State-Action-Reward-State-Action}
+
+% SARSA: State-Action-Reward-State-Action
+\begin{frame}{SARSA: State-Action-Reward-State-Action}{}
+	\begin{itemize}
+		\item SARSA is very similar to $Q$-learning
+		\item Stands for `State-Action-Reward-State-Action'
+		\item It refrains from calculating the `$\max$' in the formula
+		\item Instead it uses the current policy ($\Rightarrow$ \highlight{on-policy update})
+		\begin{equation}
+			\widehat{Q}(s, a) \longleftarrow r(s, a) + \gamma \widehat{Q}(\underbracket{\delta(s, a)}_{=s'}, \pi(s'))
+		\end{equation}
+	\end{itemize}
+\end{frame}
+
+
+% Section: Miscellaneous
+%______________________________________________________________________
+\section{Miscellaneous}
+\makedivider{Miscellaneous}
+
+% Subsection: Exploitation vs. Exploration
+% --------------------------------------------------------------------------------------------------------
+\subsection{Exploitation vs. Exploration}
+
+% Exploitation vs. Exploration
+\begin{frame}{Exploitation vs. Exploration}{}
+	\begin{itemize}
+		\item By always picking the best action the agent runs the risk of overcommitting to actions that were found
+			during early training
+		\item \highlight{It fails to explore other actions that might be even better}
+		\item \textbf{EXPLOITATION} $\bm{\Leftrightarrow}$ \textbf{EXPLORATION}
+		\item Exploitation
+		\begin{itemize}
+			\item Use the action the agent assumes to be the best one
+			\item Approximate the optimal policy
+		\end{itemize}
+		\item Exploration
+		\begin{itemize}
+			\item `Optimal action' may be wrong due to approximation errors
+			\item Try a suboptimal one
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+% Exploitation vs. Exploration (Ctd.)
+\begin{frame}{Exploitation vs. Exploration (Ctd.)}{}
+	\begin{itemize}
+		\item $\bm{\varepsilon}$\textbf{-greedy} (small $\varepsilon \Rightarrow$ exploitation)
+		\begin{equation}
+			p(a_i \vert s) =
+			\begin{cases}
+				1 - \varepsilon + \frac{\varepsilon}{\vert \mathcal{A} \vert} & 
+					\text{\textbf{if}}\ a_i = \argmax_{a \in \mathcal{A}} \widehat{Q}(s, a) \\
+				\frac{\varepsilon}{\vert \mathcal{A} \vert} &
+					\text{\textbf{otherwise}}
+			\end{cases}
+		\end{equation}
+		\item \textbf{Softmax} (actions with high $\widehat{Q}$-values get a higher probability)
+		\begin{equation}
+			P(a_i \vert s) = \frac{k^{\widehat{Q}(s, a_i)}}{\sum_j k^{\widehat{Q}(s, a_j)}}
+			\qquad k > 0 \quad \text{(large $k \Rightarrow$ exploitation)}
+		\end{equation}
+	\end{itemize}
+\end{frame}
+
+
+% Subsection: Non-Deterministic Rewards and Actions
+% --------------------------------------------------------------------------------------------------------
+\subsection{Non-Deterministic Rewards and Actions}
+
+% Non-Deterministic Rewards and Actions
+\begin{frame}{Non-Deterministic Rewards and Actions}{}
+	\begin{itemize}
+		\item So far we only considered the deterministic case
+		\item \textbf{What if the environment is non-deterministic?}
+		\begin{itemize}
+			\item E.\,g. in Backgammon each move involves a roll of the dice $\Rightarrow \delta(s, a)$ varies
+			\item Also, the rewards may change $\Rightarrow r(s, a)$ varies
+		\end{itemize}
+	\end{itemize}
+
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.3]{14_rl/02_img/backgammon}
+	\end{figure}
+\end{frame}
+
+
+% Non-Deterministic Rewards and Actions (Ctd.)
+\begin{frame}{Non-Deterministic Rewards and Actions (Ctd.)}{}
+	\begin{itemize}
+		\item $\delta(s, a)$ and $r(s, a)$ can be viewed as first producing a probability distribution over the outcomes based
+			on $s$ and $a$, and then drawing an outcome at random according to this distribution
+		\item If these probability distributions depend solely on $s$ and $a$ (not on earlier states or actions), then
+			the system is called \highlight{non-deterministic Markov decision process}
+	\end{itemize}
+
+	\begin{boxBlueNoFrame}
+		The $Q$-learning algorithm has to be modified in order to be able to handle the non-deterministic case.
+	\end{boxBlueNoFrame}
+\end{frame}
+
+
+% Non-Deterministic Rewards and Actions (Ctd.)
+\begin{frame}{Non-Deterministic Rewards and Actions (Ctd.)}{}
+	\begin{itemize}
+		\item Restate the agent's objective $\Rightarrow$ Redefine the value $V^{\pi}$ of a policy $\pi$
+			to be the expected value (solve e.\,g. by using \highlight{Monte Carlo sampling}, choose $k$):
+		\begin{equation*}
+			V^{\pi}(s_0) 	= \mathbb{E}\left[ \sum_{t=0}^{\infty} \gamma^t r(s_t, \pi(s_t)) \right]
+							= r(s_0, \pi(s_0)) + \underbracket{\frac{1}{k} \sum_{i=0}^k}_{k\ \text{samples}}
+							 	\sum_{t=1}^{\infty} \gamma^t r(s_t^i, \pi(s_t^i))
+		\end{equation*}
+		\item The definition of $Q$ has to be updated as well:
+		\begin{align*}
+			Q(s, a) 	&= \mathbb{E}[r(s, a) + \gamma V^{\pi^*}(\delta(s, a))]
+					  = \mathbb{E}[r(s, a)] + \gamma \mathbb{E}[V^{\pi^*}(\delta(s, a))] \\
+					&= \mathbb{E}[r(s, a)] + \gamma \sum_{s'} p(s' \vert s, a) V^{\pi^*}(s')
+		\end{align*}
+	\end{itemize}
+\end{frame}
+
+
+% Non-Deterministic Rewards and Actions (Ctd.)
+\begin{frame}{Non-Deterministic Rewards and Actions (Ctd.)}{}
+	\begin{itemize}
+		\item We can again re-express $Q$ recursively:
+		\begin{equation}
+			Q(s, a) = \mathbb{E}[r(s, a)] + \gamma \sum_{s'} p(s' \vert s, a) \max_{a'} Q(s', a')
+		\end{equation}
+		\item We need a new training rule for the algorithm (the old one fails to converge due to changing rewards...)
+		\begin{equation}
+			\widehat{Q}_n(s, a) \longleftarrow (1 - \alpha_n) \widehat{Q}_{n-1}(s, a) + \alpha_n[r + \gamma \max_{a'}
+				\widehat{Q}_{n-1}(s', a')]
+		\end{equation}
+		\item Where $\alpha_n = \frac{1}{1 + visits_n(s, a)}$
+			($visits_n(s, a)$ is the number of times the state-action pair has been visited)
+	\end{itemize}
+\end{frame}
+
+
+% Non-Deterministic Rewards and Actions (Ctd.)
+\begin{frame}{Non-Deterministic Rewards and Actions (Ctd.)}{}
+	\begin{itemize}
+		\item Updates of $\widehat{Q}$ are made more gradually than in the deterministic case (average)
+		\item For $\alpha_n = 1$ we get the old training rule
+		\item $\alpha_n$ decreases over time $\Rightarrow$ Updates become smaller in later iterations
+		\item By using $\alpha$ the algorithm ultimately converges
+		\item $Q$-learning often requires many thousands of training iterations to converge
+	\end{itemize}
+	
+	\begin{boxBlueNoFrame}
+		E.\,g. TD-Gammon trained for \highlight{\underline{1.5 million (!)}} Backgammon games.
+	\end{boxBlueNoFrame}
+\end{frame}
+
+
+% Subsection: Temporal Difference Learning
+% --------------------------------------------------------------------------------------------------------
+\subsection{Temporal Difference Learning}
+
+% Temporal Difference Learning
+\begin{frame}{Temporal Difference Learning}{}
+	\begin{itemize}
+		\item $Q$-learning works by iteratively reducing the discrepancy between $Q$-value estimates at different time steps
+			(based on a one-step lookahead)
+		\item $Q$-learning is a special case of \highlight{temporal difference learning}
+		\begin{align*}
+			\widehat{Q}_n(s, a) 	&\longleftarrow (1 - \alpha_n) \widehat{Q}_{n-1}(s, a) + \alpha_n[r(s, a) +
+				\gamma \max_{a'} \widehat{Q}_{n-1}(s', a')] \\
+								&\Updownarrow \text{\scriptsize \highlight{rewrite the equation}} \\
+			\widehat{Q}_n(s, a) 	&\longleftarrow \widehat{Q}_{n-1}(s, a) +
+				\alpha_n[
+					\underbracket{
+						\overbracket{(r(s, a) + \gamma \max_{a'} \widehat{Q}_{n-1}(s', a'))}^{\text{\textbf{after}}} -
+						\overbracket{\widehat{Q}_{n-1}(s, a)}^{\text{\textbf{before}}}
+					}_{\text{\highlight{Temporal difference}}}]
+		\end{align*}
+	\end{itemize}
+\end{frame}
+
+
+% Temporal Difference Learning (Ctd.)
+\begin{frame}{Temporal Difference Learning (Ctd.)}{}
+	\begin{itemize}
+		\item $Q$-learning performs a one-step lookahead (can be generalized to $n$ steps)
+		\item $Q^{(1)}(s_t, a_t)$ denotes the training value calculated by this one-step lookahead:
+		\begin{equation}
+			Q^{(1)}(s_t, a_t) = r_t + \gamma \max_a \widehat{Q}(s_{t+1}, a)
+		\end{equation}
+		\item For two steps:
+		\begin{equation}
+			Q^{(2)}(s_t, a_t) = r_t + \gamma r_{t+1} + \gamma^2 \max_a \widehat{Q}(s_{t+2}, a)
+		\end{equation}
+		\item For $n$ steps:
+		\begin{equation}
+			Q^{(n)}(s_t, a_t) = r_t + \gamma r_{t+1} + \dots + \gamma^{(n-1)} r_{t+n-1} +
+				\gamma^n \max_a \widehat{Q}(s_{t+n}, a)
+		\end{equation}
+	\end{itemize}
+\end{frame}
+
+
+% Temporal Difference Learning: TD($\lambda$)
+\begin{frame}{Temporal Difference Learning: TD($\lambda$) [\textit{Sutton}, 1988]}{}
+	\begin{itemize}
+		\item TD($\lambda$) is a method for blending these alternative training estimates
+		\item Introduce a constant $\lambda\ (0 \le \lambda \le 1)$ to combine the estimates from various lookaheads
+			(recursive definition):
+		\begin{equation*}
+			Q^{\lambda}(s_t, a_t) = r_t + \gamma \left[ (1 - \lambda) \max_a \widehat{Q}(s_t, a_t) +
+				\lambda Q^{\lambda}(s_{t+1}, a_{t+1}) \right]
+			%Q^{\lambda}(s_t, a_t) = (1 - \lambda) \left[ Q^{(1)}(s_t, a_t) + \lambda Q^{(2)}(s_t, a_t) +
+			%	\lambda^2 Q^{(3)}(s_t, a_t) + \dots \right]
+		\end{equation*}
+		\item If $\lambda = 0$ we get the original training estimate $Q^{(1)}$ (only one-step lookahead)
+		\item If $\lambda = 1$ only the observed rewards $r_{t+i}$ are taken into account
+		\item Increasing values of $\lambda$ put more emphasis on discrepancies based on more distant lookaheads
+	\end{itemize}
+\end{frame}
+
+
+% Subsection: Deep Reinforcement Learning
+% --------------------------------------------------------------------------------------------------------
+\subsection{Deep Reinforcement Learning}
+
+% Deep Reinforcement Learning
+\begin{frame}{Deep Reinforcement Learning}{}
+	\begin{itemize}
+		\item As already mentioned: The $Q$-learning table can become really large if the state space and the
+			action space are really large
+		\item It is not viable to maintain a table of all entries
+		\item Maybe it does not even fit into memory...
+		\item An alternative is needed!
+		\item \textbf{Idea}:
+		\begin{itemize}
+			\item Use deep learning methods to replace the table
+			\item E.\,g. a deep MLP could predict the action to take
+				given the observed state, the reward, ...
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+% Deep Reinforcement Learning (Ctd.)
+\begin{frame}{Deep Reinforcement Learning (Ctd.)}{}
+	\input{14_rl/01_tikz/deep_rl}
+\end{frame}
+
+
+% Subsection: Demo Applications
+% --------------------------------------------------------------------------------------------------------
+\subsection{Demo Applications}
+
+% Demo: Cartpole Task
+\begin{frame}{Demo: Cartpole Task}{}
+	\divideTwo{0.60}{
+		\begin{figure}
+			\centering
+			\includegraphics[scale=0.5]{14_rl/02_img/cartpole}
+		\end{figure}
+	}{0.39}{
+		\begin{itemize}
+			\item Move the cart \textbf{without} the pole falling over
+			\item Action space $\mathcal{A}$:
+			\begin{itemize}
+				\item Move \textit{LEFT} (0)
+				\item Move \textit{RIGHT} (1)
+			\end{itemize}
+			\item 4D state space $\mathcal{S}$:
+			\begin{itemize}
+				\item Cart position, velocity
+				\item Angle of pole to cart...
+				\item ...and its derivative
+			\end{itemize}
+		\end{itemize}
+	}
+\end{frame}
+
+
+% Demo: Mountain Car Task
+\begin{frame}{Demo: Mountain Car Task}{}
+	\divideTwo{0.39}{
+		\begin{itemize}
+			\item The engine of the car is not strong enough
+			\item You have to go back and forth to acquire momentum
+			\item The car must not hit the wall (left side)
+			\item The car has to reach the top of the hill
+		\end{itemize}		
+	}{0.60}{
+		\begin{figure}
+			\centering
+			\includegraphics[scale=0.2]{14_rl/02_img/mountaincar}
+		\end{figure}
+	}
+\end{frame}
+
+
+% Demo: Taxi Task
+\begin{frame}{Demo: Taxi Task}{}
+	\divideTwo{0.49}{
+		\begin{figure}
+			\centering
+			\includegraphics[scale=0.3]{14_rl/02_img/taxi}
+		\end{figure}
+	}{0.49}{
+		\begin{itemize}
+			\item Pick up passengers and get them to the drop-off location
+			\item Filled square represents the taxi
+			\item `|` represents a wall; you should not go there ;-)
+			\item Blue letter: \textcolor{blue}{\textbf{Pick-up location}}
+			\item Purple letter: \textcolor{violet}{\textbf{Drop-off location}}
+			\item Taxi turns \textcolor{green}{\textbf{green}} if a passenger is aboard
+		\end{itemize}
+	}
+\end{frame}
+
+
+% Section: Wrap-Up
+%______________________________________________________________________
+\section{Wrap-Up}
+\makedivider{Wrap-Up}
+
+% Subsection: Final Example
+% --------------------------------------------------------------------------------------------------------
+\subsection{Final Example}
+
+% Final Example
+\begin{frame}{Final Example}{}
+	An agent can move in a simple deterministic world which looks as following:
+
+	\begin{table}
+		\centering
+		\begin{tabular}{| c | c | c |}
+			\hline
+			\textbf{a} & \textbf{b} & \textbf{c} 		\\ \hline
+			\textbf{d} & \textbf{e} & \highlight{f}		\\ \hline
+		\end{tabular}
+	\end{table}
+
+	The agent can move up, down, left or right if the field exists. The state `f' is an absorbing goal state. If the agent reaches `f'
+	it receives a reward of one point, otherwise 0 points. The discount factor $\gamma$ be set to 0.8.
+\end{frame}
+
+
+% Final Example (Ctd.)
+\begin{frame}{Final Example (Ctd.)}{}
+	\highlight{a)} Specify the reward function $r(s, a)$ for all state-action pairs.
+	
+	\begin{table}
+		\centering
+		\begin{tabular}{| l | l | l | l | l |}
+			\hline
+			$r(a, r) = 0$ 	& 	$r(b, r) = 0$ 	& 	$r(c, u) = 1$ 	& $r(d, o) = 0$ 		& r(e, o) = 0		\\ \hline
+			$r(a, u) = 0$ 	& 	$r(b, u) = 0$ 	& 	$r(c, l) = 0$ 	& $r(d, r) = 0$ 		& r(e, r) = 1		\\ \hline
+			 			& 	$r(b, l) = 0$ 	&  				& 				& r(e, l) = 0		\\ \hline
+		\end{tabular}
+	\end{table}
+\end{frame}
+
+
+% Final Example (Ctd.)
+\begin{frame}{Final Example (Ctd.)}{}
+	\highlight{b)} Calculate the value function $V^{\pi}(s)$ for all states $s$ given policy $\pi$:
+
+	\begin{table}
+		\centering
+		\begin{tabular}{| c | c | c |}
+			\hline
+			$\rightarrow$ 	& 	$\rightarrow$ 	& 	$\downarrow$ 	\\ \hline
+			$\uparrow$ 	& 	$\uparrow$ 	& 				\\ \hline
+		\end{tabular}
+	\end{table}
+
+	\vspace*{-3mm}
+	\begin{align*}
+		V^{\pi}(d) 	&= \gamma^0 r(d, o) + \gamma^1 r(a, r) + \gamma^2 r(b, r) + \gamma^3 r(c,u) \\
+					&= 1 \cdot 0 + 0.8 \cdot 0 + 0.8^2 \cdot 0 + 0.8^3 \cdot 1 = \bm{0.512}
+	\end{align*}
+
+	\begin{table}
+		\centering
+		\begin{tabular}{| c | c | c |}
+			\hline
+			$V^{\pi}(a) = 0.640$		& 	$V^{\pi}(b) = 0.800$ 	&	$V^{\pi}(c) = 1.000$ 	\\ \hline
+			$V^{\pi}(d) = 0.512$		&	$V^{\pi}(e) = 0.640$		&				\\ \hline
+		\end{tabular}
+	\end{table}
+\end{frame}
+
+
+% Final Example (Ctd.)
+\begin{frame}{Final Example (Ctd.)}{}
+	\highlight{c)} How would \textbf{Policy Improvement} change the policy $\pi$ from task b) for \textbf{e}? \\[5mm]
+
+	Policy Improvement: $\pi(s) = \argmax_{a \in \mathcal{A}} r(s, a) + \gamma V^{\pi}(\delta(s, a))$
+	
+	\begin{tabbing}
+		\hspace*{1.5cm}\= \kill
+		\textbf{up}:		\>	$0.64$ (see above) \\
+		\textbf{left}: 		\>	$r(e, l) + \gamma V^{\pi}(d) = 0 + 0.8 \cdot 0.512 = 0.4096$ \\
+		\textbf{right}: 		\>	$r(e, r) = 1$ \highlight{$\Longleftarrow$ We would take this one!}	
+	\end{tabbing}
+
+	$\Rightarrow \pi(\bm{e}) = right$
+\end{frame}
+
+
+% Final Example (Ctd.)
+\begin{frame}{Final Example (Ctd.)}{}
+	\highlight{d)} Think of an optimal way to reach the goal state for each $s$. Calculate $V^{\pi^*}(s)$. \\[5mm]
+	
+	Optimal routes: \\
+	$a \longrightarrow b \longrightarrow c \longrightarrow f$ \\
+	$a \longrightarrow d \longrightarrow e \longrightarrow f$
+
+	\begin{table}
+		\centering
+		\begin{tabular}{| c | c | c |}
+			\hline
+			$V^{\pi^*}(a) = 0.640$		& 	$V^{\pi^*}(b) = 0.800$ 	&	$V^{\pi^*}(c) = 1.000$ 	\\ \hline
+			$V^{\pi^*}(d) = 0.800$		&	$V^{\pi^*}(e) = 1.000$	&						\\ \hline
+		\end{tabular}
+	\end{table}
+\end{frame}
+
+
+% Final Example (Ctd.)
+\begin{frame}{Final Example (Ctd.)}{}
+	\highlight{e)} Calculate the optimal $Q$-values for all possible state-action pairs. \\[5mm]
+	
+	\textbf{Hint:} Using the results from d): $Q(s, a) = r(s, a) + \gamma V^{\pi^*}(s')$ \\[5mm]
+	
+	For field \textbf{a} we get: \\
+	$Q(a, r) = r(a, r) + \gamma V^{\pi^*}(b) = 0 + 0.8 \cdot 0.8 = 0.64 = Q(a, u)$
+	
+	\begin{table}
+		\centering
+		\scalebox{0.8}{\begin{tabular}{| l | l | l | l | l |}
+			\hline
+			$Q(a, r) = 0.640$ 	& $Q(b, r) = 0.800$ 	& $Q(c, u) = 1.000$ 	& $Q(d, o) = 0.512$ 	& Q(e, o) = 0.640
+			\\ \hline
+			$Q(a, u) = 0.640$ 	& $Q(b, u) = 0.800$ 	& $Q(c, l) = 0.640$ 	& $Q(d, r) = 0.800$ 	& Q(e, r) = 1.000
+			\\ \hline
+			 				& $Q(b, l) = 0.512$ 	&  				& 				& Q(e, l) = 0.640	
+			\\ \hline
+		\end{tabular}}
+	\end{table}
+\end{frame}
+
+
+% Subsection: Summary
+% --------------------------------------------------------------------------------------------------------
+\subsection{Summary}
+
+% Summary
+\begin{frame}{Summary}{}
+	\begin{itemize}
+		\item What is reinforcement learning?
+		\begin{itemize}
+			\item Learn optimal decisions based on feedback
+			\item Based on the feedback, the agent only knows how good the action was but not the optimal solution
+			\item \highlight{Credit assignment problem}: Which move(s) is / are responsible for success / failure?
+			\item Example: MENACE
+		\end{itemize}
+		\item Important terms:
+		\begin{itemize}
+			\item State $s$, action $a$
+			\item Policy $\pi$ \textit{(optimal policy $\pi^*$)}
+			\item Reward $r$ \textit{(immediate reward, discounted reward)}
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+% Summary (Ctd.)
+\begin{frame}{Summary (Ctd.)}{}
+	\begin{itemize}
+		\item Algorithms
+		\begin{itemize}
+			\item Policy iteration
+			\item $Q$-learning
+			\item SARSA
+		\end{itemize}
+		\item Exploitation vs. Exploration
+		\begin{itemize}
+			\item \highlight{Exploitation}: Exploit what is already known to be good
+			\item \highlight{Exploration}: But don't miss to explore new states and actions
+		\end{itemize}
+		\item Non-deterministic case ($\delta(s, a)$ and $r(s, a)$ vary)
+		\item Temporal difference learning
+		\item Deep reinforcement learning (using deep learning methods)
+	\end{itemize}
+\end{frame}
+
+
+% Subsection: Recommended Literature and further Reading
+% --------------------------------------------------------------------------------------------------------
+\subsection{Recommended Literature and further Reading}
+
+% Literature
+%______________________________________________________________________
+\begin{frame}[allowframebreaks]{Recommended Literature and further Reading}{}
+	\footnotesize
+	\begin{thebibliography}{2}
+		\literature{book}{Mitchell.1997}{[1] Machine Learning}{Tom Mitchell. McGraw-Hill Science. 1997.}
+			{$\rightarrow$ \href{
+				https://www.cs.ubbcluj.ro/~gabis/ml/ml-books/McGrawHill\%20-\%20Machine\%20Learning\%20-Tom\%20Mitchell.pdf
+			}{\linkstyle{Click here}}, cf. chapter 13}
+		\literature{online}{Valkov.2017}{[2] Solving an MDP with $Q$-Learning from scratch}{Venelin Valkov. 2017.}
+			{$\rightarrow$
+				\href{https://medium.com/@curiousily/solving-an-mdp-with-q-learning-from-scratch-deep-reinforcement-learning-for-hackers-part-1-45d1d360c120}{\linkstyle{Click here}}
+			}
+		\literature{book}{Geron.2017}{[3] Hands-On Machine Learning with Scikit-Learn \& TensorFlow}
+			{Aurélien Géron. O'Reilly. 2017.}
+			{$\rightarrow$ \href{
+				https://github.com/IsaacChanghau/DL-NLP-Readings/blob/master/Papers/Books/ML\%20DL\%20Coding/Python/Hands\%20on\%20Machine\%20Learning\%20with\%20Scikit\%20Learn\%20and\%20TensorFlow.pdf
+			}{\linkstyle{Click here}}, cf. chapter 16}
+
+		\literature{book}{Marsland.2015}{[4] Machine Learning; An algorithmic perspective}
+			{S. Marsland. CRC Press. Chapman \& Hall. 2015.}
+			{$\rightarrow$ \href{
+				https://doc.lagout.org/science/Artificial\%20Intelligence/Machine\%20learning/Machine\%20Learning_\%20An\%20Algorithmic\%20Perspective\%20\%282nd\%20ed.\%29\%20\%5BMarsland\%202014-10-08\%5D.pdf
+			}{\linkstyle{Click here}}, cf. chapter 17}
+
+		\literature{article}{Sutton.1988}{[5] Learning to predict by the methods of temporal differences}
+			{R. Sutton. Kluwer Academic Publishers. 1988.}
+			{$\rightarrow$ \href{https://pdfs.semanticscholar.org/9c06/865e912788a6a51470724e087853d7269195.pdf}
+			{\linkstyle{Click here}}}
+
+		\literature{online}{Ng.2008}{[6] Machine Learning Lecture}
+			{A. Ng. Stanford University. 2008.}
+			{$\rightarrow$
+				\href{https://www.youtube.com/watch?v=RtxI449ZjSc}
+				{\linkstyle{Click here (Lecture 16)}},
+				\href{https://www.youtube.com/watch?v=LKdFTsM3hl4&index=17&list=PLA89DCFA6ADACE599}
+				{\linkstyle{Click here (Lecture 17)}},
+				\href{https://www.youtube.com/watch?v=-ff6l5D8-j8&index=18&list=PLA89DCFA6ADACE599}
+				{\linkstyle{Click here (Lecture 18)}},
+				\href{https://www.youtube.com/watch?v=UFH5ibWnA7g&index=19&list=PLA89DCFA6ADACE599}
+				{\linkstyle{Click here (Lecture 19)}},
+				\href{https://www.youtube.com/watch?v=yCqPMD6coO8&list=PLA89DCFA6ADACE599&index=20}
+				{\linkstyle{Click here (Lecture 20)}}
+			}
+			
+		\literature{online}{AiGym}{[7] OpenAI Gym}{OpenAI. 2018.}
+			{$\rightarrow$
+				\href{https://gym.openai.com/}{\linkstyle{Click here}}
+			}
+			
+		\literature{online}{Jaiswal.2017}{[8] Getting started with reinforcement Q-learning}
+			{P. Jaiswal. Towards Data Science. 2017.}
+			{$\rightarrow$
+				\href{https://towardsdatascience.com/getting-started-with-reinforcement-q-learning-77499b1766b6}
+				{\linkstyle{Click here}}
+			}
+	\end{thebibliography}
+\end{frame}
+
+
+% Subsection: Meme of the Day
+% --------------------------------------------------------------------------------------------------------
+\subsection{Meme of the Day}
+
+% Meme of the Day
+\begin{frame}{Meme of the Day}{}
+	\begin{figure}
+		\includegraphics[scale=0.30]{14_rl/02_img/meme_of_the_day}
+	\end{figure}
+\end{frame}
+
+
+% Thank you
+%______________________________________________________________________
+\makethanks
+
+\end{document}

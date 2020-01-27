@@ -1,0 +1,15 @@
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[
+		scale=0.8
+	]
+
+		\node[circle,draw=black] (X) at (-2,0) {$X$};
+		\node[circle,draw=black] (Y) at (2,0) {$Y$};
+		\node[circle,draw=black] (Z) at (0,-1) {$Z$};
+
+		\draw[->] (X) -- (Z);
+		\draw[->] (Y) -- (Z);
+
+	\end{tikzpicture}
+\end{figure}

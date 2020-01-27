@@ -1,0 +1,48 @@
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[
+		scale=0.8
+	]
+
+		% Bayesian network
+		\node[draw=black,fill=lightgray] (A) at (0, 0) {
+			\begin{tikzpicture}[scale=0.8, every node/.style={scale=0.8}]
+				\node[draw=black,circle,fill=white] (A) at (-1,1) {$A$};
+				\node[draw=black,circle,fill=white] (B) at (1,1) {$B$};
+				\node[draw=black,circle,fill=white] (C) at (0,0) {$C$};
+				\node[draw=black,circle,fill=white] (D) at (-1,-1) {$D$};
+				\node[draw=black,circle,fill=white] (E) at (1,-1) {$E$};
+				\draw[->] (A) -- (C); \draw[->] (B) -- (C);
+				\draw[->] (C) -- (D); \draw[->] (D) -- (E);
+			\end{tikzpicture}
+		};
+		
+		\node[draw=black,align=center,minimum size=2.55cm,fill=lightgray] (B) at (6,0) {
+			$A \indep B$ \\
+			$C \indep E \vert D$ \\
+				...
+		};
+
+		\node[draw=black,align=center,minimum size=2.55cm,fill=lightgray] (C) at (0,-6) {
+			$A \indep E \vert D$ \\
+			$A \indep E \vert C$ \\
+			...
+		};
+
+		\node[draw=black,align=center,minimum size=2.55cm,fill=lightgray] (D) at (6,-6) {
+			$A \indep E \vert D$ \\
+			$A \indep E \vert C$ \\
+			...
+		};
+
+		\node[draw=black,align=center,minimum size=2.55cm,fill=lightgray] (E) at (12,-3) {$I(P)$};
+
+		\draw[->,thick] (A) -- node[above] {\highlight{read off}} (B);
+		\draw[->,thick] (A) -- node[left] {\highlight{d-separation}} (C);
+		\draw[->,thick] (C) -- node[above] {$\textcolor{myblue1}{\bm{\equiv}}$} (D);
+		\draw[->,thick] (B) -- node[left] {\highlight{algebra of indep.}} (D);
+		\draw[->,thick] (B) -- node[above=1mm] {$\textcolor{myblue1}{\bm{\subseteq}}$} (E);
+		\draw[->,thick] (D) -- node[below=2mm] {$\textcolor{myblue1}{\bm{\subseteq / =}}$} (E);
+
+	\end{tikzpicture}
+\end{figure}

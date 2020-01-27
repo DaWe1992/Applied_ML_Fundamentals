@@ -8,8 +8,8 @@
 
 \title[Principal Component Analysis]{*** Applied Machine Learning Fundamentals *** Principal Component Analysis}
 \institute{SAP\,SE}
-\author{Daniel Wehner}
-\date{\today}
+\author{M.\,Sc. Daniel Wehner}
+\date{Winter term 2019/2020}
 \prefix{PCA}
 
 % ====================================================
@@ -34,7 +34,7 @@
 
 % Agenda
 %______________________________________________________________________
-\begin{frame}{Agenda \today}
+\begin{frame}{Agenda for this Unit}
 	\begin{multicols}{2}
 		\tableofcontents
 	\end{multicols}
@@ -100,15 +100,16 @@
 
 % Use Case II: Data Visualization
 \begin{frame}{Use Case II: Data Visualization}
+	\vspace*{-2mm}
 	\divideTwo{0.49}{
 		\begin{figure}
 			\centering
-			\includegraphics[scale=0.5]{13_pca/02_img/data_viz_3d}
+			\includegraphics[scale=0.40]{13_pca/02_img/data_viz_3d}
 		\end{figure}
 	}{0.49}{
 		\begin{figure}
 			\centering
-			\includegraphics[scale=0.45]{13_pca/02_img/data_viz_2d}
+			\includegraphics[scale=0.30]{13_pca/02_img/data_viz_2d}
 		\end{figure}
 	}
 \end{frame}
@@ -190,6 +191,7 @@
 % Maximum Variance Formulation (Ctd.)
 \begin{frame}{Maximum Variance Formulation (Ctd.)}{}\important
 	\begin{itemize}
+		\vspace*{2mm}
 		\item $\bm{\Sigma}$ is the covariance matrix defined by:
 		\begin{equation}
 			\bm{\Sigma} = \frac{1}{n} \sum_{i = 1}^n \overbracket{
@@ -221,7 +223,7 @@
 	\end{itemize}
 	
 	\begin{boxBlueNoFrame}
-		\highlight{The variance reaches a maximum if we set $\bm{u}_1$ equal to the eigenvector having the largest
+		\highlight{The variance reaches a maximum, if we set $\bm{u}_1$ equal to the eigenvector having the largest
 		eigenvalue $\lambda_1$. This eigenvector is the first principal component.}
 	\end{boxBlueNoFrame}
 \end{frame}
@@ -513,7 +515,14 @@
 
 % Summary
 \begin{frame}{Summary}{}
-
+	\begin{itemize}
+		\item Dimensionality reduction is important to avoid the \textbf{curse of dimensionality} $\skull$...
+		\item ...or simply to \textbf{visualize high-dimensional data}
+		\item It is defined as the \textbf{orthogonal projection} of the data onto a lower-dimensional (linear) space
+		\item We want to \textbf{keep the dimensions with the most variance}
+		\item These dimensions are called \textbf{principal components}
+		\item Lots of applications: Eigenfaces, Morphing, ...
+	\end{itemize}
 \end{frame}
 
 
@@ -523,7 +532,14 @@
 
 % Self-Test Questions
 \begin{frame}{Self-Test Questions}{}\important
-
+	\begin{enumerate}
+		\item How can PCA be defined?
+		\item What is the geometric relationship between the principal components?
+		\item Outline the PCA algorithm!
+		\item How can you recover the original data? Will you get the exact same data?
+		\item Explain how the number of components / dimensions can be chosen!
+		\item Name some use cases where PCA is useful!
+	\end{enumerate}
 \end{frame}
 
 
@@ -547,11 +563,36 @@
 
 % Literature
 %______________________________________________________________________
-\begin{frame}{Recommended Literature and further Reading}{}
+\begin{frame}[allowframebreaks]{Recommended Literature and further Reading}{}
 	\footnotesize
 	\begin{thebibliography}{2}
+		\literature{book}{Bishop.2006}{[1] Pattern Recognition and Machine Learning}
+			{Christopher Bishop. Springer. 2006.}{$\rightarrow$ \href{
+				http://users.isr.ist.utl.pt/~wurmd/Livros/school/Bishop\%20-\%20Pattern\%20Recognition\%20And\%20Machine\%20Learning\%20-\%20Springer\%20\%202006.pdf
+			}{\linkstyle{Link}}, cf. chapter 12.1}
+			
+		\literature{book}{Murphy.2012}{[2] Machine Learning: A Probabilistic Perspective}
+			{Kevin Murphy. MIT Press. 2012.}{$\rightarrow$ \href{
+				https://doc.lagout.org/science/Artificial\%20Intelligence/Machine\%20learning/Machine\%20Learning_\%20A\%20Probabilistic\%20Perspective\%20\%5BMurphy\%202012-08-24\%5D.pdf
+			}{\linkstyle{Link}}, cf. chapter 12.2}
 
+		\literature{book}{Deisenroth.2019}{[3] Mathematics for Machine Learning}
+			{Deisenroth et al. Cambridge University Press. 2019.}{$\rightarrow$ \href{
+				https://mml-book.github.io/
+			}{\linkstyle{Link}}, cf. chapter 10}
 	\end{thebibliography}
+\end{frame}
+
+
+% Subsection: Meme of the Day
+% --------------------------------------------------------------------------------------------------------
+\subsection{Meme of the Day}
+
+% Meme of the Day
+\begin{frame}{Meme of the Day}{}
+	\begin{figure}
+		\includegraphics[scale=0.6]{13_pca/02_img/meme_of_the_day}
+	\end{figure}
 \end{frame}
 
 

@@ -206,9 +206,14 @@
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
 \newcommand*\diff{\mathop{}\!\mathrm{d}}
+\newcommand{\indep}{\rotatebox[origin=c]{90}{$\models$}}
 
 \newcommand*{\vertbar}{\rule[-1ex]{0.5pt}{2.5ex}}
 \newcommand*{\horzbar}{\rule[.5ex]{2.5ex}{0.5pt}}
+
+% math cancel sign
+\newcommand\hcancel[2][black]{\setbox0=\hbox{$#2$}%
+	\rlap{\raisebox{.45\ht0}{\textcolor{#1}{\rule{\wd0}{1pt}}}}#2}
 
 % column type for matrices
 \newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
@@ -260,6 +265,9 @@
 	\draw[#5] let \p{c} = (intersection of #1 -- #2 and #3 -- #4) in (#1) -- ($(\p{c})!1.75mm!(#1)$) 
   		to[bend right=90] ($(\p{c})!1.75mm!(#2)$) -- (#2)
 }
+
+% circled numbers
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{\node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
 
 
 % slide modifiers

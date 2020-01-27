@@ -1,0 +1,40 @@
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[
+		scale=0.8,
+		n/.style={circle,draw=black,minimum size=1cm},
+		arr/.style={-stealth,thick}
+	]
+
+		\node[myblue1] at (-4,0) {\textbf{(hidden) states}};
+ 		\node[myblue1] at (-4,-2) {\textbf{observations}};
+
+		\node[n] (q1) at (0,0) {$q_1$};
+		\node[n] (q2) at (2,0) {$q_2$};
+		\node[n] (q3) at (4,0) {$q_3$};
+		\node[n] (q4) at (6,0) {$q_4$};
+		\node (qDots) at (8,0) {$\dots$};
+		\node[n] (qT) at (10,0) {$q_T$};
+
+		\draw[arr] (q1) -- (q2);
+		\draw[arr] (q2) -- (q3);
+		\draw[arr] (q3) -- (q4);
+		\draw[arr,dashed] (q4) -- (qDots);
+		\draw[arr,dashed] (qDots) -- (qT);
+
+		\node[n] (o1) at (0,-2) {$o_1$};
+		\node[n] (o2) at (2,-2) {$o_2$};
+		\node[n] (o3) at (4,-2) {$o_3$};
+		\node[n] (o4) at (6,-2) {$o_4$};
+		\node (oDots) at (8,-2) {$\dots$};
+		\node[n] (oT) at (10,-2) {$o_T$};
+
+		\draw[arr] (q1) -- (o1);
+		\draw[arr] (q2) -- (o2);
+		\draw[arr] (q3) -- (o3);
+		\draw[arr] (q4) -- (o4);
+		\draw[arr,dashed] (qDots) -- (oDots);
+		\draw[arr] (qT) -- (oT);
+		
+	\end{tikzpicture}
+\end{figure}

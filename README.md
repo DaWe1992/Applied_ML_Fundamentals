@@ -52,16 +52,18 @@ This lecture is supposed to give a general introduction into state-of-the-art ma
 	* Evaluation metrics: Precision, recall, F1 score, ROC, accuracy
 	* Cost-sensitive evaluation
 	* Model selection: Grid search, random search
-6. **Unsupervised learning**
+7. **Unsupervised learning**
     * Clustering ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/12_clustering.pdf))
       * k-Means
       * Hierarchical clustering (divisive and agglomerative)
     * Principal component analysis ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/13_pca.pdf))
-7. **Reinforcement learning**
+8. **Reinforcement learning** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/14_rl.pdf))
     * Markov decision processes
     * Dynamic programming: Policy iteration, value iteration
     * Q-learning, Q-networks
-8. **Lecture summary**
+9. **Lecture summary**
+10. **Bonus material**
+	* Probabilistic graphical models ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/15_pgm.pdf))
 
 ## Assignments <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/assignments.png" width="25px" height="25px">
 The assignments have to be solved in groups comprising 3 to 4 students.
@@ -100,6 +102,7 @@ You do not need to buy any books for the lecture. Most resources are available o
 | Mathematics for Machine Learning               | Deisenroth et al. (2019)     | Cambridge Univ. Press		| [click here](https://mml-book.github.io/)																																					|
 | Pattern Recognition and Machine Learning 	     | Bishop (2006)   			    | Springer  				| [click here](http://users.isr.ist.utl.pt/~wurmd/Livros/school/Bishop%20-%20Pattern%20Recognition%20And%20Machine%20Learning%20-%20Springer%20%202006.pdf) 								|
 | Reinforcement Learning - An introduction       | Sutton et al. (2014)         | MIT Press     			| [click here](http://incompleteideas.net/book/bookdraft2017nov5.pdf)   																													|
+| Probabilistic Graphical Models 				 | Koller et al. (2009)			| MIT Press                 | [click here](https://github.com/Zhenye-Na/machine-learning-uiuc/blob/master/docs/Probabilistic%20Graphical%20Models%20-%20Principles%20and%20Techniques.pdf                               |
 
 ## Bugs and Errors <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/bug.png" width="25px" height="30px">
 Help us improve the lecture. Feel free to file an issue, if you spot any errors in the slides, exercises or code.

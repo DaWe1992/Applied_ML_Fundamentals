@@ -126,6 +126,7 @@ def unsupervised_learning():
     ax.scatter(
         X[:, 0], X[:, 1], X[:, 2], c=y, marker="o", alpha=0.5)
     
+#    plt.savefig("data_viz_3d.pdf")
     plt.show()
     
     # transform data into 2d space
@@ -137,6 +138,7 @@ def unsupervised_learning():
     ax.scatter(
         X_hat[:, 0], X_hat[:, 1], c=y, marker="o", alpha=0.5)
     
+#    plt.savefig("data_viz_2d.pdf")
     plt.show()
     
     
@@ -181,8 +183,8 @@ if __name__ == "__main__":
     """
     Main function.
     """
-    classification()
+#    classification()
 #    regression()
-#    unsupervised_learning()
+    unsupervised_learning()
 #    reinforcement_learning()
     
