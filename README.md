@@ -102,7 +102,7 @@ You do not need to buy any books for the lecture. Most resources are available o
 | Mathematics for Machine Learning               | Deisenroth et al. (2019)     | Cambridge Univ. Press		| [click here](https://mml-book.github.io/)																																					|
 | Pattern Recognition and Machine Learning 	     | Bishop (2006)   			    | Springer  				| [click here](http://users.isr.ist.utl.pt/~wurmd/Livros/school/Bishop%20-%20Pattern%20Recognition%20And%20Machine%20Learning%20-%20Springer%20%202006.pdf) 								|
 | Reinforcement Learning - An introduction       | Sutton et al. (2014)         | MIT Press     			| [click here](http://incompleteideas.net/book/bookdraft2017nov5.pdf)   																													|
-| Probabilistic Graphical Models 				 | Koller et al. (2009)			| MIT Press                 | [click here](https://github.com/Zhenye-Na/machine-learning-uiuc/blob/master/docs/Probabilistic%20Graphical%20Models%20-%20Principles%20and%20Techniques.pdf                               |
+| Probabilistic Graphical Models 				 | Koller et al. (2009)			| MIT Press                 | [click here](https://github.com/Zhenye-Na/machine-learning-uiuc/blob/master/docs/Probabilistic%20Graphical%20Models%20-%20Principles%20and%20Techniques.pdf)                              |
 
 ## Bugs and Errors <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/bug.png" width="25px" height="30px">
 Help us improve the lecture. Feel free to file an issue, if you spot any errors in the slides, exercises or code.
