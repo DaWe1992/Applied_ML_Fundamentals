@@ -63,9 +63,21 @@ class DataCreator:
                 n_informative=2,
                 n_clusters_per_class=1,
                 n_classes=n_classes,
-                class_sep=5.00,
+                class_sep=1.25,
                 random_state=42
             )
+        elif name == "non_linear":
+            mean1 = [-1, 2]
+            mean2 = [1, -1]
+            mean3 = [4, -4]
+            mean4 = [-4, 4]
+            covar = [[1.0,0.8], [0.8, 1.0]]
+            X = np.random.multivariate_normal(mean1, covar, 50)
+            X = np.vstack((X, np.random.multivariate_normal(mean3, covar, 50)))
+            X = np.vstack((X, np.random.multivariate_normal(mean2, covar, 50)))
+            X = np.vstack((X, np.random.multivariate_normal(mean4, covar, 50)))
+            y = np.ones(200)
+            y[100:] = 0
         elif name == "circles":
             X, y = make_circles(n_samples=400, factor=0.3, noise=0.2)
         else:

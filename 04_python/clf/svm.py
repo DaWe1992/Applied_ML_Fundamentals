@@ -19,6 +19,8 @@ import cvxopt
 import numpy as np
 import numpy.linalg as linalg
 
+import matplotlib.pyplot as plt
+
 
 # -----------------------------------------------------------------------------
 # Class SVM
@@ -33,10 +35,10 @@ class SVM:
         """
         Constructor.
         
-        :param kernel:      kernel to use (linear, polynomial, gaussian)
-        :param C:           slack (soft margin)
-        :param p:           degree of polynomial (only for polynomial kernel)
-        :param s:           standard deviation (only for Gaussian kernel)
+        :param kernel:          kernel to use (linear, polynomial, gaussian)
+        :param C:               slack (soft margin)
+        :param p:               degree of polynomial (only for polynomial kernel)
+        :param s:               standard deviation (only for Gaussian kernel)
         """
         # choose kernel function
         if kernel == "linear":
@@ -59,8 +61,8 @@ class SVM:
         Solves the optimization problem and
         calculates the lagrange multipliers.
         
-        :param X:           predictors/features
-        :param y:           labels
+        :param X:               predictors/features
+        :param y:               labels
         """
         n_samples, n_features = X.shape
 
@@ -102,7 +104,8 @@ class SVM:
         self.a = a[sv]
         self.sv = X[sv]
         self.sv_y = y[sv]
-        print("{0} support vectors out of {1} points".format(len(self.a), n_samples))
+        print("{0} support vectors out of {1} points" \
+            .format(len(self.a), n_samples))
 
         # intercept
         self.b = 0
@@ -150,17 +153,17 @@ class SVM:
         return np.sign(self.__project(X))
         
         
-    # -----------------------------------------------------------------------------
+    # -------------------------------------------------------------------------
     # Kernel functions
-    # -----------------------------------------------------------------------------
+    # -------------------------------------------------------------------------
 
     def __linear_kernel(self, x1, x2):
         """
         Linear kernel. Returns the dot product of x and y.
         
-        :param x1:       data point 1
-        :param x2:       data point 2
-        :return:
+        :param x1:              data point 1
+        :param x2:              data point 2
+        :return:                kernel value for x1 and x2
         """
         return np.dot(x1, x2)
     
@@ -169,10 +172,10 @@ class SVM:
         """
         Polynomial kernel.
         
-        :param x1:       data point 1
-        :param x2:       data point 2
-        :param p:       degree of the polynomial
-        :return:
+        :param x1:              data point 1
+        :param x2:              data point 2
+        :param p:               degree of the polynomial
+        :return:                kernel value for x1 and x2
         """
         return (1 + np.dot(x1, x2))**self.p
     
@@ -181,9 +184,62 @@ class SVM:
         """
         Gaussian (RBF = radial basis function) kernel.
         
-        :param x1:       data point 1
-        :param x2:       data point 2
-        :param sigma:   standard deviation
-        :return:
+        :param x1:              data point 1
+        :param x2:              data point 2
+        :param sigma:           standard deviation
+        :return:                kernel value for x1 and x2
         """
-        return np.exp(-linalg.norm(x1 - x2) ** 2 / (2 * (self.s ** 2)))
+        return np.exp(-linalg.norm(x1 - x2)**2 / (2 * (self.s**2)))
+    
+    
+    # -------------------------------------------------------------------------
+    # Visualization
+    # -------------------------------------------------------------------------
+
+    def plot_contour(self, X1_train, X2_train):
+        """
+        Plots the contours.
+        
+        :param X1_train:        training examples, class +1
+        :param X2_train:        training examples, class -1
+        """
+        fig, ax = plt.subplots(figsize=(16.00, 10.00))
+        plt.plot(X1_train[:,0], X1_train[:,1], "ro", zorder=10)
+        plt.plot(X2_train[:,0], X2_train[:,1], "bo", zorder=10)
+        plt.scatter(self.sv[:,0], self.sv[:,1], s=100, \
+            c="#aaaaaa", marker="s", zorder=5)
+        
+        max_val = np.amax(
+            np.append(
+                [np.amax(X1_train, axis=0)],
+                [np.amax(X2_train, axis=0)], axis=0
+            ),
+            axis=0
+        )
+        min_val = np.amin(
+            np.append(
+                [np.amin(X1_train, axis=0)],
+                [np.amin(X2_train, axis=0)], axis=0
+            ),
+        axis=0)
+    
+        X1, X2 = np.meshgrid(
+            np.linspace(
+                min_val[0] - 1, max_val[0] + 1, 50
+            ),
+            np.linspace(
+                min_val[1] - 1, max_val[1] + 1, 50
+            )
+        )
+        X = np.array([[x1, x2] for x1, x2 in zip(np.ravel(X1), np.ravel(X2))])
+        Z = self.__project(X).reshape(X1.shape)
+        plt.contour(X1, X2, Z, [0.0], colors="k", linewidths=2, origin="lower")
+        plt.contour(X1, X2, Z + 1, [0.0], colors="grey",
+            linewidths=1.5, linestyles="dashed", origin="lower")
+        plt.contour(X1, X2, Z - 1, [0.0], colors="grey",
+            linewidths=1.5, linestyles="dashed", origin="lower")
+        
+        # draw major grid
+        ax.grid(b=True, which="major", color="lightgray", linestyle="--", zorder=-5)
+    
+        plt.show()

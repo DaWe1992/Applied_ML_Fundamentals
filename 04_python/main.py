@@ -55,19 +55,20 @@ def classification():
     Classification.
     """
     # create data
-    X, y = DataCreator().make_classification(name="circles", n_classes=2)
+    X, y = DataCreator().make_classification(name="non_linear", n_classes=2)
     
     # train kNN classifier
 #    clf = kNN(n_neighbors=3)
 #    clf.fit(X, y)
     
     # train SVM classifier
-#    clf = SVM(kernel="polynomial", C=1.0, p=2, s=5.0)
-#    y[np.where(y == 0)] = -1
-#    clf.fit(X, y)
+    clf = SVM(kernel="polynomial", C=1.0, p=3, s=5.0)
+    y[np.where(y == 0)] = -1
+    clf.fit(X, y)
+    clf.plot_contour(X[y == 1], X[y == -1])
     
     # train logistic regression classifier
-#    clf = LogisticRegression(poly=False)
+#    clf = LogisticRegression(poly=True)
 #    clf.fit(X, y, batch_size=X.shape[0])
     
     # train one-vs-one logistic regression classifier
@@ -75,8 +76,8 @@ def classification():
 #    clf.fit(X, y)
     
     # train tensorflow mlp
-    clf = MLP()
-    clf.fit(X, y)
+#    clf = MLP()
+#    clf.fit(X, y)
     
     # train Fisher's linear discriminant
 #    clf = LDA(n_dims=1)
@@ -88,7 +89,7 @@ def classification():
 #    em.fit(X, n_comp=3, n_iter=30)
     
     # plot boundary
-    BoundaryPlotter(X, y).plot_boundary(clf, step_size=0.005)
+#    BoundaryPlotter(X, y).plot_boundary(clf, step_size=0.005)
     
     # evaluation
 #    evaluator = Evaluator()
@@ -183,8 +184,8 @@ if __name__ == "__main__":
     """
     Main function.
     """
-#    classification()
+    classification()
 #    regression()
-    unsupervised_learning()
+#    unsupervised_learning()
 #    reinforcement_learning()
     
