@@ -17,13 +17,13 @@ import matplotlib.pyplot as plt
 
 
 # -----------------------------------------------------------------------------
-# Class BoundaryPlotter
+# Class Plotter
 # -----------------------------------------------------------------------------
 
-class BoundaryPlotter:
+class Plotter:
     """
-    Class BoundaryPlotter.
-    Plots the decision boundary.
+    Class Plotter.
+    Plots the decision boundary/regression line.
     """
 
     def __init__(self, X, y):
@@ -35,26 +35,38 @@ class BoundaryPlotter:
         """
         self.X = X
         self.y = y
-        self.x_min, self.x_max = np.floor(self.X[:, 0].min()) - 0.50, \
-            np.ceil(self.X[:, 0].max()) + 0.50
-        self.y_min, self.y_max = np.floor(self.X[:, 1].min()) - 0.50, \
-            np.ceil(self.X[:, 1].max()) + 0.50
+        
+        if X.ndim == 2: # two-dimensional data
+            self.x_min, self.x_max = np.floor(self.X[:, 0].min()), \
+                np.ceil(self.X[:, 0].max())
+            self.y_min, self.y_max = np.floor(self.X[:, 1].min()), \
+                np.ceil(self.X[:, 1].max())
+        else: # one-dimensional data
+            self.x_min, self.x_max = np.floor(self.X.min()), np.ceil(self.X.max())
+            self.y_min, self.y_max = np.floor(self.y.min()), np.ceil(self.y.max())
+                
+        self.x_min -= 0.50; self.x_max += 0.50
+        self.y_min -= 0.50; self.y_max += 0.50
 
 
-    def __prepare_plot(self, ax):
+    def __prepare_plot(self, ax, xlabel=r"$x_1$", ylabel=r"$x_2$"):
         """
         Prepares the plot.
 
         :param ax:              pyplot axis object
+        :param xlabel:          label of the x-axis
+        :param ylabel:          label of the y-axis
         """
         ax.set_xlim((self.x_min, self.x_max))
         ax.set_ylim((self.y_min, self.y_max))
 
         # axis labels
-        ax.set_xlabel(r"$x_1$")
-        ax.set_ylabel(r"$x_2$")
+        ax.set_xlabel(xlabel)
+        ax.set_ylabel(ylabel)
+        
         # draw major grid
-        ax.grid(b=True, which="major", color="gray", linestyle="--", zorder=5)
+        ax.grid(b=True, which="major", color="gray", \
+            linestyle="--", zorder=5)
 
 
     def plot_boundary(self, clf, step_size=0.0025):
@@ -91,4 +103,26 @@ class BoundaryPlotter:
         )
         
 #        plt.savefig("boundary.pdf")
+        plt.show()
+        
+        
+    def plot_regression(self, reg, n_points=100):
+        """
+        Plots the regression line.
+        
+        :param reg:             regression model
+        :param n_points:        number of points to be evaluated
+        """
+        fig, ax = plt.subplots(figsize=(12.00, 7.00))
+        self.__prepare_plot(ax, xlabel=r"$x$", ylabel=r"$y$")
+        
+        # query query data points
+        X_q = np.linspace(self.x_min - 5, self.x_max + 5, n_points)
+        y_q = reg.predict(X_q)
+        
+        # draw scatter plot
+        ax.plot(self.X, self.y, "rx", markersize=10, markeredgewidth=1.5)
+        
+        plt.plot(X_q, y_q, "m-", linewidth=2)
+            
         plt.show()

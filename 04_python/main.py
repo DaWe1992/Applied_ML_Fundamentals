@@ -17,7 +17,7 @@ import numpy as np
 # data creation and plotting
 # -----------------------------------------------------------------------------
 from utils.data_creator import DataCreator
-from utils.boundary_plotter import BoundaryPlotter
+from utils.plotter import Plotter
 
 # classifiers
 # -----------------------------------------------------------------------------
@@ -26,6 +26,7 @@ from clf.svm import SVM
 from clf.lda import LDA
 from clf.logistic_regression import LogisticRegression, LogRegOneVsOne
 from clf.mlp_torch import MLP
+from clf.decision_tree import DecisionTree
 
 # unsupervised learning
 # -----------------------------------------------------------------------------
@@ -35,6 +36,7 @@ from unsupervised.pca import PCA
 # regression
 # -----------------------------------------------------------------------------
 from reg.gaussian_process import GaussianProcess
+from reg.kernel_regression import KernelRegression
 
 # reinforcement learning
 # -----------------------------------------------------------------------------
@@ -55,17 +57,17 @@ def classification():
     Classification.
     """
     # create data
-    X, y = DataCreator().make_classification(name="non_linear", n_classes=2)
+    X, y = DataCreator().make_classification(name="linear", n_classes=3)
     
     # train kNN classifier
 #    clf = kNN(n_neighbors=3)
 #    clf.fit(X, y)
     
     # train SVM classifier
-    clf = SVM(kernel="polynomial", C=1.0, p=3, s=5.0)
-    y[np.where(y == 0)] = -1
-    clf.fit(X, y)
-    clf.plot_contour(X[y == 1], X[y == -1])
+#    clf = SVM(kernel="polynomial", C=1.0, p=3, s=5.0)
+#    y[np.where(y == 0)] = -1
+#    clf.fit(X, y)
+#    clf.plot_contour(X[y == 1], X[y == -1])
     
     # train logistic regression classifier
 #    clf = LogisticRegression(poly=True)
@@ -75,7 +77,7 @@ def classification():
 #    clf = LogRegOneVsOne(poly=True)
 #    clf.fit(X, y)
     
-    # train tensorflow mlp
+    # train pytorch mlp
 #    clf = MLP()
 #    clf.fit(X, y)
     
@@ -84,18 +86,23 @@ def classification():
 #    y[np.where(y == 0)] = -1
 #    clf.fit(X, y)
     
+    # train decision tree classifier
+    clf = DecisionTree()
+    clf.fit(X, y, max_depth=10, min_size=10)
+    clf.visualize()
+    
     # Expectation Maximization
 #    em = EM()
 #    em.fit(X, n_comp=3, n_iter=30)
     
     # plot boundary
-#    BoundaryPlotter(X, y).plot_boundary(clf, step_size=0.005)
+    Plotter(X, y).plot_boundary(clf, step_size=0.005)
     
     # evaluation
-#    evaluator = Evaluator()
-#    acc = evaluator.accuracy(clf, X, y)
-#    print("Accuracy: {} %".format(acc))
-#    evaluator.conf_mat(clf, X, y)
+    evaluator = Evaluator()
+    acc = evaluator.accuracy(clf, X, y)
+    print("Accuracy: {} %".format(acc))
+    evaluator.conf_mat(clf, X, y)
     
     
 def regression():
@@ -106,9 +113,16 @@ def regression():
     X, y = DataCreator().make_regression(sklearn=False)
     
     # train Gaussian process regressor
-    gp = GaussianProcess()
-    gp.fit(X, y)
-    gp.plot()
+    reg = GaussianProcess()
+    reg.fit(X, y)
+    reg.plot()
+    
+    # train kernel ridge regressor
+#    reg = KernelRegression()
+#    reg.fit(X, y)
+    
+    # plot boundary
+    Plotter(X, y).plot_regression(reg, n_points=500)
 
 
 def unsupervised_learning():

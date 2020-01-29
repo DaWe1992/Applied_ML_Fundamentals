@@ -85,7 +85,7 @@ class GaussianProcess:
         Predics the labels of new data points.
         
         :param X_q:     query data points
-        :return:        Mean vector and covariance matrix
+        :return:        mean vector
         """
         K_s = self.__calculate_cov(self.X, X_q)
         K_ss = self.__calculate_cov(X_q, X_q)
@@ -93,9 +93,9 @@ class GaussianProcess:
         # matrix of regression coefficients / calculate mean
         mu = self.y.T @ self.K_inv @ K_s
         # Schur complement / calculate covariance
-        sigma = K_ss - (self.K_inv @ K_s).T @ K_s
+        self.sigma = K_ss - (self.K_inv @ K_s).T @ K_s
         
-        return mu, sigma
+        return mu
     
     
     def plot(self):
@@ -110,10 +110,10 @@ class GaussianProcess:
         X_q = np.linspace(x_from, x_to, (((x_to - x_from) / 0.05) + 1).astype(int))
         
         # predict mu and sigma
-        mu, sigma = self.predict(X_q)
+        mu = self.predict(X_q)
     
         # calculate 99 % / 95 % / 90 % confidence intervals
-        var = np.diagonal(sigma)
+        var = np.diagonal(self.sigma)
         sigma_90 = 1.65 * np.sqrt(var)
         sigma_95 = 1.96 * np.sqrt(var)
         sigma_99 = 2.58 * np.sqrt(var)
@@ -133,7 +133,7 @@ class GaussianProcess:
         
         # sample some other possible functions
         k = 5
-        samples = np.random.multivariate_normal(mu, sigma, k)
+        samples = np.random.multivariate_normal(mu, self.sigma, k)
         for i in range(k):
             ax.plot(X_q, samples[i], "k-", linewidth=0.5)
         
