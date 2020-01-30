@@ -203,11 +203,11 @@ class DecisionTree:
         :param depth:           depth of the node in the tree
         """
         if isinstance(node, dict):
-            print("%s[X%d < %.3f]" % ((depth* " ", (node["index"] + 1), node["value"])))
+            print("%s[X%d < %.3f]" % ((depth * "..", (node["index"] + 1), node["value"])))
             self.__print_tree(node["left"], depth + 1)
             self.__print_tree(node["right"], depth + 1)
         else:
-            print("%s[%s]" % ((depth * " ", node)))
+            print("%s[%s]" % ((depth * "..", node)))
             
             
     def visualize(self):
