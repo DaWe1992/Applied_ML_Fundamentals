@@ -57,7 +57,7 @@ def classification():
     Classification.
     """
     # create data
-    X, y = DataCreator().make_classification(name="linear", n_classes=3)
+    X, y = DataCreator().make_classification(name="non_linear", n_classes=2)
     
     # train kNN classifier
 #    clf = kNN(n_neighbors=3)
@@ -88,7 +88,7 @@ def classification():
     
     # train decision tree classifier
     clf = DecisionTree()
-    clf.fit(X, y, max_depth=10, min_size=10)
+    clf.fit(X, y, max_depth=4, min_size=1)
     clf.visualize()
     
     # Expectation Maximization
