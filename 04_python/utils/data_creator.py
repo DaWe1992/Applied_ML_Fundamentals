@@ -20,6 +20,7 @@ from sklearn.datasets import make_classification
 from sklearn.datasets import make_circles
 from sklearn.datasets import make_regression
 from sklearn.datasets import make_swiss_roll
+from sklearn.datasets import make_moons
 
 
 # -----------------------------------------------------------------------------
@@ -39,6 +40,7 @@ class DataCreator:
                                     - custom
                                     - linear (linearly separable, sklearn)
                                     - circles (sklearn)
+                                    - moons (sklearn)
                                     - swiss (swiss roll, sklearn)
         :param n_classes:       number of classes (only needed for name="linear")
         :return:                X, y (data features and labels)
@@ -80,6 +82,8 @@ class DataCreator:
             y[100:] = 0
         elif name == "circles":
             X, y = make_circles(n_samples=400, factor=0.3, noise=0.2)
+        elif name == "moons":
+            X, y = make_moons(150, noise=0.07, random_state=21)
         else:
             X, y = make_swiss_roll(2000, 0.00)
         

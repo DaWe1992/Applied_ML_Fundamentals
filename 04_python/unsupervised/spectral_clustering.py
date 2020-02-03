@@ -16,17 +16,6 @@ from scipy import spatial
 from scipy.spatial.distance import cdist
 
 from sklearn.cluster import KMeans
-from sklearn.datasets import make_moons
-
-
-# -----------------------------------------------------------------------------
-# Generate and visualize data
-# -----------------------------------------------------------------------------
-
-X, _ = make_moons(150, noise=0.07, random_state=21)
-fig, ax = plt.subplots(figsize=(9,7))
-ax.set_title("Data", fontsize=18, fontweight="demi")
-ax.scatter(X[:, 0], X[:, 1], s=50, cmap="viridis")
 
 
 # -----------------------------------------------------------------------------
@@ -107,21 +96,7 @@ class SpectralClustering:
         :param eps:         epsilon threshold
         :return:            epsilon neighborhood graph
         """
-        A = cdist(X, X)
+        A = cdist(self.X, self.X)
         A[np.where(A > eps)] = 0
         
         return A
-
-
-# -----------------------------------------------------------------------------
-# Main
-# -----------------------------------------------------------------------------
-        
-if __name__ == "__main__":
-    # perform spectral clustering
-    sc = SpectralClustering()
-    c_assign = sc.fit(X, method="knn")
-    
-    fig, ax = plt.subplots(figsize=(9, 7))
-    ax.set_title("Data after spectral clustering", fontsize=18, fontweight="demi")
-    ax.scatter(X[:, 0], X[:, 1],c=c_assign ,s=50, cmap="viridis")

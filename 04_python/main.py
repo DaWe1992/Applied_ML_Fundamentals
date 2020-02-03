@@ -32,6 +32,8 @@ from clf.decision_tree import DecisionTree
 # -----------------------------------------------------------------------------
 from unsupervised.em import EM
 from unsupervised.pca import PCA
+from unsupervised.auto_encoder import AutoEncoder
+from unsupervised.spectral_clustering import SpectralClustering
 
 # regression
 # -----------------------------------------------------------------------------
@@ -41,7 +43,9 @@ from reg.kernel_regression import KernelRegression
 # reinforcement learning
 # -----------------------------------------------------------------------------
 from rl.grid_world import GridWorld
+from rl.q_learning import QLearning
 from rl.value_iteration import ValueIteration
+from rl.policy_iteration import PolicyIteration
 
 # evaluation
 # -----------------------------------------------------------------------------
@@ -64,10 +68,10 @@ def classification():
 #    clf.fit(X, y)
     
     # train SVM classifier
-#    clf = SVM(kernel="polynomial", C=1.0, p=3, s=5.0)
-#    y[np.where(y == 0)] = -1
-#    clf.fit(X, y)
-#    clf.plot_contour(X[y == 1], X[y == -1])
+    clf = SVM(kernel="polynomial", C=1.0, p=3, s=5.0)
+    y[np.where(y == 0)] = -1
+    clf.fit(X, y)
+    clf.plot_contour(X[y == 1], X[y == -1])
     
     # train logistic regression classifier
 #    clf = LogisticRegression(poly=True)
@@ -87,16 +91,16 @@ def classification():
 #    clf.fit(X, y)
     
     # train decision tree classifier
-    clf = DecisionTree()
-    clf.fit(X, y, max_depth=4, min_size=1)
-    clf.visualize()
+#    clf = DecisionTree()
+#    clf.fit(X, y, max_depth=4, min_size=1)
+#    clf.visualize()
     
     # Expectation Maximization
 #    em = EM()
 #    em.fit(X, n_comp=3, n_iter=30)
     
     # plot boundary
-    Plotter(X, y).plot_boundary(clf, step_size=0.005)
+#    Plotter(X, y).plot_boundary(clf, step_size=0.005)
     
     # evaluation
     evaluator = Evaluator()
@@ -134,6 +138,8 @@ def unsupervised_learning():
   
     X, y = DataCreator().make_classification(name="swiss", n_classes=2)
     
+    # dimensionality reduction
+    # -------------------------------------------------------------------------
     # plot 3d data
     fig = plt.figure(figsize=(8, 8))
     ax = fig.add_subplot(111, projection="3d")
@@ -145,9 +151,12 @@ def unsupervised_learning():
     plt.show()
     
     # transform data into 2d space
-    pca = PCA()
-    X_hat = pca.fit_transform(X, n_components=2)
-    
+#    pca = PCA()
+#    X_hat = pca.fit_transform(X, n_components=2)
+    ae = AutoEncoder()
+    ae.fit(X, n_components=2, denoising=False)
+    X_hat = ae.transform()
+        
     # plot 2d data
     fig, ax = plt.subplots(figsize=(8, 8))
     ax.scatter(
@@ -155,6 +164,16 @@ def unsupervised_learning():
     
 #    plt.savefig("data_viz_2d.pdf")
     plt.show()
+    
+    # clustering
+    # -------------------------------------------------------------------------
+    # perform spectral clustering
+#    sc = SpectralClustering()
+#    c_assign = sc.fit(X, method="knn")
+#    
+#    fig, ax = plt.subplots(figsize=(9, 7))
+#    ax.set_title("Data after spectral clustering", fontsize=18, fontweight="demi")
+#    ax.scatter(X[:, 0], X[:, 1],c=c_assign ,s=50, cmap="viridis")
     
     
 def reinforcement_learning():
@@ -184,9 +203,11 @@ def reinforcement_learning():
     # initialize value iteration
     # and calculate the optimal policy
     # -------------------------------------------------------------------------
-    val_it = ValueIteration(gamma=0.99, thresh=10e-5, env=env)
+    rl = ValueIteration(gamma=0.99, thresh=10e-5, env=env)
+#    rl = PolicyIteration(gamma=0.99, thresh=10e-5, env=env)
+#    rl = QLearning(gamma=0.99, alpha=0.20, eps=1.00, n_episodes=5000, env=env)
     # get optimal policy
-    pi = val_it.get_pi()
+    pi = rl.get_pi()
     env.pretty_print_policy(pi)
 
 
@@ -198,8 +219,8 @@ if __name__ == "__main__":
     """
     Main function.
     """
-    classification()
+#    classification()
 #    regression()
-#    unsupervised_learning()
+    unsupervised_learning()
 #    reinforcement_learning()
     

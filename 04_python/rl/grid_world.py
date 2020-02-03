@@ -10,6 +10,7 @@ Created on Thu Oct 31 18:29:38 2019
 # Imports
 # -----------------------------------------------------------------------------
 
+import itertools
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -82,6 +83,34 @@ class GridWorld:
                 and [y, x] not in self.c["r"]["r_p_pos"]
                 and [y, x] not in self.c["r"]["r_n_pos"]]
         
+    
+    def get_forbidden_state_mask(self):
+        """
+        Returns a mask of forbidden states.
+        
+        :return:                forbidden state mask
+        """
+        mask = np.zeros((self.c["size"]["y"], self.c["size"]["x"]))
+        
+        ys = range(mask.shape[1])
+        xs = range(mask.shape[0])
+        for (x, y) in list(itertools.product(ys, xs)):
+            if [y, x] in self.c["obs_pos"] \
+                or [y, x] in self.c["r"]["r_p_pos"] \
+                or [y, x] in self.c["r"]["r_n_pos"]:
+                mask[y, x] = 1
+        
+        return mask
+    
+    
+    def get_allowed_state_mask(self):
+        """
+        Returns a mask of allowed states.
+        
+        :return:                allowed state mask
+        """
+        return 1 - self.get_forbidden_state_mask()
+                    
         
     def get_n_states(self):
         """
