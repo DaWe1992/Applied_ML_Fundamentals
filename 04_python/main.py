@@ -32,6 +32,7 @@ from clf.decision_tree import DecisionTree
 # -----------------------------------------------------------------------------
 from unsupervised.em import EM
 from unsupervised.pca import PCA
+from unsupervised.tsne import TSNE
 from unsupervised.auto_encoder import AutoEncoder
 from unsupervised.spectral_clustering import SpectralClustering
 
@@ -151,8 +152,15 @@ def unsupervised_learning():
     plt.show()
     
     # transform data into 2d space
+    # pca
 #    pca = PCA()
 #    X_hat = pca.fit_transform(X, n_components=2)
+    
+    # t-SNE
+#    tsne = TSNE()
+#    X_hat = tsne.fit_transform(X, n_components=2)
+    
+    # auto-encoder
     ae = AutoEncoder()
     ae.fit(X, n_components=2, denoising=False)
     X_hat = ae.transform()

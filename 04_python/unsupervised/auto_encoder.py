@@ -86,7 +86,7 @@ class AutoEncoder(nn.Module):
         :param X:               training data
         :param n_components:    number of components (reduced dimensionality)
         :param denoising:       flag indicating whether to add noise
-                                    to the input
+                                    to the input (= denoising auto-encoder)
         """
         # encoder network
         dims = [X.shape[1], 16, 8, n_components]
