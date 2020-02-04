@@ -251,7 +251,7 @@ if __name__ == "__main__":
     ica = ICA()
     un_mixed = ica.fit(X)
 
-    # Plot input signals (not mixed)
+    # plot input signals (not mixed)
     fig, ax = plt.subplots(1, 1, figsize=[18, 5])
     
     ax.plot(S, lw=5)
