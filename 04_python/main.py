@@ -71,7 +71,7 @@ def classification():
 #    clf.fit(X, y)
     
     # train SVM classifier
-    clf = SVM(kernel="polynomial", C=1.0, p=3, s=5.0)
+    clf = SVM(kernel="polynomial", C=1.0, p=3, s=3.0)
     y[np.where(y == 0)] = -1
     clf.fit(X, y)
     clf.plot_contour(X[y == 1], X[y == -1])
@@ -120,9 +120,9 @@ def regression():
     X, y = DataCreator().make_regression(name="sine")
     
     # train Gaussian process regressor
-#    reg = GaussianProcess()
-#    reg.fit(X, y)
-#    reg.plot()
+    reg = GaussianProcess()
+    reg.fit(X, y)
+    reg.plot()
     
     # train knn regression
 #    reg = KnnRegression()
@@ -135,8 +135,8 @@ def regression():
 #    reg.plot(X[:n, :], y[:n], std_devs=1)
     
     # train kernel ridge regressor
-    reg = KernelRegression()
-    reg.fit(X, y)
+#    reg = KernelRegression()
+#    reg.fit(X, y, kernel="gaussian")
     
     # plot boundary
     Plotter(X, y).plot_regression(reg, n_points=500)
@@ -239,8 +239,8 @@ if __name__ == "__main__":
     """
     Main function.
     """
-#    classification()
-    regression()
+    classification()
+#    regression()
 #    unsupervised_learning()
 #    reinforcement_learning()
     

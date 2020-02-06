@@ -74,7 +74,7 @@ class SVM:
         for i in range(n_samples):
             for j in range(n_samples):
                 # apply kernel for each pair of i and j
-                K[i,j] = self.kernel(X[i], X[j])
+                K[i, j] = self.kernel(X[i], X[j])
 
         P = cvxopt.matrix(np.outer(y, y) * K)
         q = cvxopt.matrix(np.ones(n_samples) * -1)

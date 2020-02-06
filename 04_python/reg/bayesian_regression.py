@@ -47,8 +47,8 @@ class BayesRegression():
         self.beta = beta
         
         # set posterior distribution
-        self.mN = self.m0
-        self.SN = self.S0
+        self.mn = self.m0
+        self.Sn = self.S0
         self.posterior = self.prior
         
         
@@ -65,16 +65,16 @@ class BayesRegression():
         Phi = self.__phi(X)
         
         # update covariance matrix for posterior distribution
-        self.SN = np.linalg.inv(
+        self.Sn = np.linalg.inv(
             np.linalg.inv(self.S0) + self.beta * Phi.T @ Phi
         )
         
         # update mean of posterior distribution
-        self.mN = self.SN @ (
+        self.mn = self.Sn @ (
             np.linalg.inv(self.S0) @ self.m0 + self.beta * Phi.T @ y
         )
         
-        self.posterior = mv_norm(mean=self.mN.flatten(), cov=self.SN)
+        self.posterior = mv_norm(mean=self.mn.flatten(), cov=self.Sn)
         
         
     def predict(self, X):
@@ -84,7 +84,7 @@ class BayesRegression():
         :param X:               unseen data (features)
         :return:                labels for unseen data
         """
-        return (self.__phi(X) @ self.mN).squeeze()
+        return (self.__phi(X) @ self.mn).squeeze()
         
         
     def __phi(self, X):
@@ -120,7 +120,7 @@ class BayesRegression():
         
         for idx in range(n):
             phi = Phi[:, :, idx]
-            sig = 1 / self.beta + phi.T @ self.SN @ phi
+            sig = 1 / self.beta + phi.T @ self.Sn @ phi
             predictions.append((np.sqrt(sig)).flatten())
             
         return np.concatenate(predictions)
@@ -179,7 +179,7 @@ class BayesRegression():
             linestyle="--", zorder=5)
         
         # make scatter plot
-        plt.scatter(X, y, alpha=0.5)
+        plt.scatter(X, y, alpha=0.8, edgecolors="k")
         
         # plot true function
         if real_params:
@@ -207,8 +207,8 @@ class BayesRegression():
             y_upper = mean + std_devs * sigma
             y_lower = mean - std_devs * sigma
             plt.fill_between(x_range, y_lower, y_upper, color="b", alpha=0.2)
-            plt.plot(x_range, y_upper, "--", c="blue", linewidth=1.0)
-            plt.plot(x_range, y_lower, "--", c="blue", linewidth=1.0)
+            plt.plot(x_range, y_upper, "--", c="blue", linewidth=2.0)
+            plt.plot(x_range, y_lower, "--", c="blue", linewidth=2.0)
             
             plt.plot(x_range, mean, c="black", linewidth=2.0)
             
@@ -274,7 +274,7 @@ if __name__ == "__main__":
     
     # fit model based on the first n data points
     # (updates the posterior distribution accordingly)
-    n = 4
+    n = 1000
     reg.fit(X[0:n], y[0:n])
     if not poly:
         reg.plot_posterior(x_grid, y_grid, real_params=[theta_0, theta_1])
@@ -283,4 +283,3 @@ if __name__ == "__main__":
         reg.plot(X[0:n], y[0:n], real_params=[theta_0, theta_1], samples=5)
     # plot mean and standard deviations
     reg.plot(X[0:n], y[0:n], real_params=[theta_0, theta_1], std_devs=1)
-    
