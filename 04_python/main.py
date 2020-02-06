@@ -129,14 +129,14 @@ def regression():
 #    reg.fit(X, y, k=5)
     
     # train bayesian linear regression
-    n = 50
-    reg = BayesRegression(alpha=2.0, beta=20.0, poly=True)
-    reg.fit(X[:n, :], y[:n])
-    reg.plot(X[:n, :], y[:n], std_devs=1)
+#    n = 100
+#    reg = BayesRegression(alpha=2.0, beta=30.0, poly=True)
+#    reg.fit(X[:n, :], y[:n])
+#    reg.plot(X[:n, :], y[:n], std_devs=1)
     
     # train kernel ridge regressor
-#    reg = KernelRegression()
-#    reg.fit(X, y)
+    reg = KernelRegression()
+    reg.fit(X, y)
     
     # plot boundary
     Plotter(X, y).plot_regression(reg, n_points=500)

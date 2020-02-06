@@ -119,9 +119,13 @@ class DataCreator:
         
         # sine wave data set
         elif name == "sine":
-            X = np.linspace(0, 1, 100)
+            X = np.linspace(0, 5, 100)
             y = np.sin(X * 1.5 * np.pi) + np.random.normal(loc=0, scale=0.25, size=100)
             X = X.reshape(-1, 1)
+            
+            ind = np.where((X > 1.75) & (X < 3))
+            X = np.delete(X, ind, 0)
+            y = np.delete(y, ind, 0)
             
         return X, y
     

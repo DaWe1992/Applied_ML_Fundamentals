@@ -33,7 +33,7 @@ class GaussianProcess:
         self,
         sigma_n=0.01,
         sigma_f=1.00,
-        length_scale=1.00
+        length_scale=0.2
     ):
         """
         Constructor.
