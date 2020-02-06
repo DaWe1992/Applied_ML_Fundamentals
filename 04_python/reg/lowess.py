@@ -63,12 +63,12 @@ class LOWESS:
             
 
 # -----------------------------------------------------------------------------
-# Imports
+# Main
 # -----------------------------------------------------------------------------
    
 if __name__ == "__main__":
     # generate data
-    X = np.linspace(0,1,100)
+    X = np.linspace(0, 1, 100)
     y = np.sin(X * 1.5 * np.pi)
     noise = np.random.normal(loc=0, scale=0.25, size=100)
     y_noise = y + noise

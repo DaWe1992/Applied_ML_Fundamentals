@@ -116,7 +116,7 @@ class KernelRegression:
         return (1 + x @ y)**p
     
     
-    def __gaussian_kernel(self, x, y, sigma=5.0):
+    def __gaussian_kernel(self, x, y, sigma=0.5):
         """
         Gaussian (RBF = radial basis function) kernel.
         

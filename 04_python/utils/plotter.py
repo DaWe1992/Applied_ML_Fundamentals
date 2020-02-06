@@ -36,7 +36,7 @@ class Plotter:
         self.X = X
         self.y = y
         
-        if X.ndim == 2: # two-dimensional data
+        if X.shape[1] == 2: # two-dimensional data
             self.x_min, self.x_max = np.floor(self.X[:, 0].min()), \
                 np.ceil(self.X[:, 0].max())
             self.y_min, self.y_max = np.floor(self.X[:, 1].min()), \
@@ -118,7 +118,7 @@ class Plotter:
         
         # query query data points
         X_q = np.linspace(self.x_min - 5, self.x_max + 5, n_points)
-        y_q = reg.predict(X_q)
+        y_q = reg.predict(X_q.squeeze())
         
         # draw scatter plot
         ax.plot(self.X, self.y, "rx", markersize=10, markeredgewidth=1.5)

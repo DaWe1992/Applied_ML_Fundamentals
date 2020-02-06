@@ -40,6 +40,8 @@ from unsupervised.spectral_clustering import SpectralClustering
 # -----------------------------------------------------------------------------
 from reg.gaussian_process import GaussianProcess
 from reg.kernel_regression import KernelRegression
+from reg.knn_regression import KnnRegression
+from reg.bayesian_regression import BayesRegression
 
 # reinforcement learning
 # -----------------------------------------------------------------------------
@@ -115,12 +117,22 @@ def regression():
     Regression.
     """
     # create data
-    X, y = DataCreator().make_regression(sklearn=False)
+    X, y = DataCreator().make_regression(name="sine")
     
     # train Gaussian process regressor
-    reg = GaussianProcess()
-    reg.fit(X, y)
-    reg.plot()
+#    reg = GaussianProcess()
+#    reg.fit(X, y)
+#    reg.plot()
+    
+    # train knn regression
+#    reg = KnnRegression()
+#    reg.fit(X, y, k=5)
+    
+    # train bayesian linear regression
+    n = 50
+    reg = BayesRegression(alpha=2.0, beta=20.0, poly=True)
+    reg.fit(X[:n, :], y[:n])
+    reg.plot(X[:n, :], y[:n], std_devs=1)
     
     # train kernel ridge regressor
 #    reg = KernelRegression()
@@ -228,7 +240,7 @@ if __name__ == "__main__":
     Main function.
     """
 #    classification()
-#    regression()
-    unsupervised_learning()
+    regression()
+#    unsupervised_learning()
 #    reinforcement_learning()
     

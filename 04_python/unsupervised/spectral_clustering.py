@@ -10,7 +10,6 @@ Created on Tue Jan 21 16:04:06 2020
 # -----------------------------------------------------------------------------
 
 import numpy as np
-import matplotlib.pyplot as plt
 
 from scipy import spatial
 from scipy.spatial.distance import cdist
