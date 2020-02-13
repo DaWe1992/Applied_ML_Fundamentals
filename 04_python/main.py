@@ -32,6 +32,7 @@ from clf.decision_tree import DecisionTree
 # -----------------------------------------------------------------------------
 from unsupervised.em import EM
 from unsupervised.pca import PCA
+from unsupervised.kernel_pca import KernelPCA
 from unsupervised.tsne import TSNE
 from unsupervised.auto_encoder import AutoEncoder
 from unsupervised.spectral_clustering import SpectralClustering
@@ -42,6 +43,7 @@ from reg.gaussian_process import GaussianProcess
 from reg.kernel_regression import KernelRegression
 from reg.knn_regression import KnnRegression
 from reg.bayesian_regression import BayesRegression
+from reg.svr import SVR_GD, SVR_sklearn
 
 # reinforcement learning
 # -----------------------------------------------------------------------------
@@ -67,14 +69,14 @@ def classification():
     X, y = DataCreator().make_classification(name="non_linear", n_classes=2)
     
     # train kNN classifier
-#    clf = kNN(n_neighbors=3)
-#    clf.fit(X, y)
+    clf = kNN(n_neighbors=1)
+    clf.fit(X, y)
     
     # train SVM classifier
-    clf = SVM(kernel="polynomial", C=1.0, p=3, s=3.0)
-    y[np.where(y == 0)] = -1
-    clf.fit(X, y)
-    clf.plot_contour(X[y == 1], X[y == -1])
+#    clf = SVM(kernel="polynomial", C=1.0, p=3, s=3.0)
+#    y[np.where(y == 0)] = -1
+#    clf.fit(X, y)
+#    clf.plot_contour(X[y == 1], X[y == -1])
     
     # train logistic regression classifier
 #    clf = LogisticRegression(poly=True)
@@ -103,7 +105,7 @@ def classification():
 #    em.fit(X, n_comp=3, n_iter=30)
     
     # plot boundary
-#    Plotter(X, y).plot_boundary(clf, step_size=0.005)
+    Plotter(X, y).plot_boundary(clf, step_size=0.005)
     
     # evaluation
     evaluator = Evaluator()
@@ -117,12 +119,16 @@ def regression():
     Regression.
     """
     # create data
-    X, y = DataCreator().make_regression(name="sine")
+    X, y = DataCreator().make_regression(name="custom")
     
     # train Gaussian process regressor
-    reg = GaussianProcess()
-    reg.fit(X, y)
-    reg.plot()
+#    reg = GaussianProcess()
+#    reg.fit(X, y)
+#    reg.plot()
+    
+    # train kernel ridge regressor
+#    reg = KernelRegression()
+#    reg.fit(X, y, kernel="gaussian")
     
     # train knn regression
 #    reg = KnnRegression()
@@ -134,9 +140,14 @@ def regression():
 #    reg.fit(X[:n, :], y[:n])
 #    reg.plot(X[:n, :], y[:n], std_devs=1)
     
-    # train kernel ridge regressor
-#    reg = KernelRegression()
-#    reg.fit(X, y, kernel="gaussian")
+    # train svr (using gradient descent)
+#    reg = SVR_GD()
+#    reg.fit(X, y, epsilon=0.5, n_epochs=1000, learning_rate=0.1)
+    
+    # train svr (sklearn)
+    reg = SVR_sklearn()
+    reg.fit(X, y, epsilon=0.5, C=5.0, kernel="rbf")
+    reg.plot()
     
     # plot boundary
     Plotter(X, y).plot_regression(reg, n_points=500)
@@ -167,6 +178,10 @@ def unsupervised_learning():
     # pca
 #    pca = PCA()
 #    X_hat = pca.fit_transform(X, n_components=2)
+    
+    # kernel pca
+#    kpca = KernelPCA()
+#    X_hat = kpca.fit_transform(X, n_components=2, gamma=0.5)
     
     # t-SNE
 #    tsne = TSNE()
@@ -239,8 +254,8 @@ if __name__ == "__main__":
     """
     Main function.
     """
-    classification()
+#    classification()
 #    regression()
-#    unsupervised_learning()
+    unsupervised_learning()
 #    reinforcement_learning()
     

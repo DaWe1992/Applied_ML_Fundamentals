@@ -1,19 +1,14 @@
 \input{preamble_theme}
 
-% title
-\title{Exercise 1 - Introduction}
-
 % ====================================================
 % ====================================================
 % BEGIN OF DOCUMENT
 % ====================================================
 % ====================================================
 \begin{document}
-\AddToShipoutPicture*{\BackgroundPic}
 
-\maketitle
-\medskip
-\newpage
+\mytitle{Exercise 1 - Math Refresher}
+\firstpage{\insertmytitle}{Winter term 2019/2020}
 
 % Linear Algebra Refresher
 %______________________________________________________________________
@@ -22,24 +17,38 @@
 \begin{enumerate}[label=\alph*)]
 
 % Task 1
-\exercise{Matrix Operations (1 point)}{A fellow student suggests that matrix addition and multiplication are very similar to scalar addition and multiplication, i.\,e. commutative, associative and distributive. Is this a correct statement? Prove it mathematically or disprove it by providing at least one counter example per property (commutativity, associativity, distributivity).}{9cm}
+\exercise{Matrix Operations (1 point)}{
+A fellow student suggests that matrix addition and multiplication are very similar to scalar addition and multiplication, i.\,e. commutative, associative and distributive.
+Is this a correct statement? Prove it mathematically or disprove it by providing at least one counter example per property (commutativity, associativity, distributivity).
+}{
+\vspace*{7cm}
+}
 
-% Solution:
+
 
 
 % Task 2
-\exercise{Matrix Inverse (1 point)}{What is a matrix inverse? How can you build the inverse of a non-square matrix? You would like to invert a matrix $M \in \mathbb{R}^{2 \times 3}$ - write down the equation for computing it and specify the dimensionality of the matrices after each single operation (e.g. multiplication, inverse).}{7cm}
+\exercise{Matrix Inverse (1 point)}{
+What is a matrix inverse? How can you build the inverse of a non-square matrix?
+You would like to invert a matrix $\bm{M} \in \mathbb{R}^{2 \times 3}$, write down the equation for computing it and specify the dimensionality of the matrices after each single operation (e.\,g. multiplication, inverse).
+}{
 
-% Solution:
+}
+
+\newpage
 
 
 % Task 3
-\exercise{Eigenvectors and Eigenvalues (1 point)}{Explain what eigenvectors and eigenvalues of a matrix $M$ are. Why are they relevant in machine learning?}{7cm}
+\exercise{Eigenvectors and Eigenvalues (1 point)}{
+Explain what eigenvectors and eigenvalues of a matrix $\bm{A}$ are. Why are they relevant in machine learning?
+}{
 
-% Solution:
-
+}
 
 \end{enumerate}
+
+\newpage
+
 
 % Statistics Refresher
 %______________________________________________________________________
@@ -48,18 +57,26 @@
 \begin{enumerate}[label=\alph*)]
 
 % Task 4
-\exercise{Terminology (1 point)}{What is a random variable? What is a probability density function (PDF)? What is a probability mass function (PMF)? What do a PDF and a PMF tell us about a random variable?}{8.5cm}
+\exercise{Terminology (1 point)}{
+What is a random variable? What is a probability density function (PDF)? What is a probability mass function (PMF)? What do a PDF and a PMF tell us about a random variable?
+}{
+\vspace*{7cm}
+}
 
-% Solution:
+
 
 
 % Task 5
-\exercise{Expectation and Variance (1 point)}{State the general definition of expectation and variance for the probability density $f : \Omega \rightarrow \mathbb{R}$ of a continuous random variable. What do expectation and variance express?}{6cm}
+\exercise{Expectation and Variance (1 point)}{
+State the general definition of expectation and variance for the probability density $f : \Omega \rightarrow \mathbb{R}$ of a continuous random variable. What do expectation and variance express?
+}{
 
-% Solution:
-
+}
 
 \end{enumerate}
+
+\newpage
+
 
 % Optimization
 %______________________________________________________________________
@@ -68,10 +85,17 @@
 \begin{enumerate}[label=\alph*)]
 
 % Task 6
-\exercise{Numerical Optimization - Gradient Descent (5 points)}{Implement a simple gradient descent algorithm for finding a minimum of the Rosenbrock function with $n = 2$ using Python and NumPy: $$f(x) = \sum_{i = 0}^{n - 1} \left[100 (x_{i+1} - x_i^2)^2 + (x_i - 1)^2\right]$$ Submit your code and a plot of the learning curve for the best run of your gradient descent implementation. Which learning rate worked best? (Hint: You need to find the first derivative(s) of $f(x)$ for $n = 2$ and iteratively evaluate them during gradient descent. Automatic differentiation tools are not allowed for this exercise. Choose a random starting point for the parameters, for example $x_i \in [-2, 2]$.)}{0cm}
+\exercise{Numerical Optimization - Gradient Descent (5 points)}{
+Implement a simple gradient descent algorithm for finding a minimum of the Rosenbrock function with $n = 2$ using Python and NumPy:
+\begin{equation*}
+	f(\bm{x}) = \sum_{i=1}^{n - 1} \left[ 100 (x_{i+1} - x_i^2)^2 + (x_i - 1)^2 \right]
+\end{equation*}
 
-% Solution:
+Submit your code and a plot of the learning curve for the best run of your gradient descent implementation. Which learning rate worked best? (Hint: You need to find the first derivative(s) of $f(\bm{x})$ for $n = 2$ and iteratively evaluate them during gradient descent.
+Automatic differentiation tools are not allowed for this exercise. Choose a random starting point for the parameters, for example $\bm{x} \in [-2, 2]$.)
+}{
 
+}
 
 \end{enumerate}
 

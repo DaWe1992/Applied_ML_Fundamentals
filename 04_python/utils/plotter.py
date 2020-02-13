@@ -99,7 +99,7 @@ class Plotter:
         
         ax.scatter(self.X[:, 0], self.X[:, 1], c=self.y,
             cmap="rainbow", edgecolors="k", zorder=10,
-            vmin=-1, vmax=np.unique(self.y).shape[0]
+            vmin=-1, vmax=np.unique(self.y).shape[0] #, s=50
         )
         
 #        plt.savefig("boundary.pdf")
@@ -117,8 +117,8 @@ class Plotter:
         self.__prepare_plot(ax, xlabel=r"$x$", ylabel=r"$y$")
         
         # query query data points
-        X_q = np.linspace(self.x_min - 5, self.x_max + 5, n_points)
-        y_q = reg.predict(X_q.squeeze())
+        X_q = np.linspace(self.x_min - 5, self.x_max + 5, n_points).reshape(-1, 1)
+        y_q = reg.predict(X_q)
         
         # draw scatter plot
         ax.plot(self.X, self.y, "rx", markersize=10, markeredgewidth=1.5)

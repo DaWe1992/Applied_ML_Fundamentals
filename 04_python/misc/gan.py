@@ -385,7 +385,8 @@ def get_data():
     ])
     out_dir = "./dataset"
     
-    return datasets.MNIST(root=out_dir, train=True, transform=transform, download=True)
+    return datasets.MNIST(root=out_dir, train=True,
+        transform=transform, download=True)
 
 
 # -----------------------------------------------------------------------------

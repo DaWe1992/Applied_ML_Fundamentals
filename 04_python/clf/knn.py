@@ -75,5 +75,5 @@ class kNN():
         nbs = self.y[sq_dist.argsort()[0]][0:self.n_neighbors]
         
         # get label with maximum count
-        return np.argmax(np.bincount(nbs))
+        return np.argmax(np.bincount(nbs.astype(int)))
     

@@ -35,6 +35,7 @@ class PCA():
         
         :param X:               high dimensional data
         :param n_components:    number of components
+        :return:                data set reduced in dimensionality
         """
         # compute scatter / covariance matrix
         sigma = np.cov(X, rowvar=False)

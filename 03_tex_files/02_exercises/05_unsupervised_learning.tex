@@ -1,14 +1,4 @@
 \input{preamble_theme}
-\usepackage{hyperref}
-\usepackage{listings}
-\usepackage{xcolor}
-\usepackage{amsmath}
-\usepackage{tikz}
-\usetikzlibrary{positioning}
-\usepackage[bottom]{footmisc}
-
-% title
-\title{Exercise 5 - Backpropagation and Unsupervised Learning}
 
 % ====================================================
 % ====================================================
@@ -16,36 +6,9 @@
 % ====================================================
 % ====================================================
 \begin{document}
-\AddToShipoutPicture*{\BackgroundPic}
 
-\maketitle
-\medskip
-\newpage
- 
-\definecolor{codegreen}{rgb}{0,0.6,0}
-\definecolor{codegray}{rgb}{0.5,0.5,0.5}
-\definecolor{codepurple}{rgb}{0.58,0,0.82}
-\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
-\lstdefinestyle{pystyle}{
-	backgroundcolor=\color{backcolour},   
-	commentstyle=\color{codegreen},
-	keywordstyle=\color{magenta},
-	numberstyle=\tiny\color{codegray},
-	stringstyle=\color{codepurple},
-	basicstyle=\ttfamily\footnotesize,
-	breakatwhitespace=false,         
-	breaklines=true,                 
-	captionpos=b,                    
-	keepspaces=true,                 
-	numbers=left,                    
-	numbersep=5pt,                  
-	showspaces=false,                
-	showstringspaces=false,
-	showtabs=false,                  
-	tabsize=2
-}
- 
-\lstset{style=pystyle}
+\mytitle{Exercise 4 - Backpropagation and unsupervised Learning}
+\firstpage{\insertmytitle}{Winter term 2019/2020}
 
 % Backprop
 %______________________________________________________________________
@@ -54,92 +17,94 @@
 \begin{enumerate}[label=\alph*)]
 
 % Task 1
-\exercise{Backpropagation by Hand (5 points)}{You are given the following neural network. Compute one forward pass and backward pass based on the labeled training example $(\bf{x} = (0.05,\,0.10), \bf{y} = (0.01, 0.99))$. Use a square loss as loss function:
-\begin{align*}
-J(y_i, t_i) &= (t_i - y_i)^2\\
-\frac{\partial J}{\partial y_i} &= 2(y_i - t_i)
-\end{align*}
-The weight matrices and bias values are initialized as follows (where for instance the weight $W_{12}$ connects the input $x_2$ with hidden layer neuron $1$ and the weight $V_{21}$ connects hidden layer neuron $2$ with output layer neuron $1$):
-The weight matrices and bias values are initialized as follows (where for instance the weight $W_{12}$ connects the input $x_2$ with hidden layer neuron $1$ and the weight $V_{21}$ connects hidden layer neuron $2$ with output layer neuron $1$):
-\begin{align*}
-W &= \begin{pmatrix}
-0.15 & 0.20\\
-0.25 & 0.30
-\end{pmatrix}\\
-b_1 &= \begin{pmatrix}0.35 & 0.35\end{pmatrix}\\
-V &= \begin{pmatrix}
-0.40 & 0.45\\
-0.50 & 0.55
-\end{pmatrix}\\
-b_2 &= \begin{pmatrix}0.60 & 0.60\end{pmatrix}
-\end{align*}
-Use the activation functions mentioned above the hidden layer (ReLU) and output layer (Sigmoid). Show your calculations, annotate the visual illustration of the network with the gradients at the single neurons (derivative of the activations) and state the gradients for the weights $w_{12}$, $v_{21}$.
-}{1cm}
+\exercise{Backpropagation by Hand (5 points)}{
+You are given the neural network depicted below. Compute one forward-pass and one backward-pass based on the labeled training example $\langle \bm{x} = [0.05, 0.10], \bm{y} = [0, 1] \rangle$. 
+Employ the squared error loss function:
 
-\def\layersep{2.5cm}
+\begin{align*}
+	\mathcal{J}(\bm{\Theta})
+		&= (y_{pred} - y)^2 \\[3mm]
+	\mathcal{J}'(\bm{\Theta})
+		&= 2 \cdot (y_{pred} - y)
+\end{align*}
+
+The weight matrices and bias weights are initialized as follows (where for instance weight $\Theta_{12}^{(1)}$ connects the input $x_2$ with the first neuron in the hidden layer):
+
+\begin{minipage}{0.49\textwidth}
+	\begin{align*}
+		\bm{\Theta}^{(1)}
+			&= \begin{pmatrix}
+				0.15 & 0.20 \\
+				0.25 & 0.30
+			\end{pmatrix} \\[3mm]
+		\bm{b}^{(1)}
+			&= \begin{pmatrix}0.35 & 0.35\end{pmatrix}
+	\end{align*}
+\end{minipage}
+\hfill
+\begin{minipage}{0.49\textwidth}
+	\begin{align*}
+		\bm{\Theta}^{(2)}
+			&= \begin{pmatrix}
+				0.40 & 0.45 \\
+				0.50 & 0.55
+			\end{pmatrix} \\[3mm]
+		\bm{b}^{(2)}
+			&= \begin{pmatrix}0.60 & 0.60\end{pmatrix}
+	\end{align*}
+\end{minipage}
+\vspace*{5mm}
+
+Use the ReLU and sigmoid activation functions in the hidden layer and output layer, respectively. Write down all necessary computations.
+What are the gradients for the weights $\Theta_{12}^{(1)}$, $\Theta_{21}^{(2)}$?
 \begin{figure}[h]
-\centering
-\begin{tikzpicture}[shorten >=1pt,->,draw=black!50, node distance=\layersep]
-    \tikzstyle{every pin edge}=[<-,shorten <=1pt]
-    \tikzstyle{neuron}=[circle,fill=black!25,minimum size=17pt,inner sep=0pt]
-    \tikzstyle{input neuron}=[neuron, fill=green!50];
-    \tikzstyle{output neuron}=[neuron, fill=red!50];
-    \tikzstyle{hidden neuron}=[neuron, fill=blue!50];
-    \tikzstyle{annot} = [text width=6em, text centered]
+	\centering
+	\begin{tikzpicture}[
+		neuron/.style={circle,minimum size=17pt,fill=white,draw=black},
+		bias/.style={circle,minimum size=17pt,fill=black},
+		annot/.style={text width=6em, text centered}
+	]
 
-    % Draw the input layer nodes
-    \foreach \name / \y in {1,...,2}
-    % This is the same as writing \foreach \name / \y in {1/1,2/2,3/3,4/4}
-        \node[input neuron, pin=left:\hphantom{1em}] (I-\name) at (0,-\y) {$x_\y$};
-    % Le bias
-    \node[input neuron] (I-bias) at (0,-3cm) {$b_1$};
+		% connect input and hidden layers
+		\foreach \i in {0,1,2}
+		    \foreach \h in {1,2}
+		            \draw[-stealth] (0,\i) -- (3,\h);
+		
+		% connect hidden and output layers
+		\foreach \h in {0,1,2}
+			\foreach \o in {1,2}
+				\draw (3,\h) -- (6,\o);
+				
+		\node[neuron] at (0,2) {$x_1$};
+		\node[neuron] at (0,1) {$x_2$};
+		\node[bias] at (0,0) {\textcolor{white}{$b_1$}};
 
-    % Draw the hidden layer nodes
-    \foreach \name / \y in {1,...,2}
-        \path[yshift=0cm]
-            node[hidden neuron] (H-\name) at (\layersep,-\y cm) {$p_\y$};
-    % Le bias
-    \path[yshift=0cm]
-        node[hidden neuron] (H-bias) at (\layersep,-3cm) {$b_2$};
+		\node[neuron] at (3,2) {$p_1$};
+		\node[neuron] at (3,1) {$p_2$};
+		\node[bias] at (3,0) {\textcolor{white}{$b_2$}};
 
-    % Draw the output layer nodes
-    \foreach \name / \y in {1,...,2}
-        \path[yshift=0cm]
-             node[output neuron, pin={[pin edge={->}]right:\hphantom{1em}}] (O-\name) at (\layersep+\layersep,-\y cm) {$y_\y$};
+		\node[neuron] at (6,2) {$y_1$};
+		\node[neuron] at (6,1) {$y_2$};
+		            
+		% annotate the layers
+		\node[annot] at (0,3.5) {Input layer};
+		\node[annot] at (3,3.5) {Hidden layer (ReLU)};
+		\node[annot] at (6,3.5) {Output layer (Sigmoid)};
+		\node[annot] at (1.5,2.5) {$\bm{\Theta}^{(1)}$};
+		\node[annot] at (4.5,2.5) {$\bm{\Theta}^{(2)}$};
 
-    % Connect every node in the input layer with every node in the
-    % hidden layer.
-    \foreach \source in {1,...,2}
-        \foreach \dest in {1,...,2}
-            \path (I-\source) edge (H-\dest);
-            
-    \foreach \dest in {1,...,2}
-        \path (I-bias) edge (H-\dest);
-
-    % Connect every node in the hidden layer with the output layer
-    \foreach \source in {1,...,2}
-        \foreach \dest in {1,...,2}
-            \path (H-\source) edge (O-\dest);
-            
-    \foreach \dest in {1,...,2}
-        \path (H-bias) edge (O-\dest);
-
-    % Annotate the layers
-    \node[annot,above of=H-1, node distance=2cm] (hl) {Hidden layer (ReLU)};
-    \node[annot,left of=hl] {Input layer};
-    \node[annot,right of=hl] (ol) {Output layer (Sigmoid)};
-    \node[annot,below of=hl,left of=hl, node distance=1.3cm] (matw) {$W$};
-    \node[annot,below of=hl,left of=ol, node distance=1.3cm] (matw) {$V$};
-\end{tikzpicture}
-\caption{Multi-layer perceptron to be used for one forward and backward pass}
+	\end{tikzpicture}
+	\caption{MLP architecture}
 \end{figure}
+}{
 
-
-% Solution:
-
+}
 
 \end{enumerate}
-\pagebreak
+
+\newpage
+
+
 
 % Clustering
 %______________________________________________________________________
@@ -147,17 +112,33 @@ Use the activation functions mentioned above the hidden layer (ReLU) and output 
 
 \begin{enumerate}[label=\alph*)]
 
-% Task 1
-\exercise{k-Means clustering (4 points)}{Implement k-Means clustering for image compression. Compress the example image file \textit{data/dhbw.jpg}. You find an explanation of how image compression with k-Means works under the following \href{https://medium.com/@agarwalvibhor84/image-compression-using-k-means-clustering-8c0ec055103f}{link\footnote{\url{https://medium.com/@agarwalvibhor84/image-compression-using-k-means-clustering-8c0ec055103f}}}.}{5cm}
-
 % Task 2
-\exercise{PCA (1 point)}{Explain how to choose the number of eigenvectors to use for principal component analysis. Why does this work?}{5cm}
+\exercise{$k$-Means clustering (4 points)}{
+Implement $k$-Means clustering for image compression. Compress the exemplary image file which can be found under the path \cb{\texttt{/data/dhbw.jpg}}.
+You can find an explanation of how image compression with $k$-Means works on this web page.\footnote{\url{https://medium.com/@agarwalvibhor84/image-compression-using-k-means-clustering-8c0ec055103f}}
+}{
+\vspace*{7cm}
+}
 
-% Bonus
-\exercise{Bonus Question: Spectral clustering (1 point)}{How can you automatically choose the number of clusters for spectral clustering?}{5cm}
 
-% Solution:
 
+
+% Task 3
+\exercise{PCA (1 point)}{
+Explain how to choose the number of principal components for dimensionality reduction. Why does this work?
+}{
+
+}
+
+\newpage
+
+
+% Task 4
+\exercise{Bonus Question: Spectral clustering (1 point)}{
+How can you automatically choose the number of clusters for spectral clustering?
+}{
+
+}
 
 \end{enumerate}
 

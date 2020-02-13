@@ -17,24 +17,31 @@
   	bottom=4cm,
 ]{geometry}
 
+\usepackage{listings}
+
 \usepackage{tikz}
-\usepackage{eso-pic}
 \usepackage{fancyhdr}
 \usepackage{etoolbox}
 \usepackage{enumitem}
+
+\usepackage{bm}
 \usepackage{amssymb}
-\usepackage{xparse}
-\usepackage{roboto}
+\usepackage{amsmath}
+\usepackage{pifont}
+
+\usepackage{hyperref}
+\usepackage{tcolorbox}
+
+\usepackage{pifont}
+
 \renewcommand{\familydefault}{\sfdefault}
 
 % definitions
 % ====================================================
 
-\let\titleoriginal\title
-\renewcommand{\title}[1]{
-	\titleoriginal{#1}
-	\newcommand{\thetitle}{#1}
-}
+% title
+\newcommand\insertmytitle{}  % empty by default
+\newcommand\mytitle[1]{\renewcommand\insertmytitle{#1}}
 
 \setlength{\parskip}{\baselineskip}%
 \setlength{\parindent}{0pt}%
@@ -42,33 +49,90 @@
 % header and footer
 \pagestyle{fancy}
 \fancyhf{}
-\lhead{\thetitle}
+\lhead{\insertmytitle}
 \rhead{\includegraphics[width=2cm]{../03_img/logo_dhbw.png}}
 \cfoot{\thepage\\\vspace{0.6cm} \small Applied Machine Learning Fundamentals}
 \setlength{\headsep}{1.5cm}
 
+% listings
+\lstset{
+	backgroundcolor=\color{white},   				% choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+	basicstyle=\ttfamily\footnotesize, 				% the size of the fonts that are used for the code
+	breakatwhitespace=false,        	 			% sets if automatic breaks should only happen at whitespace
+	breaklines=true,                 					% sets automatic line breaking
+	captionpos=b,                    					% sets the caption-position to bottom
+ 	commentstyle=\color{green!30!black}\textit,    	% comment style
+ 	deletekeywords={...},            				% if you want to delete keywords from the given language
+ 	escapeinside={\%*}{*)},          				% if you want to add LaTeX within your code
+ 	extendedchars=true,              				% lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+ 	frame=tb,	                   	   				% adds a frame around the code
+ 	keepspaces=true,                 				% keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+ 	keywordstyle=\color{blue}\bfseries,       		% keyword style
+ 	language=Python,                 				% the language of the code (can be overrided per snippet)
+ 	otherkeywords={*,...},           				% if you want to add more keywords to the set
+ 	numbers=left,                    					% where to put the line-numbers; possible values are (none, left, right)
+ 	numbersep=5pt,                   				% how far the line-numbers are from the code
+	numberstyle=\tiny, 						% line number style
+ 	rulecolor=\color{black},         				% if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+ 	showspaces=false,                				% show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+ 	showstringspaces=false,          				% underline spaces within strings only
+ 	showtabs=false,                  				% show tabs within strings adding particular underscores
+ 	stepnumber=1,                    				% the step between two line-numbers. If it's 1, each line will be numbered
+ 	stringstyle=\color{red}, 					% string literal style
+ 	tabsize=2,	                   					% sets default tab size to 2 spaces
+ 	title=\lstname,                  					% show the filename of files included with \lstinputlisting; also try caption instead of title
+ 	columns=fixed                   			 		% Using fixed column width (for e.g. nice alignment)
+}
+
 % commands
 % ====================================================
 
-% title page theme
-\newcommand\BackgroundPic{%
-	\put(0,0){%
-		\parbox[b][\paperheight]{\paperwidth}{%
-			\vfill
-			\centering
-			\tikz[overlay,remember picture] \node[opacity=0.2, at=(current page.center)] {
-				\includegraphics[height=\paperheight,width=\paperwidth]{../03_img/processor.jpg}
-			};
-			\includegraphics[width=4cm, trim=-5.5cm 0 0 -1cm]{../03_img/logo_dhbw.png}
-			\vfill
-		}
-	}
+% colored text
+\newcommand{\cb}[1]{\colorbox{lightgray}{#1}}
+
+% first page
+\newcommand{\firstpage}[2]{
+	\thispagestyle{empty}
+	\begin{center}
+		{\huge\textbf{#1}} \\
+		\vspace*{10mm}
+		{\large #2}
+	\end{center}
+	\vspace*{3mm}
+	\hrule
+	\vfill
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.05]{../03_img/logo_dhbw.png}
+	\end{figure}
+	\vfill
+	\begin{tcolorbox}[colback=red!5,colframe=red!75!black,title=\textbf{Important}]
+		Please solve the assignments in groups of 3 to 4 students. The solutions are going to be presented and discussed after the submission deadline.
+		Sample solutions will not be uploaded. However, you are free to share correct solutions with your colleagues
+		\textbf{after they have been graded}. Please submit your solutions via Moodle \textbf{and} in printed form.
+		Only one member of the group has to submit the solutions. Therefore, make sure to specify the names of all group members.
+		Please do not submit hand-written solutions, rather use proper type-setting software like \LaTeX\ or other comparable programs. \\
+			
+		Your homework will be corrected and given back to you. Correct solutions are rewarded with a bonus for the exam (max. 10 percent,
+		if all solutions submitted are correct). \textbf{Please note:} You have to pass the exam \textbf{without the bonus points}!
+		\textit{(i.e. it is not possible to turn 5.0 into 4.0)} The solutions have to be your own work. If you plagiarize, you will lose all bonus points!
+	\tcblower
+		\textbf{Further remarks:}
+		\begin{itemize}
+			\item Code assignments have to be done in \texttt{Python}
+			\item The following packages are allowed: \texttt{numpy}, \texttt{pandas} \\
+				(please ask, if you want to use a specific package not mentioned here)
+			\item \textbf{Do not use already implemented models} (e.\,g. from \texttt{scikit-learn})
+		\end{itemize}
+	\end{tcolorbox}
+	\newpage
 }
 
+% exercise command
 \newcommand\exercise[4][]{
 	\ifx\hfuzz#1\hfuzz
-  		\item #2\vspace{0.2cm}\newline #3 \vspace{#4}%
+  		\item #2\vspace{0.2cm}\newline #3 \\[5mm] \textbf{Solution:} \\[3mm] #4%
 	\else
-  		\item #2\vspace{0.2cm}\newline #3\vspace{0.5cm}\newline Solution:\newline#1 \vspace{#4}%
+  		\item #2\vspace{0.2cm}\newline #3\vspace{0.5cm}\newline Solution:\newline#1  \\[5mm] \textbf{Solution:} \\ #4%
 	\fi
 }
