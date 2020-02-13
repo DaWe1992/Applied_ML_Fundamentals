@@ -42,6 +42,9 @@
 % title
 \newcommand\insertmytitle{}  % empty by default
 \newcommand\mytitle[1]{\renewcommand\insertmytitle{#1}}
+% author
+\newcommand\insertmyauthor{}  % empty by default
+\newcommand\myauthor[1]{\renewcommand\insertmyauthor{#1}}
 
 \setlength{\parskip}{\baselineskip}%
 \setlength{\parindent}{0pt}%
@@ -91,12 +94,14 @@
 \newcommand{\cb}[1]{\colorbox{lightgray}{#1}}
 
 % first page
-\newcommand{\firstpage}[2]{
+\newcommand{\firstpage}[3]{
 	\thispagestyle{empty}
 	\begin{center}
 		{\huge\textbf{#1}} \\
 		\vspace*{10mm}
-		{\large #2}
+		{\large #2} \\
+		\vspace*{2mm}
+		#3
 	\end{center}
 	\vspace*{3mm}
 	\hrule
