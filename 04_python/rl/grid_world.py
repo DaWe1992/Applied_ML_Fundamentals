@@ -216,6 +216,7 @@ class GridWorld:
         
         plt.title("Optimal policy")
         
+#        plt.savefig("policy.pdf")
         plt.show()
         
      

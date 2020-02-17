@@ -66,11 +66,11 @@ def classification():
     Classification.
     """
     # create data
-    X, y = DataCreator().make_classification(name="non_linear", n_classes=2)
+    X, y = DataCreator().make_classification(name="linear", n_classes=3)
     
     # train kNN classifier
-    clf = kNN(n_neighbors=1)
-    clf.fit(X, y)
+#    clf = kNN(n_neighbors=1)
+#    clf.fit(X, y)
     
     # train SVM classifier
 #    clf = SVM(kernel="polynomial", C=1.0, p=3, s=3.0)
@@ -101,17 +101,17 @@ def classification():
 #    clf.visualize()
     
     # Expectation Maximization
-#    em = EM()
-#    em.fit(X, n_comp=3, n_iter=30)
+    em = EM()
+    em.fit(X, n_comp=3, n_iter=30)
     
     # plot boundary
-    Plotter(X, y).plot_boundary(clf, step_size=0.005)
+#    Plotter(X, y).plot_boundary(clf, step_size=0.005)
     
     # evaluation
-    evaluator = Evaluator()
-    acc = evaluator.accuracy(clf, X, y)
-    print("Accuracy: {} %".format(acc))
-    evaluator.conf_mat(clf, X, y)
+#    evaluator = Evaluator()
+#    acc = evaluator.accuracy(clf, X, y)
+#    print("Accuracy: {} %".format(acc))
+#    evaluator.conf_mat(clf, X, y)
     
     
 def regression():
@@ -238,8 +238,8 @@ def reinforcement_learning():
     # initialize value iteration
     # and calculate the optimal policy
     # -------------------------------------------------------------------------
-    rl = ValueIteration(gamma=0.99, thresh=10e-5, env=env)
-#    rl = PolicyIteration(gamma=0.99, thresh=10e-5, env=env)
+#    rl = ValueIteration(gamma=0.99, thresh=10e-5, env=env)
+    rl = PolicyIteration(gamma=0.99, thresh=10e-5, env=env)
 #    rl = QLearning(gamma=0.99, alpha=0.20, eps=1.00, n_episodes=5000, env=env)
     # get optimal policy
     pi = rl.get_pi()
@@ -256,6 +256,6 @@ if __name__ == "__main__":
     """
 #    classification()
 #    regression()
-    unsupervised_learning()
-#    reinforcement_learning()
+#    unsupervised_learning()
+    reinforcement_learning()
     

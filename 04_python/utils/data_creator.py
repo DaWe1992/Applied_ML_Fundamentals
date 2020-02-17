@@ -65,7 +65,7 @@ class DataCreator:
             X, y = make_classification(
                 n_samples=200, n_features=2, n_redundant=0,
                 n_informative=2, n_clusters_per_class=1,
-                n_classes=n_classes, class_sep=1.25, random_state=42
+                n_classes=n_classes, class_sep=3.25, random_state=42
             )
             
         # non linear data set
