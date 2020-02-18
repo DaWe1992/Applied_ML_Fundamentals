@@ -1,4 +1,4 @@
-# Applied Machine Learning Fundamentals (DHBW Lecture)
+# 📙 Applied Machine Learning Fundamentals (DHBW Lecture)
 
 ```
 'We are drowning in information and starving for knowledge.' – John Naisbitt
@@ -86,9 +86,9 @@ Your homework is going to be corrected and given back to you. Correct solutions 
 Unsurprisingly, the solutions have to be your own work. **If you plagiarize, you will lose all bonus points!**
 
 **Further remarks:**
-* Code assignments have to be done in Python. Please submit a *.py* file (no jupyter notebooks, since it does not allow debugging)
-* The following packages are allowed: *numpy*, *pandas* (please ask beforehand, if you want to use a specific package not mentioned here)
-* Do not use already implemented models (e.g. from *scikit-learn*)
+* Code assignments have to be done in Python. Please submit a *.py* file (no jupyter notebooks, since jupyter notebooks do not allow for proper debugging).
+* The following packages are allowed: *numpy*, *pandas* (please ask beforehand, if you want to use a specific package not mentioned here).
+* Do not use already implemented models (e.g. from *scikit-learn*).
 
 ## Exam <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/exam.png" width="30px" height="25px">
 The exam will take 60 minutes. The maximum attainable score will be 60 points, so you have one minute per point.
@@ -107,11 +107,11 @@ Please do not translate domain specific technical terms in order to avoid confus
 
 Symbol (1):
 
-<img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/scream.png" width="50px" height="50px">
+<img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/scream.png" width="60px" height="60px">
 
 Symbol (2):
 
-<img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/important.png" width="50px" height="50px">
+<img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/important.png" width="60px" height="60px">
 
 **Auxiliary material for the exam:**
 * Non-programmable pocket calculator
@@ -122,8 +122,8 @@ Please find Python implementations of some of the algorithms (which are not part
 [06_python](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/06_python).
 Play around with the hyper-parameters of the algorithms and try different data sets in order to get a better feeling for how the algorithms work.
 
-## Literature <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/literature.png" width="25px" height="25px">
-You do not need to buy any books for the lecture. Most resources are available online. Please find a list below:
+## Literature and recommended Reading <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/literature.png" width="25px" height="25px">
+You do not need to buy any books for the lecture, most resources are available online. Please find a curated list below:
 
 | Title                                    	     | Author(s)                    | Publisher 				| Link                                                         																																|
 |------------------------------------------------|------------------------------|---------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -135,6 +135,9 @@ You do not need to buy any books for the lecture. Most resources are available o
 | Pattern Recognition and Machine Learning 	     | Bishop (2006)   			    | Springer  				| [click here](http://users.isr.ist.utl.pt/~wurmd/Livros/school/Bishop%20-%20Pattern%20Recognition%20And%20Machine%20Learning%20-%20Springer%20%202006.pdf) 								|
 | Reinforcement Learning - An introduction       | Sutton et al. (2014)         | MIT Press     			| [click here](http://incompleteideas.net/book/bookdraft2017nov5.pdf)   																													|
 | Probabilistic Graphical Models 				 | Koller et al. (2009)			| MIT Press                 | [click here](https://github.com/Zhenye-Na/machine-learning-uiuc/blob/master/docs/Probabilistic%20Graphical%20Models%20-%20Principles%20and%20Techniques.pdf)                              |
+
+In the exam we will not ask anything which was not discussed in the lecture. Regard the literature as additional resources in case you want to dig deeper into
+specific topics.
 
 ## Data Exploration Project (4th Semester)
 Please find the material for the project in the folder [05_project](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/05_project)
