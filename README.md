@@ -105,8 +105,13 @@ Please do not translate domain specific technical terms in order to avoid confus
 	*  Symbol (2) indicates very important content. Make sure you understand it!
 * Work through the [list of 150+ terms](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/04_exam/terms_you_have_to_know.pdf) which you should be able to explain.
 
-Symbol (1) <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/scream.png" width="25px" height="25px">
-Symbol (2) <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/important.png" width="25px" height="25px">
+Symbol (1)
+
+<img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/scream.png" width="25px" height="25px">
+
+Symbol (2)
+
+<img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/important.png" width="25px" height="25px">
 
 **Auxiliary material for the exam:**
 * Non-programmable pocket calculator
