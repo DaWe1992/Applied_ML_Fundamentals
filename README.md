@@ -1,4 +1,4 @@
-# 📙 Applied Machine Learning Fundamentals (DHBW Lecture)
+# 📙 Applied Machine Learning Fundamentals (Lecture)
 
 ```
 'We are drowning in information and starving for knowledge.' – John Naisbitt
