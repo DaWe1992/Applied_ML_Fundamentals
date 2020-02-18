@@ -143,7 +143,7 @@ You do not need to buy any books for the lecture, most resources are available o
 * [Support vector machines by Patrick Winston, MIT](https://www.youtube.com/watch?v=_PwhiWxHK8o)
 
 In general, we recommend the [Coursera machine learning course](https://de.coursera.org/learn/machine-learning#about) by Andrew Ng.
-You can get a certificate if you want:
+You can get a nice certificate if you want (around $60):
 
 <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/ml_certificate.png" width="400px" height="300px">
 
