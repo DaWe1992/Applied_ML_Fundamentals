@@ -4,17 +4,20 @@
 'We are drowning in information and starving for knowledge.' – John Naisbitt
 ```
 
-Machine learning is a subfield of artificial intelligence (AI) that provides systems the ability to automatically learn and improve from experience
+Machine learning / data science is a subfield of artificial intelligence (AI) that provides systems the ability to automatically learn and improve from experience
 **without being explicitly programmed**. Machine learning focuses on the development of computer programs that can access data and use it to learn for themselves.
-Machine learning has become an integral part of many modern applications.
+Machine learning has become an integral part of many modern applications. It is a cross-topic discipline which comprises computer science, math / statistics as well as
+domain and business knowledge:
 
 <p align="center">
 	<img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/data_science.png" width=400px>
 </p>
 
-This lecture is supposed to give a general introduction into state-of-the-art machine learning algorithms and their applications.
+The lecture 'Applied Machine Learning Fundamentals' is supposed to give a general introduction into state-of-the-art machine learning algorithms and their applications.
 
 ## Contents <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/toc.png" width="20px" height="20px">
+
+We are going to cover the following topics:
 
 1. **Introduction to machine learning** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/01_intro_ml.pdf))
     * Motivation and applications
@@ -66,15 +69,22 @@ This lecture is supposed to give a general introduction into state-of-the-art ma
 	* Probabilistic graphical models ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/15_pgm.pdf))
 
 ## Assignments <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/assignments.png" width="25px" height="25px">
-The assignments have to be solved in groups comprising 3 to 4 students.
-Task descriptions, starter code and data sets can be found in the folder [exercises](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/02_exercises).
-Solutions will be presented and discussed in the following class, sample solutions will not be uploaded. You are however free to share correct solutions with your colleagues after they have been graded.
-Please submit your solutions via Moodle and in printed form (only one group member). Please do not submit hand-written solutions,
-rather use proper type-setting software like LaTeX or other comparable programs. Also make sure to specify the names of all group members.
+The assignments are voluntary. Please solve the assignments in groups of **three to four students** if you want to participate.
+The task descriptions, starter code and data sets can be found in the folder [02_exercises](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/02_exercises).
+The solutions are going to be presented and discussed after the submission deadline.
+Sample solutions will **not** be uploaded. However, you are free to share correct solutions with your colleagues
+**after they have been graded**. Please submit your solutions via Moodle **and** in printed form.
+Only one member of the group has to submit the solutions. Therefore, make sure to specify the names of all group members.
+Please do not submit hand-written solutions, rather use proper type-setting software like LaTeX or other comparable programs.
 
-Your homework will be corrected and given back to you. Correct solutions are rewarded with a bonus for the exam (max. 10 percent, if all solutions submitted are correct).
-**Please note:** You have to pass the exam **without the bonus points!** (i.e. it is not possible to turn 5.0 into 4.0).
-**As usual, the solutions have to be your own work. If you plagiarize, you will lose all bonus points!**
+Your homework is going to be corrected and given back to you. Correct solutions are rewarded with a bonus for the exam (max. ten percent (corresponds to six points in the exam),
+if all solutions submitted are correct). **Please note:** You have to pass the exam **without the bonus points!**
+(i.e. it is not possible to turn a 5.0 into a 4.0) The solutions have to be your own work. **If you plagiarize, you will lose all bonus points!**
+
+Further remarks:
+1. Code assignments have to be done in Python. Please submit a *.py* file (no jupyter notebooks)
+2. The following packages are allowed: *numpy*, *pandas* (please ask beforehand, if you want to use a specific package not mentioned here)
+3. Do not use already implemented models (e.g. from *scikit-learn*)
 
 ## Exam <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/exam.png" width="30px" height="25px">
 The exam will take 60 minutes. You are allowed to bring a calculator to the exam.
