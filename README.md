@@ -138,8 +138,17 @@ You do not need to buy any books for the lecture, most resources are available o
 | Reinforcement Learning - An introduction       | Sutton et al. (2014)         | MIT Press     			| [click here](http://incompleteideas.net/book/bookdraft2017nov5.pdf)   																													|
 | Probabilistic Graphical Models 				 | Koller et al. (2009)			| MIT Press                 | [click here](https://github.com/Zhenye-Na/machine-learning-uiuc/blob/master/docs/Probabilistic%20Graphical%20Models%20-%20Principles%20and%20Techniques.pdf)                              |
 
+**YouTube resources:**
+* [Machine learning lecture by Andrew Ng, Stanford University](https://www.youtube.com/watch?v=UzxYlbK2c7E&list=PLA89DCFA6ADACE599)
+* [Support vector machines by Patrick Winston, MIT](https://www.youtube.com/watch?v=_PwhiWxHK8o)
+
+In general, we recommend the [Coursera machine learning course](https://de.coursera.org/learn/machine-learning#about) by Andrew Ng.
+You can get a certificate if you want:
+
+<img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/ml_certificate.png" width="250px" height="250px">
+
 In the exam we will not ask anything which was not discussed in the lecture. Regard the literature as additional resources in case you want to dig deeper into
-specific topics.
+specific topics. Please give me a hint, if you feel that some important resources are missing. I am happy to add them here.
 
 ## Data Exploration Project (4th Semester)
 Please find the material for the project in the folder [05_project](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/05_project)
