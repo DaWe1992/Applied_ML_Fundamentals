@@ -69,35 +69,51 @@ We are going to cover the following topics:
 	* Probabilistic graphical models ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/15_pgm.pdf))
 
 ## Assignments <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/assignments.png" width="25px" height="25px">
-The assignments are voluntary. Please solve the assignments in groups of **three to four students** if you want to participate.
-The task descriptions, starter code and data sets can be found in the folder [02_exercises](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/02_exercises).
-The solutions are going to be presented and discussed after the submission deadline.
-Sample solutions will **not** be uploaded. However, you are free to share correct solutions with your colleagues
-**after they have been graded**. Please submit your solutions via Moodle **and** in printed form.
-Only one member of the group has to submit the solutions. Therefore, make sure to specify the names of all group members.
-Please do not submit hand-written solutions, rather use proper type-setting software like LaTeX or other comparable programs.
+The assignments are voluntary. All students who choose to participate have to form groups comprising three to four students (not more and not less).
+The groups do not have to be static, you may form new groups for each assignment.
+The task descriptions, starter code and data sets for the assignments can be found in the folder [02_exercises](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/02_exercises).
+You have two weeks to answer the questions and to submit your work. The solutions are going to be presented and discussed after the submission deadline.
+Sample solutions will **not** be uploaded. However, you are free to share correct solutions with your colleagues **after they have been graded**.
 
-Your homework is going to be corrected and given back to you. Correct solutions are rewarded with a bonus for the exam (max. ten percent (corresponds to six points in the exam),
-if all solutions submitted are correct). **Please note:** You have to pass the exam **without the bonus points!**
-(i.e. it is not possible to turn a 5.0 into a 4.0) The solutions have to be your own work. **If you plagiarize, you will lose all bonus points!**
+**Submission details:**
+1. Please submit your solutions via Moodle (code assignments) as well as in printed form.
+2. Only one member of the group has to submit the solutions. Therefore, make sure to specify the names of all group members.
+3. Please refrain from submitting hand-written solutions, rather use proper type-setting software like LaTeX or other comparable programs.
 
-Further remarks:
-1. Code assignments have to be done in Python. Please submit a *.py* file (no jupyter notebooks)
+Your homework is going to be corrected and given back to you. Correct solutions are rewarded with a bonus for the exam which accounts to max. ten percent of the exam
+(corresponds to six points), if all solutions submitted are correct. **Please note:** You have to pass the exam **without the bonus points!**
+(i.e. it is not possible to turn a 5.0 into a 4.0)
+Unsurprisingly, the solutions have to be your own work. **If you plagiarize, you will lose all bonus points!**
+
+**Further remarks:**
+1. Code assignments have to be done in Python. Please submit a *.py* file (no jupyter notebooks, since it does not allow debugging)
 2. The following packages are allowed: *numpy*, *pandas* (please ask beforehand, if you want to use a specific package not mentioned here)
 3. Do not use already implemented models (e.g. from *scikit-learn*)
 
 ## Exam <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/exam.png" width="30px" height="25px">
-The exam will take 60 minutes. You are allowed to bring a calculator to the exam.
-You will not be asked for any derivations, rather we want to test whether you understand the general concepts.
-Make sure you can answer the self-test questions provided for each topic. Some of the slides give you important hints:
-A slide marked with <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/scream.png" width="25px" height="25px">
-provides in-depth information which you do not have to know by heart (think of it as additional material for the sake of completeness).
-On the other hand, very important content is indicated by the symbol <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/important.png" width="25px" height="25px">
-Make sure you understand it!
+The exam will take 60 minutes. The maximum attainable score will be 60 points, so you have one minute per point.
+**Important:** Keep your answers short and simple in order not to lose too much valuable time.
+The exam questions will be given in English, but you may answer them in either English or German (you are also allowed to mix the languages).
+Please do not translate domain specific technical terms in order to avoid confusion. Please answer all questions on the task sheets.
+
+**Exam preparation**
+1. You will not be asked for any derivations, rather we want to test whether you understand the general concepts.
+2. The exam will contain multiple choice questions, short answer questions and calculations.
+3. Make sure you can answer the self-test questions provided for each topic.
+4. Some of the slides give you important hints (upper left corner):
+	* <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/scream.png" width="25px" height="25px">
+		A slide marked with this symbol provides in-depth information which you do not have to know by heart (think of it as additional material for the sake of completeness).
+	* <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/important.png" width="25px" height="25px">
+		This symbol indicates very important content. Make sure you understand it!
+5. Work through the [list of the 150+ terms](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/04_exam/terms_you_have_to_know.pdf) which you should be able to explain.
+
+**Auxiliary material for the exam**
+1. Non-programmable pocket calculator
+2. Two-sided **hand-written** cheat sheet (you may note whatever you want)
 
 ## Python code <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/python.png" width="30px" height="30px">
-You can find additional implementations for some of the algorithms (which are not part of the assignments) in the folder
-[python](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/06_python).
+Please find Python implementations of some of the algorithms (which are not part of the assignments) in the folder
+[06_python](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/06_python).
 Play around with the hyper-parameters of the algorithms and try different data sets in order to get a better feeling for how the algorithms work.
 
 ## Literature <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/literature.png" width="25px" height="25px">
@@ -114,6 +130,9 @@ You do not need to buy any books for the lecture. Most resources are available o
 | Reinforcement Learning - An introduction       | Sutton et al. (2014)         | MIT Press     			| [click here](http://incompleteideas.net/book/bookdraft2017nov5.pdf)   																													|
 | Probabilistic Graphical Models 				 | Koller et al. (2009)			| MIT Press                 | [click here](https://github.com/Zhenye-Na/machine-learning-uiuc/blob/master/docs/Probabilistic%20Graphical%20Models%20-%20Principles%20and%20Techniques.pdf)                              |
 
+## Data Exploration Project (4th Semester)
+Please find the material for the project in the folder [05_project](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/05_project)
+
 ## Bugs and Errors <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/bug.png" width="25px" height="30px">
 Help us improve the lecture. Feel free to file an issue, if you spot any errors in the slides, exercises or code.
-Thank you very much. **Please do not open issues for questions concerning the content!** Either use the Moodle forum or send us an e-mail.
+Thank you very much. **Please do not open issues for questions concerning the content!** Either use the Moodle forum or send us an e-mail for that.
