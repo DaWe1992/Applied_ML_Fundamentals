@@ -76,9 +76,9 @@ You have two weeks to answer the questions and to submit your work. The solution
 Sample solutions will **not** be uploaded. However, you are free to share correct solutions with your colleagues **after they have been graded**.
 
 **Submission details:**
-1. Please submit your solutions via Moodle (code assignments) as well as in printed form.
-2. Only one member of the group has to submit the solutions. Therefore, make sure to specify the names of all group members.
-3. Please refrain from submitting hand-written solutions, rather use proper type-setting software like LaTeX or other comparable programs.
+* Please submit your solutions via Moodle (code assignments) as well as in printed form.
+* Only one member of the group has to submit the solutions. Therefore, make sure to specify the names of all group members.
+* Please refrain from submitting hand-written solutions, rather use proper type-setting software like LaTeX or other comparable programs.
 
 Your homework is going to be corrected and given back to you. Correct solutions are rewarded with a bonus for the exam which accounts to max. ten percent of the exam
 (corresponds to six points), if all solutions submitted are correct. **Please note:** You have to pass the exam **without the bonus points!**
@@ -86,9 +86,9 @@ Your homework is going to be corrected and given back to you. Correct solutions 
 Unsurprisingly, the solutions have to be your own work. **If you plagiarize, you will lose all bonus points!**
 
 **Further remarks:**
-1. Code assignments have to be done in Python. Please submit a *.py* file (no jupyter notebooks, since it does not allow debugging)
-2. The following packages are allowed: *numpy*, *pandas* (please ask beforehand, if you want to use a specific package not mentioned here)
-3. Do not use already implemented models (e.g. from *scikit-learn*)
+* Code assignments have to be done in Python. Please submit a *.py* file (no jupyter notebooks, since it does not allow debugging)
+* The following packages are allowed: *numpy*, *pandas* (please ask beforehand, if you want to use a specific package not mentioned here)
+* Do not use already implemented models (e.g. from *scikit-learn*)
 
 ## Exam <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/exam.png" width="30px" height="25px">
 The exam will take 60 minutes. The maximum attainable score will be 60 points, so you have one minute per point.
@@ -96,20 +96,21 @@ The exam will take 60 minutes. The maximum attainable score will be 60 points, s
 The exam questions will be given in English, but you may answer them in either English or German (you are also allowed to mix the languages).
 Please do not translate domain specific technical terms in order to avoid confusion. Please answer all questions on the task sheets.
 
-**Exam preparation**
-1. You will not be asked for any derivations, rather we want to test whether you understand the general concepts.
-2. The exam will contain multiple choice questions, short answer questions and calculations.
-3. Make sure you can answer the self-test questions provided for each topic.
-4. Some of the slides give you important hints (upper left corner):
-	* <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/scream.png" width="25px" height="25px">
-		A slide marked with this symbol provides in-depth information which you do not have to know by heart (think of it as additional material for the sake of completeness).
-	* <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/important.png" width="25px" height="25px">
-		This symbol indicates very important content. Make sure you understand it!
-5. Work through the [list of the 150+ terms](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/04_exam/terms_you_have_to_know.pdf) which you should be able to explain.
+**Exam preparation:**
+* You will not be asked for any derivations, rather we want to test whether you understand the general concepts.
+* The exam will contain multiple choice questions, short answer questions and calculations.
+* Make sure you can answer the self-test questions provided for each topic.
+* Some of the slides give you important hints (upper left corner):
+	*  A slide marked with symbol (1) provides in-depth information which you do not have to know by heart (think of it as additional material for the sake of completeness).
+	*  Symbol (2) indicates very important content. Make sure you understand it!
+* Work through the [list of 150+ terms](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/04_exam/terms_you_have_to_know.pdf) which you should be able to explain.
 
-**Auxiliary material for the exam**
-1. Non-programmable pocket calculator
-2. Two-sided **hand-written** cheat sheet (you may note whatever you want)
+Symbol (1) <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/scream.png" width="25px" height="25px">
+Symbol (2) <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/important.png" width="25px" height="25px">
+
+**Auxiliary material for the exam:**
+* Non-programmable pocket calculator
+* Two-sided **hand-written** cheat sheet (you may note whatever you want)
 
 ## Python code <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/python.png" width="30px" height="30px">
 Please find Python implementations of some of the algorithms (which are not part of the assignments) in the folder
