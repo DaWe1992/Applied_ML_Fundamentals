@@ -67,6 +67,8 @@ We are going to cover the following topics:
 9. **Lecture summary**
 10. **Bonus material**
 	* Probabilistic graphical models ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/15_pgm.pdf))
+	
+A list of abbreviations and symbols can be found [here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/symbols.pdf).
 
 ## Assignments <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/assignments.png" width="25px" height="25px">
 The assignments are voluntary. All students who choose to participate have to form groups comprising three to four students (not more and not less).
