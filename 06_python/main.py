@@ -255,7 +255,7 @@ if __name__ == "__main__":
     Main function.
     """
 #    classification()
-#    regression()
+    regression()
 #    unsupervised_learning()
-    reinforcement_learning()
+#    reinforcement_learning()
     

@@ -87,7 +87,7 @@ Make sure you understand it!
 
 ## Python code <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/python.png" width="30px" height="30px">
 You can find additional implementations for some of the algorithms (which are not part of the assignments) in the folder
-[python](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/04_python).
+[python](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/06_python).
 Play around with the hyper-parameters of the algorithms and try different data sets in order to get a better feeling for how the algorithms work.
 
 ## Literature <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/literature.png" width="25px" height="25px">

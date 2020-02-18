@@ -1,0 +1,203 @@
+\documentclass[12pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{fancyhdr}
+\usepackage{fullpage}
+
+\usepackage{bm}
+\usepackage{eulervm}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{bbold}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+\rhead{Page \thepage}
+\lhead{Symbols and abbreviations}
+\rfoot{}
+\lfoot{}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5\baselineskip}
+\addtolength{\topskip}{1.5cm}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+% begin of document
+\begin{document}
+
+% symbols
+\subsection*{Symbols}
+
+In general, scalars are printed as normal letters, e.\,g. $p, q$; vectors are bolded, e.\,g. $\bm{\theta}$; and matrices are denoted by bold upper-case letters, e.\,g. $\bm{\Phi}$. 
+
+\begin{tabbing}
+	\hspace*{2mm}\=\hspace*{4.15cm}\=\kill
+	\textbf{Latin letters} 																					\\[3mm]
+	\> $a$										\>	action (RL)											\\[3mm]
+	\> $\bm{A}$									\>	adjacency matrix										\\[3mm]
+	\> $\mathcal{A}$								\>	action space (RL)										\\[3mm]
+	\> $C$										\>	inverse regularization parameter (SVMs), cluster				\\[3mm]
+	\> $\mathcal{C}$								\>	set of classes										\\[3mm]
+	\> $\mathcal{C}_k$								\>	$k$-th class										\\[3mm]
+	\> D											\>	number of dimensions									\\[3mm]
+	\> $\bm{D}$									\>	degree matrix										\\[3mm]
+	\> $\mathcal{D}$								\>	data set, $\{ \bm{x}^{(i)}, y^{(i)} \}_{i=1}^n$				\\[3mm]
+	\> $\mathcal{D}_j$								\>	$j$-th partition of data set $\mathcal{D}$					\\[3mm]
+	\> $\mathcal{E}$								\>	set of edges of a graph								\\[3mm]
+	\> $\mathcal{F}$								\>	feature space										\\[3mm]
+	\> $\mathcal{G}$								\>	graph, goal state (RL)									\\[3mm]
+	\> $h$ / $h_{\bm{\theta}}$						\>	hypothesis / model									\\[3mm]
+	\> $H$										\>	kernel function for kernel density estimation					\\[3mm]
+	\> $\bm{H}$									\>	Hessian matrix (matrix of second derivatives)					\\[3mm]
+	\> $\mathcal{H}$								\>	hypothesis space										\\[3mm]
+	\> $i$										\>	index over the data examples							\\[3mm]
+	\> $\bm{I}$									\>	identity matrix										\\[3mm]
+	\> $j$										\>	index over the features								\\[3mm]
+	\> $\mathcal{J}$								\>	loss function / error function								\\[3mm]
+	\> $k$										\>	index over classes, number of clusters / neighbors / base classifiers	\\[3mm]
+	\> $\bm{K}$									\>	kernel matrix										\\[3mm]
+	\> $\mathcal{K}$								\>	kernel function										\\[3mm]
+	\> $\ell$										\>	loss												\\[3mm]
+	\> $\bm{L}$									\>	graph Laplacian matrix									\\[3mm]
+	\> $\mathcal{L}$								\>	likelihood, lagrangian, loss								\\[3mm]
+	\> $\mathcal{LL}$								\>	log-likelihood										\\[3mm]
+	\> $m$										\>	number of features ($j = 1, \dots, m$)						\\[3mm]
+	\> $M$										\>	number of mixture components							\\[3mm]
+	\> $\mathcal{M}$								\>	margin											\\[3mm]
+	\> $n$										\>	number of examples ($i = 1, \dots, n$)						\\[3mm]
+	\> $N$										\>	node in a tree										\\[3mm]
+	\> $p$										\>	degree of a polynomial									\\[3mm]
+	\> $Q$										\>	true q value (RL)										\\[3mm]
+	\> $\widehat{Q}$								\>	approximate q value (RL)								\\[3mm]
+	\> $r$										\>	cost ratio, $c_{fp} / c_{fn}$, reward (RL)					\\[3mm]
+	\> $\mathcal{R}$								\>	region											\\[3mm]
+	\> $s$										\>	state (RL)											\\[3mm]
+	\> $s_0$										\>	initial state (RL)										\\[3mm]
+	\> $s'$										\>	next state (RL)										\\[3mm]
+	\> $\mathcal{S}$								\>	state space (RL)										\\[3mm]
+	\> $T$										\>	sequence length										\\[3mm]
+	\> $v$										\>	bin volume											\\[3mm]
+	\> $\bm{v}$									\>	vector											\\[3mm]
+	\> $V^{\pi}$									\>	value function when using policy $\pi$ (RL)					\\[3mm]
+	\> $\mathcal{V}$								\>	vocabulary, set of vertices (nodes) of a graph					\\[3mm]
+	\> $w$										\>	window size										\\[3mm]
+	\> $\bm{x}$									\> 	data instance										\\[3mm]
+	\> $\bm{x}^{(i)}$								\>	$i$-th data instance									\\[3mm]
+	\> $x_j$										\>	$j$-th feature of $\bm{x}$								\\[3mm]
+	\> $x_j^{(i)}$									\>	$j$-th feature of the $i$-th data instance					\\[3mm]
+	\> $\bm{x}_{\perp}$								\>	orthogonal projection of $\bm{x}$							\\[3mm]
+	\> $\widehat{\bm{x}}$							\>	data instance with attached 1 entry, $[1 \bm{x}]$				\\[3mm]
+	\> $\bm{X}$									\>	design matrix / feature matrix / regressor matrix				\\[3mm]
+	\> $\mathcal{X}$								\> 	data input space										\\[3mm]
+	\> $y$										\>	label												\\[3mm]
+	\> $\bm{y}$									\>	label vector											\\[3mm]
+	\> $z$										\>	center of radial basis function, activation						\\[10mm]
+	
+	\textbf{Greek letters} 																					\\[3mm]
+	\> $\alpha$ 									\>	learning rate, responsibility (mixture models), model weight		\\[3mm]
+	\> $\beta$										\>	precision $\equiv \sigma^{-1}$							\\[3mm]
+	\> $\gamma$									\>	variance threshold (PCA), discount factor (RL)					\\[3mm]
+	\> $\delta$									\>	error gradient (neural networks), state transition function (RL)		\\[3mm]
+	\> $\varepsilon$									\>	noise, error rate										\\[3mm]
+	\> $\Theta$, $\theta$								\>	trainable parameters of the model							\\[3mm]
+	\> $\kappa$									\>	number of classes ($k = 1, \dots, \kappa$)					\\[3mm]
+	\> $\lambda$									\>	regularization parameter, eigenvalue, lagrange multiplier			\\[3mm]
+	\> $\mu$										\>	mean of a distribution									\\[3mm]
+	\> $\xi$										\>	slack variable (SVMs)									\\[3mm]
+	\> $\pi$										\>	prior (mixture models), policy (RL)							\\[3mm]
+	\> $\pi^*$										\>	optimal policy (RL)									\\[3mm]
+	\> $\sigma$									\>	sigmoid, standard deviation								\\[3mm]
+	\> $\sigma^2$									\>	variance											\\[3mm]
+	\> $\bm{\Sigma}$								\>	covariance matrix										\\[3mm]
+	\> $\tau$										\>	trajectory (RL)										\\[3mm]
+	\> $\varphi(\bm{x})$								\>	basis function of $\bm{x}$								\\[3mm]
+	\> $\Phi$										\>	design matrix with basis functions							\\[10mm]
+	
+	\textbf{Mathematical symbols} ($\bullet$ is a placeholder)															\\[3mm]
+	\> $\mathbb{1}\{ \dots \}$							\>	indicator function										\\[3mm]
+	\> $\argmax_x f(x)$								\>	value of $x$ which maximizes $f(x)$						\\[3mm]
+	\> $\argmin_x f(x)$								\>	value of $x$ which minimizes $f(x)$						\\[3mm]
+	\> $Bern(x \vert \mu)$							\>	bernoulli distribution, $\mu^x (1 - \mu)^{1 - x}$				\\[3mm]
+	\> $Bin(m \vert n, \mu)$							\>	binomial distribution, $\binom{n}{m}\mu^m (1 - m)^{n - m}$		\\[3mm]
+	\> $c(\mathcal{C}_i \vert \mathcal{C}_j)$				\>	cost for predicting class $\mathcal{C}_i$ instead of $\mathcal{C}_j$	\\[3mm]
+	\> $\mathcal{C}_{MAP}$							\>	maximum aposteriori class								\\[3mm]
+	\> $d(\dots)$									\>	distance metric										\\[3mm]
+	\> $\text{dom}(f)$								\>	domain of function $f$									\\[3mm]
+	\> $E(\mathcal{D})$								\>	entropy of a data set, $-\sum_{c \in \mathcal{C}} p_c \log_2 p_c$	\\[3mm]
+	\> $\exp\{ \dots \}$								\>	exponential function									\\[3mm]
+	\> $\mathbb{E}\{ x \}$							\>	expectation of a random variable $x$						\\[3mm]
+	\> $\mathbb{E}_{x \sim p(x)}\{ f(x) \}$				\>	expectation of $f(x)$ where $x$ is drawn from distribution $p(x)$	\\[3mm]
+	\> $g(x)$										\>	activation function, sigmoid								\\[3mm]
+	\> $KL(p \Vert q)$								\>	Kullback-Leibler divergence between $p$ and $q$				\\[3mm]
+	\> $\max_x f(x)$								\>	maximum value of $f(x)$								\\[3mm]
+	\> $\min_x f(x)$									\>	minimum value of $f(x)$								\\[3mm]
+	\> $\mathcal{N}(x \vert \mu, \sigma)$					\>	normal (Gaussian) distribution							\\[3mm]
+	\> $\mathcal{N}(\bm{x} \vert \bm{\mu}, \bm{\Sigma})$		\>	multivariate normal (Gaussian) distribution					\\[3mm]
+	\> $\widehat{p}(x)$								\>	approximate probability of $x$							\\[3mm]
+	\> $p(x)$										\>	probability of $x$, marginal probability						\\[3mm]
+	\> $p(x, y)$									\>	probability of $x$ and $y$, joint probability					\\[3mm]
+	\> $p(x \vert y)$								\>	probability of $x$ given $y$								\\[3mm]
+	\> $R(\alpha_i \vert \bm{x})$						\>	risk of a decision $\alpha_i$ given $\bm{x}$					\\[3mm]
+	\> $\mathbb{R}$								\>	set of real numbers									\\[3mm]
+	\> $\mathbb{R}^+$								\>	set of positive real numbers (including 0)						\\[3mm]
+	\> $ReLU(x)$									\>	ReLU activation function								\\[3mm]
+	\> $\tanh(x)$									\>	tangent hyperbolic activation function						\\[3mm]
+	\> var\{ x \}									\>	variance of a random variable $x$							\\[3mm]
+	\> $x \sim p(x)$									\>	$x$ is distributed according to probability distribution $p(x)$		\\[3mm]
+	\> $\bullet^{\intercal}$							\>	transpose of $\bullet$									\\[3mm]
+	\> $\bullet^{-1}$								\>	inverse of $\bullet$ (of a matrix for example)					\\[3mm]
+	\> $\bullet^{\#}$								\>	pseudo-inverse of $\bullet$								\\[3mm]
+	\> $\bm{a}^{\intercal}\bm{b}$						\>	dot product of $\bm{a}$ and $\bm{b}$						\\[3mm]
+	\> $\langle \bullet, \bullet \rangle$					\>	dot product										\\[3mm]
+	\> $\bm{a}\bm{b}^{\intercal}$						\>	outer product										\\[3mm]
+	\> $\vert \bullet \vert$							\>	number of elements in the set $\bullet$						\\[3mm]
+	\> $\Vert \bullet \Vert$							\>	vector norm										\\[3mm]
+	\> $\measuredangle$								\>	angle												\\[3mm]
+	\> $\binom{n}{k}$								\>	binomial coefficient, $n$ choose $k$						\\[3mm]
+	\> $\nabla_{\bm{\theta}}$							\>	gradient with respect to $\bm{\theta}$ / nabla operator			\\[3mm]	
+	\> $\partial$									\>	partial derivative										\\[3mm]
+	\> $\sum_{i=1}^n \dots$							\>	sum												\\[3mm]
+	\> $\prod_{i=1}^n \dots$							\>	product											\\[3mm]
+	\> $\oplus$									\>	positive class										\\[3mm]
+	\> $\ominus$									\>	negative class										\\[3mm]
+	\> $\overline{x}$								\>	sample set mean of $x$								\\[3mm]
+	\> $\star$										\>	convolution operator
+\end{tabbing}
+
+% abbreviations
+\subsection*{Abbreviations}
+
+\begin{tabbing}
+	\hspace*{2mm}\=\hspace*{4.15cm}\=\kill
+	\> AUC										\>	area-under-the-curve									\\[3mm]
+	\> CNN										\>	convolutional neural network								\\[3mm]
+	\> $fp$										\>	false positives										\\[3mm]
+	\> $fn$										\>	false negatives										\\[3mm]
+	\> GRU										\>	gated recurrent unit									\\[3mm]
+	\> i.\,i.\,d.										\>	independent and identically distributed						\\[3mm]
+	\> Lasso										\>	least absolute shrinkage and selection operator				\\[3mm]
+	\> LSTM										\>	long short-term memory								\\[3mm]
+	\> MAE										\>	mean absolute error									\\[3mm]
+	\> MDP										\>	Markov decision process								\\[3mm]
+	\> MLE										\>	maximum Likelihood Estimation							\\[3mm]
+	\> MLP										\>	multi-layer perceptron									\\[3mm]
+	\> MNIST										\>													\\[3mm]
+	\> OCR										\>	optical character recognition								\\[3mm]
+	\> PSD										\>	positive semi-definite									\\[3mm]
+	\> ROC										\>	receiver operating characteristic							\\[3mm]
+	\> RMSE										\>	root mean square error									\\[3mm]
+	\> RNN										\>	recurrent neural network								\\[3mm]
+	\> s.\,t.										\>	subject to											\\[3mm]
+	\> SVM										\>	support vector machine								\\[3mm]
+	\> $tp$										\>	true positives										\\[3mm]
+	\> $tn$										\>	true negatives										\\[3mm]
+	\> X-Val										\>	cross validation
+\end{tabbing}
+
+\end{document}
