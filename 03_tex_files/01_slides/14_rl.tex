@@ -48,6 +48,38 @@
 \section{Introduction}
 \makedivider{Introduction}
 
+% Subsection: Psychological Motivation
+% --------------------------------------------------------------------------------------------------------
+\subsection{Psychological Motivation}
+
+% Psychological Motivation
+\begin{frame}{Psychological Motivation}{}
+	\divideTwo{0.69}{
+		\begin{itemize}
+			\item B. F. Skinner (1904 -- 1990)
+			\item \highlight{Operant conditioning} (behaviorism)
+			\begin{itemize}
+				\item Associative learning
+				\item Strength of a behavior is modified by reinforcement or punishment
+				\item Operant behavior is \textbf{voluntary}
+			\end{itemize}
+			\item The image on the right depicts the `Skinner box'
+		\end{itemize}
+	}{0.29}{
+		\begin{figure}
+			\centering
+			\includegraphics[scale=0.35]{14_rl/02_img/skinner_box}
+		\end{figure}
+	}
+\end{frame}
+
+
+% Psychological Motivation (Ctd.)
+\begin{frame}{Psychological Motivation (Ctd.)}{}
+	\input{14_rl/03_tbl/operant_conditioning}
+\end{frame}
+
+
 % Subsection: What is Reinforcement Learning?
 % --------------------------------------------------------------------------------------------------------
 \subsection{What is Reinforcement Learning?}
@@ -449,20 +481,30 @@
 	\begin{algorithm}[H]
 		\footnotesize
 		\DontPrintSemicolon
+		\KwIn{environment $\mathcal{E} = (\mathcal{S}, \mathcal{A})$}
+		\KwOut{optimal policy $\pi$}
+		\vspace*{1mm}
  		Initialize $V(s) \in \mathbb{R}$ arbitrarily for all $s \in \mathcal{S}$\;
  		\While{$\Delta > \varepsilon$}{
  			$\Delta \longleftarrow 0$\;
  			\ForEach{$s \in \mathcal{S}$}{
  				$v \longleftarrow V(s)$\;
-				$V(s) \longleftarrow r + \gamma V(s') $\;
+				$V(s) \longleftarrow \max_a \sum_{s', r} p(s', r \vert s, a)[r + \gamma V(s')]$\;
 				$\Delta \longleftarrow \max(\Delta, \vert v - V(s) \vert)$\;
  			}
  		}
-
-		Output a deterministic policy $\pi \approx \pi^*$, such that:
-			$\pi(s) = \argmax_a[r + \gamma V(s')]$\;
- 		\caption{Value Iteration (deterministic case)}
+		\textbf{return} $\pi$ such that $\pi(s) = \argmax_a \sum_{s', r} p(s', r \vert s, a)[r + \gamma V(s')]$\;
+ 		\caption{Value Iteration}
 	\end{algorithm}
+\end{frame}
+
+
+% Backup Diagram for Value Iteration
+\begin{frame}{Backup Diagram for Value Iteration}{}
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.45]{14_rl/02_img/backup_diagram_value_iteration}
+	\end{figure}
 \end{frame}
 
 
@@ -478,53 +520,126 @@
 			\item \highlight{Policy evaluation}: Find the value function of the current policy
 			\item \highlight{Policy improvement}: Find a better policy based on the current one
 		\end{itemize}
-		\item \textbf{Policy improvement theorem:}
-		\begin{boxBlueNoFrame}
-			\footnotesize
-			If it is true that selecting the first action in each state according to a policy $\pi'$ and continuing
-			with policy $\pi$ is better than always following $\pi$, then $\pi'$ is a better policy than $\pi$. $\Rightarrow
-			\pi^0(s) \longrightarrow V^{\pi^0}(s) \longrightarrow \pi^1(s) \longrightarrow V^{\pi^1}(s)
-			\longrightarrow \dots \longrightarrow \pi^*(s)$
-		\end{boxBlueNoFrame}
 		\item Select the action that maximizes the value function of the current policy:
-		$\pi'(s) = \argmax_{a \in \mathcal{A}} r(s, a) + \gamma V^{\pi}(\delta(s, a))$
+		\begin{equation}
+			\pi'(s) = \argmax_{a \in \mathcal{A}} r(s, a) + \gamma V^{\pi}(\delta(s, a))
+		\end{equation}
+		\item This leads to a sequence of improving policies:
+		\begin{equation*}
+			\pi^0(s) \longrightarrow V^{\pi^0}(s) \longrightarrow \pi^1(s) \longrightarrow V^{\pi^1}(s)
+			\longrightarrow \dots \longrightarrow \pi^*(s)
+		\end{equation*}
 	\end{itemize}
 \end{frame}
 
 
+% Policy Iteration (Ctd.)
+\begin{frame}{Policy Iteration (Ctd.)}{}
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.4]{14_rl/02_img/policy_iteration}
+	\end{figure}
+\end{frame}
+
+
+% Policy Improvement Theorem
+\begin{frame}{Policy Improvement Theorem}{}
+	\begin{boxBlue}
+		\highlight{Policy improvement theorem:} \\[2mm]
+		\footnotesize
+		\highlight{If it is true that selecting the first action in each state according to a policy $\pi'$ and continuing
+		with policy $\pi$ is better than always following $\pi$, then $\pi'$ is a better policy than $\pi$.}
+	\end{boxBlue}
+\end{frame}
+
+
 % Policy Iteration Algorithm
-\begin{frame}[plain]{}{}
+\begin{frame}{Policy Iteration Algorithm}{}
 	\begin{algorithm}[H]
 		\footnotesize
 		\DontPrintSemicolon
+		\KwIn{environment $\mathcal{E} = (\mathcal{S}, \mathcal{A})$}
+		\KwOut{optimal policy $\pi$}
+		\vspace*{1mm}
  		Initialize $V(s) \in \mathbb{R}$ and $\pi(s) \in \mathcal{A}$ arbitrarily for all $s \in \mathcal{S}$\;
- 		\While(\tcp*[h]{Step \ding{182}: Policy evaluation}){$\Delta > \varepsilon$}{
- 			$\Delta \longleftarrow 0$\;
- 			\ForEach{$s \in \mathcal{S}$}{
- 				$v \longleftarrow V(s)$\;
-				$V(s) \longleftarrow r + \gamma V(s') $\;
-				$\Delta \longleftarrow \max(\Delta, \vert v - V(s) \vert)$\;
- 			}
- 		}
 
-		policy\_stable $\longleftarrow$ true \tcp*[h]{Step \ding{183}: Policy improvement}\;
-		\ForEach{$s \in \mathcal{S}$}{
-			old\_action $\longleftarrow \pi(s)$\;
-			$\pi(s) \longleftarrow \argmax_{a}[r + \gamma V(s')]$\;
-			\If{old\_action $\ne \pi(s)$}{
-				policy\_stable $\longleftarrow$ false\;
-			}
+		$policy\_stable \longleftarrow false$\;
+		\While{$not policy\_stable$}{
+			$V_{new} \longleftarrow PolicyEvaluation(\pi, V, \varepsilon=0.001)$\;
+			$\pi, policy\_stable \longleftarrow PolicyImprovement(V_{new})$\;
+			$V \longleftarrow V_{new}$
 		}
-		\If{policy\_stable}{
-			\textbf{return} $V \approx v^*$ and $\pi \approx \pi^*$, go to line 2 otherwise
-		}
+
+		\textbf{return} $\pi$\;
  		\caption{Policy Iteration (deterministic case)}
 	\end{algorithm}
 \end{frame}
 
 
-% Policy Iteration Example: Grid World
-\begin{frame}{Policy Iteration Example: Grid World}{}
+% Policy Evaluation and Policy Improvement
+\begin{frame}{Policy Evaluation and Policy Improvement}{}
+	\begin{algorithm}[H]
+		\footnotesize
+		\DontPrintSemicolon
+		\KwIn{current policy $\pi$, current value function $V$, threshold $\varepsilon$}
+		\KwOut{updated value function $V$}
+		\vspace*{1mm}
+		\While{$\Delta > \varepsilon$}{
+ 				$\Delta \longleftarrow 0$\;
+ 				\ForEach{$s \in \mathcal{S}$}{
+ 					$v \longleftarrow V(s)$\;
+				$V(s) \longleftarrow \sum_{s', r} p(s', r \vert s, \pi(s))[r + \gamma V^{\pi}(s')]$\;
+				$\Delta \longleftarrow \max(\Delta, \vert v - V(s) \vert)$\;
+ 				}
+ 			}
+		\textbf{return} $V$
+ 			\caption{Policy Evaluation}
+	\end{algorithm}
+\end{frame}
+
+
+% Policy Evaluation and Policy Improvement
+\begin{frame}{Policy Evaluation and Policy Improvement}{}
+	\begin{algorithm}[H]
+		\footnotesize
+		\DontPrintSemicolon
+		\KwIn{updated value function $V$}
+		\KwOut{updated policy $\pi$, boolean flag $policy\_stable$}
+		\vspace*{1mm}
+		$policy\_stable \longleftarrow true$\;
+		\ForEach{$s \in \mathcal{S}$}{
+			$old\_action \longleftarrow \pi(s)$\;
+			$\pi(s) \longleftarrow \argmax_{a}\sum_{s', r} p(s', r \vert s, a)[r + \gamma V^{\pi}(s')]$\;
+			\If{$old\_action \ne \pi(s)$}{
+				$policy\_stable \longleftarrow false$\;
+			}
+		}
+		\textbf{return} $\pi, policy\_stable$
+ 			\caption{Policy Improvement}
+	\end{algorithm}
+\end{frame}
+
+
+% Backup Diagram for Policy Iteration
+\begin{frame}{Backup Diagram for Policy Iteration}{}
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.375]{14_rl/02_img/backup_diagram_policy_iteration}
+	\end{figure}
+\end{frame}
+
+
+% Policy Iteration Example: Grid World I
+\begin{frame}[plain]{Policy Iteration Example: Grid World I}{}
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.275]{14_rl/02_img/policy_iteration_gridworld}
+	\end{figure}
+\end{frame}
+
+
+% Policy Iteration Example: Grid World II
+\begin{frame}{Policy Iteration Example: Grid World II}{}
 	\begin{figure}
 		\centering
 		\includegraphics[scale=0.275]{14_rl/02_img/optimal_policy_pi}
@@ -581,7 +696,7 @@
 		\begin{equation}
 			V^{\pi^*}(s) = \max_{a' \in \mathcal{A}} Q(s, a')
 		\end{equation}
-		\item Therefore, $Q(s, a)$ can be expressed in terms of itself \highlight{(Bellman equation)}:
+		\item Therefore, $Q(s, a)$ can be expressed in terms of itself: \highlight{Bellman equation}
 	\end{itemize}
 	
 	\begin{boxBlueNoFrame}
@@ -597,13 +712,9 @@
 	\divideTwo{0.60}{
 		\begin{itemize}
 			\item $\widehat{Q}$ denotes the agent's current estimate of the true $Q$-value (which is unknown)
-			\item The $Q$-function is represented by a table
-			\begin{itemize}
-				\item One entry per state-action pair
-				\item The entry for pair $\langle s, a \rangle$ stores $\widehat{Q}(s, a)$
-				\item Initially, the table is filled with random numbers or zeroes
-			\end{itemize}
-			\item \textbf{Problem}: The table may become large, if there are many states and actions
+			\item The $Q$-function is represented by a table (one entry per state-action pair)
+			\item Initially, the table is filled with random numbers or zeroes
+			\item \Highlight{The table may become large, if there are many states and actions}
 		\end{itemize}
 	}{0.39}{
 		\vspace*{2mm}
@@ -671,7 +782,7 @@
 			from the new state $s'$ to the old state $s$
 		\item The immediate reward is used to \textbf{augment} the propagated values of $\widehat{Q}$
 		\item Since there is an absorbing goal state $\bm{\mathcal{G}}$, there will be a series of episodes
-		\item \textbf{One episode}:
+		\item \textbf{One episode:}
 		\begin{enumerate}
 			\item Initialize the agent at a random state
 			\item The episode ends as soon as the goal state $\bm{\mathcal{G}}$ is reached
@@ -695,13 +806,27 @@
 \begin{frame}{SARSA: State-Action-Reward-State-Action}{}
 	\begin{itemize}
 		\item SARSA is very similar to $Q$-learning
-		\item Stands for `\highlight{S}tate-\highlight{A}ction-\highlight{R}eward-\highlight{S}tate-\highlight{A}ction'
+		\item The abbreviation stands for `\highlight{S}tate-\highlight{A}ction-\highlight{R}eward-\highlight{S}tate-\highlight{A}ction'
 		\item It refrains from calculating the `$\max$' in the formula
-		\item Instead it uses the current policy ($\Rightarrow$ \highlight{on-policy update})
+		\item Instead it uses the current policy (\highlight{on-policy update})
+	\end{itemize}
+	
+	\vspace*{2mm}
+	\begin{boxBlueNoFrame}
 		\begin{equation}
 			\widehat{Q}(s, a) \longleftarrow r(s, a) + \gamma \widehat{Q}(\underbracket{\delta(s, a)}_{=s'}, \pi(s'))
 		\end{equation}
-	\end{itemize}
+	\end{boxBlueNoFrame}
+\end{frame}
+
+
+% Backup Diagrams for $Q$-Learning and SARSA
+\begin{frame}{Backup Diagrams for $Q$-Learning and SARSA}{}
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.35]{14_rl/02_img/backup_diagram_q_learning_sarsa}
+		\caption{Backup diagrams of $Q$-learning (left) and SARSA (right)}
+	\end{figure}
 \end{frame}
 
 
@@ -719,19 +844,32 @@
 	\begin{itemize}
 		\item By always picking the best action the agent runs the risk of overcommitting to actions that were found
 			during early training
-		\item \highlight{It fails to explore other actions that might be even better}
-		\item \textbf{EXPLOITATION} $\bm{\Leftrightarrow}$ \textbf{EXPLORATION}
-		\item Exploitation:
-		\begin{itemize}
-			\item Use the action the agent assumes to be the best one
-			\item Approximate the optimal policy
-		\end{itemize}
-		\item Exploration:
-		\begin{itemize}
-			\item `Optimal action' may be wrong due to approximation errors
-			\item Try a suboptimal one
-		\end{itemize}
+		\item \Highlight{It fails to explore other actions that might be even better}
 	\end{itemize}
+
+	\vspace*{2mm}
+	\divideTwo{0.49}{
+		\begin{itemize}
+			\item \textbf{Exploitation:}
+			\begin{itemize}
+				\item Use the action the agent assumes to be the best one
+				\item Approximate the optimal policy
+			\end{itemize}
+		\end{itemize}
+	}{0.49}{
+		\begin{itemize}
+			\item \textbf{Exploration:}
+			\begin{itemize}
+				\item `Optimal action' may be wrong due to approximation errors
+				\item Try a sub-optimal one
+			\end{itemize}
+		\end{itemize}
+	}
+	
+	\vspace*{2mm}
+	\begin{boxBlueNoFrame}
+		\highlight{There is an exploitation $\bm{\Leftrightarrow}$ exploration trade-off!}
+	\end{boxBlueNoFrame}
 \end{frame}
 
 
@@ -767,14 +905,14 @@
 		\item So far we have only considered the deterministic case
 		\item \textbf{What if the environment is non-deterministic?}
 		\begin{itemize}
-			\item E.\,g. in Backgammon each move involves a roll of the dice $\Rightarrow \delta(s, a)$ varies
+			\item E.\,g. in Backgammon, each move involves a roll of the dice $\Rightarrow \delta(s, a)$ varies
 			\item Also, the rewards may change $\Rightarrow r(s, a)$ varies
 		\end{itemize}
 	\end{itemize}
 
 	\begin{figure}
 		\centering
-		\includegraphics[scale=0.3]{14_rl/02_img/backgammon}
+		\includegraphics[scale=0.2]{14_rl/02_img/backgammon}
 	\end{figure}
 \end{frame}
 
@@ -843,8 +981,9 @@
 		\item $Q$-learning often requires many thousands of training iterations to converge
 	\end{itemize}
 	
+	\vspace*{2mm}
 	\begin{boxBlueNoFrame}
-		E.\,g. TD-Gammon trained for \highlight{\underline{1.5 million (!)}} Backgammon games.
+		E.\,g. TD-Gammon trained for \highlight{1.5 million (!)} Backgammon games.
 	\end{boxBlueNoFrame}
 \end{frame}
 
@@ -862,7 +1001,7 @@
 		\begin{align*}
 			\widehat{Q}_n(s, a) 	&\longleftarrow (1 - \alpha_n) \widehat{Q}_{n-1}(s, a) + \alpha_n[r(s, a) +
 				\gamma \max_{a'} \widehat{Q}_{n-1}(s', a')] \\
-								&\Updownarrow \text{\scriptsize \highlight{rewrite the equation}} \\
+							&\Updownarrow \text{\scriptsize \textbf{rewrite the equation}} \\
 			\widehat{Q}_n(s, a) 	&\longleftarrow \widehat{Q}_{n-1}(s, a) +
 				\alpha_n[
 					\underbracket{
@@ -1010,22 +1149,32 @@
 % Policy Gradient Theorem
 \begin{frame}{Policy Gradient Theorem}{}
 	\vspace*{-7mm}
-	\begin{align*}
+	\begin{alignat*}{2}
 		\nabla\mathbb{E}_{\pi_{\bm{\theta}}}
-			&= \nabla\int \pi(\tau) r(\tau) \diff\tau
-				\Leftrightarrow \int \nabla\pi(\tau) r(\tau) \diff\tau
-				\Leftrightarrow \int \pi(\tau) \nabla\log\pi(\tau) r(\tau) \diff\tau \\
-			&\Leftrightarrow \mathbb{E}_{\pi_{\bm{\theta}}} [r(\tau) \nabla\log\pi(\tau)] \\
-		\pi_{\bm{\theta}}(\tau)
-			&= p(s_0) \cdot \prod_{t=1}^T \pi_{\bm{\theta}}(a_t \vert s_t) \cdot p(s_{t+1}, r_{t+1} \vert s_t, a_t)
-	\end{align*}
+			&= \nabla\int \pi(\tau) r(\tau) \diff\tau						\\
+			&= \int \nabla\pi(\tau) r(\tau) \diff\tau						
+				&&\qquad\text{pull $\nabla$ inside} 					\\
+			&= \int \pi(\tau) \nabla\log\pi(\tau) r(\tau) \diff\tau 			
+				&&\qquad\text{use log trick: $\nabla_x \log(f(x)) = \frac{1}{f(x)}\nabla_x f(x)$}
+															\\
+			&= \mathbb{E}_{\pi_{\bm{\theta}}} [r(\tau) \nabla\log\pi(\tau)]
+	\end{alignat*}
+	\vspace*{-5mm}
+	\hrule
+	\vspace*{1mm}
+	\begin{equation*}
+		\pi_{\bm{\theta}}(\tau) = p(s_0) \cdot \prod_{t=1}^T \pi_{\bm{\theta}}(a_t \vert s_t) \cdot p(s_{t+1}, r_{t+1} \vert s_t, a_t)
+	\end{equation*}
+\end{frame}
 
-	\vspace*{-3mm}
-	\begin{boxBlueNoFrame}
+
+% Policy Gradient Theorem
+\begin{frame}{Policy Gradient Theorem}{}
+	\begin{boxBlue}
 		\highlight{Policy gradient theorem:} \\[2mm]
 		\footnotesize
 		\highlight{The derivative of the expected reward is the expectation of the product of the reward and gradient of the log of the policy $\pi_{\bm{\theta}}$.}
-	\end{boxBlueNoFrame}
+	\end{boxBlue}
 \end{frame}
 
 
@@ -1052,7 +1201,7 @@
 		\item Therefore, this is an instance of a \highlight{model-free} algorithm
 		\item There is still an expectation term in the equation, but we can sample a large number of trajectories and average \\
 			$\Rightarrow$ \highlight{Markov Chain Monte Carlo (MCMC)}
-		\item \Highlight{Problem:} Reward term $r(\tau)$ adds a lot of variance to the sampling process \\
+		\item \Highlight{Problem: Reward term $r(\tau)$ adds a lot of variance to the sampling process}
 			$\Rightarrow$ We can introduce a baseline
 		\item Algorithm \highlight{REINFORCE}
 	\end{itemize}
@@ -1124,9 +1273,8 @@
 
 
 % Final Example (Ctd.)
-\begin{frame}{Final Example (Ctd.)}{}
-	\highlight{Task a)} \\
-		Specify the reward function $r(s, a)$ for all state-action pairs.
+\begin{frame}{Final Example -- Task a)}{}
+	Specify the reward function $r(s, a)$ for all state-action pairs.
 	
 	\begin{table}
 		\centering
@@ -1141,9 +1289,8 @@
 
 
 % Final Example (Ctd.)
-\begin{frame}{Final Example (Ctd.)}{}
-	\highlight{Task b)} \\
-		Calculate the value function $V^{\pi}(s)$ for all states $s$ given policy $\pi$:
+\begin{frame}{Final Example -- Task b)}{}
+	Calculate the value function $V^{\pi}(s)$ for all states $s$ given policy $\pi$:
 
 	\begin{table}
 		\centering
@@ -1173,9 +1320,8 @@
 
 
 % Final Example (Ctd.)
-\begin{frame}{Final Example (Ctd.)}{}
-	\highlight{Task c)} \\
-		How would \textbf{policy improvement} change the policy $\pi$ from task b) for state \textbf{e}? \\[5mm]
+\begin{frame}{Final Example -- Task c)}{}
+	How would \textbf{policy improvement} change the policy $\pi$ from task b) for state \textbf{e}? \\[5mm]
 
 	Policy improvement: $\pi(s) = \argmax_{a \in \mathcal{A}} r(s, a) + \gamma V^{\pi}(\delta(s, a))$
 	
@@ -1191,9 +1337,8 @@
 
 
 % Final Example (Ctd.)
-\begin{frame}{Final Example (Ctd.)}{}
-	\highlight{Task d)} \\
-		Think of an optimal way to reach the goal state for each state $s$. Calculate $V^{\pi^*}(s)$. \\[5mm]
+\begin{frame}{Final Example -- Task d)}{}
+	Think of an optimal way to reach the goal state for each state $s$. Calculate $V^{\pi^*}(s)$. \\[5mm]
 	
 	Optimal routes: \\
 	$a \longrightarrow b \longrightarrow c \longrightarrow f$ \\
@@ -1211,9 +1356,8 @@
 
 
 % Final Example (Ctd.)
-\begin{frame}{Final Example (Ctd.)}{}
-	\highlight{Task e)} \\
-		Calculate the optimal $Q$-values for all possible state-action pairs. \\[5mm]
+\begin{frame}{Final Example -- Task e)}{}
+	Calculate the optimal $Q$-values for all possible state-action pairs. \\[5mm]
 	
 	\textbf{Hint:} Use the results from task d): $Q(s, a) = r(s, a) + \gamma V^{\pi^*}(s')$ \\[5mm]
 	
@@ -1290,16 +1434,16 @@
 \begin{frame}[allowframebreaks]{Recommended Literature and further Reading}{}
 	\footnotesize
 	\begin{thebibliography}{2}
-		\literature{book}{Mitchell.1997}{[1] Machine Learning}{Tom Mitchell. McGraw-Hill Science. 1997.}
+		\literature{book}{Mitchell.1997}{[1] Machine Learning}{T. Mitchell. McGraw-Hill Science. 1997.}
 			{$\rightarrow$ \href{
 				https://www.cs.ubbcluj.ro/~gabis/ml/ml-books/McGrawHill\%20-\%20Machine\%20Learning\%20-Tom\%20Mitchell.pdf
 			}{\linkstyle{Click here}}, cf. chapter 13}
-		\literature{online}{Valkov.2017}{[2] Solving an MDP with $Q$-Learning from scratch}{Venelin Valkov. 2017.}
+		\literature{online}{Valkov.2017}{[2] Solving an MDP with $Q$-Learning from scratch}{V. Valkov. 2017.}
 			{$\rightarrow$
 				\href{https://medium.com/@curiousily/solving-an-mdp-with-q-learning-from-scratch-deep-reinforcement-learning-for-hackers-part-1-45d1d360c120}{\linkstyle{Click here}}
 			}
 		\literature{book}{Geron.2017}{[3] Hands-On Machine Learning with Scikit-Learn \& TensorFlow}
-			{Aurélien Géron. O'Reilly. 2017.}
+			{A. Géron. O'Reilly. 2017.}
 			{$\rightarrow$ \href{
 				https://github.com/IsaacChanghau/DL-NLP-Readings/blob/master/Papers/Books/ML\%20DL\%20Coding/Python/Hands\%20on\%20Machine\%20Learning\%20with\%20Scikit\%20Learn\%20and\%20TensorFlow.pdf
 			}{\linkstyle{Click here}}, cf. chapter 16}
@@ -1341,6 +1485,10 @@
 				\href{https://towardsdatascience.com/getting-started-with-reinforcement-q-learning-77499b1766b6}
 				{\linkstyle{Click here}}
 			}
+		\literature{book}{Sutton.2014}{[9] Reinforcement Learning: An Introduction}{R. Sutton, A. Barto. MIT Press. 2014.}
+			{$\rightarrow$ \href{
+				http://incompleteideas.net/book/bookdraft2017nov5.pdf
+			}{\linkstyle{Click here}}}
 	\end{thebibliography}
 \end{frame}
 
