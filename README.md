@@ -141,6 +141,8 @@ You do not need to buy any books for the lecture, most resources are available o
 **YouTube resources:**
 * [Machine learning lecture by Andrew Ng, Stanford University](https://www.youtube.com/watch?v=UzxYlbK2c7E&list=PLA89DCFA6ADACE599)
 * [Support vector machines by Patrick Winston, MIT](https://www.youtube.com/watch?v=_PwhiWxHK8o)
+* [Linear Algebra by Gilbert Strang, MIT](https://www.youtube.com/watch?v=ZK3O402wf1c&list=PL49CF3715CB9EF31D&index=1)
+* [Matrix Methods in Data Analysis, Signal Processing, and Machine Learning by Gilbert Strang, MIT](https://www.youtube.com/watch?v=Cx5Z-OslNWE&list=PLUl4u3cNGP63oMNUHXqIUcrkS2PivhN3k)
 
 In general, we recommend the [Coursera machine learning course](https://de.coursera.org/learn/machine-learning#about) by Andrew Ng.
 You can get a nice certificate if you want (around $60):
