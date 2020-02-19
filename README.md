@@ -139,10 +139,14 @@ You do not need to buy any books for the lecture, most resources are available o
 | Probabilistic Graphical Models 				 | Koller et al. (2009)			| MIT Press                 | [click here](https://github.com/Zhenye-Na/machine-learning-uiuc/blob/master/docs/Probabilistic%20Graphical%20Models%20-%20Principles%20and%20Techniques.pdf)                              |
 
 **YouTube resources:**
-* [Machine learning lecture by Andrew Ng, Stanford University](https://www.youtube.com/watch?v=UzxYlbK2c7E&list=PLA89DCFA6ADACE599)
-* [Support vector machines by Patrick Winston, MIT](https://www.youtube.com/watch?v=_PwhiWxHK8o)
-* [Linear algebra by Gilbert Strang, MIT](https://www.youtube.com/watch?v=ZK3O402wf1c&list=PL49CF3715CB9EF31D&index=1)
-* [Matrix methods in data analysis, signal processing, and machine learning by Gilbert Strang, MIT](https://www.youtube.com/watch?v=Cx5Z-OslNWE&list=PLUl4u3cNGP63oMNUHXqIUcrkS2PivhN3k)
+* [Machine learning lecture](https://www.youtube.com/watch?v=UzxYlbK2c7E&list=PLA89DCFA6ADACE599) by Andrew Ng, Stanford University
+* [Support vector machines](https://www.youtube.com/watch?v=_PwhiWxHK8o) by Patrick Winston, MIT
+* [Linear algebra](https://www.youtube.com/watch?v=ZK3O402wf1c&list=PL49CF3715CB9EF31D&index=1) by Gilbert Strang, MIT
+* [Matrix methods in data analysis, signal processing, and machine learning](https://www.youtube.com/watch?v=Cx5Z-OslNWE&list=PLUl4u3cNGP63oMNUHXqIUcrkS2PivhN3k) by Gilbert Strang, MIT
+
+**Interesting papers:**
+* [Playing atari with deep reinforcement learning](https://arxiv.org/abs/1312.5602) (Mnih et al., 2013)
+* [Efficient estimation of word representations in vector space](https://arxiv.org/abs/1301.3781) (Mikolov et al., 2013)
 
 In general, we recommend the [Coursera machine learning course](https://de.coursera.org/learn/machine-learning#about) by Andrew Ng.
 You can get a nice certificate if you want (around $60):
