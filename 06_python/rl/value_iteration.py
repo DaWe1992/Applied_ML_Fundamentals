@@ -38,12 +38,12 @@ class ValueIteration():
         
         # calculate value function
         self.__calculate_state_values()
-        print("Value function:")
-        print(self.V, "\n")
+#        print("Value function:")
+#        print(self.V, "\n")
         
         # calculate optimal policy
-        print("Optimal policy:")
-        print(self.pi, "\n")
+#        print("Optimal policy:")
+#        print(self.pi, "\n")
         
         
     def get_pi(self):
@@ -78,6 +78,9 @@ class ValueIteration():
                     # try i-th action in state s
                     ns, r, _ = self.env.simulate_step(s, a)
                     q[i] = r + self.gamma * self.V[ns[0], ns[1]]
+#                    ns, r, p = self.env.get_successor_states(s, a, tp=0.80)
+#                    for j in range(len(ns)):
+#                        q[i] += p[j] * (r[j] + self.gamma * self.V[ns[j][0], ns[j][1]])
                     
                 # get the max
                 self.V[s[0], s[1]] = np.max(q)

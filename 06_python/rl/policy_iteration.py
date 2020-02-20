@@ -35,7 +35,7 @@ class PolicyIteration():
         self.thresh = thresh
         self.V = np.zeros((env.c["size"]["y"], env.c["size"]["x"]))
         self.pi = -np.ones((env.c["size"]["y"], env.c["size"]["x"])) \
-            * self.env.get_forbidden_state_mask()
+            * self.env.get_mask()
         
         # in the beginning the policy is defined to be unstable
         policy_stable = False
@@ -45,11 +45,11 @@ class PolicyIteration():
             policy_stable = self.__policy_improvement()
           
         # print results
-        print("Value function:")
-        print(self.V, "\n")
+#        print("Value function:")
+#        print(self.V, "\n")
         
-        print("Optimal policy:")
-        print(self.pi, "\n")
+#        print("Optimal policy:")
+#        print(self.pi, "\n")
             
             
     def get_pi(self):

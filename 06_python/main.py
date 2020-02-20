@@ -220,16 +220,19 @@ def reinforcement_learning():
     # environment description
     env_description = {
         "size": {
-            "x": 8,
-            "y": 4
+            "x": 16,
+            "y": 10
         },
-        "obs_pos": [[1, 1], [3, 1], [3, 7], [0, 5], [1, 5]],
+        "obs_pos": [[1, 1], [3, 1], [3, 7], [0, 5], [1, 5], [5, 11], [6, 11],
+                    [7, 11], [8, 11], [9, 11], [3, 11], [3, 12], [3, 13], [3, 14], [3, 15],
+                    [7, 2], [6, 6], [6, 7], [7, 6], [7, 7], [5, 12], [5, 14], [4, 14],
+                    [0, 8], [1, 9]],
         "r": {
             "r_p": 10,
             "r_n": -10,
             "r_o": -1,
-            "r_p_pos": [[3, 3], [0, 7]],
-            "r_n_pos": [[2, 3], [3, 6], [0, 2]]
+            "r_p_pos": [[3, 3], [0, 7], [9, 10]],
+            "r_n_pos": [[2, 3], [3, 6], [0, 2], [7, 3], [7, 0], [7, 1], [6, 8]]
         }
     }
     
@@ -238,12 +241,16 @@ def reinforcement_learning():
     # initialize value iteration
     # and calculate the optimal policy
     # -------------------------------------------------------------------------
-#    rl = ValueIteration(gamma=0.99, thresh=10e-5, env=env)
-    rl = PolicyIteration(gamma=0.99, thresh=10e-5, env=env)
+    rl = ValueIteration(gamma=0.99, thresh=10e-5, env=env)
+#    rl = PolicyIteration(gamma=0.99, thresh=10e-5, env=env)
 #    rl = QLearning(gamma=0.99, alpha=0.20, eps=1.00, n_episodes=5000, env=env)
-    # get optimal policy
+    
+    # get optimal policy and value function
     pi = rl.get_pi()
-    env.pretty_print_policy(pi)
+    V = rl.get_V()
+    
+    env.render()
+    env.pretty_print_policy(pi, V)
 
 
 # -----------------------------------------------------------------------------
@@ -255,7 +262,7 @@ if __name__ == "__main__":
     Main function.
     """
 #    classification()
-    regression()
+#    regression()
 #    unsupervised_learning()
-#    reinforcement_learning()
+    reinforcement_learning()
     

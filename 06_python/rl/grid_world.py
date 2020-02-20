@@ -60,6 +60,10 @@ class GridWorld:
         self.c = c
         self.__initialize_env()
         
+        self.cmap = plt.cm.RdYlGn
+        self.cmap.set_bad(color="black")
+        self.cmap.set_over(color="lightgray")
+        
         
     def reset(self):
         """
@@ -84,10 +88,11 @@ class GridWorld:
                 and [y, x] not in self.c["r"]["r_n_pos"]]
         
     
-    def get_forbidden_state_mask(self):
+    def get_mask(self, types=["obstacle", "end_p", "end_n"]):
         """
         Returns a mask of forbidden states.
         
+        :param types:           list of state types to include in the mask
         :return:                forbidden state mask
         """
         mask = np.zeros((self.c["size"]["y"], self.c["size"]["x"]))
@@ -95,21 +100,14 @@ class GridWorld:
         ys = range(mask.shape[1])
         xs = range(mask.shape[0])
         for (x, y) in list(itertools.product(ys, xs)):
-            if [y, x] in self.c["obs_pos"] \
-                or [y, x] in self.c["r"]["r_p_pos"] \
-                or [y, x] in self.c["r"]["r_n_pos"]:
-                mask[y, x] = 1
+            if "obstacle" in types:
+                if [y, x] in self.c["obs_pos"]: mask[y, x] = 1
+            if "end_p" in types:
+                if [y, x] in self.c["r"]["r_p_pos"]: mask[y, x] = 1
+            if "end_n" in types:
+                if [y, x] in self.c["r"]["r_n_pos"]: mask[y, x] = 1
         
         return mask
-    
-    
-    def get_allowed_state_mask(self):
-        """
-        Returns a mask of allowed states.
-        
-        :return:                allowed state mask
-        """
-        return 1 - self.get_forbidden_state_mask()
                     
         
     def get_n_states(self):
@@ -165,59 +163,142 @@ class GridWorld:
         return self.__step(state, action, simulate=True)
     
     
+    def get_successor_states(self, state, action, tp=0.80):
+        """
+        **** EXPERIMENTAL ****
+        Gets the possible successor states along with their
+        rewards and probabilities. Can be used to model a stochastic environment.
+        
+        :param state:           current state
+        :param action:          action to take in given state
+        :param tp:              probability of arriving in intended state
+        :return:                lists of next states, rewards, probabilities
+        """
+        s_ = []
+        r_ = []
+        p_ = [0, 0, 0, 0]
+
+        for i in range(self.get_n_actions()):
+            ns, r, _ = self.simulate_step(state, self.Actions(i))
+            s_.append(ns)
+            r_.append(r)
+            
+        if action == self.Actions(0):
+            p_[0] = tp; p_[2] = (1 - tp) / 2; p_[3] = (1 - tp) / 2
+        if action == self.Actions(1):
+            p_[1] = tp; p_[2] = (1 - tp) / 2; p_[3] = (1 - tp) / 2
+        if action == self.Actions(2):
+            p_[2] = tp; p_[0] = (1 - tp) / 2; p_[1] = (1 - tp) / 2
+        if action == self.Actions(3):
+            p_[3] = tp; p_[0] = (1 - tp) / 2; p_[1] = (1 - tp) / 2
+            
+        return s_, r_, p_
+    
+    
     def render(self):
         """
         Renders the environment with the agent's current state.
         """
         # plot environment
-        fig, ax = plt.subplots(figsize=(5.0, 5.0))
-        ax.matshow(self.r, cmap=plt.cm.RdYlGn)
+        fig, ax = plt.subplots(figsize=(self.c["size"]["x"], self.c["size"]["y"]))
+        ax.matshow(self.r + self.__mask_obs_nan(), cmap=self.cmap)
         
         # add labels for agent and obstacles
         for (i, j), z in np.ndenumerate(self.env):
-            if z == "A" or z == "x":
-                ax.text(j, i, z, ha="center", va="center", fontsize=25)
+            if z == "x": self.__label(ax, j, i, z, "white")
+            if z == "A": self.__label(ax, j, i, z, "black")
         
-        ax.xaxis.set_ticks_position("bottom")
+        self.__prepare_plot(ax)
         
-        # move ticks such that labels are centered
-        plt.gca().set_xticks([x - 0.5 for x in plt.gca().get_xticks()][1:], minor="true")
-        plt.gca().set_yticks([y - 0.5 for y in plt.gca().get_yticks()][1:], minor="true")
-        plt.grid(which="minor")
-        
+#        plt.savefig("grid_world.pdf")
         plt.show()
         
         
-    def pretty_print_policy(self, pi):
+    def pretty_print_policy(self, pi, V=None):
         """
         Outputs a nice policy.
         
         :param pi:              policy
+        :param V:               value function
         """
-        fig, ax = plt.subplots(figsize=(5.0, 5.0))
-        ax.matshow(self.r, cmap=plt.cm.RdYlGn)
+        fig, ax = plt.subplots(figsize=(self.c["size"]["x"], self.c["size"]["y"]))
+
+        ax.matshow((self.r if V is None else \
+            V + self.get_mask(types=["end_p", "end_n"]) * 200) + self.__mask_obs_nan(),
+            cmap=self.cmap, vmax=self.c["r"]["r_p"])
         
-        # add labels for agent and obstacles
+        # add labels
+        # ---------------------------------------------------------------------
+        # add labels for obstacles, goal states and bad states
         for (i, j), z in np.ndenumerate(self.env):
-            if z == "x": ax.text(j, i, z, ha="center", va="center", fontsize=25)
+            if z == "x": self.__label(ax, j, i, z, "white")
+            if V is not None:
+                if z == "g": self.__label(ax, j, i, z, "green")
+                if z == "b": self.__label(ax, j, i, z, "red")
             
-        # add policy arrows
+        # print policy and value function
+        # ---------------------------------------------------------------------
         d = {0: 180, 1: 0, 2: 270, 3: 90}
         for (i, j), z in np.ndenumerate(pi):
             if z in d.keys():
-                ax.text(j, i, "v", ha="center", va="center", fontsize=10, rotation=d[z])
+                # add policy arrows
+                ax.text(j, i, "v", ha="center", va="center",
+                    fontsize=10, rotation=d[z], weight="bold")
+                
+                # add value function
+                if V is not None:
+                    ax.text(j + 0.2, i - 0.275, "{0:.2f}".format(V[i, j]),
+                        ha="center", va="center", fontsize=8)
         
-        ax.xaxis.set_ticks_position("bottom")
-        
-        # move ticks such that labels are centered
-        plt.gca().set_xticks([x - 0.5 for x in plt.gca().get_xticks()][1:], minor="true")
-        plt.gca().set_yticks([y - 0.5 for y in plt.gca().get_yticks()][1:], minor="true")
-        plt.grid(which="minor")
-        
-        plt.title("Optimal policy")
+        self.__prepare_plot(ax)
+        plt.title("Optimal policy" + \
+            (" and value function" if V is not None else ""))
         
 #        plt.savefig("policy.pdf")
         plt.show()
+        
+        
+    def __prepare_plot(self, ax):
+        """
+        Prepares the environment plot.
+        
+        :param ax:              axis object
+        """
+        ax.xaxis.set_ticks_position("bottom")
+        
+        # set x-ticks and y-ticks
+        plt.xticks(np.arange(0, self.c["size"]["x"], step=1))
+        plt.yticks(np.arange(0, self.c["size"]["y"] + 1, step=1))
+        
+        # move ticks such that labels are centered
+        plt.gca().set_xticks([x - 0.5 for x in plt.gca().get_xticks()][1:], minor="true")
+        plt.gca().set_yticks([y - 0.5 for y in plt.gca().get_yticks()], minor="true")
+        plt.grid(which="minor")
+        
+        
+    def __label(self, ax, j, i, z, color):
+        """
+        Produces a text label for a plot.
+        
+        :param ax:              axis object
+        :param j:               coordinate
+        :param i:               coordinate
+        :param z:               text to be printed
+        :param color:           color of text label
+        """
+        ax.text(j, i, z, ha="center", va="center", fontsize=25, color=color)
+        
+        
+    def __mask_obs_nan(self):
+        """
+        Produces a mask of NaN values for the obstacles.
+        
+        :return:                mask
+        """
+        mask = self.get_mask(types=["obstacle"])
+        mask[np.where(mask==1)] = float("NaN")
+        
+        return mask
         
      
     def __step(self, state, action, simulate=False):
