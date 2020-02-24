@@ -564,7 +564,7 @@
  		Initialize $V(s) \in \mathbb{R}$ and $\pi(s) \in \mathcal{A}$ arbitrarily for all $s \in \mathcal{S}$\;
 
 		$policy\_stable \longleftarrow false$\;
-		\While{$not policy\_stable$}{
+		\While{$not\ policy\_stable$}{
 			$V_{new} \longleftarrow PolicyEvaluation(\pi, V, \varepsilon=0.001)$\;
 			$\pi, policy\_stable \longleftarrow PolicyImprovement(V_{new})$\;
 			$V \longleftarrow V_{new}$

@@ -1,23 +1,207 @@
-\documentclass{beamer}
+\input{config_styles/usepackages}
+\input{config_styles/commands}
 
-\usepackage[utf8]{inputenc}
+% ====================================================
+% ====================================================
+% OPTIONS
+% ====================================================
+% ====================================================
 
-\usetheme{CambridgeUS} 
+% select theme
+\usetheme{mystyle}
 
-\title{Data Exploration Project}
+% number of levels in toc
+\dwDeepToc{false}
+
+\newcommand{\modulkatalog}{\externalurl{https://www.dhbw.de/fileadmin/user/public/SP/MA/Wirtschaftsinformatik/Data_Science.pdf}{Modulkatalog}}
+\newcommand{\sharelatex}{\externalurl{https://de.sharelatex.com/templates/journals/american-institute-of-physics-aip}{Vorlage American Institute of Physics (AIP)}}
+\newcommand{\overleaf}{\externalurl{https://de.overleaf.com/latex/templates/tagged/report}{Report Vorlagen Overleaf}}
+
+
+% ====================================================
+% ====================================================
+% PRESENTATION DATA
+% ====================================================
+% ====================================================
+
+\title[Data Exploration Project]{Data Exploration Project}
 \author{M.\,Sc. Daniel Wehner}
-\date{Summer term 2020}
+\date{Sommersemester 2020}
+\institute{SAP\,SE / DHBW Mannheim}
 
-% begin of document
+% ====================================================
+% ====================================================
+% BEGIN OF DOCUMENT
+% ====================================================
+% ====================================================
+
 \begin{document}
 
-% title and agenda
-\maketitle
-\frame{\tableofcontents[currentsection]}
+% Title frame
+%______________________________________________________________________
+\dwPrintTitle
 
-% Introduction
-\begin{frame}{Introduction}{}
+% Agenda
+%______________________________________________________________________
+\dwPrintToc
 
+% Section: Planung und Organisatorisches
+%______________________________________________________________________
+\dwSection{Planung und Organisatorisches}
+
+% Grundsätzliches zum Projekt
+\begin{dwHeaderFrame}{Grundsätzliches zum Projekt}
+	\begin{itemize}
+		\item Name der Veranstaltung: \textit{Data Exploration Project}
+		\item Laut \modulkatalog{} beträgt der Workload des Projekts \textbf{pro Person}:
+		\begin{itemize}
+			\item Präsenzzeit: 27 Stunden
+			\item Selbststudium: 47 Stunden
+		\end{itemize}
+		\item Definition des Projekts aus dem \modulkatalog:
+		\begin{quote}
+			\glqq{}Anwendung von Methoden und Verfahren des maschinellen Lernens auf eine vorgegebene Datenbasis unter Laborbedingungen. Verwendung von üblichen Repositorien wie Hadoop/Spark/Flink/Mahout, Python-RASBT, R, etc.
+			\textbf{Ein besonderer Fokus soll auf einer ganzheitlichen wirtschaftsinformatischen Betrachtung liegen.} Es soll dabei neben der informatischen Betrachtung auch der betriebswirtschaftliche Nutzen, z.\,B. anhand eines Use Cases, betrachtet werden.\grqq{}
+		\end{quote}
+	\end{itemize}
+\end{dwHeaderFrame}
+
+
+% Bearbeitung und Abgabe
+\begin{dwHeaderFrame}{Bearbeitung und Abgabe}
+	\dwHeader{Bearbeitung}
+	\begin{itemize}
+		\item Das Projekt ist in Gruppen von \textbf{maximal vier Studierenden} zu bearbeiten (bei Bedarf können auch kleinere Gruppen gebildet werden, größere Gruppen sind jedoch nicht erlaubt).
+		\item Jede Gruppe bearbeitet ein anderes Thema.
+		\item Mögliche Projektthemen: siehe ...
+		\item Bzgl. der zu verwendenden Technologien werden keine Einschränkungen gemacht.
+	\end{itemize}
+	
+	\dwAlertBox{Bei der Themenwahl ist darauf zu achten, den Umfang weder zu gering noch zu groß zu wählen!}
+\end{dwHeaderFrame}
+
+
+\begin{frame}
+	\dwHeader{Zwischenpräsentation}
+	\begin{itemize}
+		\item Die Präsentation beträgt \textbf{maximal 10 Minuten} und dient dem Zweck, die grobe Konzeption des Projektvorhabens darzulegen und zu präsentieren.
+		\item Sie geht \textbf{nicht} mit in die Endwertung ein.
+		\item Von Seiten der Projektgruppen sind zu diesem Termin keine Arbeitsergebnisse oder Dokumente einzureichen.
+	\end{itemize}
+	
+	\vspace*{3mm}
+	\dwHeader{Projektabschluss am Ende des Semesters}
+	\begin{itemize}
+		\item Am Ende des Semesters sind eine Abschlusspräsentation und ein Projektreport anzufertigen.
+		\item Die Abschlusspräsentation beträgt \textbf{25 Minuten}.
+		\item Der Projektreport ist gemäß den Regeln des wissenschaftlichen Arbeitens anzufertigen und weist einen Umfang von \textbf{minimal 3 und maximal 4 Seiten} (ohne Abbildungen) auf.
+		\item Die Termine können der \cref{tab:ablauf-projekt} entnommen werden.
+	\end{itemize}
 \end{frame}
+
+
+\begin{frame}
+	\begin{itemize}
+		\item \textbf{Tipp:} Online gibt es bereits diverse \LaTeX-Vorlagen für die Anfertigung von Projektreports; z.\,B.:
+		\begin{itemize}
+			\item ShareLaTeX: \sharelatex
+			\item Overleaf: \overleaf
+		\end{itemize}
+		\item Der Projektreport deckt mindestens folgende Bestandteile ab:
+		\begin{itemize}
+			\item Thema und Motivation
+			\item Related Work (\textit{welche wissenschaftlichen Publikationen gibt es zu diesem Thema?})
+			\item Verwendete Technologien und Bibliotheken (z.\,B. \texttt{scikit-learn}, \texttt{tensorflow}, ...)
+			\item Anmerkungen zum Quellcode (\textit{wie ist der Code auszuführen und was gibt es zu beachten?})
+			\item Präsentation der Ergebnisse
+			\item Kritische Bewertung der Ergebnisse (\textit{\glqq{}lessons learned\grqq{}})
+		\end{itemize}
+	\end{itemize}
+
+	\dwAlertBox{Die komplette Abgabe besteht aus dem Projektreport (*.pdf), der Abschlusspräsentation (*.pdf), sowie dem im Rahmen des Projekts erstellten Quellcode.}
+\end{frame}
+
+
+% Anwesenheitspflicht
+\begin{dwHeaderFrame}{Anwesenheitspflicht}
+	\begin{itemize}
+		\item Mit wenigen Ausnahmen ist die Anwesenheit der einzelnen Projektgruppen an den Terminen \textbf{freiwillig}.
+		\begin{itemize}
+			\item Es sollte jedoch regelmäßig Rücksprache bzgl. des Zwischenstands gehalten werden.
+			\item Bitte melden Sie sich \textbf{rechtzeitig} und \textbf{eigenverantwortlich} (z.\,B. per E-Mail: \texttt{daniel.wehner@sap.com}), falls von Ihrer Seite aus Diskussionsbedarf besteht.
+		\end{itemize}
+		\item \textbf{Anwesenheitspflicht} besteht an folgenden Terminen (siehe \cref{tab:ablauf-projekt}):
+		\begin{itemize}
+			\item Zwischenpräsentation
+			\item Finale Präsentation und Abgabe
+		\end{itemize}
+	\end{itemize}
+\end{dwHeaderFrame}
+
+
+% Bewertung
+\begin{dwHeaderFrame}{Bewertung des Projekts}
+	\begin{itemize}
+		\item Nur rechtzeitig eingereichte Dokumente können bewertet werden.
+		\item Die einzelnen Bestandteile werden folgendermaßen gewichtet:
+		\begin{itemize}
+			\item Quellcode und Ergebnisse (70\,\%)
+			\item Projektreport (20\,\%)
+			\item Abschlusspräsentation (10\,\%)
+		\end{itemize}
+	\end{itemize}
+
+	\dwAlertBox{Wichtig: Das Fehlen einer Teilabgabe führt zu erheblichem Punkteabzug (unter Umständen auch zum Nichtbestehen der gesamten Veranstaltung)!}
+\end{dwHeaderFrame}
+
+
+% Zeitlicher Ablauf des Projekts
+\begin{dwHeaderFrame}{Zeitlicher Ablauf des Projekts}
+	\dwTable{
+		\begin{tabularx}{\textwidth}{ c | Y | c }
+			\textbf{Termin} 		&
+			\textbf{Bemerkung} 	&								
+			\textbf{Anwesenheitspflicht}									\\ \hline\hline
+			xx.xx.2020			& 	\textbf{Einführung}				&	ja	\\ \hline
+			xx.xx.2020			&	\textit{Bedarf bitte anmelden}		& 	nein	\\ \hline
+			xx.xx.2020			& 	\textbf{Zwischenpräsentation (alle Gruppen)}
+															&	ja	\\ \hline
+			xx.xx.2020			&	\textit{Bedarf bitte anmelden}		&	nein	\\ \hline
+			xx.xx.2020			&	\textit{Bedarf bitte anmelden}		&	nein	\\ \hline
+			xx.xx.2020			&	\textit{Bedarf bitte anmelden}		&	nein	\\ \hline
+			xx.xx.2020			&	\textit{Bedarf bitte anmelden}		&	nein	\\ \hline
+			xx.xx.2020			& 	\textbf{Abschlusspräsentationen und Abgabe (alle Gruppen)}
+															& 	ja
+		\end{tabularx}
+	}{Ablaufplan des Projekts}{tab:ablauf-projekt}{1.2}
+\end{dwHeaderFrame}
+
+
+% Section: Themen
+%______________________________________________________________________
+\dwSection{Themen}
+
+% Eigene Themen
+\begin{dwHeaderFrame}{Eigene Themen}
+	\begin{itemize}
+		\item Laut \modulkatalog{} soll der Fokus auf einer \textit{\glqq{}ganzheitlichen wirtschaftsinformatischen Betrachtung\grqq{}} liegen,
+			und auch dem betriebswirtschaftlichen Aspekt Rechnung getragen werden.
+		\item Es ist grundsätzlich erlaubt und auch erwünscht, \textbf{eigene Themenvorschläge} einzubringen.
+		\item Eigene Themen müssen natürlich vorher genehmigt werden.
+		\item Auf der nächsten Folie sind einige Projektvorschläge aufgelistet, falls einzelne Gruppen kein eigenes Thema finden sollten.
+	\end{itemize}
+\end{dwHeaderFrame}
+
+% Themenvorschläge
+\begin{dwHeaderFrame}{Themenvorschläge}
+	\begin{itemize} 
+		\item \texttt{Sentiment Analyse von Kundenrezessionen} (kommt das Produkt beim Kunden gut oder schlecht an?)
+		\item \texttt{Vorhersage von Aktienkursen} (falls Sie reich werden möchten, ist das ein guter Anfang)
+		\item \texttt{Recommender Systems} (z.\,B. \textit{Collaborative Filtering})
+		\item \texttt{Baue deinen eigenen Chatbot} (z.\,B. zur automatischen Beantwortung von Kundenfragen)
+		\item \texttt{Speech Recognition}
+		\item \texttt{Analyse medizinischer Scans zur Krankheitsdiagnose}
+	\end{itemize}
+\end{dwHeaderFrame}
 
 \end{document}

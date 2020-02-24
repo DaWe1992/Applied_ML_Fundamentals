@@ -1,0 +1,204 @@
+% variable definitions
+% =============================================
+% variable deeptoc (deep or flat table of contents)
+\newcommand{\dwDeepToc}[1]{
+	\newboolean{deeptoc}
+	\setboolean{deeptoc}{#1}
+}
+
+% figure and table name in caption
+\addto\captionsenglish{%
+  	\renewcommand{\figurename}{Abbildung}%
+  	\renewcommand{\tablename}{Tabelle}%
+}
+
+% adjust font
+% =============================================
+\renewcommand*{\familydefault}{\sfdefault}
+
+% framed Floatings
+% =============================================
+% define myBox
+\newmdenv[
+	innerlinewidth=0.05pt,
+	roundcorner=4pt,
+	linecolor=black,
+	innerleftmargin=6pt,
+	innerrightmargin=6pt,
+	innertopmargin=6pt,
+	innerbottommargin=6pt
+]{mybox}
+
+\newmdenv[
+	innerlinewidth=0.05pt,
+	roundcorner=4pt,
+	linecolor=black,
+	innerleftmargin=0pt,
+	innerrightmargin=0pt,
+	innertopmargin=0pt,
+	innerbottommargin=-1pt
+]{mytablebox}
+
+% framed figure
+\newcommand{\dwFigure}[3]{
+	\begin{figure}
+		\begin{mybox}
+			\centering #1
+  		\end{mybox}
+  		\vspace{-4mm}
+  		\caption{#2}
+  		\label{#3}
+	\end{figure}
+	\vspace{-3mm}
+}
+
+% framed table
+\newcommand{\dwTable}[4]{
+	\begin{table}
+		\begin{mytablebox}
+			\renewcommand{\arraystretch}{#4} #1
+		\end{mytablebox}
+		\vspace{-2.5mm}
+		\caption{#2}
+		\label{#3}
+	\end{table}
+}
+
+% centered X column in tabularx
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+
+% sections and subsections
+% =============================================
+% section command
+\newcommand{\dwSection}[1]{
+	\ifthenelse{\boolean{deeptoc}}{
+		\section{#1}
+	}{
+		\section{#1}
+		\subsection*{#1}
+	}
+}
+
+% subsection command
+\newcommand{\dwSubsection}[1]{\subsection{#1}}
+
+% header
+% =============================================
+% green header
+\newcommand{\dwHeader}[1]{%
+	\begin{tcolorbox}[
+		boxrule=0.2mm,
+		boxsep=-1mm,
+		lowerbox=ignored,
+		colback=green,
+		colframe=black,
+		hbox
+	]
+		\textbf{#1}
+	\end{tcolorbox}
+}
+
+% alert box
+% =============================================
+\newcommand{\dwAlertBox}[1]{
+	\vspace*{2mm}\hspace*{0.25mm}
+	\begin{minipage}[c]{0.05\textwidth}
+		\begin{tikzpicture}
+			\draw[thick,fill=lightgray] (4.2,0) -- (4.5,0.5) -- (4.8,0) -- (4.2,0) -- cycle;
+			\fill (4.45,0.17) rectangle (4.55,0.37);
+			\fill (4.55,0.08) arc (0:360:0.05);
+		\end{tikzpicture}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[c]{0.92\textwidth}
+		\begin{mybox}
+			\textcolor{red}{\textbf{#1}}
+		\end{mybox}
+	\end{minipage}
+}
+
+% custom itemize environment
+% =============================================
+\let\tempone\itemize
+\let\temptwo\enditemize
+\renewenvironment{itemize}{\vspace*{1.5mm}\tempone\addtolength{\itemsep}{0.5\baselineskip}}{\temptwo}
+
+% frames
+% =============================================
+\newenvironment{dwHeaderFrame}[1]{
+	\subsubsection{#1}
+	\begin{frame}{#1}
+}{
+	\end{frame}
+}
+
+% print title frame
+% =============================================
+\newcommand{\dwPrintTitle}{
+	{\usebackgroundtemplate{%
+		\tikz[overlay,remember picture] \node[opacity=0.9, at=(current page.center)] {
+  			\includegraphics[height=\paperheight,width=\paperwidth]{../03_img/processor_red.jpg}
+		};
+	}
+	\begin{frame}[plain]
+		\begin{center}
+			\begin{tcolorbox}[
+				skin=enhanced,
+	      			boxrule=0.6mm, boxsep=0mm,
+				lowerbox=ignored,
+				colback=orange!60!red, colframe=black,
+				borderline={0.5pt}{3pt}{black}, borderline={1pt}{2pt}{red},
+				width=\textwidth
+			]
+				\centering
+				\Huge\textbf{\inserttitle}
+			\end{tcolorbox}
+			\vspace*{1.4cm}
+			\begin{tcolorbox}[width=0.5\textwidth]
+				\centering
+				\textbf{\insertauthor} \\[2mm]
+				\insertinstitute \\[2mm]
+				\insertdate
+			\end{tcolorbox}
+			
+			\begin{textblock}{1}(1,13.5)
+				\includegraphics[scale=0.04]{../03_img/logo_dhbw}
+			\end{textblock}
+		\end{center}
+	\end{frame}}
+}
+
+% print table of contents
+% =============================================
+\newcommand{\dwPrintToc}[1]{
+	{\makeatletter
+   		\setbeamertemplate{headline}[default]
+   		\def\beamer@entrycode{\vspace*{-\headheight}}
+	\makeatother
+
+	\begin{frame}[allowframebreaks]
+		\begin{tcolorbox}[
+			skin=enhanced,
+      			boxrule=0.6mm, boxsep=0mm,
+			lowerbox=ignored,
+			colback=orange!60!red, colframe=black,
+			borderline={0.5pt}{3pt}{black}, borderline={1pt}{2pt}{red},
+			width=\textwidth
+		]
+			\centering
+			\huge\textbf{Inhaltsverzeichnis zur Vorlesung}
+		\end{tcolorbox}
+		\vspace{2mm}
+		
+		{\renewcommand{\baselinestretch}{1.4}
+		\tableofcontents}
+	\end{frame}}
+}
+
+% redefine cref (add a hyperlink)
+\let\chyperref\cref % save original command under a new name
+\renewcommand{\cref}[1]{\hyperlink{#1}{\textcolor{blue}{$\Rightarrow$ \chyperref{#1}}}}
+
+\newcommand{\externalurl}[2]{\href{#1}{\textcolor{blue}{$\Rightarrow$ #2}}}
+
+
