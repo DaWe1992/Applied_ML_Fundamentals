@@ -1,0 +1,33 @@
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[
+		scale=0.3,
+		every node/.append style={scale=0.7},
+		box/.style={draw=black,very thick,minimum width=2cm,minimum height=1cm,align=center,fill=lightgray},
+		arr/.style={thick,-stealth,shorten >= 0.5mm,shorten <= 0.5mm},
+		triangle/.style={regular polygon, regular polygon sides=3,fill=black}
+	]
+		
+		\node[box] (A) at (-4,6) {\textbf{Business} \\ \textbf{Understanding}};
+		\node[box] (B) at (4,6) {\textbf{Data} \\ \textbf{Understanding}};
+		\node[box] (C) at (8,2) {\textbf{Data} \\ \textbf{Preparation}};
+		\node[box] (D) at (8,-2) {\textbf{Modeling}};
+		\node[box] (E) at (0,-6) {\textbf{Evaluation}};
+		\node[box] (F) at (-8,0) {\textbf{Deployment}};
+
+		\node[draw=black,thick,star, star points=6,fill=yellow] (G) at (0,0) {\textbf{Data}};
+		\draw[thick,dotted,rounded corners=50pt] (-12,-8) rectangle (12,8);
+		\node[triangle] at (-12,0) {};
+		\node[triangle,rotate=180] at (12,0) {};
+
+		\draw[arr,stealth-stealth] (A) to (B);
+		\draw[arr] (B) to[out=0,in=90] (C);
+		\draw[arr,stealth-stealth] (C) to (D);
+		\draw[arr] (D) to[out=270,in=0] (E);
+		\draw[arr] (E) to[out=180,in=270] (F);
+		\draw[arr] (E) to[out=10,in=350] (A);
+
+		
+		
+	\end{tikzpicture}
+\end{figure}

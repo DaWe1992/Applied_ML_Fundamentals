@@ -1,0 +1,367 @@
+% select theme
+\input{../preamble_theme_2}
+
+% ====================================================
+% ====================================================
+% OPTIONS
+% ====================================================
+% ====================================================
+
+% number of levels in toc
+\dwDeepToc{false}
+
+% ====================================================
+% ====================================================
+% PRESENTATION DATA
+% ====================================================
+% ====================================================
+
+\title[Data Preprocessing]{***** Advanced Machine Learning ***** Data Preprocessing}
+\author{M.\,Sc. Daniel Wehner}
+\date{Summer term 2020}
+\institute{SAP\,SE / DHBW Mannheim}
+
+% ====================================================
+% ====================================================
+% BEGIN OF DOCUMENT
+% ====================================================
+% ====================================================
+
+\begin{document}
+
+% Title frame
+%______________________________________________________________________
+\dwPrintTitle
+
+% Agenda
+%______________________________________________________________________
+\dwPrintToc
+
+% Section: Introduction
+%______________________________________________________________________
+\dwSection{Introduction}
+
+% Why Data Preprocessing
+\begin{dwHeaderFrame}{Why Data Preprocessing?}
+	\begin{itemize}
+		\item Data preprocessing is an important step in data mining and machine learning.
+		\item \textbf{`Garbage in, garbage out'} holds true for all data mining and machine learning algorithms (you always get back a result, but is it sensible or useful?).
+		\item There are lots of problems which impede effective learning:
+		\begin{itemize}
+			\item Out-of-range values (e.\,g.: \texttt{income} = -100)
+			\item impossible data combinations (e.\,g.: \texttt{sex} = male $\wedge$ \texttt{pregnant} = yes)
+			\item Missing values
+			\item Anomalies and outliers (values which deviate drastically from the other ones)
+		\end{itemize}
+	\end{itemize}
+\end{dwHeaderFrame}
+
+
+% Data Mining Processes
+\begin{frame}
+	\begin{itemize}
+		\item Several data mining processes were introduced in order to ensure high-quality data:
+		\begin{itemize}
+			\item KDD (Knowledge Discovery in Databases) process \cref{fig:kdd}
+			\item CRISP-DM (Cross Industry Standard Process for Data Mining) \cref{fig:crisp-dm}
+		\end{itemize}
+		\item Key steps in any data mining process:
+		\begin{itemize}
+			\item Data cleaning
+			\item Data transformation
+			\item Data integration
+			\item Data reduction
+		\end{itemize}
+	\end{itemize}
+
+	\dwAlertBox{Proper data preprocessing is necessary to learn effectively from the data!}
+\end{frame}
+
+
+% Section: Data Mining Processes
+%______________________________________________________________________
+\dwSection{Data Mining Processes}
+
+% Knowledge Discovery in Databases (KDD)
+\begin{dwHeaderFrame}{Knowledge Discovery in Databases (KDD)}
+	\dwFigure{\input{17_data_preprocessing/01_tikz/kdd}}{KDD process}{fig:kdd}
+	\dwAlertBox{The terms are not used consistently throughout the literature.}
+\end{dwHeaderFrame}
+
+
+% Cross Industry Standard Process for Data Mining (CRISP-DM)
+\begin{dwHeaderFrame}{Cross Industry Standard Process for Data Mining (CRISP-DM)}
+	\dwFigure{\input{17_data_preprocessing/01_tikz/crisp_dm}}{CRISP-DM process}{fig:crisp-dm}
+\end{dwHeaderFrame}
+
+
+\begin{frame}
+	\dwHeader{Phases of CRISP-DM}
+	\begin{itemize}
+		\item \textbf{Business understanding}
+		\begin{itemize}
+			\item Determine what you want to accomplish from a business perspective. \\
+				(\textit{What goals do we want to achieve?}, \textit{Why is the project necessary?})
+			\item Assess the current business situation w.\,r.\,t. risks, resources, constraints, assumptions, etc.
+			\item Results: Project plan, business success criteria (\textit{how to measure success?})
+		\end{itemize} 
+		\item \textbf{Data understanding:}
+		\begin{itemize}
+			\item Acquire the data needed to achieve the goals specified in the project plan.
+			\item Use tools for data exploration (\textit{e.\,g. compute distributions of key attributes, perform simple aggregations and statistical analyses}).
+			\item Results: Data description report and data quality report.
+		\end{itemize}
+		\item \textbf{Data preparation:}
+		\begin{itemize}
+			\item Integrate, select and clean the data based on the data description report / data quality report.
+			\item Construct new features if needed (\textbf{feature engineering}).
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\begin{itemize}
+		\item \textbf{Modeling}
+		\begin{itemize}
+			\item Choose a machine learning / data mining technique and find good hyper-parameters.
+			\item Train the model and test it on a separate test set.
+		\end{itemize}
+		\item \textbf{Evaluation}
+		\begin{itemize}
+			\item Evaluate the model(s) w.\,r.\,t. the business objectives. (\textit{In how far does it meet the business goals?})
+			\item Review the entire process. (\textit{e.\,g. highlight activities that have been missed or should be repeated})
+		\end{itemize}
+		\item \textbf{Deployment}
+		\begin{itemize}
+			\item Deploy the model into a productive environment.
+			\item Determine the maintenance strategy and monitor the model.
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+% Section: Data Preparation
+%______________________________________________________________________
+\dwSection{Data Preparation}
+
+% Data Cleaning
+\begin{dwHeaderFrame}{Data Cleaning}
+	\begin{itemize}
+		\item Bad data quality can (and will most probably) lead to impoverished downstream task results.
+		\item Therefore, it is necessary to remove erroneous data, inconsistencies and outliers.
+		\item The detection of such anomalies often requires a great extent of domain knowledge and is therefore not easy.
+	\end{itemize}
+	\dwFigure{\input{17_data_preprocessing/01_tikz/data_cleaning}}{Data cleaning}{fig:data-cleaning}
+\end{dwHeaderFrame}
+
+
+\begin{frame}
+	\begin{itemize}
+		\item Another problem to be handled is given by missing data (e.\,g. some feature values are not known for some of the data examples).
+		\item Possible strategies include:
+		\begin{itemize}
+			\item Deletion of the affected data example
+			\item Imputation of the missing value(s), e.\,g.:
+			\begin{itemize}
+				\item Further data collection.
+				\item Use the mean / median / mode as a substitute (\textbf{What is the difference between these three?})
+				\item Fill in the most probable value (learn a model, e.\,g. decision trees to impute the missing value)
+			\end{itemize}
+			\item Replace unknown values by a global placeholder, e.\,g. \textit{`unknown'} or \textit{`?'}
+		\end{itemize}
+	\end{itemize}
+	\dwAlertBox{Which technique is used depends on the number of missing values.}
+\end{frame}
+
+
+% Data Transformation
+\begin{dwHeaderFrame}{Data Transformation}
+	\begin{itemize}
+		\item Most algorithms require the data to be in a certain form.
+		\item If the form of the data is not as required, it has to be transformed accordingly:
+		\begin{itemize}
+			\item Data smoothing (\textit{removal of noise and peaks in the data})
+			\item Aggregation (\textit{e.\,g. computation of sum or average values})
+			\item Normalization (\textit{force the data to be in a certain range})
+			\item Discretization (\textit{numeric data} $\rightarrow$ \textit{discrete data})
+			\item Numerization (\textit{discrete data} $\rightarrow$ \textit{numeric data})
+		\end{itemize}
+		\item We will have a closer look at normalization and discretization.
+	\end{itemize}
+\end{dwHeaderFrame}
+
+
+\begin{frame}
+	\dwHeader{Normalization}
+	\begin{itemize}
+		\item Observation: Features which can take large values dominate features with a small range of values.
+		\item Possible transformations:
+		\begin{itemize}
+			\item \textbf{Min-max normalization} (left: resulting range [0, 1], right: resulting range [a, b]):
+			\begin{equation}
+				z  = \frac{x - x_{min}}{x_{max} - x_{min}} \qquad\qquad z = a + \frac{(x - x_{min}) \cdot (b - a)}{x_{max} - x_{min}}
+			\end{equation}
+			\item \textbf{Mean normalization}:
+			\begin{equation}
+				z = \frac{x - \overline{x}}{x_{max} - x_{min}}
+			\end{equation}
+			\item \textbf{Standardization} ($\overline{x} = 0$ and $\sigma = 1$):
+			\begin{equation}
+				z = \frac{x - \overline{x}}{\sigma}
+			\end{equation}
+		\end{itemize}
+		\item Scaling can be harmful, if the data contains many outliers. Libraries like \texttt{scikit-learn} also offer robust scaling
+			which can be used in such cases.
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\dwHeader{Unsupervised Discretization}
+	\begin{itemize}
+		\item \textbf{Domain dependent}
+		\begin{itemize}
+			\item Suitable discretizations are often known.
+			\item E.\,g. \texttt{age} [0--18] $\longrightarrow$ baby [0--3], child (3--6], school child (6--10], teenager (10--18] 
+		\end{itemize}
+		\item \textbf{Equal-width}
+		\begin{itemize}
+			\item Divide the range into a number of intervals with equal width.
+			\item E.\,g. \texttt{age} [0--18] $\longrightarrow$ [0--3], [4--7], [8--11], [12--15], [16--18] 
+		\end{itemize}
+		\item \textbf{Equal-frequency}
+		\begin{itemize}
+			\item Create the intervals such that they comprise roughly the same number of data points.
+			\item E.\,g. if the number of bins is set to 5, each will comprise 20\,\% of the data.
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\dwHeader{Supervised Discretization -- $\chi$-Merge}
+	\begin{itemize}
+		\item \textbf{Initialization:}
+		\begin{enumerate}
+			\item Sort the examples by feature value.
+			\item Construct one interval for each value.
+		\end{enumerate}
+		\item \textbf{Interval merging:}
+		\begin{enumerate}
+			\item Compute the $\chi^2$ value for each pair of adjacent intervals:
+			\begin{align}
+				\chi^2
+					&= \sum_{j=1}^2 \sum_{k=1}^{\kappa} \frac{(a_{jk} - e_{jk})^2}{e_{jk}} \qquad\text{where}\qquad e_{jk} = n_j \cdot \frac{a_{1k} + a_{2k}}{n_1 + n_2} \\
+				\shortintertext{Legend:}
+				\nonumber
+				a_{jk}
+					&\equiv \text{number of examples in $j$-th interval which have class $k$} \\
+				\nonumber
+				e_{jk}
+					&\equiv \text{expected number of examples in $j$-th interval which have class $k$} \\
+				\nonumber
+				n_j
+					&\equiv \text{total number of examples in $j$-th interval}
+			\end{align}
+			\item Merge the intervals with the lowest $\chi^2$ value
+		\end{enumerate}
+		\item \textbf{Stopping criterion:} $\chi^2$ values of all pairs exceed a significance threshold.
+	\end{itemize}
+\end{frame}
+
+
+% Data Reduction
+\begin{dwHeaderFrame}{Data Reduction}
+	\begin{itemize}
+		\item Databases are typically not collected with data mining / machine learning in mind.
+		\item Many features may be:
+		\begin{itemize}
+			\item irrelevant
+			\item uninteresting
+			\item redundant
+		\end{itemize}
+		\item Removing such features might increase efficiency, improve accuracy and prevent overfitting.
+		\item \textbf{Feature subset selection (FSS)} techniques try to determine appropriate features automatically.
+	\end{itemize}
+
+	\dwInfoBox{Principal component analysis (PCA) can also be used to reduce the data. Since the algorithm was already covered, it is not presented here.}
+\end{dwHeaderFrame}
+
+
+\begin{frame}
+	\dwHeader{Unsupervised FSS}
+	\begin{itemize}
+		\item Use \textbf{domain knowledge}: An expert may know in advance that some features are irrelevant uninteresting or redundant.
+		\item \textbf{Random sampling}
+		\begin{itemize}
+			\item Select a random subset of the features.
+			\item Such an approach may be appropriate in the case of many weakly correlated features or in conjunction with ensemble methods (\textit{remember random forests?}).
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\dwHeader{Supervised FSS}
+	\begin{itemize}
+		\item \textbf{Filter approaches:}
+		\begin{itemize}
+			\item Such techniques attempt to estimate the features' capabilities to discriminate between the classes.
+			\item The most discriminatory features are ultimately selected.
+			\item \textbf{Problems:}
+			\begin{itemize}
+				\item Redundant features will receive similar weights.
+				\item Some features may only be important in combination with other features (e.\,g. \texttt{XOR}-problem).
+			\end{itemize}
+		\end{itemize}
+		\item \textbf{Wrapper approaches:}
+		\begin{itemize}
+			\item Search through the space of all possible feature subsets.
+			\item Each feature subset is tried in combination with the learning algorithm.
+			\item The subset which performs best is kept.
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\dwHeader{RELIEF algorithm (filter approach)}
+	\begin{itemize}
+		\item 
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\dwHeader{Wrapper approaches}
+	\dwFigure{\input{17_data_preprocessing/01_tikz/wrapper_approach}}{Wrapper approach for feature subset selection}{fig:wrapper}
+\end{frame}
+
+
+\begin{frame}
+	\begin{itemize}
+		\item \textbf{Forward selection:}
+		\begin{enumerate}
+			\item Start with an empty feature set $\mathcal{F}$
+			\item For each attribute $A$ estimate accuracy of learning algorithm on $\mathcal{F} \cup \{ A \}$
+			\item $\mathcal{F} \longleftarrow \mathcal{F} \cup \{ \text{attribute with highest accuracy} \}$
+			\item go to 2 (until $m$ features have been found
+		\end{enumerate}
+		\item \textbf{Backward selection:}
+		\begin{itemize}
+			\item Start with a full feature set $\mathcal{F}$
+			\item Subsequently remove attributes from $\mathcal{F}$
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+% Data Integration
+\begin{dwHeaderFrame}{Data Integration}
+	\begin{itemize}
+		\item
+	\end{itemize}
+\end{dwHeaderFrame}
+
+\end{document}
