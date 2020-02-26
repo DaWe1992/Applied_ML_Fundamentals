@@ -41,13 +41,244 @@
 %______________________________________________________________________
 \dwSection{Introduction}
 
-% 
-\begin{dwHeaderFrame}{Test}
+% What is Association Rule Mining?
+\begin{dwHeaderFrame}{What is Association Rule Mining?}
 	\begin{itemize}
-		\item Test
+		\item Association rule mining belongs to the category of unsupervised learning.
+		\item Association rules describe frequent co-occurrences in the data (\textbf{not necessarily causality!})
+		\item Examples:
+		\begin{itemize}
+			\item Market basket analysis (\textit{Which products are frequently bought together? E.\,g. Amazon})
+			\item Course schedule planning (\textit{Which courses are often attended together?})
+			\item Other use cases: Marketing promotions, inventory management, customer relationship management (CRM) 
+		\end{itemize}
+		\item The general form of a rule is given by:
+		\begin{equation}
+			\overbracket{\{a_1, a_2, \dots, a_n\}}^{\text{\textbf{Antecedent}}} 
+			\rightarrow 
+			\overbracket{\{b_1, b_2, \dots, b_m\}}^{\text{\textbf{Consequent}}}
+		\end{equation}
+		\item Example: $\{ bread, cheese \} \rightarrow \{ wine \}$
 	\end{itemize}
 \end{dwHeaderFrame}
 
+
+\begin{frame}
+	\dwFigure{\includegraphics[scale=0.3]{16_association_rules/02_img/amazon}}{Famous example from Amazon}{fig:amazon}
+\end{frame}
+
+
+% Important Terminology
+\begin{dwHeaderFrame}{Important Terminology}
+	\begin{itemize}
+		\item Suppose $\mathcal{I}$ is a set of unique items which we have in our portfolio
+			$\mathcal{T} = \{ t_1, t_2, \dots, t_n \}$ is a list of transactions (what customers bought).
+		\item Each transaction $t_i \in \mathcal{T}$ is an element of $\mathfrak{P}(\mathcal{I})$, the power set of $\mathcal{I}$. (\textbf{What is a power set?})
+		\item Example:
+	\end{itemize}
+	\dwFigure{
+		\begin{minipage}{0.45\textwidth}
+			\input{16_association_rules/03_tbl/list_of_transactions}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.45\textwidth}
+			\input{16_association_rules/03_tbl/list_of_transactions_binary}
+		\end{minipage}
+	}{Left: List of transactions (raw), right: List of transactions in binary form}{}
+	\dwInfoBox{Simplification: We ignore quantities and prices of the items sold.}
+\end{dwHeaderFrame}
+
+
+\begin{frame}
+	\dwHeader{Item sets}
+	\begin{itemize}
+		\item A collection of $k$ items is called $k$-item set.
+		\item Example: $\{ pizza, wine \}$ is a 2-item set.
+		\item The number of items contained in a transaction $t_i$ is sometimes referred to as the \textbf{transaction width} $w(t_i) = \vert t_i \vert$.
+		\item An important property of an item set $X$ is the \textbf{support count} $\bm{\sigma}$:
+		\begin{equation}
+			\sigma(X) = \vert \{ t_i \vert X \subseteq t_i \wedge t_i \in \mathcal{T} \} \vert
+		\end{equation}
+		\item \textbf{What does the support count tell us?} $\sigma(X)$ refers to the number of transactions $X$ occurs in.
+	\end{itemize}
+\end{frame}
+
+
+% Quality Measures
+\begin{dwHeaderFrame}{Quality Measures}
+	\begin{itemize}
+		\item \textit{Question:} How to measure the quality of an association rule?
+		\item \textbf{Support:}
+		\begin{itemize}
+			\item Proportion of examples for which head and body are true.
+			\item Example $A \rightarrow B$: How many customers bought $A$ and $B$ together?
+			\begin{equation}
+				\text{support}(A \rightarrow B) = \text{support}(A \cup B) = \frac{\sigma(A \cup B)}{n}
+			\end{equation}
+		\end{itemize}
+		\item \textbf{Confidence:}
+		\begin{itemize}
+			\item Proportion of examples for which the head is true among those for which the body is true.
+			\item Example: If customers bought $A$, how likely are they to also buy $B$?
+			\begin{equation}
+				\text{confidence}(A \rightarrow B) = \frac{\text{support}(A \cup B)}{\text{support}(A)} = \frac{\sigma(A \cup B)}{\sigma(A)}
+			\end{equation}
+		\end{itemize}
+	\end{itemize}
+\end{dwHeaderFrame}
+
+
+\begin{frame}
+	\begin{itemize}
+		\item Support: There is a huge number of possible rules, but not all of them are interesting. \\
+			$\Rightarrow$ \textbf{Prune (remove) rules with low support.}
+		\item Confidence: The higher the confidence the more reliable is the rule.
+		\item Example:
+		\begin{itemize}
+			\item $R = \{ bread, cheese \} \rightarrow \{ wine \}$
+			\item $\text{support}(R) = 0.01$ and $\text{confidence}(R) = 0.8$
+			\item 80\,\% of all customers who bought bread and cheese also bought red wine.
+			\item However, only 1\,\% of the customers bought all three items together.
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+% Section: Apriori
+%______________________________________________________________________
+\dwSection{Apriori}
+
+% Learning Problem
+\begin{dwHeaderFrame}{Learning Problem}
+	\begin{itemize}
+		\item The \textbf{Apriori algorithm} can be used to find association rules.
+		\item The learning problem can be summarized as follows:
+		\begin{quote}
+			Given a set of transactions $\mathcal{T}$, find all rules having $\text{support} \ge s_{min}$ and $\text{confidence} \ge c_{min}$,
+			where $s_{min}$ and $c_{min}$ are thresholds.
+		\end{quote}
+		\item Obviously, mining all possible rules is super expensive.
+		\begin{equation}
+			\vert \text{rules} \vert = 3^d - 2^{d+1} + 1 \qquad\text{where}\qquad d \equiv \vert \mathcal{I} \vert
+		\end{equation}
+		\item Also, rules can be spurious (i.\,e. patterns may occur by chance and are not systematic).
+	\end{itemize}
+	\dwAlertBox{We have to avoid considering all possible rules! $\Rightarrow$ Employ early pruning.}
+\end{dwHeaderFrame}
+
+
+% Early Pruning
+\begin{dwHeaderFrame}{Early Pruning}
+	\begin{itemize}
+		\item The goal is to generate rules which have high support and high confidence.
+		\item Observation: If an item set is infrequent (does not have sufficient support), calculating the confidence can be omitted.
+		\item As a consequence, all rules which can be generated from this item set do not have to be considered anymore.
+		\item Example for the item set $\{ beer, diapers, milk \}$:
+		\begin{itemize}
+			\item The rules derived from this item set are given by:
+			\item If we know this item set to be infrequent, we can prune all these rules.
+			\item There is no need to calculate the confidence for these rules (\textbf{decoupling of support and confidence})
+		\end{itemize}
+	\end{itemize}
+	\divideTwo{0.49}{
+		\begin{align*}
+			\{ beer, diapers \} 	&\rightarrow \{ milk \} 			\\
+			\{ diapers, milk \}	&\rightarrow \{ beer \}		\\
+			\{ milk \} 			&\rightarrow \{ beer, diapers \}	
+		\end{align*}
+	}{0.49}{
+		\begin{align*}
+			\{ beer, milk \} 		&\rightarrow \{ diapers \} 		\\
+			\{ beer \}			&\rightarrow \{ diapers, milk \}	\\
+			\{ diapers \}		&\rightarrow \{ beer, milk \}
+		\end{align*}
+	}
+\end{dwHeaderFrame}
+
+
+% Apriori Algorithm
+\begin{dwHeaderFrame}{Apriori Algorithm}
+	\begin{itemize}
+		\item The overall algorithm consists of two major steps:
+		\begin{enumerate}
+			\item \textbf{Frequent item set generation:} \\
+				Find all item sets which have sufficient support (satisfy the support constraint).
+			\item \textbf{Rule generation:} \\
+				Extract highly confident rules which satisfy the confidence constraint.
+		\end{enumerate}
+		\item In the following we will have a closer look at these two steps.
+	\end{itemize}
+\end{dwHeaderFrame}
+
+
+\begin{frame}
+	\dwHeader{Step 1) Frequent item set generation}
+	\begin{itemize}
+		\item It is possible to enumerate all possible item sets with a lattice.
+		\item A brute force approach could calculate the support for each candidate set and rank them by the result.
+		\item \textbf{Problem:} The number of candidate sets grows exponentially with $\vert \mathcal{I} \vert$: $2^{\vert \mathcal{I} \vert} - 1$ (excluding empty set).
+		\item Example: For $\mathcal{I} = \{ a, b, c, d, e \}$ we have 31 possible candidates.
+		\item Therefore, the candidate sets should be generated more efficiently.
+		\item We can make use of the \textbf{anti-monotonicity} of the support:
+		\begin{quote}
+			If an item set is frequent, then all of its subsets must be frequent as well. Also, if an item set is infrequent, then all its supersets must be infrequent too.
+		\end{quote}
+		\item Adding a condition can never increase the support of a rule:
+		\begin{equation}
+			A \subseteq B \Longrightarrow \text{support}(A) \ge \text{support}(B)
+		\end{equation}
+		\item \textbf{An item set can only be frequent, if all its subsets are frequent and all supersets of an infrequent item set are also infrequent.}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\begin{enumerate}
+		\item $k \leftarrow 1$
+		\item $C_1 \leftarrow \mathcal{I}$
+		\item \textbf{while} $C_k \ne \emptyset$ \textbf{do}
+		\begin{itemize}
+			\item[$\triangleright$] $S_k \leftarrow C_k \backslash \{ \text{all infrequent item sets in $C_k$} \}$
+			\item[$\triangleright$] $C_{k+1} \leftarrow \text{all sets with $k + 1$ elements which can be formed by uniting two item sets in $S_k$}$
+			\item[$\triangleright$] $C_{k+1} \leftarrow C_{k+1} \backslash \{ \text{item sets, where not all subsets of size $k$ are in $S_k$} \}$
+			\item[$\triangleright$] $S \leftarrow S \cup S_k$
+			\item[$\triangleright$] $k \leftarrow k + 1$
+		\end{itemize}
+		\item \textbf{return} $S$
+	\end{enumerate}
+
+	\dwAlertBox{The algorithm leaves it open how the candidate set $C_{k+1}$ is generated. How can this be done efficiently?}
+\end{frame}
+
+
+\begin{frame}
+	\begin{itemize}
+		\item Requirements for efficient candidate generation:
+		\begin{itemize}
+			\item We have to avoid producing too many candidates.
+			\item At the same time we have to ensure that all frequent item sets are found (\textbf{completeness})
+			\item We don't want to produce duplicates (\textbf{efficiency})
+		\end{itemize}
+		\item The Apriori algorithm uses the so-called $S_{k-1} \times S_{k-1}$ method:
+		\begin{itemize}
+			\item Merge a pair of ($k - 1$)-item sets only if their first $k - 2$ items are identical.
+			\begin{equation}
+				A = \{ a_1, a_2, \dots, a_{k-1} \} \qquad\qquad\qquad B = \{ b_1, b_2, \dots, b_{k-1} \}
+			\end{equation}
+			\item Merge $A$ and $B$, if $a_j = b_j\ (j = 1, 2, \dots, k - 2) \wedge a_{k-1} \ne b_{k-1}$
+			\item Example:
+			\begin{itemize}
+				\item $A = \{ bread, pizza, milk \}, B = \{ bread, pizza, diapers \}$
+				\item $A$ and $B$ are merged into $\{ bread, pizza, milk, diapers \}$.
+			\end{itemize}
+			\item This method still requires pruning non-frequent item sets.
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+
+\end{frame}
+
 \end{document}
-
-

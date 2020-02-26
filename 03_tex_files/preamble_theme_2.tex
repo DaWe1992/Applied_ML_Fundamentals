@@ -1,72 +1,18 @@
-% load packages
 \documentclass[t,8pt,aspectratio=169]{beamer}
 
-% USEPACKAGES
+\input{../commons}
 
-\usepackage[T1]{fontenc}
-\usepackage[ngerman,english]{babel}
-\usepackage[utf8]{inputenc}
-
-% tikz drawing
-% ===================================
-\usepackage{tikz} 								% package for creating figures
-
-\usetikzlibrary{calc} 								% tikz library for calculating
-\usetikzlibrary{shapes}
-\usetikzlibrary{decorations.pathreplacing}
-
-\usepackage{pgfplots}
-
-\usepackage[framemethod=tikz]{mdframed} 				% frames
-
-% graphics, fonts and symbols
-% ===================================
-\usepackage{graphicx} 							% importing graphics
-\usepackage{pifont} 								% symbols
-
-% tables
-% ===================================
-\usepackage{tabularx}
-\usepackage{multirow} 							% two coloum typesetting
-
-% boxes
-% ===================================
-\usepackage{tcolorbox} 							% colorful boxes
-
-\tcbuselibrary{listings}
-\tcbuselibrary{breakable}
-\tcbuselibrary{skins}
-
-% math
-% ===================================
-\usepackage[mathcal]{euscript} 						% math symbols
-\usepackage{mathtools}
-
-% algorithms
-% ===================================
-\usepackage{algorithm}	 						% algorithms
-\usepackage{algpseudocode} 						% style for algorithms
-
-% references
-% ===================================
-\usepackage{cleveref}
-
-% misc
-% ===================================
-\usepackage{hyperref}
-\usepackage[absolute,overlay]{textpos}
-
-% =============================================
-% =============================================
-
-% STYLE DEFINITION
+% ====================================================
+% ====================================================
+% LAYOUT AND THEME
+% ====================================================
+% ====================================================
 
 % adjust margin left and right
 \setbeamersize{text margin left=25pt,text margin right=25pt}
 
-
 % define colors
-% =============================================
+% ====================================================
 \setbeamercolor{frametitle}{fg=black}
 \setbeamercolor{itemize item}{fg=black}
 \setbeamercolor{itemize subitem}{fg=black}
@@ -74,18 +20,16 @@
 \setbeamercolor{section in toc}{fg=black}
 \setbeamercolor{subsection in toc}{fg=gray!20!black}
 
-
 % define fonts and sizes
-% =============================================
+% ====================================================
 \setbeamerfont{frametitle}{series=\bf,size=\footnotesize}
 \setbeamerfont{caption name}{series=\bf}
 \setbeamertemplate{itemize/enumerate subbody begin}{\normalsize}
 \setbeamertemplate{itemize/enumerate subsubbody begin}{\small}
 \usefonttheme[onlymath]{serif}
 
-
-% Table of contents
-% =============================================
+% table of contents
+% ====================================================
 \makeatletter
 \def\beamer@endinputifotherversion#1{}
 \def\beamer@sectionintoc#1#2#3#4#5{{\large \vspace*{3mm} \textbf{#2} \hfill \textbf{#3} \par}}
@@ -93,9 +37,8 @@
 \def\beamer@subsubsectionintoc#1#2#3#4#5#6#7{{\normalsize \hspace*{6mm} \textbf{#4} \hfill #5 \par}}
 \makeatother
 
-
 % define bullet points
-% =============================================
+% ====================================================
 \setbeamertemplate{itemize item}[circle]
 \setbeamertemplate{itemize subitem}{--}
 \setbeamertemplate{itemize subsubitem}{\textcolor{black}{$\triangleright$}}
@@ -103,9 +46,8 @@
 \setlength{\leftmarginii}{3.5mm}
 \setlength{\leftmarginiii}{3.5mm}
 
-
 % frametitle
-% =============================================
+% ====================================================
 \setbeamertemplate{frametitle}{%
 	\vspace*{1mm}
 	\ifthenelse{\boolean{deeptoc}}{
@@ -146,33 +88,8 @@
 	\vspace*{-2mm}
 }
 
-
-% customize captions
-% =============================================
-\setbeamertemplate{caption}{%
-	\begin{tcolorbox}[
-		colback=lightgray, colframe=black,
-		width=.17\linewidth,
-		height=17pt,
-		boxrule=0.5pt, boxsep=-1pt
-	]
-		\textbf{\strut\insertcaptionname~\insertcaptionnumber%
-		\usebeamertemplate{caption label separator}}%
-	\end{tcolorbox}%
-	\space%
-	\begin{tcolorbox}[
-		colback=lightgray, colframe=black,
-		width=.82\linewidth,
-		height=17pt,
-		boxrule=0.5pt, boxsep=-1pt
-	]
-		\strut\insertcaption%
-	\end{tcolorbox}%
-}
-
-
 % header and Footer
-% =============================================
+% ====================================================
 
 % header
 \setbeamertemplate{headline}{
@@ -212,12 +129,34 @@
 	\insertframenumber
 }
 
+% customize captions
+% ====================================================
+\setbeamertemplate{caption}{%
+	\begin{tcolorbox}[
+		colback=lightgray, colframe=black,
+		width=.17\linewidth,
+		height=17pt,
+		boxrule=0.5pt, boxsep=-1pt
+	]
+		\textbf{\strut\insertcaptionname~\insertcaptionnumber%
+		\usebeamertemplate{caption label separator}}%
+	\end{tcolorbox}%
+	\space%
+	\begin{tcolorbox}[
+		colback=lightgray, colframe=black,
+		width=.82\linewidth,
+		height=17pt,
+		boxrule=0.5pt, boxsep=-1pt
+	]
+		\strut\insertcaption%
+	\end{tcolorbox}%
+}
+
 % remove navigation symbols
 \setbeamertemplate{navigation symbols}{}
 
-
 % remove header line on first frame of section
-% =============================================
+% ====================================================
 \makeatletter
 \newcount\beamer@sectionstartframe
 \beamer@sectionstartframe=1
@@ -249,29 +188,26 @@
 \newcommand\insertsectionendframe{\beamer@endframeofsection}
 \makeatother
 
-% COMMANDS
+% ====================================================
+% ====================================================
+% COMMANDS AND GENERAL DEFINITIONS
+% ====================================================
+% ====================================================
 
 % variable definitions
-% =============================================
+% ====================================================
 % variable deeptoc (deep or flat table of contents)
 \newcommand{\dwDeepToc}[1]{
 	\newboolean{deeptoc}
 	\setboolean{deeptoc}{#1}
 }
 
-% figure and table name in caption
-%\addto\captionsenglish{%
-%  	\renewcommand{\figurename}{Abbildung}%
-%  	\renewcommand{\tablename}{Tabelle}%
-%}
-
 % adjust font
-% =============================================
+% ====================================================
 \renewcommand*{\familydefault}{\sfdefault}
 
-% framed Floatings
-% =============================================
-% define myBox
+% framed floatings
+% ====================================================
 \newmdenv[
 	innerlinewidth=0.05pt,
 	roundcorner=4pt,
@@ -317,12 +253,8 @@
 	\end{table}
 }
 
-% centered X column in tabularx
-\newcolumntype{Y}{>{\centering\arraybackslash}X}
-
-
 % sections and subsections
-% =============================================
+% ====================================================
 % section command
 \newcommand{\dwSection}[1]{
 	\ifthenelse{\boolean{deeptoc}}{
@@ -336,9 +268,8 @@
 % subsection command
 \newcommand{\dwSubsection}[1]{\subsection{#1}}
 
-
 % header
-% =============================================
+% ====================================================
 % green header
 \newcommand{\dwHeader}[1]{%
 	\begin{tcolorbox}[
@@ -351,9 +282,8 @@
 	\end{tcolorbox}
 }
 
-
 % alert box / info box
-% =============================================
+% ====================================================
 \newcommand{\dwAlertBox}[1]{
 	\vspace*{2mm}\hspace*{0.25mm}
 	\begin{minipage}[c]{0.05\textwidth}
@@ -386,9 +316,8 @@
 	\fill (4.50,0.34) circle (1.5pt);
 }
 
-
 % custom itemize environment
-% =============================================
+% ====================================================
 \let\tempone\itemize
 \let\temptwo\enditemize
 \renewenvironment{itemize}{\vspace*{1.5mm}\tempone\addtolength{\itemsep}{0.5\baselineskip}}{\temptwo}
@@ -397,7 +326,7 @@
 \renewenvironment{enumerate}{\vspace*{1.5mm}\tempthree\addtolength{\itemsep}{0.5\baselineskip}}{\tempfour}
 
 % frames
-% =============================================
+% ====================================================
 \newenvironment{dwHeaderFrame}[1]{
 	\subsubsection{#1}
 	\begin{frame}{#1}
@@ -405,9 +334,9 @@
 	\end{frame}
 }
 
-
-% print title frame
-% =============================================
+% special pages
+% ====================================================
+% title page
 \newcommand{\dwPrintTitle}{
 	{\usebackgroundtemplate{%
 		\tikz[overlay,remember picture] \node[opacity=0.9, at=(current page.center)] {
@@ -442,9 +371,7 @@
 	\end{frame}}
 }
 
-
-% print table of contents
-% =============================================
+% table of contents
 \newcommand{\dwPrintToc}[1]{
 	{\makeatletter
    		\setbeamertemplate{headline}[default]
@@ -470,9 +397,8 @@
 	\end{frame}}
 }
 
-
 % hyperlinks
-% =============================================
+% ====================================================
 % redefine cref (add a hyperlink)
 \let\chyperref\cref % save original command under a new name
 \renewcommand{\cref}[1]{\hyperlink{#1}{\textcolor{blue}{$\Rightarrow$ \chyperref{#1}}}}

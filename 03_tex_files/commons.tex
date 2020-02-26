@@ -1,0 +1,116 @@
+% ====================================================
+% ====================================================
+% USEPACKAGES
+% ====================================================
+% ====================================================
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+% tables
+\usepackage{tabularx}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{makecell}
+
+% tikz and colors
+\usepackage{tikz}
+\usepackage{xcolor}
+\usepackage{pgf-pie}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\usepackage{tikzsymbols}
+
+\usetikzlibrary{calc}
+\usetikzlibrary{trees}
+\usetikzlibrary{patterns}
+\usetikzlibrary{shadings}
+\usetikzlibrary{positioning}
+\usetikzlibrary{intersections}
+\usetikzlibrary{decorations.pathreplacing}
+
+\usetikzlibrary{arrows}
+\usetikzlibrary{arrows.meta}
+
+\usetikzlibrary{shapes}
+\usetikzlibrary{shapes.arrows}
+\usetikzlibrary{shapes.callouts}
+\usetikzlibrary{shapes.symbols}
+\usetikzlibrary{shapes.geometric}
+
+\usepgfplotslibrary{patchplots}
+\usepgfplotslibrary{fillbetween}
+
+% boxes
+\usepackage[many]{tcolorbox}
+
+% math packages and fonts
+\usepackage{bm}
+\usepackage{ccfonts}
+\usepackage{eulervm}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{nicefrac}
+\usepackage{slashed}
+\usepackage{bbold}
+\usepackage{array}
+\usepackage{cancel}
+
+% algorithms and listings
+\usepackage[ruled,vlined,linesnumbered]{algorithm2e}
+\usepackage{listings}
+\usepackage{setspace}
+
+\tcbuselibrary{listings}
+\tcbuselibrary{breakable}
+\tcbuselibrary{skins}
+
+% misc
+\usepackage{soul}
+\usepackage{pifont}
+\usepackage{skull}
+\usepackage{multicol}
+\usepackage{animate}
+\usepackage{cleveref}
+\usepackage{hyperref}
+\usepackage{wasysym}
+\usepackage[absolute,overlay]{textpos}
+\usepackage[hang,flushmargin]{footmisc}
+\usepackage[framemethod=tikz]{mdframed} 				% provides frame for framed figure and framed table in theme_2
+
+% ====================================================
+% ====================================================
+% COMMON COMMANDS AND DEFINITIONS
+% ====================================================
+% ====================================================
+
+% centered X column in tabularx
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+
+% slide architecture
+% =============================================
+% divide frame into two parts
+\newcommand{\divideTwo}[4]{
+	\begin{minipage}{#1\textwidth}
+		#2
+	\end{minipage}
+	\hfill
+	\begin{minipage}{#3\textwidth}
+		#4
+	\end{minipage}
+}
+
+% divide frame into two parts (start on top)
+\newcommand{\divideTwoTop}[4]{
+	\begin{minipage}[t]{#1\textwidth}
+		#2
+	\end{minipage}
+	\hfill
+	\begin{minipage}[t]{#3\textwidth}
+		#4
+	\end{minipage}
+}

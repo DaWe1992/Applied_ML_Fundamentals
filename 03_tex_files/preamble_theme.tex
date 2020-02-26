@@ -1,87 +1,6 @@
 \documentclass[12pt,aspectratio=169]{beamer}
 
-% ====================================================
-% ====================================================
-% USEPACKAGES AND IMPORTS
-% ====================================================
-% ====================================================
-
-\usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
-\usepackage[english]{babel}
-
-% tables
-\usepackage{tabularx}
-\usepackage{colortbl}
-\usepackage{multirow}
-\usepackage{makecell}
-
-% tikz and colors
-\usepackage{tikz}
-\usepackage{xcolor}
-\usepackage{pgf-pie}
-\usepackage{pgfplots}
-\usepackage{pgfplotstable}
-\usepackage{tikzsymbols}
-
-\usetikzlibrary{calc}
-\usetikzlibrary{trees}
-\usetikzlibrary{patterns}
-\usetikzlibrary{shadings}
-\usetikzlibrary{positioning}
-\usetikzlibrary{intersections}
-\usepgfplotslibrary{patchplots}
-\usepgfplotslibrary{fillbetween}
-\usetikzlibrary{decorations.pathreplacing}
-
-\usetikzlibrary{arrows}
-\usetikzlibrary{arrows.meta}
-
-\usetikzlibrary{shapes}
-\usetikzlibrary{shapes.arrows}
-\usetikzlibrary{shapes.callouts}
-\usetikzlibrary{shapes.symbols}
-\usetikzlibrary{shapes.geometric}
-
-\usetikzlibrary{intersections}
-
-% boxes
-\usepackage[many]{tcolorbox}
-
-% math packages and fonts
-\usepackage{bm}
-\usepackage{ccfonts}
-\usepackage{eulervm}
-\usepackage{amsmath}
-\usepackage{amsfonts}
-\usepackage{amssymb}
-\usepackage{amsthm}
-\usepackage{mathtools}
-\usepackage{nicefrac}
-\usepackage{slashed}
-\usepackage{bbold}
-\usepackage{array}
-\usepackage{cancel}
-
-% algorithms and listings
-\usepackage[ruled,vlined,linesnumbered]{algorithm2e}
-\usepackage{listings}
-\usepackage{setspace}
-
-\tcbuselibrary{listings}
-\tcbuselibrary{breakable}
-\tcbuselibrary{skins}
-
-% misc
-\usepackage{soul}
-\usepackage{pifont}
-\usepackage{skull}
-\usepackage{multicol}
-\usepackage{animate}
-\usepackage{hyperref}
-\usepackage{wasysym}
-\usepackage[absolute,overlay]{textpos}
-\usepackage[hang,flushmargin]{footmisc}
+\input{../commons}
 
 % ====================================================
 % ====================================================
@@ -89,9 +8,11 @@
 % ====================================================
 % ====================================================
 
+% choose base theme
 \usetheme{Copenhagen}
 
-% color definitions
+% define colors
+% ====================================================
 \definecolor{myblue1}{RGB}{35,119,189}
 \definecolor{myblue2}{RGB}{95,179,238}
 \definecolor{myblue3}{RGB}{129,168,207}
@@ -100,37 +21,45 @@
 \definecolor{myred1}{RGB}{247,12,12}
 
 % set theme colors
+% ====================================================
 \setbeamercolor*{structure}{fg=myblue1,bg=blue}
 \setbeamercolor*{palette primary}{use=structure,fg=white,bg=structure.fg}
 \setbeamercolor*{palette secondary}{use=structure,fg=white,bg=structure.fg!75!black}
 \setbeamercolor*{palette tertiary}{use=structure,fg=white,bg=structure.fg!50!black}
 \setbeamercolor*{palette quaternary}{fg=black,bg=white}
 
-\setbeamertemplate{itemize item}[circle]
-\setbeamertemplate{itemize subitem}[circle]
-\setbeamertemplate{itemize subsubitem}[circle]
-
-\setbeamertemplate{enumerate item}[circle]
-\setbeamertemplate{enumerate subitem}[circle]
-\setbeamertemplate{enumerate subsubitem}[circle]
-
-\setbeamercolor{itemize item}{fg=myblue1}
-\setbeamercolor{itemize subitem}{fg=myblue1}
-\setbeamercolor{itemize subsubitem}{fg=myblue1}
-
+% table of contents
+% ====================================================
 \setbeamertemplate{section in toc}[circle]
 \setbeamertemplate{subsection in toc}[circle]
 \setbeamerfont{subsection in toc}{size=\scriptsize}
 
 \setbeamercolor{frametitle continuation}{fg=black}
 
-% title graphic -- sap logo and dhbw logo
+% define bullet points
+% ====================================================
+\setbeamertemplate{itemize item}[circle]
+\setbeamertemplate{itemize subitem}[circle]
+\setbeamertemplate{itemize subsubitem}[circle]
+
+\setbeamercolor{itemize item}{fg=myblue1}
+\setbeamercolor{itemize subitem}{fg=myblue1}
+\setbeamercolor{itemize subsubitem}{fg=myblue1}
+
+\setbeamertemplate{enumerate item}[circle]
+\setbeamertemplate{enumerate subitem}[circle]
+\setbeamertemplate{enumerate subsubitem}[circle]
+
+% title graphic (sap logo and dhbw logo)
+% ====================================================
 \titlegraphic{\includegraphics[scale=0.1]{../03_img/logo_sap}\hspace*{4.75cm}~%
    	\includegraphics[scale=0.05]{../03_img/logo_dhbw}
 }
 
 \makeatletter
-% frame title
+
+% frametitle
+% ====================================================
 \defbeamertemplate*{frametitle}{mydefault}[1][left]
 {
   	\ifbeamercolorempty[bg]{frametitle}{}{\nointerlineskip}%
@@ -171,7 +100,8 @@
   	\end{tcolorbox}%
 }
 
-% footline of a frame
+% header and Footer
+% ====================================================
 \defbeamertemplate*{footline}{mysplit theme}
 {%
   	\leavevmode%
@@ -189,6 +119,7 @@
   		\end{beamercolorbox}}%
   	\vskip0pt%
 }
+
 \makeatother
 
 % ====================================================
@@ -198,6 +129,7 @@
 % ====================================================
 
 % page number prefix
+% ====================================================
 \newcommand\insertprefix{}  % empty by default
 \newcommand\prefix[1]{\renewcommand\insertprefix{#1}}
 
@@ -223,11 +155,6 @@
 % centered X column in tabularx
 \newcolumntype{Y}{>{\centering\arraybackslash}X}
 
-% commands
-% ====================================================
-
-% highlight commands
-% --------------------------------------------------------------------------------------------------------
 % highlight command
 \newcommand{\highlight}[1]{\textcolor{myblue1}{\textbf{#1}}}
 \newcommand{\highlighttt}[1]{\textcolor{myblue1}{\texttt{#1}}}
@@ -239,16 +166,16 @@
 \newtcolorbox{boxBlueNoFill}{colback=white,colframe=myblue4}
 
 % font commands
-% --------------------------------------------------------------------------------------------------------
-\newcommand{\linkstyle}[1]{\underline{\smash{\texttt{#1}}}} 		% style of hyperlinks
+% ====================================================
+% style of hyperlinks
+\newcommand{\linkstyle}[1]{\underline{\smash{\texttt{#1}}}}
 
 % comment color in algorithms
 \newcommand{\mycommfont}[1]{\footnotesize\ttfamily\textcolor{myblue1}{#1}}
 \SetCommentSty{mycommfont}
 
 % tikz commands
-% --------------------------------------------------------------------------------------------------------
-
+% ====================================================
 % yellow sticky note
 \newcommand{\bubble}[3]{
 \begin{textblock}{100}(#1, #2)
@@ -258,16 +185,21 @@
 \end{textblock}
 }
 
+% floating text
 \newcommand{\floattext}[3]{
 \begin{textblock}{100}(#1, #2)
       	#3
 \end{textblock}
 }
 
+% double circle
 \newcommand{\doublecircle}[2]{
 	\draw[fill=white,draw=myblue1] (#1,#2) circle (2mm);
 	\draw[fill=myblue1,draw=myblue1] (#1,#2) circle (1.5mm);
 }
+
+% circled numbers
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{\node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
 
 % intersection of lines
 \newcommand{\intersect}[5]{
@@ -275,12 +207,8 @@
   		to[bend right=90] ($(\p{c})!1.75mm!(#2)$) -- (#2)
 }
 
-% circled numbers
-\newcommand*\circled[1]{\tikz[baseline=(char.base)]{\node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
-
-
 % slide modifiers
-% --------------------------------------------------------------------------------------------------------
+% ====================================================
 % mark slide as optional
 \newcommand{\optional}{
 	\begin{textblock}{100}(0.15,0.30)
@@ -296,8 +224,8 @@
 }
 
 % citation
-% --------------------------------------------------------------------------------------------------------
-% first argument in {book, online, article}
+% ====================================================
+% first argument is one of the following: {book, online, article}
 \newcommand{\literature}[5]{
 	\setbeamertemplate{bibliography item}[#1]
 	\bibitem{#2}
@@ -305,35 +233,12 @@
 	\textcolor{darkgray}{\textit{#4}} \\
 	\textcolor{black}{#5}
 }
+
 % cite content
 \newcommand{\citeAuthor}[3]{\vfill\scriptsize\textcolor{gray}{#1 \cite{#2}, #3}}
 
-% slide architecture
-% --------------------------------------------------------------------------------------------------------
-% divide frame into two parts
-\newcommand{\divideTwo}[4]{
-	\begin{minipage}{#1\textwidth}
-		#2
-	\end{minipage}
-	\hfill
-	\begin{minipage}{#3\textwidth}
-		#4
-	\end{minipage}
-}
-
-% divide frame into two parts (start on top)
-\newcommand{\divideTwoTop}[4]{
-	\begin{minipage}[t]{#1\textwidth}
-		#2
-	\end{minipage}
-	\hfill
-	\begin{minipage}[t]{#3\textwidth}
-		#4
-	\end{minipage}
-}
-
 % special pages
-% --------------------------------------------------------------------------------------------------------
+% ====================================================
 % title page
 \newcommand{\maketitlepage}{
 	{
@@ -437,7 +342,7 @@
 }
 
 % global pfgplots settings
-% --------------------------------------------------------------------------------------------------------
+% ====================================================
 \pgfplotsset{
 	% allow filtering of data for pgfplots
 	discard if/.style 2 args={
