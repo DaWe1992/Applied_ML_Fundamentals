@@ -16,7 +16,7 @@
 % ====================================================
 % ====================================================
 
-\title[Association Rule Learning]{*** Advanced Machine Learning *** Association Rule Learning}
+\title[Association Rule Learning]{***** Advanced Machine Learning ***** Association Rule Learning}
 \author{M.\,Sc. Daniel Wehner}
 \date{Summer term 2020}
 \institute{SAP\,SE / DHBW Mannheim}
@@ -173,11 +173,11 @@
 		\item The goal is to generate rules which have high support and high confidence.
 		\item Observation: If an item set is infrequent (does not have sufficient support), calculating the confidence can be omitted.
 		\item As a consequence, all rules which can be generated from this item set do not have to be considered anymore.
-		\item Example for the item set $\{ beer, diapers, milk \}$:
+		\item Example for the item set $A = \{ beer, diapers, milk \}$:
 		\begin{itemize}
-			\item The rules derived from this item set are given by:
-			\item If we know this item set to be infrequent, we can prune all these rules.
-			\item There is no need to calculate the confidence for these rules (\textbf{decoupling of support and confidence})
+			\item The rules derived from item set $A$ are given below.
+			\item If we know item set $A$ to be infrequent, we can prune all these rules.
+			\item There is no need to calculate the confidence for these rules (\textbf{decoupling of support and confidence}).
 		\end{itemize}
 	\end{itemize}
 	\divideTwo{0.49}{
@@ -214,10 +214,10 @@
 \begin{frame}
 	\dwHeader{Step 1) Frequent item set generation}
 	\begin{itemize}
-		\item It is possible to enumerate all possible item sets with a lattice.
+		\item It is possible to enumerate all possible item sets with a lattice \cref{fig:lattice}.
 		\item A brute force approach could calculate the support for each candidate set and rank them by the result.
 		\item \textbf{Problem:} The number of candidate sets grows exponentially with $\vert \mathcal{I} \vert$: $2^{\vert \mathcal{I} \vert} - 1$ (excluding empty set).
-		\item Example: For $\mathcal{I} = \{ a, b, c, d, e \}$ we have 31 possible candidates.
+		\item Example: For $\mathcal{I} = \{ a, b, c, d, e \}$, we have 31 possible candidates.
 		\item Therefore, the candidate sets should be generated more efficiently.
 		\item We can make use of the \textbf{anti-monotonicity} of the support:
 		\begin{quote}
@@ -229,6 +229,26 @@
 		\end{equation}
 		\item \textbf{An item set can only be frequent, if all its subsets are frequent and all supersets of an infrequent item set are also infrequent.}
 	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\dwFigure{
+		\begin{minipage}{0.30\textwidth}
+			\includegraphics[scale=0.21]{16_association_rules/02_img/lattice1}
+			\begin{center}(a) item set lattice\end{center}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.30\textwidth}
+			\includegraphics[scale=0.21]{16_association_rules/02_img/lattice2}
+			\begin{center}(b) frequent item set\end{center}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.30\textwidth}
+			\includegraphics[scale=0.21]{16_association_rules/02_img/lattice3}
+			\begin{center}(c) infrequent item set\end{center}
+		\end{minipage}
+	}{Item set lattice for $\mathcal{I} = \{ a, b, c, d, e \}$}{fig:lattice}
 \end{frame}
 
 
@@ -259,26 +279,181 @@
 			\item At the same time we have to ensure that all frequent item sets are found (\textbf{completeness})
 			\item We don't want to produce duplicates (\textbf{efficiency})
 		\end{itemize}
-		\item The Apriori algorithm uses the so-called $S_{k-1} \times S_{k-1}$ method:
+		\item The Apriori algorithm uses the following method:
 		\begin{itemize}
-			\item Merge a pair of ($k - 1$)-item sets only if their first $k - 2$ items are identical.
+			\item Merge a pair of $k$-item sets only if their first $k - 1$ items are identical.
 			\begin{equation}
-				A = \{ a_1, a_2, \dots, a_{k-1} \} \qquad\qquad\qquad B = \{ b_1, b_2, \dots, b_{k-1} \}
+				A = \{ a_1, a_2, \dots, a_{k} \} \qquad\qquad\qquad B = \{ b_1, b_2, \dots, b_{k} \}
 			\end{equation}
-			\item Merge $A$ and $B$, if $a_j = b_j\ (j = 1, 2, \dots, k - 2) \wedge a_{k-1} \ne b_{k-1}$
+			\item Merge $A$ and $B$, if $a_j = b_j\ (j = 1, 2, \dots, k - 1) \wedge a_{k} \ne b_{k}$
 			\item Example:
 			\begin{itemize}
-				\item $A = \{ bread, pizza, milk \}, B = \{ bread, pizza, diapers \}$
-				\item $A$ and $B$ are merged into $\{ bread, pizza, milk, diapers \}$.
+				\item $A = \{ bread, milk, pizza \}, B = \{ bread, milk, wine \}$
+				\item $A$ and $B$ are merged into $\{ bread, milk, pizza, wine \}$.
 			\end{itemize}
 			\item This method still requires pruning non-frequent item sets.
+			\item \textbf{Important: The item sets have to be in lexicographic order.}
 		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 
 \begin{frame}
-
+	Let's calculate the frequent item sets from the introductory example ($s_{min} = 0.25$):
+	\input{16_association_rules/03_tbl/list_of_transactions_binary}
+	\begin{align*}
+		C_1 	&= \{ \{ beer \}, \{ chips \}, \{ pizza \}, \{ wine \} \} \\
+		S_1 	&= \{ \{ beer \}, \{ chips \}, \{ pizza \}, \{ wine \} \} \\
+		C_2 	&= \{ \{ beer, chips \}, \{ beer, pizza \}, \{ beer, wine \}, \{ chips, pizza \}, \{ chips, wine \}, \{ pizza, wine \} \} \\
+		S_2 	&= \{ \{ beer, chips \}, \{ beer, wine \}, \{ chips, pizza \}, \{ chips, wine \}, \{ pizza, wine \} \} \\
+		C_3 	&= \{ \{ beer, chips, wine \}, \{ chips, pizza, wine \} \} \\
+		S_3 	&= \{ \{ beer, chips, wine \} \} \\
+		C_4 	&= \emptyset \\
+		S 	&= \bigcup_{k=1}^3 S_k
+	\end{align*}
 \end{frame}
+
+
+\begin{frame}
+	\begin{itemize}
+		\item The search space for frequent item sets can be structured using the subset relationship.
+		\item \textbf{Border:}
+		\begin{itemize}
+			\item The border \cref{fig:border} consists of all item sets for which...
+			\begin{itemize}
+				\item ...all subsets are frequent and...
+				\item ...no superset is frequent.
+			\end{itemize}
+			\item \textbf{Positive border:} Elements of the border which are frequent.
+			\item \textbf{Negative border:} Elements of the border which are infrequent.
+		\end{itemize}
+	\end{itemize}
+	
+	\dwAlertBox{Frequent item sets = positive border plus all subsets of border elements}
+\end{frame}
+
+
+\begin{frame}
+	\dwFigure{\input{16_association_rules/01_tikz/border}}{Border for the example above}{fig:border}
+\end{frame}
+
+
+\begin{frame}
+	\dwHeader{Step 2) Generation of association rules}
+	\begin{itemize}
+		\item The frequent item sets can now be used to generate association rules.
+		\item For each frequent $k$-item set $X$, there are $2^k - 2$ possible association rules (without $X \rightarrow \emptyset$ and $\emptyset \rightarrow X$) of the general form \cref{fig:rules}:
+		\begin{equation}
+			A \rightarrow B \qquad\text{with}\qquad A \cup B = X \wedge A \cap B = \emptyset 
+		\end{equation}
+		\item Calculate the confidence for the rules and check whether they fulfill the confidence constraint.
+		\item We can also define \textbf{anti-monotonicity} for the confidence:
+		\begin{quote}
+			If a rule is not confident, moving conditions from body to head results in rules which are also not confident.
+		\end{quote}
+		\begin{equation}
+			\text{confidence}(A \rightarrow B \cup C) \le \text{confidence}(A \cup B \rightarrow C)
+		\end{equation}
+		\item This circumstance can again be used for pruning the search space!
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\dwFigure{\input{16_association_rules/01_tikz/generated_rules}}{Search space for association rules (frequent item set $\{ beer, chips, wine \}$)}{fig:rules}
+\end{frame}
+
+
+\begin{frame}
+	Let's make a full example for the Apriori algorithm ($s_{min} = 0.5, c_{min} = 1.0$):
+	\input{16_association_rules/03_tbl/full_example}
+	\begin{align*}
+		C_1 	&= \{ \{ bread \}, \{ butter \}, \{ coffee \}, \{ milk \}, \{ sugar \} \} \\
+		S_1 	&= \{ \{ bread \}, \{ coffee \}, \{ milk \}, \{ sugar \} \} \\
+		C_2 	&= \{ \{ bread, coffee \}, \{ bread, milk \}, \{ bread, sugar \}, \{ coffee, milk \}, \{ coffee, sugar \}, \{ milk, sugar \} \} \\
+		S_2 	&= \{ \{ bread, sugar \}, \{ coffee, milk \}, \{ coffee, sugar \}, \{ milk, sugar \} \} \\
+		C_3 	&= \{ \{ coffee, milk, sugar \} \} \\
+		S_3 	&= \{ \{ coffee, milk, sugar \} \} \\
+		C_4 	&= \emptyset \\
+		S 	&= \bigcup_{k=1}^3 S_k
+	\end{align*}
+\end{frame}
+
+
+\begin{frame}
+	\begin{itemize}
+		\item Rules with $c_{min} = 1.0$:
+		\begin{tabbing}
+			\hspace*{5cm}\=\hspace*{3cm}\=\kill
+			$\{ bread \} \rightarrow \{ sugar \}$		\>	$s = 0.50$		\>	$c = 1.00$ 	\\[1.5mm]
+			$\{ milk \} \rightarrow \{ coffee \}$		\>	$s = 0.75$		\>	$c = 1.00$ 	\\[1.5mm]
+			$\{ coffee \} \rightarrow \{ milk \}$ 		\>	$s = 0.75$		\>	$c = 1.00$		\\[1.5mm]
+			$\{ milk, sugar \} \rightarrow \{ coffee \}$	\>	$s = 0.50$		\>	$c = 1.00$		\\[1.5mm]
+			$\{ sugar, coffee \} \rightarrow \{ milk \}$	\>	$s = 0.50$		\>	$c = 1.00$
+		\end{tabbing}
+		\item Other rules are either not frequent enough and are filtered out in step 1; \\
+			e.\,g. $\{ butter \} \rightarrow \{ bread, sugar \}; (s = 0.25, c = 1.0)$...
+		\item ...or not confident enough and filtered out in step 2; \\
+			e.\,g. $\{ milk, coffee \} \rightarrow \{ sugar \}; (s = 0.5, c = 0.67)$)
+	\end{itemize}
+\end{frame}
+
+
+% Section: Miscellaneous
+%______________________________________________________________________
+\dwSection{Miscellaneous}
+
+% Interestingness
+\begin{dwHeaderFrame}{Interestingness}
+	\begin{itemize}
+		\item \textbf{Problem:} There might still be way too many rules.
+		\item Assume the following two rules:
+		\begin{equation}
+			R_1 =  A \cup B \rightarrow C \qquad\qquad\qquad R_2 = A \rightarrow C
+		\end{equation}
+		\item Filter out $R_1$, if the rule is...
+		\begin{itemize}
+			\item ...\textit{trivial} ($R_2$ covers the same examples)
+			\item ...\textit{unproductive} ($R_2$ has equal or higher confidence)
+			\item ...\textit{insignificant} (Confidence of $R_2$ is not significantly worse)
+		\end{itemize}
+		\item Filter by \textbf{interestingness} (\textit{How can we measure interestingness?})
+	\end{itemize}
+\end{dwHeaderFrame}
+
+
+\begin{frame}
+	\begin{itemize}
+		\item Support and confidence are not sufficient to capture whether a rule is interesting or not.
+		\item A rule may have high support and confidence, but still may not be interesting.
+		\item Example:
+		\begin{itemize}
+			\item Consider the rule: $\{ diapers \} \rightarrow \{ beer \}; c = 0.90$
+			\item 90\,\% of all customers who buy diapers also buy beer.
+			\item Sounds like and interesting association rule.
+			\item \textbf{But:} If we know, that 90\,\% of all customers buy beer, this rule is not interesting anymore.
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+% Lift, Leverage and Conviction
+\begin{dwHeaderFrame}{Lift, Leverage and Conviction}
+	\begin{itemize}
+		\item Consider rule $R = A \rightarrow B$
+		\item \textbf{Lift:} Rule $R$ is interesting, if $\text{lift}(R) \gg 1$.
+		\begin{equation}
+			\text{lift}(A \rightarrow B) = \frac{\text{support}(A \rightarrow B)}{\text{support}(A) \cdot \text{support}(B)}
+		\end{equation}
+		\item \textbf{Leverage:} Rule $R$ is interesting, if $\text{leverage}(R) \gg 0$.
+		\begin{equation}
+			\text{leverage}(A \rightarrow B) = \text{support}(A \rightarrow B) - \text{support}(A) \cdot \text{support}(B)
+		\end{equation}
+		\item \textbf{Conviction:} Expected ratio that $A$ occurs without $B$ (incorrect prediction of $R$).
+		\begin{equation}
+			\text{conviction}(A \rightarrow B) = \frac{1 - \text{support}(B)}{1 - \text{confidence}(A \rightarrow B)}
+		\end{equation}
+	\end{itemize}
+\end{dwHeaderFrame}
 
 \end{document}
