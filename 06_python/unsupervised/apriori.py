@@ -29,7 +29,7 @@ class Apriori:
         """
         Constructor.
         """
-        pass
+        self.rules = None
     
 
     def fit(self, X, s_min, c_min, rules_sort_by="support"):
@@ -259,7 +259,6 @@ class Apriori:
     def __calculate_metrics(self, sort_by="support"):
         """
         Calculates the metrics (support, confidence, lift, ...) for each rule.
-        This method requires a call to 'fit()' first.
         
         :param sort_by:         sort key to sort the rules
         :return:                sorted list of rules with metrics
@@ -288,7 +287,10 @@ class Apriori:
     def show(self):
         """
         Prints the rules in a tabular format.
+        This method requires a call to 'fit()' first.
         """
+        if self.rules is None:
+            raise Exception("You have to call method fit() first.")
         # print some statistics about the data set
         print("Number of items:\t", self.X.shape[1])
         print("Number of transactions:\t", self.X.shape[0])
