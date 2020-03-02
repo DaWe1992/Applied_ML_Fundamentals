@@ -149,10 +149,10 @@ You can get a nice certificate if you want (around $60):
 In the exam we will not ask anything which was not discussed in the lecture. Regard the literature as additional resources in case you want to dig deeper into
 specific topics. Please give me a hint, if you feel that some important resources are missing. I am happy to add them here.
 
-## Data Exploration Project (4th Semester) <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/crane.png" width="45px" height="35px">
+## Data Exploration Project (4th Semester) <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/crane.png" width="45px" height="40px">
 Please find the material for the project in the folder [05_project](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/05_project)
 
-## Additional Material <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/bonus.png" width="35px" height="35px">
+## Additional Material <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/bonus.png" width="35px" height="45px">
 Have a look at the following slides (unless stated otherwise, these slides are not relevant for the exam):
 
 1. **Support vector machines** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/11_svm.pdf))
