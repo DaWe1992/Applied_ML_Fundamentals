@@ -36,19 +36,17 @@ We are going to cover the following topics:
     * Gaussian mixture models and expectation maximization
 5. **Supervised learning**
     * Regression ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/05_regression.pdf))
-      * Linear regression
-	  * Probabilistic regression
-      * Basis functions: Radial basis functions, polynomial basis functions
+		* Linear regression
+		* Probabilistic regression
+		* Basis functions: Radial basis functions, polynomial basis functions
     * Classification I
-      * k-nearest neighbors ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/06_knn.pdf))
-      * Logistic regression ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/07_logistic_regression.pdf))
-      * Decision trees and ensemble methods ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/08_decision_trees.pdf))
-	* Classification II
-      * Deep learning ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/10_deep_learning.pdf))
-        * Perceptrons
-        * Multi-layer-perceptrons and back-propagation
-        * Deep learning application: NLP (word embeddings, text classification, sentiment analysis)
-      * Support vector machines ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/11_svm.pdf))
+		* k-nearest neighbors ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/06_knn.pdf))
+		* Logistic regression ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/07_logistic_regression.pdf))
+		* Decision trees and ensemble methods ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/08_decision_trees.pdf))
+	* Classification II: Deep learning ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/10_deep_learning.pdf))
+		* Perceptrons
+		* Multi-layer-perceptrons and back-propagation
+		* Deep learning application: NLP (word embeddings, text classification, sentiment analysis)
 6. **Evaluation of ML models** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/09_evaluation.pdf))
 	* Out-of-sample testing and cross validation
 	* Confusion matrices
@@ -57,16 +55,10 @@ We are going to cover the following topics:
 	* Model selection: Grid search, random search
 7. **Unsupervised learning**
     * Clustering ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/12_clustering.pdf))
-      * k-Means
-      * Hierarchical clustering (divisive and agglomerative)
+		* k-Means
+		* Hierarchical clustering (divisive and agglomerative)
     * Principal component analysis ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/13_pca.pdf))
-8. **Reinforcement learning** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/14_rl.pdf))
-    * Markov decision processes
-    * Dynamic programming: Policy iteration, value iteration
-    * Q-learning, Q-networks
-9. **Lecture summary**
-10. **Bonus material**
-	* Probabilistic graphical models ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/15_pgm.pdf))
+8. **Lecture summary**
 	
 A list of abbreviations, symbols and mathematical notation used in the context of the slides can be found [here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/symbols.pdf).
 
@@ -158,6 +150,39 @@ specific topics. Please give me a hint, if you feel that some important resource
 
 ## Data Exploration Project (4th Semester)
 Please find the material for the project in the folder [05_project](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/05_project)
+
+## Bonus Material (not relevant for the Exam)
+1. **Support vector machines** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/11_svm.pdf))
+	* Linear SVMs
+	* Non-linear SVMs and the kernel-trick
+	* Soft-margin SVMs
+2. **Reinforcement learning** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/14_rl.pdf))
+    * Markov decision processes (MDPs)
+	* Algorithms:
+		* Dynamic programming: Policy iteration and value iteration
+		* Q-learning, (deep) Q-networks
+		* Policy gradient methods
+3. ** Probabilistic graphical models** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/15_pgm.pdf))
+	* Bayesian networks
+		* Representation theorem, local Markov assumption and d-separation
+		* Exact inference in Bayesian networks using variable elimination
+		* Approximate inference
+			* Forward sampling
+			* Rejection sampling
+			* Gibbs sampling
+	* Hidden markov models (HMMs) and the Viterbi algorithm
+4. **Association rules / Apriori** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/16_association_rules.pdf))
+5. **Data preprocessing** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/17_data_preprocessing.pdf))
+	* Data mining processes (KDD, CRISP-DM)
+	* Data cleaning
+	* Data transformation (e. g. normalization, standardization, discretization and numerization)
+	* Data reduction and feature subset selection
+	* Data integration
+6. **Regression II** (not yet available)
+	* Bayesian regression
+	* Kernel regression
+	* Gaussian process regression
+7. **Deep Learning II** (not yet available)
 
 ## Bugs and Errors <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/bug.png" width="25px" height="30px">
 Help us improve the lecture. Feel free to file an issue, if you spot any errors in the slides, exercises or code.
