@@ -121,7 +121,7 @@ Play around with the hyper-parameters of the algorithms and try different data s
 ## Literature and recommended Reading <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/literature.png" width="25px" height="25px">
 You do not need to buy any books for the lecture, most resources are available online. Please find a curated list below:
 
-| Title                                    	     | Author(s)                    | Publisher 				| Link to Resource                                                         																																|
+| Title                                    	     | Author(s)                    | Publisher 				| Link Resource                                                         																																|
 |------------------------------------------------|------------------------------|---------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Deep Learning                            	     | Goodfellow et al. (2016)		| MIT Press     			| [click here](https://www.deeplearningbook.org/) 		        																															|
 | Elements of statistical Learning               | Hastie et al. (2008) 		| Springer      			| [click here](https://web.stanford.edu/~hastie/Papers/ESLII.pdf)																															|
