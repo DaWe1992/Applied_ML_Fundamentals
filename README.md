@@ -198,5 +198,4 @@ Have a look at the following slides (unless stated otherwise, these slides are n
 Help us improve the lecture. Feel free to file an issue, if you spot any errors in the slides, exercises or code.
 Thank you very much. **Please do not open issues for questions concerning the content!** Either use the Moodle forum or send us an e-mail for that.
 
-___
-<sub>© Daniel Wehner, 2020</sub>
+<sub>© 2020 Daniel Wehner</sub>
