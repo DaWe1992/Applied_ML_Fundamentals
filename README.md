@@ -1,3 +1,7 @@
+table {
+    width: 100%;
+}
+
 # 📙 Applied Machine Learning Fundamentals (Lecture)
 
 ```
