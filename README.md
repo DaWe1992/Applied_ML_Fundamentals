@@ -172,7 +172,7 @@ Have a look at the following slides (unless stated otherwise, these slides are n
 		* Exact inference (variable elimination)
 		* Approximate inference (forward / rejection / Gibbs sampling)
 	* Hidden markov models
-		* Model and assumptionsand
+		* Model and assumptions
 		* Inference: Viterbi algorithm
 4. **Association rules / Apriori** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/16_association_rules.pdf))
 5. **Data preprocessing** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/17_data_preprocessing.pdf))
