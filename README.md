@@ -159,23 +159,21 @@ Please find the material for the project in the folder [05_project](https://gith
 2. **Reinforcement learning** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/14_rl.pdf))
     * Markov decision processes (MDPs)
 	* Algorithms:
-		* Dynamic programming: Policy iteration and value iteration
+		* Policy iteration and value iteration
 		* Q-learning, (deep) Q-networks
 		* Policy gradient methods
-3. ** Probabilistic graphical models** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/15_pgm.pdf))
+3. **Probabilistic graphical models** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/15_pgm.pdf))
 	* Bayesian networks
-		* Representation theorem, local Markov assumption and d-separation
-		* Exact inference in Bayesian networks using variable elimination
-		* Approximate inference
-			* Forward sampling
-			* Rejection sampling
-			* Gibbs sampling
+		* Representation theorem
+		* d-separation
+		* Exact inference (variable elimination)
+		* Approximate inference (forward / rejection sampling, Gibbs sampling)
 	* Hidden markov models (HMMs) and the Viterbi algorithm
 4. **Association rules / Apriori** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/16_association_rules.pdf))
 5. **Data preprocessing** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/17_data_preprocessing.pdf))
 	* Data mining processes (KDD, CRISP-DM)
 	* Data cleaning
-	* Data transformation (e. g. normalization, standardization, discretization and numerization)
+	* Data transformation (e. g. normalization, discretization)
 	* Data reduction and feature subset selection
 	* Data integration
 6. **Regression II** (not yet available)
