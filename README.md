@@ -60,8 +60,9 @@ We are going to cover the following topics:
 		* Hierarchical clustering (divisive and agglomerative)
     * Principal component analysis ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/13_pca.pdf))
 8. **Lecture summary**
-	
+
 A list of abbreviations, symbols and mathematical notation used in the context of the slides can be found [here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/symbols.pdf).
+Please find additional material below.
 
 ## Assignments <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/assignments.png" width="25px" height="25px">
 The assignments are voluntary. All students who choose to participate have to form groups comprising three to four students (not more and not less).
@@ -196,3 +197,6 @@ Have a look at the following slides (unless stated otherwise, these slides are n
 ## Bugs and Errors <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/bug.png" width="25px" height="30px">
 Help us improve the lecture. Feel free to file an issue, if you spot any errors in the slides, exercises or code.
 Thank you very much. **Please do not open issues for questions concerning the content!** Either use the Moodle forum or send us an e-mail for that.
+
+___
+<sub>© Daniel Wehner, 2020</sub>
