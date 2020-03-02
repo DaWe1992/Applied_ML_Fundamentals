@@ -150,7 +150,13 @@ In the exam we will not ask anything which was not discussed in the lecture. Reg
 specific topics. Please give me a hint, if you feel that some important resources are missing. I am happy to add them here.
 
 ## Data Exploration Project (4th Semester) <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/crane.png" width="45px" height="40px">
-Please find the material for the project in the folder [05_project](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/05_project)
+Please find the material for the project in the folder [05_project](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/05_project).
+
+The material contains:
+* Organization and goals of the project
+* List of topic suggestions
+* Submission details
+* Grading details
 
 ## Additional Material <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/bonus.png" width="80px" height="40px">
 Have a look at the following slides (unless stated otherwise, these slides are not relevant for the exam):
