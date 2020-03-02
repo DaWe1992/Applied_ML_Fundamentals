@@ -30,6 +30,7 @@ We are going to cover the following topics:
 3. **Bayesian decision theory** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/03_decision_theory.pdf))
     * Bayes optimal classifier
     * Naive Bayes
+	* Risk minimization
 4. **Probability density estimation** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/04_density_estimation.pdf))
     * Parametric models
     * Non-parametric models
@@ -148,27 +149,31 @@ You can get a nice certificate if you want (around $60):
 In the exam we will not ask anything which was not discussed in the lecture. Regard the literature as additional resources in case you want to dig deeper into
 specific topics. Please give me a hint, if you feel that some important resources are missing. I am happy to add them here.
 
-## Data Exploration Project (4th Semester)
+## Data Exploration Project (4th Semester) <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/crane.png" width="25px" height="30px">
 Please find the material for the project in the folder [05_project](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/05_project)
 
-## Bonus Material (not relevant for the Exam)
+## Additional Material <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/bonus.png" width="25px" height="30px">
+Have a look at the following slides (unless stated otherwise, these slides are not relevant for the exam):
+
 1. **Support vector machines** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/11_svm.pdf))
 	* Linear SVMs
 	* Non-linear SVMs and the kernel-trick
 	* Soft-margin SVMs
 2. **Reinforcement learning** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/14_rl.pdf))
-    * Markov decision processes (MDPs)
+    * Markov decision processes
 	* Algorithms:
 		* Policy iteration and value iteration
-		* Q-learning, (deep) Q-networks
+		* Q-learning and Q-networks
 		* Policy gradient methods
 3. **Probabilistic graphical models** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/15_pgm.pdf))
 	* Bayesian networks
 		* Representation theorem
 		* d-separation
 		* Exact inference (variable elimination)
-		* Approximate inference (forward / rejection sampling, Gibbs sampling)
-	* Hidden markov models (HMMs) and the Viterbi algorithm
+		* Approximate inference (forward / rejection / Gibbs sampling)
+	* Hidden markov models
+		* Model and assumptionsand
+		* Inference: Viterbi algorithm
 4. **Association rules / Apriori** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/16_association_rules.pdf))
 5. **Data preprocessing** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/17_data_preprocessing.pdf))
 	* Data mining processes (KDD, CRISP-DM)
