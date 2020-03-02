@@ -1,6 +1,8 @@
+<style>
 table {
     width: 100%;
 }
+</style>
 
 # 📙 Applied Machine Learning Fundamentals (Lecture)
 
