@@ -1,0 +1,337 @@
+% select theme
+\input{../preamble_theme_2}
+
+% ====================================================
+% ====================================================
+% OPTIONS
+% ====================================================
+% ====================================================
+
+% number of levels in toc
+\dwDeepToc{false}
+
+% ====================================================
+% ====================================================
+% PRESENTATION DATA
+% ====================================================
+% ====================================================
+
+\title[Advanced Regression Techniques]{***** Advanced Machine Learning ***** Advanced Regression Techniques}
+\author{M.\,Sc. Daniel Wehner}
+\date{Summer term 2020}
+\institute{SAP\,SE / DHBW Mannheim}
+
+% ====================================================
+% ====================================================
+% BEGIN OF DOCUMENT
+% ====================================================
+% ====================================================
+
+\begin{document}
+
+% Title frame
+%______________________________________________________________________
+\dwPrintTitle
+
+% Agenda
+%______________________________________________________________________
+\dwPrintToc
+
+% Section: Bayesian Regression
+%______________________________________________________________________
+\dwSection{Bayesian Regression}
+
+% Introduction
+\begin{dwHeaderFrame}{Introduction}
+	\begin{itemize}
+		\item 
+	\end{itemize}
+\end{dwHeaderFrame}
+
+
+% Section: Kernel Ridge Regression
+%______________________________________________________________________
+\dwSection{Kernel Ridge Regression}
+
+% Introduction
+\begin{dwHeaderFrame}{Introduction}
+	\begin{itemize}
+		\item In ridge regression, the optimal parameters $\bm{\theta}$ can be found using the \textbf{normal equation}:
+		\begin{equation}
+			\bm{\theta} = (\bm{\Phi}^{\intercal} \bm{\Phi} + \lambda \bm{I})^{-1} \bm{\Phi}^{\intercal} \bm{y}
+			\label{eq:normal-equation}
+		\end{equation}
+		\item In the above formula, $\bm{\Phi}$ denotes the design matrix (regressor matrix), $\bm{y}$ is the label vector and $\lambda$ is the regularization parameter.
+		\item In order to apply kernels, we have to rephrase this equation in terms of dot products of the input features. Replacing these dot products by kernels avoids operating in feature space.
+		\item This can be achieved by using the \textbf{Woodbury matrix identity}.
+	\end{itemize}
+\end{dwHeaderFrame}
+
+
+% Woodbury Matrix Identity
+\begin{dwHeaderFrame}{Woodbury Matrix Identity}
+	\begin{itemize}
+		\item For the prediction $y_q$ of a new query data point $\bm{x}_q$, we have to calculate:
+		\begin{align}
+			y_q
+				&= \varphi(\bm{x}_q)^{\intercal} \bm{\theta} \\[2mm]
+			\shortintertext{\footnotesize Step \ding{182}: Insert normal equation \cref{eq:normal-equation}:}
+				&= \varphi(\bm{x}_q)^{\intercal} (\bm{\Phi}^{\intercal} \bm{\Phi} + \lambda \bm{I})^{-1} \bm{\Phi}^{\intercal} \bm{y} \\[2mm]
+			\shortintertext{\footnotesize Step \ding{183}: Apply Woodbury matrix identity:}
+				&= \varphi(\bm{x}_q)^{\intercal} \bm{\Phi}^{\intercal}(\bm{\Phi} \bm{\Phi}^{\intercal} + \lambda \bm{I})^{-1} \bm{y}
+			\label{eq:woodbury}
+		\end{align}
+		\item The formula given in \cref{eq:woodbury} exclusively uses dot products of input features and is therefore susceptible to kernels.
+	\end{itemize}
+\end{dwHeaderFrame}
+
+
+\begin{frame}
+	\begin{itemize}
+		\item Replace the dot products by kernel functions:
+		\begin{alignat}{2}
+		\shortintertext{\footnotesize Rewrite of $\varphi(\bm{x}_q)^{\intercal} \bm{\Phi}^{\intercal}$:}
+			\varphi(\bm{x}_q)^{\intercal} \bm{\Phi}^{\intercal} &=
+				\varphi(\bm{x}_q)^{\intercal}
+				\begin{bmatrix}
+					\varphi(\bm{x}^{(1)})^{\intercal} 	\\
+					\vdots 						\\
+					\varphi(\bm{x}^{(n)})^{\intercal}
+				\end{bmatrix}^{\intercal} =
+				\begin{bmatrix}
+					\mathcal{K}(\bm{x}_q, \bm{x}^{(1)})	\\
+					\vdots 						\\
+					\mathcal{K}(\bm{x}_q, \bm{x}^{(n)})
+				\end{bmatrix} = \bm{K}_*(\bm{x}_q)		\\[8mm]
+		\shortintertext{\footnotesize Rewrite of $\bm{\Phi} \bm{\Phi}^{\intercal}$:}
+			\bm{\Phi} \bm{\Phi}^{\intercal} &=
+				\begin{bmatrix}
+					\varphi(\bm{x}^{(1)})^{\intercal} 	\\
+					\vdots 						\\
+					\varphi(\bm{x}^{(n)})^{\intercal}
+				\end{bmatrix}
+				\begin{bmatrix}
+					\varphi(\bm{x}^{(1)})^{\intercal} 	\\
+					\vdots 						\\
+					\varphi(\bm{x}^{(n)})^{\intercal}
+				\end{bmatrix}^{\intercal} =
+				\begin{bmatrix}
+					\mathcal{K}(\bm{x}^{(1)}, \bm{x}^{(1)}) 	& \hdots 	& \mathcal{K}(\bm{x}^{(n)}, \bm{x}^{(1)}) \\
+					\vdots 							& \ddots 	& \vdots 							\\
+					\mathcal{K}(\bm{x}^{(1)}, \bm{x}^{(n)}) 	& \hdots 	& \mathcal{K}(\bm{x}^{(n)}, \bm{x}^{(n)})
+				\end{bmatrix} = \bm{K}
+		\end{alignat}
+		\vspace*{1mm}
+		\item The kernel matrices $\bm{K}$ and $\bm{K}_*$ must fulfill \textbf{Mercer's condition} and therefore have to be \textbf{positive-semi definite (psd)}.
+			Famous choices: Polynomial kernel or radial basis function (RBF) kernel.
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\begin{itemize}
+		\item The final kernel ridge regression formula is given by:
+		\begin{equation}
+			y_q = \bm{K}_*(\bm{x_q}) (\bm{K} + \lambda \bm{I})^{-1} \bm{y}
+		\end{equation}
+		\item Like all kernel methods, it is a \textbf{non-parametric} approach.
+	\end{itemize}
+	
+	\dwAlertBox{Kernel methods do not work well for very large data sets (> 10,000 data points), since we have to calculate all pairwise similarities!}
+\end{frame}
+
+
+\begin{frame}
+	\dwFigure{\includegraphics[scale=0.55]{18_advanced_regression/02_img/kernel_regression}}{Result of kernel ridge regression}{fig:kernel-regression}
+\end{frame}
+
+
+% Section: Gaussian Process Regression
+%______________________________________________________________________
+\dwSection{Gaussian Process Regression}
+
+% Introduction
+\begin{dwHeaderFrame}{Introduction}
+	\begin{itemize}
+		\item Similarly to kernel ridge regression, Gaussian processes do not make any assumptions about the type of regression function (e.\,g. linear, quadratic, ...)
+		\item It is non-parametric and a form of supervised learning:
+		\begin{equation}
+			h(\bm{x}) = \mathfrak{GP}(m(\bm{x}), \mathcal{K}(\bm{x}, \bm{x}'))
+			\label{eq:gp}
+		\end{equation}
+		\item In \cref{eq:gp}, $m(\bm{x})$ denotes the mean function, whereas $\mathcal{K}(\bm{x}, \bm{x}')$ denotes the kernel function, which -- in the context of Gaussian processes -- is
+			referred to as the covariance function.
+		\item Definition of a Gaussian process:
+		\begin{quote}
+			Formally, a Gaussian process is a collection of random variables, any finite number of which has a \textbf{joint Gaussian distribution}.
+		\end{quote}
+	\end{itemize}
+\end{dwHeaderFrame}
+
+
+\begin{frame}
+	\begin{itemize}
+		\item Instead of modeling a distribution over parameters (cf. Bayesian regression), we model a \textbf{distribution over possible regression functions}.
+		\item Thus, Gaussian processes extend multivariate Gaussian distributions to \textbf{infinite dimensions}.
+		\begin{itemize}
+			\item E.\,g. a function $f : \mathbb{R} \mapsto \mathbb{R}$ can be thought of as a sample from some infinite Gaussian distribution.
+			\item Pick the function which maximizes the posterior distribution over functions.
+		\end{itemize}
+		\item The mean of the prior $m(\bm{x})$ distribution is usually set to 0 everywhere.
+		\item In practice, the squared exponential function ($\widehat{=}$ RBF-kernel) is frequently used:
+		\begin{equation}
+			\mathcal{K}(\bm{x}, \bm{x}') = \sigma_f^2 \cdot \exp\left\{ \frac{-\Vert \bm{x} - \bm{x}' \Vert^2}{2 \cdot l^2} \right\}
+		\end{equation}
+		\item Hyper-Parameters:
+		\begin{itemize}
+			\item $\sigma_f^2$ denotes the maximum allowable covariance. It should be high for functions covering a broad range of the $y$-axis. If $\bm{x} \approx \bm{x}'$,
+				$\mathcal{K}(\bm{x}, \bm{x}')$ approaches this maximum.
+			\item $l$ (landmark) controls how much the data points influence each other.
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+% Learning a Gaussian Process Model
+\begin{dwHeaderFrame}{Learning a Gaussian Process Model}
+	\begin{itemize}
+		\item We are given a training data set $\mathcal{D}$ comprising $n$ observations:
+		\begin{equation*}
+			\mathcal{D} = \{ (\bm{x}^{(1)}, y^{(1)}), (\bm{x}^{(2)}, y^{(2)}), \dots, (\bm{x}^{(n)}, y^{(n)}) \} = \{ (\bm{x}^{(i)}, y^{(i)}) \}_{i=1}^n
+		\end{equation*}
+		\item Also, we have a query data point $\bm{x}_q$, for which $y_q$ has to be predicted.
+		\item To do so, we compute the covariance between all example pairs.
+		\item This results in three matrices $\bm{K}$ (matrix), $\bm{K}_*$ (vector) and $\bm{K}_{**}$ (scalar).
+	\end{itemize}
+\end{dwHeaderFrame}
+
+
+\begin{frame}
+	The matrices have the following form:
+
+	\begin{align}
+		\bm{K} &=
+		\begin{bmatrix}
+			\mathcal{K}(\bm{x}^{(1)}, \bm{x}^{(1)}) 	& \mathcal{K}(\bm{x}^{(2)}, \bm{x}^{(1)}) & \hdots & \mathcal{K}(\bm{x}^{(n)}, \bm{x}^{(1)}) 	\\
+			\mathcal{K}(\bm{x}^{(1)}, \bm{x}^{(2)}) 	& \mathcal{K}(\bm{x}^{(2)}, \bm{x}^{(2)}) & \hdots & \mathcal{K}(\bm{x}^{(n)}, \bm{x}^{(2)}) 	\\
+			\vdots 							& \vdots 							& \ddots & \vdots 							\\
+			\mathcal{K}(\bm{x}^{(1)}, \bm{x}^{(n)}) 	& \mathcal{K}(\bm{x}^{(2)}, \bm{x}^{(n)}) & \hdots & \mathcal{K}(\bm{x}^{(n)}, \bm{x}^{(n)})
+		\end{bmatrix} \\[8mm]
+		\bm{K}_* &=
+		\begin{bmatrix}
+			\mathcal{K}(\bm{x}_q, \bm{x}^{(1)}) & \mathcal{K}(\bm{x}_q, \bm{x}^{(2)}) & \dots & \mathcal{K}(\bm{x}_q, \bm{x}^{(n)})
+		\end{bmatrix}^{\intercal} \\[8mm]
+		\bm{K}_{**} &= \mathcal{K}(\bm{x}_q, \bm{x}_q)
+	\end{align}
+
+	\dwAlertBox{$\bm{K}$ is a matrix (contains the similarities of training data pairs), $\bm{K}_*$ is a vector (contains similarities of the query data point with the training data),
+		while $\bm{K}_{**}$ is actually a scalar (comparison of data point $\bm{x}_q$ to itself)!}
+\end{frame}
+
+
+\begin{frame}
+	\begin{itemize}
+		\item Since we assume that the data can be modeled as a sample from a multivariate Gaussian distribution, we can model the Gaussian process prior as follows:
+		\begin{equation}
+			\begin{bmatrix} \bm{y} \\ y_q \end{bmatrix} \thicksim
+				\mathcal{N} \left(
+					\bm{0}, 
+					\begin{bmatrix} \bm{K} & \bm{K_*^{\intercal}} \\ \bm{K_*} & \bm{K_{**}} \end{bmatrix}
+				\right)
+		\end{equation}
+		\item What we actually want is the \textbf{posterior distribution} $p(y_q \vert \bm{y})$: \textit{`Given the data, what is $y_q$?'}
+		\item For Gaussian distributions, the posterior distribution can be computed analytically:
+		\begin{equation}
+			y_q \vert \bm{y} \thicksim \mathcal{N}(
+				\underbracket{\bm{K}_* \bm{K}^{-1} \bm{y}}_{
+					\substack{\text{\textbf{Matrix of}} \\ \text{\textbf{regr. coeff.}}}
+				},
+				\underbracket{\bm{K}_{**} - \bm{K}_* \bm{K}^{-1} \bm{K}_*^{\intercal}}_{
+					\text{\textbf{Schur complement}}
+				}
+			)
+		\end{equation}
+		\item The mean of the posterior distribution is given by the \textbf{matrix of regression coefficients},
+			its variance can be computed using the \textbf{Schur complement}.
+		\item We can compute confidence intervals (e.\,g. 90\,\% | 95\,\% | 99\,\%):
+		\begin{equation}
+			(1.65\ |\ 1.96\ |\ 2.58) \cdot \sqrt{var(y_q)}
+		\end{equation}
+	\end{itemize}
+\end{frame}
+
+
+% Example
+\begin{dwHeaderFrame}{Example}
+	\dwFigure{
+		\divideTwo{0.49}{
+			\input{18_advanced_regression/03_tbl/datapoints_gp}
+		}{0.49}{
+			\vspace*{3mm}
+			\input{18_advanced_regression/01_tikz/datapoints_gp}
+		}
+	}{Example data set for a Gaussian process}{fig:example-gp}
+	
+	\begin{itemize}
+		\item Suppose $\sigma_f = 1.27, l = 1.00$. What is $y_q$ for $\bm{x}_q = 8$?
+		\item Let's plot the prior distribution first.
+	\end{itemize}
+\end{dwHeaderFrame}
+
+
+\begin{frame}
+	\dwHeader{Prior distribution}
+	\dwFigure{\input{18_advanced_regression/01_tikz/gp_prior}}{Prior distribution for the Gaussian process}{fig:gp-prior}
+	\begin{itemize}
+		\item Naturally, the prior does not fit the data well (we have not fitted the model yet).
+		\item We have zero mean everywhere.
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\dwHeader{Posterior distribution}
+	\dwFigure{\input{18_advanced_regression/01_tikz/gp}}{Posterior distribution for the Gaussian process}{fig:gp-posterior}
+	\dwAlertBox{Wait a minute: Isn't this model overfitting the training data?}
+\end{frame}
+
+
+\begin{frame}
+	\begin{itemize}
+		\item The model clearly overfits the data as can be seen from the previous slide (the regression line goes through each training data point perfectly).
+		\item This is because the model assumes the data to be \textbf{noise-free}.
+		\item It is possible to add a little bit of noise, in order to deal with this easily ($\sigma_n$ is the variance of the noise):
+		\begin{equation}
+			\bm{K}_{\sigma_n} \longleftarrow \bm{K} + \sigma_n \bm{I}
+		\end{equation}
+		\item The updated formulas look like this:
+		\begin{itemize}
+			\item Matrix of regression coefficients (\textbf{same result as in kernel ridge regression}):
+			\begin{equation}
+				\bm{K_*} \bm{K}_{\sigma_n}^{-1} \bm{y}
+			\end{equation} 
+			\item Schur complement:
+			\begin{equation}
+				\bm{K}_{**} - \bm{K}_* \bm{K}_{\sigma_n}^{-1} \bm{K}_*^{\intercal}
+			\end{equation}
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\dwHeader{Prior distribution (with noise)}
+	\dwFigure{\input{18_advanced_regression/01_tikz/gp_with_noise}}{Posterior distribution for the Gaussian process with noise}{fig:gp-posterior-noise}
+\end{frame}
+
+
+% Learning the Hyper-Parameters
+\begin{dwHeaderFrame}{Learning the Hyper-Parameters}
+	\begin{itemize}
+		\item The results of Gaussian process regression depend heavily on the parameters $\{ \sigma_f, l \}$, which is why these parameters should be optimized for the task at hand.
+		\item This can be down by maximizing the \textbf{marginal likelihood} (e.\,g. by using gradient ascent).
+		\item The exact procedure is very involved and out of scope for this lecture.
+	\end{itemize}
+\end{dwHeaderFrame}
+
+\end{document}

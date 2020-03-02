@@ -1,0 +1,44 @@
+\begin{figure}
+	\centering
+	\begin{tikzpicture}
+    
+	  	  \begin{axis}[
+			scale=0.6,
+			minor tick num=5,
+			grid=both,
+	    			grid style={line width=.1pt, draw=gray!10},
+	    			major grid style={line width=.2pt,draw=gray!50},
+			x=35,
+			y=16.5,
+			xmin=-3.51,
+			xmax=13.51,
+			hide axis
+		]
+
+			\pgfplotstableread{18_advanced_regression/05_data/datapoints_gp.txt} \datatable
+			\pgfplotstableread{18_advanced_regression/05_data/datapoints_mu_sigma_gp.txt} \datatableMuSigma
+
+			% plot confidence intervals
+			\addplot[draw=none,name path=muPlusNineNine] table[x=x,y=muPlus99] from \datatableMuSigma;
+			\addplot[draw=none,name path=muMinusNineNine] table[x=x,y=muMinus99] from \datatableMuSigma;
+			\addplot[lightgray!30] fill between[of=muPlusNineNine and muMinusNineNine];
+			\addplot[draw=none,name path=muPlusNineFive] table[x=x,y=muPlus95] from \datatableMuSigma;
+			\addplot[draw=none,name path=muMinusNineFive] table[x=x,y=muMinus95] from \datatableMuSigma;
+			\addplot[lightgray!60] fill between[of=muPlusNineFive and muMinusNineFive];
+			\addplot[draw=none,name path=muPlusNineZero] table[x=x,y=muPlus90] from \datatableMuSigma;
+			\addplot[draw=none,name path=muMinusNineZero] table[x=x,y=muMinus90] from \datatableMuSigma;
+			\addplot[lightgray!80] fill between[of=muPlusNineZero and muMinusNineZero];
+
+			% plot same random samples from distribution
+			\addplot[dashed] table[x=x,y=sample1] from \datatableMuSigma;
+			\addplot[dashed] table[x=x,y=sample2] from \datatableMuSigma;
+			\addplot[dashed] table[x=x,y=sample3] from \datatableMuSigma;
+
+			% plot mean and data points
+			\addplot[draw=black,ultra thick] table[x=x,y=mu] from \datatableMuSigma;
+			\addplot[only marks,mark=*,mark size=2.5,draw=black,fill=orange] table[x=x,y=y] from \datatable;
+
+		\end{axis}
+
+	\end{tikzpicture}
+\end{figure}

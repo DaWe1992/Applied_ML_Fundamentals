@@ -188,7 +188,7 @@ Have a look at the following slides (unless stated otherwise, these slides are n
 	* Data transformation (e. g. normalization, discretization)
 	* Data reduction and feature subset selection
 	* Data integration
-6. **Regression II** (not yet available)
+6. **Advanced regression** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/18_advanced_regression.pdf))
 	* Bayesian regression
 	* Kernel regression
 	* Gaussian process regression
