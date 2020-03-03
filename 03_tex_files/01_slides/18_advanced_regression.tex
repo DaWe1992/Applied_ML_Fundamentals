@@ -141,9 +141,10 @@
 \end{frame}
 
 
-\begin{frame}
-	\dwFigure{\includegraphics[scale=0.55]{18_advanced_regression/02_img/kernel_regression}}{Result of kernel ridge regression}{fig:kernel-regression}
-\end{frame}
+% Example
+\begin{dwHeaderFrame}{Example}
+	\dwFigure{\includegraphics[scale=0.475]{18_advanced_regression/02_img/kernel_regression}}{Result of kernel ridge regression}{fig:kernel-regression}
+\end{dwHeaderFrame}
 
 
 % Section: Gaussian Process Regression
@@ -330,8 +331,198 @@
 	\begin{itemize}
 		\item The results of Gaussian process regression depend heavily on the parameters $\{ \sigma_f, l \}$, which is why these parameters should be optimized for the task at hand.
 		\item This can be down by maximizing the \textbf{marginal likelihood} (e.\,g. by using gradient ascent).
-		\item The exact procedure is very involved and out of scope for this lecture.
 	\end{itemize}
+	
+	\dwInfoBox{The exact procedure is very involved and out of scope for this lecture.}
+\end{dwHeaderFrame}
+
+
+% Section: Support Vector Regression
+%______________________________________________________________________
+\dwSection{Support Vector Regression}
+
+% Introduction
+\begin{dwHeaderFrame}{Introduction}
+	\begin{itemize}
+		\item Support vector machines can be extended to regression problems, while preserving the property of sparseness.
+		\item In ordinary least squares, we minimize a regularized error function given by:
+		\begin{equation}
+			\mathcal{J}(\bm{\theta}) = \frac{1}{2} \sum_{i=1}^n (\widehat{h}(\bm{x}^{(i)}) - y^{(i)})^2 + \frac{\lambda}{2} \Vert \bm{w} \Vert^2
+		\end{equation}
+		\item In the following, $\bm{\theta} = \{ \bm{w}, b \}$ and $\widehat{h}(\bm{x}) = \bm{w}^{\intercal} \varphi(\bm{x}) + b$.
+		\item To obtain sparse solutions, the quadratic error is replaced by an \textbf{$\bm{\varepsilon}$-insensitive error function}, which gives zero error if the absolute difference between the
+			prediction and the target is less than $\varepsilon$:
+		\begin{equation}
+			\ell_{\varepsilon}(\widehat{h}(\bm{x}) - y) =
+			\begin{cases}
+				0 									& \text{if $\vert \widehat{h}(\bm{x}) - y \vert < \varepsilon$} \\
+				\vert \widehat{h}(\bm{x}) - y \vert - \varepsilon 	& \text{otherwise}
+			\end{cases}
+		\end{equation}
+	\end{itemize}
+\end{dwHeaderFrame}
+
+
+\begin{frame}
+	\dwFigure{\input{18_advanced_regression/01_tikz/epsilon_insensitive_error}}
+		{An $\varepsilon$-insensitive error function (red) compared to the quadratic error function (blue)}{fig:eps-insensitive-error}
+\end{frame}
+
+
+\begin{frame}
+	\begin{itemize}
+		\item We therefore minimize a regularized error function given by:
+		\begin{equation}
+			\mathcal{J}(\bm{\theta}) = C \sum_{i=1}^n \ell_{\varepsilon}(\widehat{h}(\bm{x}^{(i)}) - y^{(i)}) + \frac{1}{2} \Vert \bm{w} \Vert^2
+		\end{equation}
+		\item Analogously to support vector machines for classification, $C$ denotes the (inverse) regularization parameter.
+		\item Again, we introduce slack variables:
+		\begin{itemize}
+			\item We now need two slack variables $\xi_i \ge 0$ and $\widehat{\xi}_i \ge 0$ for each data point $\bm{x}^{(i)}$.
+			\item $\xi_i > 0$ corresponds to a point for which $y^{(i)} > \widehat{h}(\bm{x}^{(i)}) + \varepsilon$.
+			\item $\widehat{\xi}_i \ge 0$ corresponds to a point for which $y^{(i)} < h(\bm{x}^{(i)}) - \varepsilon$.
+		\end{itemize}
+		\item The error function for support vector regression can then be rewritten as:
+		\begin{equation}
+			\mathcal{J}(\bm{\theta}) = C \sum_{i=1}^n (\xi_i + \widehat{\xi}_i) + \frac{1}{2} \Vert \bm{w} \Vert^2
+			\label{eq:svr-error-function}
+		\end{equation}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\divideTwo{0.29}{
+		Illustration of SVM regression, showing the regression curve together with the $\varepsilon$-insensitive `tube'. Also shown are examples
+		of the slack variables $\xi$ and $\widehat{\xi}$. \\[3mm]
+
+		Points above the $\varepsilon$-tube have $\xi > 0$ and $\widehat{\xi} = 0$, points below the tube have $\xi = 0$ and $\widehat{\xi} > 0$.
+		Points inside the tube are characterized by $\xi = \widehat{\xi} = 0$.
+	}{0.69}{
+		\vspace*{3mm}
+		\dwFigure{\input{18_advanced_regression/01_tikz/svr}}{Illustration of support vector regression}{fig:svr}
+	}
+\end{frame}
+
+
+% Optimization
+\begin{dwHeaderFrame}{Optimization}
+	\begin{itemize}
+		\item The cost function given by \cref{eq:svr-error-function} must be minimized subject to the constraints:
+		\begin{align}
+			\xi_i 			&\ge 0 							\\
+			\widehat{\xi}_i 	&\ge 0 							\\
+			y^{(i)} 		&\le h(\bm{x}^{(i)}) + \varepsilon + \xi_i 	\\
+			y^{(i)} 		&\ge h(\bm{x}^{(i)}) - \varepsilon - \widehat{\xi}_i
+		\end{align}
+		\item This can be achieved by introducing Lagrange multipliers $\alpha_i \ge 0, \widehat{\alpha}_i \ge 0, \mu_i \ge 0$ and $\widehat{\mu}_i \ge 0$:
+		\begin{align}
+			\nonumber
+			\mathcal{L}
+				&= C \sum_{i=1}^n (\xi_i + \widehat{\xi}_i) + \frac{1}{2} \Vert \bm{w} \Vert^2 - \sum_{i=1}^n (\mu_i \xi_i + \widehat{\mu}_i \widehat{\xi}_i) \\
+				&\phantom{=} - \sum_{i=1}^n \alpha_i (\varepsilon + \xi_i + \widehat{h}(\bm{x}^{(i)}) - y^{(i)}) -
+					\sum_{i=1}^n \widehat{\alpha}_i (\varepsilon + \widehat{\xi}_i - \widehat{h}(\bm{x}^{(i)}) + y^{(i)})
+		\end{align}
+	\end{itemize}
+\end{dwHeaderFrame}
+
+
+\begin{frame}
+	\dwHeader{Derivatives of $\mathcal{L}$}
+	\begin{alignat}{2}
+		\frac{\partial\mathcal{L}}{\partial \bm{w}} 		&\overset{!}{=} 0 \qquad &&\Rightarrow \qquad \bm{w} = \sum_{i=1}^n (\alpha_i - \widehat{\alpha}_i) \varphi(\bm{x}^{(i)})
+		\label{eq:derivative-w}																													\\[3mm]
+		\frac{\partial\mathcal{L}}{\partial b} 			&\overset{!}{=} 0 \qquad &&\Rightarrow \qquad \sum_{i=1}^n (\alpha_i - \widehat{\alpha}_i) = 0 						\\[3mm]
+		\frac{\partial\mathcal{L}}{\partial \xi_i} 			&\overset{!}{=} 0 \qquad &&\Rightarrow \qquad \alpha_i + \mu_i = C
+		\label{eq:derivative-xi}																													\\[3mm]
+		\frac{\partial\mathcal{L}}{\partial \widehat{\xi}_i} 	&\overset{!}{=} 0 \qquad &&\Rightarrow \qquad \widehat{\alpha}_i + \widehat{\mu}_i = C
+		\label{eq:derivative-xi-hat}
+	\end{alignat}
+
+	\dwInfoBox{We can use these results to obtain the dual formulation which has to be maximized.}
+\end{frame}
+
+
+\begin{frame}
+	\dwHeader{Dual formulation}
+	\begin{itemize}
+		\item The dual formulation is given by:
+		\begin{equation}
+			\mathcal{L}(\bm{\alpha}, \bm{\widehat{\alpha}}) = -\frac{1}{2} \sum_{i=1}^n \sum_{j=1}^n (\alpha_i - \widehat{\alpha}_i) (\alpha_j - \widehat{\alpha}_j)
+				\mathcal{K}(\bm{x}^{(i)}, \bm{x}^{(j)}) - \varepsilon \sum_{i=1}^n (\alpha_i + \widehat{\alpha}_i) + \sum_{i=1}^n (\alpha_i - \widehat{\alpha}_i) y^{(i)}
+		\end{equation}
+		\item The dual is expressed in terms of a kernel function $\mathcal{K}(\bm{x}, \bm{x}')$.
+		\item Maximize the dual function: $\max_{\bm{\alpha}, \bm{\widehat{\alpha}}} \mathcal{L}(\bm{\alpha}, \bm{\widehat{\alpha}})$
+		\item Again, this is a constraint optimization problem which is optimized subject to:
+		\begin{alignat}{2}
+			0 	&\le \alpha_i 			&&\le C \\
+			0 	&\le \widehat{\alpha}_i 	&&\le C
+		\end{alignat}
+		\item We again have the \textbf{box constraints} which directly follow from the fact that the Lagrange multipliers have to be $\ge 0$
+			together with \cref{eq:derivative-xi} and \cref{eq:derivative-xi-hat}.
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\begin{itemize}
+		\item Substituting \cref{eq:derivative-w} into $\widehat{h}(\bm{x})$, we see that predictions for new inputs can be made using:
+		\begin{equation}
+			\widehat{h}(\bm{x}) = \sum_{i=1}^n (\alpha_i - \widehat{\alpha}_i) \mathcal{K}(\bm{x}, \bm{x}^{(i)}) + b
+			\label{eq:svr-prediction}
+		\end{equation}
+		\item The support vectors are those data points for which $\alpha_i \ne 0$ or $\widehat{\alpha}_i \ne 0$. Such points either lie on the boundary of the
+			$\varepsilon$-tube or outside the tube. All points within the tube have $\alpha_i = \widehat{\alpha}_i = 0$.
+		\item It is again a \textbf{sparse solution}, since we only need the support vectors for the prediction.
+	\end{itemize}
+\end{frame}
+
+
+% Karush-Kuhn-Tucker Conditions
+\begin{dwHeaderFrame}{Karush-Kuhn-Tucker Conditions}
+	\begin{itemize}
+		\item The \textbf{Karush-Kuhn-Tucker (KKT) conditions} state that at the solution, the product of dual variables and constraints must vanish.
+		\item The KKT conditions for support vector regression are given by:
+		\begin{align}
+			\alpha_i (\varepsilon + \xi_i + \widehat{h}(\bm{x}^{(i)}) - y^{(i)}) 					&= 0
+			\label{eq:kkt-1}														\\[2mm]
+			\widehat{\alpha}_i (\varepsilon + \widehat{\xi}_i - \widehat{h}(\bm{x}^{(i)}) + y^{(i)}) 	&= 0
+			\label{eq:kkt-2}														\\[2mm]
+			\overbracket{(C - \alpha_i)}^{\mu_i} \xi_i									&= 0
+			\label{eq:kkt-3}														\\[2mm]
+			\underbracket{(C - \widehat{\alpha}_i)}_{\widehat{\mu}_i} \widehat{\xi}_i 			&= 0
+		\end{align}
+	\end{itemize}
+	
+	\dwInfoBox{We can derive useful results from the KKT conditions (cf. next slide).}
+\end{dwHeaderFrame}
+
+
+\begin{frame}
+	\begin{itemize}
+		\item First of all, we note that $\alpha_i$ can only be \textbf{non-zero}, if $\varepsilon + \xi_i + \widehat{h}(\bm{x}^{(i)}) - y^{(i)} = 0$. This implies that the data point either lies
+			on the upper boundary of the $\varepsilon$-tube ($\xi_i = 0$) or above it ($\xi_i > 0$).
+		\item Analogous: $\widehat{\alpha}_i$
+		\item The two constraints $\varepsilon + \xi_i + \widehat{h}(\bm{x}^{(i)}) - y^{(i)}$ and $\varepsilon + \widehat{\xi}_i - \widehat{h}(\bm{x}^{(i)}) + y^{(i)}$ are incompatible.
+			This can be seen by adding them together and noting that $\xi_i, \widehat{\xi}_i$ are non-negative and $\varepsilon$ is strictly positive. So for every data point
+			$\bm{x}^{(i)}$, either $\alpha_i$ or $\widehat{\alpha}_i$ (or both) must be zero.
+		\item Parameter $b$ in \cref{eq:svr-prediction} can be found by considering a data point for which $0 < \alpha_i < C$ ($\widehat{=}$ support vector).
+			From \cref{eq:kkt-3} it must have $\xi_i = 0$. Therefore, according to \cref{eq:kkt-1} it must satisfy $\varepsilon + \widehat{h}(\bm{x}^{(i)}) - y^{(i)} = 0$.
+		\item For $b$ we obtain:
+		\begin{align}
+			b 
+				&= y^{(i)} - \varepsilon - \bm{w}^{\intercal} \varphi(\bm{x}^{(i)}) \\[1mm]
+				&= y^{(i)} - \varepsilon - \sum_{j=1}^n (\alpha_j - \widehat{\alpha}_j) \mathcal{K}(\bm{x}^{(i)}, \bm{x}^{(j)})
+		\end{align}
+		\item In practice, it is better to consider all support vectors to find $b$ (average).
+	\end{itemize}
+\end{frame}
+
+
+% Example
+\begin{dwHeaderFrame}{Example}
+	\dwFigure{\includegraphics[scale=0.275]{18_advanced_regression/02_img/svr_example}}
+		{Example of support vector regression using \texttt{scikit-learn}}{fig:svr-example}
 \end{dwHeaderFrame}
 
 \end{document}

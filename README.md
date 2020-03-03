@@ -177,11 +177,11 @@ Have a look at the following slides (unless stated otherwise, these slides are n
 		* Representation theorem
 		* d-separation
 		* Exact inference (variable elimination)
-		* Approximate inference (forward / rejection / Gibbs sampling)
+		* Approximate inference (forward / rejection / gibbs sampling)
 	* Hidden markov models
 		* Model and assumptions
 		* Inference: Viterbi algorithm
-4. **Association rules / Apriori** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/16_association_rules.pdf))
+4. **Apriori / association rules** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/16_association_rules.pdf))
 5. **Data preprocessing** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/17_data_preprocessing.pdf))
 	* Data mining processes (KDD, CRISP-DM)
 	* Data cleaning
@@ -192,6 +192,7 @@ Have a look at the following slides (unless stated otherwise, these slides are n
 	* Bayesian regression
 	* Kernel regression
 	* Gaussian process regression
+	* Support vector regression
 7. **Deep Learning II** (not yet available)
 
 ## Bugs and Errors <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/bug.png" width="25px" height="30px">

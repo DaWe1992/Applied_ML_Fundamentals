@@ -119,7 +119,7 @@ def regression():
     Regression.
     """
     # create data
-    X, y = DataCreator().make_regression(name="custom")
+    X, y = DataCreator().make_regression(name="sine")
     
     # train Gaussian process regressor
 #    reg = GaussianProcess()
@@ -262,7 +262,7 @@ if __name__ == "__main__":
     Main function.
     """
 #    classification()
-#    regression()
+    regression()
 #    unsupervised_learning()
-    reinforcement_learning()
+#    reinforcement_learning()
     

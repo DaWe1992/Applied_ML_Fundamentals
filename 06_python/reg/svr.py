@@ -92,6 +92,7 @@ class SVR_sklearn:
         plt.plot(x_range, y_pred + self.epsilon, "--", c="blue", linewidth=1.0)
         plt.plot(x_range, y_pred - self.epsilon, "--", c="blue", linewidth=1.0)
         
+#        plt.savefig("svr.pdf")
         plt.show()
     
 
