@@ -173,8 +173,8 @@ Have a look at the following slides (unless stated otherwise, these slides are n
 		* Q-learning and Q-networks
 		* Policy gradient methods
 3. **Probabilistic graphical models** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/15_pgm.pdf))
-	* Bayesian networks (representation, inference)
-	* Hidden markov models and viterbi
+	* Bayesian networks (representation and inference)
+	* Hidden Markov models and viterbi
 4. **Apriori / association rules** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/16_association_rules.pdf))
 5. **Data preprocessing** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/17_data_preprocessing.pdf))
 	* Data mining processes (KDD, CRISP-DM)
