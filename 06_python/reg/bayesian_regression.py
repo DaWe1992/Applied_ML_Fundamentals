@@ -95,7 +95,6 @@ class BayesRegression():
         :param X:               original features
         :return:                augmented features (with one-column)
         """
-        X = X.squeeze()
         phi = np.ones((len(X), self.m))
         phi[:, 1] = X
         if self.poly:
@@ -149,6 +148,7 @@ class BayesRegression():
             plt.scatter(real_params[0], real_params[1],
                 marker="+", c="white", s=60, zorder=10)
         
+#        plt.savefig("posterior.pdf")
         plt.show()
     
     
@@ -212,6 +212,7 @@ class BayesRegression():
             
             plt.plot(x_range, mean, c="black", linewidth=2.0)
             
+#        plt.savefig("scatter.pdf")
         plt.show()
             
             
@@ -274,7 +275,7 @@ if __name__ == "__main__":
     
     # fit model based on the first n data points
     # (updates the posterior distribution accordingly)
-    n = 1000
+    n = 2
     reg.fit(X[0:n], y[0:n])
     if not poly:
         reg.plot_posterior(x_grid, y_grid, real_params=[theta_0, theta_1])

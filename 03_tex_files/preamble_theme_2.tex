@@ -397,6 +397,44 @@
 	\end{frame}}
 }
 
+% thank you page
+\newcommand{\makethanks}{
+	{\beamertemplatenavigationsymbolsempty
+	\begin{frame}[plain]
+		\vfill
+		\begin{tcolorbox}[
+			skin=enhanced,
+      			boxrule=0.6mm, boxsep=0mm,
+			lowerbox=ignored,
+			colback=orange!60!red, colframe=black,
+			borderline={0.5pt}{3pt}{black}, borderline={1pt}{2pt}{red},
+			width=\textwidth
+		]
+			\centering
+			\Huge \textbf{Thank you very much for the attention!}
+		\end{tcolorbox}
+		
+		\vfill
+		\begin{tabbing}
+			\hspace*{1.5cm}\= \kill
+			\textbf{Topic:} 	\> \inserttitle \\
+			\textbf{Term:} 	\> \insertdate
+		\end{tabbing}
+		
+		\vfill
+		\textbf{Contact:} \\
+		\insertauthor \\
+		\insertinstitute \\
+		\href{mailto:daniel.wehner@sap.com}{\linkstyle{daniel.wehner@sap.com}}
+		
+		\vfill
+		\begin{center}
+			\Large\textbf{Do you have any questions?}
+		\end{center}
+		\vfill
+	\end{frame}}
+}
+
 % hyperlinks
 % ====================================================
 % redefine cref (add a hyperlink)

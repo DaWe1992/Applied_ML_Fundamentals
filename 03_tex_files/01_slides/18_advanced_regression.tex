@@ -44,9 +44,286 @@
 % Introduction
 \begin{dwHeaderFrame}{Introduction}
 	\begin{itemize}
-		\item 
+		\item You already know what linear regression is and how you can solve it:
+		\begin{equation}
+			\bm{\theta} = (\bm{\Phi}^{\intercal} \bm{\Phi})^{-1} \bm{\Phi}^{\intercal} \bm{y}
+		\end{equation}
+		\item It is possible to treat regression in a more probabilistic fashion.
+		\item With this probabilistic perspective we can see where regularization comes from and we can derive the least squares error function.
+		\item \textbf{Bayes theorem} will play an important role (you should keep it in mind):
+		\begin{equation}
+			p(A \vert B) = \frac{p(B \vert A) \cdot p(A)}{p(B)}
+		\end{equation}
+		\item It gives rise to what it referred to as \textbf{Bayesian learning}.
 	\end{itemize}
 \end{dwHeaderFrame}
+
+
+% Maximum Likelihood Regression
+\begin{dwHeaderFrame}{Maximum Likelihood Regression}
+	\begin{itemize}
+		\item In probabilistic regression we make two general assumptions:
+		\begin{enumerate}
+			\item The data is noisy. Therefore, we add an additive noise term $\varepsilon$ to the function estimates:
+			\begin{equation}
+				y = h(\bm{x}; \bm{\theta}) + \varepsilon
+			\end{equation}
+			\item The noise term $\varepsilon$ is considered a Gaussian random variable with zero mean:
+			\begin{equation}
+				\varepsilon \thicksim \mathcal{N}(0, \beta^{-1})
+			\end{equation}
+		\end{enumerate}
+		\item \textbf{With these assumptions $y$ is now a random variable.} It has the following (Gaussian) probability distribution:
+		\begin{equation}
+			p(y \vert \bm{x}, \bm{\theta}, \beta) = \mathcal{N}(y \vert h(\bm{x}; \bm{\theta}), \beta^{-1})
+		\end{equation}
+	\end{itemize}
+\end{dwHeaderFrame}
+
+
+\begin{frame}
+	\begin{itemize}
+		\item We are given a labeled data set $\mathcal{D} = \{ (\bm{x}^{(i)}, y^{(i)}) \}_{i=1}^n$.
+		\item Assuming the data is i.\,i.\,d. (independent and identically distributed), the conditional likelihood is computed as follows:
+		\begin{align}
+			p(\bm{y} \vert \bm{X}, \bm{\theta}, \beta)
+				&= \prod_{i=1}^n \mathcal{N}(y^{(i)} \vert h(\bm{x}^{(i)}; \bm{\theta}), \beta^{-1}) \\
+				&= \prod_{i=1}^n \mathcal{N}(y^{(i)} \vert \bm{\theta}^{\intercal} \bm{x}^{(i)}, \beta^{-1})
+		\end{align}
+		\item Compute the log-likelihood:
+		\begin{align}
+			\log p(\bm{y} \vert \bm{X}, \bm{\theta}, \beta)
+				&= \sum_{i=1}^n \log \mathcal{N}(y^{(i)} \vert \bm{\theta}^{\intercal} \bm{x}^{(i)}, \beta^{-1}) \\
+				&= \sum_{i=1}^n \left[ \log \left( \frac{\sqrt{\beta}}{\sqrt{2 \pi}} \right) - \frac{\beta}{2} (y^{(i)} - \bm{\theta}^{\intercal} \bm{x}^{(i)})^2 \right] \\
+				&= \frac{n}{2} \log \beta - \frac{n}{2} \log 2 \pi - \frac{\beta}{2} \sum_{i=1}^n (y^{(i)} - \bm{\theta}^{\intercal} \bm{x}^{(i)})^2
+		\end{align}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\dwHeader{Computation of the gradient}
+	\begin{align}
+		\nabla_{\bm{\theta}} \log p(\bm{y} \vert \bm{X}, \bm{\theta}, \beta)
+			&= \bm{0} \\
+		-\beta \sum_{i=1}^n (y^{(i)} - \bm{\theta}^{\intercal} \bm{x}^{(i)}) \bm{x}^{(i)}
+			&= \bm{0}
+	\end{align}
+	
+	\begin{itemize}
+		\item Solving for $\bm{\theta}$ gives the normal equation: $\bm{\theta}_{ml} = (\bm{X}^{\intercal} \bm{X})^{-1} \bm{X}^{\intercal} \bm{y}$.
+		\item This is the same result as in least squares regression.
+		\item Additionally, we can get a global estimate of the uncertainty: $\beta_{ml} = \left( \frac{1}{n} \sum_{i=1}^n (y^{(i)} - \bm{\theta}^{\intercal} \bm{x}^{(i)})^2 \right)^{-1}$
+	\end{itemize}
+
+	\dwAlertBox{Important: Minimizing the squared error gives the maximum likelihood solution for the parameters $\bm{\theta}$ assuming Gaussian noise.}
+\end{frame}
+
+
+% Maximum Aposteriori (MAP) Regression
+\begin{dwHeaderFrame}{Maximum Aposteriori (MAP) Regression}
+	\begin{itemize}
+		\item The problem with maximum likelihood regression is that it might lead to \textbf{overfitting}.
+		\item \textit{What can we do to tackle this kind of problem?}
+		\item We can use a more Bayesian approach and put a \textbf{prior} on the parameters $\bm{\theta}$:
+		\begin{equation}
+			p(\bm{\theta} \vert \bm{X}, \bm{y}, \alpha, \beta) \propto p(\bm{y} \vert \bm{X}, \bm{\theta}, \beta) \cdot p(\bm{\theta} \vert \alpha)
+		\end{equation}
+		\item The prior probability distribution $p(\bm{\theta} \vert \alpha)$ encodes our \textbf{prior belief} about the parameters $\bm{\theta}$.
+	\end{itemize}
+	
+	\dwAlertBox{Please not the very important difference: In this setting you do not get a single parameter vector $\bm{\theta}$,
+		rather a probability distribution over the parameters given the data $p(\bm{\theta} \vert \bm{X}, \bm{y}, \alpha, \beta)$!}
+\end{dwHeaderFrame}
+
+
+\begin{frame}
+	\dwHeader{The prior for the parameters}
+	\begin{itemize}
+		\item We decided to put a prior on the parameters $\bm{\theta}$.
+		\item One obvious choice is to use a Gaussian distribution for the prior (with zero mean and spherical covariance):
+		\begin{equation}
+			\bm{\theta} \thicksim p(\bm{\theta} \vert \alpha) = \mathcal{N}(\bm{\theta} \vert \bm{0}, \alpha^{-1} \bm{I})
+		\end{equation}
+		\item The posterior then becomes:
+		\begin{align}
+			\nonumber
+			p(\bm{\theta} \vert \bm{X}, \bm{y}, \alpha, \beta)
+				&\propto p(\bm{y} \vert \bm{X}, \bm{\theta}, \beta) \cdot p(\bm{\theta} \vert \alpha) \\
+				&\propto p(\bm{y} \vert \bm{X}, \bm{\theta}, \beta) \cdot \mathcal{N}(\bm{\theta} \vert \bm{0}, \alpha^{-1} \bm{I}) 
+		\end{align}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\begin{itemize}
+		\item Compute the log-likelihood:
+		\begin{align}
+			\log p(\bm{\theta} \vert \bm{X}, \bm{y}, \alpha, \beta)
+				&= \log p(\bm{y} \vert \bm{X}, \bm{\theta}, \beta) + \log \mathcal{N}(\bm{\theta} \vert \bm{0}, \alpha^{-1} \bm{I}) + \text{const} \\
+				&= \sum_{i=1}^n \log \mathcal{N}(y^{(i)} \vert \bm{\theta}^{\intercal} \varphi(\bm{x}^{(i)}), \beta^{-1}) +
+					\log \mathcal{N}(\bm{\theta} \vert \bm{0}, \alpha^{-1} \bm{I}) + \text{const} \\
+				&= -\frac{\beta}{2} \sum_{i=1}^n (y^{(i)} - \bm{\theta}^{\intercal} \varphi(\bm{x}^{(i)}))^2 - \frac{\alpha}{2}\bm{\theta}^{\intercal} \bm{\theta} + \text{const}
+		\end{align}
+		\item Computation of the gradient:
+		\begin{align}
+			\nabla_{\bm{\theta}} \log p(\bm{\theta} \vert \bm{X}, \bm{y}, \alpha, \beta)
+				&= \beta \sum_{i=1}^n (y^{(i)} - \bm{\theta}^{\intercal} \varphi(\bm{x}^{(i)})) \varphi(\bm{x}^{(i)}) - \alpha \bm{\theta} = \bm{0} \\
+			\beta \sum_{i=1}^n y^{(i)} \varphi(\bm{x}^{(i)})
+				&= \beta \left[ \sum_{i=1}^n \varphi(\bm{x}^{(i)})^{\intercal} \varphi(\bm{x}^{(i)}) \right] \bm{\theta} + \alpha \bm{\theta} \\
+			\beta \sum_{i=1}^n y^{(i)} \varphi(\bm{x}^{(i)})
+				&= \left[ \beta \sum_{i=1}^n \varphi(\bm{x}^{(i)})^{\intercal} \varphi(\bm{x}^{(i)}) + \alpha \right] \bm{\theta} \\
+			\beta \bm{\Phi}^{\intercal} \bm{y}
+				&= (\beta \bm{\Phi}^{\intercal} \bm{\Phi} + \alpha \bm{I}) \bm{\theta} \qquad \Rightarrow
+					\bm{\theta}_{map} = \left( \bm{\Phi}^{\intercal} \bm{\Phi} + \frac{\alpha}{\beta} \bm{I} \right)^{-1} \bm{\Phi}^{\intercal} \bm{y}
+		\end{align}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\begin{itemize}
+		\item The prior \textbf{regularizes} the parameters $\bm{\theta}$.
+		\item This approach is referred to as \textbf{ridge regression}.
+		\item You already know this result from regularized least squares regression:
+		\begin{equation}
+			\argmin_{\bm{\theta}} \frac{1}{2} \Vert \bm{\Phi}^{\intercal} \bm{\theta} - \bm{y} \Vert^2 + \frac{\lambda}{2} \Vert \bm{\theta} \Vert^2
+		\end{equation}
+		\item Solving for $\bm{\theta}$, we get the estimate:
+		\begin{equation}
+			\bm{\theta} = (\bm{\Phi}^{\intercal} \bm{\Phi} + \lambda \bm{I})^{-1} \bm{\Phi}^{\intercal} \bm{y}
+		\end{equation}
+		\item Here: $\lambda = \frac{\alpha}{\beta}$
+	\end{itemize}
+	
+	\dwAlertBox{You assume two things when you put a regularizer $\lambda$ in least-squares regression: \\
+		\ding{182} The targets are noisy, where the noise is distributed according to a Gaussian distribution. \\
+		\ding{183} The parameters are Gaussian distributed as well.}
+\end{frame}
+
+
+% Full Bayesian Regression
+\begin{dwHeaderFrame}{Full Bayesian Regression}
+	\begin{itemize}
+		\item Again, we put a prior on the parameters $\bm{\theta}$.
+		\begin{equation}
+			p(\bm{\theta} \vert \alpha) = \mathcal{N}(\bm{\theta} \vert \bm{\mu}_0, \bm{\Lambda}_0)
+			\label{eq:param-prior}
+		\end{equation}
+		\item In \cref{eq:param-prior}, the mean $\bm{\mu}_0$ and the precision matrix $\bm{\Lambda}_0$ are given by $\bm{0}$ and $\alpha^{-1} \bm{I}$, respectively.
+			Therefore, the prior is a zero-mean, isotropic ($\widehat{=}$ rotation-invariant) Gaussian distribution.
+		\item The posterior distribution of the parameters $p(\bm{\theta} \vert \bm{X}, \bm{y}, \alpha, \beta)$ is then:
+		\begin{align}
+			p(\bm{\theta} \vert \bm{X}, \bm{y}, \alpha, \beta)
+				&= \mathcal{N}(\bm{\theta} \vert \bm{\mu}_n, \bm{\Lambda}_n) \\
+			\shortintertext{with:}
+			\bm{\mu}_n
+				&= \beta \bm{\Lambda}_n^{-1} \bm{\Phi}^{\intercal} \bm{y}\\
+			\bm{\Lambda}_n
+				&= \bm{\Lambda}_0^{-1} + \beta \bm{\Phi}^{\intercal} \bm{\Phi}
+		\end{align}
+		\item This can be phrased as a sequential update rule. The prior must be \textbf{conjugate} in order for this to work.
+	\end{itemize}
+\end{dwHeaderFrame}
+
+
+\begin{frame}
+	\begin{itemize}
+		\item In Bayesian probability theory, if the posterior distribution is in the
+			\textbf{same probability distribution family} as the prior probability distribution, the prior and posterior are then called \textbf{conjugate distributions},
+			and the prior is called \textbf{conjugate prior}.
+		 \item Here: If we multiply two Gaussian distributions, the result is again Gaussian.
+	\end{itemize}
+	\vspace*{2mm}
+	\dwHeader{Example for Bayesian regression}
+	\begin{itemize}
+		\item We can illustrate Bayesian learning in a linear basis function model.
+		\item Consider a single input variable $x$ (scalar) and a linear model of the form $h(x; \bm{\theta}) = \theta_0 + \theta_1 \cdot x$.
+		\item Because this model only has two adaptive parameters, we can plot the prior and the posterior distributions directly in parameter space.
+		\item We generate synthetic data from the function $f(x; \bm{a}) = a_0 + a_1 \cdot x$, with $a_0 = -0.3$ and $a_1 = 0.5$ by first choosing values of $x^{(i)}$ from the
+			uniform distribution $\mathcal{U}(x \vert -1, 1)$, then evaluating $f(x^{(i)}; \bm{a})$, and finally adding some Gaussian noise with precision $\beta = \frac{1}{0.2}$.
+			$\alpha$ is fixed to 2.0
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\dwFigure{
+		\begin{minipage}{0.08\textwidth}
+			\begin{tikzpicture} \node[rotate=90] at (0,0) {\textbf{prior/posterior}}; \end{tikzpicture} \\[11mm]
+			\begin{tikzpicture} \node[rotate=90] at (0,0) {\textbf{data space}}; \end{tikzpicture}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.45\textwidth}
+			\centering
+			$n = 0$ \\
+			\includegraphics[scale=0.17]{18_advanced_regression/02_img/prior} \\[-2mm]
+			\includegraphics[scale=0.17]{18_advanced_regression/02_img/samples_0}			
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.45\textwidth}
+			\centering
+			$n = 1$ \\
+			\includegraphics[scale=0.17]{18_advanced_regression/02_img/posterior_1} \\[-2mm]
+			\includegraphics[scale=0.17]{18_advanced_regression/02_img/samples_1}
+		\end{minipage}
+	}{Example for Bayesian regression (part I)}{fig:bayesian-regression-1}
+\end{frame}
+
+
+\begin{frame}
+	\dwFigure{
+		\begin{minipage}{0.08\textwidth}
+			\begin{tikzpicture} \node[rotate=90] at (0,0) {\textbf{prior/posterior}}; \end{tikzpicture} \\[11mm]
+			\begin{tikzpicture} \node[rotate=90] at (0,0) {\textbf{data space}}; \end{tikzpicture}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.45\textwidth}
+			\centering
+			$n = 2$ \\
+			\includegraphics[scale=0.17]{18_advanced_regression/02_img/posterior_2} \\[-2mm]
+			\includegraphics[scale=0.17]{18_advanced_regression/02_img/samples_2}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.45\textwidth}
+			\centering
+			$n = 300$ \\
+			\includegraphics[scale=0.17]{18_advanced_regression/02_img/posterior_300} \\[-2mm]
+			\includegraphics[scale=0.17]{18_advanced_regression/02_img/samples_300}
+		\end{minipage}
+	}{Example for Bayesian regression (part II)}{fig:bayesian-regression-2}
+\end{frame}
+
+
+\begin{frame}
+	\dwHeader{Predictive distribution}
+	\begin{itemize}
+		\item Usually, we are not interested in $\bm{\theta}$ itself, but rather in making a prediction $y_q$ for a new instance $\bm{x}_q$.
+		\item This requires that we evaluate the \textbf{predictive distribution}:
+		\begin{equation}
+			p(y_q \vert \bm{x}_q, \bm{X}, \bm{y}, \alpha, \beta) = \int_{\bm{\theta}} \underbracket{p(y_q \vert \bm{x}_q, \bm{X}, \bm{\theta}, \beta)}_{\text{regression model}} \cdot
+				\underbracket{p(\bm{\theta} \vert \bm{X}, \bm{y}, \alpha, \beta)}_{\text{parameter posterior}} \diff \bm{\theta}
+		\end{equation}
+		\item We integrate over all possible models and give each model a weight corresponding to how probable it is.
+		\item Think of it as a weighted average.
+		\item The predictive distribution takes the form:
+		\begin{align}
+			p(y_q \vert \bm{x}_q, \bm{X}, \bm{y}, \alpha, \beta)
+				&= \mathcal{N}(y_q \vert \bm{\mu}_n^{\intercal} \varphi(\bm{x}), \sigma_n^2(\bm{x})) \\
+			\shortintertext{with:}
+			\sigma_n^2
+				&= \frac{1}{\beta} + \varphi(\bm{x})^{\intercal} \bm{\Lambda}_n^{-1} \varphi(\bm{x})
+				\label{eq:variance-predictive-dist}
+		\end{align}
+		\item The first term in \cref{eq:variance-predictive-dist} reflects the noise in the data, the second one the uncertainty associated with the model parameters $\bm{\theta}$.
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\dwFigure{\includegraphics[scale=0.30]{18_advanced_regression/02_img/scatter}}{Bayesian regression and uncertainty estimate}{fig:bayes-regression-uncertainty}
+\end{frame}
 
 
 % Section: Kernel Ridge Regression
@@ -157,7 +434,7 @@
 		\item Similarly to kernel ridge regression, Gaussian processes do not make any assumptions about the type of regression function (e.\,g. linear, quadratic, ...)
 		\item It is non-parametric and a form of supervised learning:
 		\begin{equation}
-			h(\bm{x}) = \mathfrak{GP}(m(\bm{x}), \mathcal{K}(\bm{x}, \bm{x}'))
+			h(\bm{x}) = \mathcal{GP}(m(\bm{x}), \mathcal{K}(\bm{x}, \bm{x}'))
 			\label{eq:gp}
 		\end{equation}
 		\item In \cref{eq:gp}, $m(\bm{x})$ denotes the mean function, whereas $\mathcal{K}(\bm{x}, \bm{x}')$ denotes the kernel function, which -- in the context of Gaussian processes -- is
@@ -524,5 +801,10 @@
 	\dwFigure{\includegraphics[scale=0.275]{18_advanced_regression/02_img/svr_example}}
 		{Example of support vector regression using \texttt{scikit-learn}}{fig:svr-example}
 \end{dwHeaderFrame}
+
+
+% Thank you
+%______________________________________________________________________
+\makethanks
 
 \end{document}
