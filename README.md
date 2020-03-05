@@ -77,13 +77,12 @@ Sample solutions will **not** be uploaded. However, you are free to share correc
 * Please refrain from submitting hand-written solutions (this also includes images), rather use proper type-setting software like LaTeX or other comparable programs.
 
 Your homework is going to be corrected and given back to you. Correct solutions are rewarded with a bonus for the exam which accounts to max. ten percent of the exam
-(corresponds to six points), if all solutions submitted are correct. Below you find the formula which is used to compute the bonus.
+(corresponds to six points), if all solutions submitted are correct. Below you find the formula which is used to compute the bonus as well as a legend which explains what the components mean.
 
-<p align="center" style="margin-top:50px">
+<p align="center">
 	<img src="https://render.githubusercontent.com/render/math?math=b = f(a) = \left\lceil \frac{B}{A^2} \cdot a^2 \right\rceil" width=200px height=120px>
 </p>
 
-Legend:
 | Parameter 													                        			|	Explanation										|	Value 		|
 |---------------------------------------------------------------------------------------------------|---------------------------------------------------|---------------|
 | <img src="https://render.githubusercontent.com/render/math?math=b" width=15px height=15px>		|	bonus points attained for the exam				| 	up to you	|
