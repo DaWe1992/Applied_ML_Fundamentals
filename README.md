@@ -78,7 +78,7 @@ Sample solutions will **not** be uploaded. However, you are free to share correc
 
 Your homework is going to be corrected and given back to you. Correct solutions are rewarded with a bonus for the exam which accounts to max. ten percent of the exam
 (corresponds to six points), if all solutions submitted are correct. **Please note:** You have to pass the exam **without the bonus points!**
-(i.e. it is not possible to turn a 5.0 into a 4.0)
+(i.e. it is not possible to turn a 5.0 into a 4.0). The bonus points will be taken into account in case you have to repeat the exam (they do not expire if you fail the first attempt).
 Unsurprisingly, the solutions have to be your own work. **If you plagiarize, you will lose all bonus points!**
 
 **Further remarks:**

@@ -105,9 +105,9 @@
 	\dwHeader{Computation of the gradient}
 	\begin{align}
 		\nabla_{\bm{\theta}} \log p(\bm{y} \vert \bm{X}, \bm{\theta}, \beta)
-			&= \bm{0} \\
+			&\overset{!}{=} \bm{0} \\
 		-\beta \sum_{i=1}^n (y^{(i)} - \bm{\theta}^{\intercal} \bm{x}^{(i)}) \bm{x}^{(i)}
-			&= \bm{0}
+			&\overset{!}{=} \bm{0}
 	\end{align}
 	
 	\begin{itemize}
@@ -169,7 +169,7 @@
 		\item Computation of the gradient:
 		\begin{align}
 			\nabla_{\bm{\theta}} \log p(\bm{\theta} \vert \bm{X}, \bm{y}, \alpha, \beta)
-				&= \beta \sum_{i=1}^n (y^{(i)} - \bm{\theta}^{\intercal} \varphi(\bm{x}^{(i)})) \varphi(\bm{x}^{(i)}) - \alpha \bm{\theta} = \bm{0} \\
+				&= \beta \sum_{i=1}^n (y^{(i)} - \bm{\theta}^{\intercal} \varphi(\bm{x}^{(i)})) \varphi(\bm{x}^{(i)}) - \alpha \bm{\theta} \overset{!}{=} \bm{0} \\
 			\beta \sum_{i=1}^n y^{(i)} \varphi(\bm{x}^{(i)})
 				&= \beta \left[ \sum_{i=1}^n \varphi(\bm{x}^{(i)})^{\intercal} \varphi(\bm{x}^{(i)}) \right] \bm{\theta} + \alpha \bm{\theta} \\
 			\beta \sum_{i=1}^n y^{(i)} \varphi(\bm{x}^{(i)})
@@ -188,7 +188,7 @@
 		\item This approach is referred to as \textbf{ridge regression}.
 		\item You already know this result from regularized least squares regression:
 		\begin{equation}
-			\argmin_{\bm{\theta}} \frac{1}{2} \Vert \bm{\Phi}^{\intercal} \bm{\theta} - \bm{y} \Vert^2 + \frac{\lambda}{2} \Vert \bm{\theta} \Vert^2
+			\argmin_{\bm{\theta}} \frac{1}{2} \Vert \bm{\Phi} \bm{\theta} - \bm{y} \Vert^2 + \frac{\lambda}{2} \Vert \bm{\theta} \Vert^2
 		\end{equation}
 		\item Solving for $\bm{\theta}$, we get the estimate:
 		\begin{equation}
@@ -243,7 +243,7 @@
 		\item Because this model only has two adaptive parameters, we can plot the prior and the posterior distributions directly in parameter space.
 		\item We generate synthetic data from the function $f(x; \bm{a}) = a_0 + a_1 \cdot x$, with $a_0 = -0.3$ and $a_1 = 0.5$ by first choosing values of $x^{(i)}$ from the
 			uniform distribution $\mathcal{U}(x \vert -1, 1)$, then evaluating $f(x^{(i)}; \bm{a})$, and finally adding some Gaussian noise with precision $\beta = \frac{1}{0.2}$.
-			$\alpha$ is fixed to 2.0
+			$\alpha$ is fixed to 2.0.
 	\end{itemize}
 \end{frame}
 
@@ -310,10 +310,10 @@
 		\item The predictive distribution takes the form:
 		\begin{align}
 			p(y_q \vert \bm{x}_q, \bm{X}, \bm{y}, \alpha, \beta)
-				&= \mathcal{N}(y_q \vert \bm{\mu}_n^{\intercal} \varphi(\bm{x}), \sigma_n^2(\bm{x})) \\
+				&= \mathcal{N}(y_q \vert \bm{\mu}_n^{\intercal} \varphi(\bm{x}_q), \sigma_n^2(\bm{x}_q)) \\
 			\shortintertext{with:}
-			\sigma_n^2
-				&= \frac{1}{\beta} + \varphi(\bm{x})^{\intercal} \bm{\Lambda}_n^{-1} \varphi(\bm{x})
+			\sigma_n^2(\bm{x}_q)
+				&= \frac{1}{\beta} + \varphi(\bm{x}_q)^{\intercal} \bm{\Lambda}_n^{-1} \varphi(\bm{x}_q)
 				\label{eq:variance-predictive-dist}
 		\end{align}
 		\item The first term in \cref{eq:variance-predictive-dist} reflects the noise in the data, the second one the uncertainty associated with the model parameters $\bm{\theta}$.
