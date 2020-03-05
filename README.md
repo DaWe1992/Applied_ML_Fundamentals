@@ -86,12 +86,12 @@ Unsurprisingly, the solutions have to be your own work. **If you plagiarize, you
 </p>
 
 Legend:
-| Parameter 																			|	Explanation										|	Value 	|
-|---------------------------------------------------------------------------------------|---------------------------------------------------|-----------|
-| <img src="https://render.githubusercontent.com/render/math?math=\left\lceil b>		|	your bonus points for the exam					| 	-		|
-| <img src="https://render.githubusercontent.com/render/math?math=\left\lceil b_{max}>	|	maximum attainable bonus points 				|	6		|
-| <img src="https://render.githubusercontent.com/render/math?math=\left\lceil a_{max}>	|	maximum attainable points in the assignments	|	40 		|
-| <img src="https://render.githubusercontent.com/render/math?math=\left\lceil x>		|	your score in the assignments					|	-		|
+| Parameter 																|	Explanation										|	Value 	|
+|---------------------------------------------------------------------------|---------------------------------------------------|-----------|
+| <img src="https://render.githubusercontent.com/render/math?math=b>		|	your bonus points for the exam					| 	-		|
+| <img src="https://render.githubusercontent.com/render/math?math=b_{max}>	|	maximum attainable bonus points 				|	6		|
+| <img src="https://render.githubusercontent.com/render/math?math=a_{max}>	|	maximum attainable points in the assignments	|	40 		|
+| <img src="https://render.githubusercontent.com/render/math?math=x>		|	your score in the assignments					|	-		|
 
 **Further remarks:**
 * Code assignments have to be done in Python. Please submit a *.py* file (no jupyter notebooks, since jupyter notebooks do not allow for proper debugging).
