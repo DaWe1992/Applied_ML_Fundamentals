@@ -80,7 +80,7 @@ Your homework is going to be corrected and given back to you. Correct solutions 
 (corresponds to six points), if all solutions submitted are correct. Below you find the formula which is used to compute the bonus as well as a legend which explains what the components mean:
 
 <p align="center">
-	<img src="https://render.githubusercontent.com/render/math?math=b = f(a) = \text{min}\left(B, \left\lceil \frac{B}{A^2} \cdot a^2 \right\rceil \right)" width=325px height=130px>
+	<img src="https://render.githubusercontent.com/render/math?math=b(a) = \text{min}\left(B, \left\lceil \frac{B}{A^2} \cdot a^2 \right\rceil \right)" width=300px height=130px>
 </p>
 
 | Parameter 													                        			|	Explanation										|	Value 		|
