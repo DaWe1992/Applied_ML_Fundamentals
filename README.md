@@ -86,6 +86,8 @@ Unsurprisingly, the solutions have to be your own work. **If you plagiarize, you
 * The following packages are allowed: *numpy*, *pandas* (please ask beforehand, if you want to use a specific package not mentioned here).
 * Do not use already implemented models (e.g. from *scikit-learn*).
 
+<img src="https://render.githubusercontent.com/render/math?math=e^{i \pi} = -1">
+
 ## Exam <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/exam.png" width="30px" height="25px">
 The exam will take 60 minutes. The maximum attainable score will be 60 points, so you have one minute per point.
 **Important:** Keep your answers short and simple in order not to lose too much valuable time.
