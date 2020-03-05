@@ -77,18 +77,26 @@ Sample solutions will **not** be uploaded. However, you are free to share correc
 * Please refrain from submitting hand-written solutions, rather use proper type-setting software like LaTeX or other comparable programs.
 
 Your homework is going to be corrected and given back to you. Correct solutions are rewarded with a bonus for the exam which accounts to max. ten percent of the exam
-(corresponds to six points), if all solutions submitted are correct. **Please note:** You have to pass the exam **without the bonus points!**
+(corresponds to six points), if all solutions submitted are correct. Below you find the formula which is used to compute the bonus. **Please note:** You have to pass the exam **without the bonus points!**
 (i.e. it is not possible to turn a 5.0 into a 4.0). The bonus points will be taken into account in case you have to repeat the exam (they do not expire if you fail the first attempt).
 Unsurprisingly, the solutions have to be your own work. **If you plagiarize, you will lose all bonus points!**
+
+<p align="center">
+	<img src="https://render.githubusercontent.com/render/math?math=\left\lceil b = \frac{b_{max}}{a_{max}^2} \cdot x^2 \right\rceil", width=125px height=75px>
+</p>
+
+Legend:
+| Parameter 																			|	Explanation										|	Value 	|
+|---------------------------------------------------------------------------------------|---------------------------------------------------|-----------|
+| <img src="https://render.githubusercontent.com/render/math?math=\left\lceil b>		|	your bonus points for the exam					| 	-		|
+| <img src="https://render.githubusercontent.com/render/math?math=\left\lceil b_{max}>	|	maximum attainable bonus points 				|	6		|
+| <img src="https://render.githubusercontent.com/render/math?math=\left\lceil a_{max}>	|	maximum attainable points in the assignments	|	40 		|
+| <img src="https://render.githubusercontent.com/render/math?math=\left\lceil x>		|	your score in the assignments					|	-		|
 
 **Further remarks:**
 * Code assignments have to be done in Python. Please submit a *.py* file (no jupyter notebooks, since jupyter notebooks do not allow for proper debugging).
 * The following packages are allowed: *numpy*, *pandas* (please ask beforehand, if you want to use a specific package not mentioned here).
 * Do not use already implemented models (e.g. from *scikit-learn*).
-
-<p align="center">
-	<img src="https://render.githubusercontent.com/render/math?math=\left\lceil \frac{b}{a^2} \cdot x^2 \right\rceil", width=125px height=75px>
-</p>
 
 ## Exam <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/exam.png" width="30px" height="25px">
 The exam will take 60 minutes. The maximum attainable score will be 60 points, so you have one minute per point.
@@ -125,7 +133,7 @@ Play around with the hyper-parameters of the algorithms and try different data s
 ## Literature and recommended Reading <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/literature.png" width="25px" height="25px">
 You do not need to buy any books for the lecture, most resources are available online. Please find a curated list below:
 
-| Title                                    	     | Author(s)                    | Publisher 				| View online                                                         																																|
+| Title                                    	     | Author(s)                    | Publisher 				| View online                                                         																														|
 |------------------------------------------------|------------------------------|---------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Deep Learning                            	     | Goodfellow et al. (2016)		| MIT Press     			| [click here](https://www.deeplearningbook.org/) 		        																															|
 | Elements of statistical Learning               | Hastie et al. (2008) 		| Springer      			| [click here](https://web.stanford.edu/~hastie/Papers/ESLII.pdf)																															|
