@@ -87,7 +87,7 @@ Unsurprisingly, the solutions have to be your own work. **If you plagiarize, you
 * Do not use already implemented models (e.g. from *scikit-learn*).
 
 <p align="center">
-	<img src="https://render.githubusercontent.com/render/math?math=\left\lceil \frac{b}{a^2} \cdot x^2 \right\rceil", width=200px height=150px>
+	<img src="https://render.githubusercontent.com/render/math?math=\left\lceil \frac{b}{a^2} \cdot x^2 \right\rceil", width=125px height=75px>
 </p>
 
 ## Exam <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/exam.png" width="30px" height="25px">
