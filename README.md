@@ -80,7 +80,7 @@ Your homework is going to be corrected and given back to you. Correct solutions 
 (corresponds to six points), if all solutions submitted are correct. Below you find the formula which is used to compute the bonus.
 
 <p align="center">
-	<img src="https://render.githubusercontent.com/render/math?math=b = f(a) = \left\lceil \frac{B}{A^2} \cdot a^2 \right\rceil", width=150px height=100px>
+	<img src="https://render.githubusercontent.com/render/math?math=b = f(a) = \left\lceil \frac{B}{A^2} \cdot a^2 \right\rceil", width=200px height=120px>
 </p>
 
 Legend:
