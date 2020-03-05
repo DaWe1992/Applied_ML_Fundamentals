@@ -84,12 +84,12 @@ Your homework is going to be corrected and given back to you. Correct solutions 
 </p>
 
 Legend:
-| Parameter 																|	Explanation										|	Value 	|
-|---------------------------------------------------------------------------|---------------------------------------------------|-----------|
-| <img src="https://render.githubusercontent.com/render/math?math=b">		|	your bonus points for the exam					| 	-		|
-| <img src="https://render.githubusercontent.com/render/math?math=b_{max}">	|	maximum attainable bonus points 				|	6		|
-| <img src="https://render.githubusercontent.com/render/math?math=a_{max}">	|	maximum attainable points in the assignments	|	40 		|
-| <img src="https://render.githubusercontent.com/render/math?math=x">		|	your score in the assignments					|	-		|
+| Parameter 													                        			|	Explanation										|	Value 	|
+|---------------------------------------------------------------------------------------------------|---------------------------------------------------|-----------|
+| <img src="https://render.githubusercontent.com/render/math?math=b" width=30px height=30px>		|	your bonus points for the exam					| 	-		|
+| <img src="https://render.githubusercontent.com/render/math?math=b_{max}" width=30px height=30px>	|	maximum attainable bonus points 				|	6		|
+| <img src="https://render.githubusercontent.com/render/math?math=a_{max}" width=30px height=30px>	|	maximum attainable points in the assignments	|	40 		|
+| <img src="https://render.githubusercontent.com/render/math?math=x" width=30px height=30px>		|	your score in the assignments					|	-		|
 
 **Please note:** You have to pass the exam **without the bonus points!**
 (i.e. it is not possible to turn a 5.0 into a 4.0). The bonus points will be taken into account in case you have to repeat the exam (they do not expire if you fail the first attempt).
