@@ -77,12 +77,10 @@ Sample solutions will **not** be uploaded. However, you are free to share correc
 * Please refrain from submitting hand-written solutions, rather use proper type-setting software like LaTeX or other comparable programs.
 
 Your homework is going to be corrected and given back to you. Correct solutions are rewarded with a bonus for the exam which accounts to max. ten percent of the exam
-(corresponds to six points), if all solutions submitted are correct. Below you find the formula which is used to compute the bonus. **Please note:** You have to pass the exam **without the bonus points!**
-(i.e. it is not possible to turn a 5.0 into a 4.0). The bonus points will be taken into account in case you have to repeat the exam (they do not expire if you fail the first attempt).
-Unsurprisingly, the solutions have to be your own work. **If you plagiarize, you will lose all bonus points!**
+(corresponds to six points), if all solutions submitted are correct. Below you find the formula which is used to compute the bonus.
 
 <p align="center">
-	<img src="https://render.githubusercontent.com/render/math?math=\left\lceil b = \frac{b_{max}}{a_{max}^2} \cdot x^2 \right\rceil", width=125px height=75px>
+	<img src="https://render.githubusercontent.com/render/math?math=\left\lceil b = \frac{b_{max}}{a_{max}^2} \cdot x^2 \right\rceil", width=150px height=100px>
 </p>
 
 Legend:
@@ -92,6 +90,10 @@ Legend:
 | <img src="https://render.githubusercontent.com/render/math?math=b_{max}">	|	maximum attainable bonus points 				|	6		|
 | <img src="https://render.githubusercontent.com/render/math?math=a_{max}">	|	maximum attainable points in the assignments	|	40 		|
 | <img src="https://render.githubusercontent.com/render/math?math=x">		|	your score in the assignments					|	-		|
+
+**Please note:** You have to pass the exam **without the bonus points!**
+(i.e. it is not possible to turn a 5.0 into a 4.0). The bonus points will be taken into account in case you have to repeat the exam (they do not expire if you fail the first attempt).
+Unsurprisingly, the solutions have to be your own work. **If you plagiarize, you will lose all bonus points!**
 
 **Further remarks:**
 * Code assignments have to be done in Python. Please submit a *.py* file (no jupyter notebooks, since jupyter notebooks do not allow for proper debugging).
