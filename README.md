@@ -80,13 +80,13 @@ Your homework is going to be corrected and given back to you. Correct solutions 
 (corresponds to six points), if all solutions submitted are correct. Below you find the formula which is used to compute the bonus.
 
 <p align="center">
-	<img src="https://render.githubusercontent.com/render/math?math=f(a) = \left\lceil \frac{B}{A^2} \cdot a^2 \right\rceil", width=150px height=100px>
+	<img src="https://render.githubusercontent.com/render/math?math=b = f(a) = \left\lceil \frac{B}{A^2} \cdot a^2 \right\rceil", width=150px height=100px>
 </p>
 
 Legend:
 | Parameter 													                        			|	Explanation										|	Value 		|
 |---------------------------------------------------------------------------------------------------|---------------------------------------------------|---------------|
-| <img src="https://render.githubusercontent.com/render/math?math=f(a)" width=50px height=50px>		|	your bonus points for the exam					| 	up to you	|
+| <img src="https://render.githubusercontent.com/render/math?math=b" width=15px height=15px>		|	your bonus points for the exam					| 	up to you	|
 | <img src="https://render.githubusercontent.com/render/math?math=B" width=15px height=15px>		|	maximum attainable bonus points 				|	6			|
 | <img src="https://render.githubusercontent.com/render/math?math=A" width=15px height=15px>		|	maximum attainable points in the assignments	|	40 			|
 | <img src="https://render.githubusercontent.com/render/math?math=x" width=15px height=15px>		|	your score in the assignments					|	up to you	|
