@@ -79,7 +79,7 @@ Sample solutions will **not** be uploaded. However, you are free to share correc
 Your homework is going to be corrected and given back to you. Correct solutions are rewarded with a bonus for the exam which accounts to max. ten percent of the exam
 (corresponds to six points), if all solutions submitted are correct. Below you find the formula which is used to compute the bonus.
 
-<p align="center">
+<p align="center" style="margin-top:10px">
 	<img src="https://render.githubusercontent.com/render/math?math=b = f(a) = \left\lceil \frac{B}{A^2} \cdot a^2 \right\rceil" width=200px height=120px>
 </p>
 
@@ -89,7 +89,7 @@ Legend:
 | <img src="https://render.githubusercontent.com/render/math?math=b" width=15px height=15px>		|	bonus points attained for the exam				| 	up to you	|
 | <img src="https://render.githubusercontent.com/render/math?math=B" width=15px height=15px>		|	maximum attainable bonus points for the exam	|	6			|
 | <img src="https://render.githubusercontent.com/render/math?math=A" width=15px height=15px>		|	maximum attainable points in the assignments	|	40 			|
-| <img src="https://render.githubusercontent.com/render/math?math=x" width=15px height=15px>		|	score achieved in the assignments				|	up to you	|
+| <img src="https://render.githubusercontent.com/render/math?math=a" width=15px height=15px>		|	score achieved in the assignments				|	up to you	|
 
 **Please note:** You have to pass the exam **without the bonus points!**
 (i.e. it is not possible to turn a 5.0 into a 4.0). The bonus points will be taken into account in case you have to repeat the exam (they do not expire if you fail the first attempt).
