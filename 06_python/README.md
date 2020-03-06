@@ -1,4 +1,4 @@
-# Python code <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/python.png" width="30px" height="30px">
+# Python code 🐍
 
 ## How to run the Code
 Please see the file `main.py` to execute the code for the algorithms. The file contains functions for
