@@ -126,7 +126,7 @@ Symbol (2):
 * Non-programmable pocket calculator
 * Two-sided **hand-written** cheat sheet (you may note whatever you want)
 
-## Python code <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/python.png" width="30px" height="30px">
+## Python code 🐍 <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/python.png" width="30px" height="30px">
 Please find Python implementations of some of the algorithms (which are not part of the assignments) in the folder
 [06_python](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/06_python).
 Play around with the hyper-parameters of the algorithms and try different data sets in order to get a better feeling for how the algorithms work.
