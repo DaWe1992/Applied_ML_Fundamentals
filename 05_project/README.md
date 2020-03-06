@@ -1,1 +1,1 @@
-# Data Exploration Project (4th Semester)
+# Data Exploration Project (4th Semester) <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/crane.png" width="45px" height="40px">
