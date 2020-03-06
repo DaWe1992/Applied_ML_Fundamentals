@@ -127,7 +127,9 @@
 		\item \textit{What can we do to tackle this kind of problem?}
 		\item We can use a more Bayesian approach and put a \textbf{prior} on the parameters $\bm{\theta}$:
 		\begin{equation}
-			p(\bm{\theta} \vert \bm{X}, \bm{y}, \alpha, \beta) \propto p(\bm{y} \vert \bm{X}, \bm{\theta}, \beta) \cdot p(\bm{\theta} \vert \alpha)
+			\overbracket{p(\bm{\theta} \vert \bm{X}, \bm{y}, \alpha, \beta)}^{\text{posterior}} \propto
+				\overbracket{p(\bm{y} \vert \bm{X}, \bm{\theta}, \beta)}^{\text{likelihood}} \cdot
+				\overbracket{p(\bm{\theta} \vert \alpha)}^{\text{prior}}
 		\end{equation}
 		\item The prior probability distribution $p(\bm{\theta} \vert \alpha)$ encodes our \textbf{prior belief} about the parameters $\bm{\theta}$.
 	\end{itemize}
