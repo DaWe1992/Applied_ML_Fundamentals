@@ -1,6 +1,6 @@
 # Python code 🐍
 
-## How to run the Code
+## How to run the Code?
 Please see the file `main.py` to execute the code for the algorithms. The file contains functions for
 classification, regression, reinforcement learning and unsupervised learning. Simply uncomment the parts which you want to use.
 
