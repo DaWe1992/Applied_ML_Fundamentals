@@ -77,16 +77,16 @@ Sample solutions will **not** be uploaded. However, you are free to share correc
 		* One *.pdf* file for the pen-and-paper tasks
 		* One *.py* file per programming task.
 	* Only pen and paper tasks have to be printed, you do not have to print the source code.
-* Only one member of the group has to submit the solutions. Specify the matriculation numbers of all group members!
-* Please refrain from submitting hand-written solutions or images of solutions (*.png*/*.jpg* files), rather use proper type-setting software like LaTeX or other comparable programs.
+* Only one member of the group has to submit the solutions. Therefore, do not forget to specify the matriculation numbers (not the names!) of all group members!
+* Please refrain from submitting hand-written solutions or images of solutions (*.png* / *.jpg* files). Rather use proper type-setting software like LaTeX or other comparable programs.
 If you choose to use LaTeX, you may want to use the template files located [here](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/03_tex_files/02_exercises) for your answers.
-* Code assignments have to be done in Python. Please submit a *.py* file (no jupyter notebooks).
+* Code assignments have to be done in Python. Please submit *.py* files (no jupyter notebooks, since jupyter notebooks do not allow for proper debugging).
 * The following packages are allowed for code submissions (please ask **beforehand**, if you want to use a specific package not mentioned here):
 	* *numpy*
 	* *pandas*
 	* *scipy*
 * Do not use already implemented models (e.g. from *scikit-learn*).
-* **You will lose a significant amount of points if you violate the above mentioned formal requirements.**
+* **You will lose a significant amount of points, if you violate the above mentioned formal requirements.**
 
 **Grading**
 Your homework is going to be corrected and given back to you. Correct solutions are rewarded with a bonus for the exam which accounts to max. ten percent of the exam
