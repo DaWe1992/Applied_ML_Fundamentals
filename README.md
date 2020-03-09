@@ -74,7 +74,8 @@ Sample solutions will **not** be uploaded. However, you are free to share correc
 **Submission details:**
 * Please submit your solutions via Moodle (code assignments) as well as in printed form.
 * Only one member of the group has to submit the solutions. Therefore, make sure to specify the names of all group members.
-* Please refrain from submitting hand-written solutions (this also includes images), rather use proper type-setting software like LaTeX or other comparable programs.
+* Please refrain from submitting hand-written solutions (this also includes images of solutions), rather use proper type-setting software like LaTeX or other comparable programs.
+If you choose to use LaTeX you may want to use the .tex files located [here](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/03_tex_files/02_exercises).
 
 Your homework is going to be corrected and given back to you. Correct solutions are rewarded with a bonus for the exam which accounts to max. ten percent of the exam
 (corresponds to six points), if all solutions submitted are correct. Below you find the [function](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/bonus_point_function.png) which is used to compute the bonus as well as a legend which explains what the components mean:

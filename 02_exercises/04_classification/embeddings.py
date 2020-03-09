@@ -4,7 +4,7 @@ from flair.embeddings import WordEmbeddings, DocumentRNNEmbeddings, FlairEmbeddi
 word_embeddings = WordEmbeddings("glove")
 
 # document pool embeddings - try to exchange this with DocumentRNNEmbeddings!
-document_embeddings = DocumentPoolEmbeddings( \
+document_embeddings = DocumentPoolEmbeddings(
 	[word_embeddings], fine_tune_mode="none")
 
 # create an example sentence object
