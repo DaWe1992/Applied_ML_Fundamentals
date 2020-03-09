@@ -72,20 +72,24 @@ You have two weeks to answer the questions and to submit your work. The solution
 Sample solutions will **not** be uploaded. However, you are free to share correct solutions with your colleagues **after they have been graded**.
 
 **Submission details:**
-* Please submit your solutions via Moodle (code assignments) as well as in printed form.
+* Please submit your solutions via Moodle as well as in printed form.
+	* The submission in Moodle must have the following form: *zip{one pdf for pen and paper tasks, one python file per programming task}*.
+	* Only pen and paper tasks have to be printed, you do not have to print the source code.
 * Only one member of the group has to submit the solutions. Therefore, make sure to specify the matriculation numbers (not the names!) of all group members.
 * Please refrain from submitting hand-written solutions (this also includes images of solutions), rather use proper type-setting software like LaTeX or other comparable programs.
-If you choose to use LaTeX you may want to use the .tex files located [here](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/03_tex_files/02_exercises) for your answers.
+If you choose to use LaTeX, you may want to use the template files located [here](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/03_tex_files/02_exercises) for your answers.
 * Code assignments have to be done in Python. Please submit a *.py* file (no jupyter notebooks, since jupyter notebooks do not allow for proper debugging).
-* The following packages are allowed (please ask beforehand, if you want to use a specific package not mentioned here):
+* The following packages are allowed for code submissions (please ask beforehand, if you want to use a specific package not mentioned here):
 	* *numpy*
 	* *pandas*
 	* *scipy*
 * Do not use already implemented models (e.g. from *scikit-learn*).
+* **You will lose a significant amount of points if you violate the above mentioned formal requirements.**
 
 **Grading**
 Your homework is going to be corrected and given back to you. Correct solutions are rewarded with a bonus for the exam which accounts to max. ten percent of the exam
-(corresponds to six points), if all solutions submitted are correct. Below you find the [function](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/bonus_point_function.png) which is used to compute the bonus as well as a legend which explains what the components mean:
+(this corresponds to six points), if all solutions submitted are correct.
+Below you find the [function](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/bonus_point_function.png) which is used to compute the bonus as well as a legend which explains what the components mean:
 
 <p align="center">
 	<img src="https://render.githubusercontent.com/render/math?math=b(a) = \text{min}\left(B, \left\lceil \frac{B}{A^2} \cdot a^2 \right\rceil \right)" width=300px height=130px>
@@ -98,8 +102,8 @@ Your homework is going to be corrected and given back to you. Correct solutions 
 | <img src="https://render.githubusercontent.com/render/math?math=A" width=15px height=15px>		|	maximum attainable points in the assignments	|	40 			|
 | <img src="https://render.githubusercontent.com/render/math?math=a" width=15px height=15px>		|	score achieved in the assignments				|	up to you	|
 
-**Please note:** You have to pass the exam **without the bonus points!**
-(i.e. it is not possible to turn a 5.0 into a 4.0). The bonus points will be taken into account in case you have to repeat the exam (they do not expire if you fail the first attempt).
+**Please note:** You have to pass the exam **without the bonus points!** (i.e. it is not possible to turn a 5.0 into a 4.0).
+The bonus points will be taken into account in case you have to repeat the exam (they do not expire if you fail the first attempt).
 Unsurprisingly, the solutions have to be your own work. **If you plagiarize, you will lose all bonus points!**
 
 ## Exam 📝
