@@ -87,8 +87,8 @@ If you choose to use LaTeX, you may want to use the template files located [here
 
 **Grading**
 
-Your homework is going to be corrected and given back to you. Correct solutions are rewarded with a bonus for the exam which accounts to at most ten percent of the exam
-(this corresponds to six points), if all solutions submitted by you are correct.
+Your homework is going to be corrected and given back to you. Correct solutions are rewarded with a bonus for the exam which accounts to at most ten percent of the exam,
+if all solutions submitted by you are correct (this corresponds to six points).
 Below you find the [function](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/bonus_point_function.png) which is used to compute the bonus as well as a legend which explains what the components mean.
 Please note that this is not a linear function.
 
