@@ -73,11 +73,14 @@ Sample solutions will **not** be uploaded. However, you are free to share correc
 
 **Submission details:**
 * Please submit your solutions via Moodle (code assignments) as well as in printed form.
-* Only one member of the group has to submit the solutions. Therefore, make sure to specify the names of all group members.
+* Only one member of the group has to submit the solutions. Therefore, make sure to specify the matriculation numbers (not the names!) of all group members.
 * Please refrain from submitting hand-written solutions (this also includes images of solutions), rather use proper type-setting software like LaTeX or other comparable programs.
 If you choose to use LaTeX you may want to use the .tex files located [here](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/03_tex_files/02_exercises) for your answers.
 * Code assignments have to be done in Python. Please submit a *.py* file (no jupyter notebooks, since jupyter notebooks do not allow for proper debugging).
-* The following packages are allowed: *numpy*, *pandas* (please ask beforehand, if you want to use a specific package not mentioned here).
+* The following packages are allowed (please ask beforehand, if you want to use a specific package not mentioned here):
+	* *numpy*
+	* *pandas*
+	* *scipy*
 * Do not use already implemented models (e.g. from *scikit-learn*).
 
 **Grading**
