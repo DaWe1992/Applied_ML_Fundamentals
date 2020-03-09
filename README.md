@@ -86,7 +86,7 @@ If you choose to use LaTeX, you may want to use the template files located [here
 	* *pandas*
 	* *scipy*
 * Do not use already implemented models (e.g. from *scikit-learn*).
-* **You will lose a significant amount of points, if you violate the above mentioned formal requirements.**
+* **`You will lose a significant amount of points, if you violate the above mentioned formal requirements.`**
 
 **Grading**
 
