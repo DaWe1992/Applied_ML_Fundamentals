@@ -73,7 +73,9 @@ Sample solutions will **not** be uploaded. However, you are free to share correc
 
 **Submission details:**
 * Please submit your solutions via Moodle as well as in printed form.
-	* The submission in Moodle must be zipped. The *.zip* file contains one *.pdf* file for the pen-and-paper tasks, as well as one *.py* file per programming task.
+	* The submission in Moodle must be zipped. The *.zip* file contains:
+		* One *.pdf* file for the pen-and-paper tasks
+		* One *.py* file per programming task.
 	* Only pen and paper tasks have to be printed, you do not have to print the source code.
 * Only one member of the group has to submit the solutions. Specify the matriculation numbers of all group members!
 * Please refrain from submitting hand-written solutions or images of solutions (*.png*/*.jpg* files), rather use proper type-setting software like LaTeX or other comparable programs.
