@@ -81,10 +81,7 @@ Sample solutions will **not** be uploaded. However, you are free to share correc
 * Please refrain from submitting hand-written solutions or images of solutions (*.png* / *.jpg* files). Rather use proper type-setting software like LaTeX or other comparable programs.
 If you choose to use LaTeX, you may want to use the template files located [here](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/03_tex_files/02_exercises) for your answers.
 * Code assignments have to be done in Python. Please submit *.py* files (no jupyter notebooks, since jupyter notebooks do not allow for proper debugging).
-* The following packages are allowed for code submissions (please ask **beforehand**, if you want to use a specific package not mentioned here):
-	* *numpy*
-	* *pandas*
-	* *scipy*
+* The following packages are allowed for code submissions: *numpy*, *pandas*, *scipy*. Please ask **beforehand**, if you want to use a specific package not mentioned here.
 * Do not use already implemented models (e.g. from *scikit-learn*).
 * **`You will lose a significant amount of points, if you violate the above mentioned formal requirements.`**
 
