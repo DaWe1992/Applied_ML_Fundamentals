@@ -89,9 +89,11 @@ If you choose to use LaTeX, you may want to use the template files located [here
 * **You will lose a significant amount of points, if you violate the above mentioned formal requirements.**
 
 **Grading**
-Your homework is going to be corrected and given back to you. Correct solutions are rewarded with a bonus for the exam which accounts to max. ten percent of the exam
-(this corresponds to six points), if all solutions submitted are correct.
-Below you find the [function](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/bonus_point_function.png) which is used to compute the bonus as well as a legend which explains what the components mean:
+
+Your homework is going to be corrected and given back to you. Correct solutions are rewarded with a bonus for the exam which accounts to at most ten percent of the exam
+(this corresponds to six points), if all solutions submitted by you are correct.
+Below you find the [function](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/bonus_point_function.png) which is used to compute the bonus as well as a legend which explains what the components mean.
+Please note that this is not a linear function.
 
 <p align="center">
 	<img src="https://render.githubusercontent.com/render/math?math=b(a) = \text{min}\left(B, \left\lceil \frac{B}{A^2} \cdot a^2 \right\rceil \right)" width=300px height=130px>
@@ -104,9 +106,9 @@ Below you find the [function](https://github.com/DaWe1992/Applied_ML_Fundamental
 | <img src="https://render.githubusercontent.com/render/math?math=A" width=15px height=15px>		|	maximum attainable points in the assignments	|	40 			|
 | <img src="https://render.githubusercontent.com/render/math?math=a" width=15px height=15px>		|	score achieved in the assignments				|	up to you	|
 
-**Please note:** You have to pass the exam **without the bonus points!** (i.e. it is not possible to turn a 5.0 into a 4.0).
-The bonus points will be taken into account in case you have to repeat the exam (they do not expire if you fail the first attempt).
-Unsurprisingly, the solutions have to be your own work. **If you plagiarize, you will lose all bonus points!**
+**Please note:** You have to pass the exam **without the bonus points!** This means it is not possible to turn a 5.0 into a 4.0).
+The bonus points will be taken into account in case you have to repeat the exam (i.e. they do not expire if you fail the first attempt).
+Unsurprisingly, the solutions have to be your own work. **`If you plagiarize, you will lose all bonus points!`**
 
 ## Exam 📝
 The exam will take 60 minutes. The maximum attainable score will be 60 points, so you have one minute per point.
