@@ -71,7 +71,7 @@ The task descriptions, starter code and data sets for the assignments can be fou
 You have two weeks to answer the questions and to submit your work. The solutions are going to be presented and discussed after the submission deadline.
 Sample solutions will **not** be uploaded. However, you are free to share correct solutions with your colleagues **after they have been graded**.
 
-**Submission details:**
+**Formal requirements for submissions:**
 * Please submit your solutions via Moodle (as a *.zip* file) as well as in printed form. The *.zip* file must contain one *.pdf* file for the pen-and-paper tasks as well as one *.py* file per programming task. Only pen-and-paper tasks have to be printed, you do not have to print the source code.
 * Only one member of the group has to submit the solutions. Please make sure to specify the matriculation numbers (not the names!) of all group members so that all participants receive the points they deserve!
 * Please refrain from submitting hand-written solutions or images of solutions (*.png* / *.jpg* files). Rather use proper type-setting software like LaTeX or other comparable programs.
@@ -80,7 +80,7 @@ If you choose to use LaTeX, you may want to use the template files located [here
 * The following packages are allowed for code submissions: *numpy*, *pandas*, *scipy*. Please ask **beforehand**, if you want to use a specific package not mentioned here.
 * Do not use already implemented models (e.g. from *scikit-learn*).
 
-> Please make sure to fulfill the above mentioned formal requirements. Otherwise, you may risk to lose points.
+> **Please make sure to fulfill the above mentioned formal requirements. Otherwise, you may risk to lose points. Submissions which severely violate the specifications might not get any points at all!**
 
 **Grading details**
 
@@ -102,7 +102,7 @@ Please note that this is not a linear function.
 
 **Please note:** You have to pass the exam **without the bonus points!** This means it is not possible to turn a 5.0 into a 4.0).
 The bonus points will be taken into account in case you have to repeat the exam (i.e. they do not expire if you fail the first attempt).
-Unsurprisingly, the solutions have to be your own work. **`If you plagiarize, you will lose all bonus points!`**
+Unsurprisingly, the solutions have to be your own work. **If you plagiarize, you will lose all bonus points!**
 
 ## Exam 📝
 The exam will take 60 minutes. The maximum attainable score will be 60 points, so you have one minute per point.
