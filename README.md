@@ -13,7 +13,7 @@ domain and business knowledge:
 	<img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/data_science.png" width=400px>
 </p>
 
-The lecture *'Applied Machine Learning Fundamentals'* is supposed to give a general introduction into state-of-the-art machine learning algorithms and their applications. This Readme file is structured as follows: [Contents](#contents), [Assignments](#assignments), [Exam](#exam), [Python](#python-code), [Literature](#literature-and-recommended-reading), [Data Exploration Project](#data-exploration-project), [Additional Material](#additional-material) and [Bugs and Errors](#bugs-and-errors),
+The lecture *'Applied Machine Learning Fundamentals'* is supposed to give a general introduction into state-of-the-art machine learning algorithms and their applications. This Readme file is structured as follows: [Contents](#contents), [Assignments](#assignments-✒️), [Exam](#exam), [Python](#python-code), [Literature](#literature-and-recommended-reading), [Data Exploration Project](#data-exploration-project), [Additional Material](#additional-material) and [Bugs and Errors](#bugs-and-errors),
 
 ## Contents 📜
 
