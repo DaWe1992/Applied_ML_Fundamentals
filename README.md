@@ -13,7 +13,7 @@ domain and business knowledge:
 	<img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/data_science.png" width=400px>
 </p>
 
-The lecture *'Applied Machine Learning Fundamentals'* is supposed to give a general introduction into state-of-the-art machine learning algorithms and their applications. This Readme file is structured as follows:
+The lecture *'Applied Machine Learning Fundamentals'* is supposed to give a general introduction into state-of-the-art machine learning algorithms and their applications. This Readme file provides you with all necessary information. It is structured as follows:
 
 1. 📜 Lecture Contents
 2. ✒️ Assignments
