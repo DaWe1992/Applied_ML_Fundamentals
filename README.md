@@ -72,17 +72,15 @@ You have two weeks to answer the questions and to submit your work. The solution
 Sample solutions will **not** be uploaded. However, you are free to share correct solutions with your colleagues **after they have been graded**.
 
 **Submission details:**
-* Please submit your solutions via Moodle (as a *.zip* file) as well as in printed form.
-	* The *.zip* file contains one *.pdf* file for the pen-and-paper tasks as well as one *.py* file per programming task.
-	* Only pen-and-paper tasks have to be printed, you do not have to print the source code.
-* Only one member of the group has to submit the solutions. Please make sure to specify the matriculation numbers (not the names) of all group members!
-* Do not forget to specify the matriculation numbers (not the names!) of all group members!
+* Please submit your solutions via Moodle (as a *.zip* file) as well as in printed form. The *.zip* file must contain one *.pdf* file for the pen-and-paper tasks as well as one *.py* file per programming task. Only pen-and-paper tasks have to be printed, you do not have to print the source code.
+* Only one member of the group has to submit the solutions. Please make sure to specify the matriculation numbers (not the names!) of all group members so that all participants receive the points they deserve!
 * Please refrain from submitting hand-written solutions or images of solutions (*.png* / *.jpg* files). Rather use proper type-setting software like LaTeX or other comparable programs.
 If you choose to use LaTeX, you may want to use the template files located [here](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/03_tex_files/02_exercises) for your answers.
 * Code assignments have to be done in Python. Please submit *.py* files (no jupyter notebooks).
 * The following packages are allowed for code submissions: *numpy*, *pandas*, *scipy*. Please ask **beforehand**, if you want to use a specific package not mentioned here.
 * Do not use already implemented models (e.g. from *scikit-learn*).
-* **`You will lose a significant amount of points, if you violate the above mentioned formal requirements.`**
+
+> Please make sure to fulfill the above mentioned formal requirements. Otherwise, you may risk to lose points.
 
 **Grading details**
 
