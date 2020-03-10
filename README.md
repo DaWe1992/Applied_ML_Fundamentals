@@ -73,14 +73,13 @@ Sample solutions will **not** be uploaded. However, you are free to share correc
 
 **Submission details:**
 * Please submit your solutions via Moodle as well as in printed form.
-	* The submission in Moodle must be zipped. The *.zip* file contains:
-		* One *.pdf* file for the pen-and-paper tasks
-		* One *.py* file per programming task.
-	* Only pen and paper tasks have to be printed, you do not have to print the source code.
-* Only one member of the group has to submit the solutions. Therefore, do not forget to specify the matriculation numbers (not the names!) of all group members!
+	* The submission in Moodle must be zipped. The *.zip* file has to contain one *.pdf* file for the pen-and-paper tasks as well as one *.py* file per programming task.
+	* Only pen-and-paper tasks have to be printed, you do not have to print the source code.
+* Only one member of the group has to submit the solutions.
+* Do not forget to specify the matriculation numbers (not the names!) of all group members!
 * Please refrain from submitting hand-written solutions or images of solutions (*.png* / *.jpg* files). Rather use proper type-setting software like LaTeX or other comparable programs.
 If you choose to use LaTeX, you may want to use the template files located [here](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/03_tex_files/02_exercises) for your answers.
-* Code assignments have to be done in Python. Please submit *.py* files (no jupyter notebooks, since jupyter notebooks do not allow for proper debugging).
+* Code assignments have to be done in Python. Please submit *.py* files (no jupyter notebooks).
 * The following packages are allowed for code submissions: *numpy*, *pandas*, *scipy*. Please ask **beforehand**, if you want to use a specific package not mentioned here.
 * Do not use already implemented models (e.g. from *scikit-learn*).
 * **`You will lose a significant amount of points, if you violate the above mentioned formal requirements.`**
