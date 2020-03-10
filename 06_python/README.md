@@ -1,4 +1,4 @@
-# Python code 🐍
+# Python Code 🐍
 Machine learning algorithms (probably all algorithms) are easier to understand, if you see them implemented. Here you find Python implementations for some of the algorithms (which are not part of the assignments).
 Play around with the hyper-parameters of the algorithms and try different data sets in order to get a better feeling for how the algorithms work. Also, debug through the code line for line and check what each line does.
 
