@@ -24,7 +24,7 @@ The lecture *'Applied Machine Learning Fundamentals'* is supposed to give a gene
 7. 🎁 Additional material
 8. 🐞 Bugs and errors
 
-## Lecture Contents 📜
+## 📜 Lecture Contents
 
 We are going to cover the following topics:
 
@@ -73,7 +73,7 @@ We are going to cover the following topics:
 A list of abbreviations, symbols and mathematical notation used in the context of the slides can be found [here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/symbols.pdf).
 Please find additional material below.
 
-## Assignments ✒️
+## ✒️ Assignments
 The assignments are voluntary. All students who choose to participate have to form groups comprising three to four students (not more and not less).
 The groups do not have to be static, you may form new groups for each assignment.
 The task descriptions, starter code and data sets for the assignments can be found in the folder [02_exercises](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/02_exercises).
@@ -113,7 +113,7 @@ Please note that this is not a linear function.
 The bonus points will be taken into account in case you have to repeat the exam (i.e. they do not expire if you fail the first attempt).
 Unsurprisingly, the solutions have to be your own work. **If you plagiarize, you will lose all bonus points!**
 
-## Exam 📝
+## 📝 Exam
 The exam will take 60 minutes. The maximum attainable score will be 60 points, so you have one minute per point.
 **Important:** Keep your answers short and simple in order not to lose too much valuable time.
 The exam questions will be given in English, but you may answer them in either English or German (you are also allowed to mix the languages).
@@ -140,12 +140,12 @@ Symbol (2):
 * Non-programmable pocket calculator
 * Two-sided **hand-written** cheat sheet (you may note whatever you want)
 
-## Python Code 🐍
+## 🐍 Python Code
 Machine learning algorithms (probably all algorithms) are easier to understand, if you see them implemented. Please find Python implementations for some of the algorithms (which are not part of the assignments) in the folder
 [06_python](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/06_python).
 Play around with the hyper-parameters of the algorithms and try different data sets in order to get a better feeling for how the algorithms work. Also, debug through the code line for line and check what each line does.
 
-## Literature and recommended Reading 📚
+## 📚 Literature and recommended Reading
 You do not need to buy any books for the lecture, most resources are available online. Please find a curated list below:
 
 | Title                                    	     | Author(s)                    | Publisher 				| View online                                                         																														|
@@ -177,7 +177,7 @@ You can get a nice certificate if you want (around $60):
 In the exam we will not ask anything which was not discussed in the lecture. Regard the literature as additional resources in case you want to dig deeper into
 specific topics. Please give me a hint, if you feel that some important resources are missing. I am happy to add them here.
 
-## Data Exploration Project (4th Semester) 📐
+## 📐 Data Exploration Project (4th Semester)
 Please find the material for the project in the folder [05_project](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/05_project).
 
 The material contains:
@@ -186,7 +186,7 @@ The material contains:
 * Submission details
 * Grading details
 
-## Additional Material 🎁
+## 🎁 Additional Material
 Have a look at the following slides (unless stated otherwise, these slides are not relevant for the exam):
 
 1. **Support vector machines** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/11_svm.pdf))
@@ -216,7 +216,7 @@ Have a look at the following slides (unless stated otherwise, these slides are n
 	* Support vector regression
 7. **Deep learning II** (not yet available)
 
-## Bugs and Errors 🐞
+## 🐞 Bugs and Errors
 Help me improve the lecture. Feel free to file an issue, if you spot any errors in the slides, exercises or code.
 Thank you very much in advance! **Please do not open issues for questions concerning the content!** Either use the Moodle forum or send me an e-mail for that ([daniel.wehner@sap.com](mailto:daniel.wehner@sap.com)).
 
