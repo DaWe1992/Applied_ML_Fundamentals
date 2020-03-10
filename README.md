@@ -5,7 +5,8 @@
 ```
 
 Machine learning / data science is a subfield of artificial intelligence (AI) that provides systems the ability to automatically learn and improve from experience
-**without being explicitly programmed**. Machine learning focuses on the development of computer programs which can access data and use it to learn for themselves. A machine learning algorithm learns by building a mathematical / statistical model from the data. This model can then be used for inference and decision making. 
+**without being explicitly programmed**. Machine learning focuses on the development of computer programs which can access data and use it to learn for themselves.
+A machine learning algorithm learns by building a mathematical / statistical model from the data. This model can then be used for inference and decision making. 
 Machine learning has become an integral part of many modern applications. It is a cross-topic discipline which comprises computer science, math / statistics as well as
 domain and business knowledge:
 
@@ -13,7 +14,8 @@ domain and business knowledge:
 	<img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/data_science.png" width=400px>
 </p>
 
-The lecture *'Applied Machine Learning Fundamentals'* is supposed to give a general introduction into state-of-the-art machine learning algorithms and their applications. This Readme file provides you with all necessary information. It is structured as follows:
+The lecture *'Applied Machine Learning Fundamentals'* is supposed to give a general introduction into state-of-the-art machine learning algorithms and their applications.
+This Readme file provides you with all necessary information. It is structured as follows:
 
 1. 📜 Lecture contents
 2. ✒️ Assignments
@@ -81,7 +83,8 @@ You have two weeks to answer the questions and to submit your work. The solution
 Sample solutions will **not** be uploaded. However, you are free to share correct solutions with your colleagues **after they have been graded**.
 
 **Formal requirements for submissions:**
-* Please submit your solutions via Moodle (as a *.zip* file) as well as in printed form. The *.zip* file must contain one *.pdf* file for the pen-and-paper tasks as well as one *.py* file per programming task. Only pen-and-paper tasks have to be printed, you do not have to print the source code.
+* Please submit your solutions via Moodle (as a *.zip* file) as well as in printed form. The *.zip* file must contain one *.pdf* file for the pen-and-paper tasks as well as one *.py* file per programming task.
+Only pen-and-paper tasks have to be printed, you do not have to print the source code.
 * Only one member of the group has to submit the solutions. Please make sure to specify the matriculation numbers (not the names!) of all group members so that all participants receive the points they deserve!
 * Please refrain from submitting hand-written solutions or images of solutions (*.png* / *.jpg* files). Rather use proper type-setting software like LaTeX or other comparable programs.
 If you choose to use LaTeX, you may want to use the template files located [here](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/03_tex_files/02_exercises) for your answers.
