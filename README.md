@@ -5,7 +5,7 @@
 ```
 
 Machine learning / data science is a subfield of artificial intelligence (AI) that provides systems the ability to automatically learn and improve from experience
-**without being explicitly programmed**. Machine learning focuses on the development of computer programs that can access data and use it to learn for themselves.
+**without being explicitly programmed**. Machine learning focuses on the development of computer programs which can access data and use it to learn for themselves. A machine learning algorithm learns by building a mathematical / statistical model from the data. This model can then be used for inference and decision making. 
 Machine learning has become an integral part of many modern applications. It is a cross-topic discipline which comprises computer science, math / statistics as well as
 domain and business knowledge:
 
@@ -13,7 +13,7 @@ domain and business knowledge:
 	<img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/data_science.png" width=400px>
 </p>
 
-The lecture *'Applied Machine Learning Fundamentals'* is supposed to give a general introduction into state-of-the-art machine learning algorithms and their applications.
+The lecture *'Applied Machine Learning Fundamentals'* is supposed to give a general introduction into state-of-the-art machine learning algorithms and their applications. This Readme file is structured as follows: [Contents](#contents), [Assignments](#assignments), [Exam](#exam), [Python](#python-code), [Literature](#literature-and-recommended-reading), [Data Exploration Project](#data-exploration-project), [Additional Material](#additional-material) and [Bugs and Errors](#bugs-and-errors),
 
 ## Contents 📜
 
