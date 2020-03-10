@@ -205,7 +205,7 @@ Have a look at the following slides (unless stated otherwise, these slides are n
 	* Kernel regression
 	* Gaussian process regression
 	* Support vector regression
-7. **Deep Learning II** (not yet available)
+7. **Deep learning II** (not yet available)
 
 ## Bugs and Errors 🐞
 Help us improve the lecture. Feel free to file an issue, if you spot any errors in the slides, exercises or code.
