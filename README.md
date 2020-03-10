@@ -117,18 +117,19 @@ The bonus points will be taken into account in case you have to repeat the exam 
 Unsurprisingly, the solutions have to be your own work. **If you plagiarize, you will lose all bonus points!**
 
 ## Exam 📝
-The exam will take 60 minutes. The maximum attainable score will be 60 points, so you have one minute per point.
+The exam is going to take 60 minutes. The maximum attainable score will be 60 points, so you have one minute per point.
 **Important:** Keep your answers short and simple in order not to lose too much valuable time.
 The exam questions will be given in English, but you may answer them in either English or German (you are also allowed to mix the languages).
-Please do not translate domain specific technical terms in order to avoid confusion. Please answer all questions on the task sheets.
+Please do not translate domain specific technical terms in order to avoid confusion. Please answer all questions on the task sheets (you may also write on the back-sides).
 
 **Exam preparation:**
-* You will not be asked for any derivations, rather we want to test whether you understand the general concepts.
-* The exam will contain multiple choice questions, short answer questions and calculations.
+* You will not be asked for any derivations, rather I want to test whether you understand the general concepts.
+* The exam will contain a mix of multiple choice questions, short answer questions and calculations.
 * Make sure you can answer the self-test questions provided for each topic.
 * Some of the slides give you important hints (upper left corner):
 	*  A slide marked with symbol (1) provides in-depth information which you do not have to know by heart (think of it as additional material for the sake of completeness).
 	*  Symbol (2) indicates very important content. Make sure you understand it!
+* Make sure you understand the homework assignments.
 * Work through the [list of 150+ terms](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/04_exam/terms_you_have_to_know.pdf) which you should be able to explain.
 
 Symbol (1):
