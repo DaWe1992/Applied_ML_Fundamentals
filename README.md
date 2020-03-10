@@ -209,6 +209,6 @@ Have a look at the following slides (unless stated otherwise, these slides are n
 
 ## Bugs and Errors 🐞
 Help me improve the lecture. Feel free to file an issue, if you spot any errors in the slides, exercises or code.
-Thank you very much in advance! **Please do not open issues for questions concerning the content!** Either use the Moodle forum or send me an e-mail for that (`daniel.wehner@sap.com`).
+Thank you very much in advance! **Please do not open issues for questions concerning the content!** Either use the Moodle forum or send me an e-mail for that ([daniel.wehner@sap.com](mailto:daniel.wehner@sap.com)).
 
 <sub>© 2020 Daniel Wehner</sub>
