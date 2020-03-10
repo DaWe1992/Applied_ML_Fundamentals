@@ -132,9 +132,9 @@ Symbol (2):
 * Two-sided **hand-written** cheat sheet (you may note whatever you want)
 
 ## Python Code 🐍
-Please find Python implementations of some of the algorithms (which are not part of the assignments) in the folder
+Machine learning algorithms (probably all algorithms) are easier to understand, if you see them implemented. Please find Python implementations for some of the algorithms (which are not part of the assignments) in the folder
 [06_python](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/06_python).
-Play around with the hyper-parameters of the algorithms and try different data sets in order to get a better feeling for how the algorithms work.
+Play around with the hyper-parameters of the algorithms and try different data sets in order to get a better feeling for how the algorithms work. Also, debug through the code line for line and check what each line does.
 
 ## Literature and recommended Reading 📚
 You do not need to buy any books for the lecture, most resources are available online. Please find a curated list below:
