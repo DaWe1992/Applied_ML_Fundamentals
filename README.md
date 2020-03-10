@@ -77,15 +77,15 @@ Sample solutions will **not** be uploaded. However, you are free to share correc
 * Please refrain from submitting hand-written solutions or images of solutions (*.png* / *.jpg* files). Rather use proper type-setting software like LaTeX or other comparable programs.
 If you choose to use LaTeX, you may want to use the template files located [here](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/03_tex_files/02_exercises) for your answers.
 * Code assignments have to be done in Python. Please submit *.py* files (no jupyter notebooks).
-* The following packages are allowed for code submissions: *numpy*, *pandas*, *scipy*. Please ask **beforehand**, if you want to use a specific package not mentioned here.
+* The following packages are allowed for code submissions: *numpy*, *pandas* and *scipy*. Please ask **beforehand**, if you want to use a specific package not mentioned here.
 * Do not use already implemented models (e.g. from *scikit-learn*).
 
 > **Please make sure to fulfill the above mentioned formal requirements. Otherwise, you may risk to lose points. Submissions which severely violate the specifications might not get any points at all!**
 
 **Grading details**
 
-Your homework is going to be corrected and given back to you. Correct solutions are rewarded with a bonus for the exam which accounts to at most ten percent of the exam,
-if all solutions submitted by you are correct (this corresponds to six points).
+Your homework is going to be corrected and given back to you. Correct solutions are rewarded with a bonus for the exam which amounts to at most ten percent of the exam,
+if all solutions submitted by you are correct (this corresponds to at most six points in the exam). It is still possible to achieve full points in the exam, even if you choose not to participate in the assignments (it is additional).
 Below you find the [function](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/bonus_point_function.png) which is used to compute the bonus as well as a legend which explains what the components mean.
 Please note that this is not a linear function.
 
@@ -100,7 +100,7 @@ Please note that this is not a linear function.
 | <img src="https://render.githubusercontent.com/render/math?math=A" width=15px height=15px>		|	maximum attainable points in the assignments	|	40 			|
 | <img src="https://render.githubusercontent.com/render/math?math=a" width=15px height=15px>		|	score achieved in the assignments				|	up to you	|
 
-**Please note:** You have to pass the exam **without the bonus points!** This means it is not possible to turn a 5.0 into a 4.0).
+**Please note:** You have to pass the exam **without the bonus points!** This means it is not possible to turn a failing grade (= 5.0) into a passing grade (<= 4.0).
 The bonus points will be taken into account in case you have to repeat the exam (i.e. they do not expire if you fail the first attempt).
 Unsurprisingly, the solutions have to be your own work. **If you plagiarize, you will lose all bonus points!**
 
