@@ -72,8 +72,8 @@ You have two weeks to answer the questions and to submit your work. The solution
 Sample solutions will **not** be uploaded. However, you are free to share correct solutions with your colleagues **after they have been graded**.
 
 **Submission details:**
-* Please submit your solutions via Moodle as well as in printed form.
-	* The submission in Moodle must be zipped. The *.zip* file has to contain one *.pdf* file for the pen-and-paper tasks as well as one *.py* file per programming task.
+* Please submit your solutions via Moodle (as a *.zip* file) as well as in printed form.
+	* The *.zip* file contains one *.pdf* file for the pen-and-paper tasks as well as one *.py* file per programming task.
 	* Only pen-and-paper tasks have to be printed, you do not have to print the source code.
 * Only one member of the group has to submit the solutions.
 * Do not forget to specify the matriculation numbers (not the names!) of all group members!
