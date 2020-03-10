@@ -15,7 +15,7 @@ domain and business knowledge:
 
 The lecture *'Applied Machine Learning Fundamentals'* is supposed to give a general introduction into state-of-the-art machine learning algorithms and their applications. This Readme file provides you with all necessary information. It is structured as follows:
 
-1. 📜 Lecture Contents
+1. 📜 Lecture contents
 2. ✒️ Assignments
 3. 📝 Exam
 4. 🐍 Python code
