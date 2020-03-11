@@ -24,9 +24,9 @@ Employ the squared error loss function:
 
 \begin{align*}
 	\mathcal{J}(\bm{\Theta})
-		&= (y_{pred} - y)^2 \\[3mm]
+		&= (\bm{y}_{pred} - \bm{y})^2 \\[3mm]
 	\mathcal{J}'(\bm{\Theta})
-		&= 2 \cdot (y_{pred} - y)
+		&= 2 \cdot (\bm{y}_{pred} - \bm{y})
 \end{align*}
 
 The weight matrices and bias weights are initialized as follows (where for instance weight $\Theta_{12}^{(1)}$ connects the input $x_2$ with the first neuron in the hidden layer):
@@ -39,7 +39,7 @@ The weight matrices and bias weights are initialized as follows (where for insta
 				0.25 & 0.30
 			\end{pmatrix} \\[3mm]
 		\bm{b}^{(1)}
-			&= \begin{pmatrix}0.35 & 0.35\end{pmatrix}
+			&= \begin{pmatrix}0.35 \\ 0.35\end{pmatrix}
 	\end{align*}
 \end{minipage}
 \hfill
@@ -51,52 +51,51 @@ The weight matrices and bias weights are initialized as follows (where for insta
 				0.50 & 0.55
 			\end{pmatrix} \\[3mm]
 		\bm{b}^{(2)}
-			&= \begin{pmatrix}0.60 & 0.60\end{pmatrix}
+			&= \begin{pmatrix}0.60 \\ 0.60\end{pmatrix}
 	\end{align*}
 \end{minipage}
 \vspace*{5mm}
 
-Use the ReLU and sigmoid activation functions in the hidden layer and output layer, respectively. Write down all necessary computations.
-What are the gradients for the weights $\Theta_{12}^{(1)}$, $\Theta_{21}^{(2)}$?
+Use the ReLU and sigmoid activation functions in the hidden layer and output layer, respectively. The learning rate is set to $\alpha = 0.1$. Write down all necessary computations. What is the output of the network after you have updated all network parameters?
 \begin{figure}[h]
 	\centering
 	\begin{tikzpicture}[
-		neuron/.style={circle,minimum size=17pt,fill=white,draw=black},
-		bias/.style={circle,minimum size=17pt,fill=black},
+		neuron/.style={circle,minimum size=1.2cm,fill=white,draw=black},
+		bias/.style={circle,minimum size=1.2cm,fill=black},
 		annot/.style={text width=6em, text centered}
 	]
 
 		% connect input and hidden layers
-		\foreach \i in {0,1,2}
-		    \foreach \h in {1,2}
+		\foreach \i in {0,2,4}
+		    \foreach \h in {2,4}
 		            \draw[-stealth] (0,\i) -- (3,\h);
 		
 		% connect hidden and output layers
-		\foreach \h in {0,1,2}
-			\foreach \o in {1,2}
+		\foreach \h in {0,2,4}
+			\foreach \o in {2,4}
 				\draw (3,\h) -- (6,\o);
 				
-		\node[neuron] at (0,2) {$x_1$};
-		\node[neuron] at (0,1) {$x_2$};
-		\node[bias] at (0,0) {\textcolor{white}{$b_1$}};
+		\node[neuron] at (0,4) {$x_1$};
+		\node[neuron] at (0,2) {$x_2$};
+		\node[bias] at (0,0) {\textcolor{white}{$b$}};
 
-		\node[neuron] at (3,2) {$p_1$};
-		\node[neuron] at (3,1) {$p_2$};
-		\node[bias] at (3,0) {\textcolor{white}{$b_2$}};
+		\node[neuron] at (3,4) {$n_1^{(1)}$};
+		\node[neuron] at (3,2) {$n_2^{(1)}$};
+		\node[bias] at (3,0) {\textcolor{white}{$b$}};
 
-		\node[neuron] at (6,2) {$y_1$};
-		\node[neuron] at (6,1) {$y_2$};
+		\node[neuron] at (6,4) {$n_1^{(2)}$};
+		\node[neuron] at (6,2) {$n_2^{(2)}$};
 		            
 		% annotate the layers
-		\node[annot] at (0,3.5) {Input layer};
-		\node[annot] at (3,3.5) {Hidden layer (ReLU)};
-		\node[annot] at (6,3.5) {Output layer (Sigmoid)};
-		\node[annot] at (1.5,2.5) {$\bm{\Theta}^{(1)}$};
-		\node[annot] at (4.5,2.5) {$\bm{\Theta}^{(2)}$};
+		\node[annot] at (0,6) {Input layer};
+		\node[annot] at (3,6) {Hidden layer (ReLU)};
+		\node[annot] at (6,6) {Output layer (Sigmoid)};
+		\node[annot] at (1.5,4.5) {$\bm{\Theta}^{(1)}$};
+		\node[annot] at (4.5,4.5) {$\bm{\Theta}^{(2)}$};
 
 	\end{tikzpicture}
 	\caption{MLP architecture}
-\end{figure}
+\end{figure} \\
 }{
 % >>>> your answer here <<<<
 }
