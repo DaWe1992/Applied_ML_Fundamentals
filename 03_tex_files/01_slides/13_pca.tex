@@ -433,14 +433,14 @@
 	\begin{itemize}
 		\item For a given $k$, the fraction of variance retained can be computed as follows:
 		\begin{equation}
-			1 - \frac{\sum_{i=1}^k S_{ii}}{\sum_{i=1}^m S_{ii}} \le 1 - \gamma
+			1 - \frac{\sum_{j=1}^k S_{jj}}{\sum_{j=1}^m S_{jj}} \le 1 - \gamma
 		\end{equation}
 		\item The matrix has to be computed only once and can be reused for all $k$
 	\end{itemize}
 	\begin{boxBlueNoFrame}
 		\highlight{Simplification:}
 		\begin{equation*}
-			\frac{\sum_{i=1}^k S_{ii}}{\sum_{i=1}^m S_{ii}} \ge 1 - \gamma
+			\frac{\sum_{j=1}^k S_{jj}}{\sum_{j=1}^m S_{jj}} \ge \gamma
 		\end{equation*}
 	\end{boxBlueNoFrame}
 \end{frame}
