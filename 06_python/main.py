@@ -25,6 +25,7 @@ from clf.knn import kNN
 from clf.svm import SVM
 from clf.lda import LDA
 from clf.logistic_regression import LogisticRegression, LogRegOneVsOne
+from clf.irls import IRLS
 from clf.mlp_torch import MLP
 from clf.decision_tree import DecisionTree
 
@@ -66,7 +67,7 @@ def classification():
     Classification.
     """
     # create data
-    X, y = DataCreator().make_classification(name="linear", n_classes=3)
+    X, y = DataCreator().make_classification(name="non_linear", n_classes=2)
     
     # train kNN classifier
 #    clf = kNN(n_neighbors=1)
@@ -86,6 +87,10 @@ def classification():
 #    clf = LogRegOneVsOne(poly=True)
 #    clf.fit(X, y)
     
+    # train an iterative reweighted least squares (irls) classifier
+    clf = IRLS(poly=True)
+    clf.fit(X, y, n_iter=5)
+    
     # train pytorch mlp
 #    clf = MLP()
 #    clf.fit(X, y)
@@ -101,17 +106,17 @@ def classification():
 #    clf.visualize()
     
     # Expectation Maximization
-    em = EM()
-    em.fit(X, n_comp=3, n_iter=30)
+#    em = EM()
+#    em.fit(X, n_comp=3, n_iter=30)
     
     # plot boundary
-#    Plotter(X, y).plot_boundary(clf, step_size=0.005)
+    Plotter(X, y).plot_boundary(clf, step_size=0.005)
     
     # evaluation
-#    evaluator = Evaluator()
-#    acc = evaluator.accuracy(clf, X, y)
-#    print("Accuracy: {} %".format(acc))
-#    evaluator.conf_mat(clf, X, y)
+    evaluator = Evaluator()
+    acc = evaluator.accuracy(clf, X, y)
+    print("Accuracy: {} %".format(acc))
+    evaluator.conf_mat(clf, X, y)
     
     
 def regression():
@@ -261,8 +266,8 @@ if __name__ == "__main__":
     """
     Main function.
     """
-#    classification()
-    regression()
+    classification()
+#    regression()
 #    unsupervised_learning()
 #    reinforcement_learning()
     
