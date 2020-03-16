@@ -9,27 +9,27 @@ You may want to call the virtual environment `ml_lecture`.
 
 Below you find an example using the `virtualenv` package (on Linux):
 
-Step 1) Create the virtual environment:
+**Step 1)** Create the virtual environment:
 
-```
-$ pip install virtualenv
+```shell
+$ pip install virtualenv # install virtualenv package
 $ mkdir project_folder
 $ cd project_folder
 $ virtualenv ml_lecture # creates a folder in the current directory containing the virtual env
 ```
 
-Step 2) Activate the virtual environment `ml_lecture`:
+**Step 2)** Activate the virtual environment `ml_lecture`:
 
-```
+```shell
 source ml_lecture/bin/activate
 ```
 
-Step 3) Install packages using `pip`:
+**Step 3)** Install packages using `pip`:
 
 Finally, install the required packages listed in `requirements.txt` which can be found in this directory.
 You can do this by executing the following command:
 
-```
+```shell
 $ pip install -r requirements.txt
 ```
 
