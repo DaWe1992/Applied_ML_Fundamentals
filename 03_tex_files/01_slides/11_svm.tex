@@ -92,7 +92,7 @@
 				= w_1 x_1 + w_2 x_2 + \dots + w_m x_m + b
 		\end{equation} 
 		\item $\bm{\theta} = \{ \bm{w}, b \}$: $\bm{w}$ is called the \textbf{weight vector} and $b$ is the \textbf{bias}
-		\item An input vector $\bm{x}$ is assigned class $\mathcal{C}_1$ if $\widehat{h}(\bm{x}) \ge 0$,
+		\item An input vector $\bm{x}$ is assigned class $\mathcal{C}_1$, if $\widehat{h}(\bm{x}) \ge 0$,
 			class $\mathcal{C}_2$ otherwise
 		\item The \highlight{decision boundary} is defined by the relation: $\widehat{h}(\bm{x}) = 0$
 		\item The boundary is a $(D - 1)$-dimensional hyperplane within the $D$-dimensional input space
@@ -110,7 +110,7 @@
 % Discriminant Functions (Ctd.)
 \begin{frame}{Discriminant Functions (Ctd.)}{}
 	\begin{itemize}
-		\item Consider two points $\bm{x}_A$ and $\bm{x}_B$ which lie on the decision surface
+		\item Consider two points, $\bm{x}_A$ and $\bm{x}_B$, which lie on the decision surface
 		\item Since $\widehat{h}(\bm{x}_A) = \widehat{h}(\bm{x}_B) = 0$, we have $\bm{w}^{\intercal}(\bm{x}_A - \bm{x}_B) = 0$,
 			hence $\bm{w}$ is \textbf{orthogonal} to every vector lying within the decision surface
 		\item $\bm{w}$ determines the orientation of the decision surface
@@ -157,7 +157,7 @@
 \begin{frame}{Linear Separability}{}
 	\begin{itemize}
 		\item We have $n$ input vectors $\bm{X} = \{ \bm{x}^{(1)}, \bm{x}^{(2)}, \dots, \bm{x}^{(n)} \}$
-		\item With corresponding target values $y^{(1)}, y^{(2)}, \dots, y^{(n)}$ where $y^{(i)} \in \{-1, +1\}$
+		\item With corresponding target values $y^{(1)}, y^{(2)}, \dots, y^{(n)}$, where $y^{(i)} \in \{-1, +1\}$
 		\item New data points are classified according to the sign of $\widehat{h}(\bm{x})$: $sign(\widehat{h}(\bm{x}))$
 	\end{itemize}
 	

@@ -37,15 +37,86 @@
 %______________________________________________________________________
 \dwPrintToc
 
-% Section: Linear Support Vector Machines
+% Section: Introduction
 %______________________________________________________________________
-\dwSection{Linear Support Vector Machines}
+\dwSection{Introduction}
 
-% Introduction
-\begin{dwHeaderFrame}{Introduction}
+% What is a Support Vector Machine?
+\begin{dwHeaderFrame}{What is a Support Vector Machine?}
 	\begin{itemize}
+		\item A \textbf{support vector machine} is a \textbf{binary classifier}. The classes have to be denoted by $\{-1, +1 \}$. \\
+			The classes $-1$ and $+1$ are denoted by $\ominus$ and $\oplus$, respectively.
+		\item The original algorithm was proposed by \textit{Vapnik} and \textit{Chervonenkis} already in 1963. 
+			Several extensions were made in the 90s, including \textbf{non-linear SVMs} as well as \textbf{soft-margin SVMs}.
+		\item Multi-class classification can be performed using the well-known techniques:
+		\begin{itemize}
+			\item One-vs-Rest (OVR)
+			\item One-vs-One (OVO)
+		\end{itemize}
+		\item An SVM finds the best separating hyperplane and therefore has built-in \textbf{generalization guarantees}. \\
+			Question: \textit{What is the best hyperplane?}
+		\item An SVM is no physical machine, rather it is a mathematical construct (cf. Turing machine).
+	\end{itemize}
+\end{dwHeaderFrame}
+
+
+% Discriminant Functions
+\begin{dwHeaderFrame}{Discriminant Functions}
+	\begin{itemize}
+		\item The simplest discriminant function has a linear form:
+		\begin{equation}
+			\widehat{h}(\bm{x}) = \bm{w}^{\intercal} \bm{x} + b = \sum_{j=1}^m w_j x_j + b = w_1 x_1 + w_2 x_2 + \dots + w_m x_m + b
+		\end{equation}
+		\item The parameters to be optimized are $\bm{\theta} = \{ \bm{w}, b \}$. $\bm{w}$ is called the weight vector, b is called the bias.
+		\item An arbitrary input vector $\bm{x}$ is assigned to class $\oplus$, if $\widehat{h}(\bm{x}) \ge 0$, class $\ominus$ otherwise.
+		\begin{equation}
+			h(\bm{x}) = \text{sign}(\widehat{h}(\bm{x}))
+		\end{equation}
+		\item The \textbf{decision boundary} is defined by the relation: $\widehat{h}(\bm{x}) = 0$.
+		\item The boundary is a ($D - 1$)-dimensional hyperplane within the $D$-dimensional input space.
+	\end{itemize}
+\end{dwHeaderFrame}
+
+
+\begin{frame}
+	\dwFigure{\input{11_svm/01_tikz/discriminant_functions}}{A linear discriminant function}{fig:discriminant-func}
+\end{frame}
+
+
+\begin{frame}
+	\begin{itemize}
+		\item Consider two points, $\bm{x}_a$ and $\bm{x}_b$, which both lie on the decision surface.
+		\item Since $\widehat{h}(\bm{x}_a) = \widehat{h}(\bm{x}_b) = 0$, we have $\bm{w}^{\intercal}(\bm{x}_a - \bm{x}_b) = 0$.
+			Hence, $\bm{w}$ is orthogonal to every vector lying within the decision surface.
+		\item Thus, $\bm{w}$ determines the orientation of the decision surface.
 		\item 
 	\end{itemize}
+\end{frame}
+
+
+% Linear Separability
+\begin{dwHeaderFrame}{Linear Separability}
+	\begin{itemize}
+		\item Consider $n$ input vectors $\bm{X} = \{ \bm{x}^{(1)}, \bm{x}^{(2)}, \dots, \bm{x}^{(n)} \}$.
+		\item Each input vector $\bm{x}^{(i)}$ is labeled with $y^{(i)}$, where $y^{(i)} \in \{ -1, +1 \}$.
+		\item A data set is linearly separable in feature space, if $\exists (\bm{w}, b)$ such that:
+		\begin{align}
+			\widehat{h}(\bm{x}^{(i)}) &= \bm{w}^{\intercal} \bm{x}^{(i)} + b > 0
+				\qquad\qquad  \text{$\forall \bm{x}^{(i)}$ with $y^{(i)} = +1$} \\[2mm]
+			\widehat{h}(\bm{x}^{(i)}) &= \bm{w}^{\intercal} \bm{x}^{(i)} + b < 0
+				\qquad\qquad \text{otherwise ($y^{(i)} = -1$)}
+		\end{align}
+		\item This can be written as:
+		\begin{equation}
+			y^{(i)} \widehat{h}(\bm{x}^{(i)}) > 0 \qquad \forall i
+		\end{equation}
+	\end{itemize}
+\end{dwHeaderFrame}
+
+
+% Maximum Margin Classifiers
+\begin{dwHeaderFrame}{}
+	\dwFigure{\input{11_svm/01_tikz/maximum_margin_classifier}}{Maximum margin classifiers find the best separating hyperplane}{fig:max-margin-clf}
 \end{dwHeaderFrame}
 
 
