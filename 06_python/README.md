@@ -2,6 +2,20 @@
 Machine learning algorithms (probably all algorithms) are easier to understand, if you see them implemented. Here you find Python implementations for some of the algorithms (which are not part of the assignments).
 Play around with the hyper-parameters of the algorithms and try different data sets in order to get a better feeling for how the algorithms work. Also, debug through the code line for line and check what each line does.
 
+## Installation
+It is good practice to create a new virtual environment for each of your projects. Please create a new environment e.g. using Anaconda (Navigator)
+or use the `virtualenv` [package](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/).
+You may want to call the virtual environment `ml_lecture`.
+
+After that activate the environment `ml_lecture` and install the required packages listed in `requirements.txt` which can be found in this directory.
+You can do this by executing the following command:
+
+```
+$ pip install -r requirements.txt
+```
+
+Now you should be ready to go!
+
 ## How to run the Code?
 Please use the script located in `main.py` to execute the code for the algorithms. The file contains functions for
 classification, regression, reinforcement learning and unsupervised learning. Simply uncomment the parts which you want to use. Also, this repository contains classes for data creation, evaluation and plotting.

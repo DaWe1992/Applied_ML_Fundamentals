@@ -74,10 +74,10 @@ def classification():
 #    clf.fit(X, y)
     
     # train SVM classifier
-    clf = SVM(kernel="linear", C=1.0, p=3, s=3.0)
-    y[np.where(y == 0)] = -1
-    clf.fit(X, y)
-    clf.plot_contour(X[y == 1], X[y == -1])
+#    clf = SVM(kernel="linear", C=1.0, p=3, s=3.0)
+#    y[np.where(y == 0)] = -1
+#    clf.fit(X, y)
+#    clf.plot_contour(X[y == 1], X[y == -1])
     
     # train logistic regression classifier
 #    clf = LogisticRegression(poly=True)
@@ -88,8 +88,8 @@ def classification():
 #    clf.fit(X, y)
     
     # train an iterative reweighted least squares (irls) classifier
-#    clf = IRLS(poly=True)
-#    clf.fit(X, y, n_iter=5)
+    clf = IRLS(poly=True)
+    clf.fit(X, y, n_iter=5)
     
     # train pytorch mlp
 #    clf = MLP()
@@ -110,13 +110,13 @@ def classification():
 #    em.fit(X, n_comp=3, n_iter=30)
     
     # plot boundary
-#    Plotter(X, y).plot_boundary(clf, step_size=0.005)
+    Plotter(X, y).plot_boundary(clf, step_size=0.005)
     
     # evaluation
-    evaluator = Evaluator()
-    acc = evaluator.accuracy(clf, X, y)
-    print("Accuracy: {} %".format(acc))
-    evaluator.conf_mat(clf, X, y)
+#    evaluator = Evaluator()
+#    acc = evaluator.accuracy(clf, X, y)
+#    print("Accuracy: {} %".format(acc))
+#    evaluator.conf_mat(clf, X, y)
     
     
 def regression():
