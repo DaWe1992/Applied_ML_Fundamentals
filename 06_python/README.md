@@ -21,7 +21,7 @@ $ virtualenv ml_lecture # creates a folder in the current directory containing t
 **Step 2)** Activate the virtual environment `ml_lecture`:
 
 ```shell
-source ml_lecture/bin/activate
+$ source ml_lecture/bin/activate
 ```
 
 **Step 3)** Install packages using `pip`:
