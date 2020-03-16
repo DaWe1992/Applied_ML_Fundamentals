@@ -39,6 +39,110 @@ Now you should be ready to go!
 Please use the script located in `main.py` to execute the code for the algorithms. The file contains functions for
 classification, regression, reinforcement learning and unsupervised learning. Simply uncomment the parts which you want to use. Also, this repository contains classes for data creation, evaluation and plotting.
 Please refer to the folder [utils](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/06_python/utils) for this.
+
+The file `main.py` has the following structure:
+
+```python
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Oct 29 17:06:24 2019
+@author: Daniel Wehner
+"""
+
+# -----------------------------------------------------------------------------
+# Imports
+# -----------------------------------------------------------------------------
+
+# numpy
+# -----------------------------------------------------------------------------
+import numpy as np
+
+# data creation and plotting
+# -----------------------------------------------------------------------------
+from utils.data_creator import DataCreator
+from utils.plotter import Plotter
+
+# classifiers
+# -----------------------------------------------------------------------------
+from clf.knn import kNN
+from clf.svm import SVM
+from clf.lda import LDA
+from clf.logistic_regression import LogisticRegression, LogRegOneVsOne
+from clf.irls import IRLS
+from clf.mlp_torch import MLP
+from clf.decision_tree import DecisionTree
+
+# more imports...
+
+
+# -----------------------------------------------------------------------------
+# Functions
+# -----------------------------------------------------------------------------
+
+def classification():
+    """
+    Classification.
+    """
+    # create data
+    X, y = DataCreator().make_classification(name="linear", n_classes=2)
+    
+    # train logistic regression classifier
+    clf = LogisticRegression(poly=True)
+    clf.fit(X, y, batch_size=X.shape[0])
+    
+    # plot boundary
+    Plotter(X, y).plot_boundary(clf, step_size=0.005)
+    
+    # evaluation
+    evaluator = Evaluator()
+    acc = evaluator.accuracy(clf, X, y)
+    print("Accuracy: {} %".format(acc))
+    evaluator.conf_mat(clf, X, y)
+    
+    
+def regression():
+    """
+    Regression.
+    """
+    # create data
+    X, y = DataCreator().make_regression(name="sine")
+    
+    # train kernel ridge regressor
+    reg = KernelRegression()
+    reg.fit(X, y, kernel="gaussian")
+    
+    # plot boundary
+    Plotter(X, y).plot_regression(reg, n_points=500)
+
+
+def unsupervised_learning():
+    """
+    Unsupervised learning.
+    """
+    # ...
+    
+    
+def reinforcement_learning():
+    """
+    Reinforcement learning.
+    """
+    # ...
+
+
+# -----------------------------------------------------------------------------
+# Main
+# -----------------------------------------------------------------------------
+
+if __name__ == "__main__":
+    """
+    Main function.
+    """
+    classification()
+    regression()
+    unsupervised_learning()
+    reinforcement_learning()
+```
  
 ## Which Algorithms are included?
 The following algorithms are implemented (some are missing, since they are part of the exercises):
