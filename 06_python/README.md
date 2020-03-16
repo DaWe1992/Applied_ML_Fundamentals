@@ -7,7 +7,26 @@ It is good practice to create a new virtual environment for each of your project
 or use the `virtualenv` [package](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/).
 You may want to call the virtual environment `ml_lecture`.
 
-After that activate the environment `ml_lecture` and install the required packages listed in `requirements.txt` which can be found in this directory.
+Below you find an example using the `virtualenv` package (on Linux):
+
+Step 1) Create the virtual environment:
+
+```
+$ pip install virtualenv
+$ mkdir project_folder
+$ cd project_folder
+$ virtualenv ml_lecture # creates a folder in the current directory containing the virtual env
+```
+
+Step 2) Activate the virtual environment `ml_lecture`:
+
+```
+source ml_lecture/bin/activate
+```
+
+Step 3) Install packages using `pip`:
+
+Finally, install the required packages listed in `requirements.txt` which can be found in this directory.
 You can do this by executing the following command:
 
 ```
@@ -40,8 +59,8 @@ The following algorithms are implemented (some are missing, since they are part 
 	* Support vector regression
 3. **Reinforcement learning** ([folder rl](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/06_python/rl))
 	* Policy iteration
-	* Q-learning
 	* Value iteration
+	* Q-learning
 4. **Unsupervised learning** ([folder unsupervised](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/06_python/unsupervised))
 	* Apriori (association rules)
 	* Auto-encoders
