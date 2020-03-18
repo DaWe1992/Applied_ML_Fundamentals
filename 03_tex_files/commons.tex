@@ -1,86 +1,5 @@
-% ====================================================
-% ====================================================
-% USEPACKAGES
-% ====================================================
-% ====================================================
-
-\usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
-\usepackage[english]{babel}
-
-% tables
-\usepackage{tabularx}
-\usepackage{colortbl}
-\usepackage{multirow}
-\usepackage{makecell}
-
-% tikz and colors
-\usepackage{tikz}
-\usepackage{xcolor}
-\usepackage{pgf-pie}
-\usepackage{pgfplots}
-\usepackage{pgfplotstable}
-\usepackage{tikzsymbols}
-
-\usetikzlibrary{calc}
-\usetikzlibrary{trees}
-\usetikzlibrary{patterns}
-\usetikzlibrary{shadings}
-\usetikzlibrary{positioning}
-\usetikzlibrary{intersections}
-\usetikzlibrary{decorations.pathreplacing}
-
-\usetikzlibrary{arrows}
-\usetikzlibrary{arrows.meta}
-
-\usetikzlibrary{shapes}
-\usetikzlibrary{shapes.arrows}
-\usetikzlibrary{shapes.callouts}
-\usetikzlibrary{shapes.symbols}
-\usetikzlibrary{shapes.geometric}
-
-\usepgfplotslibrary{patchplots}
-\usepgfplotslibrary{fillbetween}
-
-% boxes
-\usepackage[many]{tcolorbox}
-
-% math packages and fonts
-\usepackage{bm}
-\usepackage{ccfonts}
-\usepackage{eulervm}
-\usepackage{amsmath}
-\usepackage{amsfonts}
-\usepackage{amssymb}
-\usepackage{amsthm}
-\usepackage{mathtools}
-\usepackage{nicefrac}
-\usepackage{slashed}
-\usepackage{bbold}
-\usepackage{array}
-\usepackage{cancel}
-
-% algorithms and listings
-\usepackage[ruled,vlined,linesnumbered]{algorithm2e}
-\usepackage{listings}
-\usepackage{setspace}
-
-\tcbuselibrary{listings}
-\tcbuselibrary{breakable}
-\tcbuselibrary{skins}
-
-% misc
-\usepackage{soul}
-\usepackage{pifont}
-\usepackage{skull}
-\usepackage{multicol}
-\usepackage{animate}
-\usepackage{cleveref}
-\usepackage{hyperref}
-\usepackage{wasysym}
-\usepackage[absolute,overlay]{textpos}
-\usepackage[hang,flushmargin]{footmisc}
-\usepackage[framemethod=tikz]{mdframed} 				% provides frame for framed figure and framed table in theme_2
+\input{../usepackages}
+\input{../colors}
 
 % ====================================================
 % ====================================================
@@ -88,22 +7,19 @@
 % ====================================================
 % ====================================================
 
-% define colors
-% ====================================================
-\definecolor{myblue1}{RGB}{35,119,189}
-\definecolor{myblue2}{RGB}{95,179,238}
-\definecolor{myblue3}{RGB}{129,168,207}
-\definecolor{myblue4}{RGB}{26,89,142}
-
-\definecolor{myred1}{RGB}{247,12,12}
-
 % math definitions
 % ====================================================
+% argmin, argmax
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
+
+% integration d
 \newcommand*\diff{\mathop{}\!\mathrm{d}}
+
+% independent sign
 \newcommand{\indep}{\rotatebox[origin=c]{90}{$\models$}}
 
+% vertical and horizontal bar
 \newcommand*{\vertbar}{\rule[-1ex]{0.5pt}{2.5ex}}
 \newcommand*{\horzbar}{\rule[.5ex]{2.5ex}{0.5pt}}
 

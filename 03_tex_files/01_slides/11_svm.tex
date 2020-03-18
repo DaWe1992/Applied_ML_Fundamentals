@@ -52,34 +52,24 @@
 
 % What is a Support Vector Machine (SVM)?
 \begin{frame}{What is a Support Vector Machine (SVM)?}{}
-	\bubble{11}{9}{
-		\footnotesize What is the best \\[-1mm]
-		\footnotesize separating hyperplane?
-	}
 	\begin{itemize}
 		\item A support vector machine is a \textbf{binary classifier}
 			{\footnotesize [Vapnik and Chervonenkis]}
 		\begin{itemize}
 			\item The classes are denoted by $\{-1; +1\}$
-			\item Techniques for multi-class classification:
-			\begin{itemize}
-				\item \highlight{OVR (One-vs-Rest)}
-				\item \highlight{OVO (One-vs-One)}
-			\end{itemize}
+			\item Techniques for multi-class classification: One-vs-Rest and One-vs-One
 		\end{itemize}
+		\item The algorithm was introduced in the 60s, extensions were made in the 90s
 		\item An SVM finds the \textbf{best separating hyperplane}
+		\item \textbf{Question:} \textit{What is the best separating hyperplane?}
 		\item Why is it called \textit{`machine'}?
 		\begin{itemize}
-			\item It's no physical machine, it's a mathematical construct \\
+			\item It's no physical machine, it's a mathematical construct
 			\item `Machine' refers to `Machine Learning' 
 		\end{itemize}
 	\end{itemize}
 \end{frame}
 
-
-% Subsection: Discriminant Functions
-% --------------------------------------------------------------------------------------------------------
-\subsection{Discriminant Functions}
 
 % Discriminant Functions
 \begin{frame}{Discriminant Functions}{}
@@ -149,10 +139,6 @@
 \end{frame}
 
 
-% Subsection: Linear Separability
-% --------------------------------------------------------------------------------------------------------
-\subsection{Linear Separability}
-
 % Linear Separability
 \begin{frame}{Linear Separability}{}
 	\begin{itemize}
@@ -161,6 +147,7 @@
 		\item New data points are classified according to the sign of $\widehat{h}(\bm{x})$: $sign(\widehat{h}(\bm{x}))$
 	\end{itemize}
 	
+	\vspace*{1mm}
 	\begin{boxBlueNoFrame}
 		\footnotesize
 		A data set is \textbf{linearly separable} in feature space, if $\exists (\bm{w}, b)$ such that
@@ -267,7 +254,7 @@
 			y^{(i)} (\bm{w}^{\intercal} \bm{x}^{(i)} + b) \ge 1 \qquad i = 1, 2, \dots, n
 		\end{equation}
 		\item It is sufficient to solve: \highlight{$\argmin_{\bm{w}, b} \frac{1}{2} \Vert \bm{w} \Vert^2$}
-			\footnotesize ($\nicefrac{1}{2}$ for later mathematical convenience) \normalsize
+			\footnotesize ($\nicefrac{1}{2}$ for mathematical convenience) \normalsize
 	\end{itemize}
 \end{frame}
 
@@ -451,6 +438,7 @@
 		\item $\bm{x}$ is an unknown instance for which the class label is not known
 	\end{itemize}
 
+	\vspace*{2mm}
 	\begin{boxBlueNoFrame}
 		\footnotesize
 		\highlight{Since all $\alpha_i$ will be zero for non-support vectors, the decision
@@ -470,14 +458,10 @@
 \end{frame}
 
 
-% Section: Kernel SVMs
+% Section: Non-linear / Kernel SVMs
 %______________________________________________________________________
-\section{Kernel SVMs}
-\makedivider{Kernel SVMs}
-
-% Subsection: Non-linear Data
-% --------------------------------------------------------------------------------------------------------
-\subsection{Non-linear Data}
+\section{Non-linear / Kernel SVMs}
+\makedivider{Non-linear / Kernel SVMs}
 
 % Non-Linear SVMs
 \begin{frame}{Non-Linear SVMs / Non-Linear Separability}{}
@@ -539,6 +523,7 @@
 		\item Think of it as projecting the data in a higher dimensional space to make it linearly separable
 	\end{itemize}
 	
+	\vspace*{2mm}
 	\begin{boxBlueNoFrame}
 		\footnotesize
 		A kernel allows the SVM to operate in a \highlight{high-dimensional, implicit feature space} without ever
@@ -603,13 +588,14 @@
 				= \left( \sum_{i=1}^m x_i x'_i \right) \left( \sum_{j=1}^m x_j x'_j \right)
 				= \sum_{i=1}^m \sum_{j=1}^m (x_i x_j) (x'_i x'_j) = \varphi(\bm{x})^{\intercal} \varphi(\bm{x'})
 		\end{equation}}
-		\vspace*{-4mm}
-		\begin{boxBlueNoFrame}
-			\footnotesize
-			\highlight{We need $\mathcal{O}(n^2)$ to compute $\varphi(\bm{x})$ and $\varphi(\bm{x'})$, but $\mathcal{O}(n)$
-			to compute $\mathcal{K}(\bm{x}, \bm{x'})$}
-		\end{boxBlueNoFrame}
 	\end{itemize}
+	
+	\vspace*{-3mm}
+	\begin{boxBlueNoFrame}
+		\footnotesize
+		\highlight{We need $\mathcal{O}(n^2)$ to compute $\varphi(\bm{x})$ and $\varphi(\bm{x'})$, but $\mathcal{O}(n)$
+		to compute $\mathcal{K}(\bm{x}, \bm{x'})$}
+	\end{boxBlueNoFrame}
 \end{frame}
 
 
@@ -714,6 +700,7 @@
 		\item If $\mathcal{K}_1(\bm{x}, \bm{x'})$ and $\mathcal{K}_2(\bm{x}, \bm{x'})$ are valid kernels, so are:
 	\end{itemize}
 	
+	\vspace*{2mm}
 	\begin{boxBlueNoFrame}
 		\begin{itemize}
 			\setlength\itemsep{0em}
