@@ -153,6 +153,7 @@ The following algorithms are implemented (some are missing, since they are part 
 	* Linear discriminant analysis
 	* Logistic regression
 	* Iterative reweighted least squares
+	* Perceptron
 	* Multi-layer perceptron
 	* Support vector machine
 2. **Regression** ([folder reg](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/06_python/reg))

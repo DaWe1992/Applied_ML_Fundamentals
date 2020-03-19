@@ -26,6 +26,7 @@ from clf.svm import SVM
 from clf.lda import LDA
 from clf.logistic_regression import LogisticRegression, LogRegOneVsOne
 from clf.irls import IRLS
+from clf.perceptron import Perceptron
 from clf.mlp_torch import MLP
 from clf.decision_tree import DecisionTree
 
@@ -67,7 +68,7 @@ def classification():
     Classification.
     """
     # create data
-    X, y = DataCreator().make_classification(name="linear", n_classes=2)
+    X, y = DataCreator().make_classification(name="circles", n_classes=2)
     
     # train kNN classifier
 #    clf = kNN(n_neighbors=1)
@@ -88,8 +89,13 @@ def classification():
 #    clf.fit(X, y)
     
     # train an iterative reweighted least squares (irls) classifier
-    clf = IRLS(poly=True)
-    clf.fit(X, y, n_iter=5)
+#    clf = IRLS(poly=True)
+#    clf.fit(X, y, n_iter=5)
+    
+    # train a perceptron with rbf basis functions
+    clf = Perceptron(n_rbf_neurons=10)
+    clf.fit(X, y, sigma=1.0, alpha=0.0001, n_max_iter=1000)
+    clf.plot_contour(discrete=False)
     
     # train pytorch mlp
 #    clf = MLP()

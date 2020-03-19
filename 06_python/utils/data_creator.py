@@ -80,7 +80,8 @@ class DataCreator:
             X = np.vstack((X, np.random.multivariate_normal(mean3, covar, 50)))
             X = np.vstack((X, np.random.multivariate_normal(mean2, covar, 50)))
             X = np.vstack((X, np.random.multivariate_normal(mean4, covar, 50)))
-            y = np.ones(200); y[100:] = 0
+            y = np.ones(200).astype(int); y[100:] = 0
+            
             
         # circular data
         elif name == "circles":
