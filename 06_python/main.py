@@ -68,7 +68,7 @@ def classification():
     Classification.
     """
     # create data
-    X, y = DataCreator().make_classification(name="circles", n_classes=2)
+    X, y = DataCreator().make_classification(name="non_linear", n_classes=2)
     
     # train kNN classifier
 #    clf = kNN(n_neighbors=1)
@@ -81,8 +81,8 @@ def classification():
 #    clf.plot_contour(X[y == 1], X[y == -1])
     
     # train logistic regression classifier
-#    clf = LogisticRegression(poly=True)
-#    clf.fit(X, y, batch_size=X.shape[0])
+    clf = LogisticRegression(poly=False)
+    clf.fit(X, y, batch_size=X.shape[0])
     
     # train one-vs-one logistic regression classifier
 #    clf = LogRegOneVsOne(poly=True)
@@ -93,9 +93,9 @@ def classification():
 #    clf.fit(X, y, n_iter=5)
     
     # train a perceptron with rbf basis functions
-    clf = Perceptron(n_rbf_neurons=10)
-    clf.fit(X, y, sigma=1.0, alpha=0.0001, n_max_iter=1000)
-    clf.plot_contour(discrete=False)
+#    clf = Perceptron(n_rbf_neurons=10)
+#    clf.fit(X, y, sigma=1.0, alpha=0.0001, n_max_iter=1000)
+#    clf.plot_contour(discrete=False)
     
     # train pytorch mlp
 #    clf = MLP()
@@ -119,10 +119,11 @@ def classification():
     Plotter(X, y).plot_boundary(clf, step_size=0.005)
     
     # evaluation
-#    evaluator = Evaluator()
+    evaluator = Evaluator()
 #    acc = evaluator.accuracy(clf, X, y)
 #    print("Accuracy: {} %".format(acc))
 #    evaluator.conf_mat(clf, X, y)
+    print(evaluator.auc(clf, X, y, plot=True)) # works for logistic regression
     
     
 def regression():
