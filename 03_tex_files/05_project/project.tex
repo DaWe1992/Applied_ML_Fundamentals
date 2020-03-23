@@ -197,13 +197,21 @@
 			\textbf{Nr.}		&
 			\textbf{Kriterium} 	&
 			\textbf{Punktzahl}	\\ \hline\hline
-			\ding{182}			& 	Der Quellcode ist ausreichend kommentiert. 						& 	10 	\\ \hline
-			\ding{183} 		&	Der Quellcode ist übersichtlich und ordentlich formatiert,
-								intuitiv verständlich und folgt generell dem \textit{Clean Code} Ansatz.	&	40 	\\ \hline
-			\ding{184} 		& 	Das gesamte Entwicklungsprojekt ist gut strukturiert und modular aufgebaut
-								(z.\,B. Datenvorverarbeitung ist getrennt von Datenanalyse, etc.).		& 	40 	\\ \hline
-			\ding{185} 		&	Das Projekt ist auf GitHub veröffentlicht und enthält
-								eine aussagekräftige \texttt{README.md}.						& 	10 	\\ \hline\hline
+			\ding{182} 		&	Das Projekt ist auf GitHub veröffentlicht und enthält
+								eine aussagekräftige \texttt{README.md}.						& 	5 	\\ \hline
+			\ding{183}			& 	Der Quellcode ist ausreichend kommentiert. 						& 	10 	\\ \hline
+			\ding{184} 		&	Der Quellcode ist übersichtlich und ordentlich formatiert,
+								intuitiv verständlich und folgt generell dem
+								\textit{\glqq{}Clean Code\grqq{}} Ansatz.						&	15 	\\ \hline
+			\ding{185} 		& 	Das gesamte Entwicklungsprojekt ist gut strukturiert und modular aufgebaut
+								(z.\,B. Datenvorverarbeitung ist getrennt von Datenanalyse und Evaluation, etc.).
+																					& 	20 	\\ \hline
+			\ding{186} 		& 	Die Grundregeln des maschinellen Lernens werden berücksichtigt
+								(z.\,B. korrektes Splitting, X-Val., Occam's razor, Hyper-Parameter Suche, etc.)
+								und spiegeln sich im Code wider. 							&	25 	\\ \hline
+			\ding{187} 		& 	Es wird eine geeignete Datenbasis ausgewählt und entsprechend
+								dem vorliegenden Problem vorverarbeitet.
+																					& 	25 	\\ \hline\hline
 			\multicolumn{2}{ l |}{\textbf{Summe}} 											& 	\textbf{100}
 		\end{tabularx}
 	}{Bewertungskriterien für den Quellcode}{tab:kriterien-quellcode}{1.3}
@@ -218,13 +226,14 @@
 			\textbf{Kriterium} 	&
 			\textbf{Punktzahl}	\\ \hline\hline
 			\multicolumn{3}{ l }{\cellcolor{lightgray!40}\textbf{Mündlicher Vortrag}} 							\\ \hline
-			\ding{182} 		&	Der zeitliche Rahmen wurde eingehalten (20 min $\pm$ 3 min).		&	10	\\ \hline
-			\ding{183}			& 	Die Präsentatoren haben nicht abgelesen und
-								waren imstande, frei zu sprechen. 							& 	10 	\\ \hline
-			\ding{184}			&	Die Geschwindigkeit des Vortrags war dem Inhalt angemessen.		& 	10	\\ \hline
-			\ding{185}			&	Die Gruppenmitglieder konnten vom Publikum gestellte Fragen
+			\ding{182} 		&	Der vorgegebene zeitliche Rahmen wird eingehalten (20 min $\pm$ 3 min).	
+																					&	10	\\ \hline
+			\ding{183}			& 	Die Vortragenden lesen nicht ab und
+								sind imstande, frei zu sprechen (Blickkontakt). 					& 	10 	\\ \hline
+			\ding{184}			&	Die Geschwindigkeit des Vortrags ist dem Inhalt angemessen.		& 	10	\\ \hline
+			\ding{185}			&	Die Gruppenmitglieder können vom Publikum gestellte Fragen
 								sicher beantworten.										&	20	\\ \hline
-			\ding{186}			&	Der Vortrag ging auf alle relevanten Punkte ein. 					& 	15	\\ \hline
+			\ding{186}			&	Der Vortrag geht auf alle relevanten Punkte ein. 					& 	15	\\ \hline
 			\multicolumn{3}{ l }{\cellcolor{lightgray!40}\textbf{Vortragsfolien}} 								\\ \hline
 			\ding{187}			& 	Die Folien liegen im \texttt{*.pdf}-Format vor.					&	5	\\ \hline
 			\ding{188}			& 	Die Gestaltung der Folien ist übersichtlich. Inhalte werden überwiegend
@@ -244,14 +253,16 @@
 			\textbf{Kriterium} 	&
 			\textbf{Punktzahl}	\\ \hline\hline
 			\ding{182} 		& 	Der Projektreport liegt im richtigen Format vor
-								(insbesondere Nutzung der \LaTeX-Vorlage und \texttt{*.pdf}-Format) 	& 	5 	\\ \hline
+								(\LaTeX-Vorlage und \texttt{*.pdf}-Format).						& 	5 	\\ \hline
 			\ding{183} 		& 	Der Projektreport bedient sich einer sachgerechten Sprache
 								und ist verständlich verfasst.								& 	5 	\\ \hline
-			\ding{184} 		& 	Der Vorgaben bezüglich des Seitenumfangs werden eingehalten.		& 	10	\\ \hline
-			\ding{185} 		&	Der Projektreport ist klar und übersichtlich strukturiert.				&	10	\\ \hline
-			\ding{186} 		&	Inhaltlich werden alle geforderten Bereiche abgedeckt.				& 	30 	\\ \hline
-			\ding{187} 		& 	Der wirtschaftliche Kontext wird ausreichend herausgestellt.			&	10	\\ \hline
-			\ding{188} 		& 	Die erzielten Ergebnisse werden kritisch reflektiert und bewertet.		& 	30 	\\ \hline\hline
+			\ding{184} 		&	Der Projektreport ist klar und übersichtlich strukturiert.				&	5	\\ \hline
+			\ding{185} 		& 	Die Vorgaben bezüglich des Seitenumfangs werden eingehalten.		& 	5	\\ \hline
+			\ding{186} 		& 	Die Regeln des wissenschaftlichen Arbeitens werden berücksichtigt
+								(z.\,B. Zitation). 											& 	25 	\\ \hline
+			\ding{187} 		&	Inhaltlich werden alle geforderten Bereiche abgedeckt.				& 	15 	\\ \hline
+			\ding{188} 		& 	Der wirtschaftliche Kontext wird ausreichend herausgestellt.			&	15	\\ \hline
+			\ding{189} 		& 	Die erzielten Ergebnisse werden kritisch reflektiert und bewertet.		& 	25 	\\ \hline\hline
 			\multicolumn{2}{ l |}{\textbf{Summe}} 											& 	\textbf{100}
 		\end{tabularx}
 	}{Bewertungskriterien für den Projektreport}{tab:kriterien-report}{1.3}
@@ -262,14 +273,18 @@
 	\begin{itemize}
 		\item Die Endnote für das Projekt berechnet sich somit folgendermaßen:
 		\begin{equation}
-			\text{Note} = \frac{5}{10} \cdot \Sigma_{\text{Code}} + \frac{3}{10} \cdot \Sigma_{\text{Report}} +
-				\frac{2}{10} \cdot \Sigma_{\text{Präsentation}}
+			\text{Note} = \left\lceil \frac{5}{10} \cdot \Sigma_{\text{Code}} + \frac{3}{10} \cdot \Sigma_{\text{Report}} +
+				\frac{2}{10} \cdot \Sigma_{\text{Präsentation}} \right\rceil
 		\end{equation}
 		\item Maximal zu erreichen sind 100 Punkte.
 		\item Es gilt der offizielle Notenschlüssel der DHBW Mannheim.
 		\item Die im Projekt erzielte Note wird mit der in der Klausur zur Vorlesung \textit{\glqq{}Applied Machine Learning Fundamentals\grqq{}}
 			erreichten Note verrechnet, um die Modulnote zu erhalten.
 	\end{itemize}
+	
+	\dwAlertBox{Das Ziel des Projekts ist es weniger, Ergebnisse zu erzielen, die dem \glqq{}State of the Art\grqq{} entsprechen.
+		Vielmehr steht eine korrekte (wissenschaftliche) Vorgehensweise im Vordergrund. Falls Sie keine guten Ergebnisse erzielen,
+		sollten Sie jedoch darlegen, woran es gelegen haben könnte und diesbezüglich kritisch reflektieren!}
 \end{frame}
 
 
