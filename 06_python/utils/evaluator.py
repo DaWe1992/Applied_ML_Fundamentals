@@ -20,6 +20,9 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import confusion_matrix
 
+from statistics import mean
+from prettytable import PrettyTable
+
 
 # -----------------------------------------------------------------------------
 # Class Evaluator
@@ -39,44 +42,55 @@ class Evaluator:
         :param y_test:          test data labels
         :return:                accuracy
         """
-        return accuracy_score(y_test, clf.predict(X_test)) * 100
+        return accuracy_score(y_test, clf.predict(X_test))
     
     
-    def precision(self, clf, X_test, y_test):
+    def precision(self, clf, X_test, y_test, cls):
         """
         Computes the precision of the model.
         
         :param clf:             classifier model
         :param X_test:          test data features
         :param y_test:          test data labels
+        :param cls:             class for which to compute precision
         :return:                precision
         """
-        pass
+        y_pred = clf.predict(X_test)
+        tp = sum(y_pred[np.where(y_test == cls)] == cls)
+        fp = sum(y_test[np.where(y_pred == cls)] != cls)
+        
+        return tp / (tp + fp)
+        
     
-    
-    def recall(self, clf, X_test, y_test):
+    def recall(self, clf, X_test, y_test, cls):
         """
         Computes the recall of the model.
         
         :param clf:             classifier model
         :param X_test:          test data features
         :param y_test:          test data labels
+        :param cls:             class for which to compute recall
         :return:                recall
         """
-        pass
+        y_pred = clf.predict(X_test)
+        tp = sum(y_pred[np.where(y_test == cls)] == cls)
+        fn = sum(y_pred[np.where(y_test == cls)] != cls)
+        
+        return tp / (tp + fn)
     
     
-    def f1_score(self, clf, X_test, y_test):
+    def f1_score(self, clf, X_test, y_test, cls):
         """
         Computes the f1-score of the model.
         
         :param clf:             classifier model
         :param X_test:          test data features
         :param y_test:          test data labels
+        :param cls:             class for which to compute f1-score
         :return:                f1-score
         """
-        p = self.precision(clf, X_test, y_test)
-        r = self.recall(clf, X_test, y_test)
+        p = self.precision(clf, X_test, y_test, cls)
+        r = self.recall(clf, X_test, y_test, cls)
         
         return 2 * p * r / (p + r)
     
@@ -197,5 +211,33 @@ class Evaluator:
         :param X_test:          test data features
         :param y_test:          test data labels
         """
-        pass
+        # define format function
+        f = lambda x: "{:0.4f}".format(x)
+        # get unique list of classes
+        cs = np.unique(y_test)
+        # initialize pretty table
+        t = PrettyTable(["Metric"] + cs.tolist() + ["Average"])
+        
+        # compute metrics for all classes
+        p = []; r = []; f1 = []
+        for c in cs:
+            # compute precision
+            p.append(self.precision(clf, X_test, y_test, c))
+            # compute recall
+            r.append(self.recall(clf, X_test, y_test, c))
+            # compute f1-score
+            f1.append(self.f1_score(clf, X_test, y_test, c))
+            
+        # add results to table
+        t.add_row(
+            ["Precision"] + [f(x) for x in p] + [f(mean(p))])
+        t.add_row(
+            ["Recall"] + [f(x) for x in r] + [f(mean(r))])
+        t.add_row(
+            ["F1-Score"] + [f(x) for x in f1] + [f(mean(f1))])
+        t.add_row(
+            ["Accuracy"] + ["--" for _ in p] + [f(self.accuracy(clf, X_test, y_test))])
+        
+        # print result
+        print(t)
         

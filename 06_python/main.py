@@ -124,6 +124,8 @@ def classification():
 #    print("Accuracy: {} %".format(acc))
 #    evaluator.conf_mat(clf, X, y)
     print(evaluator.auc(clf, X, y, plot=True)) # works for logistic regression
+    # print classification report
+    evaluator.classification_report(clf, X, y)
     
     
 def regression():
