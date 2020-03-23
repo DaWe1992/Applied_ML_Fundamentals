@@ -10,10 +10,8 @@
 \dwDeepToc{false}
 
 \newcommand{\modulkatalog}{\externalurl{https://www.dhbw.de/fileadmin/user/public/SP/MA/Wirtschaftsinformatik/Data_Science.pdf}{Modulkatalog}}
-\newcommand{\sharelatex}{\externalurl{https://de.sharelatex.com/templates/journals/american-institute-of-physics-aip}{Vorlage American Institute of Physics (AIP)}}
-\newcommand{\overleaf}{\externalurl{https://de.overleaf.com/latex/templates/tagged/report}{Report Vorlagen Overleaf}}
+\newcommand{\template}{\externalurl{https://de.overleaf.com/latex/templates/astronomy-and-astrophysics-template/ngdddtchkbcg}{\LaTeX{} Template}}
 \newcommand{\curemannheim}{\externalurl{https://curemannheim.de/wp/}{Cure Mannheim e.\,V.}}
-
 
 % ====================================================
 % ====================================================
@@ -22,7 +20,7 @@
 % ====================================================
 
 \title[Data Exploration Project]{Data Exploration Project}
-\author{M.\,Sc. Daniel Wehner}
+\author{Daniel Wehner M.Sc., René Penkert}
 \date{Sommersemester 2020}
 \institute{SAP\,SE / DHBW Mannheim}
 
@@ -64,69 +62,227 @@
 \end{dwHeaderFrame}
 
 
-% Bearbeitung und Abgabe
-\begin{dwHeaderFrame}{Bearbeitung und Abgabe}
-	\dwHeader{Bearbeitung}
+% Bearbeitung
+\begin{dwHeaderFrame}{Bearbeitung}
+	\dwHeader{Grundsätzliches}
 	\begin{itemize}
-		\item Das Projekt ist in Gruppen von \textbf{drei bis vier Studierenden} zu bearbeiten.
-		\item Jede Gruppe bearbeitet ein anderes Thema.
-		\item Mögliche Projektthemen: siehe ...
-		\item Bzgl. der zu verwendenden Technologien werden keine Einschränkungen gemacht.
+		\item Das Projekt ist in Gruppen von \textbf{drei bis vier Studierenden} (nicht mehr und nicht weniger) zu bearbeiten.
+		\item Die Organisation der Gruppen erfolgt selbständig durch die Studierenden.
+			Bitte melden Sie sich, falls es Probleme bei der Gruppenfindung geben sollte.
+		\item Geben Sie Ihrer Gruppe einen Namen!
+		\item Jede Gruppe bearbeitet \textbf{ein anderes Thema}. Die Gruppen dürfen eigene Themen vorschlagen.
+			\textit{Siehe mögliche Themenvorschläge am Ende dieser Präsentation.}
+		\item Bezüglich der zu verwendenden Technologien werden keine Einschränkungen gemacht, da je nach Projektthema
+			andere Technologien sinnvoll sind.
 	\end{itemize}
 	
-	\dwAlertBox{Bei der Themenwahl ist darauf zu achten, den Umfang weder zu gering noch zu groß zu wählen!}
+	\dwAlertBox{Bei der Themenwahl ist darauf zu achten, den Umfang weder zu gering noch zu groß zu wählen!
+		Bitte stimmen Sie daher das Thema mit uns ab!}
 \end{dwHeaderFrame}
 
 
 \begin{frame}
 	\dwHeader{Zwischenpräsentation}
 	\begin{itemize}
-		\item Die Präsentation beträgt \textbf{maximal 10 Minuten} und dient dem Zweck, die grobe Konzeption des Projektvorhabens darzulegen und zu präsentieren.
-		\item Sie geht \textbf{nicht} mit in die Endwertung ein.
+		\item Die Zwischenpräsentation beträgt \textbf{maximal 10 Minuten} und dient dem Zweck, die grobe Konzeption des Projektvorhabens darzulegen
+			und zu präsentieren.
+		\item Die Studierenden sind dazu angehalten, den anderen Gruppen Feedback zu geben, beziehungsweise der präsentierenden Gruppe Anregungen
+			und Ideen mitzuteilen. 
+		\item Die Zwischenpräsentation geht \textbf{nicht} mit in die Endwertung ein.
 		\item Von Seiten der Projektgruppen sind zu diesem Termin keine Arbeitsergebnisse oder Dokumente einzureichen.
 	\end{itemize}
-	
-	\vspace*{3mm}
-	\dwHeader{Projektabschluss am Ende des Semesters}
+\end{frame}
+
+
+% Abgabe
+\begin{dwHeaderFrame}{Abgabe}
 	\begin{itemize}
-		\item Am Ende des Semesters sind eine Abschlusspräsentation und ein Projektreport anzufertigen.
-		\item Die Abschlusspräsentation beträgt \textbf{20 Minuten}.
-		\item Der Projektreport ist gemäß den Regeln des wissenschaftlichen Arbeitens anzufertigen und weist einen Umfang von \textbf{minimal 3 und maximal 4 Seiten} (ohne Abbildungen) auf.
-		\item Die Termine können der \cref{tab:ablauf-projekt} entnommen werden.
+		\item Neben dem erstellten \ding{182}\,\textbf{Quellcode} sind am Ende des Semesters eine \ding{183}\,\textbf{Abschlusspräsentation} sowie ein
+			\ding{184}\,\textbf{Projektreport} anzufertigen.
+		\item Die formalen Kriterien für die Abgabebestandteile werden auf den nachfolgenden Folien beschrieben.
+		\item Sämtliche Dokumente sind \textbf{gezippt} als \texttt{*.pdf} Datei in Moodle einzureichen.
+		\item Bitte beachten Sie folgende Namenskonventionen:
+	\end{itemize}
+	
+	\vspace*{1mm}
+	{
+	\begin{tabbing}
+		\hspace*{4mm}\=\hspace*{4cm}\=\kill
+		\> \textbf{Abschlusspräsentation} 	\> \texttt{project\_presentation\_<group>.pdf} 	\\[1mm]
+		\> \textbf{Projektreport} 			\> \texttt{project\_report\_<group>.pdf} 		\\[1mm]
+		\> \textbf{Zip-Datei}				\> \texttt{project\_submission\_<group>.zip}
+	\end{tabbing}}
+	
+	\vspace*{1mm}
+	\dwInfoBox{Der Abgabetermin (und weitere wichtige Termine) können der \cref{tab:ablauf-projekt} entnommen werden.}
+\end{dwHeaderFrame}
+
+
+\begin{frame}
+	\dwHeader{\ding{182} Quellcode}
+	\begin{itemize}
+		\item Der Quellcode ist auf einem \textbf{öffentlichen GitHub Repository} abzulegen.
+		\item Dem Repository ist eine aussagekräftige \texttt{README.md} hinzuzufügen, welche mindestens Folgendes enthält:
+		\begin{itemize}
+			\item Zielsetzung des Projekts
+			\item Eine Liste der Gruppenmitglieder
+			\item Eine kurze Beschreibung, wie der Quellcode ausgeführt werden muss (Installation/Dependencies/Packages/...)
+		\end{itemize}
+		\item Auch die Qualität des Quellcodes geht mit in die Bewertung ein.
+	\end{itemize}
+	
+	\dwAlertBox{Kommentieren Sie den Quellcode ausreichend! Je leichter der Code für uns zu verstehen ist, desto besser ist es für Sie.}
+\end{frame}
+
+
+\begin{frame}
+	\dwHeader{\ding{183} Abschlusspräsentation}
+	\begin{itemize}
+		\item Die Abschlusspräsentation weist einen zeitlichen Umfang von \textbf{20 Minuten} auf.
+		\item Beachten Sie folgende Dinge für eine gute Präsentation:
+		\begin{itemize}
+			\item Gehen Sie auf alle wichtigen Bestandteile Ihres Themas ein.
+			\item \textbf{Halten Sie unbedingt den zeitlichen Rahmen ein.} Der Spielraum betragt $\pm$ 3 Minuten.
+			\item Lesen Sie nicht ab, bauen Sie stattdessen Blickkontakt zum Publikum auf.
+			\item Gestalten Sie Ihren Vortrag lebendig (Modulation der Stimme, interessante Hinführung zum Thema, Fragen ins Publikum, ...).
+			\item Lassen Sie Raum für Fragen und Anmerkungen.
+			\item Die Folien sollten übersichtlich gestaltet sein, d.\,h. nicht zu viel Text und nutzen Sie Visualisierungen!
+		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 
 \begin{frame}
+	\dwHeader{\ding{184} Projektreport}
 	\begin{itemize}
-		\item \textbf{Tipp:} Online gibt es bereits diverse \LaTeX-Vorlagen für die Anfertigung von Projektreports; z.\,B.:
-		\begin{itemize}
-			\item ShareLaTeX: \sharelatex
-			\item Overleaf: \overleaf
-		\end{itemize}
+		\item Der Projektreport ist gemäß den Regeln des wissenschaftlichen Arbeitens anzufertigen und weist einen Umfang von
+			\textbf{minimal 3 und maximal 4 Seiten} (ohne Abbildungen und ohne Anhang) auf.
+		\item Zum Zwecke der Vergleichbarkeit der Abgaben nutzen Sie bitte folgendes \template{} für die Erstellung Ihres Projektreports.
 		\item Der Projektreport deckt mindestens folgende Bestandteile ab:
 		\begin{itemize}
 			\item Thema und Motivation
-			\item Related Work (\textit{welche wissenschaftlichen Publikationen gibt es zu diesem Thema?})
+			\item Related Work (\textit{welche wissenschaftlichen Publikationen gibt es zu diesem Thema bereits?})
 			\item Verwendete Technologien und Bibliotheken (z.\,B. \texttt{scikit-learn}, \texttt{tensorflow}, ...)
-			\item Anmerkungen zum Quellcode im Anhang (\textit{wie ist der Code auszuführen und was gibt es zu beachten?})
 			\item Präsentation der Ergebnisse
-			\item Kritische Bewertung der Ergebnisse (\textit{\glqq{}lessons learned\grqq{}})
+			\item Kritische Bewertung der Ergebnisse (\textit{\glqq{}lessons learned\grqq{}: Was hat (nicht) funktioniert und warum?})
+			\item Anmerkungen zum Quellcode im Anhang (\textit{wie ist der Code auszuführen und was gibt es zu beachten?})
 		\end{itemize}
 	\end{itemize}
+\end{frame}
 
-	\dwAlertBox{Die komplette Abgabe besteht aus dem Projektreport (*.pdf), der Abschlusspräsentation (*.pdf), sowie dem im Rahmen des Projekts erstellten Quellcode. Der Quellcode ist auf einem öffentlichen GitHub Repository abzulegen.}
+
+% Bewertung
+\begin{dwHeaderFrame}{Bewertung des Projekts}
+	\begin{itemize}
+		\item Die komplette Abgabe besteht aus dem Projektreport (\texttt{*.pdf}), der Abschlusspräsentation (\texttt{*.pdf}),
+			sowie dem im Rahmen des Projekts erstellten Quellcode.
+		\item \textbf{Nur rechtzeitig eingereichte Dokumente können bewertet werden!}
+		\item Die einzelnen Bestandteile werden folgendermaßen gewichtet:
+		\begin{itemize}
+			\item Quellcode und Ergebnisse (50\,\%)
+			\item Projektreport (30\,\%)
+			\item Abschlusspräsentation (20\,\%)
+		\end{itemize}
+		\item Jeder Bestandteil wird mit \textbf{maximal 100 Punkten} bewertet (die Bewertungskriterien befinden sich auf den nachfolgenden Seiten).
+	\end{itemize}
+
+	\dwAlertBox{Wichtig: Das Fehlen einer Teilabgabe führt zu erheblichem Punkteabzug (unter Umständen auch zum Nichtbestehen der gesamten Veranstaltung)!}
+\end{dwHeaderFrame}
+
+
+\begin{frame}
+	\dwHeader{Bewertungskriterien Quellcode}
+	\dwTable{
+		\begin{tabularx}{\textwidth}{ c | X | c }
+			\textbf{Nr.}		&
+			\textbf{Kriterium} 	&
+			\textbf{Punktzahl}	\\ \hline\hline
+			\ding{182}			& 	Der Quellcode ist ausreichend kommentiert. 						& 	10 	\\ \hline
+			\ding{183} 		&	Der Quellcode ist übersichtlich und ordentlich formatiert,
+								intuitiv verständlich und folgt generell dem \textit{Clean Code} Ansatz.	&	40 	\\ \hline
+			\ding{184} 		& 	Das gesamte Entwicklungsprojekt ist gut strukturiert und modular aufgebaut
+								(z.\,B. Datenvorverarbeitung ist getrennt von Datenanalyse, etc.).		& 	40 	\\ \hline
+			\ding{185} 		&	Das Projekt ist auf GitHub veröffentlicht und enthält
+								eine aussagekräftige \texttt{README.md}.						& 	10 	\\ \hline\hline
+			\multicolumn{2}{ l |}{\textbf{Summe}} 											& 	\textbf{100}
+		\end{tabularx}
+	}{Bewertungskriterien für den Quellcode}{tab:kriterien-quellcode}{1.3}
+\end{frame}
+
+
+\begin{frame}
+	\dwHeader{Bewertungskriterien Abschlusspräsentation}
+	\dwTable{
+		\begin{tabularx}{\textwidth}{ c | X | c }
+			\textbf{Nr.}		&
+			\textbf{Kriterium} 	&
+			\textbf{Punktzahl}	\\ \hline\hline
+			\multicolumn{3}{ l }{\cellcolor{lightgray!40}\textbf{Mündlicher Vortrag}} 							\\ \hline
+			\ding{182} 		&	Der zeitliche Rahmen wurde eingehalten (20 min $\pm$ 3 min).		&	10	\\ \hline
+			\ding{183}			& 	Die Präsentatoren haben nicht abgelesen und
+								waren imstande, frei zu sprechen. 							& 	10 	\\ \hline
+			\ding{184}			&	Die Geschwindigkeit des Vortrags war dem Inhalt angemessen.		& 	10	\\ \hline
+			\ding{185}			&	Die Gruppenmitglieder konnten vom Publikum gestellte Fragen
+								sicher beantworten.										&	20	\\ \hline
+			\ding{186}			&	Der Vortrag ging auf alle relevanten Punkte ein. 					& 	15	\\ \hline
+			\multicolumn{3}{ l }{\cellcolor{lightgray!40}\textbf{Vortragsfolien}} 								\\ \hline
+			\ding{187}			& 	Die Folien liegen im \texttt{*.pdf}-Format vor.					&	5	\\ \hline
+			\ding{188}			& 	Die Gestaltung der Folien ist übersichtlich. Inhalte werden überwiegend
+								visuell dargestellt. 										& 	15	\\ \hline
+			\ding{189}			& 	Alle wichtigen Aussagen sind in den Folien festgehalten.			& 	15	\\ \hline\hline
+			\multicolumn{2}{ l |}{\textbf{Summe}} 											& 	\textbf{100}
+		\end{tabularx}
+	}{Bewertungskriterien für die Abschlusspräsentation}{tab:kriterien-praesentation}{1.3}
+\end{frame}
+
+
+\begin{frame}
+	\dwHeader{Bewertungskriterien Projektreport}
+	\dwTable{
+		\begin{tabularx}{\textwidth}{ c | X | c }
+			\textbf{Nr.}		&
+			\textbf{Kriterium} 	&
+			\textbf{Punktzahl}	\\ \hline\hline
+			\ding{182} 		& 	Der Projektreport liegt im richtigen Format vor
+								(insbesondere Nutzung der \LaTeX-Vorlage und \texttt{*.pdf}-Format) 	& 	5 	\\ \hline
+			\ding{183} 		& 	Der Projektreport bedient sich einer sachgerechten Sprache
+								und ist verständlich verfasst.								& 	5 	\\ \hline
+			\ding{184} 		& 	Der Vorgaben bezüglich des Seitenumfangs werden eingehalten.		& 	10	\\ \hline
+			\ding{185} 		&	Der Projektreport ist klar und übersichtlich strukturiert.				&	10	\\ \hline
+			\ding{186} 		&	Inhaltlich werden alle geforderten Bereiche abgedeckt.				& 	30 	\\ \hline
+			\ding{187} 		& 	Der wirtschaftliche Kontext wird ausreichend herausgestellt.			&	10	\\ \hline
+			\ding{188} 		& 	Die erzielten Ergebnisse werden kritisch reflektiert und bewertet.		& 	30 	\\ \hline\hline
+			\multicolumn{2}{ l |}{\textbf{Summe}} 											& 	\textbf{100}
+		\end{tabularx}
+	}{Bewertungskriterien für den Projektreport}{tab:kriterien-report}{1.3}
+\end{frame}
+
+
+\begin{frame}
+	\begin{itemize}
+		\item Die Endnote für das Projekt berechnet sich somit folgendermaßen:
+		\begin{equation}
+			\text{Note} = \frac{5}{10} \cdot \Sigma_{\text{Code}} + \frac{3}{10} \cdot \Sigma_{\text{Report}} +
+				\frac{2}{10} \cdot \Sigma_{\text{Präsentation}}
+		\end{equation}
+		\item Maximal zu erreichen sind 100 Punkte.
+		\item Es gilt der offizielle Notenschlüssel der DHBW Mannheim.
+		\item Die im Projekt erzielte Note wird mit der in der Klausur zur Vorlesung \textit{\glqq{}Applied Machine Learning Fundamentals\grqq{}}
+			erreichten Note verrechnet, um die Modulnote zu erhalten.
+	\end{itemize}
 \end{frame}
 
 
 % Anwesenheitspflicht
 \begin{dwHeaderFrame}{Anwesenheitspflicht}
 	\begin{itemize}
-		\item ZU KLÄREN!
-		\item Mit wenigen Ausnahmen ist die Anwesenheit der einzelnen Projektgruppen an den Terminen \textbf{freiwillig}.
+		\item \textbf{Aufgrund der momentanen Situation wird die gesamte Veranstaltung ausschließlich virtuell stattfinden.}
+		\item Mit wenigen Ausnahmen basiert die (virtuelle) Anwesenheit der einzelnen Projektgruppen an den Terminen \textbf{auf freiwilliger Basis}.
 		\begin{itemize}
-			\item Es sollte jedoch regelmäßig Rücksprache bzgl. des Zwischenstands gehalten werden.
-			\item Bitte melden Sie sich \textbf{rechtzeitig} und \textbf{eigenverantwortlich} (z.\,B. per E-Mail: \texttt{daniel.wehner@sap.com}), falls von Ihrer Seite aus Diskussionsbedarf besteht.
+			\item Es sollte jedoch regelmäßig Rücksprache bezüglich des Zwischenstands gehalten werden.
+			\item Bitte melden Sie sich \textbf{rechtzeitig} und \textbf{eigenverantwortlich},
+				falls von Ihrer Seite aus Diskussionsbedarf besteht. Nutzen Sie hierfür die Veranstaltungstermine, das Moodle-Forum,
+				oder schreiben Sie uns eine E-Mail.
 		\end{itemize}
 		\item \textbf{Anwesenheitspflicht} besteht an folgenden Terminen (siehe \cref{tab:ablauf-projekt}):
 		\begin{itemize}
@@ -138,60 +294,35 @@
 \end{dwHeaderFrame}
 
 
-% Bewertung
-\begin{dwHeaderFrame}{Bewertung des Projekts}
-	\begin{itemize}
-		\item Nur rechtzeitig eingereichte Dokumente können bewertet werden.
-		\item Die einzelnen Bestandteile werden folgendermaßen gewichtet:
-		\begin{itemize}
-			\item Quellcode und Ergebnisse (50\,\%)
-			\item Projektreport (30\,\%)
-			\item Abschlusspräsentation (20\,\%)
-		\end{itemize}
-	\end{itemize}
-
-	\dwAlertBox{Wichtig: Das Fehlen einer Teilabgabe führt zu erheblichem Punkteabzug (unter Umständen auch zum Nichtbestehen der gesamten Veranstaltung)!}
-\end{dwHeaderFrame}
-
-
-\begin{frame}
-	\dwHeader{Bewertungskriterien}
-	\begin{itemize}
-		\item \textbf{Quellcode}
-		\begin{itemize}
-			\item
-		\end{itemize}
-		\item \textbf{Projektreport}
-		\begin{itemize}
-			\item
-		\end{itemize}
-		\item \textbf{Abschlusspräsentation}
-		\begin{itemize}
-			\item
-		\end{itemize}
-	\end{itemize}
-\end{frame}
-
-
 % Zeitlicher Ablauf des Projekts
 \begin{dwHeaderFrame}{Zeitlicher Ablauf des Projekts}
 	\dwTable{
-		\begin{tabularx}{\textwidth}{ c | Y | c }
-			\textbf{Termin} 		&
+		\begin{tabularx}{\textwidth}{ c | r | r | Y | c }
+			\textbf{Datum} 		&
+			\textbf{von}		&
+			\textbf{bis}		&
 			\textbf{Bemerkung} 	&								
-			\textbf{Anwesenheitspflicht}									\\ \hline\hline
-			xx.xx.2020			& 	\textbf{Einführung}				&	ja	\\ \hline
-			xx.xx.2020			&	\textit{Bedarf bitte anmelden}		& 	nein	\\ \hline
-			xx.xx.2020			& 	\textbf{Zwischenpräsentation (alle Gruppen)}
-															&	ja	\\ \hline
-			xx.xx.2020			&	\textit{Bedarf bitte anmelden}		&	nein	\\ \hline
-			xx.xx.2020			&	\textit{Bedarf bitte anmelden}		&	nein	\\ \hline
-			xx.xx.2020			&	\textit{Bedarf bitte anmelden}		&	nein	\\ \hline
-			xx.xx.2020			&	\textit{Bedarf bitte anmelden}		&	nein	\\ \hline
-			xx.xx.2020			& 	\textbf{Abschlusspräsentationen und Abgabe (alle Gruppen)}
-															& 	ja
+			\textbf{Anwesenheitspflicht}																\\ \hline\hline
+			08.05.2020	&	3:00\,pm 	& 	4:00\,pm		& 	\textbf{Einführung}				&	ja	\\ \hline
+			15.05.2020	&	3:00\,pm	& 	4:00\,pm		&	\textit{Abstimmungstermin}			& 	nein	\\ \hline
+			22.05.2020	& 	3:00\,pm 	& 	4:00\,pm		&	\textit{Abstimmungstermin}			&	nein	\\ \hline
+			29.05.2020	&	\textbf{4:00\,pm} 
+									& 	5:00\,pm		& 	\textit{Abstimmungstermin}			&	nein	\\ \hline
+			05.06.2020	&	3:00\,pm 	& 	6:00\,pm		& 	\textbf{Zwischenpräsentation}		&	ja	\\ \hline
+			12.06.2020	&	3:00\,pm 	& 	4:00\,pm		& 	\textit{Abstimmungstermin}			&	nein	\\ \hline
+			19.06.2020	&	\textbf{4:30\,pm}
+									& 	5:30\,pm		& 	\textit{Abstimmungstermin}			&	nein	\\ \hline
+			26.06.2020	& 	3:00\,pm 	& 	4:00\,pm		& 	\textit{Abstimmungstermin}			& 	nein 	\\ \hline
+			03.07.2020	& 	3:00\,pm	& 	4:00\,pm		& 	\textit{Abstimmungstermin}			& 	nein 	\\ \hline
+			10.07.2020	& 	\textbf{3:30\,pm} 
+									& 	4:30\,pm		& 	\textit{Abstimmungstermin}			& 	nein 	\\ \hline
+			17.07.2020	& 	3:00\,pm 	&	4:00\,pm		& 	\textbf{Abgabe Moodle}			& 	nein 	\\ \hline
+			20.07.2020	& 	\textbf{9:00\,am}
+									& 	12:00\,pm		& 	\textbf{Finale Präsentation I}		& 	ja 	\\ \hline
+			21.07.2020	& 	\textbf{9:00\,am} 
+									& 	12:00\,pm		& 	\textbf{Finale Präsentation II}		& 	ja
 		\end{tabularx}
-	}{Ablaufplan des Projekts}{tab:ablauf-projekt}{1.2}
+	}{Alle wichtigen Termine der Veranstaltung}{tab:ablauf-projekt}{1.1}
 \end{dwHeaderFrame}
 
 
@@ -215,7 +346,7 @@
 	\begin{itemize} 
 		\item \texttt{Sentiment Analyse von Kundenrezensionen} (kommt das Produkt beim Kunden gut oder schlecht an?)
 		\item \texttt{Vorhersage von Aktienkursen} (falls Sie reich werden möchten, ist das ein guter Anfang)
-		\item \texttt{Recommender Systems} (z.\,B. \textit{Collaborative Filtering})
+		\item \texttt{Recommender Systems} (z.\,B. \textit{Collaborative Filtering}, cf. Netflix)
 		\item \texttt{Baue deinen eigenen Chatbot} (z.\,B. zur automatischen Beantwortung von Kundenfragen)
 		\item \texttt{Speech Recognition}
 		\item \texttt{Analyse medizinischer Scans zur Krankheitsdiagnose}
