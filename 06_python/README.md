@@ -2,6 +2,45 @@
 Machine learning algorithms (probably all algorithms) are easier to understand, if you see them implemented. Here you find Python implementations for some of the algorithms (which are not part of the assignments).
 Play around with the hyper-parameters of the algorithms and try different data sets in order to get a better feeling for how the algorithms work. Also, debug through the code line for line and check what each line does.
 
+## Which Algorithms are included?
+The following algorithms are implemented (some are missing, since they are part of the exercises):
+
+1. **Classification** ([folder clf](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/06_python/clf))
+	* Decision trees
+	* k-nearest neighbors
+	* Linear discriminant analysis
+	* Logistic regression
+	* Iterative reweighted least squares
+	* Perceptron
+	* Multi-layer perceptron
+	* Support vector machine
+2. **Regression** ([folder reg](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/06_python/reg))
+	* Bayesian linear regression
+	* Gaussian process regression
+	* Kernel (ridge) regression
+	* k-nearest neighbors regression
+	* Support vector regression
+3. **Reinforcement learning** ([folder rl](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/06_python/rl))
+	* Policy iteration
+	* Value iteration
+	* Q-learning
+4. **Unsupervised learning** ([folder unsupervised](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/06_python/unsupervised))
+	* Apriori (association rules)
+	* Expectation-maximization (EM) for Gaussian mixtures
+	* Dimensionality reduction
+		* Auto-encoders
+		* Kernel PCA
+		* Principal component analysis (PCA)
+		* t-SNE
+	* Clustering
+		* DBSCAN
+		* Mean-shift clustering
+		* Spectral clustering
+5. **Sequence learning** ([folder seq](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/06_python/seq))
+	* Hidden Markov models (HMM)
+	
+Please find further exemplary implementations in the folder [misc](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/06_python/misc).
+
 ## Installation
 It is good practice to create a new virtual environment for each of your projects. Please create a new environment e.g. using Anaconda (Navigator)
 or use the `virtualenv` [package](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/).
@@ -143,42 +182,3 @@ if __name__ == "__main__":
     unsupervised_learning()
     reinforcement_learning()
 ```
- 
-## Which Algorithms are included?
-The following algorithms are implemented (some are missing, since they are part of the exercises):
-
-1. **Classification** ([folder clf](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/06_python/clf))
-	* Decision trees
-	* k-nearest neighbors
-	* Linear discriminant analysis
-	* Logistic regression
-	* Iterative reweighted least squares
-	* Perceptron
-	* Multi-layer perceptron
-	* Support vector machine
-2. **Regression** ([folder reg](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/06_python/reg))
-	* Bayesian linear regression
-	* Gaussian process regression
-	* Kernel (ridge) regression
-	* k-nearest neighbors regression
-	* Support vector regression
-3. **Reinforcement learning** ([folder rl](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/06_python/rl))
-	* Policy iteration
-	* Value iteration
-	* Q-learning
-4. **Unsupervised learning** ([folder unsupervised](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/06_python/unsupervised))
-	* Apriori (association rules)
-	* Expectation-maximization (EM) for Gaussian mixtures
-	* Dimensionality reduction
-		* Auto-encoders
-		* Kernel PCA
-		* Principal component analysis (PCA)
-		* t-SNE
-	* Clustering
-		* DBSCAN
-		* Mean-shift clustering
-		* Spectral clustering
-5. **Sequence learning** ([folder seq](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/06_python/seq))
-	* Hidden Markov models (HMM)
-	
-Please find further exemplary implementations in the folder [misc](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/06_python/misc).
