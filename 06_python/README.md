@@ -172,6 +172,7 @@ The following algorithms are implemented (some are missing, since they are part 
 	* DBSCAN
 	* Expectation-maximization (EM) for Gaussian mixtures
 	* Kernel PCA
+	* Mean-shift clustering
 	* Principal component analysis (PCA)
 	* Spectral clustering
 	* t-SNE

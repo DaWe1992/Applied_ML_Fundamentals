@@ -38,6 +38,7 @@ from unsupervised.kernel_pca import KernelPCA
 from unsupervised.tsne import TSNE
 from unsupervised.auto_encoder import AutoEncoder
 from unsupervised.spectral_clustering import SpectralClustering
+from unsupervised.mean_shift import MeanShift
 
 # regression
 # -----------------------------------------------------------------------------
@@ -174,19 +175,19 @@ def unsupervised_learning():
     from matplotlib import pyplot as plt
     from mpl_toolkits.mplot3d import proj3d
   
-    X, y = DataCreator().make_classification(name="swiss", n_classes=2)
+    X, y = DataCreator().make_classification(name="non_linear", n_classes=2)
     
     # dimensionality reduction
     # -------------------------------------------------------------------------
     # plot 3d data
-    fig = plt.figure(figsize=(8, 8))
-    ax = fig.add_subplot(111, projection="3d")
-    ax.view_init(20, -80)
-    ax.scatter(
-        X[:, 0], X[:, 1], X[:, 2], c=y, marker="o", alpha=0.5)
+#    fig = plt.figure(figsize=(8, 8))
+#    ax = fig.add_subplot(111, projection="3d")
+#    ax.view_init(20, -80)
+#    ax.scatter(
+#        X[:, 0], X[:, 1], X[:, 2], c=y, marker="o", alpha=0.5)
     
 #    plt.savefig("data_viz_3d.pdf")
-    plt.show()
+#    plt.show()
     
     # transform data into 2d space
     # pca
@@ -202,17 +203,17 @@ def unsupervised_learning():
 #    X_hat = tsne.fit_transform(X, n_components=2)
     
     # auto-encoder
-    ae = AutoEncoder()
-    ae.fit(X, n_components=2, denoising=False)
-    X_hat = ae.transform()
+#    ae = AutoEncoder()
+#    ae.fit(X, n_components=2, denoising=False)
+#    X_hat = ae.transform()
         
     # plot 2d data
-    fig, ax = plt.subplots(figsize=(8, 8))
-    ax.scatter(
-        X_hat[:, 0], X_hat[:, 1], c=y, marker="o", alpha=0.5)
+#    fig, ax = plt.subplots(figsize=(8, 8))
+#    ax.scatter(
+#        X_hat[:, 0], X_hat[:, 1], c=y, marker="o", alpha=0.5)
     
 #    plt.savefig("data_viz_2d.pdf")
-    plt.show()
+#    plt.show()
     
     # clustering
     # -------------------------------------------------------------------------
@@ -223,6 +224,9 @@ def unsupervised_learning():
 #    fig, ax = plt.subplots(figsize=(9, 7))
 #    ax.set_title("Data after spectral clustering", fontsize=18, fontweight="demi")
 #    ax.scatter(X[:, 0], X[:, 1],c=c_assign ,s=50, cmap="viridis")
+    
+    ms = MeanShift()
+    ms.cluster(X, kernel_bandwidth=1)
     
     
 def reinforcement_learning():
@@ -275,8 +279,8 @@ if __name__ == "__main__":
     """
     Main function.
     """
-    classification()
+#     classification()
 #    regression()
-#    unsupervised_learning()
+    unsupervised_learning()
 #    reinforcement_learning()
     
