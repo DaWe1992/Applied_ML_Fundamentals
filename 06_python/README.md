@@ -174,5 +174,7 @@ The following algorithms are implemented (some are missing, since they are part 
 	* Principal component analysis (PCA)
 	* Spectral clustering
 	* t-SNE
+5. **Sequence learning** ([folder seq](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/06_python/seq))
+	* Hidden Markov models (HMM)
 	
 Please find further exemplary implementations in the folder [misc](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/06_python/misc).
