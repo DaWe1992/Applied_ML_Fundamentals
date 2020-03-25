@@ -169,6 +169,7 @@ The following algorithms are implemented (some are missing, since they are part 
 4. **Unsupervised learning** ([folder unsupervised](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/06_python/unsupervised))
 	* Apriori (association rules)
 	* Auto-encoders
+	* DBSCAN
 	* Expectation-maximization (EM) for Gaussian mixtures
 	* Kernel PCA
 	* Principal component analysis (PCA)
