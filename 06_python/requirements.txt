@@ -10,7 +10,7 @@ autopep8==1.4.4
 Babel==2.8.0
 backcall==0.1.0
 bcrypt==3.1.7
-bleach==3.1.1
+bleach==3.1.2
 cachetools==4.0.0
 certifi==2019.11.28
 cffi==1.14.0
@@ -61,6 +61,7 @@ mistune==0.8.4
 mkl==2019.0
 nbconvert==5.6.1
 nbformat==5.0.4
+nltk==3.4.5
 numpy==1.18.1
 numpydoc==0.9.2
 oauthlib==3.1.0

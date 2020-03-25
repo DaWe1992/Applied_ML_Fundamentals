@@ -148,7 +148,7 @@ if __name__ == "__main__":
 The following algorithms are implemented (some are missing, since they are part of the exercises):
 
 1. **Classification** ([folder clf](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/06_python/clf))
-	* Decision tree
+	* Decision trees
 	* k-nearest neighbors
 	* Linear discriminant analysis
 	* Logistic regression
@@ -168,14 +168,16 @@ The following algorithms are implemented (some are missing, since they are part 
 	* Q-learning
 4. **Unsupervised learning** ([folder unsupervised](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/06_python/unsupervised))
 	* Apriori (association rules)
-	* Auto-encoders
-	* DBSCAN
 	* Expectation-maximization (EM) for Gaussian mixtures
-	* Kernel PCA
-	* Mean-shift clustering
-	* Principal component analysis (PCA)
-	* Spectral clustering
-	* t-SNE
+	* Dimensionality reduction
+		* Auto-encoders
+		* Kernel PCA
+		* Principal component analysis (PCA)
+		* t-SNE
+	* Clustering
+		* DBSCAN
+		* Mean-shift clustering
+		* Spectral clustering
 5. **Sequence learning** ([folder seq](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/06_python/seq))
 	* Hidden Markov models (HMM)
 	
