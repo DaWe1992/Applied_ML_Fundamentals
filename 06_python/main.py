@@ -82,7 +82,7 @@ def classification():
 #    clf.plot_contour(X[y == 1], X[y == -1])
     
     # train logistic regression classifier
-    clf = LogisticRegression(poly=False)
+    clf = LogisticRegression(poly=True)
     clf.fit(X, y, batch_size=X.shape[0])
     
     # train one-vs-one logistic regression classifier
@@ -175,7 +175,7 @@ def unsupervised_learning():
     from matplotlib import pyplot as plt
     from mpl_toolkits.mplot3d import proj3d
   
-    X, y = DataCreator().make_classification(name="non_linear", n_classes=2)
+    X, y = DataCreator().make_classification(name="linear", n_classes=2)
     
     # dimensionality reduction
     # -------------------------------------------------------------------------
@@ -279,8 +279,8 @@ if __name__ == "__main__":
     """
     Main function.
     """
-#     classification()
+    classification()
 #    regression()
-    unsupervised_learning()
+#    unsupervised_learning()
 #    reinforcement_learning()
     
