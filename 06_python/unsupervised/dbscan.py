@@ -34,8 +34,8 @@ class DBSCAN():
         
         :param eps:             minimum distance to neighbor
         :param min_pts:         minimum number of data points in the neighborhood
-                                    in order for a data point to be considered
-                                    a core point/density-reachable point
+                                in order for a data point to be considered
+                                a core point/density-reachable point
         """
         self.eps = eps
         self.min_pts = min_pts
@@ -43,7 +43,7 @@ class DBSCAN():
         
     def fit(self, X):
         """
-        Fit to training data.
+        Fits the model to the training data.
         
         :param X:               training data
         """
@@ -179,45 +179,4 @@ class DataPoint:
     
     def hasLabel(self):
         return self.y != None
-    
-
-# -----------------------------------------------------------------------------
-# Functions
-# -----------------------------------------------------------------------------
-        
-def plot_clusters(X, clusters, title):
-    """
-    Plots the clusters.
-    
-    :param X:           data points to be visualized
-    :param clusters:    clusters
-    :param title:       title of the plot
-    """
-    plt.scatter(X[:,0], X[:,1], c=clusters, s=60)
-    plt.title(title)
-    plt.xlabel("Feature 0")
-    plt.ylabel("Feature 1")
-    plt.show()
-    
-
-# -----------------------------------------------------------------------------
-# Main
-# -----------------------------------------------------------------------------
-    
-if __name__ == "__main__":
-    """
-    Main entry point.
-    """
-    X, y = make_moons(n_samples=200, noise=0.05, random_state=0)
-    
-    # scale data
-    scaler = StandardScaler()
-    scaler.fit(X)
-    X_scaled = scaler.transform(X)
-    
-    dbscan = DBSCAN(eps=0.5, min_pts=3)
-    c_assign = dbscan.fit(X_scaled)
-    print(c_assign)
-    
-    plot_clusters(X_scaled, c_assign, "DBSCAN")
     

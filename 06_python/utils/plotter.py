@@ -126,3 +126,19 @@ class Plotter:
         plt.plot(X_q, y_q, "m-", linewidth=2)
             
         plt.show()
+        
+        
+    def plot_clusters(self, c_assign):
+        """
+        Plots the clusters.
+        
+        :param c_assign:        cluster assignments
+        """
+        fig, ax = plt.subplots(figsize=(12.00, 7.00))
+        self.__prepare_plot(ax, xlabel=r"$x_1$", ylabel=r"$x_2$")
+        
+        ax.set_title("Cluster Assignments", fontsize=18, fontweight="demi")
+        ax.scatter(self.X[:, 0], self.X[:, 1], c=c_assign, s=100,
+            cmap="nipy_spectral", edgecolors="k", zorder=10)
+    
+        plt.show()

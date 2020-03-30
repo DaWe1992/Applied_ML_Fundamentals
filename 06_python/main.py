@@ -38,6 +38,7 @@ from unsupervised.kernel_pca import KernelPCA
 from unsupervised.tsne import TSNE
 from unsupervised.auto_encoder import AutoEncoder
 from unsupervised.spectral_clustering import SpectralClustering
+from unsupervised.dbscan import DBSCAN
 from unsupervised.mean_shift import MeanShift
 
 # regression
@@ -177,6 +178,7 @@ def unsupervised_learning():
   
     X, y = DataCreator().make_classification(name="linear", n_classes=2)
     
+    # -------------------------------------------------------------------------
     # dimensionality reduction
     # -------------------------------------------------------------------------
     # plot 3d data
@@ -215,18 +217,26 @@ def unsupervised_learning():
 #    plt.savefig("data_viz_2d.pdf")
 #    plt.show()
     
+    # -------------------------------------------------------------------------
     # clustering
     # -------------------------------------------------------------------------
-    # perform spectral clustering
+    # spectral clustering
 #    sc = SpectralClustering()
 #    c_assign = sc.fit(X, method="knn")
-#    
-#    fig, ax = plt.subplots(figsize=(9, 7))
-#    ax.set_title("Data after spectral clustering", fontsize=18, fontweight="demi")
-#    ax.scatter(X[:, 0], X[:, 1],c=c_assign ,s=50, cmap="viridis")
     
-    ms = MeanShift()
-    ms.cluster(X, kernel_bandwidth=1)
+    # DBSCAN clustering
+    dbscan = DBSCAN(eps=1.00, min_pts=3)
+    c_assign = dbscan.fit(X)
+    
+    # mean-shift clustering
+#    ms = MeanShift()
+#    c_assign = ms.fit(X, bandwidth=1, min_dist=0.000001)
+    
+    # plot clusters
+    Plotter(X, y).plot_clusters(c_assign)
+    
+    # -1 is noise
+    print(c_assign)
     
     
 def reinforcement_learning():
@@ -279,8 +289,8 @@ if __name__ == "__main__":
     """
     Main function.
     """
-    classification()
+    # classification()
 #    regression()
-#    unsupervised_learning()
+    unsupervised_learning()
 #    reinforcement_learning()
     
