@@ -233,7 +233,7 @@ def unsupervised_learning():
 #    c_assign = dbscan.fit(X)
     
     # OPTICS clustering
-    optics = OPTICS(eps=3.00, eps_= 1.00, min_pts=5, plot_reach=True)
+    optics = OPTICS(eps=3.00, eps_= 1.00, min_pts=4, plot_reach=True)
     c_assign = optics.fit(X)
     
     # mean-shift clustering

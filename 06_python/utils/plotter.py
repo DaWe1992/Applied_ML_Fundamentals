@@ -139,6 +139,6 @@ class Plotter:
         
         ax.set_title("Cluster Assignments", fontsize=18, fontweight="demi")
         ax.scatter(self.X[:, 0], self.X[:, 1], c=c_assign, s=100,
-            cmap="viridis", edgecolors="k", zorder=10)
+            cmap="viridis", edgecolors="k", zorder=10, alpha=0.80)
     
         plt.show()
