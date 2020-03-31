@@ -35,6 +35,7 @@ The following algorithms are implemented (some are missing, since they are part 
 	* Clustering ([folder clustering](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/06_python/unsupervised/clustering))
 		* DBSCAN
 		* Mean-shift clustering
+		* OPTICS
 		* Spectral clustering
 5. **Sequence learning** ([folder seq](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/06_python/seq))
 	* Hidden Markov models (HMM)
