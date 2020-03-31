@@ -5,6 +5,9 @@ Created on Tue Apr  3 11:08:03 2018
 
 Implementation of DBSCAN clustering
 (Density-Based Spatial Clustering of Applications with Noise)
+
+and OPTICS
+(Ordering Points to Identify the Clustering Structure)
 """
 
 # -----------------------------------------------------------------------------
