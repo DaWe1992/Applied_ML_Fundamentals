@@ -27,12 +27,12 @@ The following algorithms are implemented (some are missing, since they are part 
 4. **Unsupervised learning** ([folder unsupervised](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/06_python/unsupervised))
 	* Apriori (association rules)
 	* Expectation-maximization (EM) for Gaussian mixtures
-	* Dimensionality reduction
+	* Dimensionality reduction ([folder unsupervised](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/06_python/unsupervised/decomposition))
 		* Auto-encoders
 		* Kernel PCA
 		* Principal component analysis (PCA)
 		* t-SNE
-	* Clustering
+	* Clustering ([folder unsupervised](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/06_python/unsupervised/clustering))
 		* DBSCAN
 		* Mean-shift clustering
 		* Spectral clustering

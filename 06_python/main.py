@@ -24,30 +24,34 @@ from utils.plotter import Plotter
 from clf.knn import kNN
 from clf.svm import SVM
 from clf.lda import LDA
-from clf.logistic_regression import LogisticRegression, LogRegOneVsOne
 from clf.irls import IRLS
-from clf.perceptron import Perceptron
 from clf.mlp_torch import MLP
+from clf.perceptron import Perceptron
 from clf.decision_tree import DecisionTree
+from clf.logistic_regression import LogisticRegression, LogRegOneVsOne
 
 # unsupervised learning
 # -----------------------------------------------------------------------------
 from unsupervised.em import EM
-from unsupervised.pca import PCA
-from unsupervised.kernel_pca import KernelPCA
-from unsupervised.tsne import TSNE
-from unsupervised.auto_encoder import AutoEncoder
-from unsupervised.spectral_clustering import SpectralClustering
-from unsupervised.dbscan import DBSCAN
-from unsupervised.mean_shift import MeanShift
+
+# dimensionality reduction / decomposition
+from unsupervised.decomposition.pca import PCA
+from unsupervised.decomposition.tsne import TSNE
+from unsupervised.decomposition.kernel_pca import KernelPCA
+from unsupervised.decomposition.auto_encoder import AutoEncoder
+
+# clustering
+from unsupervised.clustering.mean_shift import MeanShift
+from unsupervised.clustering.dbscan import DBSCAN, OPTICS
+from unsupervised.clustering.spectral_clustering import SpectralClustering
 
 # regression
 # -----------------------------------------------------------------------------
+from reg.svr import SVR_GD, SVR_sklearn
+from reg.knn_regression import KnnRegression
 from reg.gaussian_process import GaussianProcess
 from reg.kernel_regression import KernelRegression
-from reg.knn_regression import KnnRegression
 from reg.bayesian_regression import BayesRegression
-from reg.svr import SVR_GD, SVR_sklearn
 
 # reinforcement learning
 # -----------------------------------------------------------------------------
@@ -70,7 +74,7 @@ def classification():
     Classification.
     """
     # create data
-    X, y = DataCreator().make_classification(name="non_linear", n_classes=2)
+    X, y = DataCreator().make_classification(name="custom", n_classes=2)
     
     # train kNN classifier
 #    clf = kNN(n_neighbors=1)
@@ -176,7 +180,7 @@ def unsupervised_learning():
     from matplotlib import pyplot as plt
     from mpl_toolkits.mplot3d import proj3d
   
-    X, y = DataCreator().make_classification(name="linear", n_classes=2)
+    X, y = DataCreator().make_classification(name="linear", n_classes=4)
     
     # -------------------------------------------------------------------------
     # dimensionality reduction
@@ -225,8 +229,12 @@ def unsupervised_learning():
 #    c_assign = sc.fit(X, method="knn")
     
     # DBSCAN clustering
-    dbscan = DBSCAN(eps=1.00, min_pts=3)
-    c_assign = dbscan.fit(X)
+#    dbscan = DBSCAN(eps=1.00, min_pts=3)
+#    c_assign = dbscan.fit(X)
+    
+    # OPTICS clustering
+    optics = OPTICS(eps=3.00, eps_= 1.00, min_pts=5, plot_reach=True)
+    c_assign = optics.fit(X)
     
     # mean-shift clustering
 #    ms = MeanShift()
@@ -289,7 +297,7 @@ if __name__ == "__main__":
     """
     Main function.
     """
-    # classification()
+#    classification()
 #    regression()
     unsupervised_learning()
 #    reinforcement_learning()

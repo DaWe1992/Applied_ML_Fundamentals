@@ -24,6 +24,8 @@ from sklearn.cluster import KMeans
 class SpectralClustering:
     """
     Class SpectralClustering
+    
+    !!! EXPERIMENTAL !!!
     """
     
     def __init__(self):

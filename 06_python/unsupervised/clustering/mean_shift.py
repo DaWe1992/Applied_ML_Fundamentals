@@ -48,10 +48,10 @@ class MeanShift():
         self.min_dist = min_dist
         self.dist_tolerance = dist_tolerance
         
-        return self.cluster()
+        return self.__cluster()
         
         
-    def cluster(self):
+    def __cluster(self):
         """
         Clusters the data points.
         

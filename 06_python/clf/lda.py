@@ -20,6 +20,8 @@ class LDA():
     """
     LDA class.
     Implements Fisher's Linear Discriminant.
+    
+    !!! EXPERIMENTAL !!!
     """
     
     def __init__(self, n_dims=1):
