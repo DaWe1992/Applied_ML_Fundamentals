@@ -16,7 +16,12 @@ and OPTICS
 
 import math
 import numpy as np
+
+# matplotlib
+# -----------------------------------------------------------------------------
 import matplotlib.pyplot as plt
+import matplotlib.cm as cm
+from matplotlib.colors import Normalize
 
 from scipy import spatial
 from heapq import heappush, heappop
@@ -76,13 +81,13 @@ class DBSCAN():
             if x.has_label(): continue
                 
             # find neighbors of data point
-            N = get_neighbors(self.X, x, self.eps)
+            nbrs = get_neighbors(self.X, x, self.eps)
                 
             # NOISE
             # -----------------------------------------------------------------
             # classify data point as noise (-1),
             # if it has not enough neighbors
-            if len(N) < self.min_pts:
+            if len(nbrs) < self.min_pts:
                 x.set_label(-1)
                 continue
                 
@@ -93,11 +98,11 @@ class DBSCAN():
             x.set_label(c)
                 
             # initialize seed set for cluster
-            S = [n for n in N if n not in [x]]
+            seed = [n for n in nbrs if n not in [x]]
             
             i = 0
-            while i != len(S):
-                s = S[i]
+            while i != len(seed):
+                s = seed[i]
                 i += 1
                 
                 if s.get_label() == -1: s.set_label(c)
@@ -105,9 +110,9 @@ class DBSCAN():
                 s.set_label(c)
                 
                 # get neighbors for new point and add them to S
-                N = get_neighbors(self.X, s, self.eps)
-                if len(N) >= self.min_pts:
-                    S = S + [n for n in N if n not in S]
+                nbrs = get_neighbors(self.X, s, self.eps)
+                if len(nbrs) >= self.min_pts:
+                    seed += [n for n in nbrs if n not in seed]
                     
         return self.__get_cluster_list()
         
@@ -298,6 +303,8 @@ class OPTICS():
         fig, ax = plt.subplots(figsize=(12.00, 7.00))
         ax.set_title("Reachability Plot", fontsize=18, fontweight="demi")
         
+        ax.set_xlim((0, len(self.X) - 1))
+        
         # axis labels
         ax.set_xlabel("data point", fontsize=12)
         ax.set_ylabel("reachability score", fontsize=12)
@@ -307,11 +314,26 @@ class OPTICS():
             linestyle="--", zorder=5)
             
         x_range = np.arange(0, len(self.X))
+        c_assign = [x.get_label() for x in ordered_list]
+        
+        # scatter plot
+        # ---------------------------------------------------------------------
         ax.scatter(
             x_range,
             np.asarray([e.r_dist for e in ordered_list]),
-            c=[x.get_label() for x in ordered_list],
-            zorder=10, edgecolors="k", s=75
+            c=c_assign,
+            zorder=10, edgecolors="k", s=25
+        )
+        
+        # bar plot
+        # ---------------------------------------------------------------------
+        # get a color map
+        my_cmap = cm.get_cmap("viridis")
+        my_norm = Normalize(vmin=min(c_assign), vmax=max(c_assign))
+        ax.bar(
+            x_range,
+            np.asarray([e.r_dist for e in ordered_list]),
+            color=my_cmap(my_norm(c_assign)), width=1.00, zorder=9
         )
         ax.plot(x_range, [self.eps_] * len(x_range), "r--")
         

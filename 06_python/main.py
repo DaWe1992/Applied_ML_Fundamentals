@@ -44,6 +44,7 @@ from unsupervised.decomposition.auto_encoder import AutoEncoder
 from unsupervised.clustering.mean_shift import MeanShift
 from unsupervised.clustering.dbscan import DBSCAN, OPTICS
 from unsupervised.clustering.spectral_clustering import SpectralClustering
+from unsupervised.clustering.affinity_propagation import AffinityPropagation
 
 # regression
 # -----------------------------------------------------------------------------
@@ -233,8 +234,12 @@ def unsupervised_learning():
 #    c_assign = dbscan.fit(X)
     
     # OPTICS clustering
-    optics = OPTICS(eps=3.00, eps_= 1.00, min_pts=4, plot_reach=True)
-    c_assign = optics.fit(X)
+#    optics = OPTICS(eps=3.00, eps_=1.00, min_pts=4, plot_reach=True)
+#    c_assign = optics.fit(X)
+    
+    # affinity propagation clustering
+    ap = AffinityPropagation()
+    c_assign = ap.fit(X, damping=0.9, n_iter=50, plot=True)
     
     # mean-shift clustering
 #    ms = MeanShift()
