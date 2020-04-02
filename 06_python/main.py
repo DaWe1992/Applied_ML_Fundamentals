@@ -235,8 +235,8 @@ def unsupervised_learning():
 #    c_assign = dbscan.fit(X)
     
     # OPTICS clustering
-    optics = OPTICS(eps=100.00, eps_=1.20, min_pts=4, plot_reach=True)
-    c_assign = optics.fit(X)
+#    optics = OPTICS(eps=100.00, eps_=1.20, min_pts=4, plot_reach=True)
+#    c_assign = optics.fit(X)
     
     # affinity propagation clustering
 #    ap = AffinityPropagation()
@@ -247,8 +247,8 @@ def unsupervised_learning():
 #    c_assign = ms.fit(X, bandwidth=1, min_dist=0.000001)
     
     # agglomerative clustering
-#    ac = AgglomerativeClustering()
-#    c_assign = ac.fit(X, 4, method="complete_link")
+    ac = AgglomerativeClustering()
+    c_assign = ac.fit(X, n_cluster=4, method="complete_link", dendrogram=True)
     
     # plot clusters
     Plotter(X, y).plot_clusters(c_assign)
