@@ -36,6 +36,7 @@ The following algorithms are implemented (some are missing, since they are part 
 		* t-SNE
 	* Clustering ([folder clustering](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/06_python/unsupervised/clustering))
 		* Affinity propagation
+		* Agglomerative clustering
 		* DBSCAN
 		* Mean-shift clustering
 		* OPTICS

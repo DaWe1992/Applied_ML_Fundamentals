@@ -68,7 +68,7 @@ class DBSCAN():
     
     def __cluster(self):
         """
-        Cluster the data.
+        Clusters the data.
         
         :return:                cluster assignments
         """

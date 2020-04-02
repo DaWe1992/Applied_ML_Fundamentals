@@ -45,6 +45,7 @@ from unsupervised.clustering.mean_shift import MeanShift
 from unsupervised.clustering.dbscan import DBSCAN, OPTICS
 from unsupervised.clustering.spectral_clustering import SpectralClustering
 from unsupervised.clustering.affinity_propagation import AffinityPropagation
+from unsupervised.clustering.agglomerative_clustering import AgglomerativeClustering
 
 # regression
 # -----------------------------------------------------------------------------
@@ -234,7 +235,7 @@ def unsupervised_learning():
 #    c_assign = dbscan.fit(X)
     
     # OPTICS clustering
-    optics = OPTICS(eps=100.00, eps_=1.00, min_pts=4, plot_reach=True)
+    optics = OPTICS(eps=100.00, eps_=1.20, min_pts=4, plot_reach=True)
     c_assign = optics.fit(X)
     
     # affinity propagation clustering
@@ -244,6 +245,10 @@ def unsupervised_learning():
     # mean-shift clustering
 #    ms = MeanShift()
 #    c_assign = ms.fit(X, bandwidth=1, min_dist=0.000001)
+    
+    # agglomerative clustering
+#    ac = AgglomerativeClustering()
+#    c_assign = ac.fit(X, 4, method="complete_link")
     
     # plot clusters
     Plotter(X, y).plot_clusters(c_assign)
