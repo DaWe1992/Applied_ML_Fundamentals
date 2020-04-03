@@ -2,7 +2,7 @@
 Machine learning algorithms (probably all algorithms) are easier to understand, if you see them implemented. Here you find Python implementations for some of the algorithms (which are not part of the assignments).
 Play around with the hyper-parameters of the algorithms and try different data sets in order to get a better feeling for how the algorithms work. Also, debug through the code line for line and check what each line does.
 
-> **The algorithms were implemented for educational purposes only and should therefore not be used in production environments!**
+> **The algorithms were implemented for educational purposes only, and should therefore not be used in production environments!**
 
 ## Which Algorithms are included?
 The following algorithms are implemented (some are missing, since they are part of the exercises):
