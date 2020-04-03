@@ -60,12 +60,13 @@ class MLP(torch.nn.Module):
         return X
     
     
-    def fit(self, X, y):
+    def fit(self, X, y, n_epochs=1000):
         """
         Fits the model to the data.
         
         :param X:           training data (features)
         :param y:           training data (labels)
+        :param n_epochs:    number of epochs
         """
         self.X = torch.FloatTensor(X)
         
@@ -85,7 +86,6 @@ class MLP(torch.nn.Module):
         # perform training
         # ---------------------------------------------------------------------
         self.train()
-        n_epochs = 1000
         for epoch in range(n_epochs):
             # IMPORTANT !!!
             # set the gradients back to zero

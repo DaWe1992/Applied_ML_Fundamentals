@@ -76,7 +76,7 @@ def classification():
     Classification.
     """
     # create data
-    X, y = DataCreator().make_classification(name="custom", n_classes=2)
+    X, y = DataCreator().make_classification(name="spiral", n_classes=2)
     
     # train kNN classifier
 #    clf = kNN(n_neighbors=1)
@@ -89,8 +89,8 @@ def classification():
 #    clf.plot_contour(X[y == 1], X[y == -1])
     
     # train logistic regression classifier
-    clf = LogisticRegression(poly=True)
-    clf.fit(X, y, batch_size=X.shape[0])
+#    clf = LogisticRegression(poly=True)
+#    clf.fit(X, y, batch_size=X.shape[0])
     
     # train one-vs-one logistic regression classifier
 #    clf = LogRegOneVsOne(poly=True)
@@ -106,8 +106,8 @@ def classification():
 #    clf.plot_contour(discrete=False)
     
     # train pytorch mlp
-#    clf = MLP()
-#    clf.fit(X, y)
+    clf = MLP()
+    clf.fit(X, y, n_epochs=10000)
     
     # train Fisher's linear discriminant
 #    clf = LDA(n_dims=1)
@@ -124,16 +124,18 @@ def classification():
 #    em.fit(X, n_comp=3, n_iter=30)
     
     # plot boundary
+    # -------------------------------------------------------------------------
     Plotter(X, y).plot_boundary(clf, step_size=0.005)
     
     # evaluation
-    evaluator = Evaluator()
+    # -------------------------------------------------------------------------
+#    evaluator = Evaluator()
 #    acc = evaluator.accuracy(clf, X, y)
 #    print("Accuracy: {} %".format(acc))
 #    evaluator.conf_mat(clf, X, y)
-    print(evaluator.auc(clf, X, y, plot=True)) # works for logistic regression
+#    print(evaluator.auc(clf, X, y, plot=True)) # works for logistic regression
     # print classification report
-    evaluator.classification_report(clf, X, y)
+#    evaluator.classification_report(clf, X, y)
     
     
 def regression():
@@ -141,7 +143,7 @@ def regression():
     Regression.
     """
     # create data
-    X, y = DataCreator().make_regression(name="sine")
+    X, y = DataCreator().make_regression(name="custom")
     
     # train Gaussian process regressor
 #    reg = GaussianProcess()
@@ -168,7 +170,7 @@ def regression():
     
     # train svr (sklearn)
     reg = SVR_sklearn()
-    reg.fit(X, y, epsilon=0.5, C=5.0, kernel="rbf")
+    reg.fit(X, y, epsilon=0.05, C=5.0, kernel="rbf")
     reg.plot()
     
     # plot boundary
@@ -182,7 +184,7 @@ def unsupervised_learning():
     from matplotlib import pyplot as plt
     from mpl_toolkits.mplot3d import proj3d
   
-    X, y = DataCreator().make_classification(name="linear", n_classes=4)
+    X, y = DataCreator().make_classification(name="spiral", n_classes=4)
     
     # -------------------------------------------------------------------------
     # dimensionality reduction
@@ -228,15 +230,15 @@ def unsupervised_learning():
     # -------------------------------------------------------------------------
     # spectral clustering
 #    sc = SpectralClustering()
-#    c_assign = sc.fit(X, method="knn")
+#    c_assign = sc.fit(X, n_clusters=2)
     
     # DBSCAN clustering
 #    dbscan = DBSCAN(eps=1.00, min_pts=3)
 #    c_assign = dbscan.fit(X)
     
     # OPTICS clustering
-#    optics = OPTICS(eps=100.00, eps_=1.20, min_pts=4, plot_reach=True)
-#    c_assign = optics.fit(X)
+    optics = OPTICS(eps=100.00, eps_=1.30, min_pts=5, plot_reach=True)
+    c_assign = optics.fit(X)
     
     # affinity propagation clustering
 #    ap = AffinityPropagation()
@@ -247,8 +249,8 @@ def unsupervised_learning():
 #    c_assign = ms.fit(X, bandwidth=1, min_dist=0.000001)
     
     # agglomerative clustering
-    ac = AgglomerativeClustering()
-    c_assign = ac.fit(X, n_cluster=4, method="complete_link", dendrogram=True)
+#    ac = AgglomerativeClustering()
+#    c_assign = ac.fit(X, n_cluster=4, method="complete_link", dendrogram=True)
     
     # plot clusters
     Plotter(X, y).plot_clusters(c_assign)

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Tue Jan 21 16:04:06 2020
+Cf. https://github.com/pin3da/spectral-clustering
 
 @author: Daniel Wehner
 """
@@ -10,9 +11,7 @@ Created on Tue Jan 21 16:04:06 2020
 # -----------------------------------------------------------------------------
 
 import numpy as np
-
-from scipy import spatial
-from scipy.spatial.distance import cdist
+import scipy
 
 from sklearn.cluster import KMeans
 
@@ -24,8 +23,6 @@ from sklearn.cluster import KMeans
 class SpectralClustering:
     """
     Class SpectralClustering
-    
-    !!! EXPERIMENTAL !!!
     """
     
     def __init__(self):
@@ -33,71 +30,102 @@ class SpectralClustering:
         Constructor.
         """
         pass
-    
 
-    def fit(self, X, method="knn", k=5, eps=0.3):
+    
+    def fit(self, X, n_clusters):
         """
-        Fits the spectral clustering model to the data.
+        Fits a spectral clustering model to the data.
         
-        :param X:           data to  be clustered
-        :param method:      method of graph construction
-                                - knn
-                                - eps
-        :param k:           number of nearest neighbors for knn graph construction
-                                (for method = "knn", ignored for others)
-        :param eps:         distance threshold for epsilon neighborhood graph construction
-                                (for method = "eps", ignored for others)
-        :return:            cluster assignments
+        :return:                cluster assignments
         """
         self.X = X
+        self.n = X.shape[0]
+        self.n_clusters = n_clusters
         
-        if method == "knn":
-            A = self.__knn_graph(k)
-        else:
-            A = self.__eps_nbh(eps)
+        # compute Laplacian matrix
+        L = self.__laplacian(self.__compute_affinity())
+        # cluster the data points
+        c_assign = self.__cluster(L)
         
-        # compute degree matrix (diagonal)
-        D = np.diag(np.sum(A, axis=1))
-        # compute laplacian matrix
-        L = D - A
-
-        # perform eigen-decomposition of laplacian matrix
-        eigval, eigvec = np.linalg.eig(L)
-        
-        U = eigvec
-        # perform k-means on the spectral embeddings
-        kmeans = KMeans(n_clusters=2, random_state=0).fit(U)
-        
-        return kmeans.labels_
+        return c_assign
     
     
-    def __knn_graph(self, k):
+    def __cluster(self, L):
         """
-        Computes the knn graph.
+        Clusters the data points.
         
-        :param k:           number of nearest neighbors
-        :return:            knn graph
+        :param L:               Laplacian matrix
         """
-        A = np.zeros((self.X.shape[0], self.X.shape[0]))
+        # perform eigen-decomposition of L (only 'n_clusters' elements)
+        eig_val, eig_vect = scipy.sparse.linalg.eigs(L, self.n_clusters)
+        U = eig_vect.real
+        # normalize eigenvectors and perform k-Means clustering
+        rows_norm = np.linalg.norm(U, axis=1, ord=2)
+        c_assign = self.__k_means((U.T / rows_norm).T)
         
-        tree = spatial.KDTree(self.X)
-        for i, x in enumerate(self.X):
-            ds, idx = tree.query(x, k=k + 1)
-            for d, j in zip(ds[1:], idx[1:]):
-                A[i, j] = 1 / d
-                A[j, i] = 1 / d
+        return c_assign
+    
+    
+    def __laplacian(self, A):
+        """
+        Computes the symetric normalized laplacian.
+        
+        :param A:               affinity matrix
+        :return:                normalized graph Laplacian matrix
+        """
+        D = np.zeros(A.shape)
+        w = np.sum(A, axis=0)
+        D.flat[::len(w) + 1] = w ** (-0.5)  # set the diagonal of D to w
+        
+        return D.dot(A).dot(D)
+    
+    
+    def __k_means(self, U):
+        """
+        Applies k-Means clustering.
+        
+        :param U:               transformed data
+        :return:                cluster assignments
+        """
+        kmeans = KMeans(n_clusters=self.n_clusters)
+        
+        return kmeans.fit(U).labels_
+    
+    
+    def __compute_affinity(self):
+        """
+        Computes the affinity matrix for the data.
+        
+        :return:                affinity matrix
+        """
+        A = np.zeros((self.n, self.n))
+        sig = []
+        
+        # compute pairwise distances
+        for i in range(self.n):
+            dists = []
+            for j in range(self.n):
+                dists.append(np.linalg.norm(self.X[i] - self.X[j]))
+                
+            dists.sort()
+            sig.append(np.mean(dists[:5]))
+    
+        # compute squared exponential kernel
+        for i in range(self.n):
+            for j in range(self.n):
+                A[i][j] = self.__squared_exponential(self.X[i], self.X[j], sig[i], sig[j])
                 
         return A
     
     
-    def __eps_nbh(self, eps):
+    def __squared_exponential(self, x, y, sig1=0.8, sig2=1):
         """
-        Computes the epsilon neighborhood graph.
+        Squared exponential kernel.
         
-        :param eps:         epsilon threshold
-        :return:            epsilon neighborhood graph
+        :param x:               data point 1
+        :param y:               data point 2
+        :sig1:                  sigma 1
+        :sig2:                  sigma 2
+        :return:                squared exponential value
         """
-        A = cdist(self.X, self.X)
-        A[np.where(A > eps)] = 0
-        
-        return A
+        return np.exp(-np.linalg.norm(x - y)**2 / (2 * sig1 * sig2))
