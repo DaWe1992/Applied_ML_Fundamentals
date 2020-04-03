@@ -41,6 +41,7 @@ from unsupervised.decomposition.kernel_pca import KernelPCA
 from unsupervised.decomposition.auto_encoder import AutoEncoder
 
 # clustering
+from unsupervised.clustering.k_medoids import KMedoids
 from unsupervised.clustering.mean_shift import MeanShift
 from unsupervised.clustering.dbscan import DBSCAN, OPTICS
 from unsupervised.clustering.spectral_clustering import SpectralClustering
@@ -184,7 +185,7 @@ def unsupervised_learning():
     from matplotlib import pyplot as plt
     from mpl_toolkits.mplot3d import proj3d
   
-    X, y = DataCreator().make_classification(name="spiral", n_classes=4)
+    X, y = DataCreator().make_classification(name="linear", n_classes=2)
     
     # -------------------------------------------------------------------------
     # dimensionality reduction
@@ -228,6 +229,10 @@ def unsupervised_learning():
     # -------------------------------------------------------------------------
     # clustering
     # -------------------------------------------------------------------------
+    # k-Medoids clustering
+#    km = KMedoids()
+#    c_assign = km.fit(X, k=2)
+    
     # spectral clustering
 #    sc = SpectralClustering()
 #    c_assign = sc.fit(X, n_clusters=2)
@@ -237,7 +242,7 @@ def unsupervised_learning():
 #    c_assign = dbscan.fit(X)
     
     # OPTICS clustering
-    optics = OPTICS(eps=100.00, eps_=1.30, min_pts=5, plot_reach=True)
+    optics = OPTICS(eps=100.00, eps_=1.30, min_pts=3, plot_reach=True)
     c_assign = optics.fit(X)
     
     # affinity propagation clustering

@@ -38,6 +38,7 @@ The following algorithms are implemented (some are missing, since they are part 
 		* Affinity propagation
 		* Agglomerative clustering
 		* DBSCAN
+		* k-Medoids
 		* Mean-shift clustering
 		* OPTICS
 		* Spectral clustering
