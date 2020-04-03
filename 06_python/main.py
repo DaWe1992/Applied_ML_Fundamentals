@@ -77,7 +77,7 @@ def classification():
     Classification.
     """
     # create data
-    X, y = DataCreator().make_classification(name="spiral", n_classes=2)
+    X, y = DataCreator().make_classification(name="linear", n_classes=4)
     
     # train kNN classifier
 #    clf = kNN(n_neighbors=1)
@@ -97,7 +97,7 @@ def classification():
 #    clf = LogRegOneVsOne(poly=True)
 #    clf.fit(X, y)
     
-    # train an iterative reweighted least squares (irls) classifier
+    # train an iterative reweighted least squares (IRLS) classifier
 #    clf = IRLS(poly=True)
 #    clf.fit(X, y, n_iter=5)
     
@@ -106,7 +106,7 @@ def classification():
 #    clf.fit(X, y, sigma=1.0, alpha=0.0001, n_max_iter=1000)
 #    clf.plot_contour(discrete=False)
     
-    # train pytorch mlp
+    # train pytorch MLP
     clf = MLP()
     clf.fit(X, y, n_epochs=10000)
     
@@ -119,10 +119,6 @@ def classification():
 #    clf = DecisionTree()
 #    clf.fit(X, y, max_depth=4, min_size=1)
 #    clf.visualize()
-    
-    # Expectation Maximization
-#    em = EM()
-#    em.fit(X, n_comp=3, n_iter=30)
     
     # plot boundary
     # -------------------------------------------------------------------------
@@ -155,7 +151,7 @@ def regression():
 #    reg = KernelRegression()
 #    reg.fit(X, y, kernel="gaussian")
     
-    # train knn regression
+    # train kNN regression
 #    reg = KnnRegression()
 #    reg.fit(X, y, k=5)
     
@@ -165,11 +161,11 @@ def regression():
 #    reg.fit(X[:n, :], y[:n])
 #    reg.plot(X[:n, :], y[:n], std_devs=1)
     
-    # train svr (using gradient descent)
+    # train SVR (using gradient descent)
 #    reg = SVR_GD()
 #    reg.fit(X, y, epsilon=0.5, n_epochs=1000, learning_rate=0.1)
     
-    # train svr (sklearn)
+    # train SVR (sklearn)
     reg = SVR_sklearn()
     reg.fit(X, y, epsilon=0.05, C=5.0, kernel="rbf")
     reg.plot()
@@ -185,7 +181,11 @@ def unsupervised_learning():
     from matplotlib import pyplot as plt
     from mpl_toolkits.mplot3d import proj3d
   
-    X, y = DataCreator().make_classification(name="linear", n_classes=2)
+    X, y = DataCreator().make_classification(name="linear", n_classes=3)
+    
+    # expectation maximization (EM)
+    em = EM()
+    em.fit(X, n_comp=3, n_iter=30)
     
     # -------------------------------------------------------------------------
     # dimensionality reduction
@@ -201,11 +201,11 @@ def unsupervised_learning():
 #    plt.show()
     
     # transform data into 2d space
-    # pca
+    # PCA
 #    pca = PCA()
 #    X_hat = pca.fit_transform(X, n_components=2)
     
-    # kernel pca
+    # kernel PCA
 #    kpca = KernelPCA()
 #    X_hat = kpca.fit_transform(X, n_components=2, gamma=0.5)
     
@@ -229,9 +229,9 @@ def unsupervised_learning():
     # -------------------------------------------------------------------------
     # clustering
     # -------------------------------------------------------------------------
-    # k-Medoids clustering
+    # k-medoids clustering
 #    km = KMedoids()
-#    c_assign = km.fit(X, k=2)
+#    c_assign = km.fit(X, k=4)
     
     # spectral clustering
 #    sc = SpectralClustering()
@@ -242,8 +242,8 @@ def unsupervised_learning():
 #    c_assign = dbscan.fit(X)
     
     # OPTICS clustering
-    optics = OPTICS(eps=100.00, eps_=1.30, min_pts=3, plot_reach=True)
-    c_assign = optics.fit(X)
+#    optics = OPTICS(eps=100.00, eps_=1.30, min_pts=3, plot_reach=True)
+#    c_assign = optics.fit(X)
     
     # affinity propagation clustering
 #    ap = AffinityPropagation()
@@ -251,17 +251,17 @@ def unsupervised_learning():
     
     # mean-shift clustering
 #    ms = MeanShift()
-#    c_assign = ms.fit(X, bandwidth=1, min_dist=0.000001)
+#    c_assign = ms.fit(X, bandwidth=1.0, min_dist=0.01)
     
     # agglomerative clustering
 #    ac = AgglomerativeClustering()
 #    c_assign = ac.fit(X, n_cluster=4, method="complete_link", dendrogram=True)
     
     # plot clusters
-    Plotter(X, y).plot_clusters(c_assign)
+#    Plotter(X, y).plot_clusters(c_assign)
     
     # -1 is noise
-    print(c_assign)
+#    print(c_assign)
     
     
 def reinforcement_learning():

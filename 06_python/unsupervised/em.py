@@ -13,6 +13,7 @@ import math
 import numpy as np
 
 from matplotlib import pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D  
 
 
 # -----------------------------------------------------------------------------
@@ -77,7 +78,8 @@ class EM():
                 self.__visualize(i)
                 
             print("Finished iteration {}".format(i + 1))
-            
+        self.__visualize_surface()
+        
             
     def predict(self, X):
         """
@@ -172,18 +174,7 @@ class EM():
         :param iter:    iteration counter
         """
         steps = 100
-    
-        x1 = self.X[:,0]
-        x2 = self.X[:,1]
-        labels = self.predict(self.X)
-    
-        x1_min = np.min(x1); x1_max = np.max(x1)
-        x2_min = np.min(x2); x2_max = np.max(x2)
-    
-        x1_lin = np.linspace(x1_min - 1, x1_max + 1, steps)
-        x2_lin = np.linspace(x2_min - 1, x2_max + 1, steps)
-    
-        Y, X = np.meshgrid(x2_lin, x1_lin)
+        X, Y = self.__get_mesh(steps)
         Z = np.empty((steps, steps))
         
         # plot 2d gaussians
@@ -194,11 +185,60 @@ class EM():
             plt.contour(X, Y, Z, 10, zorder=15, cmap="Greys")
     
         # plot the samples
-        plt.scatter(x1, x2, zorder=10, cmap="rainbow",
-            edgecolors="k", c=labels)
+        plt.scatter(self.X[:,0], self.X[:,1], zorder=10, cmap="rainbow",
+            edgecolors="k", c=self.predict(self.X))
         # grid lines
         plt.grid(b=True, which="major", color="gray", linestyle="--", zorder=5)
         # labels and title
         plt.xlabel(r"$x_1$")
         plt.ylabel(r"$x_2$")
         plt.title("Mixtures after {} steps".format(iter + 1))
+        
+        
+    def __visualize_surface(self):
+        """
+        Plots a 3D surface plot.
+        """
+        steps = 100
+        X, Y = self.__get_mesh(steps)
+        Z = np.zeros((steps, steps))
+        
+        # plot 3d gaussian mixture density
+        for j in range(self.n_comp):
+            for i in range(steps):
+                points = np.append(X[i], Y[i]).reshape(2, steps).T
+                Z[i] += self.__multivariate_gaussian(points, self.mu[j], self.cov[j])
+        
+        fig = plt.figure(figsize=(16, 12))
+        ax = fig.add_subplot(111, projection="3d")
+        
+        ax.view_init(45, 35)
+        ax.set_xlabel(r"$x_1$", fontsize=24)
+        ax.set_ylabel(r"$x_2$", fontsize=24)
+        
+        surf = ax.plot_surface(X, Y, Z,
+            rstride=1, cstride=1, cmap="coolwarm", edgecolor="none")
+        fig.colorbar(surf, shrink=0.5, aspect=5)
+#        ax.scatter(self.X[:,0], self.X[:,1], np.asarray([0.1]*len(self.X)))
+        
+        plt.show()
+        
+        
+    def __get_mesh(self, steps):
+        """
+        Gets the meshgrid.
+        
+        :return:                meshgrid
+        """
+        x1 = self.X[:,0]
+        x2 = self.X[:,1]
+    
+        x1_min = np.min(x1); x1_max = np.max(x1)
+        x2_min = np.min(x2); x2_max = np.max(x2)
+    
+        x1_lin = np.linspace(x1_min - 1, x1_max + 1, steps)
+        x2_lin = np.linspace(x2_min - 1, x2_max + 1, steps)
+    
+        Y, X = np.meshgrid(x2_lin, x1_lin)
+
+        return X, Y        
