@@ -2,6 +2,7 @@
 """
 Created on Tue Apr  7 14:25:49 2020
 Nelder Mead Simplex algorithm.
+Cf. https://codesachin.wordpress.com/2016/01/16/nelder-mead-optimization/
 
 @author: Daniel Wehner
 """
@@ -85,7 +86,7 @@ class NelderMead():
                     # replace x_0 with x_c
                     X[0] = x_c
             
-                # try shrink extraction:
+                # try shrink contraction:
                 # -------------------------------------------------------------
                 else:
                     # redefine the entire simplex
@@ -142,24 +143,3 @@ class NelderMead():
         
         plt.show()
         
-
-# -----------------------------------------------------------------------------
-# Test functions
-# -----------------------------------------------------------------------------
-        
-def func(x):
-    return x[0]**2 + x[1]**2
-
-
-def rosenbrock(x):
-    return (1 - x[0])**2 + 100 * (x[1] - x[0]**2)**2
-
-
-# -----------------------------------------------------------------------------
-# Main
-# -----------------------------------------------------------------------------
-    
-if __name__ == "__main__":
-    nm = NelderMead()
-    print(nm.optimize(f=rosenbrock, n_iter=200))
-    
