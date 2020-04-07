@@ -13,6 +13,8 @@ Particle Swarm Optimization (PSO)
 import numpy as np
 import matplotlib.pyplot as plt
 
+from tqdm import tqdm
+
 
 # -----------------------------------------------------------------------------
 # Class PSO
@@ -23,113 +25,163 @@ class PSO():
     Class PSO.
     """
     
-    def __init__(self, n_particles=10, n_dim=2, b_lo=-10, b_up=10):
+    def __init__(self):
         """
         Constructor.
-        
-        :param n_particles:     number of particles
-        :param n_dim:           number of dimensions
-        :param b_lo:            lower boundary of the search space
-        :param b_up:            upper boundary of the search space
         """
-        self.n_particles = n_particles
-        self.b_lo = b_lo
-        self.b_up = b_up
-        # initialize the swarm
-        self.swarm = np.random.uniform(low=b_lo, high=b_up, size=(n_particles, n_dim))
-        self.g = None
-        
+        pass
+    
              
-    def optimize(self, f, n_iter, omega=0.85, phi_p=0.85, phi_g=1.00):
+    def optimize(self, f,
+        n_particles=10,
+        n_dim=2,
+        s_lim=(-10, 10),
+        n_iter=1000,
+        omega=0.85,
+        phi_p=0.85,
+        phi_g=0.90,
+        plot=True
+    ):
         """
         Optimizes function f.
         
         :param f:               function to be optimized
+        :param n_particles:     number of particles
+        :param n_dim:           number of dimensions
+        :param s_lim:           search space limit
         :param n_iter:          number of iterations
-        :return:                optimum
+        :param plot:            flag indicating whether to plot the process
+        :return:                optimum (minimum)
         """
+        # initialize the swarm
+        swarm = np.random.uniform(
+            low=s_lim[0], high=s_lim[1], size=(n_particles, n_dim))
         # vectorize function f
-        f = np.vectorize(func, signature="(n)->()")
+        f = np.vectorize(f, signature="(n)->()")
         # compute function value for all particles
-        f_swarm = f(self.swarm)
+        f_swarm = f(swarm)
         # best positions of particles
-        self.p = np.copy(self.swarm)
+        p = np.copy(swarm)
         # check if a new minimum has been found
-        self.g = self.swarm[np.argmin(f_swarm, axis=0)]
+        g = swarm[np.argmin(f_swarm, axis=0)]
         # initialize the particles' velocity
-        v = np.random.uniform(low=-abs(self.b_up - self.b_lo), high=abs(self.b_up - self.b_lo), size=self.swarm.shape)
+        v = np.random.uniform(
+            low=-abs(s_lim[1] - s_lim[0]), high=abs(s_lim[1] - s_lim[0]),
+            size=swarm.shape)
         
-        for k in range(n_iter):
-            # print(i)
-            print(f(self.g))
-            # for each particle
-            for i in range(self.swarm.shape[0]):
-                # print(self.g)
-                # for each dimension
-                for j in range(self.swarm.shape[1]):
-                    # pick random numbers
-                    r_p = np.random.uniform(0, 1)
-                    r_g = np.random.uniform(0, 1)
-                    # update the particles' velocity
-                    v[i, j] = omega * v[i, j] + phi_p * r_p * (self.p[i, j] - self.swarm[i, j]) \
-                        + phi_g * r_g * (self.g[j] - self.swarm[i, j])
+        # ---------------------------------------------------------------------
+        # optimization
+        # ---------------------------------------------------------------------
+        for k in tqdm(range(n_iter)):
+            r_p = np.random.uniform(0, 1, swarm.shape)
+            r_g = np.random.uniform(0, 1, swarm.shape)
+            # compute velocity vector
+            v = omega * v + phi_p * r_p * (p - swarm) \
+                + phi_g * r_g * (g - swarm)
                 
-                # update the particle's position
-                self.swarm[i,:] += v[i,:]
-                
-                # update the particle's best known position
-                if f(self.swarm[i,:]) < f(self.p[i,:]):
-                    self.p[i,:] = self.swarm[i,:]
-                    
-                    # update the swarm's best known position
-                    if f(self.p[i,:]) < f(self.g):
-                        self.g = self.p[i,:]
-                        
-            if k % 2 == 0:
-                self.__plot(f)
-                        
-        print(self.g)
-        
-        
-    def __plot(self, f):
+            # update particles' position
+            swarm += v
+            
+            # update the paricles' best known position
+            # -----------------------------------------------------------------
+            ind = np.where(f(swarm) < f(p))
+            p[ind] = swarm[ind]
+            
+            # update the swarm's best known position
+            # -----------------------------------------------------------------
+            ind = np.argmin(f(p), axis=0)
+            if f(p[ind]) < f(g):
+                g = p[ind]
+             
+            if plot:
+                if n_dim != 2:
+                    raise ValueError(
+                        "Wrong dimensionality for plotting. Set n_dim=2")
+                elif k % 10 == 0:
+                    self.__plot(f, swarm, s_lim)
+
+        return g
+            
+            
+    def __plot(self, f, swarm, s_lim):
         """
+        Plots the optimization progress.
         
+        :param f:               function to be optimized
+        :param swarm:           particle positions
+        :param s_lim:           search space limit
         """
-        t1, t2 = np.meshgrid(
-            np.linspace(-10, 10, 300),
-            np.linspace(-10, 10, 300)
+        x1, x2 = np.meshgrid(
+            np.linspace(s_lim[0], s_lim[1], 300),
+            np.linspace(s_lim[0], s_lim[1], 300)
         )
         
         fig, ax = plt.subplots(figsize=(10.0, 10.0))
-        ax.set_xlim((-10, 10))
-        ax.set_ylim((-10, 10))
-        # levels for contour plot
-        # levels = np.asarray([0.005, 0.020, 0.080, 0.300, 0.500, 1.000, 2.000])
+        ax.set_xlim((s_lim[0], s_lim[1]))
+        ax.set_ylim((s_lim[0], s_lim[1]))
+
         # create contour plot
-        c = ax.contourf(t1, t2, f(np.c_[t1.ravel(), t2.ravel()]).reshape(t1.shape[0],-1)) #, levels)
-        # ax.clabel(c, c.levels, inline=True, fontsize=10)
-        ax.scatter(self.swarm[:,0], self.swarm[:,1])
+        cf = ax.contourf(
+            x1, x2, f(np.c_[x1.ravel(), x2.ravel()]).reshape(x1.shape[0],-1),
+            levels=30, zorder=5)
+        c = ax.contour(cf, colors="k", zorder=5)
+#        ax.clabel(c, c.levels, inline=True, fontsize=10)
+        # plot particles
+        ax.scatter(swarm[:,0], swarm[:,1], c="w", edgecolors="k", s=75, zorder=10)
         
-        # plt.title("Gradient descent on cost function")
-        # ax.set_xlabel(r"$\theta_0$")
-        # ax.set_ylabel(r"$\theta_1$")
-        # ax.set_ylim((-0.25, 0.75))
+        plt.title("Particle swarm optimization", fontsize=18, fontweight="demi")
+        ax.set_xlabel(r"$x_1$", fontsize=18)
+        ax.set_ylabel(r"$x_2$", fontsize=18)
         
         plt.show()
-        
                         
             
 # -----------------------------------------------------------------------------
-# Main
+# Test functions
 # -----------------------------------------------------------------------------
         
 def func(x):
-    """
-    Function to be optimized.
-    """
     return x[0]**2 + x[1]**2
+
+
+def rosenbrock(x):
+    return (1 - x[0])**2 + 100 * (x[1] - x[0]**2)**2
+
+
+def rastrigin(x):
+    return 10 * 2 + (x[0]**2 - 10 * np.cos(2 * np.pi * x[0])) \
+        + (x[1]**2 - 10 * np.cos(2 * np.pi * x[1]))
+        
+        
+def himmelblau(x):
+    return (x[0]**2 + x[1] - 11)**2 \
+        + (x[0] + x[1]**2 - 7)**2
         
 
+def beale(x):
+    return (1.5 - x[0] + x[0] * x[1])**2 \
+        + (2.25 - x[0] + x[0] * x[1]**2)**2 \
+        + (2.625 - x[0] + x[0] * x[1]**3)**2
+        
+        
+def bukin(x):
+    return 100 * np.sqrt(np.abs(x[1] - 0.01 * x[0]**2)) + 0.01 * np.abs(x[0] + 10)
+
+
+# -----------------------------------------------------------------------------
+# Main
+# -----------------------------------------------------------------------------
+    
 if __name__ == "__main__":
-    pso = PSO(n_particles=100, b_lo=-10, b_up=10)
-    pso.optimize(f=func, n_iter=1000)
+    pso = PSO()
+    print(pso.optimize(
+        f=rosenbrock,
+        n_particles=100,
+        s_lim=(-2, 2),
+        n_iter=500,
+        omega=0.85,
+        phi_p=0.85,
+        phi_g=1.00,
+        plot=True
+    ))
+    
