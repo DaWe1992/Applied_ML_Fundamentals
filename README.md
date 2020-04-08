@@ -147,9 +147,9 @@ Symbol (2):
 **Exam grading**
 
 Since the lecture *Applied Machine Learning Fundamentals* is part of a bigger module (*Machine Learning Fundamentals, W3WI_DS304)*, it is not graded individually.
-Instead, the score you achieved in the exam (at most 60 points) will be added to the points you receive in the second element of the module, the *Data Exploration Project* (cf. below)
+Instead, the score you achieved in the exam (at most 60 points) will be added to the points you receive in the second element of the module, the *Data Exploration Project* in the 4th semester (cf. below)
 which is also worth 60 points at maximum. Your performance in both elements combined will determine the eventual grade.
-**Please note:** Even with bonus points included it is not possible to get more than 60 points for the exam.
+**Please note:** Even with bonus points included, it is not possible to get more than 60 points for the exam.
 
 Please refer to the [data science module catalogue](https://www.dhbw.de/fileadmin/user/public/SP/MA/Wirtschaftsinformatik/Data_Science.pdf) for further details.
 
