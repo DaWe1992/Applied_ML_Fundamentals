@@ -112,9 +112,10 @@ Please note that this is not a linear function.
 | <img src="https://render.githubusercontent.com/render/math?math=A" width=15px height=15px>		|	maximum attainable points in the assignments	|	40 			|
 | <img src="https://render.githubusercontent.com/render/math?math=a" width=15px height=15px>		|	score achieved in the assignments				|	up to you	|
 
-**Please note:** ~~old: You have to pass the exam **without the bonus points!** This means that it is not possible for you to turn a failing grade (> 4.0) into a passing grade (<= 4.0).~~
+**Please note:** ~~You have to pass the exam **without the bonus points!** This means that it is not possible for you to turn a failing grade (> 4.0) into a passing grade (<= 4.0).~~
 The bonus points will be taken into account in case you have to repeat the exam (i.e. they do not expire if you fail the first attempt).
-Unsurprisingly, the solutions have to be your own work. **If you plagiarize, you will lose all bonus points!**
+
+**VERY IMPORTANT:** Unsurprisingly, the solutions have to be your own work. **If you plagiarize in the assignments, you will lose all bonus points!**
 
 ## Exam 📝
 The exam is going to take 60 minutes. The maximum attainable score will be 60 points, so you have one minute per point.
