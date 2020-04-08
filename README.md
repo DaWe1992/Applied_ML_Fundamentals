@@ -28,7 +28,7 @@ This Readme file provides you with all necessary information. It is structured a
 
 ## Lecture Contents 📜
 
-We are going to cover the following topics:
+The following topics / algorithms will be covered by the lecture:
 
 1. **Introduction to machine learning** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/01_intro_ml.pdf))
     * Motivation and applications
@@ -182,12 +182,12 @@ You do not need to buy any books for the lecture, most resources are available o
 * [Playing atari with deep reinforcement learning](https://arxiv.org/abs/1312.5602) (Mnih et al., 2013)
 * [Efficient estimation of word representations in vector space](https://arxiv.org/abs/1301.3781) (Mikolov et al., 2013)
 
-In general, we recommend the [Coursera machine learning course](https://de.coursera.org/learn/machine-learning#about) by Andrew Ng.
-You can get a nice certificate if you want (around $60):
+In general, the [Coursera machine learning course](https://de.coursera.org/learn/machine-learning#about) by Andrew Ng is highly recommended.
+You can get a nice certificate if you want (around $60), but you can also participate in the course for free (without getting the certificate):
 
 <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/ml_certificate.png" width="400px" height="300px">
 
-In the exam we will not ask anything which was not discussed in the lecture. Regard the literature as additional resources in case you want to dig deeper into
+In the exam you will not be asked for content which was not discussed in the lecture. Regard the literature as additional resources in case you want to dig deeper into
 specific topics. Please give me a hint, if you feel that some important resources are missing. I am happy to add them here.
 
 ## Data Exploration Project (4th Semester) 📐
