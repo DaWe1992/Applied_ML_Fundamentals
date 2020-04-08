@@ -51,7 +51,7 @@ class NelderMead():
         # vectorize function f
         f = np.vectorize(f, signature="(n)->()")
         # plot initial simplex
-        self.__plot(f, X)
+        figs = [self.__plot(f, X)]
         
         # for specified number of iterations do:
         for k in tqdm(range(n_iter)):
@@ -94,9 +94,9 @@ class NelderMead():
                     X[0] = X[2] + delta * (X[0] - X[2])
                     X[1] = X[2] + delta * (X[1] - X[2])
                     
-            self.__plot(f, X)
+            figs.append(self.__plot(f, X))
                     
-        return X[2]
+        return X[2], figs
             
             
     def __init_simplex(self):
@@ -142,4 +142,6 @@ class NelderMead():
         plt.plot([X[1][0], X[2][0]], [X[1][1], X[2][1]], "r", zorder=9)
         
         plt.show()
+        
+        return fig
         

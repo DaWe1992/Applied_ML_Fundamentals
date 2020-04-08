@@ -11,9 +11,11 @@ Created on Tue Apr  7 17:46:50 2020
 
 import numpy as np
 
-from particle_swarm import PSO
-from nelder_mead import NelderMead
-from simulated_annealing import SimulatedAnnealing
+from optim.particle_swarm import PSO
+from optim.nelder_mead import NelderMead
+from optim.simulated_annealing import SimulatedAnnealing
+
+from utils.gif import make_gif
 
 
 # -----------------------------------------------------------------------------
@@ -66,13 +68,14 @@ if __name__ == "__main__":
     
     # nelder-mead (downhill simplex) optimization
     # -------------------------------------------------------------------------
-#    nm = NelderMead()
-#    x_min = nm.optimize(f=rosenbrock, n_iter=200)
+    nm = NelderMead()
+    x_min, figs = nm.optimize(f=func, n_iter=20)
+    make_gif(figures=figs, filename="nelder_mead.gif", fps=2)
     
     # simulated annealing optimization
     # -------------------------------------------------------------------------
-    sa = SimulatedAnnealing()
-    x_min = sa.optimize(f=rosenbrock, n_iter=1000, n_dim=2, s_lim=(-2, 2))
+#    sa = SimulatedAnnealing()
+#    x_min = sa.optimize(f=rosenbrock, n_iter=1000, n_dim=2, s_lim=(-2, 2))
     
     print(x_min)
     
