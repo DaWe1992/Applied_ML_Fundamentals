@@ -72,7 +72,7 @@ if __name__ == "__main__":
     # simulated annealing optimization
     # -------------------------------------------------------------------------
     sa = SimulatedAnnealing()
-    x_min = sa.optimize(f=rosenbrock, n_iter=100, n_dim=2, s_lim=(-10, 10))
+    x_min = sa.optimize(f=rosenbrock, n_iter=1000, n_dim=2, s_lim=(-2, 2))
     
     print(x_min)
     
