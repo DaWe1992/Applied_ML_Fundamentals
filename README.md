@@ -95,6 +95,7 @@ If you choose to use LaTeX, you may want to use the template files located [here
 > **Please make sure to fulfill the above mentioned formal requirements. Otherwise, you may risk to lose points. Submissions which severely violate the specifications might not get any points at all!**
 
 **Grading details for assignments**
+
 Your homework is going to be corrected and given back to you. Correct solutions are rewarded with a bonus for the exam which amounts to at most ten percent of the exam,
 if all solutions submitted by you are correct (this corresponds to at most six points in the exam). It is still possible to achieve full points in the exam, even if you choose not to participate in the assignments (it is additional).
 Below you find the [function](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/bonus_point_function.png) which is used to compute the bonus as well as a legend which explains what the components mean.
@@ -144,6 +145,7 @@ Symbol (2):
 * Two-sided **hand-written** cheat sheet (you may note whatever you want)
 
 **Exam grading**
+
 Since the lecture *Applied Machine Learning Fundamentals* is part of a bigger module (*Machine Learning Fundamentals, W3WI_DS304)*, it is not graded individually.
 Instead, the score you achieved in the exam (at most 60 points) will be added to the points you receive in the second element of the module, the *Data Exploration Project* (cf. below)
 which is also worth 60 points at maximum. Your performance in both elements combined will determine the eventual grade.
