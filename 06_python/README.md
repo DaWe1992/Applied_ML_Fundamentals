@@ -88,6 +88,10 @@ $ pip install -r requirements.txt
 
 Now you should be ready to go!
 
+## Gallery
+
+<img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/06_python/z_gif/nelder_mead.gif" width="360px" height="360px">
+
 ## How to run the Code?
 Please use the script located in `main.py` to execute the code for the algorithms. The file contains functions for
 classification, regression, reinforcement learning and unsupervised learning. Simply uncomment the parts which you want to use. Also, this repository contains classes for data creation, evaluation and plotting.
