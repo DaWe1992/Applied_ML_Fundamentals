@@ -53,6 +53,7 @@ class PSO():
         :param plot:            flag indicating whether to plot the process
         :return:                optimum (minimum)
         """
+        figs = []
         # initialize the swarm
         swarm = np.random.uniform(
             low=s_lim[0], high=s_lim[1], size=(n_particles, n_dim))
@@ -98,9 +99,9 @@ class PSO():
                     raise ValueError(
                         "Wrong dimensionality for plotting. Set n_dim=2")
                 elif k % 10 == 0:
-                    self.__plot(f, swarm, s_lim)
+                    figs.append(self.__plot(f, swarm, s_lim))
 
-        return g
+        return g, figs
             
             
     def __plot(self, f, swarm, s_lim):
@@ -134,4 +135,6 @@ class PSO():
         ax.set_ylabel(r"$x_2$", fontsize=18)
         
         plt.show()
+        
+        return fig
         

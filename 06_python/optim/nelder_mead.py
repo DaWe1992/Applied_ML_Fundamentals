@@ -141,6 +141,10 @@ class NelderMead():
         plt.plot([X[0][0], X[2][0]], [X[0][1], X[2][1]], "r", zorder=9)
         plt.plot([X[1][0], X[2][0]], [X[1][1], X[2][1]], "r", zorder=9)
         
+        plt.title("Nelder Mead optimization", fontsize=18, fontweight="demi")
+        ax.set_xlabel(r"$x_1$", fontsize=18)
+        ax.set_ylabel(r"$x_2$", fontsize=18)
+        
         plt.show()
         
         return fig
