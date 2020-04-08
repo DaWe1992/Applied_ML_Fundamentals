@@ -151,5 +151,10 @@ class SimulatedAnnealing():
         for i in range(S.shape[0] - 1):
             plt.plot([S[i, 0], S[i + 1, 0]], [S[i, 1], S[i + 1, 1]], "r", zorder=9)
             
+        plt.title("Simulated annealing optimization", fontsize=18, fontweight="demi")
+        ax.set_xlabel(r"$x_1$", fontsize=18)
+        ax.set_ylabel(r"$x_2$", fontsize=18)
+            
+        plt.savefig("z_img/simulated_annealing.png")
         plt.show()
             

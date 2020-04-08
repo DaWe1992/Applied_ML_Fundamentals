@@ -65,18 +65,18 @@ if __name__ == "__main__":
 #        f=rosenbrock, n_particles=100, s_lim=(-2, 2), n_iter=200,
 #        omega=0.85, phi_p=0.85, phi_g=1.00, plot=True
 #    )
-#    make_gif(figures=figs, filename="./z_gif/particle_swarm.gif", fps=2)
+#    make_gif(figures=figs, filename="./z_img/particle_swarm.gif", fps=2)
     
     # nelder-mead (downhill simplex) optimization
     # -------------------------------------------------------------------------
-    nm = NelderMead()
-    x_min, figs = nm.optimize(f=rosenbrock, n_iter=20)
-    make_gif(figures=figs, filename="./z_gif/nelder_mead.gif", fps=2)
+#    nm = NelderMead()
+#    x_min, figs = nm.optimize(f=rosenbrock, n_iter=20)
+#    make_gif(figures=figs, filename="./z_img/nelder_mead.gif", fps=2)
     
     # simulated annealing optimization
     # -------------------------------------------------------------------------
-#    sa = SimulatedAnnealing()
-#    x_min = sa.optimize(f=rosenbrock, n_iter=1000, n_dim=2, s_lim=(-2, 2))
+    sa = SimulatedAnnealing()
+    x_min = sa.optimize(f=rastrigin, n_iter=100, n_dim=2, s_lim=(-10, 10))
     
     print(x_min)
     
