@@ -151,7 +151,7 @@ Instead, the score you achieved in the exam (at most 60 points) will be added to
 which is also worth 60 points at maximum. Your performance in both elements combined will determine the eventual grade.
 **Please note:** Even with bonus points included, it is not possible to get more than 60 points for the exam.
 
-Please refer to the official [DHBW Data Science Module Catalogue](https://www.dhbw.de/fileadmin/user/public/SP/MA/Wirtschaftsinformatik/Data_Science.pdf) for further details.
+Please refer to the official [DHBW data science module catalogue](https://www.dhbw.de/fileadmin/user/public/SP/MA/Wirtschaftsinformatik/Data_Science.pdf) for further details.
 
 ## Python Code 🐍
 Machine learning algorithms (probably all algorithms) are easier to understand, if you see them implemented. Please find Python implementations for some of the algorithms (which are not part of the assignments) in the folder
