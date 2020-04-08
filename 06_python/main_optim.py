@@ -69,8 +69,8 @@ if __name__ == "__main__":
     # nelder-mead (downhill simplex) optimization
     # -------------------------------------------------------------------------
     nm = NelderMead()
-    x_min, figs = nm.optimize(f=func, n_iter=20)
-    make_gif(figures=figs, filename="nelder_mead.gif", fps=2)
+    x_min, figs = nm.optimize(f=rosenbrock, n_iter=20)
+    make_gif(figures=figs, filename="./z_gif/nelder_mead.gif", fps=2)
     
     # simulated annealing optimization
     # -------------------------------------------------------------------------
