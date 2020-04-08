@@ -24,7 +24,7 @@ from tqdm import tqdm
 class NelderMead():
     """
     Class NelderMead.
-    Only supports two-dimensional points
+    Only supports two-dimensional objective functions!
     """
     
     def __init__(self):

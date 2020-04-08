@@ -22,8 +22,7 @@ from tqdm import tqdm
 class SimulatedAnnealing():
     """
     Class SimulatedAnnealing.
-    
-    !!! EXPERIMENTAL !!!
+    Only supports two-dimensional objective functions!
     """
     
     def __init__(self):

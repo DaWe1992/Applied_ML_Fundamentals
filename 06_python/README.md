@@ -9,28 +9,32 @@ The following algorithms are implemented (some are missing, since they are part 
 
 1. **Classification** ([folder clf](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/06_python/clf))
 	* Decision trees
-	* k-nearest neighbors
+	* Iterative reweighted least squares (IRLS)
+	* k-nearest neighbors (kNN)
 	* Linear discriminant analysis
 	* Logistic regression
-	* Iterative reweighted least squares
+	* Multi-layer perceptron (MLP)
 	* Perceptron
-	* Multi-layer perceptron
-	* Support vector machine
+	* Support vector machine (SVM)
 2. **Regression** ([folder reg](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/06_python/reg))
 	* Bayesian linear regression
 	* Gaussian process regression
 	* Kernel (ridge) regression
 	* k-nearest neighbors regression
-	* Support vector regression
+	* LOWESS
+	* Support vector regression (SVR)
 3. **Reinforcement learning** ([folder rl](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/06_python/rl))
 	* Policy iteration
 	* Value iteration
 	* Q-learning
+	* REINFORCE
 4. **Unsupervised learning** ([folder unsupervised](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/06_python/unsupervised))
 	* Apriori (association rules)
 	* Expectation-maximization (EM) for Gaussian mixtures
 	* Dimensionality reduction ([folder decomposition](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/06_python/unsupervised/decomposition))
 		* Auto-encoders
+		* Independent component analysis (ICA)
+		* Non-negative matrix factorization
 		* Kernel PCA
 		* Principal component analysis (PCA)
 		* t-SNE
@@ -44,6 +48,10 @@ The following algorithms are implemented (some are missing, since they are part 
 		* Spectral clustering
 5. **Sequence learning** ([folder seq](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/06_python/seq))
 	* Hidden Markov models (HMM)
+6. **Optimization** ([folder optim](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/06_python/optim))
+	* Nelder-Mead optimization
+	* Particle swarm optimization
+	* Simulated annealing
 	
 Please find further exemplary implementations in the folder [misc](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/06_python/misc).
 
