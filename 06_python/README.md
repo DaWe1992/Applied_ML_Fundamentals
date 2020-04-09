@@ -209,7 +209,7 @@ if __name__ == "__main__":
 
 ### Clustering
 
-<img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/06_python/z_img/optics.png" width="500px" height="300px"> <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/06_python/z_img/affinity_propagation.gif" width="500px" height="300px">
+<img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/06_python/z_img/optics.png" width="450px" height="300px"> <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/06_python/z_img/affinity_propagation.gif" width="450px" height="300px">
 
 ### Optimization
 
