@@ -44,7 +44,7 @@ class NelderMead():
         :param beta:            contraction parameter
         :param gamma:           expansion parameter
         :param delta:           shrinkage parameter
-        :return:                optimum (minimum)
+        :return:                optimum (minimum), list of figures
         """
         # initialize simplex
         X = self.__init_simplex()
@@ -118,6 +118,7 @@ class NelderMead():
         
         :param f:               function to be optimized
         :param X:               simplex points
+        :return:                figure
         """
         x1, x2 = np.meshgrid(
             np.linspace(-2, 2, 300),

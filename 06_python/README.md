@@ -201,9 +201,15 @@ if __name__ == "__main__":
 
 ### Classification
 
+<img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/06_python/z_img/boundary.png" width="300px" height="300px"> <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/06_python/z_img/svm.png" width="300px" height="300px">
+
 ### Regression
 
+<img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/06_python/z_img/gaussian_process.png" width="300px" height="300px"> <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/06_python/z_img/knn_regression.png" width="300px" height="300px">
+
 ### Clustering
+
+<img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/06_python/z_img/optics.png" width="300px" height="300px"> <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/06_python/z_img/dendrogram.png" width="300px" height="300px"> <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/06_python/z_img/affinity_propagation.gif" width="300px" height="300px">
 
 ### Optimization
 

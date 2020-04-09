@@ -16,8 +16,9 @@ import numpy as np
 
 # data creation and plotting
 # -----------------------------------------------------------------------------
-from utils.data_creator import DataCreator
+from utils.gif import make_gif
 from utils.plotter import Plotter
+from utils.data_creator import DataCreator
 
 # classifiers
 # -----------------------------------------------------------------------------
@@ -77,21 +78,21 @@ def classification():
     Classification.
     """
     # create data
-    X, y = DataCreator().make_classification(name="linear", n_classes=4)
+    X, y = DataCreator().make_classification(name="non_linear", n_classes=2)
     
     # train kNN classifier
 #    clf = kNN(n_neighbors=1)
 #    clf.fit(X, y)
     
     # train SVM classifier
-#    clf = SVM(kernel="linear", C=1.0, p=3, s=3.0)
+#    clf = SVM(kernel="polynomial", C=1.0, p=3, s=3.0)
 #    y[np.where(y == 0)] = -1
 #    clf.fit(X, y)
 #    clf.plot_contour(X[y == 1], X[y == -1])
     
     # train logistic regression classifier
-#    clf = LogisticRegression(poly=True)
-#    clf.fit(X, y, batch_size=X.shape[0])
+    clf = LogisticRegression(poly=True)
+    clf.fit(X, y, batch_size=X.shape[0])
     
     # train one-vs-one logistic regression classifier
 #    clf = LogRegOneVsOne(poly=True)
@@ -107,8 +108,8 @@ def classification():
 #    clf.plot_contour(discrete=False)
     
     # train pytorch MLP
-    clf = MLP()
-    clf.fit(X, y, n_epochs=10000)
+#    clf = MLP()
+#    clf.fit(X, y, n_epochs=10000)
     
     # train Fisher's linear discriminant
 #    clf = LDA(n_dims=1)
@@ -140,12 +141,12 @@ def regression():
     Regression.
     """
     # create data
-    X, y = DataCreator().make_regression(name="custom")
+    X, y = DataCreator().make_regression(name="sklearn")
     
     # train Gaussian process regressor
-#    reg = GaussianProcess()
-#    reg.fit(X, y)
-#    reg.plot()
+    reg = GaussianProcess()
+    reg.fit(X, y)
+    reg.plot()
     
     # train kernel ridge regressor
 #    reg = KernelRegression()
@@ -166,12 +167,12 @@ def regression():
 #    reg.fit(X, y, epsilon=0.5, n_epochs=1000, learning_rate=0.1)
     
     # train SVR (sklearn)
-    reg = SVR_sklearn()
-    reg.fit(X, y, epsilon=0.05, C=5.0, kernel="rbf")
-    reg.plot()
+#    reg = SVR_sklearn()
+#    reg.fit(X, y, epsilon=0.05, C=5.0, kernel="rbf")
+#    reg.plot()
     
     # plot boundary
-    Plotter(X, y).plot_regression(reg, n_points=500)
+    Plotter(X, y).plot_regression(reg, n_points=500, title="kNN regression")
 
 
 def unsupervised_learning():
@@ -181,7 +182,7 @@ def unsupervised_learning():
     from matplotlib import pyplot as plt
     from mpl_toolkits.mplot3d import proj3d
   
-    X, y = DataCreator().make_classification(name="linear", n_classes=3)
+    X, y = DataCreator().make_classification(name="linear", n_classes=4)
     
     # expectation maximization (EM)
     em = EM()
@@ -247,7 +248,8 @@ def unsupervised_learning():
     
     # affinity propagation clustering
 #    ap = AffinityPropagation()
-#    c_assign = ap.fit(X, damping=0.9, n_iter=40, plot=True)
+#    c_assign, figs = ap.fit(X, damping=0.9, n_iter=40, plot=True)
+#    make_gif(figures=figs, filename="./z_img/affinity_propagation.gif", fps=2)
     
     # mean-shift clustering
 #    ms = MeanShift()

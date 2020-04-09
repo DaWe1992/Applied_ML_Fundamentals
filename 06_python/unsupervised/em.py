@@ -221,6 +221,7 @@ class EM():
         fig.colorbar(surf, shrink=0.5, aspect=5)
 #        ax.scatter(self.X[:,0], self.X[:,1], np.asarray([0.1]*len(self.X)))
         
+        plt.savefig("./z_img/em.png")
         plt.show()
         
         

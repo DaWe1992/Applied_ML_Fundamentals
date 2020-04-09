@@ -51,7 +51,7 @@ class PSO():
         :param s_lim:           search space limit
         :param n_iter:          number of iterations
         :param plot:            flag indicating whether to plot the process
-        :return:                optimum (minimum)
+        :return:                optimum (minimum), list of figures
         """
         figs = []
         # initialize the swarm
@@ -111,6 +111,7 @@ class PSO():
         :param f:               function to be optimized
         :param swarm:           particle positions
         :param s_lim:           search space limit
+        :return:                figure
         """
         x1, x2 = np.meshgrid(
             np.linspace(s_lim[0], s_lim[1], 300),

@@ -116,6 +116,7 @@ class AgglomerativeClustering():
         """
         plt.figure()
         dendrogram(linkage_mat)
+#        plt.savefig("./z_img/dendrogram.png")
         plt.show()
     
     

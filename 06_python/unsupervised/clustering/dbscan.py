@@ -337,6 +337,7 @@ class OPTICS():
         )
         ax.plot(x_range, [self.eps_] * len(x_range), "r--")
         
+#        plt.savefig("./z.img/optics.png")
         plt.show()
     
   

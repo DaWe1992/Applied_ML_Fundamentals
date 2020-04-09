@@ -241,5 +241,10 @@ class SVM:
         
         # draw major grid
         ax.grid(b=True, which="major", color="lightgray", linestyle="--", zorder=-5)
+        
+        plt.title("SVM classification", fontsize=18, fontweight="demi")
+        ax.set_xlabel(r"$x_1$", fontsize=18)
+        ax.set_ylabel(r"$x_2$", fontsize=18)
     
+#        plt.savefig("./z_img/svm.png")
         plt.show()

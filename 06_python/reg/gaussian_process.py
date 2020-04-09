@@ -31,9 +31,9 @@ class GaussianProcess:
     
     def __init__(
         self,
-        sigma_n=0.01,
+        sigma_n=0.1,
         sigma_f=1.00,
-        length_scale=0.2
+        length_scale=0.4
     ):
         """
         Constructor.
@@ -143,9 +143,12 @@ class GaussianProcess:
         
         ax.set_xlim((x_from, x_to))
         ax.set_ylim((y_from, y_to))
-        ax.set_xlabel("x")
-        ax.set_ylabel("y")
+        
+        plt.title("Gaussian process regression", fontsize=18, fontweight="demi")
+        ax.set_xlabel(r"$x$", fontsize=18)
+        ax.set_ylabel(r"$y$", fontsize=18)
         
         ax.grid(b=True, which="major", color="gray", linestyle="--")
         
+#        plt.savefig("./z_img/gaussian_process.png")
         plt.show()

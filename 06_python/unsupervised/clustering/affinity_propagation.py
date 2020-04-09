@@ -40,8 +40,9 @@ class AffinityPropagation():
         :param damping:         damping factor
         :param n_iter:          number of iterations
         :param plot:            flag whether to plot the results
-        :return:                cluster assignments
+        :return:                cluster assignments, list of figures
         """
+        figs = []
         self.X = X
         self.n = X.shape[0]
         self.damping = damping
@@ -62,9 +63,9 @@ class AffinityPropagation():
     
             # plot intermediate results
             if i % 5 == 0:
-                self.__plot_iteration(c_assign)
+                figs.append(self.__plot_iteration(c_assign))
                 
-        return c_assign
+        return c_assign, figs
     
     
     def __create_matrices(self):
@@ -147,8 +148,13 @@ class AffinityPropagation():
         Plots the result of one iteration.
         
         :param c_assign:        cluster assignments
+        :return:                figure
         """
         fig, ax = plt.subplots(figsize=(12.00, 7.00))
+        
+        plt.title("Affinity propagation", fontsize=18, fontweight="demi")
+        ax.set_xlabel(r"$x_1$", fontsize=18)
+        ax.set_ylabel(r"$x_2$", fontsize=18)
         
         # draw gridlines
         ax.grid(b=True, which="major", color="gray", \
@@ -179,4 +185,6 @@ class AffinityPropagation():
                 markeredgecolor=edge, c=colors[exemplar], zorder=z)
         
         plt.show()
+        
+        return fig
         
