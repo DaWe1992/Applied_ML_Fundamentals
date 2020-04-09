@@ -124,7 +124,7 @@ class GaussianProcess:
         # (and some other samples from the distribution)
         # -------------------------------------------------------------------------
         
-        fig, ax = plt.subplots(figsize=(15.00, 5.00))
+        fig, ax = plt.subplots(figsize=(12.00, 7.00))
         
         # plot confidence intervals
         ax.fill_between(X_q, mu - sigma_99, mu + sigma_99, facecolor="gray", alpha=0.1)

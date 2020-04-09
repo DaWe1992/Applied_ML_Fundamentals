@@ -141,7 +141,7 @@ def regression():
     Regression.
     """
     # create data
-    X, y = DataCreator().make_regression(name="sklearn")
+    X, y = DataCreator().make_regression(name="custom")
     
     # train Gaussian process regressor
     reg = GaussianProcess()
@@ -317,7 +317,7 @@ if __name__ == "__main__":
     Main function.
     """
 #    classification()
-#    regression()
-    unsupervised_learning()
+    regression()
+#    unsupervised_learning()
 #    reinforcement_learning()
     

@@ -254,7 +254,7 @@ class GridWorld:
         plt.title("Optimal policy" + \
             (" and value function" if V is not None else ""))
         
-        plt.savefig("./z_img/policy.png")
+#        plt.savefig("./z_img/policy.png")
         plt.show()
         
         
