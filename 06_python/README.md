@@ -197,7 +197,7 @@ if __name__ == "__main__":
     reinforcement_learning()
 ```
 
-## Gallery
+## Image Gallery
 
 ### Classification
 
@@ -214,3 +214,5 @@ if __name__ == "__main__":
 ### Optimization
 
 <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/06_python/z_img/nelder_mead.gif" width="300px" height="300px"> <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/06_python/z_img/particle_swarm.gif" width="300px" height="300px"> <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/06_python/z_img/simulated_annealing.png" width="300px" height="300px">
+
+<sub>© 2020 Daniel Wehner</sub>
