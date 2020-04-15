@@ -60,7 +60,7 @@ if __name__ == "__main__":
     """
     # particle swarm optimization
     # -------------------------------------------------------------------------
-    pso = PSO()
+#    pso = PSO()
 #    x_min, figs = pso.optimize(
 #        f=rosenbrock, n_particles=100, s_lim=(-2, 2), n_iter=200,
 #        omega=0.85, phi_p=0.85, phi_g=1.00, plot=True
