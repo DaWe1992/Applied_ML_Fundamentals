@@ -83,15 +83,15 @@
 		\node[illegal] (26) at (19,8) {\scriptsize NN};
 		\node[legal] (16) at (19,10) {\scriptsize end};
 
-		\draw[arr] (61) -- node[above,rotate=69] {\tiny $P(NN \vert start) \cdot P(start) = .041 \cdot 1 = .041$} (22);
+		\draw[arr] (61) -- node[above,rotate=69] {\tiny $p(NN \vert start) \cdot P(start) = .041 \cdot 1 = .041$} (22);
 		\draw[arr] (61) -- (32);
 		\draw[arr] (61) -- (42);
 		\draw[arr] (61) -- (52);
 
-		\draw[arr] (52) -- node[above,rotate=15] {\tiny $v_1(1) \cdot P(VB \vert PPSS) = .025 \cdot .23 = .0055$} (43);
-		\draw[arr] (42) -- node[above,rotate=-2] {\tiny $v_1(2) \cdot P(VB \vert VB) = 0 \cdot .0038 = 0$} (43);
-		\draw[arr] (32) -- node[above,rotate=-17.5] {\tiny $v_1(3) \cdot P(VB \vert TO) = 0 \cdot .83 = 0$} (43);
-		\draw[arr] (22) -- node[above,rotate=-31] {\tiny $v_1(4) \cdot P(VB \vert NN) = 0 \cdot .0040 = 0$} (43);
+		\draw[arr] (52) -- node[above,rotate=15] {\tiny $v_1(1) \cdot p(VB \vert PPSS) = .025 \cdot .23 = .0055$} (43);
+		\draw[arr] (42) -- node[above,rotate=-2] {\tiny $v_1(2) \cdot p(VB \vert VB) = 0 \cdot .0038 = 0$} (43);
+		\draw[arr] (32) -- node[above,rotate=-17.5] {\tiny $v_1(3) \cdot p(VB \vert TO) = 0 \cdot .83 = 0$} (43);
+		\draw[arr] (22) -- node[above,rotate=-31] {\tiny $v_1(4) \cdot p(VB \vert NN) = 0 \cdot .0040 = 0$} (43);
 
 		\draw[arrdash] (25) -- (16);
 		\draw[arrdash] (35) -- (16);

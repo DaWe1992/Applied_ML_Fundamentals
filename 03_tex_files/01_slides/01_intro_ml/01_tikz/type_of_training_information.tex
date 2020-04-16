@@ -6,7 +6,9 @@
 		block/.style={
 			draw=black,
 			thick,
-			align=left
+			align=left,
+			minimum height=17mm,
+			minimum width=60mm
 		},
 		arrow/.style={
 			shorten >=0.2cm,
@@ -16,24 +18,25 @@
 		}
 	]
 	
-		\node[block] (A) at (0,4) {
+		\node[block,minimum width=122.5mm,fill=lightgray!80] (A) at (0,4) {
 			\textbf{Supervised Learning} \\
 			$\bullet$ A `teacher' provides gold labels \\
-			$\bullet$ Neural networks, decision trees, linear regression
+			$\bullet$ Neural networks, regression, ...
 		};
 
-		\node[block] (B) at (-5,0) {
+		\node[block,fill=lightgray!50] (B) at (-5,0) {
 			\textbf{Reinforcement Learning} \\
 			$\bullet$ Feedback only \\
 			$\bullet$ No labels
 		};
 
-		\node[block] (C) at (5,0) {
+		\node[block,fill=lightgray!50] (C) at (5,0) {
 			\textbf{Semi-Supervised Learning} \\
-			$\bullet$ Partly labeled data
+			$\bullet$ Partly labeled data \\
+			$\bullet$ \textit{not covered here}
 		};
 
-		\node[block] (D) at (0,-4) {
+		\node[block,minimum width=122.5mm,fill=lightgray!20] (D) at (0,-4) {
 			\textbf{Unsupervised Learning} \\
 			$\bullet$ No labels available \\
 			$\bullet$ Clustering, Apriori, ...

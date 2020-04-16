@@ -7,9 +7,9 @@
 % ====================================================
 
 \title[Deep Learning]{*** Applied Machine Learning Fundamentals *** Neural Networks / Deep Learning}
-\institute{SAP\,SE}
-\author{M. Sc. Daniel Wehner}
-\date{Winter term 2019/2020}
+\institute[SAP\,SE]{SAP\,SE / DHBW Mannheim}
+\author{Daniel Wehner, M.Sc.}
+\date{Winter term 2020/2021}
 \prefix{DL}
 
 % ====================================================
@@ -766,6 +766,8 @@
 			softmax_k(\bm{x}) = \frac{\exp\{ x_k\}}{\sum_{j=1}^{\kappa} \exp\{x_j\}}
 		\end{equation*}
 	\end{boxBlueNoFrame}
+	\vspace*{1mm}
+	
 	\begin{itemize}
 		\item Softmax is a \textbf{global activation function} (i.\,e. it depends on the preactivations of the other units in the layer)
 		\item It is used to squash the last layer's activations into a probability distribution, \textbf{such that the activations sum to 1}
@@ -786,10 +788,10 @@
 \begin{frame}{Convolutional Neural Networks (CNNs)}{}
 	\begin{itemize}
 		\item A fully-connected MLP network has a lot of parameters, i.\,e. it might be \textbf{too complex} or \textbf{computationally inefficient} for some tasks
-		\item The input position does not matter in all cases (e.\,g. word positions when classifying emails)
+		\item The input position does not matter in all cases (e.\,g. word positions when classifying e-mails)
 		\item An MLP always needs a fixed-size input vector, but \textbf{we might have variable-size input data}
 			(e.\,g. images in different resolutions, text sequences of different lengths, etc.)
-		\item \highlight{Solution:} Use \highlight{convolution}!
+		\item \textbf{Solution:} Use \highlight{convolution}!
 	\end{itemize}
 \end{frame}
 
@@ -830,17 +832,21 @@
 % Convolution (Ctd.)
 \begin{frame}{Convolution (Ctd.)}{}\important
 	\begin{itemize}
-		\item The convolution operation
+		\item We shift a filter across the input data (e.\,g. image pixels) with a certain stride and multiply the input with the filter weights at each position
+		\item The resulting feature map is usually smaller in size
+	\end{itemize}
+	
+	\vspace*{8mm}
+	\divideTwo{0.49}{
+		\begin{figure}
+			\centering
+			\includegraphics[scale=0.80]{10_deep_learning/02_img/flatconvolution}
+		\end{figure}
+	}{0.49}{
 		\begin{equation*}
 			(x \star g)[i] = \sum_{j=-w}^w x[i - j] \cdot g[j]
 		\end{equation*}
-		\item We shift a filter across the input data (e.\,g. image pixels) with a certain stride and multiply the input with the filter weights at each position
-	\end{itemize}
-	
-	\begin{figure}
-		\centering
-		\includegraphics[scale=0.80]{10_deep_learning/02_img/flatconvolution}
-	\end{figure}
+	}
 \end{frame}
 
 

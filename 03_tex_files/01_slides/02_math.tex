@@ -7,9 +7,9 @@
 % ====================================================
 
 \title[Mathematical Foundations]{*** Applied Machine Learning Fundamentals *** Mathematical Foundations}
-\institute{SAP\,SE}
-\author{M.\,Sc. Daniel Wehner}
-\date{Winter term 2019/2020}
+\institute[SAP\,SE]{SAP\,SE / DHBW Mannheim}
+\author{Daniel Wehner, M.Sc.}
+\date{Winter term 2020/2021}
 \prefix{MATH}
 
 % ====================================================
@@ -134,9 +134,9 @@
 % Linear Combination of Vectors
 \begin{frame}{Linear Combination of Vectors}{}
 	\vspace*{-4mm}
-	\begin{align}
+	\begin{equation}
 		\bm{u} = c_1 \bm{v}^{(1)} + c_2 \bm{v}^{(2)} + \dots + c_n \bm{v}^{(n)}
-	\end{align}
+	\end{equation}
 	\input{02_math/01_tikz/linear_combination}
 \end{frame}
 
@@ -150,15 +150,12 @@
 			\bm{v}^{\intercal} = \left[\begin{array}{C{1em} C{1em}} $3$ & $1$ \end{array}\right]
 		\end{equation*}
 		\item Inner product / dot product / scalar product:
-		\begin{align}
-			\bm{v} \cdot \bm{w}
-				&\equiv \bm{v}^{\intercal} \bm{w} \equiv \langle \bm{v}, \bm{w} \rangle
-					= \sum_{j=1}^m v_j w_j \\[1mm]
-				\nonumber
-				&= \left[\begin{array}{C{1em} C{1em}} $3$ & $1$ \end{array}\right]
-					\left[\begin{array}{C{1em}} $2$ \\ $4$ \end{array}\right]
-					= (3 \cdot 2) + (1 \cdot 4) = 10
-		\end{align}
+		\begin{equation}
+			\bm{v}^{\intercal} \bm{w} \equiv \langle \bm{v}, \bm{w} \rangle
+				= \left[\begin{array}{C{1em} C{1em}} $3$ & $1$ \end{array}\right] \left[\begin{array}{C{1em}} $2$ \\ $4$ \end{array}\right]
+				= \sum_{j=1}^m v_j w_j
+				= 3 \cdot 2 + 1 \cdot 4
+		\end{equation}
 	\end{itemize}
 \end{frame}
 
@@ -167,12 +164,12 @@
 \begin{frame}{Vector Transpose and inner and outer Product (Ctd.)}{}\important
 	\begin{itemize}
 		\item Outer product:
-		\begin{equation*}
+		\begin{equation}
 			\bm{v}\bm{w}^{\intercal}
 				= 	\left[\begin{array}{C{1em}} $3$ \\ $1$ \end{array}\right]
 						\left[\begin{array}{C{1em} C{1em}} $2$ & $4$ \end{array}\right]
 				= 	\left[\begin{array}{C{1em} C{1em}} $6$ & $12$ \\ $2$ & $4$ \end{array}\right]
-		\end{equation*}
+		\end{equation}
 	\end{itemize}
 
 	\begin{boxBlueNoFrame}
@@ -289,7 +286,7 @@
 \begin{frame}{Matrix Transpose and Addition}{}\important
 	\begin{itemize}
 		\item Transpose of a matrix:
-		\begin{equation}
+		\begin{equation*}
 			\bm{M}^{\intercal}
 				=	\left[\begin{array}{C{1em} C{1em} C{1em}}
 						$3$ & $4$ & $5$ \\
@@ -300,7 +297,7 @@
 						$4$ & $0$ \\
 						$5$ & $1$
 					\end{array}\right]
-		\end{equation}
+		\end{equation*}
 		\item Addition of matrices:
 		\begin{equation}
 			\bm{X} + \bm{Y}
@@ -388,6 +385,7 @@
 		\begin{align}
 			\bm{X}^{-1} \bm{X}
 				&= \bm{X} \bm{X}^{-1} = \bm{I} \\
+			\nonumber
 			\bm{I}
 				&= \left[\begin{array}{C{1em} C{1em} C{1em} C{1em}}
 					$1$ 		& 	$0$ 		& 	$\hdots$ & 	$0$ 		\\
@@ -505,7 +503,7 @@
 
 
 % Eigenvectors form a Basis
-\begin{frame}{Eigenvectors form a Basis}{}
+\begin{frame}{Eigenvectors form a Basis (Eigenbasis)}{}
 	\begin{itemize}
 		\item Let us assume that there are $n$ eigenvectors with corresponding eigenvalues:
 		\begin{align*}
@@ -695,7 +693,7 @@
 	\end{boxBlueNoFrame}
 
 	\begin{itemize}
-		\item Continuous distributions are discrete distributions where the \textbf{number of discrete values goes to infinity}
+		\item Continuous distributions are discrete distributions where the \textbf{number of discrete values goes to infinity},
 		while the \textbf{probability of each value goes to zero}
 		\item It's described by a \highlight{probability density function} which integrates to 1:
 		\begin{equation*}
@@ -720,7 +718,7 @@
 	\begin{boxBlue}
 		\highlight{Central Limit Theorem:}
 
-		The distribution of the sum of $n$ i.\,i.\,d. (independent and identically distributed) random variables becomes increasingly Gaussian as $n$ increases.
+		The distribution of the sum of $n$ i.\,i.\,d. (independent and identically distributed) random variables becomes increasingly Gaussian as $n$ increases
 	\end{boxBlue}
 
 	\begin{itemize}
@@ -972,11 +970,11 @@
 	\floattext{2.5}{11.5}{\textbf{convex}}
 	\floattext{12}{11.5}{\textbf{non-convex}}
 	\begin{itemize}
-		\item A set $C \subseteq \mathbb{R}^n$ is convex, if $\forall \bm{x}, \bm{y} \in C$ and $\forall \alpha \in [0,1]$
+		\item A set $C \subseteq \mathbb{R}^n$ is convex, if $\forall \bm{x}, \bm{y} \in C$ and $\forall \alpha \in [0,1]$:
 		\begin{equation}	
 			\alpha \bm{x} + (1 - \alpha) \bm{y} \in C
 		\end{equation}
-		\item This is the equation line segment between $\bm{x}$ and $\bm{y}$
+		\item This is the equation of the line segment between $\bm{x}$ and $\bm{y}$
 	\end{itemize}
 	
 	\vspace*{-3mm}
@@ -990,7 +988,7 @@
 % Convexity -- Convex Functions
 \begin{frame}{Convexity -- Convex Functions}{}
 	\begin{itemize}
-		\item A function $f : \mathbb{R}^n \mapsto \mathbb{R}$ is convex, if $\forall \bm{x}, \bm{y} \in \text{dom}(f)$ and $\forall \alpha \in [0,1]$
+		\item A function $f : \mathbb{R}^n \mapsto \mathbb{R}$ is convex, if $\forall \bm{x}, \bm{y} \in \text{dom}(f)$ and $\forall \alpha \in [0,1]$:
 		\begin{equation}
 			f(\alpha \bm{x} + (1 - \alpha) \bm{y}) \le \alpha f(\bm{x}) + (1 - \alpha) f(\bm{y})
 		\end{equation}
@@ -1074,14 +1072,14 @@
 	\divideTwo{0.49}{
 		Step \ding{183}: Set equations to zero:
 		\begin{alignat*}{2}
-			\text{I.}	&\quad 1 + \lambda y 				&&\overset{!}{=} 0 	\\[2mm]
+			\text{I.}	&\quad 1 + \lambda y 			&&\overset{!}{=} 0 	\\[2mm]
 			\text{II.}	&\quad 2 + 2\lambda y + \lambda x 	&&\overset{!}{=} 0 	\\[2mm]
 			\text{III.}	&\quad y^2 + xy - 1				&&\overset{!}{=} 0
 		\end{alignat*}
 	}{0.49}{
 		Step \ding{184}: Substitute:
 		\begin{alignat*}{2}
-			\text{I.}					&\quad \lambda 		&&= -\frac{1}{y} 	\\[2mm]
+			\text{I.}					&\quad \lambda 	&&= -\frac{1}{y} 	\\[2mm]
 			\text{I.} \rightarrow \text{II.}  	&\quad x			&&= 0			\\[2mm]
 			\text{II.} \rightarrow \text{III.}	&\quad y 			&&= \pm 1
 		\end{alignat*}
@@ -1160,7 +1158,7 @@
 			\bm{\theta}^{(new)} \longleftarrow \bm{\theta}^{(old)} -
 				\alpha \nabla_{\bm{\theta}} \mathcal{J}(\bm{\theta}^{(old)})
 		\end{equation}
-		\item The parameter updates tend to 'zig-zag' down the valley (see next slide)
+		\item The parameter updates tend to 'zig-zag' down the valley (cf. next slide)
 		\item Gradient descent is a \highlight{1st-order method}
 	\end{itemize}
 \end{frame}

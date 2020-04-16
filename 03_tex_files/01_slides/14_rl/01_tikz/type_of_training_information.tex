@@ -3,6 +3,13 @@
 	\begin{tikzpicture}[
 		scale=0.5,
 		every node/.style={scale=0.8},
+		block/.style={
+			draw=black,
+			thick,
+			align=left,
+			minimum height=17mm,
+			minimum width=60mm
+		},
 		arrow/.style={
 			shorten >=0.2cm,
 			shorten <=0.2cm,
@@ -11,24 +18,25 @@
 		}
 	]
 	
-		\node[draw=black,thick,align=left] (A) at (0,4) {
+		\node[block,minimum width=122.5mm,fill=lightgray!80] (A) at (0,4) {
 			\textbf{Supervised Learning} \\
 			$\bullet$ A `teacher' provides gold labels \\
-			$\bullet$ Neural networks, decision trees, regression
+			$\bullet$ Neural networks, regression, ...
 		};
 
-		\node[draw=myblue1,thick,align=left] (B) at (-5,0) {
+		\node[block,draw=myblue1,fill=lightgray!50] (B) at (-5,0) {
 			\highlight{Reinforcement Learning} \\
 			\textcolor{myblue1}{$\bullet$ Feedback only} \\
 			\textcolor{myblue1}{$\bullet$ No labels}
 		};
 
-		\node[draw=black,thick,align=left] (C) at (5,0) {
+		\node[block,fill=lightgray!50] (C) at (5,0) {
 			\textbf{Semi-Supervised Learning} \\
-			$\bullet$ Partly labeled data
+			$\bullet$ Partly labeled data \\
+			$\bullet$ \textit{not covered here}
 		};
 
-		\node[draw=black,thick,align=left] (D) at (0,-4) {
+		\node[block,minimum width=122.5mm,fill=lightgray!20] (D) at (0,-4) {
 			\textbf{Unsupervised Learning} \\
 			$\bullet$ No labels available \\
 			$\bullet$ Clustering, Apriori, ...

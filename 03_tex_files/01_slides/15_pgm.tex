@@ -7,9 +7,9 @@
 % ====================================================
 
 \title[Probabilistic Graphical Models]{*** Applied Machine Learning Fundamentals *** Probabilistic Graphical Models}
-\institute{SAP\,SE}
-\author{M.\,Sc. Daniel Wehner}
-\date{Winter term 2019/2020}
+\institute[SAP\,SE]{SAP\,SE / DHBW Mannheim}
+\author{Daniel Wehner, M.Sc.}
+\date{Winter term 2020/2021}
 \prefix{PGM}
 
 % ====================================================
@@ -27,11 +27,11 @@
 
 % Lecture Overview
 %______________________________________________________________________
-\begin{frame}{Lecture Overview}{}
-	\begin{center}
-		\Huge\highlight{Out of scope for this lecture!}
-	\end{center}
-\end{frame}
+%\begin{frame}{Lecture Overview}{}
+%	\begin{center}
+%		\Huge\highlight{Out of scope for this lecture!}
+%	\end{center}
+%\end{frame}
 
 
 % Agenda
@@ -114,6 +114,7 @@
 		\end{itemize}
 	\end{itemize}
 
+	\vspace*{2mm}
 	\begin{boxBlueNoFrame}
 		\highlight{Bayesian networks often need much fewer parameters. Why?}
 	\end{boxBlueNoFrame}
@@ -268,7 +269,6 @@
 		\end{equation*}
 	\end{itemize}
 
-	\vspace*{-3mm}
 	\begin{boxBlueNoFrame}
 		\highlight{Much less parameters due to the local Markov assumption!}
 	\end{boxBlueNoFrame}
@@ -305,7 +305,7 @@
 				\vspace*{3mm}
 				\includegraphics[scale=0.03]{15_pgm/02_img/earth} \\
 				\vspace*{2mm}
-				{\footnotesize The true distribution $P$ contains independency assertions $I(P)$}
+				{\footnotesize The true distribution $p$ contains independency assertions $I(p)$}
 			\end{center}
 			\vfill
 		\end{boxBlueNoFill}
@@ -328,21 +328,21 @@
 % Representation Theorem
 \begin{frame}{Representation Theorem}{}
 	\begin{itemize}
-		\item \textbf{Key representational assumption:} $I_{LM}(\mathcal{G}) \subseteq I(P)$
-		\item We say: Graph $\mathcal{G}$ is an \highlight{I-Map (independency map)} for distribution $P$
+		\item \textbf{Key representational assumption:} $I_{LM}(\mathcal{G}) \subseteq I(p)$
+		\item We say: Graph $\mathcal{G}$ is an \highlight{I-Map (independency map)} for distribution $p$
 		\item \highlight{Representation theorem}:
 	\end{itemize}
 
 	\begin{center}
 		\footnotesize
-		\textit{Conditional independencies encoded in BN are subset of conditional independencies in $P$ \\
+		\textit{Conditional independencies encoded in BN are subset of conditional independencies in $p$ \\
 			$\Leftrightarrow$ \\
 			Joint probability distribution factorizes according to BN definition}
 	\end{center}
 
 	\vspace*{-4mm}
 	\begin{equation}
-		I_{LM}(\mathcal{G}) \subseteq I(P) \Leftrightarrow P(X_1, X_2, \dots, X_m) = \prod_{j=1}^m P(X_j \vert Pa(X_j))
+		I_{LM}(\mathcal{G}) \subseteq I(p) \Leftrightarrow p(X_1, X_2, \dots, X_m) = \prod_{j=1}^m p(X_j \vert Pa(X_j))
 	\end{equation}
 \end{frame}
 
@@ -832,7 +832,7 @@
 % Maximum Likelihood Estimation
 \begin{frame}{Maximum Likelihood Estimation}{}
 	\begin{itemize}
-		\item \textbf{Recall:} In MLE we want to compute: \textcolor{gray}{($\Rightarrow$ cf. slides `Density estimation')}
+		\item \textbf{Recall:} In MLE we want to compute: \textcolor{gray}{($\Rightarrow$ cf. slides `density estimation')}
 		\begin{equation*}
 			\bm{\theta}^* = \argmax_{\bm{\theta}} P(\bm{\theta} \vert \mathcal{D})
 		\end{equation*}
@@ -1040,6 +1040,7 @@
  		\caption{Expectation-Maximization Algorithm}
 	\end{algorithm}
 
+	\vspace*{2mm}
 	\begin{boxBlueNoFrame}
 		\highlight{Caution:} Depending on the initialization, the algorithm can \textbf{get stuck in local optima!}
 		(Multiple runs?)
@@ -1098,12 +1099,12 @@
 	\end{boxBlueNoFrame}
 
 	\begin{itemize}
-		\item Most probable state sequence: $\bm{\widehat{q}} = \argmax_{\bm{q}} P(\bm{q} \vert \bm{o})$
+		\item Most probable state sequence: $\bm{\widehat{q}} = \argmax_{\bm{q}} p(\bm{q} \vert \bm{o})$
 		\item This equation is hard to compute. Let's apply \textbf{Bayes' rule}:
 		\begin{equation}
-			\bm{\widehat{q}} = \argmax_{\bm{q}} \frac{P(\bm{o} \vert \bm{q}) \cdot P(\bm{q})}{P(\bm{o})}
-				\propto \argmax_{\bm{q}} \underbracket{P(\bm{o} \vert \bm{q})}_{\text{likelihood}} \cdot
-				\underbracket{P(\bm{q})}_{\text{prior}}
+			\bm{\widehat{q}} = \argmax_{\bm{q}} \frac{p(\bm{o} \vert \bm{q}) \cdot p(\bm{q})}{p(\bm{o})}
+				\propto \argmax_{\bm{q}} \underbracket{p(\bm{o} \vert \bm{q})}_{\text{likelihood}} \cdot
+				\underbracket{p(\bm{q})}_{\text{prior}}
 		\end{equation}
 	\end{itemize}
 \end{frame}
@@ -1119,12 +1120,12 @@
 	\footnotesize
 	\begin{boxBlueNoFrame}
 		\highlight{Assumption 1:} The probability of an observation depends only on its own hidden state:
-			\highlight{$P(\bm{o} \vert \bm{q}) \approx \prod_{1=1}^T P(o_i \vert q_i)$}
+			\highlight{$p(\bm{o} \vert \bm{q}) \approx \prod_{1=1}^T p(o_i \vert q_i)$}
 	\end{boxBlueNoFrame}
 
 	\begin{boxBlueNoFrame}
 		\highlight{Assumption 2:} The probability of a state appearing is dependent only on the previous state:
-			\highlight{$P(\bm{q}) \approx \prod_{1=1}^T P(q_i \vert q_{i-1})$} \\
+			\highlight{$p(\bm{q}) \approx \prod_{1=1}^T p(q_i \vert q_{i-1})$} \\
 			$\Rightarrow$ \highlight{Markov Assumption} (`the future is independent of the past given the present.')
 	\end{boxBlueNoFrame}
 \end{frame}
@@ -1135,13 +1136,13 @@
 	\begin{itemize}
 		\item Putting everything together, we get the hidden Markov model:
 		\begin{equation}
-			\bm{\widehat{q}} = \argmax_{\bm{q}} P(\bm{q} \vert \bm{o}) \propto
-				\argmax_{\bm{q}} \prod_{i=1}^T P(o_i \vert q_i) \cdot P(q_i \vert q_{i-1})
+			\bm{\widehat{q}} = \argmax_{\bm{q}} p(\bm{q} \vert \bm{o}) \propto
+				\argmax_{\bm{q}} \prod_{i=1}^T p(o_i \vert q_i) \cdot p(q_i \vert q_{i-1})
 		\end{equation}
 		\item This equation contains two types of probabilities:
 		\begin{itemize}
-			\item \highlight{Transition probabilities:} $P(q_i \vert q_{i-1})$
-			\item \highlight{Emission probabilities:} $P(o_i \vert q_i)$
+			\item \highlight{Transition probabilities:} $p(q_i \vert q_{i-1})$
+			\item \highlight{Emission probabilities:} $p(o_i \vert q_i)$
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -1159,11 +1160,11 @@
 			\item Probabilities estimated from \textsc{Brown} corpus {\scriptsize (million-word corpus of American English)}
 			\item \textbf{Transition probabilities} (first table)
 			\begin{equation}
-				P(q_i \vert q_{i-1}) = \frac{C(q_{i-1}, q_i)}{C(q_{i-1})}
+				p(q_i \vert q_{i-1}) = \frac{C(q_{i-1}, q_i)}{C(q_{i-1})}
 			\end{equation}
 			\item \textbf{Emission probabilities} (second table)
 			\begin{equation}
-				P(o_i \vert q_i) = \frac{C(q_i, o_i)}{C(q_i)}
+				p(o_i \vert q_i) = \frac{C(q_i, o_i)}{C(q_i)}
 			\end{equation}
 		\end{itemize}
 	}
@@ -1225,7 +1226,7 @@
 			\item BNs represent exponentially large probability distributions
 			\item \textbf{Local Markov assumption:} Variable is independent of its non-descendants given its parents
 			\item \textbf{Representation theorem:}
-				$I_{LM}(\mathcal{G}) \subseteq I(P) \Leftrightarrow P(X_1, X_2, \dots, X_m) =
+				$I_{LM}(\mathcal{G}) \subseteq I(p) \Leftrightarrow p(X_1, X_2, \dots, X_m) =
 					\prod_{j=1}^m p(X_j \vert Pa(X_j))$
 			\item d-separation
 		\end{itemize}

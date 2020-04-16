@@ -7,9 +7,9 @@
 % ====================================================
 
 \title[Principal Component Analysis]{*** Applied Machine Learning Fundamentals *** Principal Component Analysis}
-\institute{SAP\,SE}
-\author{M.\,Sc. Daniel Wehner}
-\date{Winter term 2019/2020}
+\institute[SAP\,SE]{SAP\,SE / DHBW Mannheim}
+\author{Daniel Wehner, M.Sc.}
+\date{Winter term 2020/2021}
 \prefix{PCA}
 
 % ====================================================
@@ -62,6 +62,7 @@
 		\end{itemize}
 	\end{itemize}
 	
+	\vspace*{2mm}
 	\begin{boxBlueNoFrame}
 		Dimensionality reduction can help to \textbf{speed up} learning algorithms substantially.
 		Too many (correlated) features usually \textbf{decrease the performance} of the learning algorithm
@@ -222,6 +223,7 @@
 			we see: $\bm{u}_1^{\intercal} \bm{\Sigma} \bm{u}_1 = \lambda_1$
 	\end{itemize}
 	
+	\vspace*{2mm}
 	\begin{boxBlueNoFrame}
 		\highlight{The variance reaches a maximum, if we set $\bm{u}_1$ equal to the eigenvector having the largest
 		eigenvalue $\lambda_1$. This eigenvector is the first principal component.}
@@ -437,6 +439,8 @@
 		\end{equation}
 		\item The matrix has to be computed only once and can be reused for all $k$
 	\end{itemize}
+	
+	\vspace*{2mm}
 	\begin{boxBlueNoFrame}
 		\highlight{Simplification:}
 		\begin{equation*}
