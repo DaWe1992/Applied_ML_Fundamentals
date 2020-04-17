@@ -1,0 +1,18 @@
+\begin{algorithm}[H]
+	\footnotesize
+	\DontPrintSemicolon
+ 	\ForEach(\tcp*[h]{initialize table entries with zeroes}){$\langle s, a \rangle$}{
+ 		$\widehat{Q}(s, a) \longleftarrow 0$ \tcp*[h]{Alternative: Initialize with random numbers}\;
+ 	}
+	\While(\tcp*[h]{endless loop}){true}{
+  		Observe current state $s$\;
+  		Select an action $a$ and execute it\;
+  		Receive the immediate reward $r$\;
+  		Observe the new state $s'$\;
+  		Update the table entry for $\widehat{Q}(s, a)$:
+  			$\widehat{Q}(s, a) \longleftarrow r + \gamma \max_{a' \in \mathcal{A}} \widehat{Q}(s', a')$\;
+  		$s \longleftarrow s'$\;
+ 	}
+ 	
+ 	\caption{Learning the $Q$-function}
+\end{algorithm}

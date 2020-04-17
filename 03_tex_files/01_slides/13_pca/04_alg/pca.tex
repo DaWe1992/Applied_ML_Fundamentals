@@ -1,0 +1,26 @@
+\begin{algorithm}[H]
+	\setstretch{1.6}
+	\DontPrintSemicolon
+	\footnotesize
+	\KwIn{Input data $\bm{X} = \{ \bm{x}^{(1)}, \bm{x}^{(2)}, \dots, \bm{x}^{(n)} \} \in \mathbb{R}^{n \times m}$, number of dimensions $k$}
+	\KwOut{Projected data $\bm{Z} \in \mathbb{R}^{n \times k}$}
+	$\overline{\bm{x}}
+		\longleftarrow \frac{1}{n} \sum_{i=1}^n \bm{x}^{(i)}$
+		\tcp*[h]{sample set mean}\;
+	$\bm{\Sigma}
+		\longleftarrow \frac{1}{n} \sum_{i = 1}^n (\bm{x}^{(i)} - \overline{\bm{x}}) (\bm{x}^{(i)}
+			- \overline{\bm{x}})^{\intercal}$
+			\tcp*[h]{covariance matrix}\;
+
+	Perform \textbf{s}ingular \textbf{v}alue \textbf{d}ecomposition to find the eigenvectors of matrix $\bm{\Sigma}$:
+	\begin{equation*}
+		[\bm{U}, \bm{S}, \bm{V}] = SVD(\bm{\Sigma})
+	\end{equation*}
+	\vspace*{-6mm}
+
+	Select first $k$ eigenvectors: $\bm{U}_k \longleftarrow \bm{U}_{(:,:k)}$
+		\tcp*[h]{eig.vecs with largest eig.vals.}\;
+	$\bm{Z} \longleftarrow \bm{U}_k^{\intercal} \bm{X}$
+	
+	\caption{PCA Algorithm}
+\end{algorithm}

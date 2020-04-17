@@ -1,0 +1,20 @@
+\begin{algorithm}[H]
+	\setstretch{1.6}
+	\DontPrintSemicolon
+	\footnotesize
+	\KwIn{Training set $\mathcal{D}$, number of base classifiers $k$}
+	\highlight{Training:}\;
+	\ForAll{$u \in \{ 1, 2, \dots, k \}$}{
+		Draw a bootstrap sample $\mathcal{D}_u$ with replacement from $\mathcal{D}$\;
+		Learn a classifier $C_u$ from $\mathcal{D}_u$\;
+		Add classifier $C_u$ to the ensemble\;
+	}
+	\hrule
+	\highlight{Prediction:}\;
+	\ForAll{unlabeled instances}{
+		Get predictions from all classifiers $C_u$\;
+	}
+	
+	\Return{Class which receives the majority of votes (combined classifier $C^*$)}
+ 	\caption{Bagging Algorithm}
+\end{algorithm}

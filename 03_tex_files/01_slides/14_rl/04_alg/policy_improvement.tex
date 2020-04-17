@@ -1,0 +1,18 @@
+\begin{algorithm}[H]
+	\footnotesize
+	\DontPrintSemicolon
+	\KwIn{updated value function $V$}
+	\KwOut{updated policy $\pi$, boolean flag $policy\_stable$}
+	\vspace*{1mm}
+	$policy\_stable \longleftarrow true$\;
+	\ForEach{$s \in \mathcal{S}$}{
+		$old\_action \longleftarrow \pi(s)$\;
+		$\pi(s) \longleftarrow \argmax_{a}\sum_{s', r} p(s', r \vert s, a)[r + \gamma V^{\pi}(s')]$\;
+		\If{$old\_action \ne \pi(s)$}{
+			$policy\_stable \longleftarrow false$\;
+		}
+	}
+	
+	\Return{$\pi, policy\_stable$}
+ 	\caption{Policy Improvement}
+\end{algorithm}

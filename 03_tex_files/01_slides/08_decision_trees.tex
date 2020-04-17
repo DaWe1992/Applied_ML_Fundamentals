@@ -395,32 +395,7 @@
 
 % ID3 Algorithm
 \begin{frame}[plain]{}{}
-	\begin{algorithm}[H]
-		\setstretch{1.0}
-		\DontPrintSemicolon
-		\footnotesize
-		\KwIn{Training set $\mathcal{D}$, Attribute list $Attr\_List$}
-		Create a node $N$\;
-		\If{all tuples in $\mathcal{D}$ have class $c$}{
-			\Return $N$ as leaf node labeled with class $c$\;
-		}
-		\If{$\vert Attr\_List \vert = 0$}{
-			\Return $N$ as leaf node labeled with majority class in $\mathcal{D}$\;
-		}
-		Find best split attribute $\texttt{A}^*$ and label node $N$ with $\texttt{A}^*$\;
-		$Attr\_List \longleftarrow Attr\_List \backslash \{ \texttt{A}^* \}$\;
-		\ForAll{$v \in \text{dom}(\texttt{A}^*)$}{
-			Let $\mathcal{D}_{\texttt{A}^*=v}$ be the set of tuples in $\mathcal{D}$ that satisfy $\texttt{A}^* = v$\;
-			\If{$\vert \mathcal{D}_{\texttt{A}^*=v} \vert = 0$}{
-				Attach leaf labeled with majority class in $\mathcal{D}$ to node $N$\;
-			}
-			\Else{
-				Attach node returned by $ID3(\mathcal{D}_{\texttt{A}^*=v}, Attr\_List)$\;
-			}
-		}
-		\Return $N$
- 		\caption{ID3 Algorithm (Iterative Dichotomizer)}
-	\end{algorithm}
+	\input{08_decision_trees/04_alg/id3}
 \end{frame}
 
 
@@ -735,25 +710,7 @@
 
 % Bagging Algorithm
 \begin{frame}[plain]{}{}
-	\begin{algorithm}[H]
-		\setstretch{1.6}
-		\DontPrintSemicolon
-		\footnotesize
-		\KwIn{Training set $\mathcal{D}$, number of base classifiers $k$}
-		\highlight{Training:}\;
-		\ForAll{$u \in \{ 1, 2, \dots, k \}$}{
-			Draw a bootstrap sample $\mathcal{D}_u$ with replacement from $\mathcal{D}$\;
-			Learn a classifier $C_u$ from $\mathcal{D}_u$\;
-			Add classifier $C_u$ to the ensemble\;
-		}
-		\hrule
-		\highlight{Prediction:}\;
-		\ForAll{unlabeled instances}{
-			Get predictions from all classifiers $C_u$\;
-		}
-		\Return{Class which receives the majority of votes (combined classifier $C^*$)}
- 		\caption{Bagging Algorithm}
-	\end{algorithm}
+	\input{08_decision_trees/04_alg/bagging}
 \end{frame}
 
 
@@ -830,30 +787,7 @@
 
 % Random Forest Algorithm
 \begin{frame}[plain]{}{}
-	\begin{algorithm}[H]
-		\setstretch{1.4}
-		\DontPrintSemicolon
-		\scriptsize
-		\KwIn{Training set $\mathcal{D}$, number of base classifiers $k$}
-		\highlight{Training:}\;
-		\For{$u \in \{ 1, 2, \dots, k \}$}{
-			Create a bootstrap sample from $\mathcal{D}$ (e.\,g. with replacement) \highlight{$\Rightarrow$ Bagging}\;
-			\Begin{
-				Grow the tree\;
-				At every node: Randomly choose $f$ attributes to be considered for the split \\
-					\highlight{$\Rightarrow$ Randomization}\;
-				Do not prune tree $C_u$\;
-			}
-			Add tree $C_u$ to the ensemble
-		}
-		\hrule
-		\highlight{Prediction:}\;
-		\ForAll{unlabeled instances}{
-			Get predictions from all classifiers $C_u$
-		}
-		\Return{Class which receives the majority of votes (combined classifier $C^*$)}
- 		\caption{Random Forest Algorithm}
-	\end{algorithm}
+	\input{08_decision_trees/04_alg/rf}
 \end{frame}
 
 
@@ -911,30 +845,7 @@
 
 % Boosting: AdaBoost Algorithm
 \begin{frame}[plain]{}{}
-	\begin{algorithm}[H]
-		\setstretch{1.4}
-		\DontPrintSemicolon
-		\scriptsize
-		\KwIn{Training set $\mathcal{D}$, number of base classifiers $k$}
-		\highlight{Training:}\;
-		Initialize example weights $w_i \longleftarrow \frac{1}{n}$\;
-		\ForAll{$u \in \{ 1, 2, \dots, k \}$}{
-			Learn a classifier $C_u$ using the current example weights\;
-			Compute weighted error estimate of the model:
-				$\varepsilon_u \longleftarrow \sum_{i=1}^n w_i \cdot \mathbb{1}\{ y_{pred} \ne y^{(i)} \}$\;
-			Compute model weight: $\alpha_u \longleftarrow \nicefrac{1}{2} \cdot \ln \left( \frac{1 - \varepsilon_u}{\varepsilon_u} \right)$\;
-			For all correctly classified examples: $w_i \longleftarrow w_i \cdot \exp\{ -\alpha_u \}$\;
-			For all incorrectly classified examples: $w_i \longleftarrow w_i \cdot \exp\{ \alpha_u \}$\;
-			Normalize the weights $w_i$ (such that they sum up to one): $\frac{w_i}{\sum_{i=1}^n w_i}$
-		}
-		\hrule
-		\highlight{Prediction:}\;
-		\ForAll{unlabeled instances}{
-			Get predictions from all classifiers $C_u$
-		}
-		\Return{Class which receives the the highest sum of weights $\alpha_u$ (combined classifier $C^*$)}
- 		\caption{AdaBoost Algorithm}
-	\end{algorithm}
+	\input{08_decision_trees/04_alg/boosting}
 \end{frame}
 
 
@@ -1058,17 +969,7 @@
 
 % Stacking Algorithm
 \begin{frame}[plain]{}{}
-	\begin{algorithm}[H]
-		\setstretch{1.3}
-		\DontPrintSemicolon
-		\footnotesize
-		\KwIn{Training set $\mathcal{D}$, number of base classifiers $k$}
-		Train $k$ base classifiers $C_1, C_2, \dots, C_k$\;
-		Let all base classifiers predict the labels for the training set\;
-		Create the meta data set (*)\;
-		Train a meta classifier $M$ on the meta data set\;
- 		\caption{Stacking Algorithm}
-	\end{algorithm}
+	\input{08_decision_trees/04_alg/stacking}
 	
 	\vspace*{5mm}
 	\footnotesize

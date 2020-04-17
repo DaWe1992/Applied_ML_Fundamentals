@@ -1,0 +1,25 @@
+\begin{algorithm}[H]
+	\setstretch{1.4}
+	\DontPrintSemicolon
+	\scriptsize
+	\KwIn{Training set $\mathcal{D}$, number of base classifiers $k$}
+	\highlight{Training:}\;
+	Initialize example weights $w_i \longleftarrow \frac{1}{n}$\;
+	\ForAll{$u \in \{ 1, 2, \dots, k \}$}{
+		Learn a classifier $C_u$ using the current example weights\;
+		Compute weighted error estimate of the model:
+			$\varepsilon_u \longleftarrow \sum_{i=1}^n w_i \cdot \mathbb{1}\{ y_{pred} \ne y^{(i)} \}$\;
+		Compute model weight: $\alpha_u \longleftarrow \nicefrac{1}{2} \cdot \ln \left( \frac{1 - \varepsilon_u}{\varepsilon_u} \right)$\;
+		For all correctly classified examples: $w_i \longleftarrow w_i \cdot \exp\{ -\alpha_u \}$\;
+		For all incorrectly classified examples: $w_i \longleftarrow w_i \cdot \exp\{ \alpha_u \}$\;
+		Normalize the weights $w_i$ (such that they sum up to one): $\frac{w_i}{\sum_{i=1}^n w_i}$
+	}
+	\hrule
+	\highlight{Prediction:}\;
+	\ForAll{unlabeled instances}{
+		Get predictions from all classifiers $C_u$
+	}
+	
+	\Return{Class which receives the the highest sum of weights $\alpha_u$ (combined classifier $C^*$)}
+ 	\caption{AdaBoost Algorithm}
+\end{algorithm}

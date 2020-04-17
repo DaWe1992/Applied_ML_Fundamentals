@@ -1,0 +1,19 @@
+\begin{algorithm}[H]
+	\setstretch{1.1}
+	\DontPrintSemicolon
+	\footnotesize
+	\KwIn{Bayesian network, \# nodes $m$, \# samples $T$}
+	
+	\tcp*[h]{generate number of samples specified}\;
+	initialize set of samples: $\bm{S} \longleftarrow \emptyset$\;
+	\For{$t \in \{1, 2, \dots, T\}$}{
+		\For{$j \in \{1, 2, \dots, m\}$}{
+			\tcp*[h]{sample value for random variable}\;
+			$s_j^{(t)} \longleftarrow$ sampled from $p(X_j \vert Pa(X_j))$\;
+		}
+		$\bm{S} \longleftarrow \bm{S} \cup \bm{s}^{(t)}$\;
+	} 
+	
+	\Return{set of samples $\bm{S} = \{ \bm{s}^{(1)}, \bm{s}^{(2)}, \dots, \bm{s}^{(T)} \}$}
+ 	\caption{Forward Sampling without Evidence}
+\end{algorithm}

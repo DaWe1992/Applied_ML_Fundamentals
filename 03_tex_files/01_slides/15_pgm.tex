@@ -604,31 +604,7 @@
 
 % Variable Elimination Algorithm
 \begin{frame}[plain]{}{}
-	\begin{algorithm}[H]
-		\setstretch{1.1}
-		\DontPrintSemicolon
-		\footnotesize
-		\KwIn{Bayesian network BN, query $p(\bm{X} \vert \bm{O})$}
-
-		instantiate evidence $\bm{O}$\;
-		prune non-active variables for $\{ \bm{X}, \bm{O} \}$\;
-		choose an ordering on the variables $\{X_1, X_2, \dots, X_m\}$\;
-		initialize factors $\{\varphi_1, \varphi_2, \dots, \varphi_m\}: \varphi_j = p(X_j \vert Pa(X_j))$\;
-		
-		\ForEach{$j \in \{ 1, 2, \dots, m \}$}{
-			\If{$X_j \not\in \{ \bm{X}, \bm{E}\}$}{
-				\tcp*[h]{marginalize variable}\;
-				remove factors $\varphi_1, \varphi_2, \dots, \varphi_k$ that include $X_j$\;
-				generate a new factor by eliminating $X_j$ from these factors:
-					$\psi = \sum_{X_j} \prod_{i=1}^k \varphi_i$\;
-				add $\psi$ to the set of factors\;
-			}
-		}
-		normalize probabilities\;		
-
-		\Return{answer to query $p(\bm{X} \vert \bm{O})$}
- 		\caption{Variable Elimination Algorithm}
-	\end{algorithm}
+	\input{15_pgm/04_alg/var_elim}
 \end{frame}
 
 
@@ -650,25 +626,7 @@
 
 % Forward Sampling (without Evidence)
 \begin{frame}{Forward Sampling (without Evidence)}{}
-	\begin{algorithm}[H]
-		\setstretch{1.1}
-		\DontPrintSemicolon
-		\footnotesize
-		\KwIn{Bayesian network, \# nodes $m$, \# samples $T$}
-		
-		\tcp*[h]{generate number of samples specified}\;
-		initialize set of samples: $\bm{S} \longleftarrow \emptyset$\;
-		\For{$t \in \{1, 2, \dots, T\}$}{
-			\For{$j \in \{1, 2, \dots, m\}$}{
-				\tcp*[h]{sample value for random variable}\;
-				$s_j^{(t)} \longleftarrow$ sampled from $p(X_j \vert Pa(X_j))$\;
-			}
-			$\bm{S} \longleftarrow \bm{S} \cup \bm{s}^{(t)}$\;
-		} 
-		
-		\Return{set of samples $\bm{S} = \{ \bm{s}^{(1)}, \bm{s}^{(2)}, \dots, \bm{s}^{(T)} \}$}
- 		\caption{Forward Sampling without Evidence}
-	\end{algorithm}
+	\input{15_pgm/04_alg/forward_sampling}
 \end{frame}
 
 
@@ -1027,19 +985,8 @@
 
 % EM-Algorithm for the incomplete Data Case
 \begin{frame}{EM-Algorithm for the incomplete Data Case}{}
-	\begin{algorithm}[H]
-		\setstretch{1.0}
-		\DontPrintSemicolon
-		\footnotesize
-		initialize parameters $\bm{\theta}$\;
-		\While{not converged}{
-			compute pseudo counts\;
-			set parameters to the maximum likelihood estimates\;
-		}
-		\Return{final parameters $\bm{\theta}$}
- 		\caption{Expectation-Maximization Algorithm}
-	\end{algorithm}
-
+	\input{15_pgm/04_alg/em}
+	
 	\vspace*{2mm}
 	\begin{boxBlueNoFrame}
 		\highlight{Caution:} Depending on the initialization, the algorithm can \textbf{get stuck in local optima!}
@@ -1173,33 +1120,7 @@
 
 % Viterbi Algorithm
 \begin{frame}[plain]{}{}
-	\begin{algorithm}[H]
-		\setstretch{1.0}
-		\DontPrintSemicolon
-		\footnotesize
-		\KwIn{$\bm{o} = o_1, o_2, \dots, o_T$, state graph of length $N$}
-
-		create a path probability matrix $\bm{V}[N + 2, T]$\;
-		\tcp*[h]{initialization step}\;
-		\ForEach{state $q \in \{ 1, 2, \dots, N \}$}{
-			$\bm{V}[q, 1] \longleftarrow a_{0, q} \cdot b_q(o_1)$\;
-			$trace[q, 1] \longleftarrow 0$\;
-		}
-
-		\tcp*[h]{compute best path through trellis}\;
-		\ForEach{time step $t \in \{ 2, 3, \dots, T \}$}{
-			\ForEach{state $q \in \{ 1, 2, \dots, N \}$}{
-				$\bm{V}[q, t] \longleftarrow \max_{q' = 1}^N \bm{V}[q', t-1] \cdot a_{q',q} \cdot b_q(o_t)$\;
-				$trace[q, t] \longleftarrow \argmax_{q'=1}^N \bm{V}[q', t-1] \cdot a_{q',q}$
-			}
-		}
-
-		\tcp*[h]{termination step}\;
-		$\bm{V}[q_F, T] \longleftarrow \max_{q = 1}^N \bm{V}[q, T] \cdot a_{q,q_F}$\;
-		$trace[q_F, T] \longleftarrow \argmax_{q=1}^N \bm{V}[q, T] \cdot a_{q,q_F}$\;
-		\Return{backtrace path by following the pointers back in time}
- 		\caption{Viterbi Algorithm (Dynamic Programming)}
-	\end{algorithm}
+	\input{15_pgm/04_alg/viterbi}
 \end{frame}
 
 

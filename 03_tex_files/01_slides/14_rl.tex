@@ -478,24 +478,7 @@
 
 % Value Iteration Algorithm
 \begin{frame}{Value Iteration Algorithm}{}
-	\begin{algorithm}[H]
-		\footnotesize
-		\DontPrintSemicolon
-		\KwIn{environment $\mathcal{E} = (\mathcal{S}, \mathcal{A})$}
-		\KwOut{optimal policy $\pi$}
-		\vspace*{1mm}
- 		Initialize $V(s) \in \mathbb{R}$ arbitrarily for all $s \in \mathcal{S}$\;
- 		\While{$\Delta > \varepsilon$}{
- 			$\Delta \longleftarrow 0$\;
- 			\ForEach{$s \in \mathcal{S}$}{
- 				$v \longleftarrow V(s)$\;
-				$V(s) \longleftarrow \max_a \sum_{s', r} p(s', r \vert s, a)[r + \gamma V(s')]$\;
-				$\Delta \longleftarrow \max(\Delta, \vert v - V(s) \vert)$\;
- 			}
- 		}
-		\textbf{return} $\pi$ such that $\pi(s) = \argmax_a \sum_{s', r} p(s', r \vert s, a)[r + \gamma V(s')]$\;
- 		\caption{Value Iteration}
-	\end{algorithm}
+	\input{14_rl/04_alg/value_iteration}
 \end{frame}
 
 
@@ -555,68 +538,19 @@
 
 % Policy Iteration Algorithm
 \begin{frame}{Policy Iteration Algorithm}{}
-	\begin{algorithm}[H]
-		\footnotesize
-		\DontPrintSemicolon
-		\KwIn{environment $\mathcal{E} = (\mathcal{S}, \mathcal{A})$}
-		\KwOut{optimal policy $\pi$}
-		\vspace*{1mm}
- 		Initialize $V(s) \in \mathbb{R}$ and $\pi(s) \in \mathcal{A}$ arbitrarily for all $s \in \mathcal{S}$\;
-
-		$policy\_stable \longleftarrow false$\;
-		\While{$not\ policy\_stable$}{
-			$V_{new} \longleftarrow PolicyEvaluation(\pi, V, \varepsilon=0.001)$\;
-			$\pi, policy\_stable \longleftarrow PolicyImprovement(V_{new})$\;
-			$V \longleftarrow V_{new}$
-		}
-
-		\textbf{return} $\pi$\;
- 		\caption{Policy Iteration (deterministic case)}
-	\end{algorithm}
+	\input{14_rl/04_alg/policy_iteration}
 \end{frame}
 
 
 % Policy Evaluation and Policy Improvement
 \begin{frame}{Policy Evaluation and Policy Improvement}{}
-	\begin{algorithm}[H]
-		\footnotesize
-		\DontPrintSemicolon
-		\KwIn{current policy $\pi$, current value function $V$, threshold $\varepsilon$}
-		\KwOut{updated value function $V$}
-		\vspace*{1mm}
-		\While{$\Delta > \varepsilon$}{
- 				$\Delta \longleftarrow 0$\;
- 				\ForEach{$s \in \mathcal{S}$}{
- 					$v \longleftarrow V(s)$\;
-				$V(s) \longleftarrow \sum_{s', r} p(s', r \vert s, \pi(s))[r + \gamma V^{\pi}(s')]$\;
-				$\Delta \longleftarrow \max(\Delta, \vert v - V(s) \vert)$\;
- 				}
- 			}
-		\textbf{return} $V$
- 			\caption{Policy Evaluation}
-	\end{algorithm}
+	\input{14_rl/04_alg/policy_evaluation}
 \end{frame}
 
 
 % Policy Evaluation and Policy Improvement
 \begin{frame}{Policy Evaluation and Policy Improvement}{}
-	\begin{algorithm}[H]
-		\footnotesize
-		\DontPrintSemicolon
-		\KwIn{updated value function $V$}
-		\KwOut{updated policy $\pi$, boolean flag $policy\_stable$}
-		\vspace*{1mm}
-		$policy\_stable \longleftarrow true$\;
-		\ForEach{$s \in \mathcal{S}$}{
-			$old\_action \longleftarrow \pi(s)$\;
-			$\pi(s) \longleftarrow \argmax_{a}\sum_{s', r} p(s', r \vert s, a)[r + \gamma V^{\pi}(s')]$\;
-			\If{$old\_action \ne \pi(s)$}{
-				$policy\_stable \longleftarrow false$\;
-			}
-		}
-		\textbf{return} $\pi, policy\_stable$
- 			\caption{Policy Improvement}
-	\end{algorithm}
+	\input{14_rl/04_alg/policy_improvement}
 \end{frame}
 
 
@@ -752,23 +686,7 @@
 
 % Algorithm for $Q$-Learning (Ctd.)
 \begin{frame}{Algorithm for $Q$-Learning (Ctd.)}{}
-	\begin{algorithm}[H]
-		\footnotesize
-		\DontPrintSemicolon
- 		\ForEach(\tcp*[h]{initialize table entries with zeroes}){$\langle s, a \rangle$}{
- 			$\widehat{Q}(s, a) \longleftarrow 0$ \tcp*[h]{Alternative: Initialize with random numbers}\;
- 		}
-		\While(\tcp*[h]{endless loop}){true}{
-  			Observe current state $s$\;
-  			Select an action $a$ and execute it\;
-  			Receive the immediate reward $r$\;
-  			Observe the new state $s'$\;
-  			Update the table entry for $\widehat{Q}(s, a)$:
-  				$\widehat{Q}(s, a) \longleftarrow r + \gamma \max_{a' \in \mathcal{A}} \widehat{Q}(s', a')$\;
-  			$s \longleftarrow s'$\;
- 		}
- 		\caption{Learning the $Q$-function}
-	\end{algorithm}
+	\input{14_rl/04_alg/q_learning}
 \end{frame}
 
 

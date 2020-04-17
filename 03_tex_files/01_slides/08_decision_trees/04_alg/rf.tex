@@ -1,0 +1,25 @@
+\begin{algorithm}[H]
+	\setstretch{1.4}
+	\DontPrintSemicolon
+	\scriptsize
+	\KwIn{Training set $\mathcal{D}$, number of base classifiers $k$}
+	\highlight{Training:}\;
+	\For{$u \in \{ 1, 2, \dots, k \}$}{
+		Create a bootstrap sample from $\mathcal{D}$ (e.\,g. with replacement) \highlight{$\Rightarrow$ Bagging}\;
+		\Begin{
+			Grow the tree\;
+			At every node: Randomly choose $f$ attributes to be considered for the split \\
+				\highlight{$\Rightarrow$ Randomization}\;
+			Do not prune tree $C_u$\;
+		}
+		Add tree $C_u$ to the ensemble
+	}
+	\hrule
+	\highlight{Prediction:}\;
+	\ForAll{unlabeled instances}{
+		Get predictions from all classifiers $C_u$
+	}
+	
+	\Return{Class which receives the majority of votes (combined classifier $C^*$)}
+ 	\caption{Random Forest Algorithm}
+\end{algorithm}
