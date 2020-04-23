@@ -1,0 +1,146 @@
+% select theme
+\input{../preamble_theme_2}
+
+% ====================================================
+% ====================================================
+% OPTIONS
+% ====================================================
+% ====================================================
+
+% number of levels in toc
+\dwDeepToc{false}
+
+% ====================================================
+% ====================================================
+% PRESENTATION DATA
+% ====================================================
+% ====================================================
+
+\title[Introduction to Python for ML]{***** Introduction to Python for ML *****}
+\author{Daniel Wehner, M.Sc.}
+\institute[SAP\,SE]{SAP\,SE / DHBW Mannheim}
+\date{Winter term 2020/2021}
+
+% ====================================================
+% ====================================================
+% BEGIN OF DOCUMENT
+% ====================================================
+% ====================================================
+
+\begin{document}
+
+% Title frame
+%______________________________________________________________________
+\dwPrintTitle
+
+% Agenda
+%______________________________________________________________________
+\dwPrintToc
+
+% Section: Introduction
+%______________________________________________________________________
+\dwSection{Introduction}
+
+% What is Python?
+\begin{dwHeaderFrame}{What is Python?}
+	\begin{itemize}
+		\item Python was developed by Guido van Rossum in the early 1990s.
+		\item It is an interpreted, high-level, general-purpose programming language which is the state-of-the-art for data science and machine learning.
+		\item \textbf{White space has a meaning!} (important difference to other languages like Java or C++)
+		\begin{itemize}
+			\item Semantic code blocks (e.\,g. conditions, loops, ...) have to be indented.
+			\item You may use tabs or spaces for indentation, but the interpreter \textbf{does not allow you to mix these two!}
+		\end{itemize}
+		\item Python supports many programming paradigms: We can write \textbf{procedural}, \textbf{functional} or \textbf{object-oriented} programs.
+	\end{itemize}
+\end{dwHeaderFrame}
+
+
+\begin{frame}
+	\begin{itemize}
+		\item \textbf{Caveat:} Python has two \textbf{non-compatible} branches:
+		\begin{itemize}
+			\item \texttt{Python 2.7} $\Longleftarrow$ This one is deprecated and no longer maintained
+			\item \texttt{Python 3.x} $\Longleftarrow$ Use this one!
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+% Installation and Components
+\begin{dwHeaderFrame}{Installation and Components}
+	\dwHeader{Python}
+	\begin{itemize}
+		\item Python is pre-installed on Mac and Linux. You may check this by executing \texttt{python -V} in the command line.
+		\item For Windows (and Mac), download the newst version from \externalurl{www.python.org/downloads/}{www.python.org/downloads/}.
+		\item Don't forget to check the \texttt{`Add Python 3.x to PATH'} option!
+	\end{itemize}
+	\dwHeader{Jupyter}
+	\begin{itemize}
+		\item It is a browser-based Python environment (either on local or remote machine).
+		\item The code is editable directly in the browser.
+		\item Nice for (interactive) demonstrations, \textbf{but hard to debug}.
+	\end{itemize}
+\end{dwHeaderFrame}
+
+
+\begin{frame}
+	\dwHeader{Anaconda}
+	\begin{itemize}
+		\item A package manager for creating \textbf{isolated Python environments} (with different package versions)
+		\item It is good programming practice to create separate environments for different projects in order to avoid version mismatches,
+			package clashes etc.
+		\item It can be downloaded from \externalurl{https://www.anaconda.com/download/}{https://www.anaconda.com/download/}
+	\end{itemize}
+	
+	\dwInfoBox{I recommend to use the \textit{Anaconda Navigator} which combines all components, including a Python IDE called \textit{spyder}.}
+\end{frame}
+
+
+% Writing and running Python Scripts
+\begin{dwHeaderFrame}{Writing and running Python Scripts}
+
+\end{dwHeaderFrame}
+
+
+\begin{frame}
+	\lstinputlisting{00_intro_python/06_listings/test.txt}
+\end{frame}
+
+
+% Section: Data Types
+%______________________________________________________________________
+\dwSection{Data Types}
+
+% Basic Data Types
+\begin{dwHeaderFrame}{Basic Data Types}
+	\begin{itemize}
+		\item Unlike Java, Python is \textbf{typed dynamically}, i.\,e. the data type does not have to be specified when declaring variables.
+		\item Nevertheless, Python works with these types internally (cf. \cref{tab:data_types}).
+	\end{itemize}
+	
+	\input{00_intro_python/03_tbl/data_types}
+\end{dwHeaderFrame}
+
+
+\begin{frame}
+	\dwHeader{Some examples}
+	\lstinputlisting{00_intro_python/06_listings/data_types_string.txt}
+\end{frame}
+
+
+\begin{dwHeaderFrame}{Conversion between Types}
+	\begin{itemize}
+		\item Although you don't have to bother with types in Python, you may want to convert a variable to another type.
+		\item E.\,g. when concatenating a number to a string
+	\end{itemize}
+	
+	\lstinputlisting{00_intro_python/06_listings/type_conversion.txt}
+\end{dwHeaderFrame}
+
+
+% Thank you
+%______________________________________________________________________
+\makethanks
+
+\end{document}

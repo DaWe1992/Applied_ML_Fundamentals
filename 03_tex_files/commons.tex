@@ -63,3 +63,39 @@
 		#4
 	\end{minipage}
 }
+
+% listings
+% ====================================================
+% listings
+\lstset{
+	backgroundcolor=\color{lightgray!50}, 			% choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+	basicstyle=\ttfamily, 						% the size of the fonts that are used for the code
+	breakatwhitespace=false,        	 			% sets if automatic breaks should only happen at whitespace
+	breaklines=true,                 				% sets automatic line breaking
+	captionpos=b,                    				% sets the caption-position to bottom
+	columns=fixed,                  			 		% Using fixed column width (for e.g. nice alignment)
+ 	commentstyle=\color{green!30!black}\textit,    	% comment style
+ 	deletekeywords={...},            				% if you want to delete keywords from the given language
+ 	escapeinside={\%*}{*)},          				% if you want to add LaTeX within your code
+ 	extendedchars=true,              				% lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+ 	fillcolor=\color{lightgray!70}, 				% background color of number column
+ 	frame=l,	                   	   				% adds a frame around the code
+ 	framesep=4.5mm,
+ 	framexleftmargin=0.9mm,
+ 	keepspaces=true,                 				% keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+ 	keywordstyle=\color{blue}\bfseries,       		% keyword style
+ 	language=Python,                 				% the language of the code (can be overrided per snippet)
+ 	otherkeywords={*,...},           				% if you want to add more keywords to the set
+ 	numbers=left,                    				% where to put the line-numbers; possible values are (none, left, right)
+ 	numbersep=6pt,                   				% how far the line-numbers are from the code
+	numberstyle=\normalfont\tiny\color{black},		% line number style
+ 	rulecolor=\color{black},         				% if not set, the frame-color may be changed on line-breaks within not-black text
+ 	showspaces=false,                				% show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+ 	showstringspaces=false,          				% underline spaces within strings only
+ 	showtabs=false,                  				% show tabs within strings adding particular underscores
+ 	stepnumber=1,                    				% the step between two line-numbers. If it's 1, each line will be numbered
+ 	stringstyle=\color{red}, 					% string literal style
+ 	tabsize=2,	                   					% sets default tab size to 2 spaces
+ 	title=\lstname,                  					% show the filename of files included with \lstinputlisting; also try caption instead of title
+	xleftmargin=2.1em
+}

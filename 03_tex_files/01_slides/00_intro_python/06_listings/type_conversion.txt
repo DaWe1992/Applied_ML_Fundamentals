@@ -1,0 +1,12 @@
+# conversion between types
+int("42") # gives 42
+str(42) # gives "42"
+
+# example:
+# this does NOT work (TypeError: can only concatenate str to str)
+print("The answer is " + 42)
+
+# use conversion:
+print("The answer is " + str(42))
+# or alternatively:
+print("The answer is", 42)
