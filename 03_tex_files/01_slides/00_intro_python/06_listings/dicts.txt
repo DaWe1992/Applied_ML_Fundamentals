@@ -1,0 +1,14 @@
+# Create a dictionary:
+months = {
+    1: "January",
+    2: "February",
+    3: "March",
+    4: "April",
+    5: "May",
+    6: "June",
+    ...
+}
+
+# We can use the key to access the corresponding value
+print("The sun shines in " + months[5] + ".")
+# Result: The sun shines in May.

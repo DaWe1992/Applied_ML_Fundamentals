@@ -1,15 +1,15 @@
-# this declares a variable s initialized with value "Hello"
+# This declares a variable s initialized with value "Hello"
 s = 'Hello'
 
-# you may also use double quotes
+# You may also use double quotes
 s = "Hello"
 
-# indexing is possible (starts at 0)
+# Indexing is possible (starts at 0)
 s = "Hello"[1] # gives "e"
 
-# indexing from the back
+# Indexing from the back
 s = "Hello"[-1] # gives "o"
 
-# dynamic typing: now you can use the same variable to save numbers;
-# keep track of what you do with your variables!
+# Dynamic typing: Now you can use the same variable to save numbers,
+# but keep track of what you do with your variables!
 s = 0.50**2 * 3.1415

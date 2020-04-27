@@ -10,6 +10,18 @@
 % number of levels in toc
 \dwDeepToc{false}
 
+%\newcommand{\code}[1]{\colorbox{lightgray!50}{\texttt{#1}}}
+
+\newcommand{\code}[2][fill=lightgray!50]{%
+	\tikz[baseline]\node[%
+        	inner ysep=0.5pt, 
+        	inner xsep=2pt, 
+        	anchor=text, 
+        	rectangle, 
+        	rounded corners=1mm,
+        	#1] {\strut \texttt{#2}};%
+}
+
 % ====================================================
 % ====================================================
 % PRESENTATION DATA
@@ -108,9 +120,9 @@
 \end{frame}
 
 
-% Section: Data Types
+% Section: Variables and Data Types
 %______________________________________________________________________
-\dwSection{Data Types}
+\dwSection{Variables and Data Types}
 
 % Basic Data Types
 \begin{dwHeaderFrame}{Basic Data Types}
@@ -129,13 +141,263 @@
 \end{frame}
 
 
-\begin{dwHeaderFrame}{Conversion between Types}
+\begin{frame}{}
+	\dwHeader{Conversion between Types}
 	\begin{itemize}
 		\item Although you don't have to bother with types in Python, you may want to convert a variable to another type.
 		\item E.\,g. when concatenating a number to a string
 	\end{itemize}
 	
 	\lstinputlisting{00_intro_python/06_listings/type_conversion.txt}
+\end{frame}
+
+
+\begin{frame}
+	\dwHeader{Immutable data types}
+	\lstinputlisting{00_intro_python/06_listings/immutable_data_types.txt}
+\end{frame}
+
+
+% Sequence Data Types
+\begin{dwHeaderFrame}{Sequence Data Types}
+	\begin{itemize}
+		\item Sometimes it is necessary to store multiple elements in one place.
+			Think e.\,g. of a list of data points which we want to analyze using machine learning methods.
+		\item Python offers the types \code{range}, \code{list} and \code{tuple} for that. 
+	\end{itemize}
+	
+	\dwHeader{Ranges}
+	\begin{itemize}
+		\item The \code{range} type represents an immutable sequence of numbers and is commonly used for looping a specific number of times in for-loops.
+		\item \textbf{Interface:} class \texttt{range}(\textit{start}, \textit{stop}[, \textit{step}])
+		\begin{itemize}
+			\item \textit{start}: Fist point in the sequence of numbers (default = 0).
+			\item \textit{stop}: Last point in the sequence of numbers (excluding).
+			\item \textit{step}: Step size
+		\end{itemize}
+	\end{itemize}
+\end{dwHeaderFrame}
+	
+	
+\begin{frame}
+	\dwHeader{Lists}
+	\begin{itemize}
+		\item Lists are \textbf{mutable} sequences of elements (i.\,e. elements can be inserted, modified, deleted).
+		\item Lists can be constructed in several ways:
+		\begin{itemize}
+			\item Using a pair of square brackets (empty list): \code{[]}
+			\item Using square brackets, separating items with commas: \code{[a]}, \code{[a, b, c]}
+			\item Using the type constructor: \code{list()} or \code{list(iterable)}
+			\item Using a \textbf{list comprehension}: \code{[x for x in iterable]}
+		\end{itemize}
+		\item Example: \code{list(range(1, 10)) = [1, 2, 3, 4, 5, 6, 7, 8, 9]}
+	\end{itemize}
+	
+	\dwInfoBox{Lists are commonly used to store \textit{homogeneous} types of elements, e.\,g. a list of customers.}
+\end{frame}
+
+
+\begin{frame}
+	\begin{itemize}
+		\item List comprehensions originate from \textbf{functional programming} and provide a concise way to create lists.
+		\item Common applications are to make new lists where each element is the result of some operations applied to each member of
+			another sequence or iterable, or to create a subsequence of those elements that satisfy a certain condition.
+		\item Example: Compute square numbers:
+	\end{itemize}
+	
+	\lstinputlisting{00_intro_python/06_listings/list_comprehensions.txt}
+	\dwInfoBox{Task: Create a list of prime numbers up to $n$ by using list comprehensions only!}
+\end{frame}
+
+
+\begin{frame}
+	\dwHeader{Excursion: Sets}
+	\begin{itemize}
+		\item Python also includes a data type for sets.
+		\item Following the mathematical notion of a set, it is an \textbf{unordered} collection with \textbf{no duplicate} elements.
+		\item A set can be created using \code{set()} (not \code{\{\}}!)
+		\item \code{set([4, 1, 2, 2, 6])} gives \code{\{ 1, 2, 4, 6 \}}
+		\item \code{set([4, 1, 2, 2, 6]) == set([4, 4, 4, 1, 2, 6, 2])} evaluates to \code{True}!
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\dwHeader{Tuples}
+	\begin{itemize}
+		\item Tuples are \textbf{immutable} sequences, typically used to store collections of \textbf{heterogeneous} data (it is not enforced, though).
+		\item Think e.\,g. of a customer record which includes the name, address and contact.
+		\item Tuples can be constructed in several ways:
+		\begin{itemize}
+			\item Using a pair of parentheses (empty tuple): \code{()}
+			\item Using a trailing comma for a singleton tuple: \code{a,} or \code{(a,)}
+			\item Separating items with commas: \code{a, b, c} or \code{(a, b, c)}
+			\item Using the \code{tuple()} built-in: \code{tuple()} or \code{tuple(iterable)}
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+% Mapping Types
+\begin{dwHeaderFrame}{Mapping Types}
+	\begin{itemize}
+		\item A mapping object maps hashable values to arbitrary objects.
+		\item Mappings are \textbf{mutable} objects.
+		\item There is currently only one standard mapping type, the \textbf{dictionary} -- \code{dict}.
+		\item A dictionary consists of key-value pairs. Consider it to be a telephone book where the keys are the names and the values are the numbers.
+		\item A dictionary’s keys are almost arbitrary values. Values that are not hashable, that is, values containing lists,
+			dictionaries or other mutable types (that are compared by value rather than by object identity) may \textbf{not} be used as keys.
+		\item Dictionaries can be created in two ways:
+		\begin{itemize}
+			\item A comma-separated list of key-value pairs: \code{\{ key1: value1, key2: value2, ... \}}
+			\item By using the \code{dict()} constructor.
+		\end{itemize}
+	\end{itemize}
+\end{dwHeaderFrame}
+
+
+\begin{frame}
+	\lstinputlisting{00_intro_python/06_listings/dicts.txt}
+\end{frame}
+
+
+% Section: Logical Operators
+%______________________________________________________________________
+\dwSection{Logical Operators}
+
+% Basic Data Types
+\begin{dwHeaderFrame}{Logical Values}
+	\begin{itemize}
+		\item Logical constants in Python: \code{True} and \code{False}.
+		\item The value of a logical expression is false, if it returns one of the following:
+		\begin{itemize}
+			\item The \code{False} constant.
+			\item The \code{None} object.
+			\item An empty sequence or collection: \code{[]}, \code{()}, \code{`'} ...
+			\item The number 0.
+		\end{itemize}
+		\item Everything else evaluates to \code{True}.
+	\end{itemize}
+\end{dwHeaderFrame}
+
+
+\begin{frame}
+	\input{00_intro_python/03_tbl/logical_operators}
+\end{frame}
+
+
+% Section: Control Flow
+%______________________________________________________________________
+\dwSection{Control Flow}
+
+% Conditionals
+\begin{dwHeaderFrame}{Conditionals}
+	\begin{itemize}
+		\item Conditionals are used to branch program execution based on conditions.
+		\item \textbf{Indentation is important to define the scope!} If you forget the indentation,
+			Python will give you a hint stating that it expects an indented block.
+		\item General form of a conditional:
+	\end{itemize}
+	
+	\lstinputlisting{00_intro_python/06_listings/conditionals.txt}
+\end{dwHeaderFrame}
+
+
+% Loops
+\begin{dwHeaderFrame}{Loops}
+	\begin{itemize}
+		\item Loops are used to repetitively execute code (and save a large amount of effort and time).
+		\item Python basically distinguishes between two types of loops: The \code{while}-loop and the \code{for}-loop.
+			One type of loop can be expressed in terms of the other (\textbf{syntactical sugar}).
+	\end{itemize}
+	
+	\dwHeader{While-loops}
+	\begin{itemize}
+		\item With the \code{while}-loop we can execute a set of statements as long as a condition is true.
+		\item It requires the relevant variables to be initialized (\code{i} in the example below).
+		\item Typically used when the number of iterations is not known in advance.
+	\end{itemize}
+	
+	\lstinputlisting{00_intro_python/06_listings/while_loop.txt}
+\end{dwHeaderFrame}
+
+
+\begin{frame}
+	\dwHeader{For-loops}
+	\begin{itemize}
+		\item 
+	\end{itemize}
+\end{frame}
+
+
+% Section: Python OO
+%______________________________________________________________________
+\dwSection{Python OO}
+
+% Classes
+\begin{dwHeaderFrame}{Classes}
+	\begin{itemize}
+		\item
+	\end{itemize}
+\end{dwHeaderFrame}
+
+
+% Section: Machine Learning Libraries
+%______________________________________________________________________
+\dwSection{Machine Learning Libraries}
+
+% NumPy
+\begin{dwHeaderFrame}{NumPy}
+	\begin{itemize}
+		\item NumPy (Numerical Python) is the fundamental package for scientific computing with Python.
+			It is mostly implemented in C ans therefore \textbf{very fast}.
+		\item It is a library which defines \textbf{multidimensional array objects} (\code{ndarray}) along with functions / routines
+			that can operate on those arrays.
+		\item The package includes routines for \textbf{linear algebra}, random number generation and many others.
+		\item Install the package using \code{pip install numpy}.
+	\end{itemize}
+\end{dwHeaderFrame}
+
+
+\begin{frame}
+	\dwHeader{ndarray}
+	\begin{itemize}
+		\item The most important object in numpy.
+		\item Creation of ndarrays (assume: \code{import numpy as np}):
+		\begin{itemize}
+			\item 0-dimensional: np.array(42)
+			\item 1-dimensional: np.array([1, 2, 3])
+			\item 2-dimensional: np.array([[1, 2], [3, 4], [5, 6]])
+			\item 3-dimensional: np.array([[[1, 2], [3, 4]], [[5, 6], [7, 8]]])
+			\item ...
+		\end{itemize}
+		\item \textcolor{blue}{\textit{What do we call the above objects from a mathematical point of view?}}
+		\item If you are interested in the dimensionality of an array you can use \code{ndarray.shape}, e.\,g. 
+	\end{itemize}
+\end{frame}
+
+
+% Matplotlib
+\begin{dwHeaderFrame}{Matplotlib}
+	\begin{itemize}
+		\item
+	\end{itemize}
+\end{dwHeaderFrame}
+
+
+% ScikitLearn
+\begin{dwHeaderFrame}{ScikitLearn}
+	\begin{itemize}
+		\item
+	\end{itemize}
+\end{dwHeaderFrame}
+
+
+% PyTorch
+\begin{dwHeaderFrame}{PyTorch}
+	\begin{itemize}
+		\item
+	\end{itemize}
 \end{dwHeaderFrame}
 
 

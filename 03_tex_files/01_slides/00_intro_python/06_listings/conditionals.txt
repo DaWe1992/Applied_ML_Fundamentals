@@ -1,0 +1,8 @@
+if condition1:
+    # condition1 evaluates to True
+    ...
+elif condition2:
+    # condition2 evaluates to True
+    ...
+else:
+    # if no condition is True

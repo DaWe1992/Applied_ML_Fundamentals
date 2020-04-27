@@ -1,0 +1,14 @@
+# Example for int data type:
+a = 10
+id(a)       # gives e.g. 1838375360
+
+a = a + 1
+id(a)       # gives e.g. 1838375392
+
+# Immutability means that some data types cannot be modified:
+
+# ------------------------
+# This code does NOT work!
+# ------------------------
+var = "Hello"
+var[1] = "E"
