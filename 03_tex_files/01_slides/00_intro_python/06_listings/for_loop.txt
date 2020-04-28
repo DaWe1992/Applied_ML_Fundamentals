@@ -1,0 +1,8 @@
+words = ["dog", "cat", "mouse"]
+# Loop over all elements in the list
+for word in words:
+    print(word)
+
+# You can also get the index using enumerate()
+for i, word in enumerate(words)
+    print(i, word)

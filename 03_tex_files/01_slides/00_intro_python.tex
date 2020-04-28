@@ -325,8 +325,11 @@
 \begin{frame}
 	\dwHeader{For-loops}
 	\begin{itemize}
-		\item 
+		\item \code{for}-loops are typically used when the number of iterations is known in advance / when iterating over collections.
+		\item The implementation differs from what you know from Java or C.
 	\end{itemize}
+	
+	\lstinputlisting{00_intro_python/06_listings/for_loop.txt}
 \end{frame}
 
 
@@ -350,7 +353,7 @@
 \begin{dwHeaderFrame}{NumPy}
 	\begin{itemize}
 		\item NumPy (Numerical Python) is the fundamental package for scientific computing with Python.
-			It is mostly implemented in C ans therefore \textbf{very fast}.
+			It is mostly implemented in C and therefore \textbf{very fast}.
 		\item It is a library which defines \textbf{multidimensional array objects} (\code{ndarray}) along with functions / routines
 			that can operate on those arrays.
 		\item The package includes routines for \textbf{linear algebra}, random number generation and many others.
@@ -372,7 +375,72 @@
 			\item ...
 		\end{itemize}
 		\item \textcolor{blue}{\textit{What do we call the above objects from a mathematical point of view?}}
-		\item If you are interested in the dimensionality of an array you can use \code{ndarray.shape}, e.\,g. 
+		\item If you are interested in the dimensionality of an array you can use \code{ndarray.shape}, e.\,g.: \\
+			\code{np.array([[1, 2, 3], [3, 8, 6]]).shape} gives \code{(2, 3)} -- 2 rows, 3 columns.
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\dwHeader{Creation of arrays}
+	\begin{itemize}
+		\item \textbf{Creation of arrays from scratch:}
+		\begin{itemize}
+			\item \code{np.empty(shape)}: Creates an empty array (not initialized). It is filled with random numbers.
+			\item \code{np.zeros(shape)}: Creates an array of zeros.
+			\item \code{np.ones(shape)}: Creates an array of ones.
+		\end{itemize}
+	\end{itemize}
+	\dwAlertBox{The creation of an empty array can lead to strange errors later in your code. I recommend to use the second or third method instead.}
+	
+	\begin{itemize}
+		\item \textbf{Creation of arrays from existing data:}
+		\begin{itemize}
+			\item \code{np.array(data)}: Creates a copy of \code{data} and converts the copy to an array.
+			\item \code{np.asarray(data)}: Uses the original data, changes to the array are reflected in the original data.
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\dwHeader{Indexing}
+	\begin{itemize}
+		\item \textbf{Standard indexing:}
+		\begin{itemize}
+			\item Indexing in numpy is rather simple (in fact it is very similar to standard lists).
+			\item This gives you the \textbf{sixth} element from the array: \code{arr[5]} (\textbf{zero-based index!}).
+			\item Further dimensions are separated with a comma: \code{arr[5,3]} (fifth row, third column).
+			\item A complete row (here: the first one) can be retrieved by: \code{arr[0,:]} or \code{arr[0,...]}
+		\end{itemize}
+		\item \textbf{Integer indexing:}
+	\end{itemize}
+	
+	\lstinputlisting{00_intro_python/06_listings/integer_indexing.txt}
+\end{frame}
+
+
+\begin{frame}
+	\dwHeader{Mathematical operations on arrays (by far not exhaustive!)}
+	\vspace*{2mm}
+	In the following consider two vectors \code{a = np.array([1, 3, 2])}, \code{b = np.array([4, 1, 0])} and the matrix \code{A = np.array([[1, 3], [3, 1]])}.
+	\vspace*{2mm}
+	\begin{itemize}
+		\item \textbf{Addition:} \code{a + b = np.array([5, 4, 2])}
+		\item \textbf{Subtraction:} \code{a - b = np.array([-3, 2, 2])}
+		\item \textbf{Multiplication:} \code{a * b = np.array([4, 3, 0])} \textit{(Hadamard/element-wise product)}
+		\item \textbf{Division:} \code{a / b = np.array([0.25, 3, inf])}
+		\item \textbf{Inner product:} \code{a @ b = 7} or \code{a.dot(b) = 7} \textit{(scalar product)}
+		\item \textbf{Transpose:} \code{A.T} \textit{(swaps rows and columns)}
+		\item \textbf{Matrix inverse:} \code{np.linalg.inv(A)}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\dwHeader{Broadcasting}
+	\begin{itemize}
+		\item The term broadcasting describes how numpy treats arrays with different shapes during arithmetic operations.
 	\end{itemize}
 \end{frame}
 
