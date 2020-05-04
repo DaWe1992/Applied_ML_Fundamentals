@@ -365,7 +365,7 @@
 \begin{frame}
 	\dwHeader{ndarray}
 	\begin{itemize}
-		\item The most important object in numpy.
+		\item The most important object in NumPy.
 		\item Creation of ndarrays (assume: \code{import numpy as np}):
 		\begin{itemize}
 			\item 0-dimensional: np.array(42)
@@ -408,7 +408,7 @@
 	\begin{itemize}
 		\item \textbf{Standard indexing:}
 		\begin{itemize}
-			\item Indexing in numpy is rather simple (in fact it is very similar to standard lists).
+			\item Indexing in NumPy is rather simple (in fact it is very similar to standard lists).
 			\item This gives you the \textbf{sixth} element from the array: \code{arr[5]} (\textbf{zero-based index!}).
 			\item Further dimensions are separated with a comma: \code{arr[5,3]} (fifth row, third column).
 			\item A complete row (here: the first one) can be retrieved by: \code{arr[0,:]} or \code{arr[0,...]}
@@ -425,32 +425,53 @@
 	\vspace*{2mm}
 	In the following consider two vectors \code{a = np.array([1, 3, 2])}, \code{b = np.array([4, 1, 0])} and the matrix \code{A = np.array([[1, 3], [3, 1]])}.
 	\vspace*{2mm}
-	\begin{itemize}
-		\item \textbf{Addition:} \code{a + b = np.array([5, 4, 2])}
-		\item \textbf{Subtraction:} \code{a - b = np.array([-3, 2, 2])}
-		\item \textbf{Multiplication:} \code{a * b = np.array([4, 3, 0])} \textit{(Hadamard/element-wise product)}
-		\item \textbf{Division:} \code{a / b = np.array([0.25, 3, inf])}
-		\item \textbf{Inner product:} \code{a @ b = 7} or \code{a.dot(b) = 7} \textit{(scalar product)}
-		\item \textbf{Transpose:} \code{A.T} \textit{(swaps rows and columns)}
-		\item \textbf{Matrix inverse:} \code{np.linalg.inv(A)}
-	\end{itemize}
+	\begin{table}
+		\centering
+		\renewcommand{\arraystretch}{2.0}
+		\begin{tabular}{ l l l l }
+			\textbullet & \textbf{Addition:} 		& \code{a + b = np.array([5, 4, 2])} 		& 									\\
+			\textbullet & \textbf{Subtraction:} 	& \code{a - b = np.array([-3, 2, 2])} 		& 									\\
+			\textbullet & \textbf{Multiplication:} 	& \code{a * b = np.array([4, 3, 0])} 		& \textit{(Hadamard/element-wise product)}	\\
+			\textbullet & \textbf{Division:} 		& \code{a / b = np.array([0.25, 3, inf])} 	& 									\\
+			\textbullet & \textbf{Inner product:} 	& \code{a @ b = 7} or \code{a.dot(b) = 7}	& \textit{(scalar product)} 					\\
+			\textbullet & \textbf{Transpose:} 	& \code{A.T} 						& \textit{(swaps rows and columns)} 			\\
+			\textbullet & \textbf{Matrix inverse:} 	& \code{np.linalg.inv(A)} 				& 									\\
+		\end{tabular}
+	\end{table}
 \end{frame}
 
 
 \begin{frame}
 	\dwHeader{Broadcasting}
 	\begin{itemize}
-		\item The term broadcasting describes how numpy treats arrays with different shapes during arithmetic operations.
+		\item The term broadcasting describes how NumPy treats arrays with different shapes during arithmetic operations.
+		\item Subject to certain constraints, the smaller array is `broadcast' across the larger array so that they have compatible shapes.
+		\item Broadcasting provides a means of \textbf{vectorizing} array operations so that looping occurs in C instead of Python.
+		\item NumPy operations are usually done on pairs of arrays on an element-by-element basis:
 	\end{itemize}
+	\lstinputlisting{00_intro_python/06_listings/broadcasting_intro.txt}
+	\begin{itemize}
+		\item NumPy’s broadcasting rule \textbf{relaxes this constraint when the arrays’ shapes meet certain constraints}.
+		The simplest broadcasting example occurs when an array and a scalar value are combined in an operation:
+	\end{itemize}
+	\lstinputlisting{00_intro_python/06_listings/broadcasting_example_1.txt}
 \end{frame}
 
 
-% Matplotlib
-\begin{dwHeaderFrame}{Matplotlib}
+\begin{frame}
 	\begin{itemize}
-		\item
+		\item NumPy compares the shapes of the arrays element-wise starting with trailing dimensions.
+		\item Two dimensions are compatible when
+		\begin{itemize}
+			\item they are equal,
+			\item or one of them is 1.
+		\end{itemize}
+		\item If these conditions are not met, a \code{ValueError: operands could not be broadcast together} exception is thrown,
+			indicating that the arrays have incompatible shapes.
+		\item The size of the resulting array is the maximum size along each dimension of the input arrays.
+		\item Check out the \externalurl{https://docs.scipy.org/doc/numpy/user/basics.broadcasting.html}{NumPy documentation}!
 	\end{itemize}
-\end{dwHeaderFrame}
+\end{frame}
 
 
 % ScikitLearn
@@ -459,6 +480,44 @@
 		\item
 	\end{itemize}
 \end{dwHeaderFrame}
+
+
+% Matplotlib
+\begin{dwHeaderFrame}{Matplotlib (PyPlot)}
+	\begin{itemize}
+		\item \code{matplotlib.pyplot} is a collection of command style functions that make matplotlib work like MATLAB.
+		\item Each pyplot function makes some change to a figure: e.g., creates a figure, creates a plotting area in a figure,
+			plots some lines in a plotting area, decorates the plot with labels, etc.
+		\item Generating visualizations with pyplot is very quick (plot on next slide):
+	\end{itemize}
+	\lstinputlisting{00_intro_python/06_listings/pyplot_example_1.txt}
+\end{dwHeaderFrame}
+
+
+\begin{frame}
+	\dwFigure{
+		\includegraphics[scale=0.325]{00_intro_python/02_img/pyplot_example_1}	
+	}{Simple pyplot example}{fig:pyplot-example-1}
+\end{frame}
+
+
+\begin{frame}
+	\begin{itemize}
+		\item Plotting in different colors and shapes is quite easy. Some colors and shapes are predefined and can be accessed using string-constants,
+			cf. \code{r--} (red dashed), \code{bs} (blue squares) and \code{g\^} (green triangles) below.
+		\item Also, Numpy and pyplot go hand in hand:
+	\end{itemize}
+	\lstinputlisting{00_intro_python/06_listings/pyplot_example_2.txt}
+	
+	\dwInfoBox{matplotlib.pyplot can handle NumPy arrays! This is very useful, since NumPy arrays are omnipresent in machine learning applications.}
+\end{frame}
+
+
+\begin{frame}
+	\dwFigure{
+		\includegraphics[scale=0.325]{00_intro_python/02_img/pyplot_example_2}	
+	}{A more sophisticated pyplot example}{fig:pyplot-example-2}
+\end{frame}
 
 
 % PyTorch

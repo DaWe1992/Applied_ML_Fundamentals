@@ -339,7 +339,7 @@
 % title page
 \newcommand{\dwPrintTitle}{
 	{\usebackgroundtemplate{%
-		\tikz[overlay,remember picture] \node[opacity=0.9, at=(current page.center)] {
+		\tikz[overlay,remember picture] \node[opacity=0.6, at=(current page.center)] {
   			\includegraphics[height=\paperheight,width=\paperwidth]{../03_img/processor_red.jpg}
 		};
 	}
@@ -363,9 +363,16 @@
 				\insertinstitute \\[2mm]
 				\insertdate
 			\end{tcolorbox}
+			\vspace*{2.8cm}
+			\begin{center}
+				Find all slides on \href{https://github.com/DaWe1992/Applied_ML_Fundamentals}{\linkstyle{GitHub}} (DaWe1992/Applied\_ML\_Fundamentals)
+			\end{center}
 			
-			\begin{textblock}{1}(1,13.5)
-				\includegraphics[scale=0.04]{../03_img/logo_dhbw}
+			\begin{textblock}{1}(1,12)
+				\includegraphics[scale=0.1]{../03_img/logo_sap}
+			\end{textblock}
+			\begin{textblock}{1}(11.5,12)
+				\includegraphics[scale=0.05]{../03_img/logo_dhbw}
 			\end{textblock}
 		\end{center}
 	\end{frame}}
