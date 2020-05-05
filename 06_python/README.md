@@ -207,7 +207,7 @@ if __name__ == "__main__":
 
 <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/06_python/z_img/gaussian_process.png" width="450px" height="300px"> <img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/06_python/z_img/knn_regression.png" width="450px" height="300px">
 <p align="center">
-	<img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/06_python/z_img/grad_desc.gif" width="600px" height="300px">
+	<img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/06_python/z_img/grad_desc.gif" width="700px" height="300px">
 </p>
 
 ### Clustering
