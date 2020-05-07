@@ -77,7 +77,7 @@ class DataCreator:
             
         # moon data set
         elif name == "moons":
-            X, y = make_moons(150, noise=0.07, random_state=21)
+            X, y = make_moons(n_samples=150, noise=0.07, random_state=21)
             
         # swiss roll data set
         else:
