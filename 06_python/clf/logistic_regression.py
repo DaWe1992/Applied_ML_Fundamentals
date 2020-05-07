@@ -316,4 +316,57 @@ class LogRegOneVsOne:
         v[np.arange(pred.shape[0]), pred.astype(int)] = 1
         
         return v
+
+
+# def plot_logistic(self):
+#     """
+#     Plots the logistic regression line.
+#     Can only be called after fit().
+#     """                
+#     fig, ax = plt.subplots(figsize=(10.00, 3.50))
     
+#     X1 = self.X1 @ self.theta
+#     X2 = self.X2 @ self.theta
+    
+#     # draw scatter plot
+#     # plot class 1
+#     ax.plot(
+#         X1, self.y1, "rx",
+#         markersize=10, markeredgewidth=1.5, label="Class 1",
+#         zorder=15
+#     )
+#     # plot class 2
+#     ax.plot(
+#         X2, self.y2, "bx",
+#         markersize=10, markeredgewidth=1.5, label="Class 2",
+#         zorder=15
+#     )
+    
+#     # plot logistic regression function
+#     x_vals = np.linspace(-12, 12, 100)
+#     ax.plot(x_vals, [0.50] * x_vals.shape[0], "k--", label="boundary")
+#     ax.plot(x_vals, [1.00] * x_vals.shape[0], "b", linewidth=0.75, zorder=5)
+#     ax.plot(x_vals, [0.00] * x_vals.shape[0], "r", linewidth=0.75, zorder=5)
+#     ax.plot(
+#         x_vals,
+#         self.__sigmoid(x_vals),
+#         "m",
+#         linewidth=3,
+#         label=r"$g(\theta^{\intercal} x)$",
+#         zorder=10
+#     )
+    
+#     ax.scatter(X1, self.__sigmoid(X1), facecolor="r", zorder=15, s=8)
+#     ax.scatter(X2, self.__sigmoid(X2), facecolor="b", zorder=15, s=8)
+    
+#     ax.set_xlim((-11.00, 11.00))
+        
+#     # axis labels
+#     ax.set_xlabel(r"$\theta^{\intercal} x$")
+#     ax.set_ylabel(r"$g(\theta^{\intercal} x)$")
+#     # grid
+#     ax.grid(b=True, which="major", color="gray", linestyle="--")
+#     ax.legend(loc="best")
+
+# #    plt.savefig("result.pdf")
+#     plt.show()
