@@ -10,8 +10,6 @@
 % number of levels in toc
 \dwDeepToc{false}
 
-%\newcommand{\code}[1]{\colorbox{lightgray!50}{\texttt{#1}}}
-
 \newcommand{\code}[2][fill=lightgray!50]{%
 	\tikz[baseline]\node[%
         	inner ysep=0.5pt, 
@@ -477,9 +475,35 @@
 % ScikitLearn
 \begin{dwHeaderFrame}{ScikitLearn}
 	\begin{itemize}
-		\item
+		\item scikit-learn is a Python module for machine learning built on top of SciPy.
+		\item The project was started in 2007 by David Cournapeau as a Google Summer of Code project, and since then many volunteers have contributed.
+		\item The library implements all common machine learning algorithms (classification, regression, clustering, dimensionality reduction)
+			with a standardized API.
+		\item Furthermore, functionality for model selection and data pre-processing is included.
+		\item Install the library with \code{pip install scikit-learn}
+		\item Standard methods all algorithms implement:
+		\begin{itemize}
+			\item \code{model.fit(X\_train, y\_train)}: Fits the model to the training data. This is called \textbf{training}.
+			\item \code{model.predict(X\_test)}: Uses the trained model to get predictions for \textbf{unseen data}.
+		\end{itemize}
 	\end{itemize}
 \end{dwHeaderFrame}
+
+
+\begin{frame}
+	\dwHeader{General procedure}
+	\lstinputlisting{00_intro_python/06_listings/scikit_learn_procedure.txt}
+\end{frame}
+
+
+\begin{frame}
+	\begin{itemize}
+		\item \code{X\_train} must be a two-dimensional array of features: \code{np.array([[...], [...], ...])}.
+		\item \code{y\_train} is a one-dimensional array of corresponding class labels, e.\,g.: \code{np.array([0, 1, 1, 0, ...])}
+	\end{itemize}
+	
+	\dwInfoBox{Task: Install scikit-learn and try it for yourself!}
+\end{frame}
 
 
 % Matplotlib
@@ -517,6 +541,34 @@
 	\dwFigure{
 		\includegraphics[scale=0.325]{00_intro_python/02_img/pyplot_example_2}	
 	}{A more sophisticated pyplot example}{fig:pyplot-example-2}
+\end{frame}
+
+
+\begin{frame}
+	\dwHeader{Plotting contours}
+	\begin{itemize}
+		\item Contour plots can be useful for plotting decision boundaries of classifiers.
+		\item For that you have to create a mesh-grid and classify all points in the grid with your classifier. Matplotlib then assigns a color
+			to that point based on the classification result.
+		\item Let use make a step-by-step example: 
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\lstinputlisting{00_intro_python/06_listings/pyplot_contours_1.txt}
+\end{frame}
+
+
+\begin{frame}
+	\lstinputlisting{00_intro_python/06_listings/pyplot_contours_2.txt}
+\end{frame}
+
+
+\begin{frame}
+	\dwFigure{
+		\includegraphics[scale=0.325]{00_intro_python/02_img/contour}	
+	}{A contour plot in matplotlib}{fig:contour}
 \end{frame}
 
 
