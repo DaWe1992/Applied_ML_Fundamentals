@@ -107,17 +107,6 @@
 \end{frame}
 
 
-% Writing and running Python Scripts
-\begin{dwHeaderFrame}{Writing and running Python Scripts}
-
-\end{dwHeaderFrame}
-
-
-\begin{frame}
-	\lstinputlisting{00_intro_python/06_listings/test.txt}
-\end{frame}
-
-
 % Section: Variables and Data Types
 %______________________________________________________________________
 \dwSection{Variables and Data Types}
@@ -336,9 +325,62 @@
 \dwSection{Python OO}
 
 % Classes
-\begin{dwHeaderFrame}{Classes}
+\begin{dwHeaderFrame}{What are Classes?}
 	\begin{itemize}
-		\item
+		\item Classes provide a means of bundling data and functionality together.
+		\item A class consists of \textbf{attributes} and \textbf{methods}.
+		\item \textbf{Definition of a simple class:}
+	\end{itemize}
+	
+	\lstinputlisting{00_intro_python/06_listings/class_definition.txt}
+\end{dwHeaderFrame}
+
+
+\begin{frame}
+	\begin{itemize}
+		\item Classes are instantiated like this: \code{x = MyClass()}.
+		\item Attributes and methods can be accessed using the \textbf{dot-operator}.
+		\begin{itemize}
+			\item Read attribute: \code{print(x.i)}, write attribute: \code{x.i = 123}
+			\item Call method: \code{x.f()}
+		\end{itemize}
+		\item By default, all class members (attributes and methods) are \textbf{public}. \textbf{Private members do not exist in Python}.
+			\textit{But: Cf. \textit{name mangling}}
+		\item Each class implicitly contains some built-in methods (not exhaustive):
+		\begin{table}
+			\centering
+			\renewcommand{\arraystretch}{2.0}
+			\begin{tabular}{ l l l l }
+				\textbullet 		& 	\textbf{Constructor:} 		& 	\code{\_\_init\_\_(self):}		&	Passes initial state to object 	\\
+				\textbullet 		& 	\textbf{Hash:} 			& 	\code{\_\_hash\_\_(self):}		& 	Defines the hash of the object 	\\
+				\textbullet 		& 	\textbf{Equality:} 		& 	\code{\_\_eq\_\_(self, other):} 	&	Comparison with other objects	\\
+			\end{tabular}
+		\end{table}
+	\end{itemize}
+\end{frame}
+
+
+% Class Variables vs. Instance Variables
+\begin{dwHeaderFrame}{Class Variables vs. Instance Variables}
+	\begin{itemize}
+		\item Class variables are shared by all objects / instances of that class.
+		\item Instance variables are for data unique to each object / instance. Such variables are declared using \code{self.var\_name}.
+		\item Cf. next slide for an example.
+	\end{itemize}
+\end{dwHeaderFrame}
+
+
+\begin{frame}
+	\lstinputlisting{00_intro_python/06_listings/instance_class_var.txt}
+\end{frame}
+
+
+% Inheritance
+\begin{dwHeaderFrame}{Inheritance}
+	\begin{itemize}
+		\item The syntax for class inheritance is \code{class sub\_class\_name(base\_class\_name):}
+		\item Python allows for \textbf{polymorphism} (all methods are \textbf{virtual}).
+		\item Python also supports some form of multiple inheritance.
 	\end{itemize}
 \end{dwHeaderFrame}
 

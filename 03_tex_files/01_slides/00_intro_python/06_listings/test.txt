@@ -1,4 +1,0 @@
-print("Hello world!") # print to console
-i = 0
-if i == 0:
-    print("Success")

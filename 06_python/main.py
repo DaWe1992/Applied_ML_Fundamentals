@@ -81,8 +81,8 @@ def classification():
     X, y = DataCreator().make_classification(name="non_linear", n_classes=2)
     
     # train kNN classifier
-#    clf = kNN(n_neighbors=1)
-#    clf.fit(X, y)
+    clf = kNN(n_neighbors=1)
+    clf.fit(X, y)
     
     # train SVM classifier
 #    clf = SVM(kernel="polynomial", C=1.0, p=3, s=3.0)
@@ -91,8 +91,8 @@ def classification():
 #    clf.plot_contour(X[y == 1], X[y == -1])
     
     # train logistic regression classifier
-    clf = LogisticRegression(poly=True)
-    clf.fit(X, y, batch_size=X.shape[0])
+#    clf = LogisticRegression(poly=True)
+#    clf.fit(X, y, batch_size=X.shape[0])
     
     # train one-vs-one logistic regression classifier
 #    clf = LogRegOneVsOne(poly=True)
@@ -123,7 +123,7 @@ def classification():
     
     # plot boundary
     # -------------------------------------------------------------------------
-    Plotter(X, y).plot_boundary(clf, step_size=0.005)
+    Plotter(X, y).plot_boundary(clf, step_size=0.05)
     
     # evaluation
     # -------------------------------------------------------------------------
@@ -316,8 +316,8 @@ if __name__ == "__main__":
     """
     Main function.
     """
-#    classification()
-    regression()
+    classification()
+#    regression()
 #    unsupervised_learning()
 #    reinforcement_learning()
     
