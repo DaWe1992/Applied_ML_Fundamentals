@@ -230,27 +230,26 @@ class NeuralNetwork:
 # Main
 # -----------------------------------------------------------------------------
         
-if __name__ == "__main__":
-    X = np.asarray([[1, 1]])
-    y = np.asarray([1])
-    
-    # train a neural network
-    clf = NeuralNetwork()
-#    clf.add_layer(Layer(2, 2, "relu",
-#        np.asarray([[0.19, -0.42], [-0.92, -0.28]]),
-#        np.asarray([0, 0])))
-#    clf.add_layer(Layer(2, 1, "tanh",
-#        np.asarray([[0.61, -1.50]]),
-#        np.asarray([0])))
-#    clf.add_layer(Layer(1, 3, "sigmoid",
-#        np.asarray([[1.50], [-0.81], [-0.24]]),
-#        np.asarray([0, 0, 0])))
-#    clf.add_layer(Layer(3, 2, "sigmoid",
-#        np.asarray([[-1.40, -2.20, -0.27], [-0.81, -1.70, -0.73]]),
-#        np.asarray([0, 0])))
-    clf.add_layer(Layer(2, 2, "relu", np.asarray([[0.19, 0.42], [-0.94, 0.30]])))
-    clf.add_layer(Layer(2, 2, "sigmoid", np.asarray([[-1.40, -2.20], [-0.81, -1.70]])))
-    clf.fit(X, y, 0.1, 1000)
-    
-    print(clf.predict(X))
-        
+#if __name__ == "__main__":
+#    X = np.asarray([[1, 1]])
+#    y = np.asarray([1])
+#    
+#    # train a neural network
+#    clf = NeuralNetwork()
+##    clf.add_layer(Layer(2, 2, "relu",
+##        np.asarray([[0.19, -0.42], [-0.92, -0.28]]),
+##        np.asarray([0, 0])))
+##    clf.add_layer(Layer(2, 1, "tanh",
+##        np.asarray([[0.61, -1.50]]),
+##        np.asarray([0])))
+##    clf.add_layer(Layer(1, 3, "sigmoid",
+##        np.asarray([[1.50], [-0.81], [-0.24]]),
+##        np.asarray([0, 0, 0])))
+##    clf.add_layer(Layer(3, 2, "sigmoid",
+##        np.asarray([[-1.40, -2.20, -0.27], [-0.81, -1.70, -0.73]]),
+##        np.asarray([0, 0])))
+#    clf.add_layer(Layer(2, 2, "relu", np.asarray([[0.19, 0.42], [-0.94, 0.30]])))
+#    clf.add_layer(Layer(2, 2, "sigmoid", np.asarray([[-1.40, -2.20], [-0.81, -1.70]])))
+#    clf.fit(X, y, 0.1, 1000)
+#    
+#    print(clf.predict(X))
