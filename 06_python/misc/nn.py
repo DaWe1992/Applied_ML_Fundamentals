@@ -38,7 +38,7 @@ class Layer:
         """
         # initialize weights and bias randomly
         self.weights = weights if weights is not None \
-            else np.random.rand(n_neurons, n_input)
+            else np.random.rand(n_neurons, n_input) - 0.5
 #        self.bias = bias if bias is not None \
 #            else np.random.rand(n_neurons)
         self.activation = activation
@@ -90,6 +90,7 @@ class Layer:
         :param p:                       preactivation
         :return:                        activation derivative
         """
+        p = np.copy(p)
         if self.activation is None:
             return p
         if self.activation == "tanh":
@@ -97,8 +98,8 @@ class Layer:
         if self.activation == "sigmoid":
             return (1 / (1 + np.exp(-p))) * (1 - (1 / (1 + np.exp(-p))))
         if self.activation == "relu":
+            p[np.where(p >= 0)] = 1
             p[np.where(p < 0)] = 0
-            return p
 
         return p
 
@@ -145,8 +146,9 @@ class NeuralNetwork:
         for i in range(n_epochs):
             print("Epoch", i)
             # stochastic gradient descent
-            for j in range(len(X)):
-                self.__backpropagation(X[j], y[j], alpha)
+            for _ in range(len(X)):
+                idx = np.random.choice(np.arange(0, len(X), 1), 1)[0]
+                self.__backpropagation(X[idx], y[idx], alpha)
                 
     
     def predict(self, X):
@@ -205,8 +207,7 @@ class NeuralNetwork:
         for i in range(len(self.__layers)):
             layer = self.__layers[i]
             input_to_use = np.atleast_2d(X if i == 0 else self.__layers[i - 1].z)
-            grad = (layer.error * layer.d_act_f(layer.p) * input_to_use.T)
-            if layer.weights.shape[1] != grad.shape[1]: grad = grad.T
+            grad = (layer.error * layer.d_act_f(layer.p) * input_to_use.T).T
             layer.weights -= alpha * grad
             
             
@@ -247,7 +248,7 @@ if __name__ == "__main__":
 #        np.asarray([0, 0])))
     clf.add_layer(Layer(2, 2, "relu", np.asarray([[0.19, 0.42], [-0.94, 0.30]])))
     clf.add_layer(Layer(2, 2, "sigmoid", np.asarray([[-1.40, -2.20], [-0.81, -1.70]])))
-    clf.fit(X, y, 0.01, 10000)
+    clf.fit(X, y, 0.1, 1000)
     
     print(clf.predict(X))
         

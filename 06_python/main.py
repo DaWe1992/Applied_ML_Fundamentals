@@ -31,6 +31,8 @@ from clf.perceptron import Perceptron
 from clf.decision_tree import DecisionTree
 from clf.logistic_regression import LogisticRegression, LogRegOneVsOne
 
+from misc.nn import NeuralNetwork, Layer
+
 # unsupervised learning
 # -----------------------------------------------------------------------------
 from unsupervised.em import EM
@@ -78,11 +80,11 @@ def classification():
     Classification.
     """
     # create data
-    X, y = DataCreator().make_classification(name="non_linear", n_classes=2)
+    X, y = DataCreator().make_classification(name="moons", n_classes=2)
     
     # train kNN classifier
-    clf = kNN(n_neighbors=1)
-    clf.fit(X, y)
+#    clf = kNN(n_neighbors=1)
+#    clf.fit(X, y)
     
     # train SVM classifier
 #    clf = SVM(kernel="polynomial", C=1.0, p=3, s=3.0)
@@ -111,6 +113,13 @@ def classification():
 #    clf = MLP()
 #    clf.fit(X, y, n_epochs=10000)
     
+    # train own MLP
+    clf = NeuralNetwork()
+    clf.add_layer(Layer(2, 64, "sigmoid"))
+    clf.add_layer(Layer(64, 32, "sigmoid"))
+    clf.add_layer(Layer(32, 2, "sigmoid"))
+    clf.fit(X, y, 0.1, 250)
+    
     # train Fisher's linear discriminant
 #    clf = LDA(n_dims=1)
 #    y[np.where(y == 0)] = -1
@@ -123,7 +132,7 @@ def classification():
     
     # plot boundary
     # -------------------------------------------------------------------------
-    Plotter(X, y).plot_boundary(clf, step_size=0.05)
+    Plotter(X, y).plot_boundary(clf, step_size=0.005)
     
     # evaluation
     # -------------------------------------------------------------------------
