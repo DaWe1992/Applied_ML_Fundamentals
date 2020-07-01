@@ -33,6 +33,7 @@ class Layer:
         :param activation:              type of activation function
                                             - tanh
                                             - sigmoid
+                                            - relu
         :param weights:                 weights for the layer
         :param bias:                    bias for the layer
         """
@@ -191,6 +192,7 @@ class NeuralNetwork:
         """
         # perform forward pass
         y_pred = self.__feed_forward(X)
+        
         # loop over the layers backward
         for i in reversed(range(len(self.__layers))):
             layer = self.__layers[i]
