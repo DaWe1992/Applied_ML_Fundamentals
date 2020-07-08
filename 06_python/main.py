@@ -80,7 +80,7 @@ def classification():
     Classification.
     """
     # create data
-    X, y = DataCreator().make_classification(name="moons", n_classes=2)
+    X, y = DataCreator().make_classification(name="linear", n_classes=2)
     
     # train kNN classifier
 #    clf = kNN(n_neighbors=1)
@@ -93,11 +93,11 @@ def classification():
 #    clf.plot_contour(X[y == 1], X[y == -1])
     
     # train logistic regression classifier
-#    clf = LogisticRegression(poly=True)
-#    clf.fit(X, y, batch_size=X.shape[0])
+    clf = LogisticRegression(poly=False)
+    clf.fit(X, y, batch_size=X.shape[0])
     
     # train one-vs-one logistic regression classifier
-#    clf = LogRegOneVsOne(poly=True)
+#    clf = LogRegOneVsOne(poly=False)
 #    clf.fit(X, y)
     
     # train an iterative reweighted least squares (IRLS) classifier
@@ -114,11 +114,11 @@ def classification():
 #    clf.fit(X, y, n_epochs=10000)
     
     # train own MLP
-    clf = NeuralNetwork()
-    clf.add_layer(Layer(2, 64, "sigmoid"))
-    clf.add_layer(Layer(64, 32, "sigmoid"))
-    clf.add_layer(Layer(32, 2, "sigmoid"))
-    clf.fit(X, y, 0.1, 250)
+#    clf = NeuralNetwork()
+#    clf.add_layer(Layer(2, 64, "sigmoid"))
+#    clf.add_layer(Layer(64, 32, "sigmoid"))
+#    clf.add_layer(Layer(32, 2, "sigmoid"))
+#    clf.fit(X, y, 0.1, 250)
     
     # train Fisher's linear discriminant
 #    clf = LDA(n_dims=1)
