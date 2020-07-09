@@ -192,6 +192,7 @@ class NeuralNetwork:
         """
         # perform forward pass
         y_pred = self.__feed_forward(X)
+        print(y_pred)
         
         # loop over the layers backward
         for i in reversed(range(len(self.__layers))):
@@ -230,12 +231,14 @@ class NeuralNetwork:
 # Main
 # -----------------------------------------------------------------------------
         
-#if __name__ == "__main__":
-#    X = np.asarray([[1, 1]])
-#    y = np.asarray([1])
-#    
-#    # train a neural network
-#    clf = NeuralNetwork()
+if __name__ == "__main__":
+    X = np.asarray([[1, 1]])
+    y = np.asarray([1])
+    
+    # train a neural network
+    clf = NeuralNetwork()
+
+# config 1
 ##    clf.add_layer(Layer(2, 2, "relu",
 ##        np.asarray([[0.19, -0.42], [-0.92, -0.28]]),
 ##        np.asarray([0, 0])))
@@ -248,8 +251,14 @@ class NeuralNetwork:
 ##    clf.add_layer(Layer(3, 2, "sigmoid",
 ##        np.asarray([[-1.40, -2.20, -0.27], [-0.81, -1.70, -0.73]]),
 ##        np.asarray([0, 0])))
-#    clf.add_layer(Layer(2, 2, "relu", np.asarray([[0.19, 0.42], [-0.94, 0.30]])))
-#    clf.add_layer(Layer(2, 2, "sigmoid", np.asarray([[-1.40, -2.20], [-0.81, -1.70]])))
-#    clf.fit(X, y, 0.1, 1000)
-#    
+
+# config 2    
+##    clf.add_layer(Layer(2, 2, "relu", np.asarray([[0.19, 0.42], [-0.94, 0.30]])))
+##    clf.add_layer(Layer(2, 2, "sigmoid", np.asarray([[-1.40, -2.20], [-0.81, -1.70]])))
+    
+# config 3
+    clf.add_layer(Layer(2, 2, "sigmoid", np.asarray([[0.09, -0.23], [-0.41, 0.19]])))
+    clf.add_layer(Layer(2, 2, "sigmoid", np.asarray([[-1.11, -0.89], [0.10, -1.45]])))
+    clf.fit(X, y, 0.1, 10000)
+    
 #    print(clf.predict(X))

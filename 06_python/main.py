@@ -80,7 +80,7 @@ def classification():
     Classification.
     """
     # create data
-    X, y = DataCreator().make_classification(name="linear", n_classes=2)
+    X, y = DataCreator().make_classification(name="circles", n_classes=2)
     
     # train kNN classifier
 #    clf = kNN(n_neighbors=1)
@@ -93,8 +93,8 @@ def classification():
 #    clf.plot_contour(X[y == 1], X[y == -1])
     
     # train logistic regression classifier
-    clf = LogisticRegression(poly=False)
-    clf.fit(X, y, batch_size=X.shape[0])
+#    clf = LogisticRegression(poly=False)
+#    clf.fit(X, y, batch_size=X.shape[0])
     
     # train one-vs-one logistic regression classifier
 #    clf = LogRegOneVsOne(poly=False)
@@ -110,8 +110,8 @@ def classification():
 #    clf.plot_contour(discrete=False)
     
     # train pytorch MLP
-#    clf = MLP()
-#    clf.fit(X, y, n_epochs=10000)
+    clf = MLP()
+    clf.fit(X, y, n_epochs=250)
     
     # train own MLP
 #    clf = NeuralNetwork()
@@ -132,7 +132,7 @@ def classification():
     
     # plot boundary
     # -------------------------------------------------------------------------
-    Plotter(X, y).plot_boundary(clf, step_size=0.005)
+    Plotter(X, y).plot_boundary(clf, step_size=0.05)
     
     # evaluation
     # -------------------------------------------------------------------------
