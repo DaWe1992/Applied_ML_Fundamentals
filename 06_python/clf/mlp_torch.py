@@ -29,7 +29,7 @@ class MLP(torch.nn.Module):
         super(MLP, self).__init__()
         
         
-    def __model_fn(self, n_input, n_out, n_hidden_1=64, n_hidden_2=64):
+    def __model_fn(self, n_input, n_out, n_hidden_1=128, n_hidden_2=128):
         """
         Specifies the network.
         

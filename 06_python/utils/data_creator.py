@@ -40,6 +40,7 @@ class DataCreator:
                                     - simple_linear (linearly separable)
                                     - linear (linearly separable, sklearn)
                                     - spiral (non-linear)
+                                    - spiral_complex (non-linear)
                                     - circles (non-linear, sklearn)
                                     - moons (non-linear, sklearn)
                                     - swiss (swiss roll, non-linear, sklearn)
@@ -70,6 +71,9 @@ class DataCreator:
         # spiral data set
         elif name == "spiral":
             X, y = self.__make_spiral(n_samples=200)
+            
+        elif name == "spiral_complex":
+            X, y = self.__make_spiral_complex(n_samples=200, noise=0.0)
             
         # circular data
         elif name == "circles":
@@ -191,4 +195,20 @@ class DataCreator:
         X += .5 * np.random.randn(2, 2 * n_samples)
         
         return X.T, y[0]
+    
+    
+    def __make_spiral_complex(self, n_samples=200, noise=0.5):
+        """
+        Generates a more complex spiral data set.
+        
+        :param n_samples:       number of data points to be generated
+        :param noise:           noise in the data set
+        :return:                X, y (data set)
+        """
+        n = np.sqrt(np.random.rand(n_samples, 1)) * 780 * (2 * np.pi) / 360
+        d1x = -np.cos(n) * n + np.random.rand(n_samples, 1) * noise
+        d1y = np.sin(n) * n + np.random.rand(n_samples, 1) * noise
+        
+        return (np.vstack((np.hstack((d1x, d1y)), np.hstack((-d1x, -d1y)))), 
+                np.hstack((np.zeros(n_samples), np.ones(n_samples))))
     

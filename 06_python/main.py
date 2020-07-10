@@ -80,7 +80,7 @@ def classification():
     Classification.
     """
     # create data
-    X, y = DataCreator().make_classification(name="circles", n_classes=2)
+    X, y = DataCreator().make_classification(name="spiral_complex", n_classes=2)
     
     # train kNN classifier
 #    clf = kNN(n_neighbors=1)
@@ -111,7 +111,7 @@ def classification():
     
     # train pytorch MLP
     clf = MLP()
-    clf.fit(X, y, n_epochs=250)
+    clf.fit(X, y, n_epochs=20000)
     
     # train own MLP
 #    clf = NeuralNetwork()
