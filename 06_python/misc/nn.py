@@ -11,6 +11,8 @@ Created on Thu Jan 23 11:17:13 2020
 
 import numpy as np
 
+from prettytable import PrettyTable
+
 np.random.seed(100)
 
 
@@ -37,16 +39,20 @@ class Layer:
         :param weights:                 weights for the layer
         :param bias:                    bias for the layer
         """
+        self.n_neurons = n_neurons
+        self.activation = activation
+        
         # initialize weights and bias randomly
         self.weights = weights if weights is not None \
             else np.random.rand(n_neurons, n_input) - 0.5
 #        self.bias = bias if bias is not None \
 #            else np.random.rand(n_neurons)
-        self.activation = activation
+            
         # filled later
         self.p = None
         self.z = None
         self.error = None
+        self.w_grad = None
 
 
     def compute_act(self, x):
@@ -132,7 +138,7 @@ class NeuralNetwork:
         self.__layers.append(layer)
         
         
-    def fit(self, X, y, alpha, n_epochs):
+    def fit(self, X, y, alpha, n_epochs, debug=False):
         """
         Trains the neural network using backpropagation.
         
@@ -140,7 +146,10 @@ class NeuralNetwork:
         :param y:                       The target values
         :param alpha:                   The learning rate
         :param n_epochs:                maximum number of epochs
+        :param debug:                   flag indicating whether to print
+                                        gradients for debugging
         """
+        self.debug = debug
         y = self.__one_hot(y)
         
         # perform training epochs
@@ -192,7 +201,6 @@ class NeuralNetwork:
         """
         # perform forward pass
         y_pred = self.__feed_forward(X)
-        print(y_pred)
         
         # loop over the layers backward
         for i in reversed(range(len(self.__layers))):
@@ -210,8 +218,11 @@ class NeuralNetwork:
         for i in range(len(self.__layers)):
             layer = self.__layers[i]
             input_to_use = np.atleast_2d(X if i == 0 else self.__layers[i - 1].z)
-            grad = (layer.error * layer.d_act_f(layer.p) * input_to_use.T).T
-            layer.weights -= alpha * grad
+            layer.w_grad = (layer.error * layer.d_act_f(layer.p) * input_to_use.T).T
+            layer.weights -= alpha * layer.w_grad
+        
+        if self.debug:
+            self.__print_gradients()
             
             
     def __one_hot(self, y):
@@ -225,7 +236,48 @@ class NeuralNetwork:
         y_one_hot[np.arange(y.size), y] = 1
         
         return y_one_hot
-
+    
+    
+    def __print_gradients(self):
+        """
+        Prints the gradients of the network.
+        """
+        t_n = PrettyTable([
+            "Neuron", "Preactivation",
+            "Activation function", "Activation",
+            "Error gradient"
+        ])
+        t_w = PrettyTable([
+            "Weight", "Weight gradient", "Weight new"
+        ])
+        
+        # loop over all layers
+        for i in range(len(self.__layers)):
+            l = self.__layers[i]
+            
+            # loop over neurons in ith layer
+            for j in range(l.n_neurons):
+                t_n.add_row([
+                    "n_{0}^({1})".format(j + 1, i + 1),
+                    "{:.2f}".format(l.p[j]),
+                    l.activation,
+                    "{:.2f}".format(l.z[j]),
+                    "{:.2f}".format(l.error[j])
+                ])
+                
+            # loop over all weights in ith layer
+            for k in range(l.weights.shape[0]):
+                for h in range(l.weights.shape[1]):
+                    t_w.add_row([
+                        "w_{0}{1}^({2})".format(k, h, i + 1),
+                        "{:.2f}".format(l.w_grad[k][h]),
+                        "{:.2f}".format(l.weights[k][h])
+                    ])
+               
+        print("Neurons:")
+        print(t_n)
+        print("Weights:")
+        print(t_w)
 
 # -----------------------------------------------------------------------------
 # Main
@@ -259,6 +311,6 @@ if __name__ == "__main__":
 # config 3
     clf.add_layer(Layer(2, 2, "sigmoid", np.asarray([[0.09, -0.23], [-0.41, 0.19]])))
     clf.add_layer(Layer(2, 2, "sigmoid", np.asarray([[-1.11, -0.89], [0.10, -1.45]])))
-    clf.fit(X, y, 0.1, 10000)
+    clf.fit(X, y, 0.1, 10, debug=True)
     
 #    print(clf.predict(X))
