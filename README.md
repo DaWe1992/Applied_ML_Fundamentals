@@ -124,13 +124,13 @@ Please do not translate domain specific technical terms in order to avoid confus
 **Exam preparation:**
 * You will not be asked for any derivations, rather I want to test whether you understand the general concepts.
 * The exam will contain a mix of multiple choice questions, short answer questions and calculations.
-* Make sure you can answer the self-test questions provided for each topic. **There won't be sample solutions for those questions!** (This would undermine the sense of *self*-test questions).
+* Make sure you can answer the self-test questions provided for each topic. **There won't be sample solutions for those questions!** (This would undermine the sense of **self**-test questions).
 * Some of the slides give you important hints (upper left corner):
 	*  A slide marked with symbol (1) provides in-depth information which you do not have to know by heart (think of it as additional material for the sake of completeness).
 	*  Symbol (2) indicates very important content. Make sure you understand it!
 * Make sure you understand the homework assignments.
 * Work through the [list of 150+ terms](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/04_exam/terms_you_have_to_know.pdf) which you should be able to explain.
-* One exemplary exam is provided in the folder [04_exam](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/04_exam). The solutions will be discussed in the last session of the lecture.
+* One exemplary exam is provided. You can find it in the folder [04_exam](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/04_exam). The solutions will be discussed in the last session of the lecture.
 
 Symbol (1):
 
