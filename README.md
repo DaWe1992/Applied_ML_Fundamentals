@@ -233,7 +233,7 @@ Have a look at the following slides (unless stated otherwise, these slides are n
 
 ## Frequently Asked Questions (FAQ) ⚠️
 
-**Q:** Can we have sample solutions for the self-test questions? </br>
+**Q: Can we have sample solutions for the self-test questions?** </br>
 **A:** No. The goal of those questions is that you deepen your knowledge about the contents.
 If answers were provided you would probably not answer the questions on your own.
 
