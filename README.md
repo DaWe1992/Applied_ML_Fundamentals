@@ -24,7 +24,8 @@ This Readme file provides you with all necessary information. It is structured a
 5. 📚 Literature and recommended reading
 6. 📐 Data exploration project
 7. 🎁 Additional material
-8. 🐞 Bugs and errors
+8. ⚠️ Frequently Asked Questions (FAQ)
+9. 🐞 Bugs and errors
 
 ## Lecture Contents 📜
 
@@ -229,6 +230,12 @@ Have a look at the following slides (unless stated otherwise, these slides are n
 	* Gaussian process regression
 	* Support vector regression
 7. **Advanced deep learning** (not yet available)
+
+## Frequently Asked Questions (FAQ) ⚠️
+
+**Q** Can we have sample solutions for the self-test questions?
+**A** No. The goal of those questions is that you deepen your knowledge about the contents.
+If answers were provided you would probably not answer the questions on your own.
 
 ## Bugs and Errors 🐞
 Help me improve the lecture. Feel free to file an issue, if you spot any errors in the slides, exercises or code.
