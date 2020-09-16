@@ -131,7 +131,7 @@ Please do not translate domain specific technical terms in order to avoid confus
 	*  Symbol (2) indicates very important content. Make sure you understand it!
 * Make sure you understand the homework assignments.
 * Work through the [list of 150+ terms](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/04_exam/terms_you_have_to_know.pdf) which you should be able to explain.
-* One exemplary exam is provided. You can find it in the folder [04_exam](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/04_exam). The solutions will be discussed in the last session of the lecture.
+* Solve the [mock exam](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/04_exam/mock_exam.pdf) which is provided. The solutions will be discussed in the last session of the lecture.
 
 Symbol (1):
 
