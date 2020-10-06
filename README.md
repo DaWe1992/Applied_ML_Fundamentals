@@ -188,7 +188,7 @@ In general, the [Coursera machine learning course](https://de.coursera.org/learn
 You can get a nice certificate if you want (around $60), but you can also participate in the course for free (without getting the certificate):
 
 <p align="center">
-	<img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/ml_certificate.png" width="400px" height="300px">
+	<img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/ml_certificate.png" width="450px" height="350px">
 </p>
 
 In the exam you will not be asked for content which was not discussed in the lecture. Regard the literature as additional resources in case you want to dig deeper into
