@@ -187,9 +187,11 @@ You do not need to buy any books for the lecture, most resources are available o
 In general, the [Coursera machine learning course](https://de.coursera.org/learn/machine-learning#about) by Andrew Ng is highly recommended.
 You can get a nice certificate if you want (around $60), but you can also participate in the course for free (without getting the certificate):
 
+</br>
 <p align="center">
 	<img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/ml_certificate.png" width="500px" height="400px">
 </p>
+</br>
 
 In the exam you will not be asked for content which was not discussed in the lecture. Regard the literature as additional resources in case you want to dig deeper into
 specific topics. Please give me a hint, if you feel that some important resources are missing. I am happy to add them here.
