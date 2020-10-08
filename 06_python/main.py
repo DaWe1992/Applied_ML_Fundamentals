@@ -80,17 +80,17 @@ def classification():
     Classification.
     """
     # create data
-    X, y = DataCreator().make_classification(name="spiral_complex", n_classes=2)
+    X, y = DataCreator().make_classification(name="spiral", n_classes=2)
     
     # train kNN classifier
 #    clf = kNN(n_neighbors=1)
 #    clf.fit(X, y)
     
     # train SVM classifier
-#    clf = SVM(kernel="polynomial", C=1.0, p=3, s=3.0)
-#    y[np.where(y == 0)] = -1
-#    clf.fit(X, y)
-#    clf.plot_contour(X[y == 1], X[y == -1])
+    clf = SVM(kernel="gaussian", C=10.0, p=3, s=3.0)
+    y[np.where(y == 0)] = -1
+    clf.fit(X, y)
+    clf.plot_contour(X[y == 1], X[y == -1])
     
     # train logistic regression classifier
 #    clf = LogisticRegression(poly=False)
@@ -110,8 +110,8 @@ def classification():
 #    clf.plot_contour(discrete=False)
     
     # train pytorch MLP
-    clf = MLP()
-    clf.fit(X, y, n_epochs=20000)
+#    clf = MLP()
+#    clf.fit(X, y, n_epochs=20000)
     
     # train own MLP
 #    clf = NeuralNetwork()
@@ -132,7 +132,7 @@ def classification():
     
     # plot boundary
     # -------------------------------------------------------------------------
-    Plotter(X, y).plot_boundary(clf, step_size=0.05)
+#    Plotter(X, y).plot_boundary(clf, step_size=0.05)
     
     # evaluation
     # -------------------------------------------------------------------------
