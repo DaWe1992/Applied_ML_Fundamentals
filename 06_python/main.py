@@ -80,14 +80,14 @@ def classification():
     Classification.
     """
     # create data
-    X, y = DataCreator().make_classification(name="spiral", n_classes=2)
+    X, y = DataCreator().make_classification(name="linear", n_classes=2)
     
     # train kNN classifier
 #    clf = kNN(n_neighbors=1)
 #    clf.fit(X, y)
     
     # train SVM classifier
-    clf = SVM(kernel="gaussian", C=10.0, p=3, s=3.0)
+    clf = SVM(kernel="linear", C=1.0, p=3, s=3.0)
     y[np.where(y == 0)] = -1
     clf.fit(X, y)
     clf.plot_contour(X[y == 1], X[y == -1])

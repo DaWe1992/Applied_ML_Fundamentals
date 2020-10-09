@@ -39,6 +39,7 @@ class DataCreator:
         :param name:            name of the data set to be generated
                                     - linear (linearly separable)
                                     - overlapping (slightly overlapping, sklearn)
+                                    - random (random data)
                                     - non_linear (not linearly separable)
                                     - spiral (non-linear)
                                     - spiral_complex (non-linear)
@@ -63,6 +64,18 @@ class DataCreator:
                 n_classes=n_classes,
                 class_sep=3.25,
                 random_state=42
+            )
+            
+        # random
+        elif name == "random":
+            X, y = make_classification(
+                n_samples=400,
+                n_features=2,
+                n_redundant=0,
+                n_informative=2,
+                n_clusters_per_class=1,
+                n_classes=n_classes,
+                class_sep=3.50
             )
             
         # non linear data set

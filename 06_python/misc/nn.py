@@ -13,7 +13,7 @@ import numpy as np
 
 from prettytable import PrettyTable
 
-np.random.seed(100)
+#np.random.seed(100)
 
 
 # -----------------------------------------------------------------------------
