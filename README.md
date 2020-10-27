@@ -208,7 +208,7 @@ The material contains:
 ## Additional Material 🎁
 Have a look at the following slides (unless stated otherwise, these slides are not relevant for the exam):
 
-1. **Support vector machines** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/11_svm.pdf))
+1. **Support vector machines** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/11_svm.pdf), [click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/11b_svm.pdf))
 	* Linear SVMs
 	* Non-linear SVMs and the kernel-trick
 	* Soft-margin SVMs
