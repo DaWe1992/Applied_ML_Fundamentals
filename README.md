@@ -157,7 +157,7 @@ Please refer to the official [DHBW data science module catalogue](https://www.dh
 ## Python Code 🐍
 Machine learning algorithms (probably all algorithms) are easier to understand, if you see them implemented. Please find Python implementations for some of the algorithms (which are not part of the assignments) in the folder
 [06_python](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/06_python).
-Play around with the hyper-parameters of the algorithms and try different data sets in order to get a better feeling for how the algorithms work. Also, debug through the code line for line and check what each line does.
+Play around with the hyper-parameters of the algorithms and try different data sets in order to get a better feeling for how the algorithms work. Also, debug through the code line by line and check what each line does.
 
 ## Literature and recommended Reading 📚
 You do not need to buy any books for the lecture, most resources are available online. Please find a curated list below:
@@ -170,8 +170,8 @@ You do not need to buy any books for the lecture, most resources are available o
 | Machine Learning - A probabilistic perspective | Murphy (2012)				| MIT Press     			| [click here](https://doc.lagout.org/science/Artificial%20Intelligence/Machine%20learning/Machine%20Learning_%20A%20Probabilistic%20Perspective%20%5BMurphy%202012-08-24%5D.pdf)			|
 | Mathematics for Machine Learning               | Deisenroth et al. (2019)     | Cambridge Univ. Press		| [click here](https://mml-book.github.io/)																																					|
 | Pattern Recognition and Machine Learning 	     | Bishop (2006)   			    | Springer  				| [click here](http://users.isr.ist.utl.pt/~wurmd/Livros/school/Bishop%20-%20Pattern%20Recognition%20And%20Machine%20Learning%20-%20Springer%20%202006.pdf) 								|
-| Reinforcement Learning - An introduction       | Sutton et al. (2014)         | MIT Press     			| [click here](http://incompleteideas.net/book/bookdraft2017nov5.pdf)   																													|
 | Probabilistic Graphical Models 				 | Koller et al. (2009)			| MIT Press                 | [click here](https://github.com/Zhenye-Na/machine-learning-uiuc/blob/master/docs/Probabilistic%20Graphical%20Models%20-%20Principles%20and%20Techniques.pdf)                              |
+| Reinforcement Learning - An introduction       | Sutton et al. (2014)         | MIT Press     			| [click here](http://incompleteideas.net/book/bookdraft2017nov5.pdf)   																													|
 
 🔗 **YouTube resources:**
 * [Machine learning lecture](https://www.youtube.com/watch?v=UzxYlbK2c7E&list=PLA89DCFA6ADACE599) by Andrew Ng, Stanford University
@@ -242,7 +242,7 @@ Have a look at the following slides (unless stated otherwise, these slides are n
 If answers were provided you would probably not answer the questions on your own.
 
 ## Bugs and Errors 🐞
-Help me improve the lecture. Feel free to file an issue, if you spot any errors in the slides, exercises or code.
+Help me improve the lecture. Please feel free to file an issue in case you spot any errors in the slides, exercises or code.
 Thank you very much in advance! **Please do not open issues for questions concerning the content!** Either use the Moodle forum or send me an e-mail for that ([daniel.wehner@sap.com](mailto:daniel.wehner@sap.com)).
 
 <sub>© 2020 Daniel Wehner</sub>
