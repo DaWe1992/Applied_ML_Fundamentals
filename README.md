@@ -77,7 +77,7 @@ A list of abbreviations, symbols and mathematical notation used in the context o
 Please find additional material below.
 
 ## Assignments ✒️
-![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) `#f03c15` NOT APPLICABLE THIS SEMESTER
+**NOT APPLICABLE THIS SEMESTER**
 
 The assignments are voluntary. All students who choose to participate have to form groups comprising three to four students (not more and not less).
 The groups do not have to be static, you may form new groups for each assignment.
