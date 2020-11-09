@@ -76,11 +76,7 @@ The following topics / algorithms will be covered by the lecture:
 A list of abbreviations, symbols and mathematical notation used in the context of the slides can be found [here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/symbols.pdf).
 Please find additional material below.
 
-## Assignments ✒️
-<p align="center">
-**------ NOT APPLICABLE THIS SEMESTER ------**
-</p>
-
+## Assignments ✒️ (Not applicable this semester!)
 The assignments are voluntary. All students who choose to participate have to form groups comprising three to four students (not more and not less).
 The groups do not have to be static, you may form new groups for each assignment.
 The task descriptions, starter code and data sets for the assignments can be found in the folder [02_exercises](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/02_exercises).
