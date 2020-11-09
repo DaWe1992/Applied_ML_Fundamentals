@@ -77,6 +77,8 @@ A list of abbreviations, symbols and mathematical notation used in the context o
 Please find additional material below.
 
 ## Assignments ✒️
+> 🚩 **Not applicable this semster** 🚩
+
 The assignments are voluntary. All students who choose to participate have to form groups comprising three to four students (not more and not less).
 The groups do not have to be static, you may form new groups for each assignment.
 The task descriptions, starter code and data sets for the assignments can be found in the folder [02_exercises](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/02_exercises).
