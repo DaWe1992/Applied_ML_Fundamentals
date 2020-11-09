@@ -78,7 +78,7 @@ Please find additional material below.
 
 ## Assignments ✒️
 ```diff
-**Not applicable this semester**
+- NOT APPLICABLE THIS SEMESTER
 ```
 
 The assignments are voluntary. All students who choose to participate have to form groups comprising three to four students (not more and not less).
