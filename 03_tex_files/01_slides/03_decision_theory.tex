@@ -311,7 +311,7 @@
 		\end{equation}
 		\item Assumptions:
 		\begin{itemize}
-			\item All $x_j \in \bm{x}$ are \highlight{pairwise conditionally independent}
+			\item All features $x_j$ are \highlight{pairwise conditionally independent}
 				($\Rightarrow$ \textbf{na\"{i}ve})
 			\begin{equation}
 				p(\bm{x} \vert \mathcal{C}_k) 
@@ -516,16 +516,16 @@
 % Loss Functions
 \begin{frame}{Loss Functions}{}
 	\begin{itemize}
-		\item \textbf{Key idea:} We have to construct a loss function which expresses what we want:
+		\item \textbf{Key idea:} We have to create a loss function which expresses what we want:
 		\begin{align*}
 			&\text{loss(decision = healthy | patient = sick)} \gg \\
 			&\text{loss(decision = sick | patient = healthy)}
 		\end{align*}
-		\item We have possible decisions $\alpha_i$...
-		\item ...and a loss function $\ell(\alpha_i \vert \mathcal{C}_k)$
-		\item Expected loss (risk) of making a decision $\alpha_i$:
+		\item We can decide for one of the $\kappa$ possible classes...
+		\item ...and we have a loss function $\ell(\mathcal{C}_i \vert \mathcal{C}_k)$ which returns the cost for deciding for $\mathcal{C}_i$ given $\mathcal{C}_k$ {\footnotesize \highlight{(depends on the weighting of false positives and false negatives)}}
+		\item Expected loss (risk) of making a decision for class $\mathcal{C}_i$:
 		\begin{equation}
-			R(\alpha_i \vert \bm{x}) = \sum_k \ell(\alpha_i \vert \mathcal{C}_k) p(\mathcal{C}_k \vert \bm{x})
+			R(\mathcal{C}_i \vert \bm{x}) = \sum_k \ell(\mathcal{C}_i \vert \mathcal{C}_k) p(\mathcal{C}_k \vert \bm{x})
 		\end{equation}
 	\end{itemize}
 \end{frame}
@@ -535,15 +535,15 @@
 \begin{frame}{Risk Minimization}{}
 	\begin{itemize}
 		\item Consider two classes: $\mathcal{C}_1$ and $\mathcal{C}_2$
-		\item Therefore, we have two possible decisions: $\alpha_1$ (for $\mathcal{C}_1$) and $\alpha_2$ (for $\mathcal{C}_2$)
-		\item Loss function: $\ell(\alpha_i \vert \mathcal{C}_k) = \ell_{ik}$
+		\item Therefore, we have two possibilities: Deciding for class $\mathcal{C}_1$ or class $\mathcal{C}_2$
+		\item Let $\ell_{ik}$ be a shorthand notation for $\ell(\mathcal{C}_i \vert \mathcal{C}_k)$
 		\item Risk of both decisions:
 		\begin{align*}
-			R(\alpha_1 \vert \bm{x}) &= \ell_{11} p(\mathcal{C}_1 \vert \bm{x}) + \ell_{12} p(\mathcal{C}_2 \vert \bm{x}) \\
-			R(\alpha_2 \vert \bm{x}) &= \ell_{21} p(\mathcal{C}_1 \vert \bm{x}) + \ell_{22} p(\mathcal{C}_2 \vert \bm{x})
+			R(\mathcal{C}_1 \vert \bm{x}) &= \ell_{11} p(\mathcal{C}_1 \vert \bm{x}) + \ell_{12} p(\mathcal{C}_2 \vert \bm{x}) \\
+			R(\mathcal{C}_2 \vert \bm{x}) &= \ell_{21} p(\mathcal{C}_1 \vert \bm{x}) + \ell_{22} p(\mathcal{C}_2 \vert \bm{x})
 		\end{align*}
 		\item \textbf{Goal:} \highlight{Create a decision rule so that the overall risk is minimized}
-		\item Decide $\alpha_1$, iff $R(\alpha_2 \vert \bm{x}) > R(\alpha_1 \vert \bm{x})$
+		\item Decide for $\mathcal{C}_1$, iff $R(\mathcal{C}_2 \vert \bm{x}) > R(\mathcal{C}_1 \vert \bm{x})$
 	\end{itemize}
 \end{frame}
 
@@ -553,8 +553,8 @@
 	\divideTwo{0.69}{
 		\vspace*{-2mm}
 		\begin{align*}
-			R(\alpha_2 \vert \bm{x})
-				&> R(\alpha_1 \vert \bm{x}) \\
+			R(\mathcal{C}_2 \vert \bm{x})
+				&> R(\mathcal{C}_1 \vert \bm{x}) \\
 			\ell_{21} p(\mathcal{C}_1 \vert \bm{x}) + \ell_{22} p(\mathcal{C}_2 \vert \bm{x})
 				&> \ell_{11} p(\mathcal{C}_1 \vert \bm{x}) + \ell_{12} p(\mathcal{C}_2 \vert \bm{x}) \\
 			(\ell_{21} - \ell_{11}) p(\mathcal{C}_1 \vert \bm{x})
@@ -563,7 +563,7 @@
 		\begin{align*}
 			\frac{\ell_{21} - \ell_{11}}{\ell_{12} - \ell_{22}}
 				&> \frac{p(\mathcal{C}_2 \vert \bm{x})}{p(\mathcal{C}_1 \vert \bm{x})}
-					= \frac{p(\bm{x} \vert \mathcal{C}_2) p(\mathcal{C}_2)}{p(\bm{x} \vert \mathcal{C}_1) p (\mathcal{C}_1)} \\
+					= \frac{p(\bm{x} \vert \mathcal{C}_2) p(\mathcal{C}_2)}{p(\bm{x} \vert \mathcal{C}_1) p (\mathcal{C}_1)} \\[2mm]
 			\frac{p(\bm{x} \vert \mathcal{C}_1)}{p(\bm{x} \vert \mathcal{C}_2)}
 				&> \frac{\ell_{12} - \ell_{22}}{\ell_{21} - \ell_{11}} \frac{p(\mathcal{C}_2)}{p(\mathcal{C}_1)}
 		\end{align*}
@@ -587,11 +587,11 @@
 	\end{boxBlueNoFrame}
 
 	\begin{itemize}
-		\item \highlight{0-1 loss:} Decide $\alpha_1$, if:
+		\item \highlight{0-1 loss:} Decide for $\mathcal{C}_1$, if:
 		\begin{equation}
 			\frac{p(\bm{x} \vert \mathcal{C}_1)}{p(\bm{x} \vert \mathcal{C}_2)}
 				> \frac{p(\mathcal{C}_2)}{p(\mathcal{C}_1)} \qquad \text{with} \qquad
-			\ell(\alpha_i \vert \mathcal{C}_k) =
+			\ell(\mathcal{C}_i \vert \mathcal{C}_k) =
 			\begin{cases}
 				0\ i = k \\
 				1\ i \ne k
