@@ -918,19 +918,19 @@
 	\vspace*{-3mm}
 	\textbf{Formalization:}
 	\begin{alignat*}{2}
-		\min_{\bm{\theta}} \mathcal{J}(\theta)
+		\min_{\bm{\theta}} \mathcal{J}(\bm{\theta})
 			&= \dots 
 			&&\qquad\qquad\longleftarrow\text{cost function / objective}			\\
-		\text{s.\,t. } f(\theta)
+		\text{s.\,t. } f(\bm{\theta})
 			&= 0
 			&&\qquad\qquad\longleftarrow\text{equality constraints}				\\
-		g(\theta)
+		g(\bm{\theta})
 			&\ge 0
 			&&\qquad\qquad\longleftarrow\text{inequality constraints}
 	\end{alignat*}
 
 	\begin{boxBlueNoFrame}
-		What should an ideal optimization problem, i.\,e. the cost function and constraints look like?
+		What should an ideal optimization problem, i.\,e. the cost function as well as the constraints, look like?
 	\end{boxBlueNoFrame}
 \end{frame}
 
@@ -938,13 +938,13 @@
 % Constrained Optimization
 \begin{frame}{Constrained Optimization (Ctd.)}{}
 	\begin{alignat*}{2}
-		\min_{\bm{\theta}} \mathcal{J}(\theta)
+		\min_{\bm{\theta}} \mathcal{J}(\bm{\theta})
 			&= \dots 
 			&&\qquad\qquad\longleftarrow\text{convex function}			\\
-		\text{s.\,t. } f(\theta)
+		\text{s.\,t. } f(\bm{\theta})
 			&= 0
 			&&\qquad\qquad\longleftarrow\text{linear function}			\\
-		g(\theta)
+		g(\bm{\theta})
 			&\ge 0
 			&&\qquad\qquad\longleftarrow\text{convex set}
 	\end{alignat*}
@@ -1130,14 +1130,14 @@
 	\begin{itemize}
 		\item \textbf{Gradient-based methods:}
 		\begin{itemize}
-			\item \highlight{Gradient descent} (with constant, variable step size $\alpha$)
+			\item \highlight{Gradient descent} (with constant or variable step size $\alpha$)
 			\item \highlight{(L-)BFGS} (Broyden-Fletcher-Goldfarb-Shanno)
 			\item \highlight{Conjugate gradient descent}
 		\end{itemize}
 		\item \textbf{Non-gradient based methods:}
 		\begin{itemize}
-			\item \highlight{Genetic algorithms}
-			\item \highlight{Non-Linear simplex}
+			\item \highlight{Genetic algorithms} (e.\,g. differential evolution)
+			\item \highlight{Non-linear simplex}
 			\item \highlight{Nelder-Mead}
 		\end{itemize}
 	\end{itemize}
