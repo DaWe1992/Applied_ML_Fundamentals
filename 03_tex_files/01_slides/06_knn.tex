@@ -89,7 +89,7 @@
 	\end{itemize}
 	
 	\begin{boxBlueNoFrame}
-		\highlight{Combine using Bayes' theorem:}
+		\highlight{Combine them using Bayes' theorem:}
 		\vspace*{-4mm}
 		\begin{equation}
 			p(\mathcal{C}_j \vert \bm{x}) 
@@ -113,7 +113,7 @@
 % Distance Metrics
 \begin{frame}{Distance Metrics}{}
 	\begin{itemize}
-		\item How to measure the distance between two data points $i$ and $j$? \\
+		\item How to measure the distance between two data points $u$ and $v$? \\
 			$\Rightarrow$ \highlight{distance metrics}
 		\item Let $d$ be a function $d : (u, v) \mapsto \mathbb{R}^{+}$ (including 0)
 		\item Function $d$ has the following properties:
@@ -204,7 +204,7 @@
 	\begin{enumerate}
 		\item Calculate the distances between the new data point and \textbf{all data points in the data set}
 		\item Sort the data points by distances \textbf{in ascending order} \\
-			{\footnotesize \textit{(if similarity metrics are used, sort in descending order)}}
+			{\footnotesize \textit{(sort in descending order if similarity metrics are used)}}
 		\item Look at the first $k$ examples and \textbf{count how often each class occurs}
 		\item Predict the class with \textbf{the maximum score}
 	\end{enumerate}
@@ -243,8 +243,8 @@
 		\begin{itemize}
 			\item Let $k$ be set to 10
 			\item Step \ding{183}: Sort data set by distances \\
-				{\footnotesize \textit{(cf. table right)}}
-			\item Step \ding{184}: Count the classes
+				{\footnotesize \textit{(cf. table on the right)}}
+			\item Step \ding{184}: Count class occurrences
 			\begin{itemize}
 				\item \textbf{Class 0:} 3
 				\item \textbf{Class 1:} 7
