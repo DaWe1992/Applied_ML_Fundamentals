@@ -108,10 +108,10 @@ Please note that this is not a linear function.
 
 | Parameter 													                        			|	Explanation										|	Value 		|
 |---------------------------------------------------------------------------------------------------|---------------------------------------------------|---------------|
+| <img src="https://render.githubusercontent.com/render/math?math=a" width=15px height=15px>		|	score achieved in the assignments				|	up to you	|
+| <img src="https://render.githubusercontent.com/render/math?math=A" width=15px height=15px>		|	maximum attainable points in the assignments	|	40 			|
 | <img src="https://render.githubusercontent.com/render/math?math=b" width=15px height=15px>		|	bonus points attained for the exam				| 	up to you	|
 | <img src="https://render.githubusercontent.com/render/math?math=B" width=15px height=15px>		|	maximum attainable bonus points for the exam	|	6			|
-| <img src="https://render.githubusercontent.com/render/math?math=A" width=15px height=15px>		|	maximum attainable points in the assignments	|	40 			|
-| <img src="https://render.githubusercontent.com/render/math?math=a" width=15px height=15px>		|	score achieved in the assignments				|	up to you	|
 
 **Please note:** The bonus points will be taken into account in case you have to repeat the exam (i.e. they do not expire if you fail the first attempt).
 🚩 **Very important:** 🚩 Unsurprisingly, the solutions have to be your own work. **If you plagiarize in the assignments, you will lose all bonus points!**
