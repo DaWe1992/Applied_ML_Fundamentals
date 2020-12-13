@@ -61,8 +61,8 @@
 		\end{itemize}
 		\item \textbf{Class labels:}
 		\begin{itemize}
-			\item The `positive class' is encoded as \textbf{1} / $\oplus$
-			\item The `negative class' as \textbf{0} / $\ominus$
+			\item The `positive class' $\oplus$ is encoded as \textbf{1}
+			\item The `negative class' $\ominus$ as \textbf{0}
 		\end{itemize}
 		\item \textbf{Probabilistic interpretation:} The output of the algorithm is between 0 and 1
 			{\footnotesize \textit{(probability of the instance belonging to the positive class)}}
@@ -89,9 +89,12 @@
 			\item If $h_{\bm{\theta}}(\bm{x}) \ge 0.5$, predict $y = 1$
 			\item If $h_{\bm{\theta}}(\bm{x}) < 0.5$, predict $y = 0$
 		\end{itemize}
-		\item \textbf{Outliers affect the decision boundary}
-		\item Furthermore, we only want $0 \le h_{\bm{\theta}}(\bm{x}) \le 1$
-		\item Linear regression can output $h_{\bm{\theta}}(\bm{x}) \ll 0$ or $h_{\bm{\theta}}(\bm{x}) \gg 1$
+		\item \Highlight{Problems:}
+		\begin{enumerate}
+			\item \textbf{Outliers heavily affect the decision boundary}
+			\item Furthermore, we only want $0 \le h_{\bm{\theta}}(\bm{x}) \le 1$,
+				linear regression can output values $h_{\bm{\theta}}(\bm{x}) \ll 0$ or $h_{\bm{\theta}}(\bm{x}) \gg 1$
+		\end{enumerate}
 		\item \highlight{We need a better strategy!}
 	\end{itemize}
 \end{frame}
@@ -247,7 +250,7 @@
 			\item If $y = 1$, we get: $-\log(h_{\bm{\theta}}(\bm{x}))$
 			\item If $y = 0$, we get: $-\log(1 - h_{\bm{\theta}}(\bm{x}))$
 		\end{itemize}
-		\item This gives the \highlight{cross entropy} cost function $\mathcal{J}(\bm{\theta})$:
+		\item This gives the \highlight{(binary) cross entropy} cost function $\mathcal{J}(\bm{\theta})$:
 		\begin{equation}
 			\mathcal{J}(\bm{\theta}) = \frac{1}{n} \sum_{i=1}^n \left[
 				-y^{(i)} \log(h_{\bm{\theta}}(\bm{x}^{(i)})) - (1 - y^{(i)}) \log(1 - h_{\bm{\theta}}(\bm{x}^{(i)}))
@@ -305,13 +308,18 @@
 \begin{frame}{Decision Boundary}{}
 	\divideTwo{0.62}{
 		\begin{itemize}
-			\item \highlight{For classification we have to set a threshold}
-			\item Suppose we predict $y = 1$, if $h_{\bm{\theta}}(\bm{x}) \ge 0.5$
+			\item \highlight{We have to set a threshold}
+			\item Setting the threshold to 0.5 means:
 			\begin{itemize}
-				\item This means $g(z) \ge 0.5$
-				\item This is equivalent to $z \ge 0$ and $\bm{\theta}^{\intercal} \bm{x} \ge 0$
+				\item Predict the positive class, if
+				\begin{equation*}
+					h_{\bm{\theta}}(\bm{x}) \ge 0.5 \Leftrightarrow \bm{\theta}^{\intercal} \bm{x} \ge 0
+				\end{equation*}
+				\item Predict the negative class, if 
+				\begin{equation*}
+					h_{\bm{\theta}}(\bm{x}) < 0.5 \Leftrightarrow \bm{\theta}^{\intercal} \bm{x} < 0
+				\end{equation*}
 			\end{itemize}
-			\item Suppose we predict $y = 0$, if $h_{\bm{\theta}}(\bm{x}) < 0.5 \Rightarrow \bm{\theta}^{\intercal} \bm{x} < 0$
 		\end{itemize}
 	}{0.37}{
 		\vspace*{2mm}
@@ -436,7 +444,7 @@
 \subsection{Regularization}
 
 % Logistic Regression Cost Function (Ctd.)
-\begin{frame}{Logistic Regression Cost Function (Ctd.)}{}
+\begin{frame}{Logistic Regression with Regularization}{}
 	\begin{itemize}
 		\item We should apply regularization for non-linear decision boundaries:
 		\footnotesize
