@@ -232,7 +232,7 @@ class NeuralNetwork:
         :param y:               class labels (without one-hot)
         :return:                one-hot class labels
         """
-        y_one_hot = np.zeros((y.size, y.max() + 1))
+        y_one_hot = np.zeros((y.size, max(2, y.max() + 1)))
         y_one_hot[np.arange(y.size), y] = 1
         
         return y_one_hot
@@ -284,8 +284,8 @@ class NeuralNetwork:
 # -----------------------------------------------------------------------------
         
 if __name__ == "__main__":
-    X = np.asarray([[1, 1]])
-    y = np.asarray([1])
+    X = np.asarray([[0, 1]])
+    y = np.asarray([0])
     
     # train a neural network
     clf = NeuralNetwork()
@@ -305,12 +305,12 @@ if __name__ == "__main__":
 ##        np.asarray([0, 0])))
 
 # config 2    
-##    clf.add_layer(Layer(2, 2, "relu", np.asarray([[0.19, 0.42], [-0.94, 0.30]])))
-##    clf.add_layer(Layer(2, 2, "sigmoid", np.asarray([[-1.40, -2.20], [-0.81, -1.70]])))
+    clf.add_layer(Layer(2, 2, "relu", np.asarray([[0.19, 0.42], [-0.94, 0.30]])))
+    clf.add_layer(Layer(2, 2, "sigmoid", np.asarray([[-1.40, -2.20], [-0.81, -1.70]])))
     
 # config 3
-    clf.add_layer(Layer(2, 2, "sigmoid", np.asarray([[0.09, -0.23], [-0.41, 0.19]])))
-    clf.add_layer(Layer(2, 2, "sigmoid", np.asarray([[-1.11, -0.89], [0.10, -1.45]])))
+##    clf.add_layer(Layer(2, 2, "sigmoid", np.asarray([[0.09, -0.23], [-0.41, 0.19]])))
+##    clf.add_layer(Layer(2, 2, "sigmoid", np.asarray([[-1.11, -0.89], [0.10, -1.45]])))
     clf.fit(X, y, 0.1, 10, debug=True)
     
 #    print(clf.predict(X))

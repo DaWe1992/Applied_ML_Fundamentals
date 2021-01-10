@@ -211,7 +211,7 @@
 	\begin{itemize}
 		\item \textbf{Idea:} Mechanism of learning is \highlight{association}
 		\item \highlight{Hebbian learning:} If the firing of one neuron repeatedly assists in firing another neuron,
-			the synaptic connection will be strengthened
+			their synaptic connection will be strengthened
 	\end{itemize}
 	
 	\begin{boxBlueNoFrame}
@@ -309,16 +309,16 @@
 \begin{frame}{Original Perceptron Algorithm [\textit{Rosenblatt}, 1957]}{}
 	\begin{enumerate}
 		\item Initialize parameters $\bm{\theta} = \{ \bm{w}, b \}$
-		\item $\forall (\bm{x}_i \in \bm{X}, y_i \in \{ -1, +1 \})_{i=1}^n$ (until convergence):
+		\item $\forall \{ \bm{x}^{(i)} \in \bm{X}, y^{(i)} \in \{ -1, +1 \} \}_{i=1}^n$ (until convergence):
 		\begin{itemize}
-			\item[\textbf{2a)}] If $\bm{x}_i$ is correctly classified, do nothing
-			\item[\textbf{2b)}] Else if $y_i = +1$, update the paramters with:
+			\item[\textbf{2a)}] If $\bm{x}^{(i)}$ is correctly classified, do nothing
+			\item[\textbf{2b)}] Else if $y^{(i)} = +1$, update the paramters with:
 			\begin{equation*}
-				\bm{w} \longleftarrow \bm{w} + \bm{x}_i \qquad\qquad b \longleftarrow b + 1
+				\bm{w} \longleftarrow \bm{w} + \bm{x}^{(i)} \qquad\qquad b \longleftarrow b + 1
 			\end{equation*}
-			\item[\textbf{2c)}] Else if $y_i = -1$, update the paramters with:
+			\item[\textbf{2c)}] Else if $y^{(i)} = -1$, update the paramters with:
 			\begin{equation*}
-				\bm{w} \longleftarrow \bm{w} - \bm{x}_i \qquad\qquad b \longleftarrow b - 1
+				\bm{w} \longleftarrow \bm{w} - \bm{x}^{(i)} \qquad\qquad b \longleftarrow b - 1
 			\end{equation*}
 		\end{itemize}
 	\end{enumerate}
@@ -380,7 +380,7 @@
 		\item We compute the \highlight{pre-activation} and the \highlight{activation}:
 		\begin{equation}
 			a = \bm{\theta}^{\intercal} \bm{x} = \sum_{j=0}^m \theta_j x_j \qquad\qquad
-			z = \sigma(a)
+			z = g(a)
 		\end{equation}
 	\end{itemize}
 \end{frame}
@@ -392,16 +392,16 @@
 		\item The simplest activation function is to use a threshold\footnote[frame]{Not used, since not differentiable;
 			alternatives later} $\rho$:
 		\begin{equation*}
-			\sigma_{\rho}(a) =
+			g_{\rho}(a) =
 			\begin{cases}
-				0 &	\text{for}\ a \le \rho \\
-				1 & \text{for}\ a > \rho
+				0 & \text{if}\ a \le \rho \\
+				1 & \text{if}\ a > \rho
 			\end{cases}
 		\end{equation*}
 		\item Quick example: $\bm{x} = (1, 0, 0.5)^{\intercal} \qquad \bm{\theta} = (1, -0.5, -1)^{\intercal} \qquad \rho = 0$
 		\begin{align*}
 			a &= \bm{\theta}^{\intercal}\bm{x} = 1 \cdot 1 + (-0.5) \cdot 0 + (-1) \cdot 0.5 = 0.5 \\
-			z &= \sigma_{\rho=0}(0.5) = 1
+			z &= g_{\rho=0}(0.5) = 1
 		\end{align*}
 	\end{itemize}
 \end{frame}
@@ -502,20 +502,20 @@
 	\begin{itemize}
 		\item In theory, a \highlight{Multi-Layer Perceptron (MLP)} can approximate any continuous function arbitrarily well
 		\item An MLP with $\lambda$ hidden layers is a function $h: \mathbb{R}^m \rightarrow \mathbb{R}^{\kappa}$,
-			parameterized by network parameters $\bm{\Theta}^{(1)}$, $\bm{\Theta}^{(2)}$, \dots, $\bm{\Theta}^{(\lambda)}$
-		\item In each layer, a non-linearity is applied: $g^{(1)}$, $g^{(2)}$, \dots, $g^{(\lambda)}$
+			parameterized by network parameters $\bm{\Theta}^{[1]}$, $\bm{\Theta}^{[2]}$, \dots, $\bm{\Theta}^{[\lambda]}$
+		\item In each layer, a non-linearity is applied: $g^{[1]}$, $g^{[2]}$, \dots, $g^{[\lambda]}$
 	\end{itemize}
 	\divideTwo{0.49}{
 		\begin{align*}
-			z^{(1)} &= g^{(1)}(\bm{\Theta}^{(1)} \bm{x})								\\
+			\bm{z}^{[1]}(\bm{(x)}) &= g^{[1]}(\bm{\Theta}^{[1]} \bm{x})						\\
 			\dots 													\\
-			z^{(\lambda)} &= \bm{\Theta}^{(\lambda)} g^{(\lambda - 1)}(\bm{z}^{(\lambda - 1)})
+			\bm{z}^{[\lambda]}(\bm{x}) &= g^{[\lambda]}(\bm{\Theta}^{[\lambda]} \bm{z}^{[\lambda - 1]}(\bm{x}))
 		\end{align*}
 	}{0.49}{
-		\begin{align*}
-			\bm{h} &= g^{(\lambda)}(\bm{z^{(\lambda)}}) 						\\
-			y_{pred} &= \argmax_k \bm{h}
-		\end{align*}
+		\textbf{Prediction:}
+		\begin{equation*}
+			y_{p} = \argmax_k \bm{z}^{[\lambda]}(\bm{x})
+		\end{equation*}
 	}
 \end{frame}
 
@@ -539,13 +539,16 @@
 
 % Backpropagation
 \begin{frame}{Backpropagation}{}\important
+	\bubble{0.5}{6.5}{
+		\tiny Let's consider $\lambda = 2$
+	}
 	\begin{itemize}
 		\item In order to update the weights, we first have to perform a \highlight{forward pass}:
 		\begin{align*}
-			h_k(\bm{x}^{(i)}; \bm{\Theta})
-				&= g^{(2)}\left( \sum_{l=0}^h \Theta_{kl}^{(2)} g^{(1)}\left( \sum_{j=0}^m \Theta_{lj}^{(1)} x_{j}^{(i)} \right) \right) \\
-			z_l
-				&=  g^{(1)}\left( \sum_{j=0}^m \Theta_{lj}^{(1)} x_{j}^{(i)} \right) \qquad\text{activation}
+			z_k^{[2]}(\bm{x})
+				&= g^{[2]}\left( \sum_{l=0}^h \Theta_{kl}^{[2]} g^{[1]}\left( \sum_{j=0}^m \Theta_{lj}^{[1]} x_{j}^{(i)} \right) \right) \\
+			z_l^{[1]}(\bm{x})
+				&=  g^{[1]}\left( \sum_{j=0}^m \Theta_{lj}^{[1]} x_{j}^{(i)} \right) \qquad\text{hidden activation}
 		\end{align*}
 		\item $g(\cdot) \equiv$ activation function, e.\,g. sigmoid, tanh, ReLU
 		\item $\bm{\Theta}$ are the network parameters (to be learned)
@@ -567,15 +570,15 @@
 \begin{frame}{Backpropagation (Ctd.)}{}\important
 	\begin{itemize}
 		\item Compute the network loss
-		\item The loss function is given by: {\footnotesize(assume square loss: $\ell = (h_k(\bm{x}^{(i)}; \bm{\Theta}) - y_k^{(i)})^2$)}
+		\item The loss function is given by: {\footnotesize(assume square loss: $\ell = (z_k^{[2]}(\bm{x}^{(i)}) - y_k^{(i)})^2$)}
 		\begin{equation*}
-			\mathcal{J}(\bm{\Theta}) = \frac{1}{n} \sum_{i=1}^n \sum_{k=1}^\kappa
-				\ell(h_k(\bm{x}^{(i)}; \bm{\Theta}), y_k^{(i)})
+			\mathcal{J}(\bm{\Theta}) = \frac{1}{n} \sum_{i=1}^n \mathcal{J}^{(i)}(\bm{\Theta}) = \frac{1}{n} \sum_{i=1}^n \sum_{k=1}^\kappa
+				\ell(z_k^{[2]}(\bm{x}^{(i)}), y_k^{(i)})
 		\end{equation*}
-		\item Compute the error gradient w.\,r.\,t. $h_k(\bm{x}^{(i)}; \bm{\Theta})$:
+		\item Compute the error gradient for the \textbf{output layer} w.\,r.\,t. $z_k^{[2]}$:
 		\begin{equation*}
-			 \frac{\partial \mathcal{J}^{(i)}(\bm{\Theta})}{\partial h_k(\bm{x}^{(i)}; \bm{\Theta})}
-			 	= \ell'(h_k(\bm{x}^{(i)}; \bm{\Theta}), y_k^{(i)}) \equiv \delta_k^{(i)}
+			 \frac{\partial \mathcal{J}^{(i)}(\bm{\Theta})}{\partial z_k^{[2]}(\bm{x}^{(i)})}
+			 	= \ell'(z_k^{[2]}(\bm{x}^{(i)}), y_k^{(i)}) \equiv \delta_k^{(i)}
 		\end{equation*}
 	\end{itemize}
 \end{frame}
@@ -584,14 +587,14 @@
 % Backpropagation (Ctd.)
 \begin{frame}{Backpropagation (Ctd.)}{}\important
 	\begin{itemize}
-		\item Compute the weight gradient for the output layer:
+		\item Compute the weight gradient for the \textbf{output layer}:
 		\begin{align*}
-			\frac{\partial \mathcal{J}^{(i)}(\bm{\Theta})}{\partial \Theta_{kl}^{(2)}}
-				&= \frac{\partial \mathcal{J}(\bm{\Theta})}{\partial h_k(\bm{x}^{(i)}; \bm{\Theta})}
-					\frac{\partial h_k(\bm{x}^{(i)}; \bm{\Theta})}{\partial \Theta_{kl}^{(2)}} \\
-				&= \ell'(h_k(\bm{x}^{(i)}; \bm{\Theta}), y_k^{(i)}) \cdot g'^{(2)} \left( \sum_{t=0}^h \Theta_{kt}^{(2)} z_t(\bm{x}^{(i)}) \right)
-					\cdot z_l(\bm{x}^{(i)}) \\
-				&= \delta_k^{(i)} \cdot g'^{(2)} \left( \sum_{t=0}^h \Theta_{kt}^{(2)} z_t(\bm{x}^{(i)}) \right) \cdot z_l(\bm{x}^{(i)})
+			\frac{\partial \mathcal{J}^{(i)}(\bm{\Theta})}{\partial \Theta_{kl}^{[2]}}
+				&= \frac{\mathcal{J}^{(i)}(\bm{\Theta})}{\partial z_k^{[2]}(\bm{x}^{(i)})}
+					\frac{\partial z_k^{[2]}(\bm{x}^{(i)})}{\partial \Theta_{kl}^{[2]}} \\
+				&= \ell'(z_k^{[2]}(\bm{x}^{(i)}), y_k^{(i)}) \cdot g'^{[2]} \left( \sum_{t=0}^h \Theta_{kt}^{[2]} z_t^{[1]}(\bm{x}^{(i)}) \right)
+					\cdot z_l^{[1]}(\bm{x}^{(i)}) \\
+				&= \delta_k^{(i)} \cdot g'^{[2]} \left( \sum_{t=0}^h \Theta_{kt}^{[2]} z_t^{[1]}(\bm{x}^{(i)}) \right) \cdot z_l^{[1]}(\bm{x}^{(i)})
 		\end{align*}
 	\end{itemize}
 \end{frame}
@@ -600,15 +603,15 @@
 % Backpropagation (Ctd.)
 \begin{frame}{Backpropagation (Ctd.)}{}\important
 	\begin{itemize}
-		\item Compute the error gradient for the hidden layer:
+		\item Compute the error gradient for the \textbf{hidden layer}:
 		\begin{align*}
-			\frac{\partial \mathcal{J}^{(i)}(\bm{\Theta})}{\partial z_l}
-				&= \sum_{k=1}^\kappa \frac{\partial \mathcal{J}^{(i)}(\bm{\Theta})}{\partial h_k(\bm{x}^{(i)}; \bm{\Theta})}
-					\frac{\partial h_k(\bm{x}^{(i)}; \bm{\Theta})}{\partial z_l} \\
-				&= \sum_{k=1}^\kappa \ell'(h_k(\bm{x}^{(i)}; \bm{\Theta}), y^{(i)})
-					\cdot g'^{(2)}\left( \sum_{t=0}^h \Theta_{kt}^{(2)} z_t(\bm{x}^{(i)}) \right) \cdot \Theta_{kl}^{(2)} \\
-				&= \sum_{k=1}^\kappa \delta_k^{(i)} \cdot g'^{(2)} \left( \sum_{t=0}^h \Theta_{kt}^{(2)} z_t(\bm{x}^{(i)}) \right)
-					\cdot \Theta_{kl}^{(2)} \equiv \widehat{\delta}_l^{(i)}
+			\frac{\partial \mathcal{J}^{(i)}(\bm{\Theta})}{\partial z_l^{[1]}}
+				&= \sum_{k=1}^\kappa \frac{\partial \mathcal{J}^{(i)}(\bm{\Theta})}{\partial z_k^{[2]}(\bm{x}^{(i)})}
+					\frac{\partial z_k^{[2]}(\bm{x}^{(i)})}{\partial z_l^{[1]}} \\
+				&= \sum_{k=1}^\kappa \ell'(z_k^{[2]}(\bm{x}^{(i)}), y_k^{(i)})
+					\cdot g'^{[2]}\left( \sum_{t=0}^h \Theta_{kt}^{[2]} z_t^{[1]}(\bm{x}^{(i)}) \right) \cdot \Theta_{kl}^{[2]} \\
+				&= \sum_{k=1}^\kappa \delta_k^{(i)} \cdot g'^{[2]} \left( \sum_{t=0}^h \Theta_{kt}^{[2]} z_t^{[1]}(\bm{x}^{(i)}) \right)
+					\cdot \Theta_{kl}^{[2]} \equiv \widehat{\delta}_l^{(i)}
 		\end{align*}
 	\end{itemize}
 \end{frame}
@@ -617,13 +620,16 @@
 % Backpropagation (Ctd.)
 \begin{frame}{Backpropagation (Ctd.)}{}\important
 	\begin{itemize}
-		\item Compute the weight gradient for the hidden layer:
+		\item Compute the weight gradient for the \textbf{hidden layer}:
 		\begin{align*}
-			\frac{\partial \mathcal{J}^{(i)}(\bm{\Theta})}{\partial \Theta_{lj}^{(1)}}
-				&= \frac{\partial \mathcal{J}^{(i)}(\bm{\Theta})}{\partial z_l} \cdot g'^{(1)} \left( \sum_{t=0}^m \Theta_{lt}^{(1)} x_t^{(i)} \right) \cdot x_j^{(i)} \\
-				&= \widehat{\delta}_l^{(i)} \cdot g'^{(1)} \left( \sum_{t=0}^m \Theta_{lt}^{(1)} x_t^{(i)} \right) \cdot x_j^{(i)}
+			\frac{\partial \mathcal{J}^{(i)}(\bm{\Theta})}{\partial \Theta_{lj}^{[1]}}
+				&= \frac{\partial \mathcal{J}^{(i)}(\bm{\Theta})}{\partial z_l^{[1]}} \cdot g'^{[1]} \left( \sum_{t=0}^m \Theta_{lt}^{[1]} x_t^{(i)} \right) \cdot x_j^{(i)} \\
+				&= \widehat{\delta}_l^{(i)} \cdot g'^{[1]} \left( \sum_{t=0}^m \Theta_{lt}^{[1]} x_t^{(i)} \right) \cdot x_j^{(i)}
 		\end{align*}
-		\item The weight derivatives are now used in the gradient descent update rule
+		\item The weight derivatives are used in the gradient descent update rule, e.\,g.:
+		\begin{equation*}
+			\Theta_{lj}^{[1]} \longleftarrow \Theta_{lj}^{[1]} - \alpha [\partial \mathcal{J}^{(i)}(\bm{\Theta})]/[\partial \Theta_{lj}^{[1]}]
+		\end{equation*}
 	\end{itemize}
 \end{frame}
 
@@ -753,7 +759,7 @@
 		\item ReLU does not lead to vanishing gradients
 		\item ReLU is very efficient to compute
 		\item Use ReLU as the hidden layer activation function!
-		\item But: Pay attention to the initialization of your parameters to avoid \textit{`dying ReLUs'} (parameter settings where single neurons will always output 0)
+		\item \Highlight{But:} Pay attention to the initialization of your parameters to avoid \textit{`dying ReLUs'} (parameter settings where single neurons will always output 0)
 		\item \highlight{Use batch-normalization!}
 	\end{itemize}
 \end{frame}
@@ -823,7 +829,7 @@
 		\item $\star$ is the convolution operator
 		\item $x$ is the input to the convolutional layer
 		\item $i$ is the current position in the input
-		\item $j$ is the filter size / window size
+		\item $w$ is the filter size / window size
 		\item $g$ is the convolution filter (kernel)
 	\end{itemize}
 \end{frame}
