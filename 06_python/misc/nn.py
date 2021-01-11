@@ -284,8 +284,8 @@ class NeuralNetwork:
 # -----------------------------------------------------------------------------
         
 if __name__ == "__main__":
-    X = np.asarray([[0, 1]])
-    y = np.asarray([0])
+    X = np.asarray([[1, 1]])
+    y = np.asarray([1])
     
     # train a neural network
     clf = NeuralNetwork()
@@ -311,6 +311,6 @@ if __name__ == "__main__":
 # config 3
 ##    clf.add_layer(Layer(2, 2, "sigmoid", np.asarray([[0.09, -0.23], [-0.41, 0.19]])))
 ##    clf.add_layer(Layer(2, 2, "sigmoid", np.asarray([[-1.11, -0.89], [0.10, -1.45]])))
-    clf.fit(X, y, 0.1, 10, debug=True)
+    clf.fit(X, y, 0.1, 1, debug=True)
     
 #    print(clf.predict(X))
