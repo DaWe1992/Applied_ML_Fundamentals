@@ -24,33 +24,33 @@ Employ the squared error loss function:
 
 \begin{align*}
 	\mathcal{J}(\bm{\Theta})
-		&= (\bm{y}_{pred} - \bm{y})^2 \\[3mm]
+		&= (z_{n_k^{[2]}} - y_k)^2 \\[3mm]
 	\mathcal{J}'(\bm{\Theta})
-		&= 2 \cdot (\bm{y}_{pred} - \bm{y})
+		&= 2 \cdot (z_{n_k^{[2]}} - y_k)
 \end{align*}
 
-The weight matrices and bias weights are initialized as follows (where for instance weight $\Theta_{12}^{(1)}$ connects the input $x_2$ with the first neuron in the hidden layer):
+The weight matrices and bias weights are initialized as follows (where for instance weight $\Theta_{12}^{[1]}$ connects the input $x_2$ with the first neuron in the hidden layer):
 
 \begin{minipage}{0.49\textwidth}
 	\begin{align*}
-		\bm{\Theta}^{(1)}
+		\bm{\Theta}^{[1]}
 			&= \begin{pmatrix}
 				0.15 & 0.20 \\
 				0.25 & 0.30
 			\end{pmatrix} \\[3mm]
-		\bm{b}^{(1)}
+		\bm{b}^{[1]}
 			&= \begin{pmatrix}0.35 \\ 0.35\end{pmatrix}
 	\end{align*}
 \end{minipage}
 \hfill
 \begin{minipage}{0.49\textwidth}
 	\begin{align*}
-		\bm{\Theta}^{(2)}
+		\bm{\Theta}^{[2]}
 			&= \begin{pmatrix}
 				0.40 & 0.45 \\
 				0.50 & 0.55
 			\end{pmatrix} \\[3mm]
-		\bm{b}^{(2)}
+		\bm{b}^{[2]}
 			&= \begin{pmatrix}0.60 \\ 0.60\end{pmatrix}
 	\end{align*}
 \end{minipage}
@@ -79,19 +79,19 @@ Use the ReLU and sigmoid activation functions in the hidden layer and output lay
 		\node[neuron] at (0,2) {$x_2$};
 		\node[bias] at (0,0) {\textcolor{white}{$b$}};
 
-		\node[neuron] at (3,4) {$n_1^{(1)}$};
-		\node[neuron] at (3,2) {$n_2^{(1)}$};
+		\node[neuron] at (3,4) {$n_1^{[1]}$};
+		\node[neuron] at (3,2) {$n_2^{[1]}$};
 		\node[bias] at (3,0) {\textcolor{white}{$b$}};
 
-		\node[neuron] at (6,4) {$n_1^{(2)}$};
-		\node[neuron] at (6,2) {$n_2^{(2)}$};
+		\node[neuron] at (6,4) {$n_1^{[2]}$};
+		\node[neuron] at (6,2) {$n_2^{[2]}$};
 		            
 		% annotate the layers
 		\node[annot] at (0,6) {Input layer};
 		\node[annot] at (3,6) {Hidden layer (ReLU)};
 		\node[annot] at (6,6) {Output layer (Sigmoid)};
-		\node[annot] at (1.5,4.5) {$\bm{\Theta}^{(1)}$};
-		\node[annot] at (4.5,4.5) {$\bm{\Theta}^{(2)}$};
+		\node[annot] at (1.5,4.5) {$\bm{\Theta}^{[1]}$};
+		\node[annot] at (4.5,4.5) {$\bm{\Theta}^{[2]}$};
 
 	\end{tikzpicture}
 	\caption{MLP architecture}
