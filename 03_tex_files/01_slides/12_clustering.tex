@@ -62,8 +62,8 @@
 	\vspace*{3mm}
 	\begin{boxBlueNoFrame}
 		\footnotesize
-		A cluster must be \highlight{internally homogeneous}, but simultaneously \highlight{externally heterogeneous}.
-		(Elements of one cluster have to be very similar, but must differ significantly from elements in other clusters.)
+		A cluster should be \highlight{internally homogeneous}, but simultaneously \highlight{externally heterogeneous}.
+		(Elements of one cluster should be similar to each other, but should differ significantly from elements belonging to other clusters.)
 	\end{boxBlueNoFrame}
 \end{frame}
 
@@ -127,15 +127,15 @@
 	\begin{itemize}
 		\item The algorithm is an instance of \highlight{vector quantization}
 		\begin{itemize}
-			\item It represent data points by a single vector (here: \highlight{centroid}) which is close to them
-			\item This is useful for \textbf{compression}!
+			\item It represents data points by a single vector (\highlight{centroid}) which is close to them
+			\item This is useful for \textbf{data compression}!
 		\end{itemize}
 		\item \textbf{How to}: Create $k$ partitions ($\widehat{=}$ clusters) of the data set $\mathcal{D}$, such that
 			the sum of squared deviations from the cluster centroids is \textbf{minimal}:
 		\begin{equation}
 			\min_{\bm{\mu}_j} \sum_{j=1}^k \sum_{\bm{x}^{(i)} \in \mathcal{D}_j} \Vert \bm{x}^{(i)} - \bm{\mu}_j \Vert^2
 		\end{equation}
-		\item With $\mathcal{D}_j \equiv j^{th}$ cluster, $\mu_j \equiv$ centroid of $j^{th}$ cluster
+		\item Where $\mathcal{D}_j \equiv j$-th cluster, $\bm{\mu}_j \equiv$ centroid of $j$-th cluster
 	\end{itemize}
 \end{frame}
 
@@ -165,7 +165,7 @@
 	\vspace*{2mm}
 	\begin{itemize}
 		\item Input: $\mathcal{D} = \{ \bm{x}^{(1)}, \bm{x}^{(2)}, \dots, \bm{x}^{(n)} \} \in \mathbb{R}^{n \times m}$,
-			Number of clusters $k$	
+			number of clusters $k$	
 		\item Algorithm:
 		\begin{enumerate}
 			\item $t \longleftarrow 1$
@@ -186,12 +186,30 @@
 				{\footnotesize
 				\begin{equation*}
 					\bm{\mu}_{j}^{\langle t+1 \rangle} =
-						\frac{1}{\vert \mathcal{D}_i^{\langle t \rangle} \vert} \sum_{\bm{x}^{(i)} \in \mathcal{D}_j^{\langle t \rangle}} \bm{x}^{(i)}
+						\frac{1}{\vert \mathcal{D}_j^{\langle t \rangle} \vert} \sum_{\bm{x}^{(i)} \in \mathcal{D}_j^{\langle t \rangle}} \bm{x}^{(i)}
 					\qquad\text{then update $t$:}\quad t \longleftarrow t + 1
 				\end{equation*}}
 			\end{itemize}
 		\end{enumerate}
 	\end{itemize}
+\end{frame}
+
+
+% $k$-Means Algorithm (Ctd.)
+\begin{frame}{$k$-Means Algorithm (Ctd.)}{}\important
+	\divideTwo{0.49}{
+		\begin{figure}
+			\centering
+			\animategraphics[autoplay,loop,height=5cm]{2.5}
+				{12_clustering/02_img/k_means_animation/}{0}{14}
+		\end{figure}
+	}{0.49}{
+		\begin{itemize}
+			\item The algorithm might need some iterations until the result is satisfactory
+			\item \Highlight{Caveat:} The algorithm might get stuck in local optima \\
+				$\Rightarrow$ several restarts
+		\end{itemize}
+	}
 \end{frame}
 
 
@@ -215,9 +233,9 @@
 % $k$-Means Issues
 \begin{frame}{$k$-Means Issues}{}
 	\begin{itemize}
-		\item The algorithm assumes all clusters are \textbf{spherical} \\
+		\item The algorithm assumes that all clusters are \textbf{spherical} \\
 			($\ne$ \highlight{affinity-based clustering})
-		\item Does not have a notion of \textbf{outliers} (unlike DBSCAN)
+		\item It does not have a notion of \textbf{outliers} (unlike DBSCAN)
 		\item What is the correct value for $k$? $\Rightarrow$ \highlight{Elbow-method:}
 		\begin{itemize}
 			\item Measure sum of squared distances from data points to cluster centers (inertia)
@@ -249,7 +267,7 @@
 % Agglomerative Clustering Algorithm
 \begin{frame}{Agglomerative Clustering Algorithm}{}\important
 	\begin{enumerate}
-		\item Start with one cluster for each instance: $C = \{ \{ \bm{x}^{(i)}\} : \bm{x}^{(i)} \in \bm{X} \}$
+		\item Start with one cluster for each instance: $C = \{ \{ \bm{x}^{(i)}\} : \bm{x}^{(i)} \in \mathcal{D} \}$
 		\item Compute distance $d(C_i, C_j)$ between all pairs of clusters $C_i$, $C_j$
 		\item Join clusters $C_i$ and $C_j$ with minimum distance into a new cluster $C_p$:
 		\begin{align*}
@@ -333,7 +351,7 @@
 % Single Linkage
 \begin{frame}{Single Linkage}{}
 	\begin{itemize}
-		\item Computing distances between clusters $C_1$ and $C_2$
+		\item How to compute the distance between two clusters $C_1$ and $C_2$?
 		\item \highlight{Single linkage}:
 		\begin{equation*}
 			d(C_1, C_2) = \min\{ d(\bm{x}^{(i)}, \bm{x}^{(j)}) : \bm{x}^{(i)} \in C_1, \bm{x}^{(j)} \in C_2 \}
@@ -350,7 +368,7 @@
 % Complete Linkage
 \begin{frame}{Complete Linkage}{}
 	\begin{itemize}
-		\item Computing distances between clusters $C_1$ and $C_2$
+		\item How to compute the distance between two clusters $C_1$ and $C_2$?
 		\item \highlight{Complete linkage}:
 		\begin{equation*}
 			d(C_1, C_2) = \max\{ d(\bm{x}^{(i)}, \bm{x}^{(j)}) : \bm{x}^{(i)} \in C_1, \bm{x}^{(j)} \in C_2 \}
@@ -476,10 +494,10 @@
 % --------------------------------------------------------------------------------------------------------
 \subsection{Spectral Clustering Algorithm}
 
-% How to get the Graph?
-\begin{frame}{How to get the Graph?}{}\important
+% How to get the Graph for the Data Set?
+\begin{frame}{How to get the Graph for the Data Set?}{}\important
 	\begin{itemize}
-		\item There are at least two possibilities
+		\item There are at least two possibilities:
 		\begin{enumerate}
 			\item \highlight{$\varepsilon$-neighborhood graph}
 			\begin{itemize}
@@ -503,7 +521,7 @@
 \begin{frame}{Spectral Clustering Algorithm}{}\important
 	\begin{itemize}
 		\item Input: $\mathcal{D} = \{ \bm{x}^{(1)}, \bm{x}^{(2)}, \dots, \bm{x}^{(n)} \} \in \mathbb{R}^{n \times m}$,
-			Number of clusters $k$
+			number of clusters $k$
 		\item Algorithm:
 		\begin{enumerate}
 			\item Construct a similarity graph (adjacency matrix $\bm{A}$ and degree matrix $\bm{D}$)
@@ -536,8 +554,8 @@
 		\item \textbf{Clustering Strategies:}
 		\begin{itemize}
 			\item EM-based clustering (e.\,g. $k$-Means)
-			\item Affinity-based clustering (e.\,g. spectral clustering, DBSCAN)
 			\item Hierarchical clustering
+			\item Affinity-based clustering (e.\,g. spectral clustering, DBSCAN)
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -554,8 +572,8 @@
 		\item What is the definition of a cluster. Which properties should it have?
 		\item Describe the general procedure of $k$-Means. What are disadvantages?
 		\item What is a dendrogram?
-		\item How do we obtain the graphs for spectral clustering
-		\item What is affinity-based clustering. How does it differ from $k$-Means?
+		\item How do we obtain the graphs for spectral clustering?
+		\item What is affinity-based clustering? How does it differ from $k$-Means?
 		\item How to calculate the graph Laplacian matrix?
 	\end{enumerate}
 \end{frame}
