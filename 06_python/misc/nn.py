@@ -284,8 +284,8 @@ class NeuralNetwork:
 # -----------------------------------------------------------------------------
         
 if __name__ == "__main__":
-    X = np.asarray([[1, 1]])
-    y = np.asarray([1])
+    X = np.asarray([[0, 1]])
+    y = np.asarray([0])
     
     # train a neural network
     clf = NeuralNetwork()
