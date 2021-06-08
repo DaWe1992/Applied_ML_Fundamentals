@@ -74,7 +74,7 @@ parso==0.5.2
 pathtools==0.1.2
 pexpect==4.8.0
 pickleshare==0.7.5
-Pillow==7.0.0
+Pillow==8.2.0
 pluggy==0.13.1
 prettytable==0.7.2
 prompt-toolkit==3.0.3
