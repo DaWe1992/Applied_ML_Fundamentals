@@ -172,12 +172,12 @@
 		\item \textbf{Example:} \highlight{Cosine similarity}
 		\item The cosine similarity of two vectors $\bm{a}$ and $\bm{b}$ is the cosine of the angle:
 		\begin{equation}
-			\cos \measuredangle (\bm{a}, \bm{b}) = \frac{\bm{a} \cdot \bm{b}}{\Vert \bm{a} \Vert \cdot \Vert \bm{b} \Vert}
+			\cos \measuredangle (\bm{a}, \bm{b}) = \frac{\bm{a}^{\intercal}\bm{b}}{\Vert \bm{a} \Vert \cdot \Vert \bm{b} \Vert}
 				= \frac{\sum_{j=1}^m a_j \cdot b_j}{\sqrt{\sum_{j=1}^m (a_j)^2} \cdot \sqrt{\sum_{j=1}^m (b_j)^2}}
 		\end{equation}
 		\item The dot product is defined as:
 		\begin{equation}
-			\bm{a} \cdot \bm{b} = \Vert \bm{a} \Vert \cdot \Vert \bm{b} \Vert \cdot \cos \measuredangle (\bm{a}, \bm{b})
+			\bm{a}^{\intercal}\bm{b} = \Vert \bm{a} \Vert \cdot \Vert \bm{b} \Vert \cdot \cos \measuredangle (\bm{a}, \bm{b})
 		\end{equation}
 	\end{itemize}
 \end{frame}

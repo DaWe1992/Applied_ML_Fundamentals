@@ -142,7 +142,7 @@
 % Where does the Sigmoid come from?
 \begin{frame}{Where does the Sigmoid come from?}{}\optional
 	{\footnotesize
-	\begin{alignat}{2}
+	\begin{alignat*}{2}
 		p(\mathcal{C}_1 \vert \bm{x})
 			&=	\frac{p(\bm{x} \vert \mathcal{C}_1) p(\mathcal{C}_1)}{p(\bm{x})}
 				= \frac{p(\bm{x} \vert \mathcal{C}_1) p(\mathcal{C}_1)}{\sum_j p(\bm{x}, \mathcal{C}_j)}
@@ -157,7 +157,7 @@
 			\\[1mm]
 		z 	&= \log \frac{p(\bm{x} \vert \mathcal{C}_1) p(\mathcal{C}_1)}{p(\bm{x} \vert \mathcal{C}_2) p(\mathcal{C}_2)}
 			&& \longrightarrow \text{\highlight{log odds}}
-	\end{alignat}}
+	\end{alignat*}}
 \end{frame}
 
 
@@ -272,6 +272,48 @@
 			\mathcal{J}(\bm{\theta}) = -\log \mathcal{L}(\bm{\theta})
 		\end{equation}
 	\end{itemize}
+\end{frame}
+
+
+% Derivation of the Gradient based on a single Example $(\bm{x}, y)$
+\begin{frame}{Derivative of the Sigmoid Function $g(z)$}{}\optional
+	%\vspace*{-5mm}
+	\footnotesize
+	\begin{align*}
+		g(z) 
+			&= 	\frac{1}{1 + e^{-z}} \\[4mm]
+		\frac{\text{d}}{\text{d}x} g(z) 
+			&= 	\frac{0 \cdot (1 + e^{-z}) - (-e^{-z})}{(1 + e^{-z})^2} \\[2mm]
+			&= 	\frac{e^{-z}}{(1 + e^{-z})^2} = \frac{(1 - 1) + e^{-z}}{(1 + e^{-z})^2} =
+				\frac{1 + e^{-z}}{(1 + e^{-z})^2} - \frac{1}{(1 + e^{-z})^2} \\[2mm]
+			&= 	\frac{1}{1 + e^{-z}} \left[ 1 - \frac{1}{1 + e^{-z}} \right] \\[2mm]
+			&=	\boxed{g(z) (1 - g(z))}
+	\end{align*}
+\end{frame}
+
+
+% Derivation of the Gradient based on a single Example $(\bm{x}, y)$
+\begin{frame}{Derivation of the Gradient based on a single Example $(\bm{x}, y)$}{}\optional
+	%\vspace*{-5mm}
+	\footnotesize
+	\begin{alignat*}{2}
+		\frac{\partial}{\partial \theta_j} \mathcal{J}(\bm{\theta})
+			&= 	-\frac{\partial}{\partial \theta_j} y \log(g(\bm{\theta}^{\intercal} \bm{x})) -
+			     	\frac{\partial}{\partial \theta_j} (1 - y) \log(1 - g(\bm{\theta}^{\intercal} \bm{x}))
+			&& 	\quad\highlight{(derivative of sum terms)} \\[2mm]
+			&=	\left[ -\frac{y}{g(\bm{\theta}^{\intercal} \bm{x})} + \frac{1 - y}{1 - g(\bm{\theta}^{\intercal} \bm{x})} \right]
+				\frac{\partial}{\partial \theta_j} g(\bm{\theta}^{\intercal} \bm{x})
+			&& 	\quad\highlight{(derivative of log function)} \\[2mm]
+			&=	\left[ -\frac{y}{g(\bm{\theta}^{\intercal} \bm{x})} + \frac{1 - y}{1 - g(\bm{\theta}^{\intercal} \bm{x})} \right]
+				g(\bm{\theta}^{\intercal} \bm{x}) (1 - g(\bm{\theta}^{\intercal} \bm{x}))
+				\frac{\partial}{\partial \theta_j} \bm{\theta}^{\intercal} \bm{x}
+			&& 	\quad\highlight{(chain rule)} \\[2mm]
+			&= 	\left[ \frac{g(\bm{\theta}^{\intercal} \bm{x}) - y}{g(\bm{\theta}^{\intercal} \bm{x}) (1 - g(\bm{\theta}^{\intercal} \bm{x}))} \right]
+				g(\bm{\theta}^{\intercal} \bm{x}) (1 - g(\bm{\theta}^{\intercal} \bm{x})) x_j
+			&& 	\quad\highlight{(algebraic manipulation)} \\[2mm]
+			&= 	(g(\bm{\theta}^{\intercal} \bm{x}) - y) x_j = \boxed{(h_{\bm{\theta}}(\bm{x}) - y) x_j}
+			&& 	\quad\highlight{(cancelling terms)}
+	\end{alignat*}
 \end{frame}
 
 
