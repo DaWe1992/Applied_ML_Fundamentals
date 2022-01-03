@@ -275,14 +275,14 @@
 \end{frame}
 
 
-% Derivation of the Gradient based on a single Example $(\bm{x}, y)$
-\begin{frame}{Derivative of the Sigmoid Function $g(z)$}{}\optional
+% Derivative of the Sigmoid Function
+\begin{frame}{Derivative of the Sigmoid Function}{}\optional
 	%\vspace*{-5mm}
 	\footnotesize
 	\begin{align*}
 		g(z) 
 			&= 	\frac{1}{1 + e^{-z}} \\[4mm]
-		\frac{\text{d}}{\text{d}x} g(z) 
+		\frac{\text{d}}{\text{d}z} g(z) 
 			&= 	\frac{0 \cdot (1 + e^{-z}) - (-e^{-z})}{(1 + e^{-z})^2} \\[2mm]
 			&= 	\frac{e^{-z}}{(1 + e^{-z})^2} = \frac{(1 - 1) + e^{-z}}{(1 + e^{-z})^2} =
 				\frac{1 + e^{-z}}{(1 + e^{-z})^2} - \frac{1}{(1 + e^{-z})^2} \\[2mm]
@@ -515,17 +515,138 @@
 % Multi-Class Classification
 \begin{frame}{Multi-Class Classification}{}
 	\begin{itemize}
-		\item Logistic regression can handle two classes only, namely \textbf{0} and \textbf{1}
-		\item \textbf{What if there are more than two classes?}
-		\item Two common techniques:
-		\begin{itemize}
-			\item \highlight{One-vs-Rest (OVR)} 	$\Rightarrow$ One-against-All
-			\item \highlight{One-vs-One (OVO)} 	$\Rightarrow$ Pairwise classification
-		\end{itemize}
-		\item Several classifiers are trained
-		\item During prediction the classifiers \textbf{vote for the correct class}
-		\item Such techniques can be used for all binary classifiers
+		\item In its basic form logistic regression can handle two classes only
+		\item \Highlight{What if there are more than two classes?}
+		\item Two approaches:
+		\begin{enumerate}
+			\item Change the algorithm so that it can deal with more classes \\
+				($\rightarrow$ \highlight{Multinomial Logistic Regression} / \highlight{Softmax Regression})
+			\item Transform the problem into several binary problems. \\
+				Two common techniques are:
+			\begin{itemize}
+				\item \highlight{One-vs-Rest (OvR)} 	$\rightarrow$ One-against-All
+				\item \highlight{One-vs-One (OvO)} 	$\rightarrow$ Pairwise classification
+			\end{itemize}
+		\end{enumerate}
+		\item Let's examine these approaches a bit closer
 	\end{itemize}
+\end{frame}
+
+
+% Subsection: Multinomial Logistic Regression
+% --------------------------------------------------------------------------------------------------------
+\subsection{Multinomial Logistic Regression}
+
+% Multinomial Logistic Regression Introduction
+\begin{frame}{Multinomial Logistic Regression Introduction}{}\optional
+	\begin{itemize}
+		\item The logistic regression model has to be changed in order to deal with multiple classes
+		\item The sigmoid function is replaced by the \highlight{Softmax} function:
+		\begin{equation}
+			\bm{g} : \mathbb{R}^{\kappa} \rightarrow \mathbb{R}^{\kappa} \qquad \bm{z} \mapsto \bm{g}(\bm{z}) \qquad
+			g_k(\bm{z}) = \frac{e^{z_k}}{\sum_{n=1}^{\kappa} e^{z_n}}
+		\end{equation}
+		\item $\kappa$ is the number of possible outcomes / classes
+		\item The softmax function returns a \textbf{probability distribution over the possible outcomes}, i.\,e. $\sum_{k=1}^{\kappa} g_k(\bm{z}) = 1$
+	\end{itemize}
+\end{frame}
+
+
+% Multinomial Logistic Regression Introduction (Ctd.)
+\begin{frame}{Multinomial Logistic Regression Introduction (Ctd.)}{}\optional
+	\begin{itemize}
+		\item $\bm{z} = \begin{pmatrix}
+			\bm{\theta}_{1}^{\intercal} \bm{x} &
+			\bm{\theta}_{2}^{\intercal} \bm{x} &
+			\hdots &
+			\bm{\theta}_{\kappa}^{\intercal} \bm{x}
+		\end{pmatrix}^{\intercal}$ is the vector of logits
+		\item This means we learn a separate set of parameters $\bm{\theta}_k$ for each possible class
+		\item All parameter vectors $\bm{\theta}_k$ are stacked into a single matrix $\bm{\Theta}$:
+		\begin{equation}
+			\bm{\Theta} = \begin{pmatrix}
+				\vertbar 			& \vertbar			& \hdots 			& \vertbar 				\\
+				\bm{\theta}_1 		& \bm{\theta}_2 	& \hdots 			& \bm{\theta}_{\kappa}	\\
+				\vertbar 			& \vertbar			& \hdots 			& \vertbar
+			\end{pmatrix}
+		\end{equation}
+	\end{itemize}
+\end{frame}
+
+
+% Derivative of the Cross-Entropy Function
+\begin{frame}{Derivative of the Cross-Entropy Function}{}\optional
+	\footnotesize
+	\begin{alignat*}{2}
+		\mathcal{J}(\bm{\Theta})
+			&= 	-\sum_{k=1}^{\kappa} y_k \log(g_k(\bm{z})) \qquad \text{with}\ \bm{z} =
+				\begin{pmatrix}
+					\bm{\theta}_{1}^{\intercal} \bm{x} \\
+					\bm{\theta}_{2}^{\intercal} \bm{x} \\
+					\vdots \\
+					\bm{\theta}_{\kappa}^{\intercal} \bm{x}
+				\end{pmatrix} 																				\\[4mm]
+		\frac{\partial}{\partial \theta_{ij}} \mathcal{J}(\bm{\Theta})
+			&= 	-\sum_{k=1}^{\kappa} y_k \frac{\partial \log(g_k(\bm{z}))}{\partial g_k(\bm{z})} \cdot
+				\frac{\partial g_k(\bm{z})}{\partial z_i} \cdot \frac{\partial z_i}{\partial \theta_{ij}}
+			&&	\qquad\longrightarrow \text{chain rule} 															\\[2mm]
+			&= 	-\sum_{k=1}^{\kappa} y_k \frac{1}{g_k(\bm{z})} \cdot \frac{\partial g_k(\bm{z})}{\partial z_i} \cdot
+				\frac{\partial z_i}{\partial \theta_{ij}}
+			&&	\qquad\longrightarrow \frac{\text{d}}{\text{d}x} \log(x) = \frac{1}{x}
+	\end{alignat*}
+\end{frame}
+
+
+% Derivative of the Softmax Function
+\begin{frame}{Derivative of the Softmax Function}{}\optional
+	\footnotesize
+	\begin{equation*}
+		g_k(\bm{z}) = \frac{e^{z_k}}{\sum_{n=1}^{\kappa} e^{z_n}} \qquad\qquad
+		\frac{\partial}{\partial z_i} g_k(\bm{z}) = \begin{cases}
+			g_i(\bm{z}) (1 - g_i(\bm{z})) 	& \text{if}\ i = k \\
+			-g_k(\bm{z}) g_i(\bm{z}) 		& \text{if}\ i \ne k
+		\end{cases}
+	\end{equation*}
+	\vspace*{2mm}
+	
+	\divideTwoTop{0.49}{
+		\highlight{Case \ding{182}:} $i = k$
+		\begin{align*}
+			\frac{\partial}{\partial z_i} g_k(\bm{z})
+				&= 	\frac{e^{z_k} \sum_{n=1}^{\kappa} e^{z_n} - e^{z_k} e^{z_i}}{(\sum_{n=1}^{\kappa} e^{z_n})^2} \\[2mm]
+				&= 	\frac{e^{z_k}}{\sum_{n=1}^{\kappa} e^{z_n}} \left[ 1 - \frac{e^{z_i}}{\sum_{n=1}^{\kappa} e^{z_n}} \right] 	\\[2mm]
+				&= 	g_k(\bm{z}) (1 - g_i(\bm{z})) \\[2mm]
+				&= 	g_k(\bm{z}) (1 - g_k(\bm{z}))
+		\end{align*}
+	}{0.49}{
+		\highlight{Case \ding{183}:} $i \ne k$:
+		\begin{align*}
+			\frac{\partial}{\partial z_i} g_k(\bm{z})
+				&= 	\frac{0 \cdot \sum_{n=1}^{\kappa} e^{z_n} - e^{z_k} e^{z_i}}{(\sum_{n=1}^{\kappa} e^{z_n})^2} 		\\[2mm]
+				&=	-\frac{e^{z_k}}{\sum_{n=1}^{\kappa} e^{z_n}} \frac{e^{z_i}}{\sum_{n=1}^{\kappa} e^{z_n}} \\[2mm]
+				&= 	-g_k(\bm{z}) g_i(\bm{z})
+		\end{align*}
+	}
+\end{frame}
+
+
+% Derivative of the Cross-Entropy Function (Ctd.)
+\begin{frame}{Derivative of the Cross-Entropy Function (Ctd.)}{}\optional
+	\footnotesize
+	\begin{alignat*}{2}
+		\frac{\partial}{\partial \theta_{ij}} \mathcal{J}(\bm{\Theta})	
+			&= 	-\sum_{k=1}^{\kappa} \frac{y_k}{g_k(\bm{z})} \cdot \frac{\partial g_k(\bm{z})}{\partial z_i} \cdot \frac{\partial z_i}{\partial \theta_{ij}}
+			&&	\quad\longrightarrow \text{see slide 33}															\\[2mm]
+			&= 	\left[ -\frac{y_k}{g_k(\bm{z})} g_k(\bm{z}) (1 - g_k(\bm{z})) +
+				\sum_{\substack{k=1 \\ k \ne i}}^{\kappa} \frac{y_k}{g_k(\bm{z})} g_k(\bm{z}) g_i(\bm{z}) \right] 
+				\frac{\partial z_i}{\partial \theta_{ij}}
+			&&	\quad\longrightarrow \text{separate cases} 															\\[2mm]
+			&= 	\left[ -y_k + y_k g_k(\bm{z}) + \sum_{\substack{k=1 \\ k \ne i}}^{\kappa} y_k g_i(\bm{z}) \right]
+				\frac{\partial z_i}{\partial \theta_{ij}} = 
+				\left[ -y_k + \sum_{k=1}^{\kappa}  y_k g_i(\bm{z}) \right] \frac{\partial z_i}{\partial \theta_{ij}} 					
+			&&	\quad\longrightarrow \text{cancel terms}\\[2mm]
+			&=	(-y_k + g_k(\bm{z})) x_j = \boxed{(g_k(\bm{z}) - y_k) x_j}
+	\end{alignat*}
 \end{frame}
 
 
