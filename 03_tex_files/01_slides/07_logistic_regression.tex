@@ -260,8 +260,8 @@
 \end{frame}
 
 
-% Derivation of Cross Entropy
-\begin{frame}{Derivation of Cross Entropy}{}\optional
+% Derivation of (binary) Cross Entropy
+\begin{frame}{Derivation of (binary) Cross Entropy}{}\optional
 	\begin{itemize}
 		\item The likelihood function can be written in the form:
 		\begin{equation}
@@ -269,8 +269,43 @@
 		\end{equation}
 		\item The cost function is then given by the \textbf{negative log-likelihood}:
 		\begin{equation}
-			\mathcal{J}(\bm{\theta}) = -\log \mathcal{L}(\bm{\theta})
+			\mathcal{J}(\bm{\theta}) = -\frac{1}{n} \log \mathcal{L}(\bm{\theta})
 		\end{equation}
+	\end{itemize}
+\end{frame}
+
+
+% Derivation of (binary) Cross Entropy (Ctd.)
+\begin{frame}{Derivation of (binary) Cross Entropy (Ctd.)}{}\optional
+	\footnotesize
+	\begin{alignat*}{2}
+		\mathcal{J}(\bm{\theta})
+			&= 	-\frac{1}{n} \log \left[ \prod_{i=1}^n h_{\bm{\theta}}(\bm{x}^{(i)})^{y^{(i)}} \cdot
+				(1 - h_{\bm{\theta}}(\bm{x}^{(i)}))^{1 - y^{(i)}} \right] 								\\[2mm]
+			&= 	-\frac{1}{n} \sum_{i=1}^n \log \left[ h_{\bm{\theta}}(\bm{x}^{(i)})^{y^{(i)}} \cdot
+				(1 - h_{\bm{\theta}}(\bm{x}^{(i)}))^{1 - y^{(i)}} \right]
+			&& 	\quad\longrightarrow \log\prod = \sum\log											\\[2mm]
+			&= 	\frac{1}{n} \sum_{i=1}^n -\log \left[ h_{\bm{\theta}}(\bm{x}^{(i)})^{y^{(i)}} \right] -
+				\log \left[ (1 - h_{\bm{\theta}}(\bm{x}^{(i)}))^{1 - y^{(i)}} \right]
+			&&	\quad\longrightarrow \log(a \cdot b) = \log(a) + \log(b)								\\[2mm]
+			&= 	\frac{1}{n} \sum_{i=1}^n \left[ -y^{(i)} \log(h_{\bm{\theta}}(\bm{x}^{(i)})) -
+				(1 - y^{(i)}) \log(1 - h_{\bm{\theta}}(\bm{x}^{(i)})) \right]
+			&&	\quad\longrightarrow \log(a^b) = b \cdot \log(a)
+	\end{alignat*}
+\end{frame}
+
+
+% Optimization of (binary) Cross Entropy
+\begin{frame}{Optimization of (binary) Cross Entropy}{}
+	\begin{itemize}
+		\item Unfortunately, there is \Highlight{no closed-form solution} to logistic regression \\
+			{\footnotesize \textit{(due to the sigmoid function)}}
+		\item We have to resort to an iterative method like \textbf{gradient descent}
+		\item We need the gradient of $\mathcal{J}(\bm{\theta})$ which requires some math (cf. next slides)
+		\begin{equation}
+			\frac{\partial}{\partial \theta_j} \mathcal{J}(\bm{\theta}) = (h_{\bm{\theta}}(\bm{x}) - y) x_j
+		\end{equation}
+		\item Due to the chain rule we also have to find the derivative of the sigmoid function. \highlight{Let's get started:}
 	\end{itemize}
 \end{frame}
 
@@ -279,16 +314,19 @@
 \begin{frame}{Derivative of the Sigmoid Function}{}\optional
 	%\vspace*{-5mm}
 	\footnotesize
-	\begin{align*}
+	\begin{alignat*}{2}
 		g(z) 
-			&= 	\frac{1}{1 + e^{-z}} \\[4mm]
+			&= 	\frac{1}{1 + e^{-z}} 															\\[4mm]
 		\frac{\text{d}}{\text{d}z} g(z) 
-			&= 	\frac{0 \cdot (1 + e^{-z}) - (-e^{-z})}{(1 + e^{-z})^2} \\[2mm]
-			&= 	\frac{e^{-z}}{(1 + e^{-z})^2} = \frac{(1 - 1) + e^{-z}}{(1 + e^{-z})^2} =
-				\frac{1 + e^{-z}}{(1 + e^{-z})^2} - \frac{1}{(1 + e^{-z})^2} \\[2mm]
-			&= 	\frac{1}{1 + e^{-z}} \left[ 1 - \frac{1}{1 + e^{-z}} \right] \\[2mm]
+			&= 	\frac{0 \cdot (1 + e^{-z}) - (-e^{-z})}{(1 + e^{-z})^2}
+			&& 	\quad\longrightarrow \text{quotient rule}	 										\\[2mm]
+			&= 	\frac{e^{-z}}{(1 + e^{-z})^2} = \overbracket{\frac{1 + e^{-z} - 1}{(1 + e^{-z})^2}}^{\text{a small trick...}} =
+				\frac{1 + e^{-z}}{(1 + e^{-z})^2} - \frac{1}{(1 + e^{-z})^2}
+			&&	\quad\longrightarrow \text{algebraic manipulation} 									\\[2mm]
+			&= 	\frac{1}{1 + e^{-z}} \left[ 1 - \frac{1}{1 + e^{-z}} \right]
+			&&	\quad\longrightarrow \text{factorize term} 											\\[2mm]
 			&=	\boxed{g(z) (1 - g(z))}
-	\end{align*}
+	\end{alignat*}
 \end{frame}
 
 
@@ -300,25 +338,25 @@
 		\frac{\partial}{\partial \theta_j} \mathcal{J}(\bm{\theta})
 			&= 	-\frac{\partial}{\partial \theta_j} y \log(g(\bm{\theta}^{\intercal} \bm{x})) -
 			     	\frac{\partial}{\partial \theta_j} (1 - y) \log(1 - g(\bm{\theta}^{\intercal} \bm{x}))
-			&& 	\quad\highlight{(derivative of sum terms)} \\[2mm]
+			&& 	\quad\longrightarrow \text{derivative of sum terms}			 						\\[2mm]
 			&=	\left[ -\frac{y}{g(\bm{\theta}^{\intercal} \bm{x})} + \frac{1 - y}{1 - g(\bm{\theta}^{\intercal} \bm{x})} \right]
 				\frac{\partial}{\partial \theta_j} g(\bm{\theta}^{\intercal} \bm{x})
-			&& 	\quad\highlight{(derivative of log function)} \\[2mm]
+			&& 	\quad\longrightarrow \text{derivative of log function} 									\\[2mm]
 			&=	\left[ -\frac{y}{g(\bm{\theta}^{\intercal} \bm{x})} + \frac{1 - y}{1 - g(\bm{\theta}^{\intercal} \bm{x})} \right]
 				g(\bm{\theta}^{\intercal} \bm{x}) (1 - g(\bm{\theta}^{\intercal} \bm{x}))
 				\frac{\partial}{\partial \theta_j} \bm{\theta}^{\intercal} \bm{x}
-			&& 	\quad\highlight{(chain rule)} \\[2mm]
+			&& 	\quad\longrightarrow \text{chain rule} 											\\[2mm]
 			&= 	\left[ \frac{g(\bm{\theta}^{\intercal} \bm{x}) - y}{g(\bm{\theta}^{\intercal} \bm{x}) (1 - g(\bm{\theta}^{\intercal} \bm{x}))} \right]
 				g(\bm{\theta}^{\intercal} \bm{x}) (1 - g(\bm{\theta}^{\intercal} \bm{x})) x_j
-			&& 	\quad\highlight{(algebraic manipulation)} \\[2mm]
+			&& 	\quad\longrightarrow \text{algebraic manipulation} 									\\[2mm]
 			&= 	(g(\bm{\theta}^{\intercal} \bm{x}) - y) x_j = \boxed{(h_{\bm{\theta}}(\bm{x}) - y) x_j}
-			&& 	\quad\highlight{(cancelling terms)}
+			&& 	\quad\longrightarrow \text{cancel terms}
 	\end{alignat*}
 \end{frame}
 
 
 % Gradient Descent
-\begin{frame}{Gradient Descent}{}
+\begin{frame}{Gradient Descent}{}\important
 	\begin{itemize}
 		\item The goal is to minimize $\mathcal{J}(\bm{\theta})$: $\bm{\theta}^*
 			= \argmin_{\bm{\theta}} \mathcal{J}(\bm{\theta})$
@@ -543,7 +581,7 @@
 		\item The logistic regression model has to be changed in order to deal with multiple classes
 		\item The sigmoid function is replaced by the \highlight{Softmax} function:
 		\begin{equation}
-			\bm{g} : \mathbb{R}^{\kappa} \rightarrow \mathbb{R}^{\kappa} \qquad \bm{z} \mapsto \bm{g}(\bm{z}) \qquad
+			\bm{g} : \mathbb{R}^{\kappa} \rightarrow \mathbb{R}^{\kappa}, \qquad \bm{z} \mapsto \bm{g}(\bm{z}), \qquad
 			g_k(\bm{z}) = \frac{e^{z_k}}{\sum_{n=1}^{\kappa} e^{z_n}}
 		\end{equation}
 		\item $\kappa$ is the number of possible outcomes / classes
@@ -560,22 +598,42 @@
 			\bm{\theta}_{2}^{\intercal} \bm{x} &
 			\hdots &
 			\bm{\theta}_{\kappa}^{\intercal} \bm{x}
-		\end{pmatrix}^{\intercal}$ is the vector of logits
-		\item This means we learn a separate set of parameters $\bm{\theta}_k$ for each possible class
+		\end{pmatrix}^{\intercal}$ is the vector of \highlight{logits}
+		\item This means we learn a separate set of parameters $\bm{\theta}_k \in \mathbb{R}^{m+1}$ for each possible class
 		\item All parameter vectors $\bm{\theta}_k$ are stacked into a single matrix $\bm{\Theta}$:
 		\begin{equation}
 			\bm{\Theta} = \begin{pmatrix}
 				\vertbar 			& \vertbar			& \hdots 			& \vertbar 				\\
 				\bm{\theta}_1 		& \bm{\theta}_2 	& \hdots 			& \bm{\theta}_{\kappa}	\\
 				\vertbar 			& \vertbar			& \hdots 			& \vertbar
-			\end{pmatrix}
+			\end{pmatrix} \in \mathbb{R}^{(m+1) \times \kappa}
 		\end{equation}
 	\end{itemize}
 \end{frame}
 
 
-% Derivative of the Cross-Entropy Function
-\begin{frame}{Derivative of the Cross-Entropy Function}{}\optional
+% Generalized Cross Entropy Cost Function
+\begin{frame}{Generalized Cross Entropy Cost Function}{}\optional
+	\begin{itemize}
+		\item We have to generalize the cross entropy cost function as well:
+		\begin{equation}
+			\mathcal{J}(\bm{\Theta}) = -\sum_{k=1}^{\kappa} y_k \log(g_k(\bm{z})) \qquad \text{with}\ \bm{z} =
+			\begin{pmatrix}
+				\bm{\theta}_{1}^{\intercal} \bm{x} \\
+				\vdots \\
+				\bm{\theta}_{\kappa}^{\intercal} \bm{x}
+			\end{pmatrix}
+		\end{equation}
+		\item This definition of the cross entropy function requires the label to be encoded as a \highlight{one-hot vector}, i.\,e. each label is now a vector:
+		\begin{equation}
+			\bm{y} = \begin{pmatrix} 0 & \hdots & 0 & 1 & 0 & \hdots & 0\end{pmatrix}^{\intercal} \in \{ 0, 1 \}^{\kappa}
+		\end{equation}
+	\end{itemize}
+\end{frame}
+
+
+% Derivative of the Cross Entropy Function
+\begin{frame}{Derivative of the Cross Entropy Function}{}\optional
 	\footnotesize
 	\begin{alignat*}{2}
 		\mathcal{J}(\bm{\Theta})
@@ -630,8 +688,8 @@
 \end{frame}
 
 
-% Derivative of the Cross-Entropy Function (Ctd.)
-\begin{frame}{Derivative of the Cross-Entropy Function (Ctd.)}{}\optional
+% Derivative of the Cross Entropy Function (Ctd.)
+\begin{frame}{Derivative of the Cross Entropy Function (Ctd.)}{}\optional
 	\footnotesize
 	\begin{alignat*}{2}
 		\frac{\partial}{\partial \theta_{ij}} \mathcal{J}(\bm{\Theta})	
@@ -650,12 +708,31 @@
 \end{frame}
 
 
-% Subsection: One-vs-Rest (OVR)
+% Subsection: One-vs-Rest (OvR)
 % --------------------------------------------------------------------------------------------------------
-\subsection{One-vs-Rest (OVR)}
+\subsection{One-vs-Rest (OvR)}
 
-% Multi-Class Classification: One-vs-Rest (OVR)
-\begin{frame}{Multi-Class Classification: One-vs-Rest (OVR)}{}
+% Transforming the Problem into several binary Problems
+\begin{frame}{Transforming the Problem into several binary Problems}{}\important
+	\begin{itemize}
+		\item Instead of adjusting the algorithm we can also \textbf{transform the multi-class problem into several binary problems}
+		\item Two common techniques are:
+		\begin{itemize}
+			\item \highlight{One-vs-Rest (OvR)} 	$\rightarrow$ One-against-All
+			\item \highlight{One-vs-One (OvO)} 	$\rightarrow$ Pairwise classification
+		\end{itemize}
+		\item \textbf{General idea:}
+		\begin{itemize}
+			\item Several classifiers are trained individually
+			\item During prediction the classifiers \textbf{vote for the correct class}
+		\end{itemize}
+		\item Such techniques can be used \textbf{for all binary classifiers}
+	\end{itemize}
+\end{frame}
+
+
+% Multi-Class Classification: One-vs-Rest (OvR)
+\begin{frame}{Multi-Class Classification: One-vs-Rest (OvR)}{}
 	\divideTwo{0.49}{
 		\begin{itemize}
 			\item \textbf{Train one classifier per class} (expert for that class)
@@ -670,12 +747,12 @@
 \end{frame}
 
 
-% Subsection: One-vs-One (OVO)
+% Subsection: One-vs-One (OvO)
 % --------------------------------------------------------------------------------------------------------
-\subsection{One-vs-One (OVO)}
+\subsection{One-vs-One (OvO)}
 
-% Multi-Class Classification: One-vs-One (OVO)
-\begin{frame}{Multi-Class Classification: One-vs-One (OVO)}{}
+% Multi-Class Classification: One-vs-One (OvO)
+\begin{frame}{Multi-Class Classification: One-vs-One (OvO)}{}
 	\divideTwo{0.49}{
 		\vspace*{2mm}
 		\input{07_logistic_regression/01_tikz/ovo}
