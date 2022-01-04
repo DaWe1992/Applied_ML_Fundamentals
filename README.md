@@ -245,4 +245,4 @@ If answers were provided you would probably not answer the questions on your own
 Help me improve the lecture. Please feel free to file an issue in case you spot any errors in the slides, exercises or code.
 Thank you very much in advance! **Please do not open issues for questions concerning the content!** Either use the Moodle forum or send me an e-mail for that ([daniel.wehner@sap.com](mailto:daniel.wehner@sap.com)).
 
-<sub>© 2020 Daniel Wehner</sub>
+<sub>© 2022 Daniel Wehner</sub>
