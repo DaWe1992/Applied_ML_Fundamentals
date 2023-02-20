@@ -140,7 +140,7 @@ You can get a nice certificate if you want (around $60), but you can also partic
 
 </br>
 <p align="center">
-	<img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/03_tex_files/03_img/ml_certificate.png" width="500px" height="400px">
+	<img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/img/ml_certificate.png" width="500px" height="400px">
 </p>
 </br>
 
