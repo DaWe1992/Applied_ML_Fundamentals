@@ -1,3 +1,0 @@
-a = np.array([1.0, 2.0, 3.0])
-b = np.array([2.0, 2.0, 2.0])
-a * b # Result: array([2., 4., 6.])

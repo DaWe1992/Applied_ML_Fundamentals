@@ -1,9 +1,0 @@
-# Conventional way:
-squares = []
-for x in range(10):
-    squares.append(x**2) # add element to the list
-
-# Result: [0, 1, 4, 9, 16, 25, ...]
-
-# List comprehensions:
-squares = [x**2 for x in range(10)]
