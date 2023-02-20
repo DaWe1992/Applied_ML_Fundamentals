@@ -111,7 +111,7 @@ Please find further instructions in the Readme there.
 You do not need to buy any books for the lecture, most resources are available online. <br />
 Please find a curated list below:
 
-| Title                                       	       | Author(s)                    | View online                                                         																														|
+| Title ✒️                                     	       | Author(s)                    | View online 🔗                                                         																														|
 |------------------------------------------------------|------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Deep Learning**                            	       | Goodfellow et al. (2016)	  | [click here](https://www.deeplearningbook.org/) 		        																															|
 | **Elements of statistical Learning**                 | Hastie et al. (2008) 		  | [click here](https://web.stanford.edu/~hastie/Papers/ESLII.pdf)																															|
