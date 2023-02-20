@@ -63,7 +63,7 @@ The following topics / algorithms will be covered in the lecture:
 7. **Lecture summary**
 
 ## Exam 📝
-The exam is going to take 60 minutes. The maximum attainable score will be 60 points, so you have **one minute per point**.
+The exam is going to take 60 minutes. The maximum attainable score will be 60 points, so you have one minute per point.
 **Important:** Keep your answers short and simple in order not to lose too much valuable time.
 
 The exam questions will be given in German, but you may answer them in either English or German (you are also allowed to mix the languages).
