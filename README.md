@@ -4,10 +4,10 @@
 'We are drowning in information and starving for knowledge.' – John Naisbitt
 ```
 
-Machine learning / data science is a subfield of artificial intelligence (AI) that provides systems the ability to automatically learn and improve from experience
+Machine learning / data science is a subfield of artificial intelligence (AI) that provides systems the ability to **automatically learn and improve** from experience
 **without being explicitly programmed**. Machine learning focuses on the development of computer programs which can access data and use it to learn for themselves.
 A machine learning algorithm learns by building a mathematical / statistical model from the data. This model can then be used for inference and decision making. 
-Machine learning has become an integral part of many modern applications. It is a cross-topic discipline which comprises computer science, math / statistics as well as
+Machine learning has become an integral part of many modern applications. It is a **cross-topic discipline** which comprises computer science, math / statistics as well as
 domain and business knowledge:
 
 <p align="center">
@@ -21,8 +21,7 @@ This Readme file provides you with all necessary information. It is structured a
 2. 📝 Exam
 3. 🐍 Python code
 4. 📚 Literature and recommended reading
-5. 🎁 Additional material
-6. 🐞 Bugs and errors
+5. 🐞 Bugs and errors
 
 ## Lecture Contents 📜
 
@@ -66,7 +65,7 @@ The following topics / algorithms will be covered by the lecture:
 7. **Unsupervised learning**
     * Clustering ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/12_clustering.pdf))
 		* k-Means
-		* Hierarchical clustering (divisive and agglomerative)
+		* Hierarchical clustering
     * Principal component analysis ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/13_pca.pdf))
 8. **Lecture summary**
 
@@ -78,8 +77,9 @@ Please do not translate domain specific technical terms in order to avoid confus
 
 **Exam preparation:**
 * You will not be asked for any derivations, rather I want to test whether you understand the general concepts.
+* Any content not discussed in the lecture **will not be part** of the exam.
 * The exam will contain a mix of multiple choice questions, short answer questions and calculations.
-* Make sure you can answer the self-test questions provided for each topic. **There won't be sample solutions for those questions!** (This would undermine the sense of **self**-test questions).
+* Make sure you can answer the self-test questions provided for each topic. **There won't be sample solutions for those questions!**
 * Some of the slides give you important hints (upper left corner):
 	*  A slide marked with symbol (1) provides in-depth information which you do not have to know by heart (think of it as additional material for the sake of completeness).
 	*  Symbol (2) indicates very important content. Make sure you understand it!
@@ -98,20 +98,22 @@ Symbol (2):
 * Two-sided **hand-written** cheat sheet (you may note whatever you want)
 
 **Exam grading**
-
 Since the lecture *Applied Machine Learning Fundamentals* is part of a bigger module (*Machine Learning Fundamentals, W3WI_DS304)*, it is not graded individually.
 Instead, the score you achieved in the exam (at most 60 points) will be added to the points you receive in the second element of the module, the *Data Exploration Project* in the 4th semester
-which is also worth 60 points at maximum. Your performance in both elements combined will determine the eventual grade.
+which is also worth 60 points at maximum. Your performance in both elements combined will determine your eventual grade.
 
 Please refer to the official [DHBW data science module catalogue](https://www.dhbw.de/fileadmin/user/public/SP/MA/Wirtschaftsinformatik/Data_Science.pdf) for further details.
 
 ## Python Code 🐍
-Machine learning algorithms (probably all algorithms) are easier to understand, if you see them implemented. Please find Python implementations for some of the algorithms (which are not part of the assignments) in this [repository](https://github.com/DaWe1992/Applied_ML_Algorithms).
-Play around with the hyper-parameters of the algorithms and try different data sets in order to get a better feeling for how the algorithms work. Also, debug through the code line by line and check what each line does.
+Machine learning algorithms are easier to understand, if you see them implemented. Please find Python implementations for some of the algorithms (which are not part of the assignments) in this [repository](https://github.com/DaWe1992/Applied_ML_Algorithms).
+
+Play around with the hyper-parameters of the algorithms and try different data sets in order to get a better feeling for how the algorithms work.
+Also, debug through the code line by line and check what each line does.
 Please find further instructions in the Readme there.
 
 ## Literature and recommended Reading 📚
-You do not need to buy any books for the lecture, most resources are available online. Please find a curated list below:
+You do not need to buy any books for the lecture, most resources are available online.
+Please find a curated list below:
 
 | Title                                    	     | Author(s)                    | Publisher 				| View online                                                         																														|
 |------------------------------------------------|------------------------------|---------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -135,20 +137,8 @@ You do not need to buy any books for the lecture, most resources are available o
 * [Playing atari with deep reinforcement learning](https://arxiv.org/abs/1312.5602) (Mnih et al., 2013)
 * [Efficient estimation of word representations in vector space](https://arxiv.org/abs/1301.3781) (Mikolov et al., 2013)
 
-In general, the [Coursera machine learning course](https://de.coursera.org/learn/machine-learning#about) by Andrew Ng is highly recommended.
-You can get a nice certificate if you want (around $60), but you can also participate in the course for free (without getting the certificate):
-
-</br>
-<p align="center">
-	<img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/img/ml_certificate.png" width="500px" height="400px">
-</p>
-</br>
-
-In the exam you will not be asked for content which was not discussed in the lecture. Regard the literature as additional resources in case you want to dig deeper into
-specific topics. Please give me a hint, if you feel that some important resources are missing. I am happy to add them here.
-
 ## Bugs and Errors 🐞
-Help me improve the lecture. Please feel free to file an issue in case you spot any errors in the slides, exercises or code.
+Help me improve the lecture. Please feel free to file an issue in case you spot any errors.
 Thank you very much in advance! **Please do not open issues for questions concerning the content!** Either use the Moodle forum or send me an e-mail for that ([daniel.wehner@sap.com](mailto:daniel.wehner@sap.com)).
 
 <sub>© 2023 Daniel Wehner, M.Sc.</sub>
