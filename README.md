@@ -101,7 +101,7 @@ Please refer to the official [DHBW data science module catalogue](https://www.dh
 
 ## Python Code 🐍
 Machine learning algorithms are easier to understand, if you see them implemented.
-Please find Python implementations for some of the algorithms (which are not part of the assignments) in this [repository](https://github.com/DaWe1992/Applied_ML_Algorithms).
+Please find Python implementations for some of the algorithms in this [repository](https://github.com/DaWe1992/Applied_ML_Algorithms).
 
 Play around with the hyper-parameters of the algorithms and try different data sets in order to get a better feeling for how the algorithms work.
 Also, debug through the code line by line and check what each line does.
