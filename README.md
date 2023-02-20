@@ -25,7 +25,7 @@ This Readme file provides you with all necessary information. It is structured a
 
 ## Lecture Contents 📜
 
-The following topics / algorithms will be covered by the lecture:
+The following topics / algorithms will be covered in the lecture:
 
 1. **Introduction to machine learning** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/01_intro_ml.pdf))
     * Motivation and applications
@@ -63,8 +63,9 @@ The following topics / algorithms will be covered by the lecture:
 7. **Lecture summary**
 
 ## Exam 📝
-The exam is going to take 60 minutes. The maximum attainable score will be 60 points, so you have one minute per point.
+The exam is going to take 60 minutes. The maximum attainable score will be 60 points, so you have **one minute per point**.
 **Important:** Keep your answers short and simple in order not to lose too much valuable time.
+
 The exam questions will be given in German, but you may answer them in either English or German (you are also allowed to mix the languages).
 Please do not translate domain specific technical terms in order to avoid confusion. Please answer all questions on the task sheets (you may also write on the back-sides).
 
@@ -91,9 +92,10 @@ Symbol (2):
 * Two-sided **hand-written** cheat sheet (you may note whatever you want)
 
 **Exam grading**
+
 Since the lecture *Applied Machine Learning Fundamentals* is part of a bigger module (*Machine Learning Fundamentals, W3WI_DS304)*, it is not graded individually.
 Instead, the score you achieved in the exam (at most 60 points) will be added to the points you receive in the second element of the module, the *Data Exploration Project* in the 4th semester
-which is also worth 60 points at maximum. Your performance in both elements combined will determine your eventual grade.
+which is also worth 60 points at maximum. **Your performance in both elements combined will determine your eventual grade.**
 
 Please refer to the official [DHBW data science module catalogue](https://www.dhbw.de/fileadmin/user/public/SP/MA/Wirtschaftsinformatik/Data_Science.pdf) for further details.
 
@@ -109,16 +111,16 @@ Please find further instructions in the Readme there.
 You do not need to buy any books for the lecture, most resources are available online. <br />
 Please find a curated list below:
 
-| Title                                    	       | Author(s)                    | View online                                                         																														|
-|--------------------------------------------------|------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Deep Learning                            	       | Goodfellow et al. (2016)	  | [click here](https://www.deeplearningbook.org/) 		        																															|
-| Elements of statistical Learning                 | Hastie et al. (2008) 		  | [click here](https://web.stanford.edu/~hastie/Papers/ESLII.pdf)																															|
-| Machine Learning                                 | Mitchell (1997)              | [click here](https://www.cin.ufpe.br/~cavmj/Machine%20-%20Learning%20-%20Tom%20Mitchell.pdf)																		|
-| Machine Learning - A probabilistic perspective   | Murphy (2012)				  | [click here](https://doc.lagout.org/science/Artificial%20Intelligence/Machine%20learning/Machine%20Learning_%20A%20Probabilistic%20Perspective%20%5BMurphy%202012-08-24%5D.pdf)			|
-| Mathematics for Machine Learning                 | Deisenroth et al. (2019)     | [click here](https://mml-book.github.io/)																																					|
-| Pattern Recognition and Machine Learning 	       | Bishop (2006)   			  | [click here](http://users.isr.ist.utl.pt/~wurmd/Livros/school/Bishop%20-%20Pattern%20Recognition%20And%20Machine%20Learning%20-%20Springer%20%202006.pdf) 								|
-| Probabilistic Graphical Models 			       | Koller et al. (2009)		  | [click here](https://github.com/Zhenye-Na/machine-learning-uiuc/blob/master/docs/Probabilistic%20Graphical%20Models%20-%20Principles%20and%20Techniques.pdf)                              |
-| Reinforcement Learning - An introduction         | Sutton et al. (2014)         | [click here](http://incompleteideas.net/book/bookdraft2017nov5.pdf)   																													|
+| Title                                       	       | Author(s)                    | View online                                                         																														|
+|------------------------------------------------------|------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Deep Learning**                            	       | Goodfellow et al. (2016)	  | [click here](https://www.deeplearningbook.org/) 		        																															|
+| **Elements of statistical Learning**                 | Hastie et al. (2008) 		  | [click here](https://web.stanford.edu/~hastie/Papers/ESLII.pdf)																															|
+| **Machine Learning**                                 | Mitchell (1997)              | [click here](https://www.cin.ufpe.br/~cavmj/Machine%20-%20Learning%20-%20Tom%20Mitchell.pdf)																		|
+| **Machine Learning - A probabilistic perspective**   | Murphy (2012)				  | [click here](https://doc.lagout.org/science/Artificial%20Intelligence/Machine%20learning/Machine%20Learning_%20A%20Probabilistic%20Perspective%20%5BMurphy%202012-08-24%5D.pdf)			|
+| **Mathematics for Machine Learning**                 | Deisenroth et al. (2019)     | [click here](https://mml-book.github.io/)																																					|
+| **Pattern Recognition and Machine Learning** 	       | Bishop (2006)   			  | [click here](http://users.isr.ist.utl.pt/~wurmd/Livros/school/Bishop%20-%20Pattern%20Recognition%20And%20Machine%20Learning%20-%20Springer%20%202006.pdf) 								|
+| **Probabilistic Graphical Models** 			       | Koller et al. (2009)		  | [click here](https://github.com/Zhenye-Na/machine-learning-uiuc/blob/master/docs/Probabilistic%20Graphical%20Models%20-%20Principles%20and%20Techniques.pdf)                              |
+| **Reinforcement Learning - An introduction**         | Sutton et al. (2014)         | [click here](http://incompleteideas.net/book/bookdraft2017nov5.pdf)   																													|
 
 🔗 **YouTube resources:**
 * [Machine learning lecture](https://www.youtube.com/watch?v=UzxYlbK2c7E&list=PLA89DCFA6ADACE599) by Andrew Ng, Stanford University
