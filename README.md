@@ -38,16 +38,11 @@ The following topics / algorithms will be covered by the lecture:
 3. **Bayesian decision theory** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/03_decision_theory.pdf))
     * Bayes optimal classifier
     * Naive Bayes
-	* Risk minimization
-4. **Probability density estimation** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/04_density_estimation.pdf))
-    * Parametric models
-    * Non-parametric models
-    * Gaussian mixture models and expectation maximization
-5. **Supervised learning**
+	* Probability density estimation
+4. **Supervised learning**
     * Regression ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/05_regression.pdf))
 		* Linear regression
-		* Probabilistic regression
-		* Basis functions: Radial basis functions, polynomial basis functions
+		* Basis function regression
     * Classification I
 		* k-nearest neighbors ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/06_knn.pdf))
 		* Logistic regression ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/07_logistic_regression.pdf))
@@ -55,19 +50,17 @@ The following topics / algorithms will be covered by the lecture:
 	* Classification II: Deep learning ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/10_deep_learning.pdf))
 		* Perceptrons
 		* Multi-layer-perceptrons and back-propagation
-		* Deep learning application: NLP (word embeddings, text classification, sentiment analysis)
-6. **Evaluation of ML models** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/09_evaluation.pdf))
+5. **Evaluation of ML models** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/09_evaluation.pdf))
 	* Out-of-sample testing and cross validation
 	* Confusion matrices
 	* Evaluation metrics: Precision, recall, F1 score, ROC, accuracy
-	* Cost-sensitive evaluation
 	* Model selection: Grid search, random search
-7. **Unsupervised learning**
+6. **Unsupervised learning**
     * Clustering ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/12_clustering.pdf))
 		* k-Means
 		* Hierarchical clustering
     * Principal component analysis ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/13_pca.pdf))
-8. **Lecture summary**
+7. **Lecture summary**
 
 ## Exam 📝
 The exam is going to take 60 minutes. The maximum attainable score will be 60 points, so you have one minute per point.
@@ -105,7 +98,8 @@ which is also worth 60 points at maximum. Your performance in both elements comb
 Please refer to the official [DHBW data science module catalogue](https://www.dhbw.de/fileadmin/user/public/SP/MA/Wirtschaftsinformatik/Data_Science.pdf) for further details.
 
 ## Python Code 🐍
-Machine learning algorithms are easier to understand, if you see them implemented. Please find Python implementations for some of the algorithms (which are not part of the assignments) in this [repository](https://github.com/DaWe1992/Applied_ML_Algorithms).
+Machine learning algorithms are easier to understand, if you see them implemented.
+Please find Python implementations for some of the algorithms (which are not part of the assignments) in this [repository](https://github.com/DaWe1992/Applied_ML_Algorithms).
 
 Play around with the hyper-parameters of the algorithms and try different data sets in order to get a better feeling for how the algorithms work.
 Also, debug through the code line by line and check what each line does.
