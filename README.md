@@ -40,26 +40,26 @@ The following topics / algorithms will be covered in the lecture:
     * Naive Bayes
 	* Probability density estimation
 4. **Supervised learning**
-    * Regression ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/05_regression.pdf))
+    * Regression ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/04_regression.pdf))
 		* Linear regression
 		* Basis function regression
     * Classification I
-		* k-nearest neighbors ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/06_knn.pdf))
-		* Logistic regression ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/07_logistic_regression.pdf))
-		* Decision trees and ensemble methods ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/08_decision_trees.pdf))
-	* Classification II: Deep learning ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/10_deep_learning.pdf))
+		* k-nearest neighbors ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/05_knn.pdf))
+		* Logistic regression ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/06_logistic_regression.pdf))
+		* Decision trees and ensemble methods ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/07_decision_trees.pdf))
+	* Classification II: Deep learning ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/09_deep_learning.pdf))
 		* Perceptrons
 		* Multi-layer-perceptrons and back-propagation
-5. **Evaluation of ML models** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/09_evaluation.pdf))
+5. **Evaluation of ML models** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/08_evaluation.pdf))
 	* Out-of-sample testing and cross validation
 	* Confusion matrices
-	* Evaluation metrics: Precision, recall, F1 score, ROC, accuracy
+	* Evaluation metrics: Precision, recall, F1 score, ROC, accuracy, RMSE, MAE
 	* Model selection: Grid search, random search
 6. **Unsupervised learning**
-    * Clustering ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/12_clustering.pdf))
+    * Clustering ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/10_clustering.pdf))
 		* k-Means
 		* Hierarchical clustering
-    * Principal component analysis ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/13_pca.pdf))
+    * Principal component analysis ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/11_pca.pdf))
 7. **Lecture summary**
 
 ## Exam 📝
