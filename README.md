@@ -37,8 +37,8 @@ The following topics / algorithms will be covered in the lecture:
 	* Optimization
 3. **Bayesian decision theory** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/03_decision_theory.pdf))
     * Bayes optimal classifier
-    * Naive Bayes
-	* Probability density estimation
+    * Multinomial and gaussian naive Bayes
+	* Probability density estimation and maximum likelihood estimation 
 4. **Supervised learning**
     * Regression ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/04_regression.pdf))
 		* Linear regression
@@ -59,6 +59,7 @@ The following topics / algorithms will be covered in the lecture:
     * Clustering ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/10_clustering.pdf))
 		* k-Means
 		* Hierarchical clustering
+		* DBSCAN
     * Principal component analysis ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/11_pca.pdf))
 7. **Lecture summary**
 
