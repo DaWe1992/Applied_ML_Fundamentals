@@ -18,10 +18,11 @@ The lecture *'Applied Machine Learning Fundamentals'* is supposed to give a gene
 This Readme file provides you with all necessary information. It is structured as follows:
 
 1. 📜 Lecture contents
-2. 📝 Exam
-3. 🐍 Python code
-4. 📚 Literature and recommended reading
-5. 🐞 Bugs and errors
+2. ✒️ Exercises
+3. 📝 Exam
+4. 🐍 Python code
+5. 📚 Literature and recommended reading
+6. 🐞 Bugs and errors
 
 ## Lecture Contents 📜
 
@@ -36,12 +37,14 @@ The following topics / algorithms will be covered in the lecture:
 	* Statistics
 	* Optimization
 3. **Bayesian decision theory** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/03_decision_theory.pdf))
-    * Bayes optimal classifier
-    * Multinomial and gaussian naive Bayes
+    * Bayes optimal classifiers
+	* Error minimization vs. risk minimization
+    * Multinomial and Gaussian naive Bayes
 	* Probability density estimation and maximum likelihood estimation 
 4. **Supervised learning**
     * Regression ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/04_regression.pdf))
 		* Linear regression
+		* Probabilistic regression
 		* Basis function regression
     * Classification I
 		* k-nearest neighbors ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/05_knn.pdf))
@@ -50,11 +53,13 @@ The following topics / algorithms will be covered in the lecture:
 	* Classification II: Deep learning ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/09_deep_learning.pdf))
 		* Perceptrons
 		* Multi-layer-perceptrons and back-propagation
+		* Further network architectures (CNNs, RNNs)
 5. **Evaluation of ML models** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/08_evaluation.pdf))
 	* Out-of-sample testing and cross validation
 	* Confusion matrices
 	* Evaluation metrics: Precision, recall, F1 score, ROC, accuracy, RMSE, MAE
-	* Model selection: Grid search, random search
+	* Model selection: Grid search, random search, early stopping
+	* Bias-variance decomposition
 6. **Unsupervised learning**
     * Clustering ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/10_clustering.pdf))
 		* k-Means
@@ -88,17 +93,19 @@ The exam is going to take 60 minutes. The maximum attainable score will be 60 po
 **Important:** Keep your answers short and simple in order not to lose too much valuable time.
 
 The exam questions will be given in German, but you may answer them in either English or German (you are also allowed to mix the languages).
-Please do not translate domain specific technical terms in order to avoid confusion. Please answer all questions on the task sheets (you may also write on the back-sides).
+Please do not translate domain specific technical terms in order to avoid confusion. Please answer all questions on the task sheets (you may also write on the empty back-sides).
 
 **Exam preparation:**
 * You will not be asked for any derivations, rather I want to test whether you understand the general concepts.
 * Any content not discussed in the lecture **will not be part** of the exam.
 * The exam will contain a mix of multiple choice questions, short answer questions and calculations.
 * Make sure you can answer the self-test questions provided for each topic. **There won't be sample solutions for those questions!**
+* Solve the exercises and work through the solutions if necessary!
 * Some of the slides give you important hints (upper left corner):
 	*  A slide marked with symbol (1) provides in-depth information which you do not have to know by heart (think of it as additional material for the sake of completeness).
 	*  Symbol (2) indicates very important content. Make sure you understand it!
-* Solve the [old exams](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/03_exam) which are officially provided. The solutions will be discussed in the last session of the lecture.
+* Have a look at the [old exams](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/03_exam) to familiarize yourself with the exam format.
+* The last lectures slot is reserved for exam preparation and additional questions.
 
 Symbol (1):
 
@@ -110,10 +117,9 @@ Symbol (2):
 
 **Auxiliary material for the exam:**
 * Non-programmable pocket calculator
-* Two-sided **hand-written** cheat sheet (you may note whatever you want)
+* Two-sided **hand-written** cheat sheet (you may note whatever you want). Hand-written means pen and paper (not on tablet!)
 
 **Exam grading**
-
 Since the lecture *Applied Machine Learning Fundamentals* is part of a bigger module (*Machine Learning Fundamentals, W3WI_DS304)*, it is not graded individually.
 Instead, the score you achieved in the exam (at most 60 points) will be added to the points you receive in the second element of the module, the *Data Exploration Project* in the 4th semester
 which is also worth 60 points at maximum. **Your performance in both elements combined will determine your eventual grade.**
