@@ -67,7 +67,8 @@ The following topics / algorithms will be covered in the lecture:
 An exercise sheet is provided for each lecture unit. Most of the time, the exercises are a compilation of old exam questions.
 However, the exercises also include programming tasks and questions which would not be suitable for an exam (due to time constraints).
 
-**It is highly recommended to solve the exercises on your own!** The solutions will be provided via Moodle after two weeks.
+The solutions will be provided via the Moodle forum after two weeks. **It is highly recommended to solve the exercises on your own!**
+Do not wait for the solutions to be uploaded.
 
 | Title                                                              | Link 🔗                                                                                                     |
 |--------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
