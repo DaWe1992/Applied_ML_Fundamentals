@@ -105,7 +105,7 @@ Please do not translate domain specific technical terms in order to avoid confus
 	*  A slide marked with symbol (1) provides in-depth information which you do not have to know by heart (think of it as additional material for the sake of completeness).
 	*  Symbol (2) indicates very important content. Make sure you understand it!
 * Have a look at the [old exams](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/03_exam) to familiarize yourself with the exam format.
-* The last lectures slot is reserved for exam preparation and additional questions.
+* The last lecture slot is reserved for exam preparation and additional questions.
 
 Symbol (1):
 
