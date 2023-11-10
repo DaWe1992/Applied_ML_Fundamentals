@@ -25,7 +25,6 @@ This Readme file provides you with all necessary information. It is structured a
 6. 🐞 Bugs and errors
 
 ## Lecture Contents 📜
-
 The following topics / algorithms will be covered in the lecture:
 
 1. **Introduction to machine learning** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/01_intro_ml.pdf))
@@ -45,7 +44,7 @@ The following topics / algorithms will be covered in the lecture:
     * Regression ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/04_regression.pdf))
 		* Linear regression
 		* Probabilistic regression
-		* Basis function regression
+		* Basis function regression and regularization
     * Classification I
 		* k-nearest neighbors ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/05_knn.pdf))
 		* Logistic regression ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/06_logistic_regression.pdf))
@@ -66,7 +65,7 @@ The following topics / algorithms will be covered in the lecture:
 		* Hierarchical clustering
 		* DBSCAN
     * Principal component analysis ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/11_pca.pdf))
-7. **Lecture summary**
+7. **Lecture summary and exam preparation**
 
 ## Exercises ✒️
 An exercise sheet is provided for each lecture unit. Most of the time, the exercises are a compilation of old exam questions.
