@@ -27,32 +27,35 @@ This Readme file provides you with all necessary information. It is structured a
 ## Lecture Contents 📜
 The following topics / algorithms will be covered in the lecture:
 
-1. **Introduction to machine learning** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/01_intro_ml.pdf))
+1. **Introduction to machine learning** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/00_intro_ml.pdf))
     * Motivation and applications
     * Terminology
     * Key challenges in ML: Generalization, feature engineering, model selection, ...
-2. **Mathematical foundations** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/02_math.pdf))
-	* Linear algebra
-	* Statistics
-	* Optimization
-3. **Bayesian decision theory** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/03_decision_theory.pdf))
+2. **Mathematical foundations** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/01_math.pdf))
+	* Refresher: Linear algebra
+	* Refresher: Statistics
+	* Optimization Techniques
+		* Unconstrained and constrained optimization
+		* Gradient descent
+		* Newton's method
+3. **Bayesian decision theory** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/02_decision_theory.pdf))
     * Bayes optimal classifiers
 	* Error minimization vs. risk minimization
     * Multinomial and Gaussian naive Bayes
 	* Probability density estimation and maximum likelihood estimation 
 4. **Supervised learning**
-    * Regression ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/04_regression.pdf))
+    * Regression ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/03_regression.pdf))
 		* Linear regression
 		* Probabilistic regression
 		* Basis function regression and regularization
-    * Classification I
-		* k-nearest neighbors ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/05_knn.pdf))
-		* Logistic regression ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/06_logistic_regression.pdf))
+    * Classification
+		* Logistic regression ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/04_logistic_regression.pdf))
+		* Deep learning ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/05_deep_learning.pdf))
+			* Perceptrons
+			* Multi-layer-perceptrons and back-propagation
+			* Further network architectures (CNNs, RNNs)
+		* k-nearest neighbors ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/06_knn.pdf))
 		* Decision trees and ensemble methods ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/07_decision_trees.pdf))
-	* Classification II: Deep learning ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/09_deep_learning.pdf))
-		* Perceptrons
-		* Multi-layer-perceptrons and back-propagation
-		* Further network architectures (CNNs, RNNs)
 5. **Evaluation of ML models** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/08_evaluation.pdf))
 	* Out-of-sample testing and cross validation
 	* Confusion matrices
@@ -60,11 +63,11 @@ The following topics / algorithms will be covered in the lecture:
 	* Model selection: Grid search, random search, early stopping
 	* Bias-variance decomposition
 6. **Unsupervised learning**
-    * Clustering ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/10_clustering.pdf))
+    * Clustering ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/09_clustering.pdf))
 		* k-Means
 		* Hierarchical clustering
 		* DBSCAN
-    * Principal component analysis ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/11_pca.pdf))
+    * Principal component analysis ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/10_pca.pdf))
 7. **Lecture summary and exam preparation**
 
 ## Exercises ✒️
@@ -77,12 +80,12 @@ Do not wait for the solutions to be uploaded.
 | Number        | Title                                                              | Link 🔗                                                                                                     |
 |---------------|-----------------------------------------------------|----------------------------------------------------------------------------------------------------------|
 | **Sheet 1:**  | Numeric Optimization Techniques                     | [Download](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/02_exercises/exercise1.pdf)   |
-| **Sheet 2:**  | Decision Theory and Probability Density Estimation  |  [Download](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/02_exercises/exercise2.pdf)  |
+| **Sheet 2:**  | Decision Theory and Probability Density Estimation  | [Download](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/02_exercises/exercise2.pdf)  |
 | **Sheet 3:**  | Linear Regression                                   | [Download](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/02_exercises/exercise3.pdf)   |
 | **Sheet 4:**  | Logistic Regression                                 | [Download](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/02_exercises/exercise4.pdf)   |
-| **Sheet 5:**  | k-nearest Neighbors                                 | [Download](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/02_exercises/exercise5.pdf)   |
-| **Sheet 6:**  | Decision Trees and Ensemble Methods                 | [Download](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/02_exercises/exercise6.pdf)   |
-| **Sheet 7:**  | Neural Networks / Deep Learning                     | [Download](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/02_exercises/exercise7.pdf)   |
+| **Sheet 5:**  | Neural Networks / Deep Learning                     | [Download](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/02_exercises/exercise5.pdf)   |
+| **Sheet 6:**  | k-nearest Neighbors                                 | [Download](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/02_exercises/exercise6.pdf)   |
+| **Sheet 7:**  | Decision Trees and Ensemble Methods                 | [Download](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/02_exercises/exercise7.pdf)   |
 | **Sheet 8:**  | Evaluation of Machine Learning Models               | [Download](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/02_exercises/exercise8.pdf)   |
 | **Sheet 9:**  | Clustering                                          | [Download](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/02_exercises/exercise9.pdf)   |
 | **Sheet 10:** | Principal Component Analysis                        | [Download](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/02_exercises/exercise10.pdf)  |
