@@ -48,7 +48,7 @@ The following topics / algorithms will be covered in the lecture:
 		* Linear regression
 		* Probabilistic regression
 		* Basis function regression and regularization
-    * Classification
+    * More classification algorithms
 		* Logistic regression ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/04_logistic_regression.pdf))
 		* Deep learning ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/05_deep_learning.pdf))
 			* Perceptrons
