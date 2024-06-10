@@ -140,17 +140,19 @@ Please find further instructions in the Readme there.
 You do not need to buy any books for the lecture, most resources are available online. <br />
 Please find a curated list below:
 
-| Title                                      	       | Author(s)                    | View online 🔗                                                         																												|
-|------------------------------------------------------|------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Deep Learning**                            	       | Goodfellow et al. (2016)	  | [click here](https://www.deeplearningbook.org/) 		        																												    |
-| **Elements of statistical Learning**                 | Hastie et al. (2008) 		  | [click here](https://web.stanford.edu/~hastie/Papers/ESLII.pdf)																														|
-| **Machine Learning**                                 | Mitchell (1997)              | [click here](https://www.cin.ufpe.br/~cavmj/Machine%20-%20Learning%20-%20Tom%20Mitchell.pdf)																		                |
-| **Machine Learning - A probabilistic Perspective**   | Murphy (2012)				  | [click here](https://doc.lagout.org/science/Artificial%20Intelligence/Machine%20learning/Machine%20Learning_%20A%20Probabilistic%20Perspective%20%5BMurphy%202012-08-24%5D.pdf)		|
-| **Mathematics for Machine Learning**                 | Deisenroth et al. (2019)     | [click here](https://mml-book.github.io/)																																			|
-| **Pattern Recognition and Machine Learning** 	       | Bishop (2006)   			  | [click here](http://users.isr.ist.utl.pt/~wurmd/Livros/school/Bishop%20-%20Pattern%20Recognition%20And%20Machine%20Learning%20-%20Springer%20%202006.pdf) 							|
-| **Probabilistic Graphical Models** 			       | Koller et al. (2009)		  | [click here](https://github.com/Zhenye-Na/machine-learning-uiuc/blob/master/docs/Probabilistic%20Graphical%20Models%20-%20Principles%20and%20Techniques.pdf)                        |
-| **Reinforcement Learning - An Introduction**         | Sutton et al. (2014)         | [click here](http://incompleteideas.net/book/bookdraft2017nov5.pdf)   																												|
-| **The Matrix Cookbook**                              | Petersen et al. (2012)       | [click here](https://www.math.uwaterloo.ca/~hwolkowi/matrixcookbook.pdf)                                                                                                            |
+| Title                                      	       | Author(s)                    | View online 🔗                                                         																												     |
+|------------------------------------------------------|------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Deep Learning**                            	       | Goodfellow et al. (2016)	  | [click here](https://www.deeplearningbook.org/) 		        																												         |
+| **Elements of statistical Learning**                 | Hastie et al. (2008) 		  | [click here](https://web.stanford.edu/~hastie/Papers/ESLII.pdf)																														     |
+| **Gaussian Processes for Machine Learning**		   | Rasmussen/Williams (2006)	  | [click here](https://gaussianprocess.org/gpml/chapters/RW.pdf)																														     |
+| **Machine Learning**                                 | Mitchell (1997)              | [click here](https://www.cin.ufpe.br/~cavmj/Machine%20-%20Learning%20-%20Tom%20Mitchell.pdf)																		                     |
+| **Machine Learning - A probabilistic Perspective**   | Murphy (2012)				  | [click here](https://doc.lagout.org/science/Artificial%20Intelligence/Machine%20learning/Machine%20Learning_%20A%20Probabilistic%20Perspective%20%5BMurphy%202012-08-24%5D.pdf)		     |
+| **Mathematics for Machine Learning**                 | Deisenroth et al. (2019)     | [click here](https://mml-book.github.io/)																																			     |
+| **Pattern Recognition and Machine Learning** 	       | Bishop (2006)   			  | [click here](http://users.isr.ist.utl.pt/~wurmd/Livros/school/Bishop%20-%20Pattern%20Recognition%20And%20Machine%20Learning%20-%20Springer%20%202006.pdf) 							     |
+| **Probabilistic Graphical Models** 			       | Koller et al. (2009)		  | [click here](https://github.com/Zhenye-Na/machine-learning-uiuc/blob/master/docs/Probabilistic%20Graphical%20Models%20-%20Principles%20and%20Techniques.pdf)                             |
+| **Reinforcement Learning - An Introduction**         | Sutton et al. (2014)         | [click here](http://incompleteideas.net/book/bookdraft2017nov5.pdf)   																										        	 |
+| **Speech and Language Processing** 				   | Jurafsky/Martin (2006)       | [click here](https://pages.ucsd.edu/~bakovic/compphon/Jurafsky,%20Martin.-Speech%20and%20Language%20Processing_%20An%20Introduction%20to%20Natural%20Language%20Processing%20(2007).pdf) |
+| **The Matrix Cookbook**                              | Petersen et al. (2012)       | [click here](https://www.math.uwaterloo.ca/~hwolkowi/matrixcookbook.pdf)                                                                                                                 |
 
 🔗 **YouTube resources:**
 * [Machine learning lecture](https://www.youtube.com/watch?v=UzxYlbK2c7E&list=PLA89DCFA6ADACE599) by Andrew Ng, Stanford University
@@ -158,6 +160,8 @@ Please find a curated list below:
 * [Linear algebra](https://www.youtube.com/watch?v=ZK3O402wf1c&list=PL49CF3715CB9EF31D&index=1) by Gilbert Strang, MIT
 * [Matrix methods in data analysis, signal processing, and machine learning](https://www.youtube.com/watch?v=Cx5Z-OslNWE&list=PLUl4u3cNGP63oMNUHXqIUcrkS2PivhN3k) by Gilbert Strang, MIT
 * [Gradient descent, how neural networks learn](https://www.youtube.com/watch?v=IHZwWFHWa-w) (3BlueOneBrown)
+* [Hidden Markov Models](https://www.youtube.com/watch?v=fX5bYmnHqqE)
+* [Viterbi] (https://www.youtube.com/watch?v=IqXdjdOgXPM)
 
 🔗 **Interesting papers:**
 * [Playing atari with deep reinforcement learning](https://arxiv.org/abs/1312.5602) (Mnih et al., 2013)
@@ -167,4 +171,4 @@ Please find a curated list below:
 Help me improve the lecture. Please feel free to file an issue in case you spot any errors.
 Thank you very much in advance! **Please do not open issues for questions concerning the content!** Either use the Moodle forum or send me an e-mail for that ([daniel.wehner@sap.com](mailto:daniel.wehner@sap.com)).
 
-<sub>© 2023 Daniel Wehner, M.Sc.</sub>
+<sub>© 2024 Daniel Wehner, M.Sc.</sub>
