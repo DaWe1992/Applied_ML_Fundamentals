@@ -27,17 +27,24 @@ This Readme file provides you with all necessary information. It is structured a
 ## Lecture Contents 📜
 The following topics and algorithms will be covered in the lecture:
 
+<details>
+<summary>
+### Test
+
+Test test
+</summary>
+</details>
+
 1. **Introduction to machine learning** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/01_intro_ml.pdf))
     * Motivation and applications
     * Terminology
     * Key challenges in ML: Generalization, feature engineering, model selection, ...
-2. **Optimization Techniques** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/02_optimization.pdf))
-	* important concepts and definitions
+2. **Optimization techniques** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/02_optimization.pdf))
+	* Important concepts and definitions
 	* Unconstrained optimization
 	* Constrained optimization
 		* Karush-Kuhn-Tucker (KKT) conditions
-		* Lagrange function
-		* Lagrange duality
+		* Lagrange function and duality
 	* Numeric optimization
 		* Gradient descent (with momentum)
 		* Newton's method
@@ -76,7 +83,7 @@ The following topics and algorithms will be covered in the lecture:
 	* Model selection: Grid search, random search, early stopping
 	* Bias-variance decomposition
 10. **Decision trees and ensemble methods** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/10_decision_trees.pdf))
-11. **Support vector machines (SVMs)** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/11_svm.pdf))
+11. **Support vector machines** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/11_svm.pdf))
 	* Hard-margin SVMs (primal and dual formulation)
 	* The kernel concept
 	* Soft-margin SVMs
@@ -86,7 +93,7 @@ The following topics and algorithms will be covered in the lecture:
 	* Hierarchical clustering
 	* DBSCAN
 	* Mean-shift clustering
-13. **Principal component analysis (PCA)** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/13_pca.pdf))
+13. **Principal component analysis** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/13_pca.pdf))
 14. **Reinforcement learning** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/14_rl.pdf))
 15. **Advanced regression techniques** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/15_advanced_regression.pdf))
 	* MLE and MAP regression
