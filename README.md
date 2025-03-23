@@ -29,10 +29,26 @@ The following topics and algorithms will be covered in the lecture:
 
 <details>
 <summary>
-Test
+1. **Introduction to machine learning** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/01_intro_ml.pdf))
 </summary>
 
-Test test
+* Motivation and applications
+* Terminology
+* Key challenges in ML: Generalization, feature engineering, model selection, ...
+</details>
+
+<details>
+<summary>
+2. **Optimization techniques** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/02_optimization.pdf))
+</summary>
+* Important concepts and definitions
+* Unconstrained optimization
+* Constrained optimization
+	* Karush-Kuhn-Tucker (KKT) conditions
+	* Lagrange function and duality
+* Numeric optimization
+	* Gradient descent (with momentum)
+	* Newton's method
 </details>
 
 1. **Introduction to machine learning** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/01_intro_ml.pdf))
