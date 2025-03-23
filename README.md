@@ -32,12 +32,15 @@ The following topics and algorithms will be covered in the lecture:
 
 * Link: [click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/01_intro_ml.pdf)
 * Content:
-	* Motivation and applications
-	* Terminology
+	* Motivation and basic terminology
+	* Problem types in machine learning
 	* Key challenges in machine learning:
 		* Generalization
 		* Feature engineering
+		* Performance measurement
 		* Model selection
+		* Computation
+	* Applications
 </details>
 
 <details>
@@ -48,11 +51,13 @@ The following topics and algorithms will be covered in the lecture:
 	* Important concepts and definitions
 		* Gradients
 		* Hessian matrix
+		* Taylor expansion
 		* Convex sets and convex functions
 	* Unconstrained optimization
 	* Constrained optimization
 		* Karush-Kuhn-Tucker (KKT) conditions
-		* Lagrange function and duality
+		* Lagrange function
+		* Lagrange duality
 	* Numeric optimization
 		* Gradient descent (with momentum)
 		* Newton's method
@@ -67,6 +72,8 @@ The following topics and algorithms will be covered in the lecture:
 	* Error minimization vs. risk minimization
     * Multinomial and Gaussian naive Bayes
 	* Probability density estimation and maximum likelihood estimation
+	* Generative and discriminative models
+	* Exponential family distributions
 </details>
 
 <details>
@@ -78,6 +85,7 @@ The following topics and algorithms will be covered in the lecture:
 	* Kernel density estimation
 	* k-nearest neighbors
 	* Expectation-maximization (EM) algorithm for Gaussian mixture models
+	* BIC and AIC
 </details>
 
 <details>
@@ -87,7 +95,7 @@ The following topics and algorithms will be covered in the lecture:
 * Content:
 	* Bayesian networks
 	* Inference and sampling in graphical models
-	* Hidden Markov models (HMMs)
+	* Hidden Markov models (HMMs) and the Viterbi algorithm
 </details>
 
 <details>
@@ -97,7 +105,7 @@ The following topics and algorithms will be covered in the lecture:
 * Content:
 	* Normal equations and gradient descent for linear regression
 	* Probabilistic regression
-	* Basis function regression (polynomial, radial basis functions)
+	* Basis function regression (polynomial basis functions, radial basis functions)
 	* Regularization techniques
 </details>
 
@@ -108,7 +116,9 @@ The following topics and algorithms will be covered in the lecture:
 * Content:
 	* Why you should not use linear regression for classification
 	* Derivation of the logistic regression model
-	* Multi-class problems:
+	* Logistic regression with basis functions
+	* Regularization techniques
+	* Dealing with multi-class problems:
 		* Softmax regression
 		* One-vs-one and one-vs-rest
 </details>
@@ -118,14 +128,15 @@ The following topics and algorithms will be covered in the lecture:
 
 * Link: [click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/08_deep_learning.pdf)
 * Content:
+	* Biological motivation of deep learning
 	* Rosenblatt's perceptron
 	* Network architectures
-	* Multi-layer-perceptrons (MLPs) and backpropagation
+	* Multi-layer-perceptrons (MLPs) and the backpropagation algorithm
 	* Extensions and improvements
 		* Activation functions
-		* Parameter initialization
-		* Optimization algorithms for deep learning models
-	* Convolutional neural networks (CNNs)
+		* Parameter initialization techniques
+		* Optimization algorithms for deep learning models (AdaGrad, RMSProp)
+	* Introduction to convolutional neural networks (CNNs)
 </details>
 
 <details>
@@ -145,7 +156,15 @@ The following topics and algorithms will be covered in the lecture:
 
 * Link: [click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/10_decision_trees.pdf)
 * Content:
-	
+	* The ID3 algorithm
+	* Extensions and variants:
+		* Impurity measures
+		* Dealing with numeric attributes
+		* Regression trees
+	* Ensemble methods:
+		* Bagging
+		* Random forests
+		* ExtraTrees
 </details>
 
 <details>
@@ -160,7 +179,7 @@ The following topics and algorithms will be covered in the lecture:
 </details>
 
 <details>
-<summary>12. Clustering</summary>
+<summary>12. Clustering algorithms</summary>
 
 * Link: [click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/12_clustering.pdf)
 * Content:
@@ -171,19 +190,33 @@ The following topics and algorithms will be covered in the lecture:
 </details>
 
 <details>
-<summary>13. Principal component analysis</summary>
+<summary>13. Dimensionality reduction: Principal component analysis</summary>
 
 * Link: [click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/13_pca.pdf)
 * Content:
-	
+	* Why dimensionality reduction?
+	* Maximum variance formulation of PCA
+	* Properties of covariance matrices
+	* The PCA algorithm
+	* PCA applications
 </details>
 
 <details>
-<summary>14. Reinforcement learning</summary>
+<summary>14. Introduction to reinforcement learning</summary>
 
 * Link: [click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/14_rl.pdf)
 * Content:
-	
+	* What is reinforcement learning?
+	* Key challenges in reinforcement learning
+	* Dynamic programming:
+		* Value iteration
+		* Policy iteration
+		* Q-learning
+		* SARSA
+	* Exploitation versus exploration
+	* Non-deterministic rewards and actions
+	* Temporal difference learning
+	* Deep reinforcement learning
 </details>
 
 <details>
