@@ -30,6 +30,7 @@ The following topics and algorithms will be covered in the lecture:
 <details>
 <summary>1. Introduction to machine learning</summary>
 
+</br>
 * Link: [click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/01_intro_ml.pdf)
 * Content:
 	* Motivation and basic terminology
