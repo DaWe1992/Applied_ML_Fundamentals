@@ -28,31 +28,37 @@ This Readme file provides you with all necessary information. It is structured a
 The following topics and algorithms will be covered in the lecture:
 
 <details>
-<summary>Introduction to machine learning</summary>
+<summary>1. Introduction to machine learning</summary>
 
 * Link: [click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/01_intro_ml.pdf)
 * Content:
 	* Motivation and applications
 	* Terminology
-	* Key challenges in ML: Generalization, feature engineering, model selection, ...
+	* Key challenges in machine learning:
+		* Generalization
+		* Feature engineering
+		* Model selection
 </details>
 
 <details>
-<summary>
-2. Optimization techniques
-</summary>
+<summary>2. Optimization techniques</summary>
 
-Link: ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/02_optimization.pdf))
-
-* Important concepts and definitions
-* Unconstrained optimization
-* Constrained optimization
-	* Karush-Kuhn-Tucker (KKT) conditions
-	* Lagrange function and duality
-* Numeric optimization
-	* Gradient descent (with momentum)
-	* Newton's method
+* Link: [click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/02_optimization.pdf)
+* Content:
+	* Important concepts and definitions
+		* Gradients
+		* Hessian matrix
+		* Convex sets and convex functions
+	* Unconstrained optimization
+	* Constrained optimization
+		* Karush-Kuhn-Tucker (KKT) conditions
+		* Lagrange function and duality
+	* Numeric optimization
+		* Gradient descent (with momentum)
+		* Newton's method
 </details>
+
+
 
 1. **Introduction to machine learning** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/01_intro_ml.pdf))
     * Motivation and applications
