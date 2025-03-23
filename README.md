@@ -29,6 +29,9 @@ The following topics and algorithms will be covered in the lecture:
 
 <details>
 <summary>Introduction to machine learning</summary>
+
+[click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/01_intro_ml.pdf)
+
 * Motivation and applications
 * Terminology
 * Key challenges in ML: Generalization, feature engineering, model selection, ...
