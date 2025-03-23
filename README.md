@@ -58,74 +58,144 @@ The following topics and algorithms will be covered in the lecture:
 		* Newton's method
 </details>
 
+<details>
+<summary>3. Bayesian decision theory</summary>
 
-
-1. **Introduction to machine learning** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/01_intro_ml.pdf))
-    * Motivation and applications
-    * Terminology
-    * Key challenges in ML: Generalization, feature engineering, model selection, ...
-2. **Optimization techniques** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/02_optimization.pdf))
-	* Important concepts and definitions
-	* Unconstrained optimization
-	* Constrained optimization
-		* Karush-Kuhn-Tucker (KKT) conditions
-		* Lagrange function and duality
-	* Numeric optimization
-		* Gradient descent (with momentum)
-		* Newton's method
-3. **Bayesian decision theory** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/02_decision_theory.pdf))
-    * Bayes optimal classifiers
+* Link: [click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/02_decision_theory.pdf)
+* Content:
+	* Bayes optimal classifiers
 	* Error minimization vs. risk minimization
     * Multinomial and Gaussian naive Bayes
 	* Probability density estimation and maximum likelihood estimation
-4. **Non-parametric density estimation and EM** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/04_nde_em.pdf))
+</details>
+
+<details>
+<summary>4. Non-parametric density estimation and EM</summary>
+
+* Link: [click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/04_nde_em.pdf)
+* Content:
 	* Histograms
 	* Kernel density estimation
 	* k-nearest neighbors
-	* Expectation-maximization (EM) algorithms for Gaussian mixture models
-5. **Probabilistic graphical models** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/05.pgm.pdf))
+	* Expectation-maximization (EM) algorithm for Gaussian mixture models
+</details>
+
+<details>
+<summary>5. Probabilistic graphical models</summary>
+
+* Link: [click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/05.pgm.pdf)
+* Content:
 	* Bayesian networks
 	* Inference and sampling in graphical models
 	* Hidden Markov models (HMMs)
-6. **Linear regression** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/06_regression.pdf))
+</details>
+
+<details>
+<summary>6. Linear regression</summary>
+
+* Link: [click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/06_regression.pdf)
+* Content:
 	* Normal equations and gradient descent for linear regression
 	* Probabilistic regression
-	* Basis function regression and regularization
-7. **Logistic regression** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/07_logistic_regression.pdf))
-	* Derivation of logistic regression
+	* Basis function regression (polynomial, radial basis functions)
+	* Regularization techniques
+</details>
+
+<details>
+<summary>7. Logistic regression</summary>
+
+* Link: [click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/07_logistic_regression.pdf)
+* Content:
+	* Why you should not use linear regression for classification
+	* Derivation of the logistic regression model
 	* Multi-class problems:
 		* Softmax regression
 		* One-vs-one and one-vs-rest
-8. **Deep learning** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/08_deep_learning.pdf))
+</details>
+
+<details>
+<summary>8. Deep learning</summary>
+
+* Link: [click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/08_deep_learning.pdf)
+* Content:
 	* Rosenblatt's perceptron
 	* Network architectures
-	* Multi-layer-perceptrons and backpropagation
+	* Multi-layer-perceptrons (MLPs) and backpropagation
+	* Extensions and improvements
+		* Activation functions
+		* Parameter initialization
+		* Optimization algorithms for deep learning models
 	* Convolutional neural networks (CNNs)
-9. **Evaluation of machine learning models** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/09_evaluation.pdf))
+</details>
+
+<details>
+<summary>9. Evaluation of machine learning models</summary>
+
+* Link: [click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/09_evaluation.pdf)
+* Content:
 	* Out-of-sample testing and cross validation
 	* Confusion matrices
 	* Evaluation metrics: Precision, recall, F1-score, ROC, accuracy, RMSE, MAE
 	* Model selection: Grid search, random search, early stopping
 	* Bias-variance decomposition
-10. **Decision trees and ensemble methods** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/10_decision_trees.pdf))
-11. **Support vector machines** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/11_svm.pdf))
+</details>
+
+<details>
+<summary>10. Decision trees and ensemble methods</summary>
+
+* Link: [click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/10_decision_trees.pdf)
+* Content:
+	
+</details>
+
+<details>
+<summary>11. Support vector machines</summary>
+
+* Link: [click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/11_svm.pdf)
+* Content:
 	* Hard-margin SVMs (primal and dual formulation)
 	* The kernel concept
 	* Soft-margin SVMs
 	* Sequential minimal optimization (SMO)
-12. **Clustering** [click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/12_clustering.pdf))
+</details>
+
+<details>
+<summary>12. Clustering</summary>
+
+* Link: [click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/12_clustering.pdf)
+* Content:
 	* KMeans
 	* Hierarchical clustering
 	* DBSCAN
 	* Mean-shift clustering
-13. **Principal component analysis** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/13_pca.pdf))
-14. **Reinforcement learning** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/14_rl.pdf))
-15. **Advanced regression techniques** ([click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/15_advanced_regression.pdf))
+</details>
+
+<details>
+<summary>13. Principal component analysis</summary>
+
+* Link: [click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/13_pca.pdf)
+* Content:
+	
+</details>
+
+<details>
+<summary>14. Reinforcement learning</summary>
+
+* Link: [click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/14_rl.pdf)
+* Content:
+	
+</details>
+
+<details>
+<summary>15. Advanced regression techniques</summary>
+
+* Link: [click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/15_advanced_regression.pdf)
+* Content:
 	* MLE and MAP regression
 	* Full Bayesian regression
 	* Kernel regression
 	* Gaussian process regression
-16. **Lecture summary and exam preparation**
+</details>
 
 ## Exercises ✒️
 An exercise sheet is provided for each lecture unit. Most of the time, the exercises are a compilation of old exam questions.
