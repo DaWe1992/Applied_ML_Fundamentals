@@ -61,7 +61,7 @@ The following topics and algorithms will be covered in the lecture:
 <details>
 <summary>3. Bayesian decision theory</summary>
 
-* Link: [click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/02_decision_theory.pdf)
+* Link: [click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/03_decision_theory.pdf)
 * Content:
 	* Bayes optimal classifiers
 	* Error minimization vs. risk minimization
