@@ -89,7 +89,7 @@ The following topics and algorithms will be covered in the lecture:
 </details>
 
 <details>
-<summary>5. Probabilistic graphical models</summary>
+<summary>5. Probabilistic graphical models (PGMs)</summary>
 
 * Link: [click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/05_pgm.pdf)
 * Content:
