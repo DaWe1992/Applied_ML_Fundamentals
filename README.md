@@ -288,7 +288,7 @@ Symbol (2):
 ## Programming Tasks (Bonus Points for the Exam) 🐍
 Almost every exercise sheet contains at least one programming task. You can collect bonus points for the exam by working on one of these tasks.
 
-**Here are the rules:**
+**How it works:**
 * Form groups of 2 to 3 students.
 * At the end of each lecture slot one group will be chosen to work on the next programming task. Each group will be given a separate programming task.
 * The group solves the programming task and presents the results in the next lecture slot.
