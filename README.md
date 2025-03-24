@@ -268,7 +268,7 @@ Please do not translate domain specific technical terms in order to avoid confus
 * Make sure you can answer the self-test questions provided for each topic. You can find those at the end of each slide deck. **There won't be sample solutions for those questions!**
 * Solve the exercises and work through the solutions if necessary! The solutions will be uploaded after two weeks.
 * Some of the slides give you important hints (upper left corner):
-	*  A slide marked with symbol (1) provides in-depth information which you do not have to know by heart (think of it as additional material for the sake of completeness). However, do not ignore the content completely during the exam preparation. The content may still be relevant, but won't be a focus topic.
+	*  A slide marked with symbol (1) provides in-depth information which you do not have to know by heart. Think of it as additional material for the sake of completeness. However, do not ignore the content completely during the exam preparation. The content may still be relevant, but won't be a focus topic.
 	*  Symbol (2) indicates very important content. Make sure you understand it!
 * Have a look at the [old exam](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/03_exam) to familiarize yourself with the exam format.
 * The last lecture slot is reserved for exam preparation and additional questions.
