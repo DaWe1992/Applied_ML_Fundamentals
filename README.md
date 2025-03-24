@@ -334,12 +334,12 @@ Please find a curated list below:
 🔗 **Interesting papers:**
 * [Playing atari with deep reinforcement learning](https://arxiv.org/abs/1312.5602) (Mnih et al., 2013)
 * [Efficient estimation of word representations in vector space](https://arxiv.org/abs/1301.3781) (Mikolov et al., 2013)
-* [Fast Training of Support Vector Machines using Sequential Minimal Optimization](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/smo-book.pdf) (Platt, 1998)
-* [An Implementation of the Mean Shift Algorithm](https://www.ipol.im/pub/art/2019/255/article_lr.pdf) (Demirovic, 2019)
+* [Fast training of support vector machines using sequential minimal optimization](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/smo-book.pdf) (Platt, 1998)
+* [An implementation of the mean shift algorithm](https://www.ipol.im/pub/art/2019/255/article_lr.pdf) (Demirovic, 2019)
 
 🔗 **Miscellaneous:**
-* [CS229 Lecture Notes](https://cs229.stanford.edu/lectures-spring2022/main_notes.pdf) (Andrew Ng)
-* [The simplified SMO Algorithm](https://cs229.stanford.edu/materials/smo.pdf) (CS229 Stanford)
+* [CS229 lecture notes](https://cs229.stanford.edu/lectures-spring2022/main_notes.pdf) (Andrew Ng)
+* [The simplified SMO algorithm](https://cs229.stanford.edu/materials/smo.pdf) (CS229 Stanford)
 
 ## Bugs and Errors 🐞
 Help me improve the lecture. Please feel free to file an issue in case you spot any errors or issues.
