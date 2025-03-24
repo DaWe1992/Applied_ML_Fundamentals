@@ -4,10 +4,10 @@
 'We are drowning in information and starving for knowledge.' – John Naisbitt
 ```
 
-Machine learning / data science is a subfield of artificial intelligence (AI) that provides systems the ability to **automatically learn and improve** from experience
+Machine learning and data science represent a subfield of artificial intelligence (AI) that provides systems the ability to **automatically learn and improve** from experience
 **without being explicitly programmed**. Machine learning focuses on the development of computer programs which can access data and use it to learn for themselves.
 A machine learning algorithm learns by building a mathematical / statistical model from the data. This model can then be used for inference and decision making. 
-Machine learning has become an integral part of many modern applications. It is a **cross-topic discipline** which comprises computer science, math / statistics as well as
+Machine learning has become an integral part of many modern applications. In general, data science is a **cross-topic discipline** which comprises computer science, math / statistics as well as
 domain and business knowledge:
 
 <p align="center">
@@ -15,7 +15,7 @@ domain and business knowledge:
 </p>
 
 The lecture *'Artificial Intelligence and Machine Learning'* is supposed to provide in-depth knowledge about state-of-the-art machine learning algorithms and their applications.
-This Readme file provides you with all necessary information. It is structured as follows:
+This Readme file provides you with all necessary information about the lecture. It is structured as follows:
 
 1. 📜 Lecture contents
 2. ✒️ Exercises
@@ -77,7 +77,7 @@ The following topics and algorithms will be covered in the lecture:
 </details>
 
 <details>
-<summary>4. Non-parametric density estimation and EM</summary>
+<summary>4. Non-parametric density estimation and expectation-maximization (EM)</summary>
 
 * Link: [click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/04_nde_em.pdf)
 * Content:
@@ -168,7 +168,7 @@ The following topics and algorithms will be covered in the lecture:
 </details>
 
 <details>
-<summary>11. Support vector machines</summary>
+<summary>11. Support vector machines (SVMs)</summary>
 
 * Link: [click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/11_svm.pdf)
 * Content:
@@ -190,7 +190,7 @@ The following topics and algorithms will be covered in the lecture:
 </details>
 
 <details>
-<summary>13. Dimensionality reduction: Principal component analysis</summary>
+<summary>13. Dimensionality reduction: Principal component analysis (PCA)</summary>
 
 * Link: [click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/13_pca.pdf)
 * Content:
@@ -230,9 +230,12 @@ The following topics and algorithms will be covered in the lecture:
 	* Gaussian process regression
 </details>
 
+Please refer to the official [DHBW module catalogue](https://www.dhbw.de/fileadmin/user/public/SP/MA/Data_Science_und_Kuenstliche_Intelligenz/Business_Management.pdf) for further details.
+
 ## Exercises ✒️
 An exercise sheet is provided for (almost) all lecture units. Most of the time, the exercises are a compilation of old exam questions.
 However, the exercises also include programming tasks and questions which would not be suitable for an exam (due to time constraints).
+But the programming tasks can be used to collect bonus points for the exam (see description below).
 
 The solutions will be provided via the Moodle forum after two weeks. **It is highly recommended to solve the exercises on your own!**
 Do not wait for the solutions to be uploaded.
@@ -255,19 +258,18 @@ Do not wait for the solutions to be uploaded.
 The exam is going to take 120 minutes. The maximum attainable score will be 120 points, so you have one minute per point.
 **Important:** Keep your answers short and simple in order not to lose too much valuable time.
 
-The exam questions will be given in German, but you may answer them in either English or German (you are also allowed to mix the languages).
-Please do not translate domain specific technical terms in order to avoid confusion. Please answer all questions on the paper handed-out in the exam
+The exam questions will be given in German, but you may answer them in either English or German (you are also allowed to mix the languages if you like).
+Please do not translate domain specific technical terms in order to avoid confusion. Please answer all questions on the concept paper which is handed out during the exam
 (exception: multiple choice questions).
 
 **Exam preparation:**
 * You will not be asked for lengthy derivations. Instead, I want to test whether you understand the general concepts.
 * Any content not discussed in the lecture **will not be part** of the exam. A list of relevant topics will be shared at the end of the lecture.
 * The exam will contain a mix of multiple choice questions, short answer questions and calculations.
-* Make sure you can answer the self-test questions provided for each topic. **There won't be sample solutions for those questions!**
+* Make sure you can answer the self-test questions provided for each topic. You can find those at the end of each slide deck. **There won't be sample solutions for those questions!**
 * Solve the exercises and work through the solutions if necessary! The solutions will be uploaded after two weeks.
 * Some of the slides give you important hints (upper left corner):
-	*  A slide marked with symbol (1) provides in-depth information which you do not have to know by heart (think of it as additional material for the sake of completeness).
-	   However, do not ignore the content completely.
+	*  A slide marked with symbol (1) provides in-depth information which you do not have to know by heart (think of it as additional material for the sake of completeness). However, do not ignore the content completely during the exam preparation. The content may still be relevant, but is not a focus topic.
 	*  Symbol (2) indicates very important content. Make sure you understand it!
 * Have a look at the [old exam](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/03_exam) to familiarize yourself with the exam format.
 * The last lecture slot is reserved for exam preparation and additional questions.
@@ -284,20 +286,18 @@ Symbol (2):
 * Non-programmable pocket calculator
 * Two-sided **hand-written** cheat sheet (you may note whatever you want). Hand-written means pen and paper (not on a tablet or computer!)
 
-Please refer to the official [DHBW data science module catalogue](https://www.dhbw.de/fileadmin/user/public/SP/MA/Data_Science_und_Kuenstliche_Intelligenz/Business_Management.pdf) for further details.
-
 ## Programming tasks (bonus points for the exam) 🐍
 Almost every exercise sheet contains at least one programming task. You can collect bonus points for the exam by working on one of these tasks.
 Here are the rules:
 
 * Form groups of 2 to 3 students.
-* At the end of each lecture slot one group will be chosen to work on the programming task for the contents discussed.
-* Each group will be given a separate programming task.
-* Each group solves the programming task and presents the results in the next lecture slot.
-* The usage of machine learning libraries like Scikit-Learn, etc. is forbidden. The goal is to implement the algorithms from scratch only using Numpy.
+* At the end of each lecture slot one group will be chosen to work on the next programming task. Each group will be given a separate programming task.
+* The group solves the programming task and presents the results in the next lecture slot.
+* The usage of advanced machine learning libraries (sklearn, etc.) is strictly forbidden. The goal is to implement the algorithms in Numpy from scratch.
 * Grading:
-	* The group can achieve 10 points per member (2 students = 20 points, 3 students = 30 points).
-	* The members of the group can distribute these points between them.
+	* A group can achieve 10 points per group member (2 students = 20 points, 3 students = 30 points).
+	* The group will be given a total number of points.
+	* The group members can distribute these points between them.
 	* No member can achieve more than 15 points.
 * The code has to be shared with me.
 
