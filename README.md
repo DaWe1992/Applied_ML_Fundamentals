@@ -259,8 +259,7 @@ The exam is going to take 120 minutes. The maximum attainable score will be 120 
 **Important:** Keep your answers short and simple in order not to lose too much valuable time.
 
 The exam questions will be given in German, but you may answer them in either English or German (you are also allowed to mix the languages if you like).
-Please do not translate domain specific technical terms in order to avoid confusion. Please answer all questions on the concept paper which is handed out during the exam
-(exception: multiple choice questions).
+Please do not translate domain specific technical terms in order to avoid confusion. Please answer all questions (except for multiple choice questions) on the concept paper which is handed out during the exam.
 
 **Exam preparation:**
 * You will not be asked for lengthy derivations. Instead, I want to test whether you understand the general concepts.
