@@ -14,13 +14,13 @@ domain and business knowledge:
 	<img src="https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/img/data_science.png" width=400px>
 </p>
 
-The lecture *'Artificial Intelligence and Machine Learning'* is supposed to provide in-depth insights into state-of-the-art machine learning algorithms and their applications.
+The lecture *'Artificial Intelligence and Machine Learning'* is supposed to provide in-depth knowledge about state-of-the-art machine learning algorithms and their applications.
 This Readme file provides you with all necessary information. It is structured as follows:
 
 1. 📜 Lecture contents
 2. ✒️ Exercises
 3. 📝 Exam
-4. 🐍 Python code
+4. 🐍 Programming tasks (bonus points for the exam)
 5. 📚 Literature and recommended reading
 6. 🐞 Bugs and errors
 
@@ -252,22 +252,24 @@ Do not wait for the solutions to be uploaded.
 | **Sheet 11:** | Principal Component Analysis                        | [Download](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/02_exercises/exercise11.pdf)  |
 
 ## Exam 📝
-The exam is going to take 60 minutes. The maximum attainable score will be 60 points, so you have one minute per point.
+The exam is going to take 120 minutes. The maximum attainable score will be 120 points, so you have one minute per point.
 **Important:** Keep your answers short and simple in order not to lose too much valuable time.
 
 The exam questions will be given in German, but you may answer them in either English or German (you are also allowed to mix the languages).
-Please do not translate domain specific technical terms in order to avoid confusion. Please answer all questions on the task sheets (you may also write on the empty back-sides).
+Please do not translate domain specific technical terms in order to avoid confusion. Please answer all questions on the paper handed-out in the exam
+(exception: multiple choice questions).
 
 **Exam preparation:**
-* You will not be asked for any derivations, rather I want to test whether you understand the general concepts.
-* Any content not discussed in the lecture **will not be part** of the exam.
+* You will not be asked for lengthy derivations. Instead, I want to test whether you understand the general concepts.
+* Any content not discussed in the lecture **will not be part** of the exam. A list of relevant topics will be shared at the end of the lecture.
 * The exam will contain a mix of multiple choice questions, short answer questions and calculations.
 * Make sure you can answer the self-test questions provided for each topic. **There won't be sample solutions for those questions!**
-* Solve the exercises and work through the solutions if necessary!
+* Solve the exercises and work through the solutions if necessary! The solutions will be uploaded after two weeks.
 * Some of the slides give you important hints (upper left corner):
 	*  A slide marked with symbol (1) provides in-depth information which you do not have to know by heart (think of it as additional material for the sake of completeness).
+	   However, do not ignore the content completely.
 	*  Symbol (2) indicates very important content. Make sure you understand it!
-* Have a look at the [old exams](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/03_exam) to familiarize yourself with the exam format.
+* Have a look at the [old exam](https://github.com/DaWe1992/Applied_ML_Fundamentals/tree/master/03_exam) to familiarize yourself with the exam format.
 * The last lecture slot is reserved for exam preparation and additional questions.
 
 Symbol (1):
@@ -280,22 +282,24 @@ Symbol (2):
 
 **Auxiliary material for the exam:**
 * Non-programmable pocket calculator
-* Two-sided **hand-written** cheat sheet (you may note whatever you want). Hand-written means pen and paper (not on tablet!)
+* Two-sided **hand-written** cheat sheet (you may note whatever you want). Hand-written means pen and paper (not on a tablet or computer!)
 
-**Exam grading**
-Since the lecture *Applied Machine Learning Fundamentals* is part of a bigger module (*Machine Learning Fundamentals, W3WI_DS304)*, it is not graded individually.
-Instead, the score you achieved in the exam (at most 60 points) will be added to the points you receive in the second element of the module, the *Data Exploration Project* in the 4th semester
-which is also worth 60 points at maximum. **Your performance in both elements combined will determine your eventual grade.**
+Please refer to the official [DHBW data science module catalogue](https://www.dhbw.de/fileadmin/user/public/SP/MA/Data_Science_und_Kuenstliche_Intelligenz/Business_Management.pdf) for further details.
 
-Please refer to the official [DHBW data science module catalogue](https://www.dhbw.de/fileadmin/user/public/SP/MA/Wirtschaftsinformatik/Data_Science.pdf) for further details.
+## Programming tasks (bonus points for the exam) 🐍
+Almost every exercise sheet contains at least one programming task. You can collect bonus points for the exam by working on one of these tasks.
+Here are the rules:
 
-## Python Code 🐍
-Machine learning algorithms are easier to understand, if you see them implemented.
-Please find Python implementations for some of the algorithms in this [repository](https://github.com/DaWe1992/Applied_ML_Algorithms).
-
-Play around with the hyper-parameters of the algorithms and try different data sets in order to get a better feeling for how the algorithms work.
-Also, debug through the code line by line and check what each line does.
-Please find further instructions in the Readme there.
+* Form groups of 2 to 3 students.
+* At the end of each lecture slot one group will be chosen to work on the programming task for the contents discussed.
+* Each group will be given a separate programming task.
+* Each group solves the programming task and presents the results in the next lecture slot.
+* The usage of machine learning libraries like Scikit-Learn, etc. is forbidden. The goal is to implement the algorithms from scratch only using Numpy.
+* Grading:
+	* The group can achieve 10 points per member (2 students = 20 points, 3 students = 30 points).
+	* The members of the group can distribute these points between them.
+	* No member can achieve more than 15 points.
+* The code has to be shared with me.
 
 ## Literature and recommended Reading 📚
 You do not need to buy any books for the lecture, most resources are available online. <br />
@@ -336,4 +340,4 @@ Please find a curated list below:
 Help me improve the lecture. Please feel free to file an issue in case you spot any errors.
 Thank you very much in advance! **Please do not open issues for questions concerning the content!** Either use the Moodle forum or send me an e-mail for that ([daniel.wehner@sap.com](mailto:daniel.wehner@sap.com)).
 
-<sub>© 2024 Daniel Wehner, M.Sc.</sub>
+<sub>© 2025 Daniel Wehner, M.Sc.</sub>
