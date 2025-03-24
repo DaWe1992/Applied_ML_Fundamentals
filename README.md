@@ -310,9 +310,9 @@ Please find a curated list below:
 |------------------------------------------------------|------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Convex Optimization** 							   | Boyd/Vandenberghe (2004)     | [click here](https://web.stanford.edu/~boyd/cvxbook/)
 | **Deep Learning**                            	       | Goodfellow et al. (2016)	  | [click here](https://www.deeplearningbook.org/) 		        																												         |
-| **Elements of statistical Learning**                 | Hastie et al. (2008) 		  | [click here](https://web.stanford.edu/~hastie/Papers/ESLII.pdf)																														     |
+| **Elements of statistical Learning**                 | Hastie et al. (2008) 		  | [click here](https://www.sas.upenn.edu/~fdiebold/NoHesitations/BookAdvanced.pdf)																														     |
 | **Gaussian Processes for Machine Learning**		   | Rasmussen/Williams (2006)	  | [click here](https://gaussianprocess.org/gpml/chapters/RW.pdf)																														     |
-| **Machine Learning**                                 | Mitchell (1997)              | [click here](https://www.cin.ufpe.br/~cavmj/Machine%20-%20Learning%20-%20Tom%20Mitchell.pdf)																		                     |
+| **Machine Learning**                                 | Mitchell (1997)              | [click here](https://www.cs.cmu.edu/~tom/files/MachineLearningTomMitchell.pdf)																		                     |
 | **Machine Learning - A probabilistic Perspective**   | Murphy (2012)				  | [click here](https://doc.lagout.org/science/Artificial%20Intelligence/Machine%20learning/Machine%20Learning_%20A%20Probabilistic%20Perspective%20%5BMurphy%202012-08-24%5D.pdf)		     |
 | **Mathematics for Machine Learning**                 | Deisenroth et al. (2019)     | [click here](https://mml-book.github.io/)																																			     |
 | **Pattern Recognition and Machine Learning** 	       | Bishop (2006)   			  | [click here](http://users.isr.ist.utl.pt/~wurmd/Livros/school/Bishop%20-%20Pattern%20Recognition%20And%20Machine%20Learning%20-%20Springer%20%202006.pdf) 							     |
@@ -335,6 +335,7 @@ Please find a curated list below:
 * [Playing atari with deep reinforcement learning](https://arxiv.org/abs/1312.5602) (Mnih et al., 2013)
 * [Efficient estimation of word representations in vector space](https://arxiv.org/abs/1301.3781) (Mikolov et al., 2013)
 * [Fast Training of Support Vector Machines using Sequential Minimal Optimization](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/smo-book.pdf) (Platt, 1998)
+* [An Implementation of the Mean Shift Algorithm](https://www.ipol.im/pub/art/2019/255/article_lr.pdf) (Demirovic, 2019)
 
 🔗 **Miscellaneous:**
 * [CS229 Lecture Notes](https://cs229.stanford.edu/lectures-spring2022/main_notes.pdf) (Andrew Ng)
