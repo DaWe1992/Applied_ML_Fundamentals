@@ -285,7 +285,7 @@ Symbol (2):
 * Non-programmable pocket calculator
 * Two-sided **hand-written** cheat sheet (you may note whatever you want). Hand-written means pen and paper (not on a tablet or computer!)
 
-## Programming tasks (bonus points for the exam) 🐍
+## Programming Tasks (Bonus Points for the Exam) 🐍
 Almost every exercise sheet contains at least one programming task. You can collect bonus points for the exam by working on one of these tasks.
 Here are the rules:
 
