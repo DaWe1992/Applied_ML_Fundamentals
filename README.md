@@ -322,7 +322,8 @@ Please find a curated list below:
 | **The Matrix Cookbook**                              | Petersen et al. (2012)       | [click here](https://www.math.uwaterloo.ca/~hwolkowi/matrixcookbook.pdf)                                                                                                                 |
 
 🔗 **YouTube resources:**
-* [Machine learning lecture](https://www.youtube.com/watch?v=UzxYlbK2c7E&list=PLA89DCFA6ADACE599) by Andrew Ng, Stanford University
+* [Machine learning lecture](https://www.youtube.com/watch?v=jGwO_UgTS7I&list=PLoROMvodv4rMiGQp3WXShtMGgzqpfVfbU) by Andrew Ng, Stanford University (new version)
+* [Machine learning lecture](https://www.youtube.com/watch?v=UzxYlbK2c7E&list=PLA89DCFA6ADACE599) by Andrew Ng, Stanford University (old version)
 * [Support vector machines](https://www.youtube.com/watch?v=_PwhiWxHK8o) by Patrick Winston, MIT
 * [Linear algebra](https://www.youtube.com/watch?v=ZK3O402wf1c&list=PL49CF3715CB9EF31D&index=1) by Gilbert Strang, MIT
 * [Matrix methods in data analysis, signal processing, and machine learning](https://www.youtube.com/watch?v=Cx5Z-OslNWE&list=PLUl4u3cNGP63oMNUHXqIUcrkS2PivhN3k) by Gilbert Strang, MIT
@@ -334,11 +335,13 @@ Please find a curated list below:
 * [Playing atari with deep reinforcement learning](https://arxiv.org/abs/1312.5602) (Mnih et al., 2013)
 * [Efficient estimation of word representations in vector space](https://arxiv.org/abs/1301.3781) (Mikolov et al., 2013)
 * [Fast Training of Support Vector Machines using Sequential Minimal Optimization](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/smo-book.pdf) (Platt, 1998)
-* [The simplified SMO Algorithm](https://cs229.stanford.edu/materials/smo.pdf) (CS229 Stanford)
+
+🔗 **Miscellaneous:**
 * [CS229 Lecture Notes](https://cs229.stanford.edu/lectures-spring2022/main_notes.pdf) (Andrew Ng)
+* [The simplified SMO Algorithm](https://cs229.stanford.edu/materials/smo.pdf) (CS229 Stanford)
 
 ## Bugs and Errors 🐞
-Help me improve the lecture. Please feel free to file an issue in case you spot any errors.
+Help me improve the lecture. Please feel free to file an issue in case you spot any errors or issues.
 Thank you very much in advance! **Please do not open issues for questions concerning the content!** Either use the Moodle forum or send me an e-mail for that ([daniel.wehner@sap.com](mailto:daniel.wehner@sap.com)).
 
 <sub>© 2025 Daniel Wehner, M.Sc.</sub>
