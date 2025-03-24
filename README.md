@@ -287,18 +287,20 @@ Symbol (2):
 
 ## Programming Tasks (Bonus Points for the Exam) 🐍
 Almost every exercise sheet contains at least one programming task. You can collect bonus points for the exam by working on one of these tasks.
-Here are the rules:
 
+**Here are the rules:**
 * Form groups of 2 to 3 students.
 * At the end of each lecture slot one group will be chosen to work on the next programming task. Each group will be given a separate programming task.
 * The group solves the programming task and presents the results in the next lecture slot.
 * The usage of advanced machine learning libraries (sklearn, etc.) is strictly forbidden. The goal is to implement the algorithms in Numpy from scratch.
-* Grading:
-	* A group can achieve 10 points per group member (2 students = 20 points, 3 students = 30 points).
-	* The group will be given a total number of points.
-	* The group members can distribute these points between them.
-	* No member can achieve more than 15 points.
 * The code has to be shared with me.
+
+**Grading:**
+* A group can achieve 10 points per group member (2 students = 20 points, 3 students = 30 points).
+* The group will be given a total number of points.
+* The group members can distribute these points between them.
+* No member can achieve more than 15 points.
+
 
 ## Literature and recommended Reading 📚
 You do not need to buy any books for the lecture, most resources are available online. <br />
