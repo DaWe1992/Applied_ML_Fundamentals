@@ -28,6 +28,15 @@ This Readme file provides you with all necessary information about the lecture. 
 The following topics and algorithms will be covered in the lecture:
 
 <details>
+<summary>0. Math refresher</summary>
+
+* Link: [click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/00_math.pdf)
+* Content:
+	* Linear algebra
+	* Statistics
+</details>
+
+<details>
 <summary>1. Introduction to machine learning</summary>
 
 * Link: [click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/01_intro_ml.pdf)
