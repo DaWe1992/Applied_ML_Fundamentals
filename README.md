@@ -275,7 +275,7 @@ Please do not translate domain specific technical terms in order to avoid confus
 * Any content not discussed in the lecture **will not be part** of the exam. A list of relevant topics will be shared at the end of the lecture.
 * The exam will contain a mix of multiple choice questions, short answer questions and calculations.
 * Make sure you can answer the self-test questions provided for each topic. You can find those at the end of each slide deck. **There won't be sample solutions for those questions!**
-* Solve the exercises and work through the solutions if necessary! The solutions will be uploaded after two weeks.
+* Solve the exercises and work through the solutions if necessary! The solutions will be uploaded after two weeks. Questions marked with an asterisk are old exam questions (or slightly modified).
 * Some of the slides give you important hints (upper left corner):
 	*  A slide marked with symbol (1) provides in-depth information which you do not have to know by heart. Think of it as additional material for the sake of completeness. However, do not ignore the content completely during the exam preparation. The content may still be relevant, but won't be a focus topic.
 	*  Symbol (2) indicates very important content. Make sure you understand it!
