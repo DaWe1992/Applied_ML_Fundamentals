@@ -249,19 +249,19 @@ But the programming tasks can be used to collect bonus points for the exam (see 
 The solutions will be provided via the Moodle forum after two weeks. **It is highly recommended to solve the exercises on your own!**
 Do not wait for the solutions to be uploaded.
 
-| Number        | Title                                               | Link 🔗                                                                                                 	 |
-|---------------|-----------------------------------------------------|----------------------------------------------------------------------------------------------------------|
-| **Sheet 1:**  | Numeric Optimization Techniques                     | [Download](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/02_exercises/exercise1.pdf)   |
-| **Sheet 2:**  | Decision Theory and Probability Density Estimation  | [Download](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/02_exercises/exercise2.pdf)   |
-| **Sheet 3:**  | k-nearest Neighbors                                 | [Download](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/02_exercises/exercise3.pdf)   |
-| **Sheet 4:**  | Linear Regression                                   | [Download](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/02_exercises/exercise4.pdf)   |
-| **Sheet 5:**  | Logistic Regression                                 | [Download](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/02_exercises/exercise5.pdf)   |
-| **Sheet 6:**  | Neural Networks / Deep Learning                     | [Download](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/02_exercises/exercise6.pdf)   |
-| **Sheet 7:**  | Evaluation of Machine Learning Models               | [Download](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/02_exercises/exercise7.pdf)   |
-| **Sheet 8:**  | Decision Trees and Ensemble Methods                 | [Download](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/02_exercises/exercise8.pdf)   |
-| **Sheet 9:**  | Support Vector Machines                             | [Download](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/02_exercises/exercise9.pdf)   |
-| **Sheet 10:** | Clustering                                          | [Download](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/02_exercises/exercise10.pdf)  |
-| **Sheet 11:** | Principal Component Analysis                        | [Download](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/02_exercises/exercise11.pdf)  |
+| Number        | Title                                                          | Link 🔗                                                                                                 	 |
+|---------------|----------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
+| **Sheet 1:**  | Numeric optimization techniques                                | [Download](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/02_exercises/exercise1.pdf)   |
+| **Sheet 2:**  | Decision theory and parametric density estimation              | [Download](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/02_exercises/exercise2.pdf)   |
+| **Sheet 3:**  | Non-parametric density estimation, k-nearest neighbors, and EM | [Download](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/02_exercises/exercise3.pdf)   |
+| **Sheet 4:**  | Linear regression                                              | [Download](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/02_exercises/exercise4.pdf)   |
+| **Sheet 5:**  | Logistic regression                                            | [Download](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/02_exercises/exercise5.pdf)   |
+| **Sheet 6:**  | Neural networks and deep learning                              | [Download](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/02_exercises/exercise6.pdf)   |
+| **Sheet 7:**  | Evaluation of machine learning models                          | [Download](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/02_exercises/exercise7.pdf)   |
+| **Sheet 8:**  | Decision trees and ensemble methods                            | [Download](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/02_exercises/exercise8.pdf)   |
+| **Sheet 9:**  | Support vector machines                                        | [Download](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/02_exercises/exercise9.pdf)   |
+| **Sheet 10:** | Clustering                                                     | [Download](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/02_exercises/exercise10.pdf)  |
+| **Sheet 11:** | Principal component analysis                                   | [Download](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/02_exercises/exercise11.pdf)  |
 
 ## Exam 📝
 The exam is going to take 120 minutes. The maximum attainable score will be 120 points, so you have one minute per point.
