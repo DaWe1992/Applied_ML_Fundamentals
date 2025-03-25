@@ -300,7 +300,7 @@ Almost every exercise sheet contains at least one programming task. You can coll
 **How it works:**
 * Form groups of 2 to 3 students.
 * At the end of each lecture slot one group will be chosen to work on the next programming task. Each group will be given a separate programming task.
-* The group solves the programming task and presents the results in the next lecture slot.
+* The group solves the programming task in Python and presents the results in the next lecture slot.
 * The usage of advanced machine learning libraries (sklearn, etc.) is strictly forbidden. The goal is to implement the algorithms in Numpy from scratch.
 * The code has to be shared with me.
 
