@@ -345,7 +345,7 @@ Please find a curated list below:
 * [Efficient estimation of word representations in vector space](https://arxiv.org/abs/1301.3781) (Mikolov et al., 2013)
 * [Fast training of support vector machines using sequential minimal optimization](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/smo-book.pdf) (Platt, 1998)
 * [An implementation of the mean shift algorithm](https://www.ipol.im/pub/art/2019/255/article_lr.pdf) (Demirovic, 2019)
-* [Independent Component Analysis: A Tutorial](https://www.cs.jhu.edu/~ayuille/courses/Stat161-261-Spring14/HyvO00-icatut.pdf) (Hyvärinen, Oja, 1999)
+* [Independent component analysis: A tutorial](https://www.cs.jhu.edu/~ayuille/courses/Stat161-261-Spring14/HyvO00-icatut.pdf) (Hyvärinen, Oja, 1999)
 
 🔗 **Miscellaneous:**
 * [CS229 lecture notes](https://cs229.stanford.edu/lectures-spring2022/main_notes.pdf) (Andrew Ng)
