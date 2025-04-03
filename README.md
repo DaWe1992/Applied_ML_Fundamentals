@@ -337,8 +337,8 @@ Please find a curated list below:
 * [Linear algebra](https://www.youtube.com/watch?v=ZK3O402wf1c&list=PL49CF3715CB9EF31D&index=1) by Gilbert Strang, MIT
 * [Matrix methods in data analysis, signal processing, and machine learning](https://www.youtube.com/watch?v=Cx5Z-OslNWE&list=PLUl4u3cNGP63oMNUHXqIUcrkS2PivhN3k) by Gilbert Strang, MIT
 * [Gradient descent, how neural networks learn](https://www.youtube.com/watch?v=IHZwWFHWa-w) (3BlueOneBrown)
-* [Hidden Markov models](https://www.youtube.com/watch?v=fX5bYmnHqqE)
-* [Viterbi algorithm](https://www.youtube.com/watch?v=IqXdjdOgXPM)
+* [Hidden Markov models](https://www.youtube.com/watch?v=fX5bYmnHqqE) (ritvikmath)
+* [Viterbi algorithm](https://www.youtube.com/watch?v=IqXdjdOgXPM) (ritvikmath)
 
 🔗 **Interesting papers:**
 * [Playing atari with deep reinforcement learning](https://arxiv.org/abs/1312.5602) (Mnih et al., 2013)
@@ -348,8 +348,8 @@ Please find a curated list below:
 * [Independent component analysis: A tutorial](https://www.cs.jhu.edu/~ayuille/courses/Stat161-261-Spring14/HyvO00-icatut.pdf) (Hyvärinen, Oja, 1999)
 
 🔗 **Miscellaneous:**
-* [CS229 lecture notes](https://cs229.stanford.edu/lectures-spring2022/main_notes.pdf) (Andrew Ng)
-* [The simplified SMO algorithm](https://cs229.stanford.edu/materials/smo.pdf) (CS229 Stanford)
+* [CS229 lecture notes](https://cs229.stanford.edu/lectures-spring2022/main_notes.pdf) (Andrew Ng, CS229 Stanford)
+* [The simplified SMO algorithm](https://cs229.stanford.edu/materials/smo.pdf) (Andrew Ng, CS229 Stanford)
 
 ## Bugs and Errors 🐞
 Help me improve the lecture. Please feel free to file an issue in case you spot any errors or issues.
