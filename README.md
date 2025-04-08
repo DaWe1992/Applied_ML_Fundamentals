@@ -204,10 +204,11 @@ The following topics and algorithms will be covered in the lecture:
 * Link: 🔗 [click here](https://github.com/DaWe1992/Applied_ML_Fundamentals/blob/master/01_slides/13_pca.pdf)
 * Content:
 	* Why dimensionality reduction?
+	* PCA applications
 	* Maximum variance formulation of PCA
 	* Properties of covariance matrices
 	* The PCA algorithm
-	* PCA applications
+	* Fisher's linear discriminant
 </details>
 
 <details>
