@@ -351,6 +351,7 @@ Please find a curated list below:
 🔗 **Miscellaneous:**
 * [CS229 lecture notes](https://cs229.stanford.edu/lectures-spring2022/main_notes.pdf) (Andrew Ng, CS229 Stanford)
 * [The simplified SMO algorithm](https://cs229.stanford.edu/materials/smo.pdf) (Andrew Ng, CS229 Stanford)
+* [Momentum simulator](https://distill.pub/2017/momentum/)
 
 ## Bugs and Errors 🐞
 Help me improve the lecture. Please feel free to file an issue in case you spot any errors or issues.
