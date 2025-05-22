@@ -304,6 +304,7 @@ Almost every exercise sheet contains at least one programming task. You can coll
 * The group solves the programming task in Python and presents the results in the next lecture slot.
 * The usage of advanced machine learning libraries (sklearn, etc.) is strictly forbidden. The goal is to implement the algorithms in Numpy from scratch.
 * The code has to be shared with me.
+* Please submit .py files (not Jupyter notebooks)
 
 **Grading:**
 * A group can achieve 10 points per group member (2 students = 20 points, 3 students = 30 points).
