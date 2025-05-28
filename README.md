@@ -302,15 +302,17 @@ Almost every exercise sheet contains at least one programming task. You can coll
 * Form groups of 2 to 3 students.
 * At the end of each lecture slot one group will be chosen to work on the next programming task. Each group will be given a separate programming task.
 * The group solves the programming task in Python and presents the results in the next lecture slot.
-* The usage of advanced machine learning libraries (sklearn, etc.) is strictly forbidden. The goal is to implement the algorithms in Numpy from scratch.
-* The code has to be shared with me.
-* Please submit .py files (not Jupyter notebooks).
+* The usage of advanced machine learning libraries (sklearn, etc.) is strictly forbidden. The goal is to implement the algorithms in NumPy from scratch. Exception: Functions that are explicitly mentioned in the task description are allowed.
+* The code has to be shared with me via e-mail.
+* Please submit .py files (not Jupyter notebooks). Please zip the file before sending it!
+* You don't have to prepare slides for the presentation.
 
 **Grading:**
-* A group can achieve 10 points per group member (2 students = 20 points, 3 students = 30 points).
+* A group can achieve 10 points per group member (e.g. 2 students => 20 points, 3 students => 30 points).
 * The group will be given a total number of points.
 * The group members can distribute these points between them.
 * No member can achieve more than 15 points.
+* You can still achieve 100 % in the exam, even if you do not participate in the bonus point tasks.
 
 
 ## Literature and recommended Reading 📚
