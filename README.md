@@ -321,14 +321,15 @@ Please find a curated list below:
 
 | Title                                      	       | Author(s)                    | View online 🔗                                                         																												     |
 |------------------------------------------------------|------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Convex Optimization** 							   | Boyd/Vandenberghe (2004)     | [click here](https://web.stanford.edu/~boyd/cvxbook/)
+| **Convex Optimization** 							   | Boyd/Vandenberghe (2004)     | [click here](https://web.stanford.edu/~boyd/cvxbook/)                                                                                                                                    |
+| **C4.5 - Programs for Machine Learning** 			   | Quinlan (1993)               | -                                                                                                                                                                                        |
 | **Deep Learning**                            	       | Goodfellow et al. (2016)	  | [click here](https://www.deeplearningbook.org/) 		        																												         |
-| **Elements of statistical Learning**                 | Hastie et al. (2008) 		  | [click here](https://www.sas.upenn.edu/~fdiebold/NoHesitations/BookAdvanced.pdf)																														     |
+| **Elements of statistical Learning**                 | Hastie et al. (2008) 		  | [click here](https://www.sas.upenn.edu/~fdiebold/NoHesitations/BookAdvanced.pdf)																										 |
 | **Gaussian Processes for Machine Learning**		   | Rasmussen/Williams (2006)	  | [click here](https://gaussianprocess.org/gpml/chapters/RW.pdf)																														     |
-| **Machine Learning**                                 | Mitchell (1997)              | [click here](https://www.cs.cmu.edu/~tom/files/MachineLearningTomMitchell.pdf)																		                     |
+| **Machine Learning**                                 | Mitchell (1997)              | [click here](https://www.cs.cmu.edu/~tom/files/MachineLearningTomMitchell.pdf)																		                     				 |
 | **Machine Learning - A probabilistic Perspective**   | Murphy (2012)				  | [click here](https://doc.lagout.org/science/Artificial%20Intelligence/Machine%20learning/Machine%20Learning_%20A%20Probabilistic%20Perspective%20%5BMurphy%202012-08-24%5D.pdf)		     |
 | **Mathematics for Machine Learning**                 | Deisenroth et al. (2019)     | [click here](https://mml-book.github.io/)																																			     |
-| **Pattern Recognition and Machine Learning** 	       | Bishop (2006)   			  | [click here](https://www.microsoft.com/en-us/research/wp-content/uploads/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf) 							     |
+| **Pattern Recognition and Machine Learning** 	       | Bishop (2006)   			  | [click here](https://www.microsoft.com/en-us/research/wp-content/uploads/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf) 							        			 |
 | **Probabilistic Graphical Models** 			       | Koller et al. (2009)		  | [click here](https://github.com/Zhenye-Na/machine-learning-uiuc/blob/master/docs/Probabilistic%20Graphical%20Models%20-%20Principles%20and%20Techniques.pdf)                             |
 | **Reinforcement Learning - An Introduction**         | Sutton et al. (2014)         | [click here](http://incompleteideas.net/book/bookdraft2017nov5.pdf)   																										        	 |
 | **Speech and Language Processing** 				   | Jurafsky/Martin (2006)       | [click here](https://pages.ucsd.edu/~bakovic/compphon/Jurafsky,%20Martin.-Speech%20and%20Language%20Processing_%20An%20Introduction%20to%20Natural%20Language%20Processing%20(2007).pdf) |
