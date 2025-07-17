@@ -293,7 +293,7 @@ Symbol (2):
 
 **Auxiliary material for the exam:**
 * Non-programmable pocket calculator
-* Two-sided **hand-written** cheat sheet (you may note whatever you want). Hand-written means pen and paper (not on a tablet or computer!)
+* Two-sided **hand-written** cheat sheet (you may note whatever you want). You are allowed to use a tablet or computer, but you have to be able to read it without any additional reading aids like magnifier glasses, etc.)
 
 ## Programming Tasks (Bonus Points for the Exam) 🐍
 Almost every exercise sheet contains at least one programming task. You can collect bonus points for the exam by working on one of these tasks.
