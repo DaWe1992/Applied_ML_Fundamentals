@@ -174,6 +174,7 @@ The following topics and algorithms will be covered in the lecture:
 		* Bagging
 		* Random forests
 		* ExtraTrees
+		* Boosting (AdaBoost)
 </details>
 
 <details>
