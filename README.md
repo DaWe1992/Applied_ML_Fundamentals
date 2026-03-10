@@ -362,4 +362,4 @@ Please find a curated list below:
 Help me improve the lecture. Please feel free to file an issue in case you spot any errors or issues.
 Thank you very much in advance! **Please do not open issues for questions concerning the content!** Either use the Moodle forum or send me an e-mail for that ([daniel.wehner@sap.com](mailto:daniel.wehner@sap.com)).
 
-<sub>© 2025 Daniel Wehner, M.Sc.</sub>
+<sub>© 2026 Daniel Wehner, M.Sc.</sub>
