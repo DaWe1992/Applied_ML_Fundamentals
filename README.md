@@ -327,6 +327,7 @@ Please find a curated list below:
 | **Deep Learning**                            	       | Goodfellow et al. (2016)	  | [click here](https://www.deeplearningbook.org/) 		        																												         |
 | **Elements of statistical Learning**                 | Hastie et al. (2008) 		  | [click here](https://www.sas.upenn.edu/~fdiebold/NoHesitations/BookAdvanced.pdf)																										 |
 | **Gaussian Processes for Machine Learning**		   | Rasmussen/Williams (2006)	  | [click here](https://gaussianprocess.org/gpml/chapters/RW.pdf)																														     |
+| **Independent Component Analysis** 				   | Hyvärinen et al. (2001) 	  | [click here](https://www.cs.helsinki.fi/u/ahyvarin/papers/bookfinal_ICA.pdf) 																											 |
 | **Machine Learning**                                 | Mitchell (1997)              | [click here](https://www.cs.cmu.edu/~tom/files/MachineLearningTomMitchell.pdf)																		                     				 |
 | **Machine Learning - A probabilistic Perspective**   | Murphy (2012)				  | [click here](https://doc.lagout.org/science/Artificial%20Intelligence/Machine%20learning/Machine%20Learning_%20A%20Probabilistic%20Perspective%20%5BMurphy%202012-08-24%5D.pdf)		     |
 | **Mathematics for Machine Learning**                 | Deisenroth et al. (2019)     | [click here](https://mml-book.github.io/)																																			     |
