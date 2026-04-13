@@ -325,7 +325,7 @@ Please find a curated list below:
 | **Convex Optimization** 							   | Boyd/Vandenberghe (2004)     | [click here](https://web.stanford.edu/~boyd/cvxbook/)                                                                                                                                           |
 | **C4.5 - Programs for Machine Learning** 			   | Quinlan (1993)               | -                                                                                                                                                                                               |
 | **Deep Learning**                            	       | Goodfellow et al. (2016)	  | [click here](https://www.deeplearningbook.org/) 		        																												                |
-| **Deep Learning - Foundations and Concepts**		   | Bishop (2024)                | [click here](https://github.com/luzmontserrat/deep-learning/blob/main/Christopher%20M.%20Bishop%2C%20Hugh%20Bishop%20-%20Deep%20Learning_%20Foundations%20and%20Concepts-Springer%20(2024).pdf) |
+| **Deep Learning - Foundations and Concepts**		   | Bishop (2024)                | - 																																																|
 | **Elements of statistical Learning**                 | Hastie et al. (2008) 		  | [click here](https://www.sas.upenn.edu/~fdiebold/NoHesitations/BookAdvanced.pdf)																										        |
 | **Gaussian Processes for Machine Learning**		   | Rasmussen/Williams (2006)	  | [click here](https://gaussianprocess.org/gpml/chapters/RW.pdf)																														            |
 | **Independent Component Analysis** 				   | Hyvärinen et al. (2001) 	  | [click here](https://www.cs.helsinki.fi/u/ahyvarin/papers/bookfinal_ICA.pdf) 																											        |
